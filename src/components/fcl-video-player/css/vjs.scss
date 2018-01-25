@@ -1,0 +1,39 @@
+@import "video-js";
+
+fcl-video-player.hydrated{
+  position: relative !important;
+}
+.fcl-video-class {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  position: relative;
+}
+.fcl-video-class img{
+  width: 100%;
+  height: 100%;
+  }
+.video-img-block{
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  z-index: 999999;
+  width: 100%;
+  height: 100%;
+}
+
+.video-img-none{
+  display: none;
+}
+
+.no-video-display{
+  display: none !important;
+}
+
+@media only screen and (min-width:1px) and (max-width:767px)
+{
+
+.video-img-block img{width: 102%;}
+.video-js{width: 100% !important;}
+
+}
