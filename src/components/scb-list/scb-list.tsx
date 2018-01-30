@@ -1,6 +1,7 @@
 import { Component, Prop, PropDidChange, State, Event, EventEmitter, Element, Method } from '@stencil/core';
 import { VirtualNode, ListDataItem } from './scb-list-interfaces';
 
+// TODO: Move interpolation mechanics to lodash templates
 
 /**
  * An infinite list component which
