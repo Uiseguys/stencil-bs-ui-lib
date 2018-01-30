@@ -118,6 +118,16 @@ export class StencilBootstrapDemo {
                                     Typeahead
                                 </stencil-route-link>
                             </li>
+                            <li>
+                                <stencil-route-link
+                                    url="/multiselect"
+                                    urlMatch={['/multiselect']}
+                                    activeClass="active"
+                                    exact={true}
+                                >
+                                    Multiselect
+                                </stencil-route-link>
+                            </li>
 
                         </ul>
                     </div>
@@ -179,6 +189,12 @@ export class StencilBootstrapDemo {
                             <stencil-route
                                 url={['/typeahead']}
                                 component="typeahead-page"
+                                exact={true}
+                            >
+                            </stencil-route>
+                            <stencil-route
+                                url={['/multiselect']}
+                                component="multiselect-page"
                                 exact={true}
                             >
                             </stencil-route>

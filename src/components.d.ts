@@ -50,6 +50,40 @@ declare global {
 
 
 import {
+  CwcMultiselect as CwcMultiselect
+} from './components/cwc-multiselect/cwc-multiselect';
+
+declare global {
+  interface HTMLCwcMultiselectElement extends CwcMultiselect, HTMLElement {
+  }
+  var HTMLCwcMultiselectElement: {
+    prototype: HTMLCwcMultiselectElement;
+    new (): HTMLCwcMultiselectElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-multiselect": HTMLCwcMultiselectElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-multiselect": HTMLCwcMultiselectElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-multiselect": JSXElements.CwcMultiselectAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcMultiselectAttributes extends HTMLAttributes {
+      data?: any[];
+      idValue?: string;
+      minSearchLength?: number;
+      placeholder?: string;
+      searchKey?: string;
+    }
+  }
+}
+
+
+import {
   CwcTypeahead as CwcTypeahead
 } from './components/cwc-typeahead/cwc-typeahead';
 
@@ -525,6 +559,36 @@ declare global {
   }
   namespace JSXElements {
     export interface ListPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  MultiselectPage as MultiselectPage
+} from './pages/multiselect-page/multiselect-page';
+
+declare global {
+  interface HTMLMultiselectPageElement extends MultiselectPage, HTMLElement {
+  }
+  var HTMLMultiselectPageElement: {
+    prototype: HTMLMultiselectPageElement;
+    new (): HTMLMultiselectPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "multiselect-page": HTMLMultiselectPageElement;
+  }
+  interface ElementTagNameMap {
+    "multiselect-page": HTMLMultiselectPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "multiselect-page": JSXElements.MultiselectPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MultiselectPageAttributes extends HTMLAttributes {
       
     }
   }
