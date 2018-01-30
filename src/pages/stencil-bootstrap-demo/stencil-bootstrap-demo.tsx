@@ -98,6 +98,26 @@ export class StencilBootstrapDemo {
                                     File Input
                                 </stencil-route-link>
                             </li>
+                            <li>
+                                <stencil-route-link
+                                    url="/dropdown"
+                                    urlMatch={['/dropdown']}
+                                    activeClass="active"
+                                    exact={true}
+                                >
+                                    Dropdown
+                                </stencil-route-link>
+                            </li>
+                            <li>
+                                <stencil-route-link
+                                    url="/typeahead"
+                                    urlMatch={['/typeahead']}
+                                    activeClass="active"
+                                    exact={true}
+                                >
+                                    Typeahead
+                                </stencil-route-link>
+                            </li>
 
                         </ul>
                     </div>
@@ -147,6 +167,18 @@ export class StencilBootstrapDemo {
                             <stencil-route
                                 url={['/list']}
                                 component="list-page"
+                                exact={true}
+                            >
+                            </stencil-route>
+                            <stencil-route
+                                url={['/dropdown']}
+                                component="dropdown-page"
+                                exact={true}
+                            >
+                            </stencil-route>
+                            <stencil-route
+                                url={['/typeahead']}
+                                component="typeahead-page"
                                 exact={true}
                             >
                             </stencil-route>
