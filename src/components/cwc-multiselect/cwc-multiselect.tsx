@@ -1,6 +1,7 @@
 import { Component, State, Prop, Listen, Method, Event, EventEmitter } from '@stencil/core';
 import filter from 'lodash/filter'
 import get from 'lodash/get';
+import pull from 'lodash/pull'
 
 
 
@@ -17,15 +18,34 @@ export class CwcMultiselect {
     @Prop() placeholder: string = 'Search something e.g. "Alabama"';
 
 
+
     @State() filterValue: string = '';
     @State() optionsShown: boolean = false;
     @State() focusIndex: number = 0
+    @State() labels: any[] = [];
+    @State() justAddedLabel: boolean = false;
 
     private filtered: any[] = []
 
     @Event() multiselectOnSubmit: EventEmitter;
 
+    addLabel(label) {
+        this.labels = [...this.labels, label]
+        this.justAddedLabel = true
+    }
+
+    clearLabels() {
+        this.labels = []
+    }
+
+    removeLabel(label) {
+        pull(this.labels, label)
+    }
+
     multiselectOnSubmitHandler(result) {
+        this.addLabel(result)
+        this.filterValue = ''
+        this.clearTextNodes()
         this.multiselectOnSubmit.emit(result)
     }
 
@@ -35,13 +55,19 @@ export class CwcMultiselect {
     componentWillUpdate() {
         if (this.filterValue) {
 
-
             if (this.filterValue.length >= this.minSearchLength) {
                 this.filtered = this.filter()
 
                 if (this.filtered.length > 0)
                     this.optionsShown = true
             }
+        }
+    }
+
+    componentDidUpdate() {
+        if (this.justAddedLabel) {
+            this.setCaretPositionEnd()
+            this.justAddedLabel = false
         }
     }
 
@@ -70,6 +96,7 @@ export class CwcMultiselect {
         })
     }
 
+    //TODO: rename this
     private findInComplex(data, address) {
         let temporary = []
         temporary = data.map(value =>
@@ -79,30 +106,30 @@ export class CwcMultiselect {
             })
         )
         return this.filterStringArray(temporary)
-
     }
 
+    getValue(val: string | any): string {
+        if (typeof val == 'string') {
+            return val
+        } else {
+            return get(val.data, this.searchKey)
+        }
+    }
 
     /**
      * Handlers
      */
     handleInputChange(e) {
-        console.log(e)
         this.filterValue = e.data
     }
 
     handleSelect(value, index) {
         let input: HTMLInputElement = document.querySelector(`#${this.idValue} div.form-control`)
-
-        let result = typeof this.filtered[index] == 'string' ?
-            this.filtered[index] :
-            this.filtered[index].data
-
-
         input.value = value
-        console.log(result)
 
+        let result = this.getValue(this.filtered[index])
         this.multiselectOnSubmitHandler(result)
+
         this.close()
     }
 
@@ -123,30 +150,37 @@ export class CwcMultiselect {
 
     render() {
 
-        let input: HTMLTextAreaElement
-
         return (
             <div id={this.idValue}>
+
+                {/* 
+                    Render input field
+                    
+                */}
                 <div onInput={(e) => this.handleInputChange(e)}
-                    //    style={['margin-top'] : '0'}
 
                     class="form-control" contentEditable={true} >
 
-                    {
-                        (() => {
-                            return (
+                    {/* 
+                        Render labels
+                    */}
 
-                                <span contenteditable={false} class="badge badge-secondary" > New
-                                   <span aria-hidden="true">&times;</span>
-                                </span>
-                            )
+                    {(() => {
 
-                        })()
+                        return this.labels.map(label =>
+
+                            <span contenteditable={false} class="badge badge-secondary" > {this.getValue(label)}
+                                <span aria-hidden="true" onClick={(e) => this.removeLabel(label)}>&times;</span>
+                            </span>
+                        )
+
+                    })()
                     }
-
                 </div>
 
-
+                {/* 
+                    Render options list
+                */}
 
                 {(() => {
                     if (this.filtered.length > 0) {
@@ -162,7 +196,6 @@ export class CwcMultiselect {
                             </div>
 
                         )
-
                     }
                 })()}
             </div>
@@ -202,9 +235,33 @@ export class CwcMultiselect {
     handleEnter(ev) {
         if (this.focusIndex > 0) {
             this.handleSelect(document.querySelectorAll(`#${this.idValue} option`)[this.focusIndex - 1].textContent, this.focusIndex - 1)
+            ev.preventDefault()
+
         }
     }
 
+    /*
+        DOM API functions
+    */
 
+    setCaretPositionEnd() {
+        let input = document.querySelector(`#${this.idValue} div.form-control`)
+        let range = document.createRange()
+        range.selectNodeContents(input)
+        range.collapse(false)
+        let selection = window.getSelection()
+        selection.removeAllRanges()
+        selection.addRange(range)
+        console.log('caret pos set end')
+    }
+
+    clearTextNodes() {
+        let input: HTMLInputElement = document.querySelector(`#${this.idValue} div.form-control`)
+        for (let i = 0; i < input.childNodes.length; i++) {
+            if (input.childNodes[i].nodeName == '#text') {
+                input.removeChild(input.childNodes[i])
+            }
+        }
+    }
 
 }
