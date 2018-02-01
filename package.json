@@ -18,6 +18,7 @@
     "@stencil/core": "next",
     "@stencil/router": "0.0.9",
     "@types/video.js": "^6.2.3",
+    "popper.js": "^1.12.9",
     "video.js": "^6.6.0",
     "videojs-font": "^2.0.0"
   },
