@@ -22,8 +22,10 @@ export class CwcMultiselect {
     @State() filterValue: string = '';
     @State() optionsShown: boolean = false;
     @State() focusIndex: number = 0
-    @State() labels: any[] = [];
     @State() justAddedLabel: boolean = false;
+
+    @State() labels: any[] = [];
+    @State() results: any[] = [];
 
     private filtered: any[] = []
 
@@ -34,19 +36,42 @@ export class CwcMultiselect {
         this.justAddedLabel = true
     }
 
+    addResult(result: any) {
+        if (typeof result == 'string') {
+            this.results = [...this.results, result]
+        } else {
+            this.results = [...this.results, result.data]
+        }
+    }
+
+    removeResult(index) {
+        this.results = this.results.filter((r, i) => i !== index)
+        this.multiselectOnSubmit.emit(this.results)
+    }
+
     clearLabels() {
         this.labels = []
     }
 
     removeLabel(label) {
-        pull(this.labels, label)
+        let index = this.labels.indexOf(label)
+        this.removeResult(index)
+        this.labels = this.labels.filter((l, i) => i !== index)
+
+
     }
 
     multiselectOnSubmitHandler(result) {
         this.addLabel(result)
         this.filterValue = ''
         this.clearTextNodes()
-        this.multiselectOnSubmit.emit(result)
+
+        typeof this.filtered[this.focusIndex - 1] == 'string' ?
+            this.addResult(this.filtered[this.focusIndex - 1]) :
+            this.addResult(this.filtered[this.focusIndex - 1].data)
+
+
+        this.multiselectOnSubmit.emit(this.results)
     }
 
     /**
@@ -108,7 +133,7 @@ export class CwcMultiselect {
         return this.filterStringArray(temporary)
     }
 
-    getValue(val: string | any): string {
+    getStringValue(val: string | any): string {
         if (typeof val == 'string') {
             return val
         } else {
@@ -127,7 +152,7 @@ export class CwcMultiselect {
         let input: HTMLInputElement = document.querySelector(`#${this.idValue} div.form-control`)
         input.value = value
 
-        let result = this.getValue(this.filtered[index])
+        let result = this.getStringValue(this.filtered[index])
         this.multiselectOnSubmitHandler(result)
 
         this.close()
@@ -169,7 +194,7 @@ export class CwcMultiselect {
 
                         return this.labels.map(label =>
 
-                            <span contenteditable={false} class="badge badge-secondary" > {this.getValue(label)}
+                            <span contenteditable={false} class="badge badge-secondary" > {this.getStringValue(label)}
                                 <span aria-hidden="true" onClick={(e) => this.removeLabel(label)}>&times;</span>
                             </span>
                         )

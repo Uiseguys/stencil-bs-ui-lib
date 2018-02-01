@@ -34,8 +34,9 @@ export class MultiselectPage {
 
     @State() result
 
-    @Listen('typeaheadOnSubmit')
+    @Listen('multiselectOnSubmit')
     typeaheadOnSubmit(e) {
+        console.log('got results: ', e.detail)
         this.result = e.detail
     }
     searchString = 'data.name'
