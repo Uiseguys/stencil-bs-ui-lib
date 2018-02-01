@@ -3,7 +3,7 @@ import {
   Element,
   HostElement,
   Prop,
-  PropWillChange,
+  Watch,
   State,
   Method,
 } from '@stencil/core';
@@ -40,10 +40,10 @@ export class ScbAlert {
     this.show = false;
     setTimeout(() => {
       this.onDismiss(this.el);
-    },         150); // TODO Replace with configurable value?
+    }, 150); // TODO Replace with configurable value?
   }
 
-  @PropWillChange('animatable')
+  @Watch('animatable')
   componentWillLoad() {
     this.setShowFadeState();
   }
