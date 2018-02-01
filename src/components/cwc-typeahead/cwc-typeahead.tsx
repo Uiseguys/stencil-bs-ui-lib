@@ -96,7 +96,6 @@ export class CwcTypeahead {
 
 
         input.value = value
-        debugger
 
         this.typeaheadOnSubmitHandler(result)
         this.close()

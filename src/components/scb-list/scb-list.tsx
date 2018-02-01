@@ -1,4 +1,4 @@
-import { Component, Prop, PropDidChange, State, Event, EventEmitter, Element, Method } from '@stencil/core';
+import { Component, Prop, State, Event, EventEmitter, Element, Method, Watch } from '@stencil/core';
 import { VirtualNode, ListDataItem } from './scb-list-interfaces';
 
 // TODO: Move interpolation mechanics to lodash templates
@@ -62,12 +62,13 @@ export class StencilComponent {
             this.loadMore()
     }
 
-
-    @PropDidChange('items')
+    @Watch('items')
     itemsdidChangeHandler() {
         this.itemsData.length = 0
         this.initItemsData()
     }
+
+
 
     private initItemsData() {
 
@@ -175,19 +176,5 @@ export class StencilComponent {
                 {list}
             </div>
         );
-    }
-
-    /**
-     * Utils for performance check
-     */
-    private timeStart: any
-
-    private startPerfMark() {
-        this.timeStart = performance.now()
-    }
-
-    private endPerfMark() {
-        let timeEnd = performance.now()
-        console.log('Operations took ' + (timeEnd - this.timeStart) + 'ms.')
     }
 }
