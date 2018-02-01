@@ -1,4 +1,4 @@
-import { Component, Prop, Element, HostElement, State, Method, PropDidChange } from '@stencil/core';
+import { Component, Prop, Element, HostElement, State, Method, Watch } from '@stencil/core';
 import Popper from 'popper.js';
 
 @Component({
@@ -23,11 +23,11 @@ export class StencilComponent {
         this.popper.scheduleUpdate()
     }
 
-    @PropDidChange('dropdownPlacement')
+    @Watch('dropdownPlacement')
     placementDidChangeHandler(newValue) {
         this.popper.options.placement = newValue
     }
-    @PropDidChange('triggerOverflow')
+    @Watch('triggerOverflow')
     overflowDidChangeHandler(newValue) {
         this.popper.options.modifiers.offset.offset = newValue ?
             '-10%r, -110%' :

@@ -121,7 +121,6 @@ export class CwcMultiselect {
         })
     }
 
-    //TODO: rename this
     private findInComplex(data, address) {
         let temporary = []
         temporary = data.map(value =>
