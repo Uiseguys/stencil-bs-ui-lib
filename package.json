@@ -15,7 +15,7 @@
     "test.watch": "jest --watch --no-cache"
   },
   "dependencies": {
-    "@stencil/core": "next",
+    "@stencil/core": "0.2.3",
     "@stencil/router": "0.0.9",
     "@types/video.js": "^6.2.3",
     "popper.js": "^1.12.9",
