@@ -149,6 +149,7 @@ export class CwcMultiselect {
 
     handleSelect(value, index) {
         let input: HTMLInputElement = document.querySelector(`#${this.idValue} div.form-control`)
+
         input.value = value
 
         let result = this.getStringValue(this.filtered[index])
@@ -200,6 +201,7 @@ export class CwcMultiselect {
 
                     })()
                     }
+                    <span>&#160;</span>
                 </div>
 
                 {/* 
