@@ -14,6 +14,9 @@ import {
   HostElement,
 } from '@stencil/core';
 import {
+  BootstrapThemeColor as BootstrapThemeColor2,
+} from './common/bootstrap-theme-color.type';
+import {
   VirtualNode,
 } from './components/scb-list/scb-list-interfaces';
 
@@ -78,6 +81,42 @@ declare global {
       minSearchLength?: number;
       placeholder?: string;
       searchKey?: string;
+    }
+  }
+}
+
+
+import {
+  CwcTag as CwcTag
+} from './components/cwc-tag/cwc-tag';
+
+declare global {
+  interface HTMLCwcTagElement extends CwcTag, HTMLElement {
+  }
+  var HTMLCwcTagElement: {
+    prototype: HTMLCwcTagElement;
+    new (): HTMLCwcTagElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-tag": HTMLCwcTagElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-tag": HTMLCwcTagElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-tag": JSXElements.CwcTagAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcTagAttributes extends HTMLAttributes {
+      classes?: string;
+      closable?: boolean;
+      imgLink?: string;
+      limitTo?: number;
+      link?: string;
+      rounded?: boolean;
+      text?: string;
     }
   }
 }
@@ -239,6 +278,7 @@ declare global {
   namespace JSXElements {
     export interface ScbBadgeAttributes extends HTMLAttributes {
       link?: string;
+      onDestroyMessage?: string;
       pill?: boolean;
       type?: BootstrapThemeColor;
     }

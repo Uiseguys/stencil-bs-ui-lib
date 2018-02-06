@@ -54,15 +54,45 @@ export class MultiselectPage {
 
             <br />,
             <br />,
-            <br />,
-            <br />,
             <h3>Complex Object[] demo!</h3>,
             <cwc-multiselect
                 data={this.complex}
                 searchKey={this.searchString}
                 placeholder="Search something e.g. 'Argentina'"></ cwc-multiselect>,
-            <br />, <br />, <br />, <h4>result: </h4>,
-            <pre>{JSON.stringify(this.result, null, 2)}</pre>
+            <br />, <h4>result: </h4>,
+            <pre>{JSON.stringify(this.result, null, 2)}</pre>,
+            <br />, <br />, <cwc-tag
+                text='Holla tag'
+            />,
+            <br />, <br />, <cwc-tag
+                text='Holla link'
+                imgLink='../../assets/icon/favicon.ico'
+                closable={true}
+            />,
+            <br />, <br />, <cwc-tag
+                text='Holla rounded tag'
+                rounded={true}
+                closable={true}
+            />,
+            <br />, <br />, <cwc-tag
+                text='Holla rounded link'
+                imgLink='../../assets/icon/favicon.ico'
+            // rounded={true}
+            />,
+            <br />, <br />, <cwc-tag
+                text='Holla rounded img tag'
+                imgLink='../../assets/icon/favicon.ico'
+                rounded={true}
+            />,
+            <br />, <br />, <cwc-tag
+                text='Holla rounded img link'
+                limitTo={10}
+                imgLink='../../assets/icon/favicon.ico'
+                rounded={true}
+                closable={true}
+            />
+            // link='https://google.com'
+            // <img src=" ../../assets/icon/favicon.ico" alt="" />
         ]
     }
 }
