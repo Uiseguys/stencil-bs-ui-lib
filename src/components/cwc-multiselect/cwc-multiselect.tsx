@@ -31,6 +31,11 @@ export class CwcMultiselect {
 
     @Event() multiselectOnSubmit: EventEmitter;
 
+    @Listen('destroy')
+    destroyHandler(event) {
+        console.log('Received the custom event: ', event);
+    }
+
     addLabel(label) {
         this.labels = [...this.labels, label]
         this.justAddedLabel = true
@@ -144,6 +149,8 @@ export class CwcMultiselect {
      * Handlers
      */
     handleInputChange(e) {
+
+        console.log(e)
         this.filterValue = e.data
     }
 
@@ -183,7 +190,6 @@ export class CwcMultiselect {
                     
                 */}
                 <div onInput={(e) => this.handleInputChange(e)}
-
                     class="form-control" contentEditable={true} >
 
                     {/* 
@@ -191,14 +197,13 @@ export class CwcMultiselect {
                     */}
 
                     {(() => {
-
-                        return this.labels.map(label =>
-
-                            <span contenteditable={false} class="badge badge-secondary" > {this.getStringValue(label)}
-                                <span aria-hidden="true" onClick={(e) => this.removeLabel(label)}>&times;</span>
-                            </span>
+                        return this.labels.map((label, i) =>
+                            <scb-badge contenteditable="false">
+                                <span contenteditable={false} class="badge badge-secondary" > {this.getStringValue(label)}
+                                    <span aria-hidden="true" onClick={(e) => this.removeLabel(label)}>&times;</span>
+                                </span>
+                            </scb-badge>
                         )
-
                     })()
                     }
                     <span>&#160;</span>
@@ -278,12 +283,14 @@ export class CwcMultiselect {
         let selection = window.getSelection()
         selection.removeAllRanges()
         selection.addRange(range)
-        console.log('caret pos set end')
+        // console.log('caret pos set end')
     }
 
     clearTextNodes() {
         let input: HTMLInputElement = document.querySelector(`#${this.idValue} div.form-control`)
+        console.log('input children: ', input.childNodes)
         for (let i = 0; i < input.childNodes.length; i++) {
+
             if (input.childNodes[i].nodeName == '#text') {
                 input.removeChild(input.childNodes[i])
             }

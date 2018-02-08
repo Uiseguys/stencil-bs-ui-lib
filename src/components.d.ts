@@ -8,6 +8,9 @@ import '@stencil/router';
 
 import {
   BootstrapThemeColor,
+} from './common/bootstrap-theme-color.type';
+import {
+  BootstrapThemeColor as BootstrapThemeColor2,
   IBreadcrumbItem,
 } from './common/index';
 import {
@@ -78,6 +81,43 @@ declare global {
       minSearchLength?: number;
       placeholder?: string;
       searchKey?: string;
+    }
+  }
+}
+
+
+import {
+  CwcTag as CwcTag
+} from './components/cwc-tag/cwc-tag';
+
+declare global {
+  interface HTMLCwcTagElement extends CwcTag, HTMLElement {
+  }
+  var HTMLCwcTagElement: {
+    prototype: HTMLCwcTagElement;
+    new (): HTMLCwcTagElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-tag": HTMLCwcTagElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-tag": HTMLCwcTagElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-tag": JSXElements.CwcTagAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcTagAttributes extends HTMLAttributes {
+      classes?: string;
+      closable?: boolean;
+      imgLink?: string;
+      limitTo?: number;
+      link?: string;
+      rounded?: boolean;
+      tagType?: BootstrapThemeColor;
+      text?: string;
     }
   }
 }
@@ -619,6 +659,36 @@ declare global {
   }
   namespace JSXElements {
     export interface StencilBootstrapDemoAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  TagPage as TagPage
+} from './pages/tag-page/tag-page';
+
+declare global {
+  interface HTMLTagPageElement extends TagPage, HTMLElement {
+  }
+  var HTMLTagPageElement: {
+    prototype: HTMLTagPageElement;
+    new (): HTMLTagPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "tag-page": HTMLTagPageElement;
+  }
+  interface ElementTagNameMap {
+    "tag-page": HTMLTagPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "tag-page": JSXElements.TagPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface TagPageAttributes extends HTMLAttributes {
       
     }
   }
