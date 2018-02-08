@@ -198,7 +198,7 @@ export class CwcMultiselect {
 
                     {(() => {
                         return this.labels.map((label, i) =>
-                            <scb-badge contenteditable="false" onDestroyMessage={'label #${' + i + '} removed'}>
+                            <scb-badge contenteditable="false">
                                 <span contenteditable={false} class="badge badge-secondary" > {this.getStringValue(label)}
                                     <span aria-hidden="true" onClick={(e) => this.removeLabel(label)}>&times;</span>
                                 </span>

@@ -8,14 +8,14 @@ import '@stencil/router';
 
 import {
   BootstrapThemeColor,
+} from './common/bootstrap-theme-color.type';
+import {
+  BootstrapThemeColor as BootstrapThemeColor2,
   IBreadcrumbItem,
 } from './common/index';
 import {
   HostElement,
 } from '@stencil/core';
-import {
-  BootstrapThemeColor as BootstrapThemeColor2,
-} from './common/bootstrap-theme-color.type';
 import {
   VirtualNode,
 } from './components/scb-list/scb-list-interfaces';
@@ -116,6 +116,7 @@ declare global {
       limitTo?: number;
       link?: string;
       rounded?: boolean;
+      tagType?: BootstrapThemeColor;
       text?: string;
     }
   }
@@ -278,7 +279,6 @@ declare global {
   namespace JSXElements {
     export interface ScbBadgeAttributes extends HTMLAttributes {
       link?: string;
-      onDestroyMessage?: string;
       pill?: boolean;
       type?: BootstrapThemeColor;
     }
@@ -659,6 +659,36 @@ declare global {
   }
   namespace JSXElements {
     export interface StencilBootstrapDemoAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  TagPage as TagPage
+} from './pages/tag-page/tag-page';
+
+declare global {
+  interface HTMLTagPageElement extends TagPage, HTMLElement {
+  }
+  var HTMLTagPageElement: {
+    prototype: HTMLTagPageElement;
+    new (): HTMLTagPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "tag-page": HTMLTagPageElement;
+  }
+  interface ElementTagNameMap {
+    "tag-page": HTMLTagPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "tag-page": JSXElements.TagPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface TagPageAttributes extends HTMLAttributes {
       
     }
   }

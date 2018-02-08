@@ -1,4 +1,5 @@
-import { Component, Prop, Method, Element } from '@stencil/core';
+import { Component, Prop, Method, Element, Watch } from '@stencil/core';
+import { BootstrapThemeColor } from '../../common/bootstrap-theme-color.type';
 
 
 @Component({
@@ -8,6 +9,7 @@ import { Component, Prop, Method, Element } from '@stencil/core';
 export class CwcTag {
 
     @Prop() text: string = ''
+    @Prop() tagType: BootstrapThemeColor = undefined;
     @Prop() classes: string = undefined
     @Prop() link: string = undefined
     @Prop() imgLink: string = undefined
@@ -25,6 +27,18 @@ export class CwcTag {
         this.element.parentElement.removeChild(this.element)
     }
 
+    @Watch('text')
+    textWatchHandler(val) {
+        this.text = val
+    }
+
+    @Watch('tagType')
+    watchHandler(val) {
+        console.log('new tagType is: ', val)
+        this.tagType = val
+    }
+
+
     limit(text: string, count: number): string {
         if (text.length > count - 3) {
             text = text.slice(0, text.length - 3)
@@ -36,6 +50,16 @@ export class CwcTag {
 
     getClassList(): string {
         let classes = ''
+        if (!!this.tagType) {
+            console.log('+tagType: ', this.tagType)
+            classes = ' badge-' + this.tagType
+        } else {
+            console.log('-tagType: ', this.tagType)
+            classes = ' badge-primary'
+        }
+
+        console.log('inited ' + classes)
+
         if (this.classes)
             classes += ` ${this.classes} `
         if (this.rounded)
@@ -51,7 +75,7 @@ export class CwcTag {
     render() {
         return this.link ?
             (
-                <a class={'badge badge-info ' + this.getClassList()} href={this.link}
+                <a class={'badge ' + this.getClassList()} href={this.link}
                     title={this.link}>
                     {(() => this.imgLink && (
                         <img src={this.imgLink} class="rounded-circle" ></img>
@@ -69,7 +93,7 @@ export class CwcTag {
                 </a>
             )
             : (
-                <span class={'badge badge-info' + this.getClassList()}
+                <span class={'badge ' + this.getClassList()}
                     title={this.text}>
                     {(() => this.imgLink && (
                         <img src={this.imgLink} class="rounded-circle" ></img>
