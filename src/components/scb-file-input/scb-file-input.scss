@@ -1,0 +1,153 @@
+/**
+* A small function allowing skipping base64 encoding and simply pasting the SVG markup right in the CSS.
+* @author Jakob Eriksen
+* @link http://codepen.io/jakob-e/pen/doMoML
+* @param {string} $svg - SVG image to encode
+* @returns {string} - encoded SVG data uri
+*/
+@function svg-uri($svg) {
+  $encoded: '';
+  $slice: 2000;
+  $index: 0;
+  $loops: ceil(str-length($svg) / $slice);
+
+  @for $i from 1 through $loops {
+    $chunk: str-slice($svg, $index, $index + $slice - 1);
+    $chunk: str-replace($chunk, '"', "'");
+    $chunk: str-replace($chunk, '<', '%3C');
+    $chunk: str-replace($chunk, '>', '%3E');
+    $chunk: str-replace($chunk, '&', '%26');
+    $chunk: str-replace($chunk, '#', '%23');
+    $encoded: #{$encoded}#{$chunk};
+    $index: $index + $slice;
+  }
+
+  @return url("data:image/svg+xml;charset=utf8,#{$encoded}");
+}
+
+/**
+* Characters encode
+* @param {String} $string - character to replace
+* @param {String} $search - string to replace character with
+* @param {String} $replace - replace part
+* @returns {String} - Encoded string
+*/
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+$scbIconSize: 16px;
+.scb-icon {
+  display: inline-block;
+  width: $scbIconSize;
+  height: $scbIconSize;
+  vertical-align: middle;
+  opacity: .75;
+  line-height: 1;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    width: $scbIconSize;
+    height: $scbIconSize;
+    background-size: $scbIconSize;
+    background-repeat: no-repeat;
+  }
+
+  &.icon-close::before {
+    background-image: svg-uri('<svg viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="si-glyph si-glyph-delete">
+      <title>1227</title>
+      <defs></defs>
+      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <path d="M12.566,8 L15.611,4.956 C16.031,4.535 16.031,3.853 15.611,3.434 L12.566,0.389 C12.146,-0.031 11.464,-0.031 11.043,0.389 L7.999,3.433 L4.955,0.389 C4.534,-0.031 3.852,-0.031 3.432,0.389 L0.388,3.434 C-0.034,3.854 -0.034,4.536 0.387,4.956 L3.431,8 L0.387,11.044 C-0.034,11.465 -0.034,12.147 0.388,12.567 L3.432,15.611 C3.852,16.032 4.534,16.032 4.955,15.611 L7.999,12.567 L11.043,15.611 C11.464,16.032 12.146,16.032 12.566,15.611 L15.611,12.567 C16.031,12.146 16.031,11.464 15.611,11.044 L12.566,8 L12.566,8 Z" fill="#434343" class="si-glyph-fill"></path>
+      </g>
+    </svg>');
+  }
+  &.icon-reload::before {
+    background-image: svg-uri('<svg viewBox="0 0 17 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="si-glyph si-glyph-arrow-reload">
+      <title>802</title>
+      <defs></defs>
+      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(1.000000, 2.000000)" fill="#434343">
+          <path d="M15.796,6.908 L14.234,5.21 C14.019,4.998 13.672,4.998 13.458,5.21 L11.894,6.908 C11.679,7.122 11.679,7.467 11.894,7.68 L13.188,7.68 C12.702,9.505 11.27,10.976 9.399,11.47 C7.231,12.042 4.913,11.191 3.632,9.351 L2.541,10.102 C3.807,11.921 5.884,12.966 8.039,12.966 C8.604,12.966 9.176,12.894 9.737,12.745 C12.188,12.099 14.04,10.112 14.55,7.68 L15.795,7.68 C16.01,7.467 16.01,7.122 15.796,6.908 L15.796,6.908 Z" class="si-glyph-fill"></path>
+          <path d="M4.475,6.021 C4.69,5.808 4.69,5.462 4.475,5.249 L3.018,5.249 C3.516,3.448 4.936,2.001 6.789,1.511 C8.959,0.938 11.275,1.791 12.555,3.632 L13.647,2.88 C12.049,0.585 9.161,-0.479 6.448,0.235 C4.016,0.878 2.175,2.84 1.648,5.249 L0.196,5.249 C-0.019,5.463 -0.019,5.809 0.196,6.021 L1.834,7.658 C2.048,7.87 2.396,7.87 2.61,7.658 L4.475,6.021 L4.475,6.021 Z" class="si-glyph-fill"></path>
+        </g>
+      </g>
+    </svg>');
+  }
+}
+
+scb-file-input {
+  display: block;
+  margin-bottom: 20px;
+
+  .scb-fi-wrapper {
+    width: 100%;
+    padding: 20px;
+    border: 1px dashed #363636;
+  }
+
+  .scb-fi-hidden {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+  }
+
+  .scb-fi-button-wrapper {
+    display: inline-block;
+  }
+
+  .scb-fi-row-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .scb-fi-label {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+
+  [slot="label"] + .scb-fi-default-label {
+    display: none;
+  }
+  [slot="button"] + .scb-fi-default-button {
+    display: none;
+  }
+
+  .scb-fi-row {
+    margin-top: 10px;
+  }
+
+  .scb-fi-icon-btn,
+  .scb-fi-icon-btn:hover,
+  .scb-fi-icon-btn:focus {
+    background: none;
+    outline: none;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+
+  .scb-fi-wrapper .progress-bar {
+    transition: none;
+  }
+
+  .scb-fi-retry-btn {
+    display: none;
+  }
+}
