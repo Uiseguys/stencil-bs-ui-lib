@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.1",
   "description": "Bootstrap componentes built with StencilJS",
+  "engines": {
+    "node": ">=8.5.0"
+  },
   "files": [
     "dist/"
   ],
@@ -12,24 +15,26 @@
     "serve": "stencil-dev-server",
     "start": "npm run dev",
     "test": "jest --no-cache",
-    "test.watch": "jest --watch --no-cache"
+    "test.watch": "jest --watch --no-cache",
+    "postinstall": "npm run build",
+    "serve:heroku": "http-server www"
   },
   "dependencies": {
     "@stencil/core": "0.2.3",
+    "@stencil/dev-server": "latest",
     "@stencil/router": "0.0.9",
+    "@stencil/utils": "latest",
+    "@types/jest": "^21.1.1",
     "@types/video.js": "^6.2.3",
+    "http-server": "^0.11.1",
+    "jest": "^21.2.1",
     "popper.js": "^1.12.9",
+    "tslint": "^5.7.0",
+    "tslint-config-airbnb": "^5.3.0",
     "video.js": "^6.6.0",
     "videojs-font": "^2.0.0"
   },
-  "devDependencies": {
-    "@stencil/dev-server": "latest",
-    "@stencil/utils": "latest",
-    "@types/jest": "^21.1.1",
-    "jest": "^21.2.1",
-    "tslint": "^5.7.0",
-    "tslint-config-airbnb": "^5.3.0"
-  },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ionic-team/stencil-starter.git"
