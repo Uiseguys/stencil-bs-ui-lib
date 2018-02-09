@@ -12,7 +12,8 @@
     "serve": "stencil-dev-server",
     "start": "npm run dev",
     "test": "jest --no-cache",
-    "test.watch": "jest --watch --no-cache"
+    "test.watch": "jest --watch --no-cache",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "@stencil/core": "0.2.3",
