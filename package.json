@@ -21,9 +21,7 @@
     "@types/video.js": "^6.2.3",
     "popper.js": "^1.12.9",
     "video.js": "^6.6.0",
-    "videojs-font": "^2.0.0"
-  },
-  "devDependencies": {
+    "videojs-font": "^2.0.0",
     "@stencil/dev-server": "latest",
     "@stencil/utils": "latest",
     "@types/jest": "^21.1.1",
@@ -31,6 +29,7 @@
     "tslint": "^5.7.0",
     "tslint-config-airbnb": "^5.3.0"
   },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ionic-team/stencil-starter.git"
