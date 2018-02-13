@@ -137,6 +137,16 @@ export class StencilBootstrapDemo {
                                     Tag
                                 </stencil-route-link>
                             </li>
+                            <li>
+                                <stencil-route-link
+                                    url="/form"
+                                    urlMatch={['/form']}
+                                    activeClass="active"
+                                    exact={true}
+                                >
+                                    Form
+                                </stencil-route-link>
+                            </li>
 
                         </ul>
                     </div>
@@ -209,6 +219,12 @@ export class StencilBootstrapDemo {
                             </stencil-route> <stencil-route
                                 url={['/tag']}
                                 component="tag-page"
+                                exact={true}
+                            >
+                            </stencil-route>
+                            <stencil-route
+                                url={['/form']}
+                                component="form-page"
                                 exact={true}
                             >
                             </stencil-route>
