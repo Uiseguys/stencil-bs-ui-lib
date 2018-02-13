@@ -1,4 +1,6 @@
 exports.config = {
+	namespace: 'index',
+	generateDistribution: true,
   bundles: [
     { components: ['stencil-bootstrap-demo', 'alerts-page', 'scb-alert'] },
     { components: ['badge-page', 'scb-badge'] },
