@@ -1,8 +1,12 @@
 {
-  "name": "stencil-bootrap",
-  "private": true,
+  "name": "stencil-bootrap-test",
+  "private": false,
   "version": "0.0.1",
   "description": "Bootstrap componentes built with StencilJS",
+  "main": "dist/index.js",
+  "types": "dist/types/components.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "browser": "dist/index.js",
   "files": [
     "dist/"
   ],
