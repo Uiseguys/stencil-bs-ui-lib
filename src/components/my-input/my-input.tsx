@@ -58,8 +58,6 @@ export class MyInput {
   componentDidLoad() {
 
     let self=this;
-
-    let formatedDate: any;
     if(this.for === "object" && this.format === "date") {
       const picker = new Pikaday({
         field: this.element.shadowRoot.querySelector("input"),
@@ -67,7 +65,6 @@ export class MyInput {
           self.currentDate = moment(date).format('Do MMMM YYYY');
         }
       });
-
       picker._onClick = null;   // disable the listener to support shadow DOM
     }
   };
