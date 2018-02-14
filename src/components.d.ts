@@ -208,7 +208,8 @@ declare global {
       animatable?: boolean;
       dismissible?: boolean;
       onDismiss?: (hostEl: HostElement) => void;
-      type?: BootstrapThemeColor;
+      show?: boolean;
+      type?: string;
     }
   }
 }
