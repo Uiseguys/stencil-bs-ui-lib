@@ -1,4 +1,4 @@
-import { Component, State } from '@stencil/core';
+import {Component, State} from '@stencil/core';
 import Ajv from 'ajv/dist/ajv.min.js';
 import * as moment from 'moment';
 
@@ -18,7 +18,7 @@ export class FormPage {
 
         this.schema = {
             "type": "object",
-            "required": [ "startDate", "endDate", "min", "max", "checked", "sources", "dateValue" ],
+            "required": ["startDate", "endDate", "min", "max", "checked", "sources", "dateValue"],
             "properties": {
                 "checked": {
                     "$id": "data/properties/checked",
@@ -131,7 +131,7 @@ export class FormPage {
 
 
         return (
-            <my-dynamic-form schema={this.schema} form={this.form} ajv={this.ajv} >
+            <my-dynamic-form schema={this.schema} form={this.form} ajv={this.ajv}>
                 <my-input for="integer"></my-input>
                 <my-input for="string"></my-input>
                 <my-input for="object"></my-input>
