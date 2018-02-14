@@ -7,12 +7,12 @@
 import '@stencil/router';
 
 import {
+  HostElement,
+} from '@stencil/core';
+import {
   BootstrapThemeColor,
   IBreadcrumbItem,
 } from './common/index';
-import {
-  HostElement,
-} from '@stencil/core';
 import {
   VirtualNode,
 } from './components/scb-list/scb-list-interfaces';
@@ -208,7 +208,8 @@ declare global {
       animatable?: boolean;
       dismissible?: boolean;
       onDismiss?: (hostEl: HostElement) => void;
-      type?: BootstrapThemeColor;
+      show?: boolean;
+      type?: string;
     }
   }
 }

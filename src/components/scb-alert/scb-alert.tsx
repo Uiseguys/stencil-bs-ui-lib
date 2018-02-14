@@ -6,6 +6,8 @@ import {
   Watch,
   State,
   Method,
+  Event,
+  EventEmitter
 } from '@stencil/core';
 import { BootstrapThemeColor } from './../../common/index';
 
@@ -15,13 +17,18 @@ import { BootstrapThemeColor } from './../../common/index';
 export class ScbAlert {
   @Element() el: HostElement;
 
-  @Prop() type: BootstrapThemeColor = 'info';
   @Prop() dismissible = false;
   @Prop() animatable = true;
+  @Prop() type: string ;
   @Prop() onDismiss: (hostEl: HostElement) => void;
 
-  @State() show: boolean;
+  @Prop() show = true;
   @State() fade: boolean;
+
+  @Event() toggleVisibility: EventEmitter;
+  toggleVisibilityHandler(event: any) {
+    this.toggleVisibility.emit(event);
+  }
 
   @Method()
   dismiss() {
@@ -29,17 +36,21 @@ export class ScbAlert {
       return console.warn('This alert is not dismissible!', this.el);
     }
 
-    if (!this.onDismiss) {
+    /* if (!this.onDismiss) {
       return console.warn('No onDismiss callback for this alert.', this.el);
-    }
+    }*/
 
-    if (!this.animatable) {
+    if (!this.animatable && this.onDismiss) {
       return this.onDismiss(this.el);
     }
-
     this.show = false;
+    this.toggleVisibilityHandler(this.show);
+    if (!this.onDismiss) {
+      return;
+    }
+
     setTimeout(() => {
-      this.onDismiss(this.el);
+        this.onDismiss(this.el);
     }, 150); // TODO Replace with configurable value?
   }
 
@@ -52,11 +63,11 @@ export class ScbAlert {
     return (
       <div class={{
         alert: true,
-        [`alert-${this.type}`]: true,
+        [`alert-${this.type || 'info'}`]: true,
         'alert-dismissible': this.dismissible,
         show: this.animatable && this.show,
         fade: this.animatable && this.fade,
-      }} role="alert">
+      }} role="alert" >
         {this.getDismissButton()}
         <slot />
       </div>
