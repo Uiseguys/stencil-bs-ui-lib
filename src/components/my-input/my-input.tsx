@@ -74,10 +74,6 @@ export class MyInput {
 
 	render() {
 
-      console.log("render");
-
-      console.log(`this.currentDate ${this.currentDate}`);
-
 	  let content = this.getContent();
 
     return (
