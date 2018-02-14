@@ -120,11 +120,6 @@ export class FormPage {
                 "source2"
             ]
         };
-
-
-        // const dynamicForm = document.querySelector('my-dynamic-form');
-        // dynamicForm.schema = schema;
-        // dynamicForm.form = form;
     };
 
     render() {
