@@ -7,10 +7,13 @@
 import '@stencil/router';
 
 import {
+  BootstrapThemeColor,
+} from './common/bootstrap-theme-color.type';
+import {
   HostElement,
 } from '@stencil/core';
 import {
-  BootstrapThemeColor,
+  BootstrapThemeColor as BootstrapThemeColor2,
   IBreadcrumbItem,
 } from './common/index';
 import {
@@ -78,6 +81,43 @@ declare global {
       minSearchLength?: number;
       placeholder?: string;
       searchKey?: string;
+    }
+  }
+}
+
+
+import {
+  CwcTag as CwcTag
+} from './components/cwc-tag/cwc-tag';
+
+declare global {
+  interface HTMLCwcTagElement extends CwcTag, HTMLElement {
+  }
+  var HTMLCwcTagElement: {
+    prototype: HTMLCwcTagElement;
+    new (): HTMLCwcTagElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-tag": HTMLCwcTagElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-tag": HTMLCwcTagElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-tag": JSXElements.CwcTagAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcTagAttributes extends HTMLAttributes {
+      classes?: string;
+      closable?: boolean;
+      imgLink?: string;
+      limitTo?: number;
+      link?: string;
+      rounded?: boolean;
+      tagType?: BootstrapThemeColor;
+      text?: string;
     }
   }
 }
@@ -176,6 +216,138 @@ declare global {
     export interface FclVideoPlayerAttributes extends HTMLAttributes {
       controls?: boolean;
       poster?: string;
+    }
+  }
+}
+
+
+import {
+  MyCheckbox as MyCheckbox
+} from './components/my-checkbox/my-checkbox';
+
+declare global {
+  interface HTMLMyCheckboxElement extends MyCheckbox, HTMLElement {
+  }
+  var HTMLMyCheckboxElement: {
+    prototype: HTMLMyCheckboxElement;
+    new (): HTMLMyCheckboxElement;
+  };
+  interface HTMLElementTagNameMap {
+    "my-checkbox": HTMLMyCheckboxElement;
+  }
+  interface ElementTagNameMap {
+    "my-checkbox": HTMLMyCheckboxElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "my-checkbox": JSXElements.MyCheckboxAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MyCheckboxAttributes extends HTMLAttributes {
+      for?: string;
+      id?: string;
+      title?: string;
+      value?: boolean;
+    }
+  }
+}
+
+
+import {
+  MyDropdown as MyDropdown
+} from './components/my-dropdown/my-dropdown';
+
+declare global {
+  interface HTMLMyDropdownElement extends MyDropdown, HTMLElement {
+  }
+  var HTMLMyDropdownElement: {
+    prototype: HTMLMyDropdownElement;
+    new (): HTMLMyDropdownElement;
+  };
+  interface HTMLElementTagNameMap {
+    "my-dropdown": HTMLMyDropdownElement;
+  }
+  interface ElementTagNameMap {
+    "my-dropdown": HTMLMyDropdownElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "my-dropdown": JSXElements.MyDropdownAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MyDropdownAttributes extends HTMLAttributes {
+      for?: string;
+      id?: string;
+      title?: string;
+      value?: string;
+    }
+  }
+}
+
+
+import {
+  MyDynamicForm as MyDynamicForm
+} from './components/my-dynamic-form/my-dynamic-form';
+
+declare global {
+  interface HTMLMyDynamicFormElement extends MyDynamicForm, HTMLElement {
+  }
+  var HTMLMyDynamicFormElement: {
+    prototype: HTMLMyDynamicFormElement;
+    new (): HTMLMyDynamicFormElement;
+  };
+  interface HTMLElementTagNameMap {
+    "my-dynamic-form": HTMLMyDynamicFormElement;
+  }
+  interface ElementTagNameMap {
+    "my-dynamic-form": HTMLMyDynamicFormElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "my-dynamic-form": JSXElements.MyDynamicFormAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MyDynamicFormAttributes extends HTMLAttributes {
+      ajv?: any;
+      form?: any;
+      schema?: any;
+    }
+  }
+}
+
+
+import {
+  MyInput as MyInput
+} from './components/my-input/my-input';
+
+declare global {
+  interface HTMLMyInputElement extends MyInput, HTMLElement {
+  }
+  var HTMLMyInputElement: {
+    prototype: HTMLMyInputElement;
+    new (): HTMLMyInputElement;
+  };
+  interface HTMLElementTagNameMap {
+    "my-input": HTMLMyInputElement;
+  }
+  interface ElementTagNameMap {
+    "my-input": HTMLMyInputElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "my-input": JSXElements.MyInputAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MyInputAttributes extends HTMLAttributes {
+      for?: string;
+      format?: any;
+      id?: string;
+      title?: string;
+      value?: any;
     }
   }
 }
@@ -537,6 +709,36 @@ declare global {
 
 
 import {
+  FormPage as FormPage
+} from './pages/form-page/form-page';
+
+declare global {
+  interface HTMLFormPageElement extends FormPage, HTMLElement {
+  }
+  var HTMLFormPageElement: {
+    prototype: HTMLFormPageElement;
+    new (): HTMLFormPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "form-page": HTMLFormPageElement;
+  }
+  interface ElementTagNameMap {
+    "form-page": HTMLFormPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "form-page": JSXElements.FormPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface FormPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
   ListPage as ListPage
 } from './pages/list-page/list-page';
 
@@ -620,6 +822,36 @@ declare global {
   }
   namespace JSXElements {
     export interface StencilBootstrapDemoAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  TagPage as TagPage
+} from './pages/tag-page/tag-page';
+
+declare global {
+  interface HTMLTagPageElement extends TagPage, HTMLElement {
+  }
+  var HTMLTagPageElement: {
+    prototype: HTMLTagPageElement;
+    new (): HTMLTagPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "tag-page": HTMLTagPageElement;
+  }
+  interface ElementTagNameMap {
+    "tag-page": HTMLTagPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "tag-page": JSXElements.TagPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface TagPageAttributes extends HTMLAttributes {
       
     }
   }

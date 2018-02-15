@@ -1,5 +1,6 @@
-import { Component, Prop } from '@stencil/core';
-import { BootstrapThemeColor } from './../../common/index';
+import { Component, Prop, Element, EventEmitter } from '@stencil/core';
+import { BootstrapThemeColor } from '../../common/bootstrap-theme-color.type';
+
 
 @Component({
   tag: 'scb-badge',
@@ -12,11 +13,11 @@ export class ScbBadge {
   render() {
     return this.link
       ? <a class={this.getClassList()} href={this.link}>
-          <slot />
-        </a>
+        <slot />
+      </a>
       : <span class={this.getClassList()}>
-          <slot />
-        </span>;
+        <slot />
+      </span>;
   }
 
   private getClassList() {

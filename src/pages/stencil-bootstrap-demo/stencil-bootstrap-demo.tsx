@@ -127,6 +127,25 @@ export class StencilBootstrapDemo {
                                 >
                                     Multiselect
                                 </stencil-route-link>
+                            </li>  <li>
+                                <stencil-route-link
+                                    url="/tag"
+                                    urlMatch={['/tag']}
+                                    activeClass="active"
+                                    exact={true}
+                                >
+                                    Tag
+                                </stencil-route-link>
+                            </li>
+                            <li>
+                                <stencil-route-link
+                                    url="/form"
+                                    urlMatch={['/form']}
+                                    activeClass="active"
+                                    exact={true}
+                                >
+                                    Form
+                                </stencil-route-link>
                             </li>
 
                         </ul>
@@ -195,6 +214,17 @@ export class StencilBootstrapDemo {
                             <stencil-route
                                 url={['/multiselect']}
                                 component="multiselect-page"
+                                exact={true}
+                            >
+                            </stencil-route> <stencil-route
+                                url={['/tag']}
+                                component="tag-page"
+                                exact={true}
+                            >
+                            </stencil-route>
+                            <stencil-route
+                                url={['/form']}
+                                component="form-page"
                                 exact={true}
                             >
                             </stencil-route>
