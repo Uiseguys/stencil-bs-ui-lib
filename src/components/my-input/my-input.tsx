@@ -1,7 +1,6 @@
 import {Component, Prop, State, Event, EventEmitter, Element} from '@stencil/core';
 import Pikaday from 'pikaday/pikaday.js';   // disable the listener to support shadow DOM
-import * as moment from 'moment';
-// import moment from 'moment';
+import moment from 'moment';
 
 @Component({
     tag: 'my-input',

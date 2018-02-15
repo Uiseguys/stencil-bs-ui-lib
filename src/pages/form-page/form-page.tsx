@@ -1,7 +1,6 @@
 import {Component, State} from '@stencil/core';
 import Ajv from 'ajv/dist/ajv.min.js';
-// import moment from 'moment';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
     tag: 'form-page',
