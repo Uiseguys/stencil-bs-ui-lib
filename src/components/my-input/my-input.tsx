@@ -1,6 +1,7 @@
 import {Component, Prop, State, Event, EventEmitter, Element} from '@stencil/core';
 import Pikaday from 'pikaday/pikaday.js';   // disable the listener to support shadow DOM
 import * as moment from 'moment';
+// import moment from 'moment';
 
 @Component({
     tag: 'my-input',
@@ -10,7 +11,7 @@ import * as moment from 'moment';
 export class MyInput {
 
     @State() currentValue: string;
-    @State() currentDate: any;
+    @State() currentDate: string;
 
     @Prop() id: string;
     @Prop() for: string;
@@ -63,6 +64,7 @@ export class MyInput {
         if (this.for === "object" && this.format === "date") {
             const picker = new Pikaday({
                 field: this.element.shadowRoot.querySelector("input"),
+                format: 'D MMM YYYY',
                 onSelect: function (date) {
                     self.currentDate = moment(date).format('Do MMMM YYYY');
                 }
