@@ -115,6 +115,8 @@ declare global {
       imgLink?: string;
       limitTo?: number;
       link?: string;
+      onCloseData?: any;
+      removeOnClose?: boolean;
       rounded?: boolean;
       tagType?: BootstrapThemeColor;
       text?: string;

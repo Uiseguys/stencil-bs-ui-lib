@@ -4,7 +4,7 @@ import { BootstrapThemeColor } from '../../common/bootstrap-theme-color.type';
 
 @Component({
     tag: 'tag-page',
-    // styleUrl: 'tag-page.scss'
+    styleUrl: 'tag-page.scss'
 })
 export class TagPage {
 
@@ -97,6 +97,24 @@ export class TagPage {
                             <td>false</td>
                             <td>Makes tag rounded.</td>
                         </tr>
+
+                        <tr>
+                            <td><code>removeOnClose</code></td>
+                            <td><code>boolean</code></td>
+                            <td>no</td>
+                            <td><code>true</code></td>
+                            <td>If set <code>true</code>, element will be removed from DOM on <code>close()</code> event.</td>
+                        </tr>
+
+                        <tr>
+                            <td><code>onCloseData</code></td>
+                            <td><code>any</code></td>
+                            <td>no</td>
+                            <td><code>undefined</code></td>
+                            <td>Custom data in <code>tagCloseEvent</code> which is emited every time <code>close()</code> method triggered.</td>
+                        </tr>
+
+
                     </tbody>
                 </table>
 
