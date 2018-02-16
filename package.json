@@ -42,7 +42,9 @@
     "video.js": "^6.6.0",
     "videojs-font": "^2.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@stencil/sass": "0.0.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ionic-team/stencil-starter.git"

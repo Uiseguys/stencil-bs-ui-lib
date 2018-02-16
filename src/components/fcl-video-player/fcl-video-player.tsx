@@ -44,7 +44,7 @@ export class FclVideoPLayer {
     this.toggle = true;
     this.autoPlay = true;
 
-    this.el.querySelector("img").style.display = 'none';
+    this.el.querySelector("fcl-image").style.display = 'none';
     this.el.querySelector("video").style.display = 'block';
 
   }
@@ -55,12 +55,14 @@ export class FclVideoPLayer {
 
   render() {
 
-      if( this.poster != null && this.toggle == false){
+      if (this.poster != null && this.toggle === false) {
 
        return(
          <div class="fcl-video-class">
 
-           <fcl-image class="video-img-block" onClick={() => this.toggleClick()} brokenUrl="assets/img/broken-image.png" src={this.poster}></fcl-image>
+           <fcl-image class="video-img-block"
+                      onClick={() => this.toggleClick()}
+                      brokenUrl="assets/img/broken-image.png" src={this.poster}></fcl-image>
 
            <video class="video-js vjs-default-skin">
           <slot> </slot>
@@ -70,9 +72,9 @@ export class FclVideoPLayer {
 
       );
 
-    }else{
+    } else {
 
-     if( this.poster != null ){
+     if (this.poster != null) {
 
        this.el.getElementsByTagName('video')[0].play();
      }
@@ -94,11 +96,10 @@ export class FclVideoPLayer {
 
   componentDidLoad() {
 
-   if( this.poster == null )
-   {
+   if (this.poster == null) {
       this.autoPlay = false;
       this.el.querySelector("video").style.display = 'block';
-   }else{
+   } else {
      this.el.querySelector("video").style.display = 'block';
    }
 
@@ -114,8 +115,7 @@ export class FclVideoPLayer {
 
   componentWillUpdate() {
 
-    if( this.poster == null )
-    {
+    if (this.poster == null) {
        this.autoPlay = false;
     }
 
