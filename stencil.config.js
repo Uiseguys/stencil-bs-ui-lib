@@ -26,6 +26,6 @@ exports.config = {
 };
 
 exports.devServer = {
-	root: 'www',
-	watchGlob: '**/**'
+  //root: 'www',
+  //watchGlob: '**/**'// httpPort: '8080'
 }
