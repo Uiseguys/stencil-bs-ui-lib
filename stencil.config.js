@@ -1,3 +1,4 @@
+const sass = require('@stencil/sass');
 exports.config = {
 	namespace: 'index',
 	generateDistribution: true,
@@ -20,8 +21,11 @@ exports.config = {
 		]
 	},
 	copy: [
-		{src: 'assets/fonts', dest: 'font'},
+		{src: 'components/fcl-video-player/css/fonts', dest: 'fonts'},
 		{src: 'assets/img', dest: 'css'}
+	],
+	plugins: [
+		sass()
 	]
 };
 
