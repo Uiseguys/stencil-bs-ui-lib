@@ -147,7 +147,16 @@ export class StencilBootstrapDemo {
                                     Form
                                 </stencil-route-link>
                             </li>
-
+                            <li>
+                                <stencil-route-link
+                                    url="/dialog"
+                                    urlMatch={['/dialog']}
+                                    activeClass="active"
+                                    exact={true}
+                                >
+                                    Dialog
+                                </stencil-route-link>
+                            </li>
                         </ul>
                     </div>
 
@@ -228,7 +237,12 @@ export class StencilBootstrapDemo {
                                 exact={true}
                             >
                             </stencil-route>
-
+                            <stencil-route
+                                url={['/dialog']}
+                                component="dialog-page"
+                                exact={true}
+                            >
+                            </stencil-route>
                         </stencil-router>
                     </div>
                 </div>
