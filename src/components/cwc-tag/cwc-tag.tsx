@@ -1,4 +1,4 @@
-import { Component, Prop, Method, Element, Watch } from '@stencil/core';
+import { Component, Prop, Method, Element, Watch, Event, EventEmitter } from '@stencil/core';
 import { BootstrapThemeColor } from '../../common/bootstrap-theme-color.type';
 
 
@@ -14,17 +14,28 @@ export class CwcTag {
     @Prop() link: string = undefined
     @Prop() imgLink: string = undefined
     @Prop() closable: boolean = false
+    @Prop() removeOnClose: boolean = true
+    @Prop() onCloseData: any = undefined
     @Prop() rounded: boolean = false
     @Prop() limitTo: number = 25;
 
     @Element() element: HTMLElement;
+
+    @Event() tagCloseEvent: EventEmitter
 
     @Method()
     close(e?: UIEvent): void {
         if (this.link)
             e.preventDefault()
 
-        this.element.parentElement.removeChild(this.element)
+        this.tagCloseEvent.emit({
+            eventType: 'EVENT_TAG_CLOSE',
+            tagText: this.text,
+            customData: this.onCloseData
+        })
+
+        if (this.removeOnClose)
+            this.element.parentElement.removeChild(this.element)
     }
 
     @Watch('text')
@@ -34,7 +45,6 @@ export class CwcTag {
 
     @Watch('tagType')
     watchHandler(val) {
-        console.log('new tagType is: ', val)
         this.tagType = val
     }
 
@@ -57,8 +67,6 @@ export class CwcTag {
             console.log('-tagType: ', this.tagType)
             classes = ' badge-primary'
         }
-
-        console.log('inited ' + classes)
 
         if (this.classes)
             classes += ` ${this.classes} `
