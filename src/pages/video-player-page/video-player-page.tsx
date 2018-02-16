@@ -11,8 +11,8 @@ export class VideoPlayerPage {
       <div>
         <h2>Video Player</h2>
         <div>
-          <fcl-video-player poster="http://images.telvi.de/images/originals/2017/50/1/319b47392316aa2c54d5fbab.jp">
-            <source src="http://techslides.com/demos/sample-videos/small.mp" type='video/mp4' />
+          <fcl-video-player poster="http://images.telvi.de/images/originals/2017/50/1/319b47392316aa2c54d5fbab.jpg">
+            <source src="http://techslides.com/demos/sample-videos/small.mp4" type='video/mp4' />
           </fcl-video-player>
 
           <section class="box top">

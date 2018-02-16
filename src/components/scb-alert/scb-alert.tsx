@@ -50,7 +50,7 @@ export class ScbAlert {
     }
 
     setTimeout(() => {
-        this.onDismiss(this.el);
+      this.onDismiss(this.el);
     }, 150); // TODO Replace with configurable value?
   }
 
@@ -67,7 +67,7 @@ export class ScbAlert {
         'alert-dismissible': this.dismissible,
         show: this.animatable && this.show,
         fade: this.animatable && this.fade,
-      }} role="alert" >
+      }} role="alert">
         {this.getDismissButton()}
         <slot />
       </div>
