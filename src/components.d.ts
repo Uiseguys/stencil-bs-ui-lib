@@ -452,6 +452,44 @@ declare global {
 
 
 import {
+  ScbDialog as ScbDialog
+} from './components/scb-dialog/scb-dialog';
+
+declare global {
+  interface HTMLScbDialogElement extends ScbDialog, HTMLElement {
+  }
+  var HTMLScbDialogElement: {
+    prototype: HTMLScbDialogElement;
+    new (): HTMLScbDialogElement;
+  };
+  interface HTMLElementTagNameMap {
+    "scb-dialog": HTMLScbDialogElement;
+  }
+  interface ElementTagNameMap {
+    "scb-dialog": HTMLScbDialogElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "scb-dialog": JSXElements.ScbDialogAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ScbDialogAttributes extends HTMLAttributes {
+      animation?: boolean;
+      centered?: boolean;
+      content?: string;
+      optBackdrop?: any;
+      optFocus?: boolean;
+      optKeyboard?: boolean;
+      optShow?: boolean;
+      size?: string;
+      title?: string;
+    }
+  }
+}
+
+
+import {
   ScbFileInput as ScbFileInput
 } from './components/scb-file-input/scb-file-input';
 
@@ -651,6 +689,36 @@ declare global {
   }
   namespace JSXElements {
     export interface BreadcrumbPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  DiaglogPage as DialogPage
+} from './pages/dialog-page/dialog-page';
+
+declare global {
+  interface HTMLDialogPageElement extends DialogPage, HTMLElement {
+  }
+  var HTMLDialogPageElement: {
+    prototype: HTMLDialogPageElement;
+    new (): HTMLDialogPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "dialog-page": HTMLDialogPageElement;
+  }
+  interface ElementTagNameMap {
+    "dialog-page": HTMLDialogPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "dialog-page": JSXElements.DialogPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface DialogPageAttributes extends HTMLAttributes {
       
     }
   }

@@ -8,6 +8,7 @@ exports.config = {
 		{components: ['breadcrumb-page', 'scb-breadcrumb']},
 		{components: ['video-player-page', 'fcl-video-player']},
 		{components: ['fcl-image-page', 'fcl-image']},
+		{components: ['dialog-page', 'scb-dialog']},
 		{components: ['tooltip-page', 'scb-tooltip']}
 	],
 	collections: [
