@@ -1,7 +1,7 @@
 {
-  "name": "stencil-bootrap-test",
+  "name": "@ui-guys/stencil-bs-ui-lib",
   "private": false,
-  "version": "0.0.11",
+  "version": "0.0.13",
   "description": "Bootstrap componentes built with StencilJS",
   "engines": {
     "node": ">=8.5.0"
@@ -20,7 +20,7 @@
     "start": "npm run dev",
     "test": "jest --no-cache",
     "test.watch": "jest --watch --no-cache",
-    "postinstall": "npm run build",
+    "publish": "npm publish ./ --dry-run --access public",
     "serve:heroku": "http-server www"
   },
   "dependencies": {
@@ -47,14 +47,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ionic-team/stencil-starter.git"
+    "url": "git+https://github.com/Uiseguys/stencil-bs-ui-lib.git"
   },
-  "author": "Khaled Shaaban",
+  "author": "wiseguys-admin <admin@uiguys.berlin>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kshaaban-/stencil-bootstrap/issues"
+    "url": "https://github.com/Uiseguys/stencil-bs-ui-lib/issues"
   },
-  "homepage": "https://github.com/kshaaban-/stencil-bootstrap",
+  "homepage": "https://github.com/Uiseguys/stencil-bs-ui-lib",
   "jest": {
     "transform": {
       "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
