@@ -18,6 +18,9 @@ export class TolltipPage {
                                             <h3>Usage </h3>
                                             <div>
                                                 <scb-tooltip
+                                                    type="link"
+                                                    href="https://stencil-bs-ui-lib.herokuapp.com/"
+                                                    target="_blank"
                                                     title="Tooltip content"
                                                     placement="top"
                                                     trigger="hover focus click">
@@ -31,9 +34,12 @@ export class TolltipPage {
                                         <div class="col-lg-12">
                                         <pre><code class="lang-tsx">
                                             <span>&lt;scb-tooltip</span><br />
+                                            <span class="hljs-built_in ml-4">type="link"</span><br />
+                                            <span class="hljs-built_in ml-4">href="https://stencil-bs-ui-lib.herokuapp.com/"</span><br />
+                                            <span class="hljs-built_in ml-4">target="_blank"</span><br />
                                             <span class="hljs-built_in ml-4">title="Tooltip content"</span><br />
-                                            <span class="ml-4">placement="top"</span><br />
-                                            <span class="ml-4">trigger="hover focus click"</span>
+                                            <span class="hljs-built_in ml-4">placement="top"</span><br />
+                                            <span class="hljs-built_in ml-4">trigger="hover focus click"</span>
                                             <span>&gt;</span>
                                             <br />
                                             <span>&lt;/cwc-tooltip&gt;</span>
@@ -52,6 +58,24 @@ export class TolltipPage {
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <tr>
+                                                <td>type</td>
+                                                <td>String</td>
+                                                <td>'span'</td>
+                                                <td>How tooltip is displayed - as a link, button or span</td>
+                                            </tr>
+                                            <tr>
+                                                <td>href</td>
+                                                <td>String</td>
+                                                <td>'#'</td>
+                                                <td>Set href to a link type tooltip. Only of type is 'link'.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>target</td>
+                                                <td>String</td>
+                                                <td>'_blank'</td>
+                                                <td>The target property sets or returns the value of the target attribute of a link. The target attribute specifies where to open the linked document - '_blank', '_self', '_parent', '_top'</td>
+                                            </tr>
                                             <tr>
                                                 <td>title</td>
                                                 <td>String</td>

@@ -555,10 +555,13 @@ declare global {
   namespace JSXElements {
     export interface ScbTooltipAttributes extends HTMLAttributes {
       delay?: any;
+      href?: string;
       offset?: string;
       placement?: string;
+      target?: string;
       title?: string;
       trigger?: string;
+      type?: string;
     }
   }
 }
