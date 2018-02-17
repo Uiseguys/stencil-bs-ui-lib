@@ -7,7 +7,8 @@ exports.config = {
 		{components: ['badge-page', 'scb-badge']},
 		{components: ['breadcrumb-page', 'scb-breadcrumb']},
 		{components: ['video-player-page', 'fcl-video-player']},
-		{components: ['fcl-image-page', 'fcl-image']}
+		{components: ['fcl-image-page', 'fcl-image']},
+		{components: ['tooltip-page', 'scb-tooltip']}
 	],
 	collections: [
 		{name: '@stencil/router'}

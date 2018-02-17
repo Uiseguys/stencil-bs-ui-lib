@@ -531,6 +531,40 @@ declare global {
 
 
 import {
+  ScbTooltip as ScbTooltip
+} from './components/scb-tooltip/scb-tooltip';
+
+declare global {
+  interface HTMLScbTooltipElement extends ScbTooltip, HTMLElement {
+  }
+  var HTMLScbTooltipElement: {
+    prototype: HTMLScbTooltipElement;
+    new (): HTMLScbTooltipElement;
+  };
+  interface HTMLElementTagNameMap {
+    "scb-tooltip": HTMLScbTooltipElement;
+  }
+  interface ElementTagNameMap {
+    "scb-tooltip": HTMLScbTooltipElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "scb-tooltip": JSXElements.ScbTooltipAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ScbTooltipAttributes extends HTMLAttributes {
+      delay?: any;
+      offset?: string;
+      placement?: string;
+      title?: string;
+      trigger?: string;
+    }
+  }
+}
+
+
+import {
   AlertsPage as AlertsPage
 } from './pages/alerts-page/alerts-page';
 
@@ -854,6 +888,36 @@ declare global {
   }
   namespace JSXElements {
     export interface TagPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  TolltipPage as TooltipPage
+} from './pages/tooltip-page/tooltip-page';
+
+declare global {
+  interface HTMLTooltipPageElement extends TooltipPage, HTMLElement {
+  }
+  var HTMLTooltipPageElement: {
+    prototype: HTMLTooltipPageElement;
+    new (): HTMLTooltipPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "tooltip-page": HTMLTooltipPageElement;
+  }
+  interface ElementTagNameMap {
+    "tooltip-page": HTMLTooltipPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "tooltip-page": JSXElements.TooltipPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface TooltipPageAttributes extends HTMLAttributes {
       
     }
   }
