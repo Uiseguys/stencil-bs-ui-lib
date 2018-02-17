@@ -122,23 +122,21 @@ export class CwcTypeahead {
                 <input onInput={(e) => this.handleInputChange(e)}
                     type="text" class="form-control" placeholder={this.placeholder} />
 
-                {(() => {
-                    if (this.filtered.length > 0) {
-                        return (
-                            <div class="card">
-                                {
-                                    this.filtered.map((val, i) =>
-                                        <option class={"dropdown-item".concat((this.focusIndex == i + 1) ? ' active' : '')}
-                                            onClick={(e: any) => this.handleSelect(e.target.value, i)}
-                                            onMouseEnter={() => this.handleHover(i + 1)}
-                                        >{typeof val == 'string' ? val : val.index}</option>)
-                                }
-                            </div>
+                {
+                    (this.filtered.length > 0) ? (
+                        <div class="card">
+                            {
+                                this.filtered.map((val, i) =>
+                                    <option class={"dropdown-item".concat((this.focusIndex == i + 1) ? ' active' : '')}
+                                        onClick={(e: any) => this.handleSelect(e.target.value, i)}
+                                        onMouseEnter={() => this.handleHover(i + 1)}
+                                    >{typeof val == 'string' ? val : val.index}</option>)
+                            }
+                        </div>
 
-                        )
+                    ) : (() => { })
+                }
 
-                    }
-                })()}
             </div>
         )
     }
