@@ -157,6 +157,16 @@ export class StencilBootstrapDemo {
                                     Dialog
                                 </stencil-route-link>
                             </li>
+                            <li>
+                                <stencil-route-link
+                                    url="/tooltip"
+                                    urlMatch={['/tooltip']}
+                                    activeClass="active"
+                                    exact={true}
+                                >
+                                    Tooltip
+                                </stencil-route-link>
+                            </li>
                         </ul>
                     </div>
 
@@ -240,6 +250,12 @@ export class StencilBootstrapDemo {
                             <stencil-route
                                 url={['/dialog']}
                                 component="dialog-page"
+                                exact={true}
+                            >
+                            </stencil-route>
+                            <stencil-route
+                                url={['/tooltip']}
+                                component="tooltip-page"
                                 exact={true}
                             >
                             </stencil-route>
