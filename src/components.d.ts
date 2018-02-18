@@ -7,6 +7,9 @@
 import '@stencil/router';
 
 import {
+  VirtualNode,
+} from './components/cwc-list/cwc-list-interfaces';
+import {
   BootstrapThemeColor,
 } from './common/bootstrap-theme-color.type';
 import {
@@ -16,9 +19,6 @@ import {
   BootstrapThemeColor as BootstrapThemeColor2,
   IBreadcrumbItem,
 } from './common/index';
-import {
-  VirtualNode,
-} from './components/scb-list/scb-list-interfaces';
 
 import {
   StencilComponent as CwcDropdown
@@ -47,6 +47,47 @@ declare global {
       dropdownPlacement?: any;
       offsetString?: string;
       triggerOverflow?: boolean;
+    }
+  }
+}
+
+
+import {
+  CwcList as CwcList
+} from './components/cwc-list/cwc-list';
+
+declare global {
+  interface HTMLCwcListElement extends CwcList, HTMLElement {
+  }
+  var HTMLCwcListElement: {
+    prototype: HTMLCwcListElement;
+    new (): HTMLCwcListElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-list": HTMLCwcListElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-list": HTMLCwcListElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-list": JSXElements.CwcListAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcListAttributes extends HTMLAttributes {
+      addClass?: string;
+      addClassEven?: string;
+      addClassFirst?: string;
+      addClassLast?: string;
+      addClassOdd?: string;
+      bindToList?: boolean;
+      bottomOffset?: number;
+      debounce?: number;
+      itemAs?: string;
+      items?: object[];
+      template?: VirtualNode;
+      wrapperClass?: string;
     }
   }
 }
@@ -452,6 +493,44 @@ declare global {
 
 
 import {
+  ScbDialog as ScbDialog
+} from './components/scb-dialog/scb-dialog';
+
+declare global {
+  interface HTMLScbDialogElement extends ScbDialog, HTMLElement {
+  }
+  var HTMLScbDialogElement: {
+    prototype: HTMLScbDialogElement;
+    new (): HTMLScbDialogElement;
+  };
+  interface HTMLElementTagNameMap {
+    "scb-dialog": HTMLScbDialogElement;
+  }
+  interface ElementTagNameMap {
+    "scb-dialog": HTMLScbDialogElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "scb-dialog": JSXElements.ScbDialogAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ScbDialogAttributes extends HTMLAttributes {
+      animation?: boolean;
+      centered?: boolean;
+      content?: string;
+      optBackdrop?: any;
+      optFocus?: boolean;
+      optKeyboard?: boolean;
+      optShow?: boolean;
+      size?: string;
+      title?: string;
+    }
+  }
+}
+
+
+import {
   ScbFileInput as ScbFileInput
 } from './components/scb-file-input/scb-file-input';
 
@@ -493,38 +572,37 @@ declare global {
 
 
 import {
-  StencilComponent as ScbList
-} from './components/scb-list/scb-list';
+  ScbTooltip as ScbTooltip
+} from './components/scb-tooltip/scb-tooltip';
 
 declare global {
-  interface HTMLScbListElement extends ScbList, HTMLElement {
+  interface HTMLScbTooltipElement extends ScbTooltip, HTMLElement {
   }
-  var HTMLScbListElement: {
-    prototype: HTMLScbListElement;
-    new (): HTMLScbListElement;
+  var HTMLScbTooltipElement: {
+    prototype: HTMLScbTooltipElement;
+    new (): HTMLScbTooltipElement;
   };
   interface HTMLElementTagNameMap {
-    "scb-list": HTMLScbListElement;
+    "scb-tooltip": HTMLScbTooltipElement;
   }
   interface ElementTagNameMap {
-    "scb-list": HTMLScbListElement;
+    "scb-tooltip": HTMLScbTooltipElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "scb-list": JSXElements.ScbListAttributes;
+      "scb-tooltip": JSXElements.ScbTooltipAttributes;
     }
   }
   namespace JSXElements {
-    export interface ScbListAttributes extends HTMLAttributes {
-      addClass?: string;
-      addClassEven?: string;
-      addClassOdd?: string;
-      bindToList?: boolean;
-      bottomOffset?: number;
-      itemAs?: string;
-      items?: object[];
-      template?: VirtualNode;
-      wrapperClass?: string;
+    export interface ScbTooltipAttributes extends HTMLAttributes {
+      delay?: any;
+      href?: string;
+      offset?: string;
+      placement?: string;
+      target?: string;
+      title?: string;
+      trigger?: string;
+      type?: string;
     }
   }
 }
@@ -614,6 +692,36 @@ declare global {
   }
   namespace JSXElements {
     export interface BreadcrumbPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  DiaglogPage as DialogPage
+} from './pages/dialog-page/dialog-page';
+
+declare global {
+  interface HTMLDialogPageElement extends DialogPage, HTMLElement {
+  }
+  var HTMLDialogPageElement: {
+    prototype: HTMLDialogPageElement;
+    new (): HTMLDialogPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "dialog-page": HTMLDialogPageElement;
+  }
+  interface ElementTagNameMap {
+    "dialog-page": HTMLDialogPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "dialog-page": JSXElements.DialogPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface DialogPageAttributes extends HTMLAttributes {
       
     }
   }
@@ -854,6 +962,36 @@ declare global {
   }
   namespace JSXElements {
     export interface TagPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  TolltipPage as TooltipPage
+} from './pages/tooltip-page/tooltip-page';
+
+declare global {
+  interface HTMLTooltipPageElement extends TooltipPage, HTMLElement {
+  }
+  var HTMLTooltipPageElement: {
+    prototype: HTMLTooltipPageElement;
+    new (): HTMLTooltipPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "tooltip-page": HTMLTooltipPageElement;
+  }
+  interface ElementTagNameMap {
+    "tooltip-page": HTMLTooltipPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "tooltip-page": JSXElements.TooltipPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface TooltipPageAttributes extends HTMLAttributes {
       
     }
   }
