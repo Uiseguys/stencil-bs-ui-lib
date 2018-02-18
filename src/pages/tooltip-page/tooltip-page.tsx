@@ -74,7 +74,7 @@ export class TolltipPage {
                                                 <td>target</td>
                                                 <td>String</td>
                                                 <td>'_blank'</td>
-                                                <td>The target property sets or returns the value of the target attribute of a link. The target attribute specifies where to open the linked document - '_blank', '_self', '_parent', '_top'</td>
+                                                <td>The target property sets or returns the value of the target attribute of a link. The target attribute specifies where to open the linked document - '_blank', '_self', '_parent', '_top'. Only of type is 'link'.</td>
                                             </tr>
                                             <tr>
                                                 <td>title</td>

@@ -167,6 +167,16 @@ export class StencilBootstrapDemo {
                                     Tooltip
                                 </stencil-route-link>
                             </li>
+                            <li>
+                                <stencil-route-link
+                                    url="/navbar"
+                                    urlMatch={['/navbar']}
+                                    activeClass="active"
+                                    exact={true}
+                                >
+                                    Navbar
+                                </stencil-route-link>
+                            </li>
                         </ul>
                     </div>
 
@@ -256,6 +266,12 @@ export class StencilBootstrapDemo {
                             <stencil-route
                                 url={['/tooltip']}
                                 component="tooltip-page"
+                                exact={true}
+                            >
+                            </stencil-route>
+                            <stencil-route
+                                url={['/navbar']}
+                                component="navbar-page"
                                 exact={true}
                             >
                             </stencil-route>
