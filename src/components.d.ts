@@ -556,9 +556,12 @@ declare global {
     export interface ScbListAttributes extends HTMLAttributes {
       addClass?: string;
       addClassEven?: string;
+      addClassFirst?: string;
+      addClassLast?: string;
       addClassOdd?: string;
       bindToList?: boolean;
       bottomOffset?: number;
+      debounce?: number;
       itemAs?: string;
       items?: object[];
       template?: VirtualNode;
