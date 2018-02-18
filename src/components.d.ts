@@ -7,6 +7,9 @@
 import '@stencil/router';
 
 import {
+  VirtualNode,
+} from './components/cwc-list/cwc-list-interfaces';
+import {
   BootstrapThemeColor,
 } from './common/bootstrap-theme-color.type';
 import {
@@ -16,9 +19,6 @@ import {
   BootstrapThemeColor as BootstrapThemeColor2,
   IBreadcrumbItem,
 } from './common/index';
-import {
-  VirtualNode,
-} from './components/scb-list/scb-list-interfaces';
 
 import {
   StencilComponent as CwcDropdown
@@ -47,6 +47,47 @@ declare global {
       dropdownPlacement?: any;
       offsetString?: string;
       triggerOverflow?: boolean;
+    }
+  }
+}
+
+
+import {
+  CwcList as CwcList
+} from './components/cwc-list/cwc-list';
+
+declare global {
+  interface HTMLCwcListElement extends CwcList, HTMLElement {
+  }
+  var HTMLCwcListElement: {
+    prototype: HTMLCwcListElement;
+    new (): HTMLCwcListElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-list": HTMLCwcListElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-list": HTMLCwcListElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-list": JSXElements.CwcListAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcListAttributes extends HTMLAttributes {
+      addClass?: string;
+      addClassEven?: string;
+      addClassFirst?: string;
+      addClassLast?: string;
+      addClassOdd?: string;
+      bindToList?: boolean;
+      bottomOffset?: number;
+      debounce?: number;
+      itemAs?: string;
+      items?: object[];
+      template?: VirtualNode;
+      wrapperClass?: string;
     }
   }
 }
@@ -525,47 +566,6 @@ declare global {
       target?: string;
       timeout?: number;
       type?: BootstrapThemeColor;
-    }
-  }
-}
-
-
-import {
-  StencilComponent as ScbList
-} from './components/scb-list/scb-list';
-
-declare global {
-  interface HTMLScbListElement extends ScbList, HTMLElement {
-  }
-  var HTMLScbListElement: {
-    prototype: HTMLScbListElement;
-    new (): HTMLScbListElement;
-  };
-  interface HTMLElementTagNameMap {
-    "scb-list": HTMLScbListElement;
-  }
-  interface ElementTagNameMap {
-    "scb-list": HTMLScbListElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      "scb-list": JSXElements.ScbListAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface ScbListAttributes extends HTMLAttributes {
-      addClass?: string;
-      addClassEven?: string;
-      addClassFirst?: string;
-      addClassLast?: string;
-      addClassOdd?: string;
-      bindToList?: boolean;
-      bottomOffset?: number;
-      debounce?: number;
-      itemAs?: string;
-      items?: object[];
-      template?: VirtualNode;
-      wrapperClass?: string;
     }
   }
 }

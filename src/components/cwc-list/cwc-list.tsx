@@ -1,5 +1,5 @@
-import { Component, Prop, PropDidChange, State, Event, EventEmitter, Element, Method } from '@stencil/core';
-import { VirtualNode, ListDataItem } from './scb-list-interfaces';
+import { Component, Prop, Watch, State, Event, EventEmitter, Element, Method } from '@stencil/core';
+import { VirtualNode, ListDataItem } from './cwc-list-interfaces';
 import get from 'lodash/get'
 
 
@@ -7,14 +7,14 @@ import get from 'lodash/get'
  * An infinite list component which
  * 
  * @export
- * @class StencilComponent
+ * @class CwcList
  */
 @Component({
-    tag: 'scb-list',
-    styleUrl: 'scb-list.scss'
+    tag: 'cwc-list',
+    styleUrl: 'cwc-list.scss'
 })
 
-export class StencilComponent {
+export class CwcList {
 
     @Prop() items: object[];
     @Prop() itemAs: string = 'item';
@@ -44,7 +44,7 @@ export class StencilComponent {
     /**
      * Method to dispatch HTMLCustomEvent 
      * {@link https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events}
-     * If scb-list has id, this id will be dispatched as event.detail
+     * If cwc-list has id, this id will be dispatched as event.detail
      * 
      * @memberof StencilComponent
      */
@@ -85,7 +85,7 @@ export class StencilComponent {
     }
 
 
-    @PropDidChange('items')
+    @Watch('items')
     itemsdidChangeHandler() {
         this.itemsData.length = 0
         this.initItemsData()
