@@ -592,7 +592,11 @@ declare global {
   }
   namespace JSXElements {
     export interface ScbNavbarAttributes extends HTMLAttributes {
+      bgColor?: string;
       id?: string;
+      navbarColor?: string;
+      placement?: string;
+      size?: string;
     }
   }
 }
