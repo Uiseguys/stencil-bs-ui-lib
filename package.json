@@ -41,7 +41,8 @@
     "tslint": "^5.7.0",
     "tslint-config-airbnb": "^5.3.0",
     "video.js": "^6.6.0",
-    "videojs-font": "^2.0.0"
+    "videojs-font": "^2.0.0",
+    "lodash": "^4.17.4"
   },
   "devDependencies": {
     "@stencil/sass": "0.0.2"
