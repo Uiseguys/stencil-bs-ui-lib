@@ -572,44 +572,6 @@ declare global {
 
 
 import {
-  StencilComponent as ScbList
-} from './components/scb-list/scb-list';
-
-declare global {
-  interface HTMLScbListElement extends ScbList, HTMLElement {
-  }
-  var HTMLScbListElement: {
-    prototype: HTMLScbListElement;
-    new (): HTMLScbListElement;
-  };
-  interface HTMLElementTagNameMap {
-    "scb-list": HTMLScbListElement;
-  }
-  interface ElementTagNameMap {
-    "scb-list": HTMLScbListElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      "scb-list": JSXElements.ScbListAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface ScbListAttributes extends HTMLAttributes {
-      addClass?: string;
-      addClassEven?: string;
-      addClassOdd?: string;
-      bindToList?: boolean;
-      bottomOffset?: number;
-      itemAs?: string;
-      items?: object[];
-      template?: VirtualNode;
-      wrapperClass?: string;
-    }
-  }
-}
-
-
-import {
   ScbNavbar as ScbNavbar
 } from './components/scb-navbar/scb-navbar';
 
