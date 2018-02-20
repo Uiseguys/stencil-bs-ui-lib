@@ -572,6 +572,78 @@ declare global {
 
 
 import {
+  StencilComponent as ScbList
+} from './components/scb-list/scb-list';
+
+declare global {
+  interface HTMLScbListElement extends ScbList, HTMLElement {
+  }
+  var HTMLScbListElement: {
+    prototype: HTMLScbListElement;
+    new (): HTMLScbListElement;
+  };
+  interface HTMLElementTagNameMap {
+    "scb-list": HTMLScbListElement;
+  }
+  interface ElementTagNameMap {
+    "scb-list": HTMLScbListElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "scb-list": JSXElements.ScbListAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ScbListAttributes extends HTMLAttributes {
+      addClass?: string;
+      addClassEven?: string;
+      addClassOdd?: string;
+      bindToList?: boolean;
+      bottomOffset?: number;
+      itemAs?: string;
+      items?: object[];
+      template?: VirtualNode;
+      wrapperClass?: string;
+    }
+  }
+}
+
+
+import {
+  ScbNavbar as ScbNavbar
+} from './components/scb-navbar/scb-navbar';
+
+declare global {
+  interface HTMLScbNavbarElement extends ScbNavbar, HTMLElement {
+  }
+  var HTMLScbNavbarElement: {
+    prototype: HTMLScbNavbarElement;
+    new (): HTMLScbNavbarElement;
+  };
+  interface HTMLElementTagNameMap {
+    "scb-navbar": HTMLScbNavbarElement;
+  }
+  interface ElementTagNameMap {
+    "scb-navbar": HTMLScbNavbarElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "scb-navbar": JSXElements.ScbNavbarAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ScbNavbarAttributes extends HTMLAttributes {
+      bgColor?: string;
+      id?: string;
+      navbarColor?: string;
+      placement?: string;
+      size?: string;
+    }
+  }
+}
+
+
+import {
   ScbTooltip as ScbTooltip
 } from './components/scb-tooltip/scb-tooltip';
 
@@ -902,6 +974,36 @@ declare global {
   }
   namespace JSXElements {
     export interface MultiselectPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  NavbarPage as NavbarPage
+} from './pages/navbar-page/navbar-page';
+
+declare global {
+  interface HTMLNavbarPageElement extends NavbarPage, HTMLElement {
+  }
+  var HTMLNavbarPageElement: {
+    prototype: HTMLNavbarPageElement;
+    new (): HTMLNavbarPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "navbar-page": HTMLNavbarPageElement;
+  }
+  interface ElementTagNameMap {
+    "navbar-page": HTMLNavbarPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "navbar-page": JSXElements.NavbarPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface NavbarPageAttributes extends HTMLAttributes {
       
     }
   }

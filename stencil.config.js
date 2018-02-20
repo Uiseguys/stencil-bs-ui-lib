@@ -9,7 +9,8 @@ exports.config = {
 		{components: ['video-player-page', 'fcl-video-player']},
 		{components: ['fcl-image-page', 'fcl-image']},
 		{components: ['dialog-page', 'scb-dialog']},
-		{components: ['tooltip-page', 'scb-tooltip']}
+		{components: ['tooltip-page', 'scb-tooltip']},
+		{components: ['navbar-page', 'scb-navbar']}
 	],
 	collections: [
 		{name: '@stencil/router'}

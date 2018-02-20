@@ -32,18 +32,18 @@ export class TolltipPage {
                                     <br />
                                     <div class="row">
                                         <div class="col-lg-12">
-                                        <pre><code class="lang-tsx">
-                                            <span>&lt;scb-tooltip</span><br />
-                                            <span class="hljs-built_in ml-4">type="link"</span><br />
-                                            <span class="hljs-built_in ml-4">href="https://stencil-bs-ui-lib.herokuapp.com/"</span><br />
-                                            <span class="hljs-built_in ml-4">target="_blank"</span><br />
-                                            <span class="hljs-built_in ml-4">title="Tooltip content"</span><br />
-                                            <span class="hljs-built_in ml-4">placement="top"</span><br />
-                                            <span class="hljs-built_in ml-4">trigger="hover focus click"</span>
-                                            <span>&gt;</span>
-                                            <br />
-                                            <span>&lt;/cwc-tooltip&gt;</span>
-                                        </code></pre>
+                                            <pre><code class="lang-tsx">
+                                                <span>&lt;scb-tooltip</span><br />
+                                                <span class="hljs-built_in ml-4">type="link"</span><br />
+                                                <span class="hljs-built_in ml-4">href="https://stencil-bs-ui-lib.herokuapp.com/"</span><br />
+                                                <span class="hljs-built_in ml-4">target="_blank"</span><br />
+                                                <span class="hljs-built_in ml-4">title="Tooltip content"</span><br />
+                                                <span class="hljs-built_in ml-4">placement="top"</span><br />
+                                                <span class="hljs-built_in ml-4">trigger="hover focus click"</span>
+                                                <span>&gt;</span>
+                                                <br />
+                                                <span>&lt;/cwc-tooltip&gt;</span>
+                                            </code></pre>
                                         </div>
                                     </div>
                                 </div>
@@ -74,7 +74,7 @@ export class TolltipPage {
                                                 <td>target</td>
                                                 <td>String</td>
                                                 <td>'_blank'</td>
-                                                <td>The target property sets or returns the value of the target attribute of a link. The target attribute specifies where to open the linked document - '_blank', '_self', '_parent', '_top'</td>
+                                                <td>The target property sets or returns the value of the target attribute of a link. The target attribute specifies where to open the linked document - '_blank', '_self', '_parent', '_top'. Only of type is 'link'.</td>
                                             </tr>
                                             <tr>
                                                 <td>title</td>
