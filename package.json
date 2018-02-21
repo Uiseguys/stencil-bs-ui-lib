@@ -24,9 +24,8 @@
     "serve:heroku": "http-server www"
   },
   "dependencies": {
-    "@stencil/core": "0.2.3",
+    "@stencil/core": "0.6.3",
     "@stencil/dev-server": "latest",
-    "@stencil/router": "0.0.9",
     "@stencil/utils": "latest",
     "@types/jest": "^21.1.1",
     "@types/video.js": "^6.2.3",
@@ -39,7 +38,6 @@
     "popper.js": "^1.12.9",
     "tooltip.js": "^1.1.7",
     "tslint": "^5.7.0",
-    "tslint-config-airbnb": "^5.3.0",
     "video.js": "^6.6.0",
     "videojs-font": "^2.0.0",
     "lodash": "^4.17.4"

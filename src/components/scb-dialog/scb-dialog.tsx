@@ -1,4 +1,4 @@
-import { Component, Method, Element, Prop, Event, EventEmitter } from '@stencil/core';
+import { Component, Element, Prop, Event, EventEmitter } from '@stencil/core';
 
 @Component({
     tag: 'scb-dialog'

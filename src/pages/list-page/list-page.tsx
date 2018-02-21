@@ -9,17 +9,17 @@ import { Component, State, Listen } from '@stencil/core';
 })
 export class ListPage {
 
-    @State() users1: any[] = []
-    @State() users2: any[] = []
+    @State() users1: any[] = [];
+    @State() users2: any[] = [];
 
     @Listen('onBottomReach')
     customEventHandler(event) {
 
-        if (event.detail == 'users-infinite') {
+        if (event.detail === 'users-infinite') {
             this.initUsers1Data()
         }
 
-        if (event.detail == 'users-boxed') {
+        if (event.detail === 'users-boxed') {
             this.initUsers2Data()
         }
 
@@ -27,8 +27,9 @@ export class ListPage {
     // doc: string = 'cwc-list?.md'
 
     componentWillLoad() {
-        this.initUsers1Data(20)
-        this.initUsers2Data(20)
+        this.initUsers1Data(20);
+        this.initUsers2Data(20);
+        console.log(this.customEventHandler);
     }
 
     initUsers1Data(count?: number) {
@@ -85,17 +86,17 @@ export class ListPage {
 
     getUsers(count = 10) {
 
-        return new Promise((resolve, reject?) => {
+        return new Promise((resolve) => {
 
-            let request = new XMLHttpRequest();
+            const request = new XMLHttpRequest();
             request.open('GET', `https://randomuser.me/api/?page=${this.getUsersPage()}&results=${count}&seed=abc`, true);
             request.onload = () => {
                 if (request.status >= 200 && request.status < 400) {
-                    let data = JSON.parse(request.responseText);
-                    let users = data.results
-                    resolve(users)
+                    const data = JSON.parse(request.responseText);
+                    const users = data.results;
+                    resolve(users);
                 } else {
-                    resolve(false)
+                    resolve(false);
                     console.error("Users endpoint can't be reached. Status: ", request.status)
 
                 }

@@ -1,4 +1,4 @@
-import { Component, Prop, Element, EventEmitter } from '@stencil/core';
+import { Component, Prop } from '@stencil/core';
 import { BootstrapThemeColor } from '../../common/bootstrap-theme-color.type';
 
 

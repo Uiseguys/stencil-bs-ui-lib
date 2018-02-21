@@ -149,6 +149,7 @@ export class CwcTypeahead {
 
     @Listen('keydown.down')
     handleDownArrow(ev) {
+        console.log(ev);
         if (this.focusIndex < this.filtered.length)
             this.focusIndex = this.focusIndex + 1
 
@@ -164,6 +165,7 @@ export class CwcTypeahead {
 
     @Listen('keydown.escape')
     handleEscape(ev) {
+        console.log(ev);
         if (this.focusIndex > 0) {
             this.focusIndex = 0
         }
@@ -172,6 +174,7 @@ export class CwcTypeahead {
 
     @Listen('keydown.enter')
     handleEnter(ev) {
+        console.log(ev);
         if (this.focusIndex > 0) {
             this.handleSelect(document.querySelectorAll(`#${this.idValue} option`)[this.focusIndex - 1].textContent, this.focusIndex - 1)
         }
