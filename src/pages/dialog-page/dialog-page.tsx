@@ -17,15 +17,16 @@ export class DiaglogPage {
 
     render() {
         return <scb-dialog
+                    btntype="success"
                     title="Info"
                     content="Modal Content"
                     centered={true}
                     animation={true}
                     size=""
-                    optBackdrop={true}
-                    optKeyboard={true}
-                    optFocus={true}
-                    optShow={true}>
+                    backdrop={true}
+                    keyboard={true}
+                    modalfocus={true}
+                    show={true}>
                 </scb-dialog>
     }
 }

@@ -515,12 +515,13 @@ declare global {
   namespace JSXElements {
     export interface ScbDialogAttributes extends HTMLAttributes {
       animation?: boolean;
+      backdrop?: any;
+      btntype?: string;
       centered?: boolean;
       content?: string;
-      optBackdrop?: any;
-      optFocus?: boolean;
-      optKeyboard?: boolean;
-      optShow?: boolean;
+      keyboard?: boolean;
+      modalfocus?: boolean;
+      show?: boolean;
       size?: string;
       title?: string;
     }
