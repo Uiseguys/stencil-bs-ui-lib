@@ -8,8 +8,8 @@ export class ScbNavbar {
 
     @Prop() id: string;
     @Prop() size: string = '';
-    @Prop() navbarColor: string = "light";
-    @Prop() bgColor: string = "light";
+    @Prop() navbarcolor: string = "light";
+    @Prop() bgcolor: string = "light";
     @Prop() placement: string = '';
 
     render() {
@@ -18,8 +18,8 @@ export class ScbNavbar {
                 'navbar ' +
                 this.placement +
                 (this.size ? ' navbar-expand-' + this.size : ' navbar-expand') +
-                ' navbar-' + this.navbarColor +
-                ' bg-' + this.bgColor}>
+                ' navbar-' + this.navbarcolor +
+                ' bg-' + this.bgcolor}>
                 <slot name="slot-navbar-brand-left"></slot>
 
                 <button class="navbar-toggler" type="button"

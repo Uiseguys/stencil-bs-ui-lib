@@ -19,8 +19,8 @@ export class NavbarPage {
                                         <scb-navbar
                                             id="navbarSupportedContent"
                                             size="lg"
-                                            navbarColor="light"
-                                            bgColor="light"
+                                            navbarcolor="light"
+                                            bgcolor="light"
                                             placement=''>
                                             <a slot="slot-navbar-brand-left" class="navbar-brand" href="#">Navbar</a>
 
@@ -62,8 +62,8 @@ export class NavbarPage {
                                         <span>&lt;scb-navbar</span><br />
                                         <span class="hljs-built_in ml-4">id="navbarSupportedContent"</span><br />
                                         <span class="hljs-built_in ml-4">size="lg"</span><br />
-                                        <span class="hljs-built_in ml-4">navbarColor="light"</span><br />
-                                        <span class="hljs-built_in ml-4">bgColor="light"</span><br />
+                                        <span class="hljs-built_in ml-4">navbarcolor="light"</span><br />
+                                        <span class="hljs-built_in ml-4">bgcolor="light"</span><br />
                                         <span class="hljs-built_in ml-4">placement=''</span>
                                         <span>&gt;</span>
                                         <br />
@@ -94,13 +94,13 @@ export class NavbarPage {
                                                 <td>For responsive collapsing set appropriate class to .navbar-expand-&#123;&#125;. Accepted values are: '<strong>sm</strong>', <strong>'md</strong>', '<strong>lg</strong>' or '<strong>xl</strong>'. For navbars that never collapse, leave the property empty.</td>
                                             </tr>
                                             <tr>
-                                                <td>navbarColor</td>
+                                                <td>navbarcolor</td>
                                                 <td>String</td>
                                                 <td>'light'</td>
                                                 <td>Theming classes. Accepted values are: '<strong>light</strong>' or '<strong>dark</strong>'.</td>
                                             </tr>
                                             <tr>
-                                                <td>bgColor</td>
+                                                <td>bgcolor</td>
                                                 <td>String</td>
                                                 <td>'light'</td>
                                                 <td>Background color classes. Accepted values are: '<strong>primary</strong>', '<strong>secondary</strong>', '<strong>success</strong>', '<strong>danger</strong>', '<strong>warning</strong>', '<strong>info</strong>', '<strong>light</strong>' or '<strong>dark</strong>'.</td>
