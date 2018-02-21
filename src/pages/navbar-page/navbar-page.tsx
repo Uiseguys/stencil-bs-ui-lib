@@ -17,40 +17,32 @@ export class NavbarPage {
                                     <p>If setting a 'navbar-brand' element, set the 'slot="slot-navbar-brand-left"' attribute to show the element on the left side of the 'navbar-toggler' element. Set 'slot="slot-navbar-brand-right"', otherwise. Remove the 'slot' attribute and insert the 'navbar-brand' into 'slot="slot-navbar-content"' element if you don't want it to be shown when 'navbar-toggler' element is visible.</p>
                                     <div>
                                         <scb-navbar
-                                            id="navbarSupportedContent"
                                             size="lg"
                                             navbarcolor="light"
                                             bgcolor="light"
                                             placement=''>
                                             <a slot="slot-navbar-brand-left" class="navbar-brand" href="#">Navbar</a>
 
-                                            <div slot="slot-navbar-content" id="navbarSupportedContent" class="collapse navbar-collapse">
-                                                <ul class="navbar-nav mr-auto">
-                                                    <li class="nav-item active">
-                                                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" href="#">Link</a>
-                                                    </li>
-                                                    <li class="nav-item dropdown">
-                                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                            <a class="dropdown-item" href="#">Action</a>
-                                                            <a class="dropdown-item" href="#">Another action</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a class="dropdown-item" href="#">Something else here</a>
-                                                        </div>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link disabled" href="#">Disabled</a>
-                                                    </li>
-                                                </ul>
-
-                                                <form class="form-inline my-2 my-lg-0">
-                                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                                                </form>
-                                            </div>
+                                            <ul slot="slot-navbar-content" class="navbar-nav mr-auto">
+                                                <li class="nav-item active">
+                                                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#">Link</a>
+                                                </li>
+                                                <li class="nav-item dropdown">
+                                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <a class="dropdown-item" href="#">Action</a>
+                                                        <a class="dropdown-item" href="#">Another action</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#">Something else here</a>
+                                                    </div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link disabled" href="#">Disabled</a>
+                                                </li>
+                                            </ul>
                                         </scb-navbar>
                                     </div>
                                 </div>
@@ -60,7 +52,6 @@ export class NavbarPage {
                                 <div class="col-lg-4">
                                     <pre><code class="lang-tsx">
                                         <span>&lt;scb-navbar</span><br />
-                                        <span class="hljs-built_in ml-4">id="navbarSupportedContent"</span><br />
                                         <span class="hljs-built_in ml-4">size="lg"</span><br />
                                         <span class="hljs-built_in ml-4">navbarcolor="light"</span><br />
                                         <span class="hljs-built_in ml-4">bgcolor="light"</span><br />
@@ -81,12 +72,6 @@ export class NavbarPage {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>id</td>
-                                                <td>String</td>
-                                                <td>''</td>
-                                                <td>Set the same id as 'collapse navbar-collapse' element for the 'navbar-toggler' button element to work.</td>
-                                            </tr>
                                             <tr>
                                                 <td>size</td>
                                                 <td>String</td>
