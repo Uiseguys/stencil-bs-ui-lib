@@ -58,7 +58,7 @@ export class NavbarPage {
                                         <span class="hljs-built_in ml-4">placement=''</span>
                                         <span>&gt;</span>
                                         <br />
-                                        <span>&lt;/cwc-navbar&gt;</span>
+                                        <span>&lt;/scb-navbar&gt;</span>
                                     </code></pre>
                                 </div>
                                 <div class="col-lg-8">
