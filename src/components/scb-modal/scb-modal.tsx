@@ -1,25 +1,25 @@
 import { Component, Element, Prop, Event, EventEmitter } from '@stencil/core';
 
 @Component({
-    tag: 'scb-dialog'
+    tag: 'scb-modal'
 })
-export class ScbDialog {
+export class ScbModal {
     @Element() el;
 
     @Prop() btntype: string = 'primary';
-    @Prop() title: string;
-    @Prop() content: string;
-    @Prop() centered: boolean;
-    @Prop() animation: boolean;
+    @Prop() title: string = 'Modal Title';
+    @Prop() content: string = 'Modal Content';
+    @Prop() centered: boolean = true;
+    @Prop() animation: boolean = true;
 
     // 'large' for large modal, 'small' for small modal, '' for default modal
-    @Prop() size: string;
+    @Prop() size: string = '';
 
     // true, false or 'static'
-    @Prop() backdrop: any;
-    @Prop() keyboard: boolean;
-    @Prop() modalfocus: boolean;
-    @Prop() show: boolean;
+    @Prop() backdrop: any = true;
+    @Prop() keyboard: boolean = true;
+    @Prop() modalfocus: boolean = true;
+    @Prop() show: boolean = true;
 
     @Event() onOpenModal: EventEmitter;
     @Event() onCloseModal: EventEmitter;
