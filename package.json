@@ -20,9 +20,9 @@
     "start": "npm run dev",
     "test": "jest --no-cache",
     "test.watch": "jest --watch --no-cache",
-    "serve:heroku": "http-server www",
     "publish": "npm publish ./ --dry-run --access public",
-    "postinstall" : "npm run build"
+    "postinstall" : "npm run build",
+    "serve:heroku": "http-server www"
   },
   "dependencies": {
     "@stencil/core": "0.6.3",
