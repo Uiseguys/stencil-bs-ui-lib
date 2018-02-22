@@ -13,7 +13,7 @@ export class ScbTooltip {
     @Prop() type: string = 'span';
     @Prop() href: string = '#';
     @Prop() target: string = '_blank';
-    @Prop() title: string = '';
+    @Prop() tooltipTitle: string = '';
     @Prop() placement: string = 'top';
     @Prop() delay: any = 0;
     @Prop() trigger: string = 'hover';
@@ -27,7 +27,7 @@ export class ScbTooltip {
         this.btn = this.el.children[0];
 
         this.tooltip = new Tooltip(this.btn, {
-            title: this.title,
+            title: this.tooltipTitle,
             placement: this.placement,
             delay: this.delay,
             trigger: this.trigger,

@@ -7,8 +7,8 @@ export class ScbModal {
     @Element() el;
 
     @Prop() btntype: string = 'primary';
-    @Prop() title: string = 'Modal Title';
-    @Prop() content: string = 'Modal Content';
+    @Prop() modalTitle: string = 'Modal Title';
+    @Prop() modalContent: string = 'Modal Content';
     @Prop() centered: boolean = true;
     @Prop() animation: boolean = true;
 
@@ -52,10 +52,10 @@ export class ScbModal {
                         }} role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">{this.title}</h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle">{this.modalTitle}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={this.closeModalHandler.bind(this)}><span aria-hidden="true">&times;</span></button>
                             </div>
-                            <div class="modal-body">{this.content}</div>
+                            <div class="modal-body">{this.modalContent}</div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={this.closeModalHandler.bind(this)}>Close</button>
                             </div>
