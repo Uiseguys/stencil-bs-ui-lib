@@ -18,12 +18,21 @@ import {
   IBreadcrumbItem,
 } from './common/index';
 
+declare global {
+  interface HTMLStencilElement extends HTMLElement {
+    componentOnReady(): Promise<this>;
+    componentOnReady(done: (ele?: this) => void): void;
+  }
+}
+
+
+
 import {
   StencilComponent as CwcDropdown
 } from './components/cwc-dropdown/cwc-dropdown';
 
 declare global {
-  interface HTMLCwcDropdownElement extends CwcDropdown, HTMLElement {
+  interface HTMLCwcDropdownElement extends CwcDropdown, HTMLStencilElement {
   }
   var HTMLCwcDropdownElement: {
     prototype: HTMLCwcDropdownElement;
@@ -55,7 +64,7 @@ import {
 } from './components/cwc-list/cwc-list';
 
 declare global {
-  interface HTMLCwcListElement extends CwcList, HTMLElement {
+  interface HTMLCwcListElement extends CwcList, HTMLStencilElement {
   }
   var HTMLCwcListElement: {
     prototype: HTMLCwcListElement;
@@ -96,7 +105,7 @@ import {
 } from './components/cwc-multiselect/cwc-multiselect';
 
 declare global {
-  interface HTMLCwcMultiselectElement extends CwcMultiselect, HTMLElement {
+  interface HTMLCwcMultiselectElement extends CwcMultiselect, HTMLStencilElement {
   }
   var HTMLCwcMultiselectElement: {
     prototype: HTMLCwcMultiselectElement;
@@ -130,7 +139,7 @@ import {
 } from './components/cwc-tag/cwc-tag';
 
 declare global {
-  interface HTMLCwcTagElement extends CwcTag, HTMLElement {
+  interface HTMLCwcTagElement extends CwcTag, HTMLStencilElement {
   }
   var HTMLCwcTagElement: {
     prototype: HTMLCwcTagElement;
@@ -169,7 +178,7 @@ import {
 } from './components/cwc-typeahead/cwc-typeahead';
 
 declare global {
-  interface HTMLCwcTypeaheadElement extends CwcTypeahead, HTMLElement {
+  interface HTMLCwcTypeaheadElement extends CwcTypeahead, HTMLStencilElement {
   }
   var HTMLCwcTypeaheadElement: {
     prototype: HTMLCwcTypeaheadElement;
@@ -203,7 +212,7 @@ import {
 } from './components/fcl-image/fcl-image';
 
 declare global {
-  interface HTMLFclImageElement extends FclImage, HTMLElement {
+  interface HTMLFclImageElement extends FclImage, HTMLStencilElement {
   }
   var HTMLFclImageElement: {
     prototype: HTMLFclImageElement;
@@ -236,7 +245,7 @@ import {
 } from './components/fcl-video-player/fcl-video-player';
 
 declare global {
-  interface HTMLFclVideoPlayerElement extends FclVideoPlayer, HTMLElement {
+  interface HTMLFclVideoPlayerElement extends FclVideoPlayer, HTMLStencilElement {
   }
   var HTMLFclVideoPlayerElement: {
     prototype: HTMLFclVideoPlayerElement;
@@ -267,7 +276,7 @@ import {
 } from './components/my-checkbox/my-checkbox';
 
 declare global {
-  interface HTMLMyCheckboxElement extends MyCheckbox, HTMLElement {
+  interface HTMLMyCheckboxElement extends MyCheckbox, HTMLStencilElement {
   }
   var HTMLMyCheckboxElement: {
     prototype: HTMLMyCheckboxElement;
@@ -300,7 +309,7 @@ import {
 } from './components/my-dropdown/my-dropdown';
 
 declare global {
-  interface HTMLMyDropdownElement extends MyDropdown, HTMLElement {
+  interface HTMLMyDropdownElement extends MyDropdown, HTMLStencilElement {
   }
   var HTMLMyDropdownElement: {
     prototype: HTMLMyDropdownElement;
@@ -333,7 +342,7 @@ import {
 } from './components/my-dynamic-form/my-dynamic-form';
 
 declare global {
-  interface HTMLMyDynamicFormElement extends MyDynamicForm, HTMLElement {
+  interface HTMLMyDynamicFormElement extends MyDynamicForm, HTMLStencilElement {
   }
   var HTMLMyDynamicFormElement: {
     prototype: HTMLMyDynamicFormElement;
@@ -365,7 +374,7 @@ import {
 } from './components/my-input/my-input';
 
 declare global {
-  interface HTMLMyInputElement extends MyInput, HTMLElement {
+  interface HTMLMyInputElement extends MyInput, HTMLStencilElement {
   }
   var HTMLMyInputElement: {
     prototype: HTMLMyInputElement;
@@ -399,7 +408,7 @@ import {
 } from './components/scb-alert/scb-alert';
 
 declare global {
-  interface HTMLScbAlertElement extends ScbAlert, HTMLElement {
+  interface HTMLScbAlertElement extends ScbAlert, HTMLStencilElement {
   }
   var HTMLScbAlertElement: {
     prototype: HTMLScbAlertElement;
@@ -433,7 +442,7 @@ import {
 } from './components/scb-badge/scb-badge';
 
 declare global {
-  interface HTMLScbBadgeElement extends ScbBadge, HTMLElement {
+  interface HTMLScbBadgeElement extends ScbBadge, HTMLStencilElement {
   }
   var HTMLScbBadgeElement: {
     prototype: HTMLScbBadgeElement;
@@ -465,7 +474,7 @@ import {
 } from './components/scb-breadcrumb/scb-breadcrumb';
 
 declare global {
-  interface HTMLScbBreadcrumbElement extends ScbBreadcrumb, HTMLElement {
+  interface HTMLScbBreadcrumbElement extends ScbBreadcrumb, HTMLStencilElement {
   }
   var HTMLScbBreadcrumbElement: {
     prototype: HTMLScbBreadcrumbElement;
@@ -495,7 +504,7 @@ import {
 } from './components/scb-dialog/scb-dialog';
 
 declare global {
-  interface HTMLScbDialogElement extends ScbDialog, HTMLElement {
+  interface HTMLScbDialogElement extends ScbDialog, HTMLStencilElement {
   }
   var HTMLScbDialogElement: {
     prototype: HTMLScbDialogElement;
@@ -534,7 +543,7 @@ import {
 } from './components/scb-file-input/scb-file-input';
 
 declare global {
-  interface HTMLScbFileInputElement extends ScbFileInput, HTMLElement {
+  interface HTMLScbFileInputElement extends ScbFileInput, HTMLStencilElement {
   }
   var HTMLScbFileInputElement: {
     prototype: HTMLScbFileInputElement;
@@ -575,7 +584,7 @@ import {
 } from './components/scb-navbar/scb-navbar';
 
 declare global {
-  interface HTMLScbNavbarElement extends ScbNavbar, HTMLElement {
+  interface HTMLScbNavbarElement extends ScbNavbar, HTMLStencilElement {
   }
   var HTMLScbNavbarElement: {
     prototype: HTMLScbNavbarElement;
@@ -608,7 +617,7 @@ import {
 } from './components/scb-tooltip/scb-tooltip';
 
 declare global {
-  interface HTMLScbTooltipElement extends ScbTooltip, HTMLElement {
+  interface HTMLScbTooltipElement extends ScbTooltip, HTMLStencilElement {
   }
   var HTMLScbTooltipElement: {
     prototype: HTMLScbTooltipElement;
@@ -645,7 +654,7 @@ import {
 } from './pages/alerts-page/alerts-page';
 
 declare global {
-  interface HTMLAlertsPageElement extends AlertsPage, HTMLElement {
+  interface HTMLAlertsPageElement extends AlertsPage, HTMLStencilElement {
   }
   var HTMLAlertsPageElement: {
     prototype: HTMLAlertsPageElement;
@@ -675,7 +684,7 @@ import {
 } from './pages/badge-page/badge-page';
 
 declare global {
-  interface HTMLBadgePageElement extends BadgePage, HTMLElement {
+  interface HTMLBadgePageElement extends BadgePage, HTMLStencilElement {
   }
   var HTMLBadgePageElement: {
     prototype: HTMLBadgePageElement;
@@ -705,7 +714,7 @@ import {
 } from './pages/breadcrumb-page/breadcrumb-page';
 
 declare global {
-  interface HTMLBreadcrumbPageElement extends BreadcrumbPage, HTMLElement {
+  interface HTMLBreadcrumbPageElement extends BreadcrumbPage, HTMLStencilElement {
   }
   var HTMLBreadcrumbPageElement: {
     prototype: HTMLBreadcrumbPageElement;
@@ -735,7 +744,7 @@ import {
 } from './pages/dialog-page/dialog-page';
 
 declare global {
-  interface HTMLDialogPageElement extends DialogPage, HTMLElement {
+  interface HTMLDialogPageElement extends DialogPage, HTMLStencilElement {
   }
   var HTMLDialogPageElement: {
     prototype: HTMLDialogPageElement;
@@ -765,7 +774,7 @@ import {
 } from './pages/dropdown-page/dropdown-page';
 
 declare global {
-  interface HTMLDropdownPageElement extends DropdownPage, HTMLElement {
+  interface HTMLDropdownPageElement extends DropdownPage, HTMLStencilElement {
   }
   var HTMLDropdownPageElement: {
     prototype: HTMLDropdownPageElement;
@@ -795,7 +804,7 @@ import {
 } from './pages/fcl-image-page/fcl-image-page';
 
 declare global {
-  interface HTMLFclImagePageElement extends FclImagePage, HTMLElement {
+  interface HTMLFclImagePageElement extends FclImagePage, HTMLStencilElement {
   }
   var HTMLFclImagePageElement: {
     prototype: HTMLFclImagePageElement;
@@ -825,7 +834,7 @@ import {
 } from './pages/file-input-page/file-input-page';
 
 declare global {
-  interface HTMLFileInputPageElement extends FileInputPage, HTMLElement {
+  interface HTMLFileInputPageElement extends FileInputPage, HTMLStencilElement {
   }
   var HTMLFileInputPageElement: {
     prototype: HTMLFileInputPageElement;
@@ -855,7 +864,7 @@ import {
 } from './pages/form-page/form-page';
 
 declare global {
-  interface HTMLFormPageElement extends FormPage, HTMLElement {
+  interface HTMLFormPageElement extends FormPage, HTMLStencilElement {
   }
   var HTMLFormPageElement: {
     prototype: HTMLFormPageElement;
@@ -885,7 +894,7 @@ import {
 } from './pages/list-page/list-page';
 
 declare global {
-  interface HTMLListPageElement extends ListPage, HTMLElement {
+  interface HTMLListPageElement extends ListPage, HTMLStencilElement {
   }
   var HTMLListPageElement: {
     prototype: HTMLListPageElement;
@@ -915,7 +924,7 @@ import {
 } from './pages/multiselect-page/multiselect-page';
 
 declare global {
-  interface HTMLMultiselectPageElement extends MultiselectPage, HTMLElement {
+  interface HTMLMultiselectPageElement extends MultiselectPage, HTMLStencilElement {
   }
   var HTMLMultiselectPageElement: {
     prototype: HTMLMultiselectPageElement;
@@ -945,7 +954,7 @@ import {
 } from './pages/navbar-page/navbar-page';
 
 declare global {
-  interface HTMLNavbarPageElement extends NavbarPage, HTMLElement {
+  interface HTMLNavbarPageElement extends NavbarPage, HTMLStencilElement {
   }
   var HTMLNavbarPageElement: {
     prototype: HTMLNavbarPageElement;
@@ -975,7 +984,7 @@ import {
 } from './pages/stencil-bootstrap-demo/stencil-bootstrap-demo';
 
 declare global {
-  interface HTMLStencilBootstrapDemoElement extends StencilBootstrapDemo, HTMLElement {
+  interface HTMLStencilBootstrapDemoElement extends StencilBootstrapDemo, HTMLStencilElement {
   }
   var HTMLStencilBootstrapDemoElement: {
     prototype: HTMLStencilBootstrapDemoElement;
@@ -1005,7 +1014,7 @@ import {
 } from './pages/tag-page/tag-page';
 
 declare global {
-  interface HTMLTagPageElement extends TagPage, HTMLElement {
+  interface HTMLTagPageElement extends TagPage, HTMLStencilElement {
   }
   var HTMLTagPageElement: {
     prototype: HTMLTagPageElement;
@@ -1035,7 +1044,7 @@ import {
 } from './pages/tooltip-page/tooltip-page';
 
 declare global {
-  interface HTMLTooltipPageElement extends TooltipPage, HTMLElement {
+  interface HTMLTooltipPageElement extends TooltipPage, HTMLStencilElement {
   }
   var HTMLTooltipPageElement: {
     prototype: HTMLTooltipPageElement;
@@ -1065,7 +1074,7 @@ import {
 } from './pages/typeahead-page/typeahead-page';
 
 declare global {
-  interface HTMLTypeaheadPageElement extends TypeaheadPage, HTMLElement {
+  interface HTMLTypeaheadPageElement extends TypeaheadPage, HTMLStencilElement {
   }
   var HTMLTypeaheadPageElement: {
     prototype: HTMLTypeaheadPageElement;
@@ -1095,7 +1104,7 @@ import {
 } from './pages/video-player-page/video-player-page';
 
 declare global {
-  interface HTMLVideoPlayerPageElement extends VideoPlayerPage, HTMLElement {
+  interface HTMLVideoPlayerPageElement extends VideoPlayerPage, HTMLStencilElement {
   }
   var HTMLVideoPlayerPageElement: {
     prototype: HTMLVideoPlayerPageElement;
