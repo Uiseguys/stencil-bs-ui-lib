@@ -42,7 +42,7 @@ export class TolltipPage {
                                             <span class="hljs-built_in ml-4">trigger="hover focus click"</span>
                                             <span>&gt;</span>
                                             <br />
-                                            <span>&lt;/cwc-tooltip&gt;</span>
+                                            <span>&lt;/scb-tooltip&gt;</span>
                                         </code></pre>
                                         </div>
                                     </div>
