@@ -19,6 +19,8 @@ export class StencilBootstrapDemo {
                     </div>
                 </div>
 
+                NAVBAR
+                
                 <div class="row">
                     <div>
                        <navbar-page></navbar-page>
