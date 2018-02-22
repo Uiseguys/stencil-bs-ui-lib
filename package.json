@@ -1,10 +1,10 @@
 {
   "name": "@ui-guys/stencil-bs-ui-lib",
   "private": false,
-  "version": "0.0.13",
+  "version": "0.0.15",
   "description": "Bootstrap componentes built with StencilJS",
   "engines": {
-    "node": ">=8.5.0"
+    "node": ">=6.11.0"
   },
   "main": "dist/index.js",
   "types": "dist/types/components.d.ts",
@@ -21,12 +21,13 @@
     "test": "jest --no-cache",
     "test.watch": "jest --watch --no-cache",
     "publish": "npm publish ./ --dry-run --access public",
+    "postinstall" : "npm run build",
     "serve:heroku": "http-server www"
   },
   "dependencies": {
-    "@stencil/core": "0.2.3",
+    "@stencil/core": "0.6.3",
+    "@stencil/sass": "0.0.2",
     "@stencil/dev-server": "latest",
-    "@stencil/router": "0.0.9",
     "@stencil/utils": "latest",
     "@types/jest": "^21.1.1",
     "@types/video.js": "^6.2.3",
@@ -39,9 +40,9 @@
     "popper.js": "^1.12.9",
     "tooltip.js": "^1.1.7",
     "tslint": "^5.7.0",
-    "tslint-config-airbnb": "^5.3.0",
     "video.js": "^6.6.0",
-    "videojs-font": "^2.0.0"
+    "videojs-font": "^2.0.0",
+    "lodash": "^4.17.4"
   },
   "devDependencies": {
     "@stencil/sass": "0.0.2"

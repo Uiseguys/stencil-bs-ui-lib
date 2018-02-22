@@ -1,3 +1,25 @@
 .capitalized {
     text-transform: capitalize;
 }
+
+.card.card-18 {
+    width: 14rem;
+}
+
+#users-boxed {
+    height: 500px;
+    display: block;
+    overflow-y: auto;
+}
+
+div.docs {
+    h4 {
+        margin-top: 2rem;
+    }
+    h3 {
+        margin-top: 3rem;
+    }
+    h2 {
+        margin-top: 4rem;
+    }
+}

@@ -1,4 +1,4 @@
-import { Component, Method, Element, HostElement, Prop, Event, EventEmitter, State } from '@stencil/core';
+import { Component, Element, HostElement, Prop, State } from '@stencil/core';
 import Tooltip from 'tooltip.js';
 
 @Component({
@@ -19,10 +19,11 @@ export class ScbTooltip {
     @Prop() trigger: string = 'hover';
     @Prop() offset: string = '';
 
-    @State() tooltip: Tooltip
+    @State() tooltip: Tooltip;
 
     componentDidLoad() {
-        const template = '<div class="tooltip show" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>';
+        const template = '<div class="tooltip show" ' +
+            'role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>';
         this.btn = this.el.children[0];
 
         this.tooltip = new Tooltip(this.btn, {
@@ -36,9 +37,9 @@ export class ScbTooltip {
     }
 
     render() {
-        if (this.type == 'link') {
+        if (this.type === 'link') {
             return ( <a href={this.href} target={this.target}><slot name="btn-content"></slot></a> )
-        } else if (this.type == 'button') {
+        } else if (this.type === 'button') {
             return ( <button type="button" class="btn btn-secondary"><slot name="btn-content"></slot></button> )
         } else {
             return ( <span><slot name="btn-content"></slot></span> )
