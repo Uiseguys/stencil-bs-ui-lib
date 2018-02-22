@@ -1,45 +1,67 @@
-import { Component, Prop, State, Event, EventEmitter, Element, Method, Watch } from '@stencil/core';
-import { VirtualNode, ListDataItem } from './scb-list-interfaces';
+import { Component, Prop, Watch, State, Event, EventEmitter, Element, Method } from '@stencil/core';
+import { VirtualNode, ListDataItem } from './cwc-list-interfaces';
+import get from 'lodash/get'
 
-// TODO: Move interpolation mechanics to lodash templates
 
 /**
  * An infinite list component which
- *
+ * 
  * @export
- * @class StencilComponent
+ * @class CwcList
  */
 @Component({
-    tag: 'scb-list',
-    styleUrl: 'scb-list.scss',
+    tag: 'cwc-list',
+    styleUrl: 'cwc-list.scss'
 })
 
-export class StencilComponent {
+export class CwcList {
 
     @Prop() items: object[];
     @Prop() itemAs: string = 'item';
     @Prop() template: VirtualNode;
 
-    @Prop() addClass?: string;
-    @Prop() addClassEven?: string;
-    @Prop() addClassOdd?: string;
+    @Prop() addClass?: string = '';
+    @Prop() addClassFirst?: string = '';
+    @Prop() addClassLast?: string = '';
+    @Prop() addClassEven?: string = '';
+    @Prop() addClassOdd?: string = '';
     @Prop() wrapperClass: string;
-    @Prop() bottomOffset?: number = 20;
+    @Prop() bottomOffset?: number = 100;
+
+    @Prop() debounce: number = 300;
+    debounceStatus: boolean = false
 
     @Prop() bindToList: boolean = false;
 
-    @State() itemsData: ListDataItem[] = [];
+    @State() itemsData: ListDataItem[] = []
 
     @Element() el: HTMLElement;
 
-    @Event() onBottomReach: EventEmitter;
+    @Event() onBottomReach: EventEmitter
 
-    //TODO: Change interpolation regex to double brackets pattern
-    regExpression = new RegExp(/\[(.*?)\]/g);
+    regex = /\[\[+(.*?) ?\]\]+/g;
 
+    /**
+     * Method to dispatch HTMLCustomEvent 
+     * {@link https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events}
+     * If cwc-list has id, this id will be dispatched as event.detail
+     * 
+     * @memberof StencilComponent
+     */
     @Method()
     loadMore() {
-        this.onBottomReach.emit({})
+        if (!this.debounceStatus) {
+            this.startDebounce()
+            this.onBottomReach.emit(this.el.id && this.el.id)
+        }
+    }
+
+    startDebounce(): void {
+        this.debounceStatus = true;
+
+        setTimeout(() =>
+            this.debounceStatus = false
+            , this.debounce)
     }
 
     componentWillLoad() {
@@ -56,19 +78,18 @@ export class StencilComponent {
     }
 
     windowScrollHandler() {
-        let last = document.querySelector('scb-list div:last-child')
+        let last = document.querySelector(`#${this.el.id} .list-item-last`)
 
         if (last.getBoundingClientRect().bottom - this.bottomOffset <= window.innerHeight)
             this.loadMore()
     }
+
 
     @Watch('items')
     itemsdidChangeHandler() {
         this.itemsData.length = 0
         this.initItemsData()
     }
-
-
 
     private initItemsData() {
 
@@ -84,51 +105,66 @@ export class StencilComponent {
         return this.itemsData
     }
 
+    /**
+     * Adds custom class for every first, last, even and odd node
+     * 
+     * @private
+     * @param {string} [base=''] 
+     * @param {number} index 
+     * @param {number} count 
+     * @returns {string} 
+     * @memberof StencilComponent
+     */
     private addListClasses(base: string = '', index: number, count: number): string {
-        let classString = base + ' list-item'
+        let classString = base + ' list-item'.concat(this.addClass && ' ' + this.addClass)
         if (index == 0) {
-            classString += ' list-item-first'
-        }
-        if (index == count - 1) {
-            classString += ' list-item-last'
-        }
-        if (index % 2 == 0) {
-            classString += ' list-item-even'
-        }
-        if (Math.abs(index % 2) == 1) {
-            classString += ' list-item-odd'
+            classString += ' list-item-first'.concat(this.addClassFirst && ' ' + this.addClassFirst)
+        } if (index == count - 1) {
+            classString += ' list-item-last'.concat(this.addClassLast && ' ' + this.addClassLast)
+        } if (index % 2 == 0) {
+            classString += ' list-item-even'.concat(this.addClassEven && ' ' + this.addClassEven)
+        } if (Math.abs(index % 2) == 1) {
+            classString += ' list-item-odd'.concat(this.addClassOdd && ' ' + this.addClassOdd)
         }
         return classString
     }
 
-    //TODO: Refactor this
+    /**
+     * Interpolates virtual node's text content and attributes
+     * 
+     * @private
+     * @param {VirtualNode} vnode 
+     * @param {*} obj 
+     * @returns {VirtualNode} 
+     * @memberof StencilComponent
+     */
     private interpolateText(vnode: VirtualNode, obj: any): VirtualNode {
         if (vnode.vtext) {
 
-            let matches = vnode.vtext.match(new RegExp(/\[(.*?)\]/g))
+            let matches = vnode.vtext.match(this.regex)
 
-            if (matches)
+            if (matches) {
                 matches.map(matched =>
 
-                    //TODO: replace eval statement with object key find function
                     vnode.vtext = vnode.vtext.replace(
                         matched,
-                        eval('obj.' + matched.slice(1, -1))
+                        get(obj, matched.slice(2, -2), matched)
                     )
                 )
+            }
         }
         if (vnode.vattrs) {
             for (const key in vnode.vattrs) {
                 if (vnode.vattrs.hasOwnProperty(key)) {
-                    let matches = vnode.vattrs[key].match(new RegExp(/\[(.*?)\]/g))
+
+                    let matches = vnode.vattrs[key].match(this.regex)
 
                     if (matches)
                         matches.map(matched =>
 
                             vnode.vattrs[key] = vnode.vattrs[key].replace(
                                 matched,
-                                eval('obj.' + matched.slice(1, -1))
-                            ))
+                                get(obj, matched.slice(1, -1), matched)))
                 }
             }
         }
@@ -136,6 +172,16 @@ export class StencilComponent {
     }
 
 
+    /**
+     * Iterate current virtual node and it's children and invoke 
+     * interpolation function if there's text content or attributes
+     * 
+     * @private
+     * @param {VirtualNode} vnode 
+     * @param {object} obj 
+     * @returns {VirtualNode} 
+     * @memberof StencilComponent
+     */
     private iterateChildVNodes(vnode: VirtualNode, obj: object): VirtualNode {
 
         if (vnode.vtext)

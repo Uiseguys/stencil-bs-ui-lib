@@ -1,6 +1,4 @@
 import { Component, Listen, State } from '@stencil/core';
-import get from 'lodash/get'
-import filter from 'lodash/filter'
 
 @Component({
     tag: 'typeahead-page',
@@ -30,20 +28,21 @@ export class StencilComponent {
                 capital: 'Buenos Aires'
             }
         }
-    ]
+    ];
 
-    @State() result
+    searchString = 'data.name';
+
+    complexResult = [];
+
+    data = ['Alex', 'Alabama', 'Alaska', 'andreas', 'alexandro'];
+
+
+    @State() result;
 
     @Listen('typeaheadOnSubmit')
     typeaheadOnSubmit(e) {
         this.result = e.detail
     }
-    searchString = 'data.name'
-
-    complexResult = []
-
-    data = ['Alex', 'Alabama', 'Alaska', 'andreas', 'alexandro']
-
 
     render() {
         return [

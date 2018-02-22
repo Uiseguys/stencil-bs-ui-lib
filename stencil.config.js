@@ -1,18 +1,20 @@
+const sass = require('@stencil/sass');
+
 exports.config = {
-  bundles: [
-    { components: ['stencil-bootstrap-demo', 'alerts-page', 'scb-alert'] },
-    { components: ['badge-page', 'scb-badge'] },
-    { components: ['breadcrumb-page', 'scb-breadcrumb'] },
-    { components: ['video-player-page', 'fcl-video-player']},
-    { components: ['fcl-image-page', 'fcl-image']}
-  ],  
-  collections: [
-    { name: '@stencil/router' }
-  ]
+    namespace: 'index',
+    generateDistribution: true,
+    serviceWorker: false,
+    bundles: [
+        {
+            components: ['cwc-typeahead', 'cwc-tag', 'cwc-list']
+        }
+    ],
+    plugins: [
+        sass()
+    ]
 };
 
 exports.devServer = {
-  // root: 'www',
-  // watchGlob: '**/**'
-  // httpPort: '8080'
-}
+    root: 'www',
+    watchGlob: '**/**'
+};

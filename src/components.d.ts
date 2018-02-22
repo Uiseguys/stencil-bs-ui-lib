@@ -4,21 +4,19 @@
  * and imports for stencil collections that might be configured in your stencil.config.js file
  */
 
-import '@stencil/router';
-
+import {
+  VirtualNode,
+} from './components/cwc-list/cwc-list-interfaces';
 import {
   BootstrapThemeColor,
 } from './common/bootstrap-theme-color.type';
 import {
-  BootstrapThemeColor as BootstrapThemeColor2,
-  IBreadcrumbItem,
-} from './common/index';
-import {
   HostElement,
 } from '@stencil/core';
 import {
-  VirtualNode,
-} from './components/scb-list/scb-list-interfaces';
+  BootstrapThemeColor as BootstrapThemeColor2,
+  IBreadcrumbItem,
+} from './common/index';
 
 import {
   StencilComponent as CwcDropdown
@@ -47,6 +45,47 @@ declare global {
       dropdownPlacement?: any;
       offsetString?: string;
       triggerOverflow?: boolean;
+    }
+  }
+}
+
+
+import {
+  CwcList as CwcList
+} from './components/cwc-list/cwc-list';
+
+declare global {
+  interface HTMLCwcListElement extends CwcList, HTMLElement {
+  }
+  var HTMLCwcListElement: {
+    prototype: HTMLCwcListElement;
+    new (): HTMLCwcListElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-list": HTMLCwcListElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-list": HTMLCwcListElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-list": JSXElements.CwcListAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcListAttributes extends HTMLAttributes {
+      addClass?: string;
+      addClassEven?: string;
+      addClassFirst?: string;
+      addClassLast?: string;
+      addClassOdd?: string;
+      bindToList?: boolean;
+      bottomOffset?: number;
+      debounce?: number;
+      itemAs?: string;
+      items?: object[];
+      template?: VirtualNode;
+      wrapperClass?: string;
     }
   }
 }
@@ -115,6 +154,8 @@ declare global {
       imgLink?: string;
       limitTo?: number;
       link?: string;
+      onCloseData?: any;
+      removeOnClose?: boolean;
       rounded?: boolean;
       tagType?: BootstrapThemeColor;
       text?: string;
@@ -380,7 +421,8 @@ declare global {
       animatable?: boolean;
       dismissible?: boolean;
       onDismiss?: (hostEl: HostElement) => void;
-      type?: BootstrapThemeColor;
+      show?: boolean;
+      type?: string;
     }
   }
 }
@@ -449,6 +491,45 @@ declare global {
 
 
 import {
+  ScbDialog as ScbDialog
+} from './components/scb-dialog/scb-dialog';
+
+declare global {
+  interface HTMLScbDialogElement extends ScbDialog, HTMLElement {
+  }
+  var HTMLScbDialogElement: {
+    prototype: HTMLScbDialogElement;
+    new (): HTMLScbDialogElement;
+  };
+  interface HTMLElementTagNameMap {
+    "scb-dialog": HTMLScbDialogElement;
+  }
+  interface ElementTagNameMap {
+    "scb-dialog": HTMLScbDialogElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "scb-dialog": JSXElements.ScbDialogAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ScbDialogAttributes extends HTMLAttributes {
+      animation?: boolean;
+      backdrop?: any;
+      btntype?: string;
+      centered?: boolean;
+      content?: string;
+      keyboard?: boolean;
+      modalfocus?: boolean;
+      show?: boolean;
+      size?: string;
+      title?: string;
+    }
+  }
+}
+
+
+import {
   ScbFileInput as ScbFileInput
 } from './components/scb-file-input/scb-file-input';
 
@@ -490,38 +571,70 @@ declare global {
 
 
 import {
-  StencilComponent as ScbList
-} from './components/scb-list/scb-list';
+  ScbNavbar as ScbNavbar
+} from './components/scb-navbar/scb-navbar';
 
 declare global {
-  interface HTMLScbListElement extends ScbList, HTMLElement {
+  interface HTMLScbNavbarElement extends ScbNavbar, HTMLElement {
   }
-  var HTMLScbListElement: {
-    prototype: HTMLScbListElement;
-    new (): HTMLScbListElement;
+  var HTMLScbNavbarElement: {
+    prototype: HTMLScbNavbarElement;
+    new (): HTMLScbNavbarElement;
   };
   interface HTMLElementTagNameMap {
-    "scb-list": HTMLScbListElement;
+    "scb-navbar": HTMLScbNavbarElement;
   }
   interface ElementTagNameMap {
-    "scb-list": HTMLScbListElement;
+    "scb-navbar": HTMLScbNavbarElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "scb-list": JSXElements.ScbListAttributes;
+      "scb-navbar": JSXElements.ScbNavbarAttributes;
     }
   }
   namespace JSXElements {
-    export interface ScbListAttributes extends HTMLAttributes {
-      addClass?: string;
-      addClassEven?: string;
-      addClassOdd?: string;
-      bindToList?: boolean;
-      bottomOffset?: number;
-      itemAs?: string;
-      items?: object[];
-      template?: VirtualNode;
-      wrapperClass?: string;
+    export interface ScbNavbarAttributes extends HTMLAttributes {
+      bgcolor?: string;
+      navbarcolor?: string;
+      placement?: string;
+      size?: string;
+    }
+  }
+}
+
+
+import {
+  ScbTooltip as ScbTooltip
+} from './components/scb-tooltip/scb-tooltip';
+
+declare global {
+  interface HTMLScbTooltipElement extends ScbTooltip, HTMLElement {
+  }
+  var HTMLScbTooltipElement: {
+    prototype: HTMLScbTooltipElement;
+    new (): HTMLScbTooltipElement;
+  };
+  interface HTMLElementTagNameMap {
+    "scb-tooltip": HTMLScbTooltipElement;
+  }
+  interface ElementTagNameMap {
+    "scb-tooltip": HTMLScbTooltipElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "scb-tooltip": JSXElements.ScbTooltipAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ScbTooltipAttributes extends HTMLAttributes {
+      delay?: any;
+      href?: string;
+      offset?: string;
+      placement?: string;
+      target?: string;
+      title?: string;
+      trigger?: string;
+      type?: string;
     }
   }
 }
@@ -611,6 +724,36 @@ declare global {
   }
   namespace JSXElements {
     export interface BreadcrumbPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  DiaglogPage as DialogPage
+} from './pages/dialog-page/dialog-page';
+
+declare global {
+  interface HTMLDialogPageElement extends DialogPage, HTMLElement {
+  }
+  var HTMLDialogPageElement: {
+    prototype: HTMLDialogPageElement;
+    new (): HTMLDialogPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "dialog-page": HTMLDialogPageElement;
+  }
+  interface ElementTagNameMap {
+    "dialog-page": HTMLDialogPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "dialog-page": JSXElements.DialogPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface DialogPageAttributes extends HTMLAttributes {
       
     }
   }
@@ -798,6 +941,36 @@ declare global {
 
 
 import {
+  NavbarPage as NavbarPage
+} from './pages/navbar-page/navbar-page';
+
+declare global {
+  interface HTMLNavbarPageElement extends NavbarPage, HTMLElement {
+  }
+  var HTMLNavbarPageElement: {
+    prototype: HTMLNavbarPageElement;
+    new (): HTMLNavbarPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "navbar-page": HTMLNavbarPageElement;
+  }
+  interface ElementTagNameMap {
+    "navbar-page": HTMLNavbarPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "navbar-page": JSXElements.NavbarPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface NavbarPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
   StencilBootstrapDemo as StencilBootstrapDemo
 } from './pages/stencil-bootstrap-demo/stencil-bootstrap-demo';
 
@@ -851,6 +1024,36 @@ declare global {
   }
   namespace JSXElements {
     export interface TagPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  TolltipPage as TooltipPage
+} from './pages/tooltip-page/tooltip-page';
+
+declare global {
+  interface HTMLTooltipPageElement extends TooltipPage, HTMLElement {
+  }
+  var HTMLTooltipPageElement: {
+    prototype: HTMLTooltipPageElement;
+    new (): HTMLTooltipPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "tooltip-page": HTMLTooltipPageElement;
+  }
+  interface ElementTagNameMap {
+    "tooltip-page": HTMLTooltipPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "tooltip-page": JSXElements.TooltipPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface TooltipPageAttributes extends HTMLAttributes {
       
     }
   }

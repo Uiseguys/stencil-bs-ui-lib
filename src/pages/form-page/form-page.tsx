@@ -1,6 +1,6 @@
 import {Component, State} from '@stencil/core';
 import Ajv from 'ajv/dist/ajv.min.js';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
     tag: 'form-page',
@@ -120,11 +120,6 @@ export class FormPage {
                 "source2"
             ]
         };
-
-
-        // const dynamicForm = document.querySelector('my-dynamic-form');
-        // dynamicForm.schema = schema;
-        // dynamicForm.form = form;
     };
 
     render() {

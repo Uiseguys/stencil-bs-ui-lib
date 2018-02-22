@@ -1,33 +1,27 @@
-@import "video-js";
+@import "video-js.scss";
+@media print {
+  .video-js > *:not(.vjs-tech):not(.vjs-poster) {
+    visibility: hidden; } }
 
-fcl-video-player.hydrated{
-  position: relative !important;
-}
-.fcl-video-class {
-  width: 100%;
-  height: 100%;
-  display: inline-block;
-  position: relative;
-}
-.fcl-video-class img{
-  width: 100%;
-  height: 100%;
-  }
-.video-img-block{
-  display: inline-block;
+.vjs-resize-manager {
   position: absolute;
   top: 0;
-  z-index: 999999;
+  left: 0;
   width: 100%;
   height: 100%;
+  border: none;
+  visibility: hidden; }
+
+@media \0screen {
+  .vjs-user-inactive.vjs-playing .vjs-control-bar :before {
+    content: "";
+  }
 }
 
-.video-img-none{
-  display: none;
-}
-
-.no-video-display{
-  display: none !important;
+@media \0screen {
+  .vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {
+    visibility: hidden;
+  }
 }
 
 @media only screen and (min-width:1px) and (max-width:767px)

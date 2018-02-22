@@ -49,13 +49,13 @@ export class StencilComponent {
             }
         });
 
-        this.btn.addEventListener('click', (e) => this.toggle(e))
+        this.btn.addEventListener('click', () => this.toggle())
         this.close()
     }
 
 
     @Method()
-    toggle(event) {
+    toggle() {
         this.openState
             ? this.close()
             : this.open()
@@ -68,15 +68,13 @@ export class StencilComponent {
 
     @Method()
     open() {
-        this.openState = true
-        this.btn.addEventListener('blur', (e) => this.onBlurHandler(), true);
+        this.openState = true;
+        this.btn.addEventListener('blur', () => this.onBlurHandler(), true);
     }
 
     onBlurHandler() {
         this.close()
     }
-
-
 
     render() {
 
@@ -88,7 +86,7 @@ export class StencilComponent {
 
                 <div class={'content dropdown-menu ' +
                     (this.openState ? 'show' : '')}
-                    onClick={(event: UIEvent) => this.toggle(event)} >
+                    onClick={() => this.toggle()} >
                     <slot name="dropdown-content"></slot>
                 </div>
             </div >
