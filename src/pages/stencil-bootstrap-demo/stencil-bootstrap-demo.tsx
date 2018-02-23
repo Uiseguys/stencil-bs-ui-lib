@@ -20,216 +20,53 @@ export class StencilBootstrapDemo {
                 </div>
 
                 <div class="row">
-                    <div class="col-12 col-md-3">
-                        <ul>
-                            <li>
-                                <stencil-route-link
-                                    url="/alerts"
-                                    urlMatch={['/', '/alerts']}
-                                    activeClass="active"
-                                    exact={true}
-                                >
-                                    Alerts
-                                </stencil-route-link>
-                            </li>
-                            <li>
-                                <stencil-route-link
-                                    url="/badge"
-                                    urlMatch={['/badge']}
-                                    activeClass="active"
-                                    exact={true}
-                                >
-                                    Badge
-                                </stencil-route-link>
-                            </li>
-                            <li>
-                                <stencil-route-link
-                                    url="/breadcrumb"
-                                    urlMatch={['/breadcrumb']}
-                                    activeClass="active"
-                                    exact={true}
-                                >
-                                    Breadcrumb
-                                </stencil-route-link>
-                            </li>
+                    <div class="col-lg-12">
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="navigationComponent">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#navigationCollapse" aria-expanded="true" aria-controls="navigationCollapse">
+                                            Navigation Component
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="navigationCollapse" class="collapse" aria-labelledby="navigationComponent" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <navbar-page></navbar-page>
+                                    </div>
+                                </div>
+                            </div>
 
-                            <li>
+                            <div class="card">
+                                <div class="card-header" id="tooltipComponent">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#tooltipCollapse" aria-expanded="true" aria-controls="tooltipCollapse">
+                                            Tooltip Component
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="tooltipCollapse" class="collapse" aria-labelledby="tooltipComponent" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <tooltip-page></tooltip-page>
+                                    </div>
+                                </div>
+                            </div>
 
-                                <stencil-route-link
-                                    url="/video-player"
-                                    urlMatch={['/video-player']}
-                                    activeClass="active"
-                                    exact={true}
-                                >
-                                    Video Player
-                                </stencil-route-link>
-
-                            </li>
-
-                            <li>
-                                <stencil-route-link
-                                    url="/fcl-image"
-                                    urlMatch={['/fcl-image']}
-                                    activeClass="active"
-                                    exact={true}
-                                >
-                                    Fcl Image
-                                </stencil-route-link>
-                            </li>
-
-                            <li>
-                                <stencil-route-link
-                                    url="/list"
-                                    urlMatch={['/list']}
-                                    activeClass="active"
-                                    exact={true}
-                                >
-                                    List
-                                </stencil-route-link>
-                            </li>
-
-                            <li>
-                                <stencil-route-link
-                                    url="/file-input"
-                                    urlMatch={['/file-input']}
-                                    activeClass="active"
-                                    exact={true}
-                                >
-                                    File Input
-                                </stencil-route-link>
-                            </li>
-                            <li>
-                                <stencil-route-link
-                                    url="/dropdown"
-                                    urlMatch={['/dropdown']}
-                                    activeClass="active"
-                                    exact={true}
-                                >
-                                    Dropdown
-                                </stencil-route-link>
-                            </li>
-                            <li>
-                                <stencil-route-link
-                                    url="/typeahead"
-                                    urlMatch={['/typeahead']}
-                                    activeClass="active"
-                                    exact={true}
-                                >
-                                    Typeahead
-                                </stencil-route-link>
-                            </li>
-                            <li>
-                                <stencil-route-link
-                                    url="/multiselect"
-                                    urlMatch={['/multiselect']}
-                                    activeClass="active"
-                                    exact={true}
-                                >
-                                    Multiselect
-                                </stencil-route-link>
-                            </li>  <li>
-                                <stencil-route-link
-                                    url="/tag"
-                                    urlMatch={['/tag']}
-                                    activeClass="active"
-                                    exact={true}
-                                >
-                                    Tag
-                                </stencil-route-link>
-                            </li>
-                            <li>
-                                <stencil-route-link
-                                    url="/form"
-                                    urlMatch={['/form']}
-                                    activeClass="active"
-                                    exact={true}
-                                >
-                                    Form
-                                </stencil-route-link>
-                            </li>
-
-                        </ul>
-                    </div>
-
-                    <div class="col-12 col-md-9">
-                        <stencil-router id="router">
-                            <stencil-route
-                                url={['/', '/alerts']}
-                                component="alerts-page"
-                                exact={true}
-                            >
-                            </stencil-route>
-                            <stencil-route
-                                url={['/badge']}
-                                component="badge-page"
-                                exact={true}
-                            >
-                            </stencil-route>
-                            <stencil-route
-                                url={['/breadcrumb']}
-                                component="breadcrumb-page"
-                                exact={true}
-                            >
-                            </stencil-route>
-
-                            <stencil-route
-                                url={['/video-player']}
-                                component="video-player-page"
-                                exact={true}
-                            >
-                            </stencil-route>
-
-                            <stencil-route
-                                url={['/fcl-image']}
-                                component="fcl-image-page"
-                                exact={true}
-                            >
-                            </stencil-route>
-
-                            <stencil-route
-                                url={['/file-input']}
-                                component="file-input-page"
-                                exact={true}
-                            >
-                            </stencil-route>
-
-                            <stencil-route
-                                url={['/list']}
-                                component="list-page"
-                                exact={true}
-                            >
-                            </stencil-route>
-                            <stencil-route
-                                url={['/dropdown']}
-                                component="dropdown-page"
-                                exact={true}
-                            >
-                            </stencil-route>
-                            <stencil-route
-                                url={['/typeahead']}
-                                component="typeahead-page"
-                                exact={true}
-                            >
-                            </stencil-route>
-                            <stencil-route
-                                url={['/multiselect']}
-                                component="multiselect-page"
-                                exact={true}
-                            >
-                            </stencil-route> <stencil-route
-                                url={['/tag']}
-                                component="tag-page"
-                                exact={true}
-                            >
-                            </stencil-route>
-                            <stencil-route
-                                url={['/form']}
-                                component="form-page"
-                                exact={true}
-                            >
-                            </stencil-route>
-
-                        </stencil-router>
+                            <div class="card">
+                                <div class="card-header" id="modalComponent">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#modalCollapse" aria-expanded="true" aria-controls="modalCollapse">
+                                            Modal Component
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="modalCollapse" class="collapse" aria-labelledby="modalComponent" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <modal-page></modal-page>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

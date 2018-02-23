@@ -9,7 +9,6 @@ import {
   Event,
   EventEmitter
 } from '@stencil/core';
-import { BootstrapThemeColor } from './../../common/index';
 
 @Component({
   tag: 'scb-alert',

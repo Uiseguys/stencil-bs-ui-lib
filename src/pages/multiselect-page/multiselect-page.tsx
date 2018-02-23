@@ -1,6 +1,4 @@
 import { Component, Listen, State } from '@stencil/core';
-import get from 'lodash/get'
-import filter from 'lodash/filter'
 
 @Component({
     tag: 'multiselect-page',
@@ -30,21 +28,21 @@ export class MultiselectPage {
                 capital: 'Buenos Aires'
             }
         }
-    ]
+    ];
 
-    @State() result
+    searchString = 'data.name';
+
+    complexResult = [];
+
+    data = ['Alex', 'Alabama', 'Alaska', 'andreas', 'alexandro']
+
+    @State() result;
 
     @Listen('multiselectOnSubmit')
     typeaheadOnSubmit(e) {
         console.log('got results: ', e.detail)
         this.result = e.detail
     }
-    searchString = 'data.name'
-
-    complexResult = []
-
-    data = ['Alex', 'Alabama', 'Alaska', 'andreas', 'alexandro']
-
 
     render() {
         return [
@@ -77,22 +75,21 @@ export class MultiselectPage {
             <br />, <br />, <cwc-tag
                 text='Holla rounded link'
                 imgLink='../../assets/icon/favicon.ico'
-            // rounded={true}
-            />,
+    />,
+        <br />, <br />, <cwc-tag
+            text='Holla rounded img tag'
+            imgLink='../../assets/icon/favicon.ico'
+            rounded={true}
+        />,
             <br />, <br />, <cwc-tag
-                text='Holla rounded img tag'
-                imgLink='../../assets/icon/favicon.ico'
-                rounded={true}
-            />,
-            <br />, <br />, <cwc-tag
-                text='Holla rounded img link'
-                limitTo={10}
-                imgLink='../../assets/icon/favicon.ico'
-                rounded={true}
-                closable={true}
-            />
-            // link='https://google.com'
-            // <img src=" ../../assets/icon/favicon.ico" alt="" />
-        ]
+            text='Holla rounded img link'
+            limitTo={10}
+            imgLink='../../assets/icon/favicon.ico'
+            rounded={true}
+            closable={true}
+        />
+        // link='https://google.com'
+        // <img src=" ../../assets/icon/favicon.ico" alt="" />
+    ]
     }
 }
