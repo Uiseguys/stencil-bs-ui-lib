@@ -112,7 +112,7 @@ export class FclVideoPLayer {
         videojs(this.el.getElementsByTagName('video')[0], options);
         if (this.thumbnail) {
             const video = this.el.getElementsByTagName('video')[0];
-            initThumbnail(this.thumbnail, this.el.getElementsByTagName('video')[0]);
+            initThumbnail(this.thumbnail,video);
         }
 
     }

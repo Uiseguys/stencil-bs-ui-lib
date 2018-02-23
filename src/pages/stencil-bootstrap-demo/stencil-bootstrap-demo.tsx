@@ -66,6 +66,20 @@ export class StencilBootstrapDemo {
                                     </div>
                                 </div>
                             </div>
+                            <div class="card">
+                                <div class="card-header" id="videoPlayerComponent">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#videoPlayerCollapse" aria-expanded="true" aria-controls="videoPlayerCollapse">
+                                            Video player Component
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="videoPlayerCollapse" class="collapse" aria-labelledby="videoPlayerComponent" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <video-player-page></video-player-page>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
