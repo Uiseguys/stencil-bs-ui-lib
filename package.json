@@ -24,6 +24,7 @@
     "serve:heroku": "http-server www"
   },
   "dependencies": {
+    "@divsbhalala/video-js-thumbnails": "^1.0.0",
     "@stencil/core": "0.2.3",
     "@stencil/dev-server": "latest",
     "@stencil/router": "0.0.9",
