@@ -23,6 +23,21 @@ export class StencilBootstrapDemo {
                     <div class="col-lg-12">
                         <div id="accordion">
                             <div class="card">
+                                <div class="card-header" id="collapseComponent">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseCollapse" aria-expanded="true" aria-controls="collapseCollapse">
+                                            Collapse Component
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseCollapse" class="collapse" aria-labelledby="collapseComponent" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <collapse-page></collapse-page>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
                                 <div class="card-header" id="navigationComponent">
                                     <h5 class="mb-0">
                                         <button class="btn btn-link" data-toggle="collapse" data-target="#navigationCollapse" aria-expanded="true" aria-controls="navigationCollapse">
