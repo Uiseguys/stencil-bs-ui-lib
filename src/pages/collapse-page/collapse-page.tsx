@@ -93,7 +93,10 @@ export class CollapsePage {
                                                         &#125;&#93;
                                                     </code></pre>
                                                 </td>
-                                                <td>You create cards by creating objects with the given parameters. 'cardHeaderId' and 'cardBodyId' must be unique for each object and between themselves in an object. Set the collapsible element to be open by default using the 'showOnInit'. You can also insert HTML into the 'cardBodyContent' attribute.</td>
+                                                <td>You create cards by creating objects with the given parameters.
+                                                    'cardHeaderId' and 'cardBodyId' must be unique for each object and between themselves in an object.
+                                                    Set the collapsible element to be open by default using the 'showOnInit'.
+                                                    You can also insert HTML into the 'cardBodyContent' attribute, e.g.('&lt;h1&gt;Hello World!&lt;/h1&gt;').</td>
                                             </tr>
                                         </tbody>
                                     </table>

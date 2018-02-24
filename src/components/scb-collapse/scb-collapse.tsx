@@ -29,8 +29,7 @@ export class ScbCollapse {
                             </h5>
                         </div>
                         <div id={item.cardBodyId} class={{'collapse': true, 'show': item.showOnInit}} aria-labelledby={item.cardHeaderId} data-parent={'#' + this.collapseid}>
-                            <div class="card-body">
-                                {item.cardBodyContent}
+                            <div class="card-body" innerHTML={item.cardBodyContent}>
                             </div>
                         </div>
                     </div>

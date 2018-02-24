@@ -9,28 +9,28 @@ export class StencilBootstrapDemo {
             cardHeaderId: 'navbarHeading',
             cardBodyId: 'navbarCollapse',
             cardHeaderContent: 'Navbar Component',
-            cardBodyContent: <navbar-page></navbar-page>,
+            cardBodyContent: '<navbar-page></navbar-page>',
             showOnInit: false
         },
         {
             cardHeaderId: 'collapseHeading',
             cardBodyId: 'collapseCollapse',
             cardHeaderContent: 'Collapse Component',
-            cardBodyContent: <collapse-page></collapse-page>,
+            cardBodyContent: '<collapse-page></collapse-page>',
             showOnInit: false
         },
         {
             cardHeaderId: 'tooltipHeading',
             cardBodyId: 'tooltipCollapse',
             cardHeaderContent: 'Tooltip Component',
-            cardBodyContent: <tooltip-page></tooltip-page>,
+            cardBodyContent: '<tooltip-page></tooltip-page>',
             showOnInit: false
         },
         {
             cardHeaderId: 'modalHeading',
             cardBodyId: 'modalCollapse',
             cardHeaderContent: 'Modal Component',
-            cardBodyContent: <modal-page></modal-page>,
+            cardBodyContent: '<modal-page></modal-page>',
             showOnInit: false
         }
     ];
