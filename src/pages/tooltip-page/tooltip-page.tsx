@@ -32,18 +32,18 @@ export class TolltipPage {
                                     <br />
                                     <div class="row">
                                         <div class="col-lg-12">
-                                        <pre><code class="lang-tsx">
-                                            <span>&lt;scb-tooltip</span><br />
-                                            <span class="hljs-built_in ml-4">type="link"</span><br />
-                                            <span class="hljs-built_in ml-4">href="https://stencil-bs-ui-lib.herokuapp.com/"</span><br />
-                                            <span class="hljs-built_in ml-4">target="_blank"</span><br />
-                                            <span class="hljs-built_in ml-4">tooltipTitle="Tooltip content"</span><br />
-                                            <span class="hljs-built_in ml-4">placement="top"</span><br />
-                                            <span class="hljs-built_in ml-4">trigger="hover focus click"</span>
-                                            <span>&gt;</span>
-                                            <br />
-                                            <span>&lt;/scb-tooltip&gt;</span>
-                                        </code></pre>
+                                            <pre><code class="lang-tsx">
+                                                <span>&lt;scb-tooltip</span><br />
+                                                <span class="hljs-built_in ml-4">type="link"</span><br />
+                                                <span class="hljs-built_in ml-4">href="https://stencil-bs-ui-lib.herokuapp.com/"</span><br />
+                                                <span class="hljs-built_in ml-4">target="_blank"</span><br />
+                                                <span class="hljs-built_in ml-4">tooltipTitle="Tooltip content"</span><br />
+                                                <span class="hljs-built_in ml-4">placement="top"</span><br />
+                                                <span class="hljs-built_in ml-4">trigger="hover focus click"</span>
+                                                <span>&gt;</span>
+                                                <br />
+                                                <span>&lt;/scb-tooltip&gt;</span>
+                                            </code></pre>
                                         </div>
                                     </div>
                                 </div>
