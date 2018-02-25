@@ -266,6 +266,7 @@ declare global {
     export interface FclVideoPlayerAttributes extends HTMLAttributes {
       controls?: boolean;
       poster?: string;
+      thumbnail?: any;
     }
   }
 }

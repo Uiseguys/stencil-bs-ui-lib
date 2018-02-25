@@ -4,14 +4,49 @@ import { Component } from '@stencil/core';
   tag: 'video-player-page',
 })
 export class VideoPlayerPage {
-
+  thumbnail: any = {
+    0: {
+      src: 'https://www.w3schools.com/howto/img_fjords.jpg',
+      style: {
+        left: '-60px',
+        width: '600px',
+        height: '68px',
+        clip: 'rect(0, 120px, 68px, 0)'
+      }
+    },
+    1: {
+      style: {
+        left: '-180px',
+        clip: 'rect(0, 240px, 68px, 120px)'
+      }
+    },
+    2: {
+      style: {
+        left: '-300px',
+        clip: 'rect(0, 360px, 68px, 240px)'
+      }
+    },
+    3: {
+      style: {
+        left: '-420px',
+        clip: 'rect(0, 480px, 68px, 360px)'
+      }
+    },
+    4: {
+      style: {
+        left: '-540px',
+        clip: 'rect(0, 600px, 68px, 480px)'
+      }
+    }
+  };
 
   render() {
     return [
       <div>
         <h2>Video Player</h2>
         <div>
-          <fcl-video-player poster="http://images.telvi.de/images/originals/2017/50/1/319b47392316aa2c54d5fbab.jpg">
+          <fcl-video-player poster="http://images.telvi.de/images/originals/2017/50/1/319b47392316aa2c54d5fbab.jpg"
+                            thumbnail={this.thumbnail}>
             <source src="http://techslides.com/demos/sample-videos/small.mp4" type='video/mp4' />
           </fcl-video-player>
 
