@@ -32,6 +32,13 @@ export class StencilBootstrapDemo {
             cardHeaderContent: 'Modal Component',
             cardBodyContent: '<modal-page></modal-page>',
             showOnInit: false
+        },
+        {
+            cardHeaderId: 'videoHeaderId',
+            cardBodyId: 'videoCollapse',
+            cardHeaderContent: 'Video Component',
+            cardBodyContent: '<video-player-page></video-player-page>',
+            showOnInit: false
         }
     ];
 
