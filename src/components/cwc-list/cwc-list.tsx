@@ -1,6 +1,7 @@
 import { Component, Prop, Watch, State, Event, EventEmitter, Element, Method } from '@stencil/core';
 import { VirtualNode, ListDataItem } from './cwc-list-interfaces';
 import get from 'lodash/get'
+import template from 'lodash/template'
 
 
 /**
@@ -18,7 +19,7 @@ export class CwcList {
 
     @Prop() items: object[];
     @Prop() itemAs: string = 'item';
-    @Prop() template: VirtualNode;
+    @Prop() template: string;
 
     @Prop() addClass?: string = '';
     @Prop() addClassFirst?: string = '';
@@ -32,8 +33,6 @@ export class CwcList {
     debounceStatus: boolean = false
 
     @Prop() bindToList: boolean = false;
-
-    @State() itemsData: ListDataItem[] = []
 
     @Element() el: HTMLElement;
 
@@ -65,7 +64,6 @@ export class CwcList {
     }
 
     componentWillLoad() {
-        this.initItemsData()
 
         this.bindToList ?
             this.el.addEventListener('scroll', this.listScrollHandler.bind(this))
@@ -82,27 +80,6 @@ export class CwcList {
 
         if (last.getBoundingClientRect().bottom - this.bottomOffset <= window.innerHeight)
             this.loadMore()
-    }
-
-
-    @Watch('items')
-    itemsdidChangeHandler() {
-        this.itemsData.length = 0
-        this.initItemsData()
-    }
-
-    private initItemsData() {
-
-        this.items.map((value, index) => {
-            let newItemData: ListDataItem = {
-                index: index,
-                itemAs: this.itemAs
-            }
-            newItemData[this.itemAs] = value
-
-            this.itemsData = [...this.itemsData, newItemData]
-        })
-        return this.itemsData
     }
 
     /**
@@ -126,100 +103,67 @@ export class CwcList {
         } if (Math.abs(index % 2) == 1) {
             classString += ' list-item-odd'.concat(this.addClassOdd && ' ' + this.addClassOdd)
         }
-        return classString
+        console.log('returning: ' + ' ' + classString + ' ')
+        return classString + ' '
     }
 
+
+
     /**
-     * Interpolates virtual node's text content and attributes
+     * Insert into string helper function
      * 
-     * @private
-     * @param {VirtualNode} vnode 
-     * @param {*} obj 
-     * @returns {VirtualNode} 
-     * @memberof StencilComponent
+     * @param {any} str 
+     * @param {any} index 
+     * @param {any} value 
+     * @returns {string} 
+     * @memberof CwcList
      */
-    private interpolateText(vnode: VirtualNode, obj: any): VirtualNode {
-        if (vnode.vtext) {
-
-            let matches = vnode.vtext.match(this.regex)
-
-            if (matches) {
-                matches.map(matched =>
-
-                    vnode.vtext = vnode.vtext.replace(
-                        matched,
-                        get(obj, matched.slice(2, -2), matched)
-                    )
-                )
-            }
-        }
-        if (vnode.vattrs) {
-            for (const key in vnode.vattrs) {
-                if (vnode.vattrs.hasOwnProperty(key)) {
-
-                    let matches = vnode.vattrs[key].match(this.regex)
-
-                    if (matches)
-                        matches.map(matched =>
-
-                            vnode.vattrs[key] = vnode.vattrs[key].replace(
-                                matched,
-                                get(obj, matched.slice(1, -1), matched)))
-                }
-            }
-        }
-        return vnode
+    insert(str, index, value): string {
+        return str.substr(0, index) + value + str.substr(index);
     }
 
 
     /**
-     * Iterate current virtual node and it's children and invoke 
-     * interpolation function if there's text content or attributes
+     * Inserts additional list-item-* classes into string node depends of item position.
      * 
-     * @private
-     * @param {VirtualNode} vnode 
-     * @param {object} obj 
-     * @returns {VirtualNode} 
-     * @memberof StencilComponent
+     * @param {any} str 
+     * @param {any} index 
+     * @returns {string} 
+     * @memberof CwcList
      */
-    private iterateChildVNodes(vnode: VirtualNode, obj: object): VirtualNode {
+    insertClassList(str, index): string {
+        let indexCloseTag = str.indexOf('>'),
+            indexClass = str.indexOf('class="')
 
-        if (vnode.vtext)
-            vnode = this.interpolateText(vnode, obj)
+        let isClassPresent = indexClass !== -1 && indexClass < indexCloseTag
 
-        if (vnode.vattrs)
-            vnode = this.interpolateText(vnode, obj)
+        let finalClassList = isClassPresent ?
+            this.insert(str, str.indexOf('"', indexClass + 7), this.addListClasses('', index, this.items.length)) :
+            this.insert(str, indexCloseTag, this.addListClasses('', index, this.items.length))
 
-        if (vnode.vchildren) {
-
-            for (var i = 0; i < vnode.vchildren.length; i++) {
-                vnode.vchildren[i] = this.iterateChildVNodes(vnode.vchildren[i], obj)
-            }
-
-        }
-
-        return vnode
+        return finalClassList
     }
 
     render() {
 
-        const list = this.itemsData.map(val => {
+        let tmpl = template(this.template)
 
-            let cloned: VirtualNode = JSON.parse(JSON.stringify(this.template)),
-                interpolated = this.iterateChildVNodes(cloned, val)
+        let str = ''
+        this.items.map((item, index) => {
 
-            interpolated.vattrs.class = this.addListClasses(interpolated.vattrs.class, val.index, this.itemsData.length)
+            let templateString = tmpl({ [this.itemAs]: item })
+            templateString = this.insertClassList(templateString, index)
 
-            return (
-                interpolated
-            )
-
+            str += templateString
         })
+
 
         return (
 
-            <div class={"item-list-wrapper " + this.wrapperClass}>
-                {list}
+            <div id={this.el.id} class={"item-list-wrapper " + this.wrapperClass}
+
+
+                innerHTML={str}>
             </div>
         );
     }

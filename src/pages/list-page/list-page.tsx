@@ -12,6 +12,17 @@ export class ListPage {
     @State() users1: any[] = []
     @State() users2: any[] = []
 
+    @State() lodashData = [
+        { name: 'one' },
+        { name: 'second' },
+        { name: 'third' }
+    ]
+
+    getLodashTemplate() {
+        return `<h3 class="demo"><%=item.name%></h3>`
+
+    }
+
     @Listen('onBottomReach')
     customEventHandler(event) {
 
@@ -45,38 +56,35 @@ export class ListPage {
     }
 
     getUser2Template() {
-        return (
-            <div class="card card-18" >
-                <img class="card-img-top" src="[[user.picture.large]]" alt="Card image cap" />
+        return `<div class="card card-18">
+            <img class="card-img-top" src="<%=user.picture.large%>" alt="Card image cap" />
                 <div class="card-body">
-                    <h5 class="card-title capitalized">[[user.name.first]] [[user.name.last]]</h5>
+                    <h5 class="card-title capitalized"><%=user.name.first%> <%=user.name.last%></h5>
                     <a href="#" class="btn btn-primary">Send message</a>
                 </div>
-            </div>
-        )
+            </div > `
+
     }
 
     getUserTemplate() {
-        return (
+        return `<div class="card col-md-6 col-sm-12">
+            <div class="card-body" >
+                <div class="media">
+                    <img class="d-flex mr-3 rounded" src="<%=user.picture.medium%>" alt="Generic placeholder image" />
+                    <div class="media-body">
+                        <h5 class="mt-0 capitalized"><%=user.name.first%> <%=user.name.last%></h5>
 
-            <div class="card col-md-6 col-sm-12" >
-                <div class="card-body">
-                    <div class="media">
-                        <img class="d-flex mr-3 rounded" src="[[user.picture.medium]]" alt="Generic placeholder image" />
-                        <div class="media-body">
-                            <h5 class="mt-0 capitalized">[[user.name.first]] [[user.name.last]]</h5>
-
-                            <div>
-                                <span class="capitalized">
-                                    [[user.location.city]], [[user.location.state]],
+                        <div>
+                            <span class="capitalized">
+                                <%=user.location.city%>, <%=user.location.state%>,
                                 </span>
-                                <span> [[user.location.street]] </span>
-                            </div>
+                            <span> <%=user.location.street%> </span>
                         </div>
                     </div>
                 </div>
-            </div>
-        )
+                </div>
+            </div> `
+
     }
 
     getUsersPage(): number {
@@ -109,10 +117,17 @@ export class ListPage {
 
 
 
+
     render() {
         return (
 
             <div class="container">
+
+                <cwc-list id="lodash" items={this.lodashData} template={this.getLodashTemplate()}>
+
+                </cwc-list>
+
+                <hr />
 
 
                 <div>
