@@ -22,7 +22,7 @@
     "test": "jest --no-cache",
     "test.watch": "jest --watch --no-cache",
     "publish": "npm publish ./ --dry-run --access public",
-    "serve:heroku": "http-server dist"
+    "serve:heroku": "http-server www"
   },
   "dependencies": {
     "@divsbhalala/video-js-thumbnails": "^1.0.0",
