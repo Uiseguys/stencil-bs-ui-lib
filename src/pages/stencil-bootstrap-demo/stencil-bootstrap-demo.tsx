@@ -76,13 +76,6 @@ export class StencilBootstrapDemo {
             showOnInit: false
         },
         {
-            cardHeaderId: 'fileInputHeaderId',
-            cardBodyId: 'fileInputCollapse',
-            cardHeaderContent: 'File Input Component',
-            cardBodyContent: '<file-input-page></file-input-page>',
-            showOnInit: false
-        },
-        {
             cardHeaderId: 'formHeaderId',
             cardBodyId: 'formCollapse',
             cardHeaderContent: 'Form Component',
