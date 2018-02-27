@@ -4,3 +4,9 @@
 
 ## Live Demo
 [https://stencil-bs-ui-lib.herokuapp.com/](https://stencil-bs-ui-lib.herokuapp.com/)
+
+## TO Publish on NPM
+
+run command `npm run publish`
+before running this command on terminal make sure you are login into npm account
+for that run `npm login` form the terminal and provide your credential to do the login authentication

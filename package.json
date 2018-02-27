@@ -1,7 +1,7 @@
 {
   "name": "@ui-guys/stencil-bs-ui-lib",
   "private": false,
-  "version": "0.0.18",
+  "version": "0.0.20",
   "description": "Bootstrap componentes built with StencilJS",
   "engines": {
     "node": ">=6.11.0"
@@ -21,7 +21,7 @@
     "start": "npm run dev",
     "test": "jest --no-cache",
     "test.watch": "jest --watch --no-cache",
-    "publish": "npm publish ./ --dry-run --access public",
+    "publish": "npm publish --dry-run --access public",
     "serve:heroku": "http-server www"
   },
   "dependencies": {

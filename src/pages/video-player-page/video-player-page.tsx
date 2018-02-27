@@ -111,6 +111,19 @@ export class VideoPlayerPage {
               </div>
             </div>
 
+            <div class="details">
+              <div class="details-name">
+                <p><code>thumbnail</code></p>
+              </div>
+              <div class="details-info">
+                <p><code>Json Array</code></p>
+                <marked-element><p>The <code>thumbnail</code> attribute specifies an image shown in progress bar while hovering on them</p>
+                  <p>This is optional attribute.
+                    If we don't pass this attrib this will not showing thumbnail image while hovering on progress bar</p>
+                </marked-element>
+              </div>
+            </div>
+
           </section>
 
 
