@@ -1,7 +1,7 @@
 {
   "name": "@ui-guys/stencil-bs-ui-lib",
   "private": false,
-  "version": "0.0.18",
+  "version": "0.0.20",
   "description": "Bootstrap componentes built with StencilJS",
   "engines": {
     "node": ">=6.11.0"
