@@ -5,9 +5,6 @@
  */
 
 import {
-  VirtualNode,
-} from './components/cwc-list/cwc-list-interfaces';
-import {
   BootstrapThemeColor,
 } from './common/bootstrap-theme-color.type';
 import {
@@ -93,7 +90,7 @@ declare global {
       debounce?: number;
       itemAs?: string;
       items?: object[];
-      template?: VirtualNode;
+      template?: string;
       wrapperClass?: string;
     }
   }
