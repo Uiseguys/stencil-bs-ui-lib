@@ -39,6 +39,83 @@ export class StencilBootstrapDemo {
             cardHeaderContent: 'Video Component',
             cardBodyContent: '<video-player-page></video-player-page>',
             showOnInit: false
+        },
+        {
+            cardHeaderId: 'alertHeaderId',
+            cardBodyId: 'alertCollapse',
+            cardHeaderContent: 'Alert Component',
+            cardBodyContent: '<alerts-page></alerts-page>',
+            showOnInit: false
+        },
+        {
+            cardHeaderId: 'badgeHeaderId',
+            cardBodyId: 'badgeCollapse',
+            cardHeaderContent: 'Badge Component',
+            cardBodyContent: '<badge-page></badge-page>',
+            showOnInit: false
+        },
+        {
+            cardHeaderId: 'breadcrumbHeaderId',
+            cardBodyId: 'breadcrumbCollapse',
+            cardHeaderContent: 'Breadcrumb Component',
+            cardBodyContent: '<breadcrumb-page></breadcrumb-page>',
+            showOnInit: false
+        },
+        {
+            cardHeaderId: 'dropdownHeaderId',
+            cardBodyId: 'dropdownCollapse',
+            cardHeaderContent: 'Dropdown Component',
+            cardBodyContent: '<dropdown-page></dropdown-page>',
+            showOnInit: false
+        },
+        {
+            cardHeaderId: 'fclImageHeaderId',
+            cardBodyId: 'fclImageCollapse',
+            cardHeaderContent: 'Fcl Image Component',
+            cardBodyContent: '<fcl-image-page></fcl-image-page>',
+            showOnInit: false
+        },
+        {
+            cardHeaderId: 'fileInputHeaderId',
+            cardBodyId: 'fileInputCollapse',
+            cardHeaderContent: 'File Input Component',
+            cardBodyContent: '<file-input-page></file-input-page>',
+            showOnInit: false
+        },
+        {
+            cardHeaderId: 'formHeaderId',
+            cardBodyId: 'formCollapse',
+            cardHeaderContent: 'Form Component',
+            cardBodyContent: '<form-page></form-page>',
+            showOnInit: false
+        },
+        {
+            cardHeaderId: 'listHeaderId',
+            cardBodyId: 'listCollapse',
+            cardHeaderContent: 'List Component',
+            cardBodyContent: '<list-page></list-page>',
+            showOnInit: false
+        },
+        {
+            cardHeaderId: 'multiselectHeaderId',
+            cardBodyId: 'multiselectCollapse',
+            cardHeaderContent: 'Multiselect Component',
+            cardBodyContent: '<multiselect-page></list-page>',
+            showOnInit: false
+        },
+        {
+            cardHeaderId: 'tagHeaderId',
+            cardBodyId: 'tagCollapse',
+            cardHeaderContent: 'Tag Component',
+            cardBodyContent: '<tag-page></list-page>',
+            showOnInit: false
+        },
+        {
+            cardHeaderId: 'typeaHeadHeaderId',
+            cardBodyId: 'typeaHeadCollapse',
+            cardHeaderContent: 'Typeahead Component',
+            cardBodyContent: '<typeahead-page></list-page>',
+            showOnInit: false
         }
     ];
 
