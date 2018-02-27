@@ -1,6 +1,4 @@
-import { Component, Prop, Watch, State, Event, EventEmitter, Element, Method } from '@stencil/core';
-import { VirtualNode, ListDataItem } from './cwc-list-interfaces';
-import get from 'lodash/get'
+import { Component, Prop, Event, EventEmitter, Element, Method } from '@stencil/core';
 import template from 'lodash/template'
 
 
@@ -19,14 +17,14 @@ export class CwcList {
 
     @Prop() items: object[];
     @Prop() itemAs: string = 'item';
-    @Prop() template: string;
+    @Prop() template: string = '';
 
     @Prop() addClass?: string = '';
     @Prop() addClassFirst?: string = '';
     @Prop() addClassLast?: string = '';
     @Prop() addClassEven?: string = '';
     @Prop() addClassOdd?: string = '';
-    @Prop() wrapperClass: string;
+    @Prop() wrapperClass: string = '';
     @Prop() bottomOffset?: number = 100;
 
     @Prop() debounce: number = 300;
@@ -71,15 +69,18 @@ export class CwcList {
     }
 
     listScrollHandler() {
-        if (this.el.scrollTop + this.el.clientHeight >= this.el.scrollHeight - this.bottomOffset)
+        if (this.el.scrollTop + this.el.clientHeight >= this.el.scrollHeight - this.bottomOffset) {
+
             this.loadMore()
+        }
     }
 
     windowScrollHandler() {
-        let last = document.querySelector(`#${this.el.id} .list-item-last`)
+        const last = document.querySelector(`#${this.el.id} .list-item-last`)
 
-        if (last.getBoundingClientRect().bottom - this.bottomOffset <= window.innerHeight)
+        if (last.getBoundingClientRect().bottom - this.bottomOffset <= window.innerHeight) {
             this.loadMore()
+        }
     }
 
     /**
