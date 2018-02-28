@@ -1,4 +1,4 @@
-import { Component, Prop, Watch, State } from '@stencil/core';
+import { Component, Prop, State } from '@stencil/core';
 // import { BootstrapThemeColor } from '../../common/bootstrap-theme-color.type';
 import initMarkup from '@ui-guys/stencil-markdown';
 
@@ -8,22 +8,14 @@ import initMarkup from '@ui-guys/stencil-markdown';
 })
 export class CwcMarkdown {
 
-    @Prop() data: string = '';
+    @Prop() data: string
     @State() marked: initMarkup
 
     constructor() {
         this.marked = initMarkup();
     }
 
-    @Watch('data')
-    textWatchHandler(val) {
-        this.data = val
-    }
-
-
-
     render() {
-
         return (
             <div innerHTML={this.marked(this.data)}>
             </div>
