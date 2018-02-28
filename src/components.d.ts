@@ -101,6 +101,36 @@ declare global {
 
 
 import {
+  CwcMarkdown as CwcMarkdown
+} from './components/cwc-markdown/cwc-markdown';
+
+declare global {
+  interface HTMLCwcMarkdownElement extends CwcMarkdown, HTMLStencilElement {
+  }
+  var HTMLCwcMarkdownElement: {
+    prototype: HTMLCwcMarkdownElement;
+    new (): HTMLCwcMarkdownElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-markdown": HTMLCwcMarkdownElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-markdown": HTMLCwcMarkdownElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-markdown": JSXElements.CwcMarkdownAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcMarkdownAttributes extends HTMLAttributes {
+      data?: string;
+    }
+  }
+}
+
+
+import {
   CwcMultiselect as CwcMultiselect
 } from './components/cwc-multiselect/cwc-multiselect';
 
@@ -945,6 +975,36 @@ declare global {
   }
   namespace JSXElements {
     export interface ListPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  MarkdownPage as MarkdownPage
+} from './pages/markdown-page/markdown-page';
+
+declare global {
+  interface HTMLMarkdownPageElement extends MarkdownPage, HTMLStencilElement {
+  }
+  var HTMLMarkdownPageElement: {
+    prototype: HTMLMarkdownPageElement;
+    new (): HTMLMarkdownPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "markdown-page": HTMLMarkdownPageElement;
+  }
+  interface ElementTagNameMap {
+    "markdown-page": HTMLMarkdownPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "markdown-page": JSXElements.MarkdownPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MarkdownPageAttributes extends HTMLAttributes {
       
     }
   }
