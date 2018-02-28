@@ -57,6 +57,77 @@ declare global {
 
 
 import {
+  CwcInfiniteListWatcher as CwcInfiniteListWatcher
+} from './components/cwc-infinite-list-watcher/cwc-infinite-list-watcher';
+
+declare global {
+  interface HTMLCwcInfiniteListWatcherElement extends CwcInfiniteListWatcher, HTMLStencilElement {
+  }
+  var HTMLCwcInfiniteListWatcherElement: {
+    prototype: HTMLCwcInfiniteListWatcherElement;
+    new (): HTMLCwcInfiniteListWatcherElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-infinite-list-watcher": HTMLCwcInfiniteListWatcherElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-infinite-list-watcher": HTMLCwcInfiniteListWatcherElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-infinite-list-watcher": JSXElements.CwcInfiniteListWatcherAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcInfiniteListWatcherAttributes extends HTMLAttributes {
+      bindToList?: boolean;
+      bottomOffset?: number;
+      debounce?: number;
+      listSelector?: string;
+    }
+  }
+}
+
+
+import {
+  CwcList2 as CwcList2
+} from './components/cwc-list-2/cwc-list-2';
+
+declare global {
+  interface HTMLCwcList2Element extends CwcList2, HTMLStencilElement {
+  }
+  var HTMLCwcList2Element: {
+    prototype: HTMLCwcList2Element;
+    new (): HTMLCwcList2Element;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-list-2": HTMLCwcList2Element;
+  }
+  interface ElementTagNameMap {
+    "cwc-list-2": HTMLCwcList2Element;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-list-2": JSXElements.CwcList2Attributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcList2Attributes extends HTMLAttributes {
+      addClass?: string;
+      addClassEven?: string;
+      addClassFirst?: string;
+      addClassLast?: string;
+      addClassOdd?: string;
+      itemAs?: string;
+      items?: object[];
+      template?: string;
+      wrapperClass?: string;
+    }
+  }
+}
+
+
+import {
   CwcList as CwcList
 } from './components/cwc-list/cwc-list';
 
@@ -165,6 +236,36 @@ declare global {
       rounded?: boolean;
       tagType?: BootstrapThemeColor;
       text?: string;
+    }
+  }
+}
+
+
+import {
+  CwcTest as CwcTest
+} from './components/cwc-test/cwc-test';
+
+declare global {
+  interface HTMLCwcTestElement extends CwcTest, HTMLStencilElement {
+  }
+  var HTMLCwcTestElement: {
+    prototype: HTMLCwcTestElement;
+    new (): HTMLCwcTestElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-test": HTMLCwcTestElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-test": HTMLCwcTestElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-test": JSXElements.CwcTestAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcTestAttributes extends HTMLAttributes {
+      items?: any[];
     }
   }
 }

@@ -123,10 +123,14 @@ export class ListPage {
         return (
 
             <div class="container">
+                // 
+                {/* //                 <cwc-list id="lodash" items={this.lodashData} template={this.getLodashTemplate()}>
 
-                <cwc-list id="lodash" items={this.lodashData} template={this.getLodashTemplate()}>
+//                 </cwc-list> */}
 
-                </cwc-list>
+                <cwc-test items={this.lodashData}>
+                    <h4>I am the slot</h4>
+                </cwc-test>
 
                 <hr />
 
@@ -244,7 +248,6 @@ export class ListPage {
                     items={this.users2}
                     itemAs='user'
                     template={this.getUser2Template()}
-                    bindToList={true}
                     wrapperClass='row d-flex justify-content-around mx-0'
                     addClass='my-3'> </cwc-list>
                 {/* </div> */}
@@ -254,11 +257,14 @@ export class ListPage {
                 <br />
                 <div >
 
+                    <br />
+
+                    <cwc-infinite-list-watcher listSelector="#users-infinite"></cwc-infinite-list-watcher>
+
                     <cwc-list id="users-infinite"
                         items={this.users1}
                         itemAs='user'
                         template={this.getUserTemplate()}
-                        bindToList={false}
                         wrapperClass='row'
                         addClass='custom mxy-2'
                         addClassEven='custom-even'
