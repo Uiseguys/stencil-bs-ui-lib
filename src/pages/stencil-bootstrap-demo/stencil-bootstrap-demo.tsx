@@ -104,6 +104,13 @@ export class StencilBootstrapDemo {
             showOnInit: false
         },
         {
+            cardHeaderId: 'markdownHeaderId',
+            cardBodyId: 'markdownCollapse',
+            cardHeaderContent: 'Markdown Component',
+            cardBodyContent: '<markdown-page></list-page>',
+            showOnInit: false
+        },
+        {
             cardHeaderId: 'typeaHeadHeaderId',
             cardBodyId: 'typeaHeadCollapse',
             cardHeaderContent: 'Typeahead Component',
