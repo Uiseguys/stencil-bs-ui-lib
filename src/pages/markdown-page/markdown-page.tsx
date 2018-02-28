@@ -1,23 +1,10 @@
 import { Component } from '@stencil/core';
-import { BootstrapThemeColor } from '../../common/bootstrap-theme-color.type';
-
 
 @Component({
     tag: 'markdown-page',
     styleUrl: 'markdown-page.scss'
 })
 export class MarkdownPage {
-
-    tagTypes: BootstrapThemeColor[] = [
-        'primary',
-        'secondary',
-        'success',
-        'danger',
-        'warning',
-        'info',
-        'light',
-        'dark',
-    ];
 
     render() {
         return [
