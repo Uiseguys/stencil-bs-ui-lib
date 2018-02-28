@@ -1,7 +1,7 @@
 {
   "name": "@ui-guys/stencil-bs-ui-lib",
   "private": false,
-  "version": "0.0.20",
+  "version": "0.3.42",
   "description": "Bootstrap componentes built with StencilJS",
   "engines": {
     "node": ">=6.11.0"
@@ -14,7 +14,6 @@
     "dist/"
   ],
   "scripts": {
-    "postinstall": "npm run build",
     "build": "stencil build --prerender",
     "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
     "serve": "stencil-dev-server",
