@@ -165,6 +165,42 @@ declare global {
 
 
 import {
+  CwcProgressBar as CwcProgressBar
+} from './components/cwc-progress-bar/cwc-progress-bar';
+
+declare global {
+  interface HTMLCwcProgressBarElement extends CwcProgressBar, HTMLStencilElement {
+  }
+  var HTMLCwcProgressBarElement: {
+    prototype: HTMLCwcProgressBarElement;
+    new (): HTMLCwcProgressBarElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-progress-bar": HTMLCwcProgressBarElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-progress-bar": HTMLCwcProgressBarElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-progress-bar": JSXElements.CwcProgressBarAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcProgressBarAttributes extends HTMLAttributes {
+      animated?: boolean;
+      classes?: string;
+      closable?: boolean;
+      height?: number;
+      progressBarType?: BootstrapThemeColor;
+      striped?: boolean;
+      text?: string;
+    }
+  }
+}
+
+
+import {
   CwcTag as CwcTag
 } from './components/cwc-tag/cwc-tag';
 
@@ -1095,6 +1131,36 @@ declare global {
   }
   namespace JSXElements {
     export interface NavbarPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  ProgressBarPage as ProgressBarPage
+} from './pages/progress-bar-page/progress-bar-page';
+
+declare global {
+  interface HTMLProgressBarPageElement extends ProgressBarPage, HTMLStencilElement {
+  }
+  var HTMLProgressBarPageElement: {
+    prototype: HTMLProgressBarPageElement;
+    new (): HTMLProgressBarPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "progress-bar-page": HTMLProgressBarPageElement;
+  }
+  interface ElementTagNameMap {
+    "progress-bar-page": HTMLProgressBarPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "progress-bar-page": JSXElements.ProgressBarPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ProgressBarPageAttributes extends HTMLAttributes {
       
     }
   }
