@@ -15,11 +15,16 @@ export class CwcProgressBar {
     @Prop() striped: boolean = false
     @Prop() animated: boolean = false
     @Prop() height: number = 20;
+    @Prop() progress: number = 0;
 
 
     @Watch('text')
     textWatchHandler(val) {
         this.text = val
+    }
+    @Watch('progress')
+    progressWatchHandler(val) {
+        this.progress = val
     }
 
     @Watch('progressBarType')
@@ -66,7 +71,7 @@ export class CwcProgressBar {
         return (
         <div>
             <div class={"progress"} style={{height: this.height + 'px'}}>
-                <div  class={"progress-bar" + this.getClassList()} role="progressbar" style={{width: '50%'}}>
+                <div  class={"progress-bar" + this.getClassList()} role="progressbar" style={{width: this.progress + '%'}}>
                     {this.limit(this.text, this.height)}
                  </div>
             </div>

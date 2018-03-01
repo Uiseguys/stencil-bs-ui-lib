@@ -88,14 +88,14 @@ export class ProgressBarPage {
 
                 <h3 class="mt-4">Usage</h3>
                 <h4 class="mt-3">Basic usage</h4>
-                <cwc-progress-bar text='Holla link' />
+                <cwc-progress-bar text='Holla link' progress={10} />
                 <code class="mb-3 d-block p-3">&lt;cwc-progress-bar text='Holla link' /&gt;</code>
 
                 <h4 class="mt-3">Bootstrap styles</h4>
 
                 {(() => {
                     return this.progressBarTypes.map(type =>
-                        <cwc-progress-bar class="mx-1" text={'Progress Bar ' + type} progressBarType={type} />
+                        <cwc-progress-bar class="mx-1" text={'Progress Bar ' + type} progressBarType={type} progress={80} />
                     )
 
                 })()}
@@ -105,7 +105,7 @@ export class ProgressBarPage {
                 </code>
 
                 <h4 class="mt-3">Max text length</h4>
-                <cwc-progress-bar class="mx-1" text={'Lorem ipsum dolor sir amet'} height={10} />
+                <cwc-progress-bar class="mx-1" text={'Lorem ipsum dolor sir amet'} height={10} progress={50}/>
                 <code class="mb-3 d-block p-3">&lt;cwc-progress-bar
                     text='Lorem ipsum dolor sir amet' height=&#123;10&#125; /&gt;</code>
 
@@ -118,11 +118,11 @@ export class ProgressBarPage {
 
 
                 <cwc-progress-bar class="mx-1" text='Stencil'
-                    striped={true} animated={true}/>
+                    striped={true} animated={true} progress={20}/>
                 <cwc-progress-bar class="mx-1" text='Angular'
-                    striped={true} animated={true}/>
+                    striped={true} animated={true} progress={30}/>
                 <cwc-progress-bar class="mx-1" text='React'
-                    striped={true} animated={true}/>
+                    striped={true} animated={true} progress={40}/>
 
             </div>
 
