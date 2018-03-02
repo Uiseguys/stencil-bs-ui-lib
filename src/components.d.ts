@@ -192,6 +192,7 @@ declare global {
       classes?: string;
       closable?: boolean;
       height?: number;
+      progress?: number;
       progressBarType?: BootstrapThemeColor;
       striped?: boolean;
       text?: string;
