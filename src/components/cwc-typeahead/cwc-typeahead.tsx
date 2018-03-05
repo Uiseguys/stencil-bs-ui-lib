@@ -1,4 +1,5 @@
 import { Component, State, Prop, Listen, Method, Event, EventEmitter } from '@stencil/core';
+import { VirtualNode } from './cwc-typeahead-interfaces';
 import filter from 'lodash/filter'
 import get from 'lodash/get';
 
@@ -11,11 +12,12 @@ import get from 'lodash/get';
 export class CwcTypeahead {
 
     @Prop() minSearchLength: number = 1;
-    @Prop() data: any[] = []
+    @Prop() data: any[] = [];
+    @Prop() dataAs: string = 'item';
     @Prop() idValue: string = 'typeahead-' + Date.now();
     @Prop() searchKey: string;
+    @Prop() template: VirtualNode;
     @Prop() placeholder: string = 'Search something e.g. "Alabama"';
-
 
     @State() filterValue: string = '';
     @State() optionsShown: boolean = false;
@@ -25,6 +27,8 @@ export class CwcTypeahead {
 
     @Event() typeaheadOnSubmit: EventEmitter;
 
+    regex = /\[\[+(.*?) ?\]\]+/g;
+
     typeaheadOnSubmitHandler(result) {
         this.typeaheadOnSubmit.emit(result)
     }
@@ -33,7 +37,6 @@ export class CwcTypeahead {
      * Life cycle hooks
      */
     componentWillUpdate() {
-
         if (this.filterValue.length >= this.minSearchLength) {
             this.filtered = this.filter()
 
@@ -47,13 +50,13 @@ export class CwcTypeahead {
      * Private functions
      */
     private filter() {
-        if (typeof this.data[0] == 'string')
+        if (typeof this.data[0] == 'string') {
             return this.filterStringArray(this.data)
+        }
 
         if (typeof this.data[0] == 'object') {
             return this.findInComplex(this.data, this.searchKey)
         }
-
     }
 
     private filterStringArray(data) {
@@ -78,7 +81,6 @@ export class CwcTypeahead {
         return this.filterStringArray(temporary)
 
     }
-
 
     /**
      * Handlers
@@ -115,7 +117,88 @@ export class CwcTypeahead {
         this.filtered = []
     }
 
+    /**
+     * Interpolates virtual node's text content and attributes
+     *
+     * @private
+     * @param {VirtualNode} vnode
+     * @param {*} obj
+     * @returns {VirtualNode}
+     * @memberof StencilComponent
+     */
+    private interpolateText(vnode: VirtualNode, obj: any): VirtualNode {
+        if (vnode.vtext) {
+            let matches = vnode.vtext.match(this.regex)
+            if (matches) {
+                matches.map(matched =>
+                    vnode.vtext = vnode.vtext.replace(
+                        matched,
+                        get(obj, matched.slice(2, -2), matched)
+                    )
+                )
+            }
+        }
+        if (vnode.vattrs) {
+            for (const key in vnode.vattrs) {
+                if (vnode.vattrs.hasOwnProperty(key)) {
+                    let matches = vnode.vattrs[key].match(this.regex)
+                    if (matches)
+                        matches.map(matched =>
+                            vnode.vattrs[key] = vnode.vattrs[key].replace(
+                                matched,
+                                get(obj, matched.slice(1, -1), matched)))
+                }
+            }
+        }
+        return vnode
+    }
+
+    /**
+     * Iterate current virtual node and it's children and invoke
+     * interpolation function if there's text content or attributes
+     *
+     * @private
+     * @param {VirtualNode} vnode
+     * @param {object} obj
+     * @returns {VirtualNode}
+     * @memberof StencilComponent
+     */
+    private iterateChildVNodes(vnode: VirtualNode, obj: object): VirtualNode {
+        if (vnode.vtext)
+            vnode = this.interpolateText(vnode, obj)
+
+        if (vnode.vattrs)
+            vnode = this.interpolateText(vnode, obj)
+
+        if (vnode.vchildren) {
+
+            for (var i = 0; i < vnode.vchildren.length; i++) {
+                vnode.vchildren[i] = this.iterateChildVNodes(vnode.vchildren[i], obj)
+            }
+
+        }
+        return vnode
+    }
+
     render() {
+        let list = undefined;
+        if (this.template) {
+            list = this.filtered.map((val) => {
+                let cloned: VirtualNode = JSON.parse(JSON.stringify(this.template)),
+                    interpolated = this.iterateChildVNodes(cloned, val)
+
+                return (
+                    interpolated
+                )
+            })
+        } else {
+            list = this.filtered.map((val, i) =>
+                <option class={"dropdown-item".concat((this.focusIndex == i + 1) ? ' active' : '')}
+                    onClick={(e: any) => this.handleSelect(e.target.value, i)}
+                    onMouseEnter={() => this.handleHover(i + 1)}
+                >{typeof val == 'string' ? val : val.index}</option>
+            )
+        }
 
         return (
             <div id={this.idValue}>
@@ -125,15 +208,10 @@ export class CwcTypeahead {
                 {
                     (this.filtered.length > 0) ? (
                         <div class="card">
-                            {
-                                this.filtered.map((val, i) =>
-                                    <option class={"dropdown-item".concat((this.focusIndex == i + 1) ? ' active' : '')}
-                                        onClick={(e: any) => this.handleSelect(e.target.value, i)}
-                                        onMouseEnter={() => this.handleHover(i + 1)}
-                                    >{typeof val == 'string' ? val : val.index}</option>)
-                            }
+                            <div class="item-list-wrapper row d-flex mx-0">
+                                { list }
+                            </div>
                         </div>
-
                     ) : (() => { })
                 }
 
@@ -141,10 +219,9 @@ export class CwcTypeahead {
         )
     }
 
-
-    /** 
+    /**
      * Keyboard handlers
-     * 
+     *
      **/
 
     @Listen('keydown.down')
@@ -179,7 +256,4 @@ export class CwcTypeahead {
             this.handleSelect(document.querySelectorAll(`#${this.idValue} option`)[this.focusIndex - 1].textContent, this.focusIndex - 1)
         }
     }
-
-
-
 }
