@@ -33,6 +33,7 @@ export class FclVideoPLayer {
     @Element() el: HostElement;
 
     @Prop() poster: string = null;
+    @Prop() theme: string = null;
     @Prop() thumbnail: any = null;
     @Prop() controls = true;
 
@@ -53,13 +54,16 @@ export class FclVideoPLayer {
     constructor() {
         initThumbnail();
     }
+    getClassList(): string {
+        return this.theme || 'default'
+    }
 
     render() {
 
         if (this.poster != null && this.toggle === false) {
 
             return (
-                <div class="fcl-video-class">
+                <div class={"fcl-video-class theme-" + this.getClassList()}>
 
                     <fcl-image class="video-img-block"
                                onClick={() => this.toggleClick()}
@@ -81,7 +85,7 @@ export class FclVideoPLayer {
             }
 
             return (
-                <div class="fcl-video-class">
+                <div class={"fcl-video-class theme-" + this.getClassList()}>
 
                     <video class="video-js vjs-default-skin">
                         <slot></slot>
@@ -112,7 +116,7 @@ export class FclVideoPLayer {
         videojs(this.el.getElementsByTagName('video')[0], options);
         if (this.thumbnail) {
             const video = this.el.getElementsByTagName('video')[0];
-            initThumbnail(this.thumbnail,video);
+            initThumbnail(this.thumbnail, video);
         }
 
     }
