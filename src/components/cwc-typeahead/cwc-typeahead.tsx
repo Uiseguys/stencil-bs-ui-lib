@@ -1,5 +1,5 @@
 import { Component, State, Prop, Listen, Method, Event, EventEmitter } from '@stencil/core';
-import { VirtualNode } from './cwc-typeahead-interfaces';
+import { VirtualNode, ListDataItem } from './cwc-typeahead-interfaces';
 import filter from 'lodash/filter'
 import get from 'lodash/get';
 
@@ -19,6 +19,7 @@ export class CwcTypeahead {
     @Prop() template: VirtualNode;
     @Prop() placeholder: string = 'Search something e.g. "Alabama"';
 
+    @State() itemsData: ListDataItem[] = [];
     @State() filterValue: string = '';
     @State() optionsShown: boolean = false;
     @State() focusIndex: number = 0
@@ -35,7 +36,11 @@ export class CwcTypeahead {
 
     /**
      * Life cycle hooks
-     */
+    */
+    componentWillLoad() {
+        this.initItemsData()
+    }
+
     componentWillUpdate() {
         if (this.filterValue.length >= this.minSearchLength) {
             this.filtered = this.filter()
@@ -46,16 +51,36 @@ export class CwcTypeahead {
     }
 
 
+    private initItemsData() {
+        if (this.template) {
+            this.data.map((value, index) => {
+                let newItemData: ListDataItem = {
+                    indicator: index,
+                    itemAs: this.dataAs
+                }
+                newItemData[this.dataAs] = value
+
+                this.itemsData = [...this.itemsData, newItemData]
+            })
+        }
+    }
+
     /**
      * Private functions
      */
     private filter() {
-        if (typeof this.data[0] == 'string') {
-            return this.filterStringArray(this.data)
+        let data = (this.itemsData && this.itemsData.length > 0) ? this.itemsData : this.data;
+
+        if (typeof data[0] == 'string') {
+            return this.filterStringArray(data);
         }
 
-        if (typeof this.data[0] == 'object') {
-            return this.findInComplex(this.data, this.searchKey)
+        if (typeof data[0] == 'object') {
+            if (this.template) {
+                return this.findInComplexTemplate(data, this.searchKey);
+            } else {
+                return this.findInComplex(data, this.searchKey);
+            }
         }
     }
 
@@ -79,7 +104,19 @@ export class CwcTypeahead {
             })
         )
         return this.filterStringArray(temporary)
+    }
 
+    private findInComplexTemplate(data, address) {
+        let temporary = []
+        temporary = data.map(value =>
+            ({
+                index: get(value, address),
+                indicator: value.indicator,
+                itemAs: value.itemAs,
+                option: value.option
+            })
+        )
+        return this.filterStringArray(temporary)
     }
 
     /**

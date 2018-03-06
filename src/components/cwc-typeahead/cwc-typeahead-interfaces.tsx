@@ -7,3 +7,9 @@ export interface VirtualNode {
     vref?: (elm: any) => void
     elm?: Element
 }
+
+export interface ListDataItem {
+    indicator: number
+    itemAs: string
+    item?: object
+}
