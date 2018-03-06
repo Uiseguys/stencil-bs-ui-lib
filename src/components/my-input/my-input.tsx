@@ -4,7 +4,8 @@ import Pikaday from 'pikaday/pikaday.js';   // disable the listener to support s
 
 @Component({
     tag: 'my-input',
-    shadow: true
+    shadow: true,
+    styleUrl: 'my-input.scss'
 })
 export class MyInput {
 
