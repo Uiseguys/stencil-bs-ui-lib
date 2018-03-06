@@ -35,21 +35,26 @@ export class StencilComponent {
     }
 
     componentDidLoad() {
-        this.btn = this.el.children[0].children[0].children[0].children[0]
-        this.content = this.el.children[0].children[1]
+        if (this.el && this.el.children
+            && this.el.children[0]
+            && this.el.children[0].children[0]
+            && this.el.children[0].children[0].children[0]) {
+            this.btn = this.el.children[0].children[0].children[0].children[0]
+            this.content = this.el.children[0].children[1]
 
-        this.popper = new Popper(this.btn, this.content, {
-            placement: this.dropdownPlacement,
-            removeOnDestroy: true,
-            modifiers: {
-                offset: {
-                    offset: this.triggerOverflow ?
-                        '-10%r, -110%' : ''
+            this.popper = new Popper(this.btn, this.content, {
+                placement: this.dropdownPlacement,
+                removeOnDestroy: true,
+                modifiers: {
+                    offset: {
+                        offset: this.triggerOverflow ?
+                            '-10%r, -110%' : ''
+                    }
                 }
-            }
-        });
+            });
+            this.btn.addEventListener('click', () => this.toggle())
+        }
 
-        this.btn.addEventListener('click', () => this.toggle())
         this.close()
     }
 

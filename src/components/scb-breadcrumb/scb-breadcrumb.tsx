@@ -2,7 +2,7 @@ import { Component, Prop } from '@stencil/core';
 import { IBreadcrumbItem } from './../../common/index';
 
 @Component({
-  tag: 'scb-breadcrumb',
+  tag: 'scb-breadcrumb'
 })
 export class ScbBreadcrumb {
   @Prop({ mutable: true }) items: IBreadcrumbItem[] = [];

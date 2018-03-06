@@ -2,8 +2,7 @@ import {Component, Prop, State, Event, EventEmitter, Element} from '@stencil/cor
 
 @Component({
     tag: 'my-dropdown',
-    shadow: true,
-    styleUrl: '../../../node_modules/bootstrap/dist/css/bootstrap.css'
+    shadow: true
 })
 export class MyDropdown {
 
