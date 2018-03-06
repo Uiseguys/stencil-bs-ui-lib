@@ -124,13 +124,6 @@ export class ListPage {
 
             <div class="container">
 
-                <cwc-list id="lodash" items={this.lodashData} template={this.getLodashTemplate()}>
-
-                </cwc-list>
-
-                <hr />
-
-
                 <div>
 
                     <h1 id="infinite-list-component" class="mb-2">Infinite list component</h1>
@@ -244,21 +237,23 @@ export class ListPage {
                     items={this.users2}
                     itemAs='user'
                     template={this.getUser2Template()}
-                    bindToList={true}
                     wrapperClass='row d-flex justify-content-around mx-0'
                     addClass='my-3'> </cwc-list>
-                {/* </div> */}
+
                 <br /><br />
 
                 <h4>Infinite list of users with data from <a href="randomuser.me">randomuser.me</a>: </h4>
                 <br />
                 <div >
 
+                    <br />
+
+                    <cwc-infinite-list-watcher listSelector="#users-infinite"></cwc-infinite-list-watcher>
+
                     <cwc-list id="users-infinite"
                         items={this.users1}
                         itemAs='user'
                         template={this.getUserTemplate()}
-                        bindToList={false}
                         wrapperClass='row'
                         addClass='custom mxy-2'
                         addClassEven='custom-even'

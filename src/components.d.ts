@@ -57,6 +57,41 @@ declare global {
 
 
 import {
+  CwcInfiniteListWatcher as CwcInfiniteListWatcher
+} from './components/cwc-infinite-list-watcher/cwc-infinite-list-watcher';
+
+declare global {
+  interface HTMLCwcInfiniteListWatcherElement extends CwcInfiniteListWatcher, HTMLStencilElement {
+  }
+  var HTMLCwcInfiniteListWatcherElement: {
+    prototype: HTMLCwcInfiniteListWatcherElement;
+    new (): HTMLCwcInfiniteListWatcherElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-infinite-list-watcher": HTMLCwcInfiniteListWatcherElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-infinite-list-watcher": HTMLCwcInfiniteListWatcherElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-infinite-list-watcher": JSXElements.CwcInfiniteListWatcherAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcInfiniteListWatcherAttributes extends HTMLAttributes {
+      bindToList?: boolean;
+      bottomOffset?: number;
+      containerSelector?: string;
+      debounce?: number;
+      lastItemSelector?: string;
+      listSelector?: string;
+    }
+  }
+}
+
+
+import {
   CwcList as CwcList
 } from './components/cwc-list/cwc-list';
 
@@ -85,9 +120,6 @@ declare global {
       addClassFirst?: string;
       addClassLast?: string;
       addClassOdd?: string;
-      bindToList?: boolean;
-      bottomOffset?: number;
-      debounce?: number;
       itemAs?: string;
       items?: object[];
       template?: string;
