@@ -166,9 +166,40 @@ $icon-font-path: '../fonts' !default;
   content: char("e905") !important;
 }
 
+/*theme-berlin css*/
+.theme-berlin{
+  .video-js{
+    [class^='vjs-'], [class*=' icon-'] {
+      color: green;
+    }
+    .vjs-play-progress, .vjs-volume-level{
+      background-color: green;
+    }
+  }
+}
+/*theme-moskau css*/
+.theme-moskau{
+  .video-js{
+    [class^='vjs-'], [class*=' icon-'] {
+      color: red;
+    }
+    .vjs-play-progress, .vjs-volume-level{
+      background-color: red;
+    }
+  }
+}
+
 /*DEFAULT CSS*/
 fcl-video-player.hydrated {
   position: relative !important;
+  width: 560px;
+  height: 320px;
+  display: inline-block;
+  .video-js.vjs-default-skin{
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 320px;
+  }
 }
 
 .fcl-video-class {

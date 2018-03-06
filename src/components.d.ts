@@ -98,6 +98,36 @@ declare global {
 
 
 import {
+  CwcMarkdown as CwcMarkdown
+} from './components/cwc-markdown/cwc-markdown';
+
+declare global {
+  interface HTMLCwcMarkdownElement extends CwcMarkdown, HTMLStencilElement {
+  }
+  var HTMLCwcMarkdownElement: {
+    prototype: HTMLCwcMarkdownElement;
+    new (): HTMLCwcMarkdownElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-markdown": HTMLCwcMarkdownElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-markdown": HTMLCwcMarkdownElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-markdown": JSXElements.CwcMarkdownAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcMarkdownAttributes extends HTMLAttributes {
+      data?: string;
+    }
+  }
+}
+
+
+import {
   CwcMultiselect as CwcMultiselect
 } from './components/cwc-multiselect/cwc-multiselect';
 
@@ -126,6 +156,43 @@ declare global {
       minSearchLength?: number;
       placeholder?: string;
       searchKey?: string;
+    }
+  }
+}
+
+
+import {
+  CwcProgressBar as CwcProgressBar
+} from './components/cwc-progress-bar/cwc-progress-bar';
+
+declare global {
+  interface HTMLCwcProgressBarElement extends CwcProgressBar, HTMLStencilElement {
+  }
+  var HTMLCwcProgressBarElement: {
+    prototype: HTMLCwcProgressBarElement;
+    new (): HTMLCwcProgressBarElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-progress-bar": HTMLCwcProgressBarElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-progress-bar": HTMLCwcProgressBarElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-progress-bar": JSXElements.CwcProgressBarAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcProgressBarAttributes extends HTMLAttributes {
+      animated?: boolean;
+      classes?: string;
+      closable?: boolean;
+      height?: number;
+      progress?: number;
+      progressBarType?: BootstrapThemeColor;
+      striped?: boolean;
+      text?: string;
     }
   }
 }
@@ -263,6 +330,7 @@ declare global {
     export interface FclVideoPlayerAttributes extends HTMLAttributes {
       controls?: boolean;
       poster?: string;
+      theme?: string;
       thumbnail?: any;
     }
   }
@@ -949,6 +1017,36 @@ declare global {
 
 
 import {
+  MarkdownPage as MarkdownPage
+} from './pages/markdown-page/markdown-page';
+
+declare global {
+  interface HTMLMarkdownPageElement extends MarkdownPage, HTMLStencilElement {
+  }
+  var HTMLMarkdownPageElement: {
+    prototype: HTMLMarkdownPageElement;
+    new (): HTMLMarkdownPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "markdown-page": HTMLMarkdownPageElement;
+  }
+  interface ElementTagNameMap {
+    "markdown-page": HTMLMarkdownPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "markdown-page": JSXElements.MarkdownPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MarkdownPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
   ModalPage as ModalPage
 } from './pages/modal-page/modal-page';
 
@@ -1032,6 +1130,36 @@ declare global {
   }
   namespace JSXElements {
     export interface NavbarPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  ProgressBarPage as ProgressBarPage
+} from './pages/progress-bar-page/progress-bar-page';
+
+declare global {
+  interface HTMLProgressBarPageElement extends ProgressBarPage, HTMLStencilElement {
+  }
+  var HTMLProgressBarPageElement: {
+    prototype: HTMLProgressBarPageElement;
+    new (): HTMLProgressBarPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "progress-bar-page": HTMLProgressBarPageElement;
+  }
+  interface ElementTagNameMap {
+    "progress-bar-page": HTMLProgressBarPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "progress-bar-page": JSXElements.ProgressBarPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ProgressBarPageAttributes extends HTMLAttributes {
       
     }
   }

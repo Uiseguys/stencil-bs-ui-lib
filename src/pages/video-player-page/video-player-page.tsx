@@ -39,6 +39,7 @@ export class VideoPlayerPage {
       }
     }
   };
+  theme: string = 'berlin';
 
   render() {
     return [
@@ -46,7 +47,7 @@ export class VideoPlayerPage {
         <h2>Video Player</h2>
         <div>
           <fcl-video-player poster="http://images.telvi.de/images/originals/2017/50/1/319b47392316aa2c54d5fbab.jpg"
-                            thumbnail={this.thumbnail}>
+                            thumbnail={this.thumbnail} theme={this.theme}>
             <source src="http://techslides.com/demos/sample-videos/small.mp4" type='video/mp4' />
           </fcl-video-player>
 
@@ -107,6 +108,18 @@ export class VideoPlayerPage {
               <div class="details-info">
                 <p><code>string</code></p>
                 <marked-element><p>The <code>poster</code> attribute specifies an image shown while downloading</p>
+                </marked-element>
+              </div>
+            </div>
+
+            <div class="details">
+              <div class="details-name">
+                <p><code>theme</code></p>
+              </div>
+              <div class="details-info">
+                <p><code>string</code></p>
+                <marked-element>
+                  <p>The <code>theme</code> attribute specifies theme for the video player, Currently we have two theme berlin/moskau</p>
                 </marked-element>
               </div>
             </div>

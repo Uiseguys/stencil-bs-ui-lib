@@ -76,13 +76,6 @@ export class StencilBootstrapDemo {
             showOnInit: false
         },
         {
-            cardHeaderId: 'fileInputHeaderId',
-            cardBodyId: 'fileInputCollapse',
-            cardHeaderContent: 'File Input Component',
-            cardBodyContent: '<file-input-page></file-input-page>',
-            showOnInit: false
-        },
-        {
             cardHeaderId: 'formHeaderId',
             cardBodyId: 'formCollapse',
             cardHeaderContent: 'Form Component',
@@ -108,6 +101,20 @@ export class StencilBootstrapDemo {
             cardBodyId: 'tagCollapse',
             cardHeaderContent: 'Tag Component',
             cardBodyContent: '<tag-page></list-page>',
+            showOnInit: false
+        },
+        {
+            cardHeaderId: 'markdownHeaderId',
+            cardBodyId: 'markdownCollapse',
+            cardHeaderContent: 'Markdown Component',
+            cardBodyContent: '<markdown-page></list-page>',
+            showOnInit: false
+        },
+        {
+            cardHeaderId: 'progressBarHeaderId',
+            cardBodyId: 'progressBarCollapse',
+            cardHeaderContent: 'Progress bar Component',
+            cardBodyContent: '<progress-bar-page></progress-bar-page>',
             showOnInit: false
         },
         {
