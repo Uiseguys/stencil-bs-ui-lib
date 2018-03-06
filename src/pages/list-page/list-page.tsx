@@ -123,17 +123,6 @@ export class ListPage {
         return (
 
             <div class="container">
-                // 
-                {/* //                 <cwc-list id="lodash" items={this.lodashData} template={this.getLodashTemplate()}>
-
-//                 </cwc-list> */}
-
-                <cwc-test items={this.lodashData}>
-                    <h4>I am the slot</h4>
-                </cwc-test>
-
-                <hr />
-
 
                 <div>
 
@@ -250,7 +239,7 @@ export class ListPage {
                     template={this.getUser2Template()}
                     wrapperClass='row d-flex justify-content-around mx-0'
                     addClass='my-3'> </cwc-list>
-                {/* </div> */}
+
                 <br /><br />
 
                 <h4>Infinite list of users with data from <a href="randomuser.me">randomuser.me</a>: </h4>

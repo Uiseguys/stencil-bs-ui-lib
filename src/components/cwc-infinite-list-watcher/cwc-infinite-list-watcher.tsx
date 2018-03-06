@@ -8,6 +8,7 @@ import { Component, Prop, Event, EventEmitter, Method, State } from '@stencil/co
 export class CwcInfiniteListWatcher {
 
     @Prop() listSelector: string = '';
+    @Prop() lastItemSelector: string = '.list-item-last'
     @Prop() containerSelector: string = '';
 
     @Prop() bindToList: boolean = false;
@@ -54,7 +55,7 @@ export class CwcInfiniteListWatcher {
     }
 
     windowScrollHandler() {
-        const last = document.querySelector(`#${this.listElement.id} .list-item-last`)
+        const last = document.querySelector(`#${this.listElement.id} ${this.lastItemSelector}`)
 
         if (last.getBoundingClientRect().bottom - this.bottomOffset <= window.innerHeight) {
             this.loadMore()

@@ -46,7 +46,7 @@ export class CwcList {
         } if (Math.abs(index % 2) == 1) {
             classString += ' list-item-odd'.concat(this.addClassOdd && ' ' + this.addClassOdd)
         }
-        console.log('returning: ' + ' ' + classString + ' ')
+
         return classString + ' '
     }
 
