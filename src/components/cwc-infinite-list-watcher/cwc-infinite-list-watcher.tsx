@@ -66,7 +66,7 @@ export class CwcInfiniteListWatcher {
 
     render() {
         return (
-            <p>Hi I'm infinite-list-watcher !;D</p>
+            <div class="inifinite-list-watcher"></div>
         );
     }
 }
