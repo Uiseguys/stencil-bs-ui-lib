@@ -1,5 +1,5 @@
 import { Component, State, Prop, Listen, Method, Event, EventEmitter } from '@stencil/core';
-import { VirtualNode, ListDataItem } from './cwc-typeahead-interfaces';
+import template from 'lodash/template';
 import filter from 'lodash/filter'
 import get from 'lodash/get';
 
@@ -13,13 +13,12 @@ export class CwcTypeahead {
 
     @Prop() minSearchLength: number = 1;
     @Prop() data: any[] = [];
-    @Prop() dataAs: string = 'item';
+    @Prop() itemAs: string = 'item';
     @Prop() idValue: string = 'typeahead-' + Date.now();
     @Prop() searchKey: string;
-    @Prop() template: VirtualNode;
+    @Prop() template: string;
     @Prop() placeholder: string = 'Search something e.g. "Alabama"';
 
-    @State() itemsData: ListDataItem[] = [];
     @State() filterValue: string = '';
     @State() optionsShown: boolean = false;
     @State() focusIndex: number = 0
@@ -28,8 +27,6 @@ export class CwcTypeahead {
 
     @Event() typeaheadOnSubmit: EventEmitter;
 
-    regex = /\[\[+(.*?) ?\]\]+/g;
-
     typeaheadOnSubmitHandler(result) {
         this.typeaheadOnSubmit.emit(result)
     }
@@ -37,11 +34,6 @@ export class CwcTypeahead {
     /**
      * Life cycle hooks
     */
-    componentWillLoad() {
-        console.log('Typeahead Component Will Load');
-        this.initItemsData()
-    }
-
     componentWillUpdate() {
         if (this.filterValue.length >= this.minSearchLength) {
             this.filtered = this.filter()
@@ -51,37 +43,16 @@ export class CwcTypeahead {
         }
     }
 
-
-    private initItemsData() {
-        if (this.template) {
-            this.data.map((value, index) => {
-                let newItemData: ListDataItem = {
-                    indicator: index,
-                    itemAs: this.dataAs
-                }
-                newItemData[this.dataAs] = value
-
-                this.itemsData = [...this.itemsData, newItemData]
-            })
-        }
-    }
-
     /**
      * Private functions
      */
     private filter() {
-        let data = (this.itemsData && this.itemsData.length > 0) ? this.itemsData : this.data;
-
-        if (typeof data[0] == 'string') {
-            return this.filterStringArray(data);
+        if (typeof this.data[0] == 'string') {
+            return this.filterStringArray(this.data);
         }
 
-        if (typeof data[0] == 'object') {
-            if (this.template) {
-                return this.findInComplexTemplate(data, this.searchKey);
-            } else {
-                return this.findInComplex(data, this.searchKey);
-            }
+        if (typeof this.data[0] == 'object') {
+            return this.findInComplex(this.data, this.searchKey);
         }
     }
 
@@ -102,19 +73,6 @@ export class CwcTypeahead {
             ({
                 index: get(value, address),
                 data: value
-            })
-        )
-        return this.filterStringArray(temporary)
-    }
-
-    private findInComplexTemplate(data, address) {
-        let temporary = []
-        temporary = data.map(value =>
-            ({
-                index: get(value, address),
-                indicator: value.indicator,
-                itemAs: value.itemAs,
-                option: value.option
             })
         )
         return this.filterStringArray(temporary)
@@ -155,80 +113,16 @@ export class CwcTypeahead {
         this.filtered = []
     }
 
-    /**
-     * Interpolates virtual node's text content and attributes
-     *
-     * @private
-     * @param {VirtualNode} vnode
-     * @param {*} obj
-     * @returns {VirtualNode}
-     * @memberof StencilComponent
-     */
-    private interpolateText(vnode: VirtualNode, obj: any): VirtualNode {
-        if (vnode.vtext) {
-            let matches = vnode.vtext.match(this.regex)
-            if (matches) {
-                matches.map(matched =>
-                    vnode.vtext = vnode.vtext.replace(
-                        matched,
-                        get(obj, matched.slice(2, -2), matched)
-                    )
-                )
-            }
-        }
-        if (vnode.vattrs) {
-            for (const key in vnode.vattrs) {
-                if (vnode.vattrs.hasOwnProperty(key)) {
-                    let matches = vnode.vattrs[key].match(this.regex)
-                    if (matches)
-                        matches.map(matched =>
-                            vnode.vattrs[key] = vnode.vattrs[key].replace(
-                                matched,
-                                get(obj, matched.slice(1, -1), matched)))
-                }
-            }
-        }
-        return vnode
-    }
-
-    /**
-     * Iterate current virtual node and it's children and invoke
-     * interpolation function if there's text content or attributes
-     *
-     * @private
-     * @param {VirtualNode} vnode
-     * @param {object} obj
-     * @returns {VirtualNode}
-     * @memberof StencilComponent
-     */
-    private iterateChildVNodes(vnode: VirtualNode, obj: object): VirtualNode {
-        if (vnode.vtext)
-            vnode = this.interpolateText(vnode, obj)
-
-        if (vnode.vattrs)
-            vnode = this.interpolateText(vnode, obj)
-
-        if (vnode.vchildren) {
-
-            for (var i = 0; i < vnode.vchildren.length; i++) {
-                vnode.vchildren[i] = this.iterateChildVNodes(vnode.vchildren[i], obj)
-            }
-
-        }
-        return vnode
-    }
-
     render() {
         let list = undefined;
+        let str = '';
         if (this.template) {
-            list = this.filtered.map((val) => {
-                let cloned: VirtualNode = JSON.parse(JSON.stringify(this.template)),
-                    interpolated = this.iterateChildVNodes(cloned, val)
+            let tmpl = template(this.template);
 
-                return (
-                    interpolated
-                )
-            })
+            this.filtered.map((val) => {
+                let templateString = tmpl({ [this.itemAs]: val.data });
+                str += templateString;
+            });
         } else {
             list = this.filtered.map((val, i) =>
                 <option class={"dropdown-item".concat((this.focusIndex == i + 1) ? ' active' : '')}
@@ -246,13 +140,20 @@ export class CwcTypeahead {
                 {
                     (this.filtered.length > 0) ? (
                         <div class="card">
-                            <div class="item-list-wrapper row d-flex mx-0">
-                                { list }
-                            </div>
+                        {
+                            (this.template) ? (
+                                <div class="item-list-wrapper row d-flex mx-0"
+                                    innerHTML={str}>
+                                </div>
+                            ) : (
+                                <div class="item-list-wrapper row d-flex mx-0">
+                                    { list }
+                                </div>
+                            )
+                        }
                         </div>
                     ) : (() => { })
                 }
-
             </div>
         )
     }

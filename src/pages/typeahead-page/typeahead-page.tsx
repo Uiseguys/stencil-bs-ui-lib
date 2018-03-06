@@ -55,15 +55,13 @@ export class StencilComponent {
     ]
 
     getTemplate() {
-        return (
-            <div class="card card-18 my-3 mx-3">
-                <img class="card-img-top" src="[[option.visual]]" alt="Card image cap" />
+        return `<div class="card card-18 my-3 mx-3">
+                <img class="card-img-top" src="<%=option.visual%>" alt="Card image cap" />
                 <div class="card-body">
-                    <h5 class="card-title capitalized">[[option.label]]</h5>
+                    <h5 class="card-title capitalized"><%=option.label%></h5>
                     <a href="#" class="btn btn-primary">Send message</a>
                 </div>
-            </div>
-        )
+            </div>`
     }
 
     @State() result;
@@ -96,8 +94,8 @@ export class StencilComponent {
             <h3>Complex Object[] with template demo!</h3>,
             <cwc-typeahead
                 data={this.myOptions}
-                dataAs='option'
-                searchKey='option.label'
+                itemAs='option'
+                searchKey='label'
                 template={this.getTemplate()}
                 placeholder="Search something e.g. 'The'">
             </cwc-typeahead>,
