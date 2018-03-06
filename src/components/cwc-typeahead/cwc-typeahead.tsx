@@ -38,6 +38,7 @@ export class CwcTypeahead {
      * Life cycle hooks
     */
     componentWillLoad() {
+        console.log('Typeahead Component Will Load');
         this.initItemsData()
     }
 
