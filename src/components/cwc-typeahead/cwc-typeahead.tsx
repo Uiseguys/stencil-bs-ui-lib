@@ -10,11 +10,13 @@ import get from 'lodash/get';
     styleUrl: 'cwc-typeahead.scss'
 })
 export class CwcTypeahead {
+    date = '' + Date.now();
 
     @Prop() minSearchLength: number = 1;
+    @Prop() googleAutocomplete: boolean = false;
     @Prop() data: any[] = [];
     @Prop() itemAs: string = 'item';
-    @Prop() idValue: string = 'typeahead-' + Date.now();
+    @Prop() idValue: string = 'typeahead-' + this.date;
     @Prop() searchKey: string;
     @Prop() template: string;
     @Prop() highlight: boolean = false;
@@ -36,7 +38,7 @@ export class CwcTypeahead {
      * Life cycle hooks
     */
     componentWillUpdate() {
-        if (this.filterValue.length >= this.minSearchLength) {
+        if (!this.googleAutocomplete && this.filterValue.length >= this.minSearchLength) {
             this.filtered = this.filter()
 
             if (this.filtered.length > 0) {
@@ -118,55 +120,57 @@ export class CwcTypeahead {
         this.filtered = []
     }
 
+    initGoogleAutocomplete(ref) {
+        new google.maps.places.Autocomplete((ref), {types: ['geocode']});
+        // autocomplete.addListener('place_changed', this.typeaheadOnSubmitHandler(autocomplete.getPlace()));
+    }
+
     render() {
         let list = undefined;
         let str = '';
         let noBoldRegx = new RegExp('(<b>|</b>)', 'gi');
-        let boldRegx = new RegExp('(' + this.filterValue + ')', 'gi');
+        let boldRegx = new RegExp('(' + this.filterValue + ')', 'gi')
 
-        if (this.template) {
-            let tmpl = template(this.template);
+        if (!this.googleAutocomplete) {
+            if (this.template) {
+                let tmpl = template(this.template);
 
-            if (this.highlight) {
+                if (this.highlight) {
+                    this.filtered.map((val) => {
+                        val.data.label = val.data.label.replace(boldRegx, '<b>$1</b>');
+                    })
+                }
+
                 this.filtered.map((val) => {
-                    val.data.label = val.data.label.replace(boldRegx, '<b>$1</b>');
-                })
-            }
-
-            this.filtered.map((val) => {
-                let templateString = tmpl({ [this.itemAs]: val.data });
-                str += templateString;
-                val.data.label = val.data.label.replace(noBoldRegx, '');
-            });
-        } else {
-            list = this.filtered.map((val, i) =>
-                <option class={"dropdown-item".concat((this.focusIndex == i + 1) ? ' active' : '')}
+                    let templateString = tmpl({ [this.itemAs]: val.data });
+                    str += templateString;
+                    val.data.label = val.data.label.replace(noBoldRegx, '');
+                });
+            } else {
+                list = this.filtered.map((val, i) =>
+                    <option class={"dropdown-item".concat((this.focusIndex == i + 1) ? ' active' : '')}
                     onClick={(e: any) => this.handleSelect(e.target.value, i)}
                     onMouseEnter={() => this.handleHover(i + 1)}
                     innerHTML={typeof val == 'string' ? val : val.index}
-                ></option>
-            )
+                    ></option>
+                )
+            }
         }
 
         return (
             <div id={this.idValue}>
-                <input onInput={(e) => this.handleInputChange(e)}
-                    type="text" class="form-control" placeholder={this.placeholder} />
+                <input id={'input-'+this.date} onInput={(e) => this.handleInputChange(e)}
+                    type="text" class="form-control" placeholder={this.placeholder}
+                    ref={(ref) => (this.googleAutocomplete) ? this.initGoogleAutocomplete(ref) : (() => { })} />
 
                 {
                     (this.filtered.length > 0) ? (
                         <div class="card">
-                        {
-                            (this.template) ? (
-                                <div class="row mx-0"
-                                    innerHTML={ str }>
-                                </div>
+                            {(this.template) ? (
+                                <div class="row mx-0" innerHTML={str}></div>
                             ) : (
-                                <div class="row mx-0">
-                                    { list }
-                                </div>
-                            )
-                        }
+                                <div class="row mx-0">{list}</div>
+                            )}
                         </div>
                     ) : (() => { })
                 }

@@ -157,6 +157,14 @@ export class StencilComponent {
             </p>,
 
             <p class="my-3 mx-3">
+                <h3>Google Autocomplete</h3>
+                <cwc-typeahead
+                    googleAutocomplete={true}
+                    placeholder="Search for a location">
+                </cwc-typeahead>
+            </p>,
+
+            <p class="my-3 mx-3">
                 <h4>result: </h4>
                 <pre>{JSON.stringify(this.result, null, 2)}</pre>
             </p>,
