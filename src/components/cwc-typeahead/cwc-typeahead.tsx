@@ -82,7 +82,13 @@ export class CwcTypeahead {
      * Handlers
      */
     handleInputChange(e) {
-        this.filterValue = e.target.value
+        this.filterValue = e.target.value;
+        if (this.filterValue.length <= 0) {
+            if (this.focusIndex > 0) {
+                this.focusIndex = 0;
+            }
+            this.close();
+        }
     }
 
     handleSelect(value, index) {
