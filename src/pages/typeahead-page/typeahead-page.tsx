@@ -160,7 +160,7 @@ export class StencilComponent {
                 <h3>Google Autocomplete</h3>
                 <cwc-typeahead
                     googleAutocomplete={true}
-                    placeholder="Search for a location">
+                    placeholder="Search for a location e.g 'Berlin'">
                 </cwc-typeahead>
             </p>,
 

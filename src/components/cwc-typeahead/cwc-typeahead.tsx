@@ -121,8 +121,11 @@ export class CwcTypeahead {
     }
 
     initGoogleAutocomplete(ref) {
-        new google.maps.places.Autocomplete((ref), {types: ['geocode']});
-        // autocomplete.addListener('place_changed', this.typeaheadOnSubmitHandler(autocomplete.getPlace()));
+        let autocomplete = new google.maps.places.Autocomplete((ref), {types: ['geocode']});
+        autocomplete.addListener('place_changed', () => {
+            let place = autocomplete.getPlace();
+            this.typeaheadOnSubmitHandler(place);
+        });
     }
 
     render() {
