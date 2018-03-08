@@ -1,4 +1,5 @@
 import { Component, State, Prop, Listen, Method, Event, EventEmitter } from '@stencil/core';
+import template from 'lodash/template';
 import filter from 'lodash/filter'
 import get from 'lodash/get';
 
@@ -11,11 +12,12 @@ import get from 'lodash/get';
 export class CwcTypeahead {
 
     @Prop() minSearchLength: number = 1;
-    @Prop() data: any[] = []
+    @Prop() data: any[] = [];
+    @Prop() itemAs: string = 'item';
     @Prop() idValue: string = 'typeahead-' + Date.now();
     @Prop() searchKey: string;
+    @Prop() template: string;
     @Prop() placeholder: string = 'Search something e.g. "Alabama"';
-
 
     @State() filterValue: string = '';
     @State() optionsShown: boolean = false;
@@ -31,9 +33,8 @@ export class CwcTypeahead {
 
     /**
      * Life cycle hooks
-     */
+    */
     componentWillUpdate() {
-
         if (this.filterValue.length >= this.minSearchLength) {
             this.filtered = this.filter()
 
@@ -42,18 +43,17 @@ export class CwcTypeahead {
         }
     }
 
-
     /**
      * Private functions
      */
     private filter() {
-        if (typeof this.data[0] === 'string')
-            return this.filterStringArray(this.data)
-
-        if (typeof this.data[0] === 'object') {
-            return this.findInComplex(this.data, this.searchKey)
+        if (typeof this.data[0] === 'string') {
+            return this.filterStringArray(this.data);
         }
 
+        if (typeof this.data[0] === 'object') {
+            return this.findInComplex(this.data, this.searchKey);
+        }
     }
 
     private filterStringArray(data) {
@@ -76,9 +76,7 @@ export class CwcTypeahead {
             })
         )
         return this.filterStringArray(temporary)
-
     }
-
 
     /**
      * Handlers
@@ -116,6 +114,23 @@ export class CwcTypeahead {
     }
 
     render() {
+        let list = undefined;
+        let str = '';
+        if (this.template) {
+            let tmpl = template(this.template);
+
+            this.filtered.map((val) => {
+                let templateString = tmpl({ [this.itemAs]: val.data });
+                str += templateString;
+            });
+        } else {
+            list = this.filtered.map((val, i) =>
+                <option class={"dropdown-item".concat((this.focusIndex == i + 1) ? ' active' : '')}
+                    onClick={(e: any) => this.handleSelect(e.target.value, i)}
+                    onMouseEnter={() => this.handleHover(i + 1)}
+                >{typeof val == 'string' ? val : val.index}</option>
+            )
+        }
 
         return (
             <div id={this.idValue}>
@@ -125,26 +140,27 @@ export class CwcTypeahead {
                 {
                     (this.filtered.length > 0) ? (
                         <div class="card cwc-typeahead">
-                            {
-                                this.filtered.map((val, i) =>
-                                    <option class={"dropdown-item".concat((this.focusIndex === i + 1) ? ' active' : '')}
-                                        onClick={(e: any) => this.handleSelect(e.target.value, i)}
-                                        onMouseEnter={() => this.handleHover(i + 1)}
-                                    >{typeof val === 'string' ? val : val.index}</option>)
-                            }
+                        {
+                            (this.template) ? (
+                                <div class="item-list-wrapper row d-flex mx-0"
+                                    innerHTML={str}>
+                                </div>
+                            ) : (
+                                <div class="item-list-wrapper row d-flex mx-0">
+                                    { list }
+                                </div>
+                            )
+                        }
                         </div>
-
                     ) : (() => { })
                 }
-
             </div>
         )
     }
 
-
-    /** 
+    /**
      * Keyboard handlers
-     * 
+     *
      **/
 
     @Listen('keydown.down')
@@ -179,7 +195,4 @@ export class CwcTypeahead {
             this.handleSelect(document.querySelectorAll(`#${this.idValue} option`)[this.focusIndex - 1].textContent, this.focusIndex - 1)
         }
     }
-
-
-
 }
