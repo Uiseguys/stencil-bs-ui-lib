@@ -5,9 +5,6 @@
  */
 
 import {
-  VirtualNode,
-} from './components/cwc-list/cwc-list-interfaces';
-import {
   BootstrapThemeColor,
 } from './common/bootstrap-theme-color.type';
 import {
@@ -60,6 +57,41 @@ declare global {
 
 
 import {
+  CwcInfiniteListWatcher as CwcInfiniteListWatcher
+} from './components/cwc-infinite-list-watcher/cwc-infinite-list-watcher';
+
+declare global {
+  interface HTMLCwcInfiniteListWatcherElement extends CwcInfiniteListWatcher, HTMLStencilElement {
+  }
+  var HTMLCwcInfiniteListWatcherElement: {
+    prototype: HTMLCwcInfiniteListWatcherElement;
+    new (): HTMLCwcInfiniteListWatcherElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-infinite-list-watcher": HTMLCwcInfiniteListWatcherElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-infinite-list-watcher": HTMLCwcInfiniteListWatcherElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-infinite-list-watcher": JSXElements.CwcInfiniteListWatcherAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcInfiniteListWatcherAttributes extends HTMLAttributes {
+      bindToList?: boolean;
+      bottomOffset?: number;
+      containerSelector?: string;
+      debounce?: number;
+      lastItemSelector?: string;
+      listSelector?: string;
+    }
+  }
+}
+
+
+import {
   CwcList as CwcList
 } from './components/cwc-list/cwc-list';
 
@@ -88,13 +120,40 @@ declare global {
       addClassFirst?: string;
       addClassLast?: string;
       addClassOdd?: string;
-      bindToList?: boolean;
-      bottomOffset?: number;
-      debounce?: number;
       itemAs?: string;
       items?: object[];
-      template?: VirtualNode;
+      template?: string;
       wrapperClass?: string;
+    }
+  }
+}
+
+
+import {
+  CwcMarkdown as CwcMarkdown
+} from './components/cwc-markdown/cwc-markdown';
+
+declare global {
+  interface HTMLCwcMarkdownElement extends CwcMarkdown, HTMLStencilElement {
+  }
+  var HTMLCwcMarkdownElement: {
+    prototype: HTMLCwcMarkdownElement;
+    new (): HTMLCwcMarkdownElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-markdown": HTMLCwcMarkdownElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-markdown": HTMLCwcMarkdownElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-markdown": JSXElements.CwcMarkdownAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcMarkdownAttributes extends HTMLAttributes {
+      data?: string;
     }
   }
 }
@@ -129,6 +188,43 @@ declare global {
       minSearchLength?: number;
       placeholder?: string;
       searchKey?: string;
+    }
+  }
+}
+
+
+import {
+  CwcProgressBar as CwcProgressBar
+} from './components/cwc-progress-bar/cwc-progress-bar';
+
+declare global {
+  interface HTMLCwcProgressBarElement extends CwcProgressBar, HTMLStencilElement {
+  }
+  var HTMLCwcProgressBarElement: {
+    prototype: HTMLCwcProgressBarElement;
+    new (): HTMLCwcProgressBarElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-progress-bar": HTMLCwcProgressBarElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-progress-bar": HTMLCwcProgressBarElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-progress-bar": JSXElements.CwcProgressBarAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcProgressBarAttributes extends HTMLAttributes {
+      animated?: boolean;
+      classes?: string;
+      closable?: boolean;
+      height?: number;
+      progress?: number;
+      progressBarType?: BootstrapThemeColor;
+      striped?: boolean;
+      text?: string;
     }
   }
 }
@@ -266,6 +362,8 @@ declare global {
     export interface FclVideoPlayerAttributes extends HTMLAttributes {
       controls?: boolean;
       poster?: string;
+      theme?: string;
+      thumbnail?: any;
     }
   }
 }
@@ -500,39 +598,31 @@ declare global {
 
 
 import {
-  ScbDialog as ScbDialog
-} from './components/scb-dialog/scb-dialog';
+  ScbCollapse as ScbCollapse
+} from './components/scb-collapse/scb-collapse';
 
 declare global {
-  interface HTMLScbDialogElement extends ScbDialog, HTMLStencilElement {
+  interface HTMLScbCollapseElement extends ScbCollapse, HTMLStencilElement {
   }
-  var HTMLScbDialogElement: {
-    prototype: HTMLScbDialogElement;
-    new (): HTMLScbDialogElement;
+  var HTMLScbCollapseElement: {
+    prototype: HTMLScbCollapseElement;
+    new (): HTMLScbCollapseElement;
   };
   interface HTMLElementTagNameMap {
-    "scb-dialog": HTMLScbDialogElement;
+    "scb-collapse": HTMLScbCollapseElement;
   }
   interface ElementTagNameMap {
-    "scb-dialog": HTMLScbDialogElement;
+    "scb-collapse": HTMLScbCollapseElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "scb-dialog": JSXElements.ScbDialogAttributes;
+      "scb-collapse": JSXElements.ScbCollapseAttributes;
     }
   }
   namespace JSXElements {
-    export interface ScbDialogAttributes extends HTMLAttributes {
-      animation?: boolean;
-      backdrop?: any;
-      btntype?: string;
-      centered?: boolean;
-      content?: string;
-      keyboard?: boolean;
-      modalfocus?: boolean;
-      show?: boolean;
-      size?: string;
-      title?: string;
+    export interface ScbCollapseAttributes extends HTMLAttributes {
+      collapseid?: string;
+      items?: any[];
     }
   }
 }
@@ -574,6 +664,45 @@ declare global {
       target?: string;
       timeout?: number;
       type?: BootstrapThemeColor;
+    }
+  }
+}
+
+
+import {
+  ScbModal as ScbModal
+} from './components/scb-modal/scb-modal';
+
+declare global {
+  interface HTMLScbModalElement extends ScbModal, HTMLStencilElement {
+  }
+  var HTMLScbModalElement: {
+    prototype: HTMLScbModalElement;
+    new (): HTMLScbModalElement;
+  };
+  interface HTMLElementTagNameMap {
+    "scb-modal": HTMLScbModalElement;
+  }
+  interface ElementTagNameMap {
+    "scb-modal": HTMLScbModalElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "scb-modal": JSXElements.ScbModalAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ScbModalAttributes extends HTMLAttributes {
+      animation?: boolean;
+      backdrop?: any;
+      btntype?: string;
+      centered?: boolean;
+      keyboard?: boolean;
+      modalContent?: string;
+      modalfocus?: boolean;
+      modalTitle?: string;
+      show?: boolean;
+      size?: string;
     }
   }
 }
@@ -641,7 +770,7 @@ declare global {
       offset?: string;
       placement?: string;
       target?: string;
-      title?: string;
+      tooltipTitle?: string;
       trigger?: string;
       type?: string;
     }
@@ -740,29 +869,29 @@ declare global {
 
 
 import {
-  DiaglogPage as DialogPage
-} from './pages/dialog-page/dialog-page';
+  CollapsePage as CollapsePage
+} from './pages/collapse-page/collapse-page';
 
 declare global {
-  interface HTMLDialogPageElement extends DialogPage, HTMLStencilElement {
+  interface HTMLCollapsePageElement extends CollapsePage, HTMLStencilElement {
   }
-  var HTMLDialogPageElement: {
-    prototype: HTMLDialogPageElement;
-    new (): HTMLDialogPageElement;
+  var HTMLCollapsePageElement: {
+    prototype: HTMLCollapsePageElement;
+    new (): HTMLCollapsePageElement;
   };
   interface HTMLElementTagNameMap {
-    "dialog-page": HTMLDialogPageElement;
+    "collapse-page": HTMLCollapsePageElement;
   }
   interface ElementTagNameMap {
-    "dialog-page": HTMLDialogPageElement;
+    "collapse-page": HTMLCollapsePageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "dialog-page": JSXElements.DialogPageAttributes;
+      "collapse-page": JSXElements.CollapsePageAttributes;
     }
   }
   namespace JSXElements {
-    export interface DialogPageAttributes extends HTMLAttributes {
+    export interface CollapsePageAttributes extends HTMLAttributes {
       
     }
   }
@@ -920,6 +1049,66 @@ declare global {
 
 
 import {
+  MarkdownPage as MarkdownPage
+} from './pages/markdown-page/markdown-page';
+
+declare global {
+  interface HTMLMarkdownPageElement extends MarkdownPage, HTMLStencilElement {
+  }
+  var HTMLMarkdownPageElement: {
+    prototype: HTMLMarkdownPageElement;
+    new (): HTMLMarkdownPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "markdown-page": HTMLMarkdownPageElement;
+  }
+  interface ElementTagNameMap {
+    "markdown-page": HTMLMarkdownPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "markdown-page": JSXElements.MarkdownPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MarkdownPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  ModalPage as ModalPage
+} from './pages/modal-page/modal-page';
+
+declare global {
+  interface HTMLModalPageElement extends ModalPage, HTMLStencilElement {
+  }
+  var HTMLModalPageElement: {
+    prototype: HTMLModalPageElement;
+    new (): HTMLModalPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "modal-page": HTMLModalPageElement;
+  }
+  interface ElementTagNameMap {
+    "modal-page": HTMLModalPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "modal-page": JSXElements.ModalPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ModalPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
   MultiselectPage as MultiselectPage
 } from './pages/multiselect-page/multiselect-page';
 
@@ -973,6 +1162,36 @@ declare global {
   }
   namespace JSXElements {
     export interface NavbarPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  ProgressBarPage as ProgressBarPage
+} from './pages/progress-bar-page/progress-bar-page';
+
+declare global {
+  interface HTMLProgressBarPageElement extends ProgressBarPage, HTMLStencilElement {
+  }
+  var HTMLProgressBarPageElement: {
+    prototype: HTMLProgressBarPageElement;
+    new (): HTMLProgressBarPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "progress-bar-page": HTMLProgressBarPageElement;
+  }
+  interface ElementTagNameMap {
+    "progress-bar-page": HTMLProgressBarPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "progress-bar-page": JSXElements.ProgressBarPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ProgressBarPageAttributes extends HTMLAttributes {
       
     }
   }

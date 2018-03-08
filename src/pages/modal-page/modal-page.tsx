@@ -31,8 +31,8 @@ export class ModalPage {
                                             <div>
                                                 <scb-modal
                                                     btntype="success"
-                                                    title="Info"
-                                                    content="Modal Content"
+                                                    modalTitle="Info"
+                                                    modalContent="Modal Content"
                                                     centered={true}
                                                     animation={true}
                                                     size=""
@@ -50,8 +50,8 @@ export class ModalPage {
                                         <pre><code class="lang-tsx">
                                             <span>&lt;scb-modal</span><br />
                                             <span class="hljs-built_in ml-4">btntype="success"</span><br />
-                                            <span class="hljs-built_in ml-4">title="Info"</span><br />
-                                            <span class="hljs-built_in ml-4">content="Modal Content"</span><br />
+                                            <span class="hljs-built_in ml-4">modalTitle="Info"</span><br />
+                                            <span class="hljs-built_in ml-4">modalContent="Modal Content"</span><br />
                                             <span class="hljs-built_in ml-4">centered=true</span><br />
                                             <span class="hljs-built_in ml-4">animation=true</span><br />
                                             <span class="hljs-built_in ml-4">size=""</span><br />
@@ -84,13 +84,13 @@ export class ModalPage {
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td>title</td>
+                                                <td>modalTitle</td>
                                                 <td>String</td>
                                                 <td>'Modal Title'</td>
                                                 <td>Sets the Modal title</td>
                                             </tr>
                                             <tr>
-                                                <td>content</td>
+                                                <td>modalContent</td>
                                                 <td>String</td>
                                                 <td>'Modal Content'</td>
                                                 <td>Sets the Modal content</td>

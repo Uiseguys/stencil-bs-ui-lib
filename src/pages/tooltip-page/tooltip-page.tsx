@@ -1,4 +1,4 @@
-import { Component, Listen } from '@stencil/core';
+import { Component } from '@stencil/core';
 
 @Component({
     tag: 'tooltip-page',
@@ -21,7 +21,7 @@ export class TolltipPage {
                                                     type="link"
                                                     href="https://stencil-bs-ui-lib.herokuapp.com/"
                                                     target="_blank"
-                                                    title="Tooltip content"
+                                                    tooltipTitle="Tooltip content"
                                                     placement="top"
                                                     trigger="hover focus click">
                                                     <span slot="btn-content">Btn text</span>
@@ -32,18 +32,18 @@ export class TolltipPage {
                                     <br />
                                     <div class="row">
                                         <div class="col-lg-12">
-                                        <pre><code class="lang-tsx">
-                                            <span>&lt;scb-tooltip</span><br />
-                                            <span class="hljs-built_in ml-4">type="link"</span><br />
-                                            <span class="hljs-built_in ml-4">href="https://stencil-bs-ui-lib.herokuapp.com/"</span><br />
-                                            <span class="hljs-built_in ml-4">target="_blank"</span><br />
-                                            <span class="hljs-built_in ml-4">title="Tooltip content"</span><br />
-                                            <span class="hljs-built_in ml-4">placement="top"</span><br />
-                                            <span class="hljs-built_in ml-4">trigger="hover focus click"</span>
-                                            <span>&gt;</span>
-                                            <br />
-                                            <span>&lt;/scb-tooltip&gt;</span>
-                                        </code></pre>
+                                            <pre><code class="lang-tsx">
+                                                <span>&lt;scb-tooltip</span><br />
+                                                <span class="hljs-built_in ml-4">type="link"</span><br />
+                                                <span class="hljs-built_in ml-4">href="https://stencil-bs-ui-lib.herokuapp.com/"</span><br />
+                                                <span class="hljs-built_in ml-4">target="_blank"</span><br />
+                                                <span class="hljs-built_in ml-4">tooltipTitle="Tooltip content"</span><br />
+                                                <span class="hljs-built_in ml-4">placement="top"</span><br />
+                                                <span class="hljs-built_in ml-4">trigger="hover focus click"</span>
+                                                <span>&gt;</span>
+                                                <br />
+                                                <span>&lt;/scb-tooltip&gt;</span>
+                                            </code></pre>
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@ export class TolltipPage {
                                                 <td>The target property sets or returns the value of the target attribute of a link. The target attribute specifies where to open the linked document - '_blank', '_self', '_parent', '_top'</td>
                                             </tr>
                                             <tr>
-                                                <td>title</td>
+                                                <td>tooltipTitle</td>
                                                 <td>String</td>
                                                 <td>''</td>
                                                 <td>Default title value if title attribute isn’t present.</td>
