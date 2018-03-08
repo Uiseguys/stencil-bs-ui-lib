@@ -1,0 +1,65 @@
+@import "video-js.scss";
+/* a wrapper element that tracks the mouse vertically */
+.vjs-thumbnail-holder {
+  position: absolute;
+  left: -1000px;
+}
+
+/* the thumbnail image itself */
+.vjs-thumbnail {
+  position: absolute;
+  left: 0;
+  bottom: 1.3em;
+  opacity: 0;
+  transition: opacity .2s ease;
+  -webkit-transition: opacity .2s ease;
+  -moz-transition: opacity .2s ease;
+  -mz-transition: opacity .2s ease;
+}
+
+/* fade in the thumbnail when hovering over the progress bar */
+/* .fake-active is needed for Android only. It's removed on touchend/touchecancel */
+.vjs-progress-control:hover .vjs-thumbnail,
+.vjs-progress-control.fake-active .vjs-thumbnail,
+.vjs-progress-control:active .vjs-thumbnail {
+  opacity: 1;
+}
+
+/* ... but hide the thumbnail when hovering directly over it */
+.vjs-progress-control:hover .vjs-thumbnail:hover,
+.vjs-progress-control:active .vjs-thumbnail:active {
+  opacity: 0;
+}
+
+@media print {
+  .video-js > *:not(.vjs-tech):not(.vjs-poster) {
+    visibility: hidden; } }
+
+.vjs-resize-manager {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  visibility: hidden; }
+
+@media \0screen {
+  .vjs-user-inactive.vjs-playing .vjs-control-bar :before {
+    content: "";
+  }
+}
+
+@media \0screen {
+  .vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {
+    visibility: hidden;
+  }
+}
+
+@media only screen and (min-width:1px) and (max-width:767px)
+{
+
+.video-img-block img{width: 102%;}
+.video-js{width: 100% !important;}
+
+}
