@@ -1,5 +1,6 @@
 import { Component, Prop, Element, HostElement, State, Method, Watch } from '@stencil/core';
 import Popper from 'popper.js';
+// import Popper from 'popper.js/dist/popper.js';
 
 @Component({
     tag: 'cwc-dropdown',

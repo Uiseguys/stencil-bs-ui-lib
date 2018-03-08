@@ -80,7 +80,7 @@ export class CwcList {
     windowScrollHandler() {
         let last = document.querySelector(`#${this.el.id} .list-item-last`)
 
-        if (last.getBoundingClientRect().bottom - this.bottomOffset <= window.innerHeight)
+        if (last && last.getBoundingClientRect && last.getBoundingClientRect().bottom - this.bottomOffset <= window.innerHeight)
             this.loadMore()
     }
 
