@@ -14,7 +14,7 @@
     "dist/"
   ],
   "scripts": {
-    "build": "stencil build --prerender",
+    "build": "stencil build",
     "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
     "serve": "stencil-dev-server",
     "start": "npm run dev",
@@ -48,7 +48,8 @@
     "videojs-font": "^2.0.0"
   },
   "devDependencies": {
-    "@stencil/sass": "0.0.2"
+    "@stencil/sass": "0.0.2",
+    "@types/googlemaps": "^3.30.7"
   },
   "repository": {
     "type": "git",
