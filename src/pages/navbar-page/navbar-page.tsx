@@ -31,13 +31,16 @@ export class NavbarPage {
                                                     <a class="nav-link" href="#">Link</a>
                                                 </li>
                                                 <li class="nav-item dropdown">
-                                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                        <a class="dropdown-item" href="#">Action</a>
-                                                        <a class="dropdown-item" href="#">Another action</a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="#">Something else here</a>
-                                                    </div>
+                                                    <cwc-dropdown id="example1">
+                                                        <a slot="dropdown-trigger" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Todos</a>
+
+                                                        <div slot="dropdown-menu" class="dropdown-menu">
+                                                            <a class="dropdown-item" role="presentation" href="#">Static</a>
+                                                            <a class="dropdown-item" role="presentation" href="#">Dynamic</a>
+                                                            <div class="dropdown-divider"></div>
+                                                            <a class="dropdown-item" role="presentation" href="#">Third Item</a>
+                                                        </div>
+                                                    </cwc-dropdown>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link disabled" href="#">Disabled</a>
