@@ -3,7 +3,7 @@ import {Element, Component, Prop, State, Listen} from '@stencil/core';
 @Component({
     tag: 'my-dynamic-form',
     shadow: true,
-    styleUrl: '../../../node_modules/bootstrap/dist/css/bootstrap.css'
+    styleUrl: 'my-dynamic-form.scss'
 })
 export class MyDynamicForm {
 

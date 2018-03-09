@@ -215,7 +215,7 @@ export class CwcMultiselect {
                                             class={"dropdown-item".concat((this.focusIndex == i + 1) ? ' active' : '')}
                                             onClick={(e: any) => this.handleSelect(e.target.value, i)}
                                             onMouseEnter={() => this.handleHover(i + 1)}
-                                        >{typeof val == 'string' ? val : val.index}</option>)
+                                        >{typeof val === 'string' ? val : val.index}</option>)
                                 }
                             </div>
 
@@ -269,7 +269,7 @@ export class CwcMultiselect {
 
     setCaretPositionEnd() {
         const input = document.querySelector(`#${this.idValue} div.form-control`);
-        const range = document.createRange();
+        const range = document && document.createRange && document.createRange();
         range.selectNodeContents(input);
         range.collapse(false);
         const selection = window.getSelection();

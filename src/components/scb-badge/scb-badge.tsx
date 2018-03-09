@@ -3,7 +3,7 @@ import { BootstrapThemeColor } from '../../common/bootstrap-theme-color.type';
 
 
 @Component({
-  tag: 'scb-badge',
+  tag: 'scb-badge'
 })
 export class ScbBadge {
   @Prop() type: BootstrapThemeColor = 'secondary';
