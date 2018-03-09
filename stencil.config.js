@@ -3,7 +3,7 @@ const sass = require('@stencil/sass');
 exports.config = {
     namespace: 'index',
     generateDistribution: true,
-    serviceWorker: false,
+    serviceWorker: true,
     bundles: [{
         components: ['cwc-typeahead', 'cwc-tag', 'cwc-list', 'cwc-infinite-list-watcher']
     }],

@@ -2,7 +2,8 @@ import {Component, Prop, Event, EventEmitter, Element, State} from '@stencil/cor
 
 @Component({
     tag: 'my-checkbox',
-    shadow: true
+    shadow: true,
+    styleUrl: 'my-checkbox.scss'
 })
 export class MyCheckbox {
 

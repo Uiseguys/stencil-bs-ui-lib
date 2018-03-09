@@ -31,10 +31,6 @@
   opacity: 0;
 }
 
-@media print {
-  .video-js > *:not(.vjs-tech):not(.vjs-poster) {
-    visibility: hidden; } }
-
 .vjs-resize-manager {
   position: absolute;
   top: 0;
@@ -42,7 +38,8 @@
   width: 100%;
   height: 100%;
   border: none;
-  visibility: hidden; }
+  visibility: hidden;
+}
 
 @media \0screen {
   .vjs-user-inactive.vjs-playing .vjs-control-bar :before {
@@ -56,10 +53,13 @@
   }
 }
 
-@media only screen and (min-width:1px) and (max-width:767px)
-{
+@media only screen and (min-width: 1px) and (max-width: 767px) {
 
-.video-img-block img{width: 102%;}
-.video-js{width: 100% !important;}
+  .video-img-block img {
+    width: 102%;
+  }
+  .video-js {
+    width: 100% !important;
+  }
 
 }
