@@ -1,7 +1,10 @@
 import { Component, Element, HostElement, Prop } from '@stencil/core';
+import 'bootstrap.native/dist/bootstrap-native-v4';
+declare var window: any;
 
 @Component({
-    tag: 'scb-navbar'
+    tag: 'scb-navbar',
+    styleUrl: '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 })
 export class ScbNavbar {
     @Element() el: HostElement;
@@ -10,6 +13,10 @@ export class ScbNavbar {
     @Prop() navbarcolor: string = "light";
     @Prop() bgcolor: string = "light";
     @Prop() placement: string = '';
+
+    componentDidLoad() {
+        window.BSN.initCallback();
+    }
 
     render() {
         return (
