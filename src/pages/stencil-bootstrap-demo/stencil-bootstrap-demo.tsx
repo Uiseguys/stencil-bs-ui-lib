@@ -129,6 +129,12 @@ export class StencilBootstrapDemo {
     render() {
         return (
             <div class="container-fluid">
+
+
+                <h4>Schedule demo start</h4>
+                <cwc-schedule />
+                <h4>Schedule demo end</h4>
+
                 <div class="row">
                     <div class="col-12 text-center">
                         <h1>Web Components for Bootstrap 4 Beta</h1>

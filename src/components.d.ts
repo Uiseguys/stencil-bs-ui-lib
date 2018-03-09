@@ -231,6 +231,36 @@ declare global {
 
 
 import {
+  StencilComponent as CwcSchedule
+} from './components/cwc-schedule/cwc-schedule';
+
+declare global {
+  interface HTMLCwcScheduleElement extends CwcSchedule, HTMLStencilElement {
+  }
+  var HTMLCwcScheduleElement: {
+    prototype: HTMLCwcScheduleElement;
+    new (): HTMLCwcScheduleElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-schedule": HTMLCwcScheduleElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-schedule": HTMLCwcScheduleElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-schedule": JSXElements.CwcScheduleAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcScheduleAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
   CwcTag as CwcTag
 } from './components/cwc-tag/cwc-tag';
 
@@ -294,10 +324,14 @@ declare global {
   namespace JSXElements {
     export interface CwcTypeaheadAttributes extends HTMLAttributes {
       data?: any[];
+      googleAutocomplete?: boolean;
+      highlight?: boolean;
       idValue?: string;
+      itemAs?: string;
       minSearchLength?: number;
       placeholder?: string;
       searchKey?: string;
+      template?: string;
     }
   }
 }
