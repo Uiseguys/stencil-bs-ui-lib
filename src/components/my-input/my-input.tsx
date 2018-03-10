@@ -5,7 +5,7 @@ import Pikaday from 'pikaday/pikaday.js';   // disable the listener to support s
 @Component({
     tag: 'my-input',
     shadow: true,
-    styleUrl: '../../../node_modules/bootstrap/dist/css/bootstrap.css'
+    styleUrl: 'my-input.scss'
 })
 export class MyInput {
 
@@ -24,7 +24,8 @@ export class MyInput {
 
     getAndPostTextValue(event) {
         if (event.currentTarget.value) {
-            this.for === "integer" ? this.currentValue = JSON.parse(event.currentTarget.value) : this.currentValue = event.currentTarget.value;
+            this.for === "integer" ?
+                this.currentValue = JSON.parse(event.currentTarget.value) : this.currentValue = event.currentTarget.value;
         } else {
             this.currentValue = null;
         }
@@ -61,7 +62,7 @@ export class MyInput {
 
         if (this.for === "object" && this.format === "date") {
             const picker = new Pikaday({
-                field: this.element.shadowRoot.querySelector("input"),
+                field: this.element && this.element.shadowRoot && this.element.shadowRoot.querySelector("input"),
                 onSelect: function (date) {
                     console.log('disabled date formatting via moment because build broke');
                     console.log(date);

@@ -11,7 +11,7 @@ import {
 } from '@stencil/core';
 
 @Component({
-  tag: 'scb-alert',
+  tag: 'scb-alert'
 })
 export class ScbAlert {
   @Element() el: HostElement;
@@ -21,7 +21,7 @@ export class ScbAlert {
   @Prop() type: string ;
   @Prop() onDismiss: (hostEl: HostElement) => void;
 
-  @Prop() show = true;
+  @Prop() show: boolean = true;
   @State() fade: boolean;
 
   @Event() toggleVisibility: EventEmitter;

@@ -1,58 +1,32 @@
-import { Component, Prop, Element, HostElement, State, Method, Watch } from '@stencil/core';
-import Popper from 'popper.js';
+import { Component, Element, HostElement, State, Method } from '@stencil/core';
+import 'bootstrap.native/dist/bootstrap-native-v4';
+declare var window: any;
 
 @Component({
     tag: 'cwc-dropdown',
     styleUrl: 'cwc-dropdown.scss'
 })
 export class StencilComponent {
-
-    @Prop() dropdownPlacement: any = 'top-start';
-    @Prop() triggerOverflow: boolean = true;
-    @Prop() offsetString: string = '';
-
-    @State() openState: boolean = true;
+    btn: Element;
+    content: Element;
 
     @Element() el: HostElement;
 
-    @State() popper: Popper
-    btn: Element
-    content: Element
-
-    componentWillUpdate() {
-        this.popper.scheduleUpdate()
-    }
-
-    @Watch('dropdownPlacement')
-    placementDidChangeHandler(newValue) {
-        this.popper.options.placement = newValue
-    }
-    @Watch('triggerOverflow')
-    overflowDidChangeHandler(newValue) {
-        this.popper.options.modifiers.offset.offset = newValue ?
-            '-10%r, -110%' :
-            ''
-    }
+    @State() openState: boolean = false;
 
     componentDidLoad() {
-        this.btn = this.el.children[0].children[0].children[0].children[0]
-        this.content = this.el.children[0].children[1]
-
-        this.popper = new Popper(this.btn, this.content, {
-            placement: this.dropdownPlacement,
-            removeOnDestroy: true,
-            modifiers: {
-                offset: {
-                    offset: this.triggerOverflow ?
-                        '-10%r, -110%' : ''
-                }
-            }
-        });
-
+        window.BSN.initCallback();
+        this.btn = this.el.children[0].children[0];
+        this.content = this.el.children[0].children[1];
         this.btn.addEventListener('click', () => this.toggle())
         this.close()
     }
 
+    componentWillUpdate() {
+        this.openState
+            ? this.content.classList.add("show")
+            : this.content.classList.remove("show");
+    }
 
     @Method()
     toggle() {
@@ -77,20 +51,12 @@ export class StencilComponent {
     }
 
     render() {
-
         return (
-            <div class="dropup">
-                <div class="trigger" >
-                    <slot name="dropdown-trigger"></slot>
-                </div>
+            <div class="dropdown">
+                <slot name="dropdown-trigger"></slot>
 
-                <div class={'content dropdown-menu ' +
-                    (this.openState ? 'show' : '')}
-                    onClick={() => this.toggle()} >
-                    <slot name="dropdown-content"></slot>
-                </div>
+                <slot name="dropdown-menu"></slot>
             </div >
         )
-
     }
 }

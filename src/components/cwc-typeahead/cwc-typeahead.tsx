@@ -51,18 +51,18 @@ export class CwcTypeahead {
      * Private functions
     */
     private filter() {
-        if (typeof this.data[0] == 'string') {
+        if (typeof this.data[0] === 'string') {
             return this.filterStringArray(this.data);
         }
 
-        if (typeof this.data[0] == 'object') {
+        if (typeof this.data[0] === 'object') {
             return this.findInComplex(this.data, this.searchKey);
         }
     }
 
     private filterStringArray(data) {
         return filter(data, value => {
-            let v = (typeof value == 'string') ? value : value.index;
+            let v = (typeof value === 'string') ? value : value.index;
 
             return v.toLowerCase().indexOf(this.filterValue.toLowerCase()) >= 0;
         })
@@ -95,7 +95,7 @@ export class CwcTypeahead {
     handleSelect(value, index) {
         let input: HTMLInputElement = document.querySelector(`#${this.idValue} input`)
 
-        let result = typeof this.filtered[index] == 'string' ?
+        let result = typeof this.filtered[index] === 'string' ?
             this.filtered[index] :
             this.filtered[index].data
 
@@ -168,7 +168,7 @@ export class CwcTypeahead {
 
                 {
                     (this.filtered.length > 0) ? (
-                        <div class="card">
+                        <div class="card cwc-typeahead">
                             {(this.template) ? (
                                 <div class="row mx-0" innerHTML={str}></div>
                             ) : (

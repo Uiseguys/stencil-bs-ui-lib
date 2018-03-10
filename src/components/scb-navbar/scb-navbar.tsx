@@ -1,7 +1,8 @@
 import { Component, Element, HostElement, Prop } from '@stencil/core';
 
 @Component({
-    tag: 'scb-navbar'
+    tag: 'scb-navbar',
+    styleUrl: '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 })
 export class ScbNavbar {
     @Element() el: HostElement;
