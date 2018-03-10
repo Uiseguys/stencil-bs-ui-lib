@@ -1,7 +1,10 @@
 import { Component, Prop } from '@stencil/core';
+import 'bootstrap.native/dist/bootstrap-native-v4';
+declare var window: any;
 
 @Component({
-    tag: 'scb-collapse'
+    tag: 'scb-collapse',
+    styleUrl: '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 })
 export class ScbCollapse {
 
@@ -16,6 +19,10 @@ export class ScbCollapse {
         }
     ];
 
+    componentDidLoad() {
+        window.BSN.initCallback();
+    }
+
     render() {
         return (
             <div id={this.collapseid}>
@@ -23,12 +30,12 @@ export class ScbCollapse {
                     <div class="card">
                         <div class="card-header" id={item.cardHeaderId}>
                             <h5 class="mb-0">
-                                <button class="btn btn-link" data-toggle="collapse" data-target={'#' + item.cardBodyId} aria-expanded="true" aria-controls={item.cardBodyId}>
+                                <button class="btn btn-link" data-toggle="collapse" data-target={'#' + item.cardBodyId} data-parent={'#' + this.collapseid} aria-expanded="true" aria-controls={item.cardBodyId}>
                                     {item.cardHeaderContent}
                                 </button>
                             </h5>
                         </div>
-                        <div id={item.cardBodyId} class={{'collapse': true, 'show': item.showOnInit}} aria-labelledby={item.cardHeaderId} data-parent={'#' + this.collapseid}>
+                        <div id={item.cardBodyId} class={{'collapse': true, 'show': item.showOnInit}} role="tabpanel" aria-labelledby={item.cardHeaderId}>
                             <div class="card-body" innerHTML={item.cardBodyContent}>
                             </div>
                         </div>

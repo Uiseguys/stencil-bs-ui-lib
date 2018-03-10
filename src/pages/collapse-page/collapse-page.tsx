@@ -6,22 +6,22 @@ import { Component } from '@stencil/core';
 export class CollapsePage {
     cards: any[] = [
         {
-            cardHeaderId: 'heading#1',
-            cardBodyId: 'collapse#1',
+            cardHeaderId: 'heading1',
+            cardBodyId: 'collapse1',
             cardHeaderContent: 'Card Item #1',
             cardBodyContent: 'Card Body #1',
             showOnInit: true
         },
         {
-            cardHeaderId: 'heading#2',
-            cardBodyId: 'collapse#2',
+            cardHeaderId: 'heading2',
+            cardBodyId: 'collapse2',
             cardHeaderContent: 'Card Item #2',
             cardBodyContent: 'Card Body #2',
             showOnInit: false
         },
         {
-            cardHeaderId: 'heading#3',
-            cardBodyId: 'collapse#3',
+            cardHeaderId: 'heading3',
+            cardBodyId: 'collapse3',
             cardHeaderContent: 'Card Item #3',
             cardBodyContent: 'Card Body #3',
             showOnInit: false
