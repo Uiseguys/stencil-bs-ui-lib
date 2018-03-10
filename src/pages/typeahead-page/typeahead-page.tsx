@@ -55,13 +55,15 @@ export class StencilComponent {
     ]
 
     getTemplate() {
-        return `<div class="card card-18 my-3 mx-3">
+        return `
+            <div class="dropdown-item card card-18 my-3 mx-3">
                 <img class="card-img-top" src="<%=option.visual%>" alt="Card image cap" />
                 <div class="card-body">
-                    <h5 class="card-title capitalized"><%=option.label%></h5>
+                    <h5 class="dropdown-item-label card-title capitalized"><%=option.label%></h5>
                     <button class="btn btn-primary">Select</button>
                 </div>
-            </div>`
+            </div>
+        `
     }
 
     extenderImagePrefix = [
@@ -103,10 +105,12 @@ export class StencilComponent {
     ];
 
     getImagePrefixTemplate() {
-        return `<div class="dropdown-item">
+        return `
+            <div class="dropdown-item">
                 <img src="<%=option.imgPrefix%>" alt="Card image cap" />
-                <%=option.label%>
-            </div>`
+                <span class="dropdown-item-label"><%=option.label%></span>
+            </div>
+        `
     }
 
     @State() result;
@@ -120,7 +124,7 @@ export class StencilComponent {
         return [
             <p class="my-3 mx-3">
                 <h3>Simple String[] data demo!</h3>
-                <cwc-typeahead data={this.data}></cwc-typeahead>
+                <cwc-typeahead data={this.data} highlight={true}></cwc-typeahead>
             </p>,
 
             <p class="my-3 mx-3">
@@ -128,33 +132,39 @@ export class StencilComponent {
                 <cwc-typeahead
                     data={this.complex}
                     searchKey={this.searchString}
+                    highlight={true}
                     placeholder="Search something e.g. 'Argentina'">
                 </cwc-typeahead>
             </p>,
 
-            <p class="my-3 mx-3">
-                <h3>Complex Object[] with template demo!</h3>
-                <cwc-typeahead
-                    data={this.myOptions}
-                    itemAs='option'
-                    searchKey='label'
-                    template={this.getTemplate()}
-                    highlight={true}
-                    placeholder="Search something e.g. 'The'">
-                </cwc-typeahead>
-            </p>,
+            <div class="jumbotron">
+                <p>Add class 'dropdown-item' to the top parent element in the template in order for the callback function to work.</p>
+                <p>Add class 'dropdown-item-label' on the element of which text you want to appear in the input field after selection.</p>
 
-            <p class="my-3 mx-3">
-                <h3>Autocomplete extender with image prefix</h3>
-                <cwc-typeahead
-                    data={this.extenderImagePrefix}
-                    itemAs='option'
-                    searchKey='label'
-                    template={this.getImagePrefixTemplate()}
-                    highlight={true}
-                    placeholder="Search country that starts with 'G'">
-                </cwc-typeahead>
-            </p>,
+                <p class="my-3 mx-3">
+                    <h3>Template demo!</h3>
+                    <cwc-typeahead
+                        data={this.myOptions}
+                        itemAs='option'
+                        searchKey='label'
+                        template={this.getTemplate()}
+                        highlight={true}
+                        placeholder="Search something e.g. 'The'">
+                    </cwc-typeahead>
+                </p>
+
+                <p class="my-3 mx-3">
+                    <h3>Template demo with image prefix!</h3>
+                    <cwc-typeahead
+                        data={this.extenderImagePrefix}
+                        itemAs='option'
+                        searchKey='label'
+                        template={this.getImagePrefixTemplate()}
+                        highlight={true}
+                        placeholder="Search country that starts with 'G'">
+                    </cwc-typeahead>
+                </p>
+            </div>,
 
             <p class="my-3 mx-3">
                 <h3>Google Autocomplete</h3>

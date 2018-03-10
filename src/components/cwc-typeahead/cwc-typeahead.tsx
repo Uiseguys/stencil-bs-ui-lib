@@ -3,14 +3,12 @@ import template from 'lodash/template';
 import filter from 'lodash/filter'
 import get from 'lodash/get';
 
-
-
 @Component({
     tag: 'cwc-typeahead',
-    styleUrl: 'cwc-typeahead.scss'
+    styleUrl: '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 })
 export class CwcTypeahead {
-    date = '' + Date.now();
+    date = '' + (new Date().valueOf() + Math.floor(Math.random() * Math.floor(9999999)));
 
     @Prop() minSearchLength: number = 1;
     @Prop() googleAutocomplete: boolean = false;
@@ -44,6 +42,15 @@ export class CwcTypeahead {
             if (this.filtered.length > 0) {
                 this.optionsShown = true
             }
+        }
+    }
+
+    componentDidUpdate() {
+        let items: any = document.querySelectorAll("div.dropdown-item");
+        for (let i = 0; i < items.length; i++) {
+            items[i].addEventListener('click', (e: any) => {
+                this.handleSelectFromTemplate(e, i);
+            });
         }
     }
 
@@ -92,7 +99,12 @@ export class CwcTypeahead {
         }
     }
 
+    handleSelectFromTemplate(e: any, i: number) {
+        this.handleSelect(e.currentTarget.querySelector('.dropdown-item-label').innerText, i);
+    }
+
     handleSelect(value, index) {
+        if (!this.filtered.length) return;
         let input: HTMLInputElement = document.querySelector(`#${this.idValue} input`)
 
         let result = typeof this.filtered[index] === 'string' ?
@@ -137,25 +149,21 @@ export class CwcTypeahead {
         if (!this.googleAutocomplete) {
             if (this.template) {
                 let tmpl = template(this.template);
-
-                if (this.highlight) {
-                    this.filtered.map((val) => {
-                        val.data.label = val.data.label.replace(boldRegx, '<b>$1</b>');
-                    })
-                }
-
                 this.filtered.map((val) => {
+                    if (this.highlight) val.data.label = val.data.label.replace(boldRegx, '<b>$1</b>');
+
                     let templateString = tmpl({ [this.itemAs]: val.data });
                     str += templateString;
-                    val.data.label = val.data.label.replace(noBoldRegx, '');
+
+                    if (this.highlight) val.data.label = val.data.label.replace(noBoldRegx, '');
                 });
             } else {
                 list = this.filtered.map((val, i) =>
-                    <option class={"dropdown-item".concat((this.focusIndex == i + 1) ? ' active' : '')}
-                    onClick={(e: any) => this.handleSelect(e.target.value, i)}
-                    onMouseEnter={() => this.handleHover(i + 1)}
-                    innerHTML={typeof val == 'string' ? val : val.index}
-                    ></option>
+                    <div class={"dropdown-item".concat((this.focusIndex == i + 1) ? ' active' : '')}
+                        onClick={(e: any) => this.handleSelect(e.target.innerText, i)}
+                        onMouseEnter={() => this.handleHover(i + 1)}
+                        innerHTML={typeof val == 'string' ? val : val.index}>
+                    </div>
                 )
             }
         }
@@ -215,7 +223,7 @@ export class CwcTypeahead {
     handleEnter(ev) {
         console.log(ev);
         if (this.focusIndex > 0) {
-            this.handleSelect(document.querySelectorAll(`#${this.idValue} option`)[this.focusIndex - 1].textContent, this.focusIndex - 1)
+            this.handleSelect(document.querySelectorAll(`#${this.idValue} .dropdown-item`)[this.focusIndex - 1].textContent, this.focusIndex - 1)
         }
     }
 }
