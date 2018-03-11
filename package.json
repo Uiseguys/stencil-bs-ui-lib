@@ -39,7 +39,7 @@
     "http-server": "^0.11.1",
     "jest": "^21.2.1",
     "lodash": "^4.17.4",
-    "moment": "^2.20.1",
+    "moment": "^2.21.0",
     "pikaday": "^1.7.0",
     "popper.js": "^1.12.9",
     "tooltip.js": "^1.1.7",
