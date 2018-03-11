@@ -6,8 +6,8 @@ import moment_ from 'moment';
     styleUrl: '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 })
 export class CwcMoment {
-    @Prop() date: string = '2016-01-10 14:30';
-    @Prop() format: string = 'LLLL';
+    @Prop() date: string;
+    @Prop() format: string;
 
     @State() momentNow: string;
 

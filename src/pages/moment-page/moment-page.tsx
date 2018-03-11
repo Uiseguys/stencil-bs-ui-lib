@@ -51,13 +51,13 @@ export class MomentPage {
                                             <tr>
                                                 <td>date</td>
                                                 <td>String</td>
-                                                <td>'2016-01-10 14:30'</td>
+                                                <td>''</td>
                                                 <td>Date parameter</td>
                                             </tr>
                                             <tr>
                                                 <td>format</td>
                                                 <td>String</td>
-                                                <td>'LLLL'</td>
+                                                <td>''</td>
                                                 <td>
                                                     Format the Date e.g:<br />
                                                     <strong>LTS</strong>  : 'h:mm:ss A'<br />
