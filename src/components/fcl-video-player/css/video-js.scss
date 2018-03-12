@@ -1,39 +1,115 @@
-@import "variables";
-@import "private-variables";
-@import "utilities";
-// @import "../../../../node_modules/videojs-font/scss/icons";
-@import "components/layout";
-@import "components/big-play";
-@import "components/button";
-@import "components/close-button";
-@import "components/modal-dialog";
-@import "components/menu/menu";
-@import "components/menu/menu-popup";
-@import "components/menu/menu-inline";
-@import "components/control-bar";
-@import "components/control";
-@import "components/control-spacer";
-@import "components/progress";
-@import "components/slider";
-@import "components/volume";
-@import "components/poster";
-@import "components/live";
-@import "components/time";
-@import "components/play-pause";
-@import "components/text-track";
-@import "components/fullscreen";
-@import "components/playback-rate";
-@import "components/error";
-@import "components/loading";
-@import "components/captions";
-@import "components/chapters";
-@import "components/descriptions";
-@import "components/subtitles";
-@import "components/subs-caps";
-@import "components/audio";
-@import "components/adaptive";
-@import "components/captions-settings";
-@import "print";
+.vjs-thumbnail-holder {
+  position: absolute;
+  left: -1000px;
+}
+
+/* the thumbnail image itself */
+.vjs-thumbnail {
+  position: absolute;
+  left: 0;
+  bottom: 1.3em;
+  opacity: 0;
+  transition: opacity .2s ease;
+  -webkit-transition: opacity .2s ease;
+  -moz-transition: opacity .2s ease;
+  -mz-transition: opacity .2s ease;
+}
+
+/* fade in the thumbnail when hovering over the progress bar */
+/* .fake-active is needed for Android only. It's removed on touchend/touchecancel */
+.vjs-progress-control:hover .vjs-thumbnail,
+.vjs-progress-control.fake-active .vjs-thumbnail,
+.vjs-progress-control:active .vjs-thumbnail {
+  opacity: 1;
+}
+
+/* ... but hide the thumbnail when hovering directly over it */
+.vjs-progress-control:hover .vjs-thumbnail:hover,
+.vjs-progress-control:active .vjs-thumbnail:active {
+  opacity: 0;
+}
+
+.vjs-resize-manager {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  visibility: hidden;
+}
+.vjs-modal-dialog.vjs-text-track-settings {
+  background-color: #2B333F;
+  background-color: rgba(43, 51, 63, 0.75);
+  color: #fff;
+  height: 70%;
+}
+.vjs-text-track-settings .vjs-modal-dialog-content {
+  display: table;
+}
+
+.vjs-text-track-settings .vjs-track-settings-colors,
+.vjs-text-track-settings .vjs-track-settings-font,
+.vjs-text-track-settings .vjs-track-settings-controls {
+  display: table-cell;
+}
+
+.vjs-text-track-settings .vjs-track-settings-controls {
+  text-align: right;
+  vertical-align: bottom;
+}
+
+.vjs-text-track-settings fieldset {
+  margin: 5px;
+  padding: 3px;
+  border: none;
+}
+
+.vjs-text-track-settings fieldset span {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.vjs-text-track-settings legend {
+  color: #fff;
+  margin: 0 0 5px 0;
+}
+
+.vjs-text-track-settings .vjs-label {
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  display: block;
+  margin: 0 0 5px 0;
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+
+.vjs-track-settings-controls button:focus,
+.vjs-track-settings-controls button:active {
+  outline-style: solid;
+  outline-width: medium;
+  background-image: linear-gradient(0deg, #fff 88%, #73859f 100%);
+}
+
+.vjs-track-settings-controls button:hover {
+  color: rgba(43, 51, 63, 0.75);
+}
+
+.vjs-track-settings-controls button {
+  background-color: #fff;
+  background-image: linear-gradient(-180deg, #fff 88%, #73859f 100%);
+  color: #2B333F;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.vjs-track-settings-controls .vjs-default-button {
+  margin-right: 1em;
+}
 
 @function char($character-code) {
   @if function-exists("selector-append") {
@@ -1878,76 +1954,41 @@ video::-webkit-media-text-track-display {
   display: none;
 }
 
-.vjs-modal-dialog.vjs-text-track-settings {
-  background-color: #2B333F;
-  background-color: rgba(43, 51, 63, 0.75);
-  color: #fff;
-  height: 70%;
-}
 
-.vjs-text-track-settings .vjs-modal-dialog-content {
-  display: table;
-}
 
-.vjs-text-track-settings .vjs-track-settings-colors,
-.vjs-text-track-settings .vjs-track-settings-font,
-.vjs-text-track-settings .vjs-track-settings-controls {
-  display: table-cell;
-}
-
-.vjs-text-track-settings .vjs-track-settings-controls {
-  text-align: right;
-  vertical-align: bottom;
-}
-
-.vjs-text-track-settings fieldset {
-  margin: 5px;
-  padding: 3px;
-  border: none;
-}
-
-.vjs-text-track-settings fieldset span {
-  display: inline-block;
-  margin-left: 5px;
-}
-
-.vjs-text-track-settings legend {
-  color: #fff;
-  margin: 0 0 5px 0;
-}
-
-.vjs-text-track-settings .vjs-label {
-  position: absolute;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
-  display: block;
-  margin: 0 0 5px 0;
-  padding: 0;
-  border: 0;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-}
-
-.vjs-track-settings-controls button:focus,
-.vjs-track-settings-controls button:active {
-  outline-style: solid;
-  outline-width: medium;
-  background-image: linear-gradient(0deg, #fff 88%, #73859f 100%);
-}
-
-.vjs-track-settings-controls button:hover {
-  color: rgba(43, 51, 63, 0.75);
-}
-
-.vjs-track-settings-controls button {
-  background-color: #fff;
-  background-image: linear-gradient(-180deg, #fff 88%, #73859f 100%);
-  color: #2B333F;
-  cursor: pointer;
-  border-radius: 2px;
-}
-
-.vjs-track-settings-controls .vjs-default-button {
-  margin-right: 1em;
-}
+@import "variables";
+@import "private-variables";
+@import "utilities";
+// @import "../../../../node_modules/videojs-font/scss/icons";
+@import "components/layout";
+@import "components/big-play";
+@import "components/button";
+@import "components/close-button";
+@import "components/modal-dialog";
+@import "components/menu/menu";
+@import "components/menu/menu-popup";
+@import "components/menu/menu-inline";
+@import "components/control-bar";
+@import "components/control";
+@import "components/control-spacer";
+@import "components/progress";
+@import "components/slider";
+@import "components/volume";
+@import "components/poster";
+@import "components/live";
+@import "components/time";
+@import "components/play-pause";
+@import "components/text-track";
+@import "components/fullscreen";
+@import "components/playback-rate";
+@import "components/error";
+@import "components/loading";
+@import "components/captions";
+@import "components/chapters";
+@import "components/descriptions";
+@import "components/subtitles";
+@import "components/subs-caps";
+@import "components/audio";
+@import "components/adaptive";
+@import "components/captions-settings";
+@import "print";
