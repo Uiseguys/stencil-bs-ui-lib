@@ -48,9 +48,7 @@ declare global {
   }
   namespace JSXElements {
     export interface CwcDropdownAttributes extends HTMLAttributes {
-      dropdownPlacement?: any;
-      offsetString?: string;
-      triggerOverflow?: boolean;
+      
     }
   }
 }
@@ -294,10 +292,14 @@ declare global {
   namespace JSXElements {
     export interface CwcTypeaheadAttributes extends HTMLAttributes {
       data?: any[];
+      googleAutocomplete?: boolean;
+      highlight?: boolean;
       idValue?: string;
+      itemAs?: string;
       minSearchLength?: number;
       placeholder?: string;
       searchKey?: string;
+      template?: string;
     }
   }
 }
