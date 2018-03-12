@@ -11,8 +11,8 @@ export class ScbCollapse {
     @Prop() collapseid: string = 'collpaseComponent';
     @Prop() items: any[] = [
         {
-            cardHeaderId: 'heading#1',
-            cardBodyId: 'collapse#1',
+            cardHeaderId: 'heading1',
+            cardBodyId: 'collapse1',
             cardHeaderContent: 'Card Item #1',
             cardBodyContent: 'Card Body #1',
             showOnInit: true
