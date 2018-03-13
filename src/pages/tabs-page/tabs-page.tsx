@@ -22,10 +22,10 @@ export class TabsPage {
                                         <stc-tabs> 
                                             <stc-tab-header slot="header" name="tab1">Tab 1</stc-tab-header>
                                             <stc-tab-header slot="header" name="tab2">Tab 2</stc-tab-header>
-                                            <stc-tab-content slot="content" name="tab1">
+                                            <stc-tab-content class="mx-1" slot="content" name="tab1">
                                                 Content 1
                                             </stc-tab-content>
-                                            <stc-tab-content slot="content" name="tab2">
+                                            <stc-tab-content class="mx-1" slot="content" name="tab2">
                                                 Content 2
                                             </stc-tab-content>
                                         </stc-tabs>
@@ -37,16 +37,16 @@ export class TabsPage {
                                 <div class="col-lg-6">
                                     <pre><code class="lang-tsx">
                                     <span>&lt;stc-tabs&gt;</span><br />
-                                    <span class="hljs-built_in ml-4">&lt;stc-tab-header slot="header" name="tab1"&gt;Tab 1&lt;stc-tab-header&gt;</span><br />
-                                    <span class="hljs-built_in ml-4">&lt;stc-tab-header slot="header" name="tab2"&gt;Tab 2&lt;stc-tab-header&gt;</span><br />
+                                    <span class="hljs-built_in ml-4">&lt;stc-tab-header slot="header" name="tab1"&gt;Tab 1&lt;/stc-tab-header&gt;</span><br />
+                                    <span class="hljs-built_in ml-4">&lt;stc-tab-header slot="header" name="tab2"&gt;Tab 2&lt;/stc-tab-header&gt;</span><br />
                                     <br />
                                     <span class="hljs-built_in ml-4">&lt;stc-tab-content slot="content" name="tab1"&gt;</span><br />
                                     <span class="hljs-built_in ml-4">Content 1</span><br />
-                                    <span class="hljs-built_in ml-4">&lt;stc-tab-content&gt;</span><br />
+                                    <span class="hljs-built_in ml-4">&lt;/stc-tab-content&gt;</span><br />
                                     <br />
                                     <span class="hljs-built_in ml-4">&lt;stc-tab-content slot="content" name="tab2"&gt;</span><br />
                                     <span class="hljs-built_in ml-4">Content 2</span><br />
-                                    <span class="hljs-built_in ml-4">&lt;stc-tab-content&gt;</span><br />
+                                    <span class="hljs-built_in ml-4">&lt;/stc-tab-content&gt;</span><br />
                                     <br />                                    
                                     <span>&lt;/stc-tabs&gt;</span>
                                     </code></pre>
