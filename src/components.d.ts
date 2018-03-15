@@ -231,6 +231,46 @@ declare global {
 
 
 import {
+  StencilComponent as CwcSchedule
+} from './components/cwc-schedule/cwc-schedule';
+
+declare global {
+  interface HTMLCwcScheduleElement extends CwcSchedule, HTMLStencilElement {
+  }
+  var HTMLCwcScheduleElement: {
+    prototype: HTMLCwcScheduleElement;
+    new (): HTMLCwcScheduleElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-schedule": HTMLCwcScheduleElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-schedule": HTMLCwcScheduleElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-schedule": JSXElements.CwcScheduleAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcScheduleAttributes extends HTMLAttributes {
+      aspectRatio?: number;
+      defaultViews?: string;
+      editable?: boolean;
+      events?: any[];
+      header?: any;
+      height?: string;
+      now?: string;
+      resourceLabelText?: string;
+      resources?: any[];
+      scrollTime?: string;
+      views?: any;
+    }
+  }
+}
+
+
+import {
   CwcTag as CwcTag
 } from './components/cwc-tag/cwc-tag';
 
@@ -294,10 +334,14 @@ declare global {
   namespace JSXElements {
     export interface CwcTypeaheadAttributes extends HTMLAttributes {
       data?: any[];
+      googleAutocomplete?: boolean;
+      highlight?: boolean;
       idValue?: string;
+      itemAs?: string;
       minSearchLength?: number;
       placeholder?: string;
       searchKey?: string;
+      template?: string;
     }
   }
 }
@@ -1192,6 +1236,36 @@ declare global {
   }
   namespace JSXElements {
     export interface ProgressBarPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  SchedulePage as SchedulePage
+} from './pages/schedule-page/schedule-page';
+
+declare global {
+  interface HTMLSchedulePageElement extends SchedulePage, HTMLStencilElement {
+  }
+  var HTMLSchedulePageElement: {
+    prototype: HTMLSchedulePageElement;
+    new (): HTMLSchedulePageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "schedule-page": HTMLSchedulePageElement;
+  }
+  interface ElementTagNameMap {
+    "schedule-page": HTMLSchedulePageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "schedule-page": JSXElements.SchedulePageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchedulePageAttributes extends HTMLAttributes {
       
     }
   }

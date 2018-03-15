@@ -123,7 +123,14 @@ export class StencilBootstrapDemo {
             cardHeaderContent: 'Typeahead Component',
             cardBodyContent: '<typeahead-page></list-page>',
             showOnInit: false
-        }
+        },
+        {
+            cardHeaderId: 'scheduleHeaderId',
+            cardBodyId: 'scheduleCollapse',
+            cardHeaderContent: 'Schedule Component',
+            cardBodyContent: '<schedule-page></schedule-page>',
+            showOnInit: false
+        },
     ];
 
     render() {
