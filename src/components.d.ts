@@ -229,6 +229,46 @@ declare global {
 
 
 import {
+  StencilComponent as CwcSchedule
+} from './components/cwc-schedule/cwc-schedule';
+
+declare global {
+  interface HTMLCwcScheduleElement extends CwcSchedule, HTMLStencilElement {
+  }
+  var HTMLCwcScheduleElement: {
+    prototype: HTMLCwcScheduleElement;
+    new (): HTMLCwcScheduleElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-schedule": HTMLCwcScheduleElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-schedule": HTMLCwcScheduleElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-schedule": JSXElements.CwcScheduleAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcScheduleAttributes extends HTMLAttributes {
+      aspectRatio?: number;
+      defaultViews?: string;
+      editable?: boolean;
+      events?: any[];
+      header?: any;
+      height?: string;
+      now?: string;
+      resourceLabelText?: string;
+      resources?: any[];
+      scrollTime?: string;
+      views?: any;
+    }
+  }
+}
+
+
+import {
   CwcTag as CwcTag
 } from './components/cwc-tag/cwc-tag';
 
@@ -781,6 +821,96 @@ declare global {
 
 
 import {
+  StcTabContent as StcTabContent
+} from './components/stc-tabs/tab-content';
+
+declare global {
+  interface HTMLStcTabContentElement extends StcTabContent, HTMLStencilElement {
+  }
+  var HTMLStcTabContentElement: {
+    prototype: HTMLStcTabContentElement;
+    new (): HTMLStcTabContentElement;
+  };
+  interface HTMLElementTagNameMap {
+    "stc-tab-content": HTMLStcTabContentElement;
+  }
+  interface ElementTagNameMap {
+    "stc-tab-content": HTMLStcTabContentElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "stc-tab-content": JSXElements.StcTabContentAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface StcTabContentAttributes extends HTMLAttributes {
+      name?: string;
+    }
+  }
+}
+
+
+import {
+  StcTabHeader as StcTabHeader
+} from './components/stc-tabs/tab-header';
+
+declare global {
+  interface HTMLStcTabHeaderElement extends StcTabHeader, HTMLStencilElement {
+  }
+  var HTMLStcTabHeaderElement: {
+    prototype: HTMLStcTabHeaderElement;
+    new (): HTMLStcTabHeaderElement;
+  };
+  interface HTMLElementTagNameMap {
+    "stc-tab-header": HTMLStcTabHeaderElement;
+  }
+  interface ElementTagNameMap {
+    "stc-tab-header": HTMLStcTabHeaderElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "stc-tab-header": JSXElements.StcTabHeaderAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface StcTabHeaderAttributes extends HTMLAttributes {
+      name?: string;
+    }
+  }
+}
+
+
+import {
+  StcTabs as StcTabs
+} from './components/stc-tabs/tabs';
+
+declare global {
+  interface HTMLStcTabsElement extends StcTabs, HTMLStencilElement {
+  }
+  var HTMLStcTabsElement: {
+    prototype: HTMLStcTabsElement;
+    new (): HTMLStcTabsElement;
+  };
+  interface HTMLElementTagNameMap {
+    "stc-tabs": HTMLStcTabsElement;
+  }
+  interface ElementTagNameMap {
+    "stc-tabs": HTMLStcTabsElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "stc-tabs": JSXElements.StcTabsAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface StcTabsAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
   AlertsPage as AlertsPage
 } from './pages/alerts-page/alerts-page';
 
@@ -1201,6 +1331,36 @@ declare global {
 
 
 import {
+  SchedulePage as SchedulePage
+} from './pages/schedule-page/schedule-page';
+
+declare global {
+  interface HTMLSchedulePageElement extends SchedulePage, HTMLStencilElement {
+  }
+  var HTMLSchedulePageElement: {
+    prototype: HTMLSchedulePageElement;
+    new (): HTMLSchedulePageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "schedule-page": HTMLSchedulePageElement;
+  }
+  interface ElementTagNameMap {
+    "schedule-page": HTMLSchedulePageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "schedule-page": JSXElements.SchedulePageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchedulePageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
   StencilBootstrapDemo as StencilBootstrapDemo
 } from './pages/stencil-bootstrap-demo/stencil-bootstrap-demo';
 
@@ -1224,6 +1384,36 @@ declare global {
   }
   namespace JSXElements {
     export interface StencilBootstrapDemoAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  TabsPage as TabsPage
+} from './pages/tabs-page/tabs-page';
+
+declare global {
+  interface HTMLTabsPageElement extends TabsPage, HTMLStencilElement {
+  }
+  var HTMLTabsPageElement: {
+    prototype: HTMLTabsPageElement;
+    new (): HTMLTabsPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "tabs-page": HTMLTabsPageElement;
+  }
+  interface ElementTagNameMap {
+    "tabs-page": HTMLTabsPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "tabs-page": JSXElements.TabsPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface TabsPageAttributes extends HTMLAttributes {
       
     }
   }

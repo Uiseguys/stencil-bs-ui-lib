@@ -85,11 +85,11 @@ export class CollapsePage {
                                                 <td>
                                                     <pre><code class="lang-tsx">
                                                         &#91;&#123;<br />
-                                                            cardHeaderId: 'heading#1',<br />
-                                                            cardBodyId: 'collapse#1',<br />
-                                                            cardHeaderContent: 'Card Item #1',<br />
-                                                            cardBodyContent: 'Card Body #1',<br />
-                                                            showOnInit: true<br />
+                                                        cardHeaderId: 'heading#1',<br />
+                                                        cardBodyId: 'collapse#1',<br />
+                                                        cardHeaderContent: 'Card Item #1',<br />
+                                                        cardBodyContent: 'Card Body #1',<br />
+                                                        showOnInit: true<br />
                                                         &#125;&#93;
                                                     </code></pre>
                                                 </td>
