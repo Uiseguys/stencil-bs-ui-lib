@@ -254,7 +254,17 @@ declare global {
   }
   namespace JSXElements {
     export interface CwcScheduleAttributes extends HTMLAttributes {
-      
+      aspectRatio?: number;
+      defaultViews?: string;
+      editable?: boolean;
+      events?: any[];
+      header?: any;
+      height?: string;
+      now?: string;
+      resourceLabelText?: string;
+      resources?: any[];
+      scrollTime?: string;
+      views?: any;
     }
   }
 }
@@ -1226,6 +1236,36 @@ declare global {
   }
   namespace JSXElements {
     export interface ProgressBarPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  SchedulePage as SchedulePage
+} from './pages/schedule-page/schedule-page';
+
+declare global {
+  interface HTMLSchedulePageElement extends SchedulePage, HTMLStencilElement {
+  }
+  var HTMLSchedulePageElement: {
+    prototype: HTMLSchedulePageElement;
+    new (): HTMLSchedulePageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "schedule-page": HTMLSchedulePageElement;
+  }
+  interface ElementTagNameMap {
+    "schedule-page": HTMLSchedulePageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "schedule-page": JSXElements.SchedulePageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchedulePageAttributes extends HTMLAttributes {
       
     }
   }
