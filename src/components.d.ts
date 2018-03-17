@@ -739,11 +739,13 @@ declare global {
       backdrop?: any;
       btntype?: string;
       centered?: boolean;
+      customId?: string;
       keyboard?: boolean;
       modalContent?: string;
       modalfocus?: boolean;
       modalTitle?: string;
       show?: boolean;
+      showButton?: boolean;
       size?: string;
     }
   }
