@@ -30,6 +30,7 @@
         "@stencil/dev-server": "latest",
         "@stencil/sass": "0.0.2",
         "@stencil/utils": "latest",
+        "@types/bootstrap": "^4.0.1",
         "@types/jest": "^21.1.1",
         "@types/jquery": "^3.3.1",
         "@types/video.js": "^6.2.3",

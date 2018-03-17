@@ -36,7 +36,8 @@ export class SchedulePage {
          */
 
         // $('#scheduleCollapse').on('shown.bs.collapse', ()=>{})
-        $('#scheduleHeaderId').on('click', () => {
+        const scheduleHeader: any = $('#scheduleHeaderId')
+        scheduleHeader.on('click', () => {
             const sch: any = document.getElementById('scheduler-component')
             sch.rerender()
         })

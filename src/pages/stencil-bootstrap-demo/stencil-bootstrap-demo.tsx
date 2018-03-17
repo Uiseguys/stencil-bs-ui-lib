@@ -31,7 +31,7 @@ export class StencilBootstrapDemo {
             cardBodyId: 'modalCollapse',
             cardHeaderContent: 'Modal Component',
             cardBodyContent: '<modal-page></modal-page>',
-            showOnInit: false
+            showOnInit: true
         },
         {
             cardHeaderId: 'videoHeaderId',
@@ -102,7 +102,7 @@ export class StencilBootstrapDemo {
             cardHeaderContent: 'Tabs Component',
             cardBodyContent: '<tabs-page></tabs-page>',
             showOnInit: false
-        },        
+        },
         {
             cardHeaderId: 'tagHeaderId',
             cardBodyId: 'tagCollapse',
