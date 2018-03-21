@@ -1,7 +1,7 @@
 {
     "name": "@ui-guys/stencil-bs-ui-lib",
     "private": false,
-    "version": "0.3.56",
+    "version": "0.3.65",
     "description": "Bootstrap componentes built with StencilJS",
     "engines": {
         "node": ">=6.11.0"
@@ -20,7 +20,6 @@
         "start": "npm run dev",
         "test": "jest --no-cache",
         "test.watch": "jest --watch --no-cache",
-        "publish": "npm publish --dry-run --access public",
         "heroku-postbuild": "npm run build",
         "serve:heroku": "http-server www"
     },
@@ -32,16 +31,13 @@
         "@stencil/utils": "latest",
         "@types/bootstrap": "^4.0.1",
         "@types/jest": "^21.1.1",
-        "@types/jquery": "^3.3.1",
         "@types/video.js": "^6.2.3",
         "@ui-guys/stencil-markdown": "^1.0.0",
         "ajv": "^6.1.1",
         "bootstrap": "^4.0.0",
         "bootstrap.native": "^2.0.21",
-        "fullcalendar-scheduler": "^1.9.3",
         "http-server": "^0.11.1",
         "jest": "^21.2.1",
-        "jquery": "^3.3.1",
         "lodash": "^4.17.4",
         "moment": "^2.20.1",
         "pikaday": "^1.7.0",

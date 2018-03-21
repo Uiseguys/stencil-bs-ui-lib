@@ -12,5 +12,5 @@ https://atlassian.design/guidelines/product/overview
 ## TO Publish on NPM
 
 run command `npm run publish`
-before running this command on terminal make sure you are login into npm account
+before running this command on terminal make sure you are logged in to your npm account
 for that run `npm login` form the terminal and provide your credential to do the login authentication

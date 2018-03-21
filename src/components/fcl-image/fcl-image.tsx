@@ -16,35 +16,32 @@ export class FclImage {
 
   @Element() el: HostElement;
 
-  handleClick() {
+  handleError() {
     this.isError = true;
-    console.log( "Error image load" );
+    console.log( "Error image load in image component" );
     this.el.getElementsByTagName('img')[0].src = this.brokenUrl;
  }
 
   render() {
 
-     if( this.isError != true){
+     if (this.isError) {
         return (
-          // <h1>Image Test</h1>
-          <img class="fcl-image-custom" src={this.src}  onError={ () => this.handleClick()}></img>
+          <img class="fcl-image-custom" src={this.brokenUrl}></img>
         );
-      }else{
+      } else {
         return (
-          // <h1>Image Test</h1>
-          <img src={this.src}  onError={ () => this.handleClick()}></img>
+          <img src={this.src}  onError={ () => this.handleError()}></img>
         );
       }
 
   }
 
   componentDidLoad() {
-
+      console.log('component did load in image component');
   }
 
   componentWillUpdate() {
-
-
+      console.log('component will update image component');
   }
 
 }

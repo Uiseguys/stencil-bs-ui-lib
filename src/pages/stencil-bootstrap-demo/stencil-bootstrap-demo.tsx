@@ -27,13 +27,6 @@ export class StencilBootstrapDemo {
             showOnInit: false
         },
         {
-            cardHeaderId: 'modalHeading',
-            cardBodyId: 'modalCollapse',
-            cardHeaderContent: 'Modal Component',
-            cardBodyContent: '<modal-page></modal-page>',
-            showOnInit: true
-        },
-        {
             cardHeaderId: 'videoHeaderId',
             cardBodyId: 'videoCollapse',
             cardHeaderContent: 'Video Component',
@@ -129,13 +122,6 @@ export class StencilBootstrapDemo {
             cardBodyId: 'typeaHeadCollapse',
             cardHeaderContent: 'Typeahead Component',
             cardBodyContent: '<typeahead-page></typeahead-page>',
-            showOnInit: false
-        },
-        {
-            cardHeaderId: 'scheduleHeaderId',
-            cardBodyId: 'scheduleCollapse',
-            cardHeaderContent: 'Schedule Component',
-            cardBodyContent: '<schedule-page></schedule-page>',
             showOnInit: false
         },
     ];
