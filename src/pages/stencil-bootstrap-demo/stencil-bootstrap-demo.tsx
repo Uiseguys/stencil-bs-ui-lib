@@ -34,13 +34,6 @@ export class StencilBootstrapDemo {
             showOnInit: false
         },
         {
-            cardHeaderId: 'modalHeading',
-            cardBodyId: 'modalCollapse',
-            cardHeaderContent: 'Modal Component',
-            cardBodyContent: '<modal-page></modal-page>',
-            showOnInit: false
-        },
-        {
             cardHeaderId: 'videoHeaderId',
             cardBodyId: 'videoCollapse',
             cardHeaderContent: 'Video Component',
@@ -100,21 +93,28 @@ export class StencilBootstrapDemo {
             cardHeaderId: 'multiselectHeaderId',
             cardBodyId: 'multiselectCollapse',
             cardHeaderContent: 'Multiselect Component',
-            cardBodyContent: '<multiselect-page></list-page>',
+            cardBodyContent: '<multiselect-page></multiselect-page>',
+            showOnInit: false
+        },
+        {
+            cardHeaderId: 'tabsHeaderId',
+            cardBodyId: 'tabsCollapse',
+            cardHeaderContent: 'Tabs Component',
+            cardBodyContent: '<tabs-page></tabs-page>',
             showOnInit: false
         },
         {
             cardHeaderId: 'tagHeaderId',
             cardBodyId: 'tagCollapse',
             cardHeaderContent: 'Tag Component',
-            cardBodyContent: '<tag-page></list-page>',
+            cardBodyContent: '<tag-page></tag-page>',
             showOnInit: false
         },
         {
             cardHeaderId: 'markdownHeaderId',
             cardBodyId: 'markdownCollapse',
             cardHeaderContent: 'Markdown Component',
-            cardBodyContent: '<markdown-page></list-page>',
+            cardBodyContent: '<markdown-page></markdown-page>',
             showOnInit: false
         },
         {
@@ -128,9 +128,9 @@ export class StencilBootstrapDemo {
             cardHeaderId: 'typeaHeadHeaderId',
             cardBodyId: 'typeaHeadCollapse',
             cardHeaderContent: 'Typeahead Component',
-            cardBodyContent: '<typeahead-page></list-page>',
+            cardBodyContent: '<typeahead-page></typeahead-page>',
             showOnInit: false
-        }
+        },
     ];
 
     render() {

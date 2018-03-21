@@ -48,9 +48,7 @@ declare global {
   }
   namespace JSXElements {
     export interface CwcDropdownAttributes extends HTMLAttributes {
-      dropdownPlacement?: any;
-      offsetString?: string;
-      triggerOverflow?: boolean;
+      
     }
   }
 }
@@ -294,10 +292,14 @@ declare global {
   namespace JSXElements {
     export interface CwcTypeaheadAttributes extends HTMLAttributes {
       data?: any[];
+      googleAutocomplete?: boolean;
+      highlight?: boolean;
       idValue?: string;
+      itemAs?: string;
       minSearchLength?: number;
       placeholder?: string;
       searchKey?: string;
+      template?: string;
     }
   }
 }
@@ -670,45 +672,6 @@ declare global {
 
 
 import {
-  ScbModal as ScbModal
-} from './components/scb-modal/scb-modal';
-
-declare global {
-  interface HTMLScbModalElement extends ScbModal, HTMLStencilElement {
-  }
-  var HTMLScbModalElement: {
-    prototype: HTMLScbModalElement;
-    new (): HTMLScbModalElement;
-  };
-  interface HTMLElementTagNameMap {
-    "scb-modal": HTMLScbModalElement;
-  }
-  interface ElementTagNameMap {
-    "scb-modal": HTMLScbModalElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      "scb-modal": JSXElements.ScbModalAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface ScbModalAttributes extends HTMLAttributes {
-      animation?: boolean;
-      backdrop?: any;
-      btntype?: string;
-      centered?: boolean;
-      keyboard?: boolean;
-      modalContent?: string;
-      modalfocus?: boolean;
-      modalTitle?: string;
-      show?: boolean;
-      size?: string;
-    }
-  }
-}
-
-
-import {
   ScbNavbar as ScbNavbar
 } from './components/scb-navbar/scb-navbar';
 
@@ -773,6 +736,96 @@ declare global {
       tooltipTitle?: string;
       trigger?: string;
       type?: string;
+    }
+  }
+}
+
+
+import {
+  StcTabContent as StcTabContent
+} from './components/stc-tabs/tab-content';
+
+declare global {
+  interface HTMLStcTabContentElement extends StcTabContent, HTMLStencilElement {
+  }
+  var HTMLStcTabContentElement: {
+    prototype: HTMLStcTabContentElement;
+    new (): HTMLStcTabContentElement;
+  };
+  interface HTMLElementTagNameMap {
+    "stc-tab-content": HTMLStcTabContentElement;
+  }
+  interface ElementTagNameMap {
+    "stc-tab-content": HTMLStcTabContentElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "stc-tab-content": JSXElements.StcTabContentAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface StcTabContentAttributes extends HTMLAttributes {
+      name?: string;
+    }
+  }
+}
+
+
+import {
+  StcTabHeader as StcTabHeader
+} from './components/stc-tabs/tab-header';
+
+declare global {
+  interface HTMLStcTabHeaderElement extends StcTabHeader, HTMLStencilElement {
+  }
+  var HTMLStcTabHeaderElement: {
+    prototype: HTMLStcTabHeaderElement;
+    new (): HTMLStcTabHeaderElement;
+  };
+  interface HTMLElementTagNameMap {
+    "stc-tab-header": HTMLStcTabHeaderElement;
+  }
+  interface ElementTagNameMap {
+    "stc-tab-header": HTMLStcTabHeaderElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "stc-tab-header": JSXElements.StcTabHeaderAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface StcTabHeaderAttributes extends HTMLAttributes {
+      name?: string;
+    }
+  }
+}
+
+
+import {
+  StcTabs as StcTabs
+} from './components/stc-tabs/tabs';
+
+declare global {
+  interface HTMLStcTabsElement extends StcTabs, HTMLStencilElement {
+  }
+  var HTMLStcTabsElement: {
+    prototype: HTMLStcTabsElement;
+    new (): HTMLStcTabsElement;
+  };
+  interface HTMLElementTagNameMap {
+    "stc-tabs": HTMLStcTabsElement;
+  }
+  interface ElementTagNameMap {
+    "stc-tabs": HTMLStcTabsElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "stc-tabs": JSXElements.StcTabsAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface StcTabsAttributes extends HTMLAttributes {
+      
     }
   }
 }
@@ -1079,36 +1132,6 @@ declare global {
 
 
 import {
-  ModalPage as ModalPage
-} from './pages/modal-page/modal-page';
-
-declare global {
-  interface HTMLModalPageElement extends ModalPage, HTMLStencilElement {
-  }
-  var HTMLModalPageElement: {
-    prototype: HTMLModalPageElement;
-    new (): HTMLModalPageElement;
-  };
-  interface HTMLElementTagNameMap {
-    "modal-page": HTMLModalPageElement;
-  }
-  interface ElementTagNameMap {
-    "modal-page": HTMLModalPageElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      "modal-page": JSXElements.ModalPageAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface ModalPageAttributes extends HTMLAttributes {
-      
-    }
-  }
-}
-
-
-import {
   MultiselectPage as MultiselectPage
 } from './pages/multiselect-page/multiselect-page';
 
@@ -1222,6 +1245,36 @@ declare global {
   }
   namespace JSXElements {
     export interface StencilBootstrapDemoAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  TabsPage as TabsPage
+} from './pages/tabs-page/tabs-page';
+
+declare global {
+  interface HTMLTabsPageElement extends TabsPage, HTMLStencilElement {
+  }
+  var HTMLTabsPageElement: {
+    prototype: HTMLTabsPageElement;
+    new (): HTMLTabsPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "tabs-page": HTMLTabsPageElement;
+  }
+  interface ElementTagNameMap {
+    "tabs-page": HTMLTabsPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "tabs-page": JSXElements.TabsPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface TabsPageAttributes extends HTMLAttributes {
       
     }
   }
