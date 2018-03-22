@@ -17,10 +17,8 @@ export class MomentPage {
                                         <div class="col-lg-12">
                                             <h3>Usage </h3>
                                             <div>
-                                                <cwc-moment
-                                                    date="2016-01-10 14:30"
-                                                    format="LLLL">
-                                                </cwc-moment>
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -30,10 +28,23 @@ export class MomentPage {
                                             <pre><code class="lang-tsx">
                                                 <span>&lt;cwc-moment</span><br />
                                                 <span class="hljs-built_in ml-4">date="2016-01-10 14:30"</span><br />
-                                                <span class="hljs-built_in ml-4">format="LLLL"</span><span>&gt;</span>
+                                                <span class="hljs-built_in ml-4">format="L"</span><span>&gt;</span>
                                                 <br />
                                                 <span>&lt;/cwc-moment&gt;</span>
                                             </code></pre>
+
+                                            outputs: <cwc-moment date="2016-01-10 14:30" format="L"></cwc-moment>
+                                            <br />
+                                            <pre><code class="lang-tsx">
+                                                <span>&lt;cwc-moment</span><br />
+                                                <span class="hljs-built_in ml-4">duration="123412341234123"</span><br />
+                                                <span class="hljs-built_in ml-4">unit="seconds"</span><span>&gt;</span>
+                                                <br />
+                                                <span>&lt;/cwc-moment&gt;</span>
+                                            </code></pre>
+
+                                            outputs: <cwc-moment duration="123412341234123" unit="seconds"></cwc-moment>
+                                            <br />
                                         </div>
                                     </div>
                                 </div>
@@ -67,6 +78,18 @@ export class MomentPage {
                                                     <strong>LLL</strong>  : 'MMMM D, YYYY h:mm A'<br />
                                                     <strong>LLLL</strong> : 'dddd, MMMM D, YYYY h:mm A'<br />
                                                 </td>
+                                            </tr>
+                                            <tr>
+                                                <td>duration</td>
+                                                <td>String</td>
+                                                <td>''</td>
+                                                <td>Duration</td>
+                                            </tr>
+                                            <tr>
+                                                <td>unit</td>
+                                                <td>String</td>
+                                                <td>''</td>
+                                                <td>Duration Unit</td>
                                             </tr>
                                         </tbody>
                                     </table>

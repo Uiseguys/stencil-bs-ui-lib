@@ -5,6 +5,9 @@
  */
 
 import {
+  DurationInputArg2,
+} from 'moment';
+import {
   BootstrapThemeColor,
 } from './common/bootstrap-theme-color.type';
 import {
@@ -182,7 +185,10 @@ declare global {
   namespace JSXElements {
     export interface CwcMomentAttributes extends HTMLAttributes {
       date?: string;
+      duration?: string;
       format?: string;
+      separator?: string;
+      unit?: DurationInputArg2;
     }
   }
 }
