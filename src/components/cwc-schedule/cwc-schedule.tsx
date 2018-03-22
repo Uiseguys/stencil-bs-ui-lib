@@ -1,3 +1,4 @@
+/*
 import { Component, Prop, Method } from '@stencil/core';
 import $ from 'jquery';
 import 'fullcalendar-scheduler';
@@ -80,3 +81,4 @@ export class StencilComponent {
         );
     }
 }
+*/

@@ -13,6 +13,13 @@ export class StencilBootstrapDemo {
             showOnInit: false
         },
         {
+            cardHeaderId: 'momentHeading',
+            cardBodyId: 'momentCollapse',
+            cardHeaderContent: 'Moment Component',
+            cardBodyContent: '<moment-page></moment-page>',
+            showOnInit: false
+        },
+        {
             cardHeaderId: 'collapseHeading',
             cardBodyId: 'collapseCollapse',
             cardHeaderContent: 'Collapse Component',
@@ -25,13 +32,6 @@ export class StencilBootstrapDemo {
             cardHeaderContent: 'Tooltip Component',
             cardBodyContent: '<tooltip-page></tooltip-page>',
             showOnInit: false
-        },
-        {
-            cardHeaderId: 'modalHeading',
-            cardBodyId: 'modalCollapse',
-            cardHeaderContent: 'Modal Component',
-            cardBodyContent: '<modal-page></modal-page>',
-            showOnInit: true
         },
         {
             cardHeaderId: 'videoHeaderId',

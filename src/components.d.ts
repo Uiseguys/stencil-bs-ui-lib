@@ -229,46 +229,6 @@ declare global {
 
 
 import {
-  StencilComponent as CwcSchedule
-} from './components/cwc-schedule/cwc-schedule';
-
-declare global {
-  interface HTMLCwcScheduleElement extends CwcSchedule, HTMLStencilElement {
-  }
-  var HTMLCwcScheduleElement: {
-    prototype: HTMLCwcScheduleElement;
-    new (): HTMLCwcScheduleElement;
-  };
-  interface HTMLElementTagNameMap {
-    "cwc-schedule": HTMLCwcScheduleElement;
-  }
-  interface ElementTagNameMap {
-    "cwc-schedule": HTMLCwcScheduleElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      "cwc-schedule": JSXElements.CwcScheduleAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface CwcScheduleAttributes extends HTMLAttributes {
-      aspectRatio?: number;
-      defaultViews?: string;
-      editable?: boolean;
-      events?: any[];
-      header?: any;
-      height?: string;
-      now?: string;
-      resourceLabelText?: string;
-      resources?: any[];
-      scrollTime?: string;
-      views?: any;
-    }
-  }
-}
-
-
-import {
   CwcTag as CwcTag
 } from './components/cwc-tag/cwc-tag';
 
@@ -747,47 +707,6 @@ declare global {
 
 
 import {
-  ScbModal as ScbModal
-} from './components/scb-modal/scb-modal';
-
-declare global {
-  interface HTMLScbModalElement extends ScbModal, HTMLStencilElement {
-  }
-  var HTMLScbModalElement: {
-    prototype: HTMLScbModalElement;
-    new (): HTMLScbModalElement;
-  };
-  interface HTMLElementTagNameMap {
-    "scb-modal": HTMLScbModalElement;
-  }
-  interface ElementTagNameMap {
-    "scb-modal": HTMLScbModalElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      "scb-modal": JSXElements.ScbModalAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface ScbModalAttributes extends HTMLAttributes {
-      animation?: boolean;
-      backdrop?: any;
-      btntype?: string;
-      centered?: boolean;
-      customId?: string;
-      keyboard?: boolean;
-      modalContent?: string;
-      modalfocus?: boolean;
-      modalTitle?: string;
-      show?: boolean;
-      showButton?: boolean;
-      size?: string;
-    }
-  }
-}
-
-
-import {
   ScbNavbar as ScbNavbar
 } from './components/scb-navbar/scb-navbar';
 
@@ -1248,36 +1167,6 @@ declare global {
 
 
 import {
-  ModalPage as ModalPage
-} from './pages/modal-page/modal-page';
-
-declare global {
-  interface HTMLModalPageElement extends ModalPage, HTMLStencilElement {
-  }
-  var HTMLModalPageElement: {
-    prototype: HTMLModalPageElement;
-    new (): HTMLModalPageElement;
-  };
-  interface HTMLElementTagNameMap {
-    "modal-page": HTMLModalPageElement;
-  }
-  interface ElementTagNameMap {
-    "modal-page": HTMLModalPageElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      "modal-page": JSXElements.ModalPageAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface ModalPageAttributes extends HTMLAttributes {
-      
-    }
-  }
-}
-
-
-import {
   MultiselectPage as MultiselectPage
 } from './pages/multiselect-page/multiselect-page';
 
@@ -1391,36 +1280,6 @@ declare global {
   }
   namespace JSXElements {
     export interface ProgressBarPageAttributes extends HTMLAttributes {
-      
-    }
-  }
-}
-
-
-import {
-  SchedulePage as SchedulePage
-} from './pages/schedule-page/schedule-page';
-
-declare global {
-  interface HTMLSchedulePageElement extends SchedulePage, HTMLStencilElement {
-  }
-  var HTMLSchedulePageElement: {
-    prototype: HTMLSchedulePageElement;
-    new (): HTMLSchedulePageElement;
-  };
-  interface HTMLElementTagNameMap {
-    "schedule-page": HTMLSchedulePageElement;
-  }
-  interface ElementTagNameMap {
-    "schedule-page": HTMLSchedulePageElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      "schedule-page": JSXElements.SchedulePageAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface SchedulePageAttributes extends HTMLAttributes {
       
     }
   }

@@ -1,3 +1,4 @@
+/*
 import { Component, Listen } from '@stencil/core';
 
 @Component({
@@ -30,7 +31,10 @@ export class ModalPage {
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <h3>Usage </h3>
-                                            <p>You can use the 'btntype' attribute to specify the type of the button. See Bootstrap <a href="https://getbootstrap.com/docs/4.0/components/buttons/" target="_blank">Buttons</a> component</p>
+                                            <p>You can use the 'btntype' attribute to specify the type of the button.
+                                            See Bootstrap
+                                            <a href="https://getbootstrap.com/docs/4.0/components/buttons/"
+                                            target="_blank">Buttons</a> component</p>
                                             <div>
                                                 <scb-modal
                                                     id="demo-modal-1"
@@ -120,13 +124,17 @@ export class ModalPage {
                                                 <td><code>size</code></td>
                                                 <td><code>string</code></td>
                                                 <td><code>''</code></td>
-                                                <td>Modals have two optional sizes, available via modifier classes to be placed on a .modal-dialog. These sizes kick in at certain breakpoints to avoid horizontal scrollbars on narrower viewports. Acceptable values: 'large', 'small', ''</td>
+                                                <td>Modals have two optional sizes, available via modifier
+                                                classes to be placed on a .modal-dialog. These sizes kick in at certain
+                                                breakpoints to avoid horizontal scrollbars on narrower viewports.
+                                                Acceptable values: 'large', 'small', ''</td>
                                             </tr>
                                             <tr>
                                                 <td><code>backdrop</code></td>
                                                 <td><code>Boolean | String</code></td>
                                                 <td><code>true</code></td>
-                                                <td>Includes a modal-backdrop element. Alternatively, specify static for a backdrop which doesn't close the modal on click.</td>
+                                                <td>Includes a modal-backdrop element. Alternatively, specify static for
+                                                a backdrop which doesn't close the modal on click.</td>
                                             </tr>
                                             <tr>
                                                 <td><code>keyboard</code></td>
@@ -150,7 +158,8 @@ export class ModalPage {
                                                 <td><code>showButton</code></td>
                                                 <td><code>boolean</code></td>
                                                 <td><code>true</code></td>
-                                                <td>Shows button for modal toggle or not (which can be toggled by methods).</td>
+                                                <td>Shows button for modal toggle or not (which can be toggled by methods).
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><code>customId</code></td>
@@ -171,3 +180,4 @@ export class ModalPage {
         )
     }
 }
+*/

@@ -1,3 +1,5 @@
+/*
+
 import { Component } from '@stencil/core';
 import $ from 'jquery'
 
@@ -30,10 +32,9 @@ export class SchedulePage {
     ]
 
     componentDidLoad() {
-        /** 
-         * Little workaround with initialisation of closed collapse.
-         * We get reference of fullcalendar object and call rerender function
-         */
+
+         // Little workaround with initialisation of closed collapse.
+         // We get reference of fullcalendar object and call rerender function
 
         // $('#scheduleCollapse').on('shown.bs.collapse', ()=>{})
         const scheduleHeader: any = $('#scheduleHeaderId')
@@ -52,3 +53,4 @@ export class SchedulePage {
         );
     }
 }
+*/

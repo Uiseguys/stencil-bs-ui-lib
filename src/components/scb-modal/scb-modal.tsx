@@ -1,4 +1,6 @@
+/*
 import { Component, Element, Prop, Event, EventEmitter, Method, State } from '@stencil/core';
+
 import $ from 'jquery'
 
 @Component({
@@ -106,3 +108,4 @@ export class ScbModal {
         )
     }
 }
+*/
