@@ -5,13 +5,12 @@ import { Component } from '@stencil/core';
 })
 export class FclImagePage {
 
-
   render() {
     return [
       <div>
            <fcl-image
-               brokenUrl="https://s3.amazonaws.com/images.seroundtable.com/invalid-url-1354629517.png"
-               src="https://www.w3schools.com/howto/img_fjords.jpg"></fcl-image>
+               brokenUrl="https://s3.amazonaws.com/images.seroundtable.com/invalid-url-1354629517.pngk"
+               src="https://www.w3schools.com/howto/img_fjordsk.jpg"></fcl-image>
       </div>
     ];
   }

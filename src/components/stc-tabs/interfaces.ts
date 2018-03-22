@@ -9,3 +9,9 @@ export interface IStcTabHeaderData extends IStcTabData {
 }
 
 export interface IStcTabContentData extends IStcTabData { }
+
+export interface StcTabs {
+    tabsHeader: IStcTabHeaderData[];
+    tabsContent: IStcTabContentData[];
+    tabGroup: any;
+}
