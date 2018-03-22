@@ -145,6 +145,13 @@ export class StencilBootstrapDemo {
             cardBodyContent: '<mwc-slider-page></mwc-slider-page>',
             showOnInit: false
         },        
+        {
+            cardHeaderId: 'cwcAvatarHeaderId',
+            cardBodyId: 'cwcAvatarCollapse',
+            cardHeaderContent: 'Avatar Component',
+            cardBodyContent: '<avatar-page></avatar-page>',
+            showOnInit: false
+        },         
     ];
 
     render() {

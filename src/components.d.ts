@@ -25,6 +25,43 @@ declare global {
 
 
 import {
+  UiAvatar as CwcAvatar
+} from './components/cwc-avatar/cwc-avatar';
+
+declare global {
+  interface HTMLCwcAvatarElement extends CwcAvatar, HTMLStencilElement {
+  }
+  var HTMLCwcAvatarElement: {
+    prototype: HTMLCwcAvatarElement;
+    new (): HTMLCwcAvatarElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-avatar": HTMLCwcAvatarElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-avatar": HTMLCwcAvatarElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-avatar": JSXElements.CwcAvatarAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcAvatarAttributes extends HTMLAttributes {
+      background?: string;
+      color?: string;
+      fontSize?: number;
+      length?: number;
+      name?: string;
+      rounded?: boolean;
+      size?: number;
+      uppercase?: boolean;
+    }
+  }
+}
+
+
+import {
   StencilComponent as CwcDropdown
 } from './components/cwc-dropdown/cwc-dropdown';
 
@@ -921,6 +958,36 @@ declare global {
   }
   namespace JSXElements {
     export interface AlertsPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  AvatarPage as AvatarPage
+} from './pages/avatar-page/avatar-page';
+
+declare global {
+  interface HTMLAvatarPageElement extends AvatarPage, HTMLStencilElement {
+  }
+  var HTMLAvatarPageElement: {
+    prototype: HTMLAvatarPageElement;
+    new (): HTMLAvatarPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "avatar-page": HTMLAvatarPageElement;
+  }
+  interface ElementTagNameMap {
+    "avatar-page": HTMLAvatarPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "avatar-page": JSXElements.AvatarPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface AvatarPageAttributes extends HTMLAttributes {
       
     }
   }
