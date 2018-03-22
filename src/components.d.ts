@@ -25,7 +25,7 @@ declare global {
 
 
 import {
-  UiAvatar as CwcAvatar
+  CwcAvatar as CwcAvatar
 } from './components/cwc-avatar/cwc-avatar';
 
 declare global {

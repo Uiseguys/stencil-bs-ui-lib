@@ -3,7 +3,7 @@ import { Component, Prop } from "@stencil/core";
 @Component({
   tag: "cwc-avatar"
 })
-export class UiAvatar {
+export class CwcAvatar {
 
   @Prop() name: string;
   @Prop() rounded: boolean;
