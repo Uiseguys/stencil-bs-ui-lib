@@ -13,7 +13,7 @@ export class MWCSlider {
     @Prop() value: number = 50;
     @Prop() min: number = 0;
     @Prop() max: number = 100;
-    @Prop() step: number = 0;
+    @Prop() step: number = 1;
     @Prop() disabled: boolean = false;
     @Prop() slidercolor: string = "#000000";        
     mwcSlider: any;

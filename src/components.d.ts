@@ -158,6 +158,37 @@ declare global {
 
 
 import {
+  CwcMoment as CwcMoment
+} from './components/cwc-moment/cwc-moment';
+
+declare global {
+  interface HTMLCwcMomentElement extends CwcMoment, HTMLStencilElement {
+  }
+  var HTMLCwcMomentElement: {
+    prototype: HTMLCwcMomentElement;
+    new (): HTMLCwcMomentElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-moment": HTMLCwcMomentElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-moment": HTMLCwcMomentElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-moment": JSXElements.CwcMomentAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcMomentAttributes extends HTMLAttributes {
+      date?: string;
+      format?: string;
+    }
+  }
+}
+
+
+import {
   CwcMultiselect as CwcMultiselect
 } from './components/cwc-multiselect/cwc-multiselect';
 
@@ -1160,6 +1191,36 @@ declare global {
   }
   namespace JSXElements {
     export interface MarkdownPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  MomentPage as MomentPage
+} from './pages/moment-page/moment-page';
+
+declare global {
+  interface HTMLMomentPageElement extends MomentPage, HTMLStencilElement {
+  }
+  var HTMLMomentPageElement: {
+    prototype: HTMLMomentPageElement;
+    new (): HTMLMomentPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "moment-page": HTMLMomentPageElement;
+  }
+  interface ElementTagNameMap {
+    "moment-page": HTMLMomentPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "moment-page": JSXElements.MomentPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MomentPageAttributes extends HTMLAttributes {
       
     }
   }

@@ -60,7 +60,7 @@ export class MwcSliderPage {
                     <td><code>step</code></td>
                     <td><code>number</code></td>
                     <td>false</td>
-                    <td><code>0</code></td>
+                    <td><code>1</code></td>
                     <td>step value of the slider</td>
                 </tr> 
                 <tr>
