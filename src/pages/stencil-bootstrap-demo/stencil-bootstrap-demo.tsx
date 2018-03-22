@@ -138,6 +138,13 @@ export class StencilBootstrapDemo {
             cardBodyContent: '<schedule-page></schedule-page>',
             showOnInit: false
         },
+        {
+            cardHeaderId: 'mwsSliderHeaderId',
+            cardBodyId: 'mwsSliderCollapse',
+            cardHeaderContent: 'Slider Component',
+            cardBodyContent: '<mwc-slider-page></mwc-slider-page>',
+            showOnInit: false
+        },        
     ];
 
     render() {

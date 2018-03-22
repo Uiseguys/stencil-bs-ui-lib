@@ -37,6 +37,7 @@
         "@ui-guys/stencil-markdown": "^1.0.0",
         "ajv": "^6.1.1",
         "bootstrap": "^4.0.0",
+        "bootstrap-slider": "git+https://gitlab.com/as-public/bootstrap-slider.git",
         "bootstrap.native": "^2.0.21",
         "fullcalendar-scheduler": "^1.9.3",
         "http-server": "^0.11.1",
