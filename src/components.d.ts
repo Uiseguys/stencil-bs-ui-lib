@@ -372,6 +372,41 @@ declare global {
 
 
 import {
+  MWCSlider as MwcSlider
+} from './components/mwc-slider/mwc-slider';
+
+declare global {
+  interface HTMLMwcSliderElement extends MwcSlider, HTMLStencilElement {
+  }
+  var HTMLMwcSliderElement: {
+    prototype: HTMLMwcSliderElement;
+    new (): HTMLMwcSliderElement;
+  };
+  interface HTMLElementTagNameMap {
+    "mwc-slider": HTMLMwcSliderElement;
+  }
+  interface ElementTagNameMap {
+    "mwc-slider": HTMLMwcSliderElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "mwc-slider": JSXElements.MwcSliderAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MwcSliderAttributes extends HTMLAttributes {
+      disabled?: boolean;
+      max?: number;
+      min?: number;
+      slidercolor?: string;
+      step?: number;
+      value?: number;
+    }
+  }
+}
+
+
+import {
   MyCheckbox as MyCheckbox
 } from './components/my-checkbox/my-checkbox';
 
@@ -1155,6 +1190,36 @@ declare global {
   }
   namespace JSXElements {
     export interface MultiselectPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  MwcSliderPage as MwcSliderPage
+} from './pages/mwc-slider-page/mwc-slider-page';
+
+declare global {
+  interface HTMLMwcSliderPageElement extends MwcSliderPage, HTMLStencilElement {
+  }
+  var HTMLMwcSliderPageElement: {
+    prototype: HTMLMwcSliderPageElement;
+    new (): HTMLMwcSliderPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "mwc-slider-page": HTMLMwcSliderPageElement;
+  }
+  interface ElementTagNameMap {
+    "mwc-slider-page": HTMLMwcSliderPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "mwc-slider-page": JSXElements.MwcSliderPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MwcSliderPageAttributes extends HTMLAttributes {
       
     }
   }

@@ -13,6 +13,13 @@ export class StencilBootstrapDemo {
             showOnInit: false
         },
         {
+            cardHeaderId: 'momentHeading',
+            cardBodyId: 'momentCollapse',
+            cardHeaderContent: 'Moment Component',
+            cardBodyContent: '<moment-page></moment-page>',
+            showOnInit: false
+        },
+        {
             cardHeaderId: 'collapseHeading',
             cardBodyId: 'collapseCollapse',
             cardHeaderContent: 'Collapse Component',
@@ -124,6 +131,20 @@ export class StencilBootstrapDemo {
             cardBodyContent: '<typeahead-page></typeahead-page>',
             showOnInit: false
         },
+        {
+            cardHeaderId: 'scheduleHeaderId',
+            cardBodyId: 'scheduleCollapse',
+            cardHeaderContent: 'Schedule Component',
+            cardBodyContent: '<schedule-page></schedule-page>',
+            showOnInit: false
+        },
+        {
+            cardHeaderId: 'mwsSliderHeaderId',
+            cardBodyId: 'mwsSliderCollapse',
+            cardHeaderContent: 'Slider Component',
+            cardBodyContent: '<mwc-slider-page></mwc-slider-page>',
+            showOnInit: false
+        },        
     ];
 
     render() {
