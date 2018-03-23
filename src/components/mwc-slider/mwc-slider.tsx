@@ -1,5 +1,5 @@
 import { Component, Element, Prop, Method, Event, EventEmitter } from '@stencil/core';
-import Slider from 'bootstrap-slider/src/js/bootstrap-slider';
+import Slider from '@ui-guys/bootstra-slider/src/js/bootstrap-slider';
 
 @Component({
     tag: 'mwc-slider',
