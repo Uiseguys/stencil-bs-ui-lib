@@ -303,6 +303,36 @@ declare global {
 
 
 import {
+  CwcStickyHeaderComponent as CwcStickyHeader
+} from './components/cwc-sticky-header/cwc-sticky-header';
+
+declare global {
+  interface HTMLCwcStickyHeaderElement extends CwcStickyHeader, HTMLStencilElement {
+  }
+  var HTMLCwcStickyHeaderElement: {
+    prototype: HTMLCwcStickyHeaderElement;
+    new (): HTMLCwcStickyHeaderElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-sticky-header": HTMLCwcStickyHeaderElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-sticky-header": HTMLCwcStickyHeaderElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-sticky-header": JSXElements.CwcStickyHeaderAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcStickyHeaderAttributes extends HTMLAttributes {
+      name?: string;
+    }
+  }
+}
+
+
+import {
   CwcTag as CwcTag
 } from './components/cwc-tag/cwc-tag';
 
@@ -1444,6 +1474,36 @@ declare global {
   }
   namespace JSXElements {
     export interface StencilBootstrapDemoAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  StickyHeaderPage as StickyHeaderPage
+} from './pages/sticky-header-page/sticky-header-page';
+
+declare global {
+  interface HTMLStickyHeaderPageElement extends StickyHeaderPage, HTMLStencilElement {
+  }
+  var HTMLStickyHeaderPageElement: {
+    prototype: HTMLStickyHeaderPageElement;
+    new (): HTMLStickyHeaderPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "sticky-header-page": HTMLStickyHeaderPageElement;
+  }
+  interface ElementTagNameMap {
+    "sticky-header-page": HTMLStickyHeaderPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "sticky-header-page": JSXElements.StickyHeaderPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface StickyHeaderPageAttributes extends HTMLAttributes {
       
     }
   }
