@@ -34,7 +34,8 @@ export class CwcMultiselect {
 
     addLabel(label) {
         this.labels = [...this.labels, label];
-        this.justAddedLabel = true
+        this.justAddedLabel = true;
+        this.renderLabels();
     }
 
     addResult(result: any) {
@@ -46,18 +47,20 @@ export class CwcMultiselect {
     }
 
     removeResult(index) {
-        this.results = this.results.filter((r, i) => { console.log(r); return i !== index });
+        this.results = this.results.filter((_, i) => i !== index );
         this.multiselectOnSubmit.emit(this.results)
     }
 
     clearLabels() {
         this.labels = []
+        this.renderLabels();
     }
 
     removeLabel(label) {
         const index = this.labels.indexOf(label);
         this.removeResult(index);
-        this.labels = this.labels.filter((l, i) => { console.log(l); return i !== index })
+        this.labels = this.labels.filter((_, i) =>  i !== index )
+        this.renderLabels();
     }
 
     multiselectOnSubmitHandler(result) {
@@ -95,13 +98,43 @@ export class CwcMultiselect {
         }
     }
 
+    private removeAlllabels() {
+        const labels = document.querySelectorAll(`#${this.idValue} div.form-control scb-badge`);
+        let i = labels.length - 1;
+        while (i >= 0) {
+            labels[i].remove();
+            i--;
+        }      
+    }
+
+    private renderLabels() {
+        this.removeAlllabels();
+        const input: HTMLInputElement = document.querySelector(`#${this.idValue} div.form-control`);
+        this.labels.forEach(label => {
+            const labelEl = document.createElement('scb-badge');
+            labelEl.contentEditable = "false";
+            const spanEl = document.createElement('span');
+            spanEl.contentEditable = "false";
+            spanEl.className = "badge badge-secondary";
+            spanEl.innerText = this.getStringValue(label);
+            const spanHidden = document.createElement('span');
+            spanHidden.contentEditable = "false";
+            spanHidden['aria-hidden'] = "true";
+            spanHidden.onclick = () => this.removeLabel(label);
+            spanHidden.innerHTML = "&times;";
+            spanEl.appendChild(spanHidden);
+            labelEl.appendChild(spanEl);
+            input.insertBefore(labelEl, input.childNodes[0]);
+        });
+    }
 
     /**
      * Private functions
      */
     private filter() {
-        if (typeof this.data[0] === 'string')
+        if (typeof this.data[0] === 'string') {
             return this.filterStringArray(this.data);
+        }
 
         if (typeof this.data[0] === 'object') {
             return this.findInComplex(this.data, this.searchKey)
@@ -143,8 +176,14 @@ export class CwcMultiselect {
      * Handlers
      */
     handleInputChange(e) {
-        console.log(e);
         this.filterValue = e.data
+        if (['deleteContentBackward', 'deleteContentForward'].indexOf(e.inputType) !== -1) {
+            const caretEl = document.querySelector(`#${this.idValue} div.form-control span.caret`);
+            if (!caretEl) {
+                this.createCaretEl();
+            }
+            this.renderLabels();
+        }
     }
 
     handleSelect(value, index) {
@@ -173,57 +212,29 @@ export class CwcMultiselect {
 
     render() {
 
-        return (
+        return ([
             <div id={this.idValue}>
-
-                {/* 
-                 Render input field
-
-                 */}
                 <div onInput={(e) => this.handleInputChange(e)}
                      class="form-control" contentEditable={true}>
-
-                    {/* 
-                     Render labels
-                     */}
-
-                    {(() => {
-                        return this.labels.map((label) =>
-                            <scb-badge contenteditable="false">
-                                <span contenteditable={false}
-                                      class="badge badge-secondary"> {this.getStringValue(label)}
-                                    <span aria-hidden="true" onClick={() => this.removeLabel(label)}>&times;</span>
-                                </span>
-                            </scb-badge>
-                        )
-                    })()
-                    }
-                    <span>&#160;</span>
+                     <span class="caret">&nbsp;</span>
                 </div>
-
-                {/* 
-                 Render options list
-                 */}
-
-                {(() => {
-                    if (this.filtered.length > 0) {
-                        return (
-                            <div class="card">
-                                {
-                                    this.filtered.map((val, i) =>
-                                        <option
-                                            class={"dropdown-item".concat((this.focusIndex == i + 1) ? ' active' : '')}
-                                            onClick={(e: any) => this.handleSelect(e.target.value, i)}
-                                            onMouseEnter={() => this.handleHover(i + 1)}
-                                        >{typeof val === 'string' ? val : val.index}</option>)
-                                }
-                            </div>
-
-                        )
-                    }
-                })()}
+            </div>,
+            <div>
+            {
+                this.filtered.length > 0 &&
+                    <div class="card">
+                        {
+                            this.filtered.map((val, i) =>
+                                <option
+                                    class={"dropdown-item".concat((this.focusIndex == i + 1) ? ' active' : '')}
+                                    onClick={(e: any) => this.handleSelect(e.target.value, i)}
+                                    onMouseEnter={() => this.handleHover(i + 1)}
+                                >{typeof val === 'string' ? val : val.index}</option>)
+                        }
+                    </div>
+            }
             </div>
-        )
+        ])
     }
 
 
@@ -258,7 +269,8 @@ export class CwcMultiselect {
     @Listen('keydown.enter')
     handleEnter(ev) {
         if (this.focusIndex > 0) {
-            this.handleSelect(document.querySelectorAll(`#${this.idValue} option`)[this.focusIndex - 1].textContent, this.focusIndex - 1)
+            const options = document.querySelector(`#${this.idValue}`).nextElementSibling.querySelectorAll('option');
+            this.handleSelect(options[this.focusIndex - 1].textContent, this.focusIndex - 1)
             ev.preventDefault()
         }
     }
@@ -275,18 +287,29 @@ export class CwcMultiselect {
         const selection = window.getSelection();
         selection.removeAllRanges();
         selection.addRange(range)
-        // console.log('caret pos set end')
     }
 
     clearTextNodes() {
         const input: HTMLInputElement = document.querySelector(`#${this.idValue} div.form-control`);
-        console.log('input children: ', input.childNodes);
         for (let i = 0; i < input.childNodes.length; i++) {
-
             if (input.childNodes[i].nodeName === '#text') {
                 input.removeChild(input.childNodes[i])
             }
         }
+        const caretEl = document.querySelector(`#${this.idValue} div.form-control span.caret`);
+        if (caretEl) {
+            caretEl.innerHTML = "&nbsp;";
+        } else {
+            this.createCaretEl();
+        }
+    }
+
+    private createCaretEl() {
+        const input: HTMLInputElement = document.querySelector(`#${this.idValue} div.form-control`);
+        const caretEl = document.createElement('span');
+        caretEl.className = "caret";
+        caretEl.innerHTML = "&nbsp;";
+        input.appendChild(caretEl);
     }
 
 }
