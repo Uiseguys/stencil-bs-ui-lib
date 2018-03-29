@@ -1,10 +1,5 @@
 import { Component, Element, Listen } from '@stencil/core';
-import { IStcTabContentData, IStcTabHeaderData } from './interfaces';
-
-interface ITabGroup {
-    header: IStcTabHeaderData;
-    content: IStcTabContentData;
-}
+import { IStcTabContentData, IStcTabHeaderData, ITabGroup } from './interfaces';
 
 @Component({
     tag: 'stc-tabs',
