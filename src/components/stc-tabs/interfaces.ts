@@ -15,3 +15,8 @@ export interface StcTabs {
     tabsContent: IStcTabContentData[];
     tabGroup: any;
 }
+
+export interface ITabGroup {
+    header: IStcTabHeaderData;
+    content: IStcTabContentData;
+}
