@@ -100,7 +100,7 @@ export class FclVideoPLayer {
     }
 
     componentDidLoad() {
-
+        let self = this;
         if (this.poster == null) {
             this.autoPlay = false;
             this.el.querySelector("video").style.display = 'block';
@@ -113,16 +113,19 @@ export class FclVideoPLayer {
             preload: 'metadata'
         };
 
-        videojs(this.el.getElementsByTagName('video')[0], options);
+        let player = videojs(this.el.getElementsByTagName('video')[0], options);
+        player.on('play', function () {
+            self.el.querySelector("fcl-image").style.display = 'none';
+            self.el.querySelector("video").style.display = 'block';
+        });
+        const video = this.el.getElementsByTagName('video')[0];
         if (this.thumbnail) {
-            const video = this.el.getElementsByTagName('video')[0];
             initThumbnail(this.thumbnail, video);
         }
-
     }
 
     componentWillUpdate() {
-
+        let self = this;
         if (this.poster == null) {
             this.autoPlay = false;
         }
@@ -133,7 +136,11 @@ export class FclVideoPLayer {
             preload: 'metadata'
         };
 
-        videojs(this.el.getElementsByTagName('video')[0], options);
+        let player = videojs(this.el.getElementsByTagName('video')[0], options);
+        player.on('play', function () {
+            self.el.querySelector("fcl-image").style.display = 'none';
+            self.el.querySelector("video").style.display = 'block';
+        });
 
     }
 
