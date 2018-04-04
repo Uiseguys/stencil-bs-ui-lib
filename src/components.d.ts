@@ -304,7 +304,7 @@ declare global {
 
 import {
   CwcStickyHeaderComponent as CwcStickyHeader
-} from './components/cwc-sticky-header/cwc-sticky-header';
+} from './components/cwc-sticky/cwc-sticky-header';
 
 declare global {
   interface HTMLCwcStickyHeaderElement extends CwcStickyHeader, HTMLStencilElement {
@@ -326,7 +326,38 @@ declare global {
   }
   namespace JSXElements {
     export interface CwcStickyHeaderAttributes extends HTMLAttributes {
-      name?: string;
+      background?: string;
+      color?: string;
+    }
+  }
+}
+
+
+import {
+  CwcStickyComponent as CwcSticky
+} from './components/cwc-sticky/cwc-sticky';
+
+declare global {
+  interface HTMLCwcStickyElement extends CwcSticky, HTMLStencilElement {
+  }
+  var HTMLCwcStickyElement: {
+    prototype: HTMLCwcStickyElement;
+    new (): HTMLCwcStickyElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-sticky": HTMLCwcStickyElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-sticky": HTMLCwcStickyElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-sticky": JSXElements.CwcStickyAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcStickyAttributes extends HTMLAttributes {
+      
     }
   }
 }
@@ -1481,29 +1512,29 @@ declare global {
 
 
 import {
-  StickyHeaderPage as StickyHeaderPage
-} from './pages/sticky-header-page/sticky-header-page';
+  StickyPage as StickyPage
+} from './pages/sticky-page/sticky-page';
 
 declare global {
-  interface HTMLStickyHeaderPageElement extends StickyHeaderPage, HTMLStencilElement {
+  interface HTMLStickyPageElement extends StickyPage, HTMLStencilElement {
   }
-  var HTMLStickyHeaderPageElement: {
-    prototype: HTMLStickyHeaderPageElement;
-    new (): HTMLStickyHeaderPageElement;
+  var HTMLStickyPageElement: {
+    prototype: HTMLStickyPageElement;
+    new (): HTMLStickyPageElement;
   };
   interface HTMLElementTagNameMap {
-    "sticky-header-page": HTMLStickyHeaderPageElement;
+    "sticky-page": HTMLStickyPageElement;
   }
   interface ElementTagNameMap {
-    "sticky-header-page": HTMLStickyHeaderPageElement;
+    "sticky-page": HTMLStickyPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "sticky-header-page": JSXElements.StickyHeaderPageAttributes;
+      "sticky-page": JSXElements.StickyPageAttributes;
     }
   }
   namespace JSXElements {
-    export interface StickyHeaderPageAttributes extends HTMLAttributes {
+    export interface StickyPageAttributes extends HTMLAttributes {
       
     }
   }

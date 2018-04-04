@@ -151,14 +151,7 @@ export class StencilBootstrapDemo {
             cardHeaderContent: 'Avatar Component',
             cardBodyContent: '<avatar-page></avatar-page>',
             showOnInit: false
-        },    
-        {
-            cardHeaderId: 'cwcStickyHeaderId',
-            cardBodyId: 'cwcStickyCollapse',
-            cardHeaderContent: 'Sticky header component',
-            cardBodyContent: '<sticky-header-page></sticky-header-page>',
-            showOnInit: false
-        },              
+        },                
     ];
 
     render() {
@@ -175,7 +168,8 @@ export class StencilBootstrapDemo {
                         <scb-collapse collapseid="mainCollapse" items={this.cards}></scb-collapse>
                     </div>
                 </div>
-            </div>
+                <sticky-page></sticky-page>                                              
+            </div>                    
         );
     }
 }
