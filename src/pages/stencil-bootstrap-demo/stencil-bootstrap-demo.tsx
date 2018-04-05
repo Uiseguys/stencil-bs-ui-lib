@@ -151,7 +151,7 @@ export class StencilBootstrapDemo {
             cardHeaderContent: 'Avatar Component',
             cardBodyContent: '<avatar-page></avatar-page>',
             showOnInit: false
-        },         
+        },                
     ];
 
     render() {
@@ -168,7 +168,8 @@ export class StencilBootstrapDemo {
                         <scb-collapse collapseid="mainCollapse" items={this.cards}></scb-collapse>
                     </div>
                 </div>
-            </div>
+                <sticky-page></sticky-page>                                              
+            </div>                    
         );
     }
 }

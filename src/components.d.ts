@@ -303,6 +303,67 @@ declare global {
 
 
 import {
+  CwcStickyHeaderComponent as CwcStickyHeader
+} from './components/cwc-sticky/cwc-sticky-header';
+
+declare global {
+  interface HTMLCwcStickyHeaderElement extends CwcStickyHeader, HTMLStencilElement {
+  }
+  var HTMLCwcStickyHeaderElement: {
+    prototype: HTMLCwcStickyHeaderElement;
+    new (): HTMLCwcStickyHeaderElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-sticky-header": HTMLCwcStickyHeaderElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-sticky-header": HTMLCwcStickyHeaderElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-sticky-header": JSXElements.CwcStickyHeaderAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcStickyHeaderAttributes extends HTMLAttributes {
+      background?: string;
+      color?: string;
+    }
+  }
+}
+
+
+import {
+  CwcStickyComponent as CwcSticky
+} from './components/cwc-sticky/cwc-sticky';
+
+declare global {
+  interface HTMLCwcStickyElement extends CwcSticky, HTMLStencilElement {
+  }
+  var HTMLCwcStickyElement: {
+    prototype: HTMLCwcStickyElement;
+    new (): HTMLCwcStickyElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-sticky": HTMLCwcStickyElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-sticky": HTMLCwcStickyElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-sticky": JSXElements.CwcStickyAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcStickyAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
   CwcTag as CwcTag
 } from './components/cwc-tag/cwc-tag';
 
@@ -1444,6 +1505,36 @@ declare global {
   }
   namespace JSXElements {
     export interface StencilBootstrapDemoAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  StickyPage as StickyPage
+} from './pages/sticky-page/sticky-page';
+
+declare global {
+  interface HTMLStickyPageElement extends StickyPage, HTMLStencilElement {
+  }
+  var HTMLStickyPageElement: {
+    prototype: HTMLStickyPageElement;
+    new (): HTMLStickyPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "sticky-page": HTMLStickyPageElement;
+  }
+  interface ElementTagNameMap {
+    "sticky-page": HTMLStickyPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "sticky-page": JSXElements.StickyPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface StickyPageAttributes extends HTMLAttributes {
       
     }
   }
