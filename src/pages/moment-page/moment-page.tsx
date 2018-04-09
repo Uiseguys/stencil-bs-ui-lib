@@ -45,6 +45,18 @@ export class MomentPage {
 
                                             outputs: <cwc-moment duration="123412341234123" unit="seconds"></cwc-moment>
                                             <br />
+                                            <pre><code class="lang-tsx">
+                                                <span>&lt;cwc-moment</span><br />
+                                                <span class="hljs-built_in ml-4">date="2018-04-08 14:30"</span><br />
+                                                <span class="hljs-built_in ml-4">diff=&#123;true&#125;</span><br /> 
+                                                <span class="hljs-built_in ml-4">humanize=&#123;true&#125;</span><span>&gt;</span>
+                                                <br />
+                                                <span>&lt;/cwc-moment&gt;</span>
+                                            </code></pre>
+                                            
+                                            outputs: <cwc-moment date="2018-04-08 14:30" diff={true} humanize={true}></cwc-moment>
+                                            outputs: <cwc-moment date="2018-04-09 17:45" diff={true} humanize={true}></cwc-moment>
+                                            <br />
                                         </div>
                                     </div>
                                 </div>
@@ -91,6 +103,23 @@ export class MomentPage {
                                                 <td>''</td>
                                                 <td>Duration Unit</td>
                                             </tr>
+                                            <tr>
+                                                <td>diff</td>
+                                                <td>boolean</td>
+                                                <td>false</td>
+                                                <td>
+                                                if diff from now to 'date' is smaller then 1 minute output "a moment ago" <br/>
+                                                if diff from now to 'date' is bigger then 1 minute but is still today, output: 'today, 10:39am'<br/>
+                                                if date is yesterday, output: 'yesterday, 10:39am'<br/>
+                                                else output default format 
+                                                </td>
+                                            </tr>    
+                                            <tr>
+                                                <td>humanize</td>
+                                                <td>boolean</td>
+                                                <td>false</td>
+                                                <td>humanize output of the time ago</td>
+                                            </tr>                                                                                    
                                         </tbody>
                                     </table>
                                 </div>
