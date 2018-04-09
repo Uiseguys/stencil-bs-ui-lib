@@ -1,5 +1,5 @@
 import { Component, Prop, State } from '@stencil/core';
-import moment_, { Duration, DurationInputArg2 } from 'moment';
+import moment_, { Duration, DurationInputArg2 } from 'moment/moment.js';
 import 'moment/locale/de';
 
 @Component({
@@ -17,7 +17,7 @@ export class CwcMoment {
 
     componentDidLoad() {
         const moment = moment_;
-
+        
         moment.locale('de', {
             longDateFormat : {
                 LT : 'HH:mm',
