@@ -1,6 +1,6 @@
 import { Component, Prop, State } from '@stencil/core';
 import moment_, { Duration, DurationInputArg2 } from 'moment/moment.js';
-import 'moment/locale/de';
+import 'moment/min/locales.min';
 
 @Component({
     tag: 'cwc-moment'
@@ -13,6 +13,7 @@ export class CwcMoment {
     @Prop() format: string;
     @Prop() diff: boolean;
     @Prop() humanize: boolean;
+    @Prop() lang = 'en';
 
     @State() momentNow: string;
     @State() durationFormatted: string;
@@ -20,7 +21,7 @@ export class CwcMoment {
     componentDidLoad() {
         const moment = moment_;
         
-        moment.locale('de', {
+        moment.locale(this.lang, {
             longDateFormat : {
                 LT : 'HH:mm',
                 LTS : 'HH:mm:ss',
@@ -50,12 +51,16 @@ export class CwcMoment {
                 if (momentDate.isBetween(oneMinutesBefore, moment())) {
                     this.momentNow = 'a moment ago';
                 } else if (momentDate.isBetween(todayBegin, todayEnd)) {
-                    this.momentNow = 'today, ' + momentDate.format("hh:mm a");
+                    const calendarFormat = moment(this.date).calendar();
+                    this.momentNow = calendarFormat.split(' ')[0] + ', ' + momentDate.format("hh:mm a");
                 } else if (momentDate.isBetween(yesterdayBegin, yesterdayEnd)) {
-                    this.momentNow = 'yesterday, ' + momentDate.format("hh:mm a");
+                    const calendarFormat = moment(this.date).calendar();
+                    this.momentNow = calendarFormat.split(' ')[0] + ', ' + momentDate.format("hh:mm a");
                 } else {
                     this.momentNow = momentDate.fromNow();
                 }
+            } else if (!this.format) {
+                this.momentNow = moment(this.date).calendar();
             } else {
                 this.momentNow = moment(this.date).format(this.format);
             }

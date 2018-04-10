@@ -226,6 +226,7 @@ declare global {
       duration?: string;
       format?: string;
       humanize?: boolean;
+      lang?: string;
       separator?: string;
       unit?: DurationInputArg2;
     }
