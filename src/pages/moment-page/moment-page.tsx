@@ -47,15 +47,50 @@ export class MomentPage {
                                             <br />
                                             <pre><code class="lang-tsx">
                                                 <span>&lt;cwc-moment</span><br />
-                                                <span class="hljs-built_in ml-4">date="2018-04-08 14:30"</span><br />
+                                                <span class="hljs-built_in ml-4">date="2018-04-09 14:30"</span><br />
                                                 <span class="hljs-built_in ml-4">diff=&#123;true&#125;</span><br /> 
                                                 <span class="hljs-built_in ml-4">humanize=&#123;true&#125;</span><span>&gt;</span>
                                                 <br />
                                                 <span>&lt;/cwc-moment&gt;</span>
                                             </code></pre>
-                                            
-                                            outputs: <cwc-moment date="2018-04-08 14:30" diff={true} humanize={true}></cwc-moment>
-                                            outputs: <cwc-moment date="2018-04-09 17:45" diff={true} humanize={true}></cwc-moment>
+                                            outputs: <cwc-moment date="2018-04-09 14:30" diff={true} humanize={true}></cwc-moment>
+                                            <br />
+                                            <pre><code class="lang-tsx">
+                                                <span>&lt;cwc-moment</span><br />
+                                                <span class="hljs-built_in ml-4">date="2018-04-10 14:45"</span><br />
+                                                <span class="hljs-built_in ml-4">diff=&#123;true&#125;</span><br /> 
+                                                <span class="hljs-built_in ml-4">humanize=&#123;true&#125;</span><span>&gt;</span>
+                                                <br />
+                                                <span>&lt;/cwc-moment&gt;</span>
+                                            </code></pre>                                            
+                                            outputs: <cwc-moment date="2018-04-10 14:45" diff={true} humanize={true}></cwc-moment>
+                                            <br />
+                                            <pre><code class="lang-tsx">
+                                                <span>&lt;cwc-moment</span><br />
+                                                <span class="hljs-built_in ml-4">date="2018-04-09 06:45"</span><br />
+                                                <span class="hljs-built_in ml-4">lang="fr";</span><span>&gt;</span>
+                                                <br />
+                                                <span>&lt;/cwc-moment&gt;</span>
+                                            </code></pre>                                             
+                                            outputs: <cwc-moment date="2018-04-09 06:45" lang="fr"></cwc-moment>
+                                            <br />
+                                            <pre><code class="lang-tsx">
+                                                <span>&lt;cwc-moment</span><br />
+                                                <span class="hljs-built_in ml-4">date="2018-04-09 06:45"</span><br />
+                                                <span class="hljs-built_in ml-4">lang="de";</span><span>&gt;</span>
+                                                <br />
+                                                <span>&lt;/cwc-moment&gt;</span>
+                                            </code></pre>                                              
+                                            outputs: <cwc-moment date="2018-04-09 06:45" lang="de"></cwc-moment>
+                                            <br />
+                                            <pre><code class="lang-tsx">
+                                                <span>&lt;cwc-moment</span><br />
+                                                <span class="hljs-built_in ml-4">date="2018-04-09 06:45"</span><br />
+                                                <span class="hljs-built_in ml-4">lang="en";</span><span>&gt;</span>
+                                                <br />
+                                                <span>&lt;/cwc-moment&gt;</span>
+                                            </code></pre>                                              
+                                            outputs: <cwc-moment date="2018-04-09 06:45" lang="en"></cwc-moment>
                                             <br />
                                         </div>
                                     </div>
@@ -119,7 +154,13 @@ export class MomentPage {
                                                 <td>boolean</td>
                                                 <td>false</td>
                                                 <td>humanize output of the time ago</td>
-                                            </tr>                                                                                    
+                                            </tr>    
+                                            <tr>
+                                                <td>lang</td>
+                                                <td>string</td>
+                                                <td>'en'</td>
+                                                <td>locale value</td>
+                                            </tr>                                                                                                                              
                                         </tbody>
                                     </table>
                                 </div>
