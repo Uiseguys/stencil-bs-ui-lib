@@ -1515,6 +1515,36 @@ declare global {
 
 
 import {
+  StencilBsDemoPage as StencilBsDemoPage
+} from './pages/stencil-bs-demo-page/stencil-bs-demo-page';
+
+declare global {
+  interface HTMLStencilBsDemoPageElement extends StencilBsDemoPage, HTMLStencilElement {
+  }
+  var HTMLStencilBsDemoPageElement: {
+    prototype: HTMLStencilBsDemoPageElement;
+    new (): HTMLStencilBsDemoPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "stencil-bs-demo-page": HTMLStencilBsDemoPageElement;
+  }
+  interface ElementTagNameMap {
+    "stencil-bs-demo-page": HTMLStencilBsDemoPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "stencil-bs-demo-page": JSXElements.StencilBsDemoPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface StencilBsDemoPageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
   StickyPage as StickyPage
 } from './pages/sticky-page/sticky-page';
 
