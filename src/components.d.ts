@@ -1538,7 +1538,7 @@ declare global {
   }
   namespace JSXElements {
     export interface StencilBsDemoPageAttributes extends HTMLAttributes {
-      
+      root?: string;
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@stencil/core';
+import { Component, Prop } from '@stencil/core';
 import '@stencil/router';
 
 @Component({
@@ -6,6 +6,7 @@ import '@stencil/router';
     styleUrl: '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 })
 export class StencilBsDemoPage {
+    @Prop() root = '/';
     components = [
         {
             componentName: 'navbar-page',
@@ -145,7 +146,7 @@ export class StencilBsDemoPage {
                         </ul>                    
                     </nav>
                     <main class="col-10">
-                        <stencil-router>
+                        <stencil-router root={this.root}>
                             {this.components.map((cmp) =>
                                     <stencil-route
                                         url={cmp.url}
