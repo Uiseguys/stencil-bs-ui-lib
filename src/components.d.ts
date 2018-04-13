@@ -65,6 +65,37 @@ declare global {
 
 
 import {
+  CwcDatepicker as CwcDatepicker
+} from './components/cwc-datepicker/cwc-datepicker';
+
+declare global {
+  interface HTMLCwcDatepickerElement extends CwcDatepicker, HTMLStencilElement {
+  }
+  var HTMLCwcDatepickerElement: {
+    prototype: HTMLCwcDatepickerElement;
+    new (): HTMLCwcDatepickerElement;
+  };
+  interface HTMLElementTagNameMap {
+    "cwc-datepicker": HTMLCwcDatepickerElement;
+  }
+  interface ElementTagNameMap {
+    "cwc-datepicker": HTMLCwcDatepickerElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "cwc-datepicker": JSXElements.CwcDatepickerAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcDatepickerAttributes extends HTMLAttributes {
+      endDate?: string;
+      startDate?: string;
+    }
+  }
+}
+
+
+import {
   StencilComponent as CwcDropdown
 } from './components/cwc-dropdown/cwc-dropdown';
 
@@ -1148,6 +1179,36 @@ declare global {
   }
   namespace JSXElements {
     export interface CollapsePageAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  DatepickerPage as DatepickerPage
+} from './pages/datepicker-page/datepicker-page';
+
+declare global {
+  interface HTMLDatepickerPageElement extends DatepickerPage, HTMLStencilElement {
+  }
+  var HTMLDatepickerPageElement: {
+    prototype: HTMLDatepickerPageElement;
+    new (): HTMLDatepickerPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    "datepicker-page": HTMLDatepickerPageElement;
+  }
+  interface ElementTagNameMap {
+    "datepicker-page": HTMLDatepickerPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "datepicker-page": JSXElements.DatepickerPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface DatepickerPageAttributes extends HTMLAttributes {
       
     }
   }
