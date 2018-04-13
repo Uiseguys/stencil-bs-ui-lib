@@ -118,6 +118,11 @@ export class StencilBsDemoPage {
             title: 'Sticky Component',
             componentName: 'sticky-page'
         },
+        {
+            url: '/datepicker',
+            title: 'Datepicker Component',
+            componentName: 'datepicker-page'
+        },        
     ];
 
     render() {

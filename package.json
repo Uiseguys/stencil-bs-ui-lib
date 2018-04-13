@@ -44,6 +44,7 @@
         "moment": "^2.20.1",
         "pikaday": "^1.7.0",
         "popper.js": "^1.12.9",
+        "tiny-date-picker": "^3.2.4",
         "tooltip.js": "^1.1.7",
         "tslint": "^5.7.0",
         "video.js": "^6.6.0",
