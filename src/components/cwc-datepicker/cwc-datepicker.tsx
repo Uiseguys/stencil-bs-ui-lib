@@ -1,5 +1,6 @@
 import { Component, Element, Prop, Event, EventEmitter } from '@stencil/core';
 import DateRangePicker from 'tiny-date-picker/dist/date-range-picker';
+import moment from 'moment/moment.js';
 
 @Component({
     tag: 'cwc-datepicker',
@@ -29,8 +30,8 @@ export class CwcDatepicker {
             .on('statechange', function (_, rp) {
                 // Update the inputs when the state changes
                 const range = rp.state;
-                txtStart.value = range.start ? range.start.toDateString() : '';
-                txtEnd.value = range.end ? range.end.toDateString() : '';
+                txtStart.value = range.start ? moment(range.start).format('MM/DD/YYYY') : '';
+                txtEnd.value = range.end ? moment(range.end).format('MM/DD/YYYY') : '';
                 self.statechange.emit({
                     start: range.start, 
                     end: range.end
@@ -51,6 +52,19 @@ export class CwcDatepicker {
         // When the inputs gain focus, show the date range picker
         txtStart.addEventListener('focus', () => this.showPicker());
         txtEnd.addEventListener('focus', () => this.showPicker());
+
+        txtStart.addEventListener('change', () => {
+            const date = new Date(txtStart.value);
+            dp.setState({
+                start: !isNaN(date.getTime()) ? date : ''
+            });
+        });
+        txtEnd.addEventListener('change', () => {
+            const date = new Date(txtEnd.value);
+            dp.setState({
+                end: !isNaN(date.getTime()) ? date : ''
+            });
+        });        
 
         // If focus leaves the root element, it is not in the date
         // picker or the inputs, so we should hide the date picker
