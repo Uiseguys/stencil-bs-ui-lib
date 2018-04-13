@@ -1,6 +1,6 @@
 import { Component, Element, Prop, Event, EventEmitter } from '@stencil/core';
 import DateRangePicker from 'tiny-date-picker/dist/date-range-picker';
-import moment from 'moment/moment.js';
+import moment from 'moment'
 
 @Component({
     tag: 'cwc-datepicker',
