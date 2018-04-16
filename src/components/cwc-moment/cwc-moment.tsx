@@ -1,5 +1,5 @@
 import { Component, Prop, State } from '@stencil/core';
-import moment_, { Duration, DurationInputArg2 } from 'moment/moment.js';
+import moment_, { Duration, DurationInputArg2 } from 'moment';
 import 'moment/min/locales.min';
 
 @Component({

@@ -4,1782 +4,2096 @@
  * and imports for stencil collections that might be configured in your stencil.config.js file
  */
 
+import '@stencil/core';
+
+declare global {
+  namespace JSX {
+    interface Element {}
+    export interface IntrinsicElements {}
+  }
+  namespace JSXElements {}
+
+  interface HTMLStencilElement extends HTMLElement {
+    componentOnReady(): Promise<this>;
+    componentOnReady(done: (ele?: this) => void): void;
+
+    forceUpdate(): void;
+  }
+
+  interface HTMLAttributes {}
+}
+
+import '@stencil/router';
+
 import {
   DurationInputArg2,
-} from 'moment/moment.js';
+} from 'moment';
 import {
   BootstrapThemeColor,
 } from './common/bootstrap-theme-color.type';
 import {
-  HostElement,
-} from '@stencil/core';
-import {
   BootstrapThemeColor as BootstrapThemeColor2,
   IBreadcrumbItem,
 } from './common/index';
-
-declare global {
-  interface HTMLStencilElement extends HTMLElement {
-    componentOnReady(): Promise<this>;
-    componentOnReady(done: (ele?: this) => void): void;
-  }
-}
-
-
-
 import {
-  CwcAvatar as CwcAvatar
-} from './components/cwc-avatar/cwc-avatar';
+  IStcTabContentData,
+  IStcTabHeaderData,
+} from './components/stc-tabs/interfaces';
 
 declare global {
-  interface HTMLCwcAvatarElement extends CwcAvatar, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface CwcAvatar {
+      'background': string;
+      'color': string;
+      'fontSize': number;
+      'length': number;
+      'name': string;
+      'rounded': boolean;
+      'size': number;
+      'uppercase': boolean;
+    }
   }
+
+  interface HTMLCwcAvatarElement extends StencilComponents.CwcAvatar, HTMLStencilElement {}
+
   var HTMLCwcAvatarElement: {
     prototype: HTMLCwcAvatarElement;
     new (): HTMLCwcAvatarElement;
   };
   interface HTMLElementTagNameMap {
-    "cwc-avatar": HTMLCwcAvatarElement;
+    'cwc-avatar': HTMLCwcAvatarElement;
   }
   interface ElementTagNameMap {
-    "cwc-avatar": HTMLCwcAvatarElement;
+    'cwc-avatar': HTMLCwcAvatarElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "cwc-avatar": JSXElements.CwcAvatarAttributes;
+      'cwc-avatar': JSXElements.CwcAvatarAttributes;
     }
   }
   namespace JSXElements {
     export interface CwcAvatarAttributes extends HTMLAttributes {
-      background?: string;
-      color?: string;
-      fontSize?: number;
-      length?: number;
-      name?: string;
-      rounded?: boolean;
-      size?: number;
-      uppercase?: boolean;
+      'background'?: string;
+      'color'?: string;
+      'fontSize'?: number;
+      'length'?: number;
+      'name'?: string;
+      'rounded'?: boolean;
+      'size'?: number;
+      'uppercase'?: boolean;
     }
   }
 }
 
 
-import {
-  CwcDatepicker as CwcDatepicker
-} from './components/cwc-datepicker/cwc-datepicker';
-
 declare global {
-  interface HTMLCwcDatepickerElement extends CwcDatepicker, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface CwcDatepicker {
+      'endDate': string;
+      'startDate': string;
+    }
   }
+
+  interface HTMLCwcDatepickerElement extends StencilComponents.CwcDatepicker, HTMLStencilElement {}
+
   var HTMLCwcDatepickerElement: {
     prototype: HTMLCwcDatepickerElement;
     new (): HTMLCwcDatepickerElement;
   };
   interface HTMLElementTagNameMap {
-    "cwc-datepicker": HTMLCwcDatepickerElement;
+    'cwc-datepicker': HTMLCwcDatepickerElement;
   }
   interface ElementTagNameMap {
-    "cwc-datepicker": HTMLCwcDatepickerElement;
+    'cwc-datepicker': HTMLCwcDatepickerElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "cwc-datepicker": JSXElements.CwcDatepickerAttributes;
+      'cwc-datepicker': JSXElements.CwcDatepickerAttributes;
     }
   }
   namespace JSXElements {
     export interface CwcDatepickerAttributes extends HTMLAttributes {
-      endDate?: string;
-      startDate?: string;
+      'endDate'?: string;
+      'onStatechange'?: (event: CustomEvent) => void;
+      'startDate'?: string;
     }
   }
 }
 
 
-import {
-  StencilComponent as CwcDropdown
-} from './components/cwc-dropdown/cwc-dropdown';
-
 declare global {
-  interface HTMLCwcDropdownElement extends CwcDropdown, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface CwcDropdown {
+      'close': () => void;
+      'open': () => void;
+      'toggle': () => void;
+    }
   }
+
+  interface HTMLCwcDropdownElement extends StencilComponents.CwcDropdown, HTMLStencilElement {}
+
   var HTMLCwcDropdownElement: {
     prototype: HTMLCwcDropdownElement;
     new (): HTMLCwcDropdownElement;
   };
   interface HTMLElementTagNameMap {
-    "cwc-dropdown": HTMLCwcDropdownElement;
+    'cwc-dropdown': HTMLCwcDropdownElement;
   }
   interface ElementTagNameMap {
-    "cwc-dropdown": HTMLCwcDropdownElement;
+    'cwc-dropdown': HTMLCwcDropdownElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "cwc-dropdown": JSXElements.CwcDropdownAttributes;
+      'cwc-dropdown': JSXElements.CwcDropdownAttributes;
     }
   }
   namespace JSXElements {
     export interface CwcDropdownAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  CwcInfiniteListWatcher as CwcInfiniteListWatcher
-} from './components/cwc-infinite-list-watcher/cwc-infinite-list-watcher';
-
 declare global {
-  interface HTMLCwcInfiniteListWatcherElement extends CwcInfiniteListWatcher, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface CwcInfiniteListWatcher {
+      'bindToList': boolean;
+      'bottomOffset': number;
+      'containerSelector': string;
+      'debounce': number;
+      'lastItemSelector': string;
+      'listSelector': string;
+      'loadMore': () => void;
+    }
   }
+
+  interface HTMLCwcInfiniteListWatcherElement extends StencilComponents.CwcInfiniteListWatcher, HTMLStencilElement {}
+
   var HTMLCwcInfiniteListWatcherElement: {
     prototype: HTMLCwcInfiniteListWatcherElement;
     new (): HTMLCwcInfiniteListWatcherElement;
   };
   interface HTMLElementTagNameMap {
-    "cwc-infinite-list-watcher": HTMLCwcInfiniteListWatcherElement;
+    'cwc-infinite-list-watcher': HTMLCwcInfiniteListWatcherElement;
   }
   interface ElementTagNameMap {
-    "cwc-infinite-list-watcher": HTMLCwcInfiniteListWatcherElement;
+    'cwc-infinite-list-watcher': HTMLCwcInfiniteListWatcherElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "cwc-infinite-list-watcher": JSXElements.CwcInfiniteListWatcherAttributes;
+      'cwc-infinite-list-watcher': JSXElements.CwcInfiniteListWatcherAttributes;
     }
   }
   namespace JSXElements {
     export interface CwcInfiniteListWatcherAttributes extends HTMLAttributes {
-      bindToList?: boolean;
-      bottomOffset?: number;
-      containerSelector?: string;
-      debounce?: number;
-      lastItemSelector?: string;
-      listSelector?: string;
+      'bindToList'?: boolean;
+      'bottomOffset'?: number;
+      'containerSelector'?: string;
+      'debounce'?: number;
+      'lastItemSelector'?: string;
+      'listSelector'?: string;
+      'onOnBottomReach'?: (event: CustomEvent) => void;
     }
   }
 }
 
 
-import {
-  CwcList as CwcList
-} from './components/cwc-list/cwc-list';
-
 declare global {
-  interface HTMLCwcListElement extends CwcList, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface CwcList {
+      'addClass': string;
+      'addClassEven': string;
+      'addClassFirst': string;
+      'addClassLast': string;
+      'addClassOdd': string;
+      'itemAs': string;
+      'items': object[];
+      'template': string;
+      'wrapperClass': string;
+    }
   }
+
+  interface HTMLCwcListElement extends StencilComponents.CwcList, HTMLStencilElement {}
+
   var HTMLCwcListElement: {
     prototype: HTMLCwcListElement;
     new (): HTMLCwcListElement;
   };
   interface HTMLElementTagNameMap {
-    "cwc-list": HTMLCwcListElement;
+    'cwc-list': HTMLCwcListElement;
   }
   interface ElementTagNameMap {
-    "cwc-list": HTMLCwcListElement;
+    'cwc-list': HTMLCwcListElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "cwc-list": JSXElements.CwcListAttributes;
+      'cwc-list': JSXElements.CwcListAttributes;
     }
   }
   namespace JSXElements {
     export interface CwcListAttributes extends HTMLAttributes {
-      addClass?: string;
-      addClassEven?: string;
-      addClassFirst?: string;
-      addClassLast?: string;
-      addClassOdd?: string;
-      itemAs?: string;
-      items?: object[];
-      template?: string;
-      wrapperClass?: string;
+      'addClass'?: string;
+      'addClassEven'?: string;
+      'addClassFirst'?: string;
+      'addClassLast'?: string;
+      'addClassOdd'?: string;
+      'itemAs'?: string;
+      'items'?: object[];
+      'template'?: string;
+      'wrapperClass'?: string;
     }
   }
 }
 
 
-import {
-  CwcMarkdown as CwcMarkdown
-} from './components/cwc-markdown/cwc-markdown';
-
 declare global {
-  interface HTMLCwcMarkdownElement extends CwcMarkdown, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface CwcMarkdown {
+      'data': string;
+    }
   }
+
+  interface HTMLCwcMarkdownElement extends StencilComponents.CwcMarkdown, HTMLStencilElement {}
+
   var HTMLCwcMarkdownElement: {
     prototype: HTMLCwcMarkdownElement;
     new (): HTMLCwcMarkdownElement;
   };
   interface HTMLElementTagNameMap {
-    "cwc-markdown": HTMLCwcMarkdownElement;
+    'cwc-markdown': HTMLCwcMarkdownElement;
   }
   interface ElementTagNameMap {
-    "cwc-markdown": HTMLCwcMarkdownElement;
+    'cwc-markdown': HTMLCwcMarkdownElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "cwc-markdown": JSXElements.CwcMarkdownAttributes;
+      'cwc-markdown': JSXElements.CwcMarkdownAttributes;
     }
   }
   namespace JSXElements {
     export interface CwcMarkdownAttributes extends HTMLAttributes {
-      data?: string;
+      'data'?: string;
     }
   }
 }
 
 
-import {
-  CwcMoment as CwcMoment
-} from './components/cwc-moment/cwc-moment';
-
 declare global {
-  interface HTMLCwcMomentElement extends CwcMoment, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface CwcMoment {
+      'date': string;
+      'diff': boolean;
+      'duration': string;
+      'format': string;
+      'humanize': boolean;
+      'lang': string;
+      'separator': string;
+      'unit': DurationInputArg2;
+    }
   }
+
+  interface HTMLCwcMomentElement extends StencilComponents.CwcMoment, HTMLStencilElement {}
+
   var HTMLCwcMomentElement: {
     prototype: HTMLCwcMomentElement;
     new (): HTMLCwcMomentElement;
   };
   interface HTMLElementTagNameMap {
-    "cwc-moment": HTMLCwcMomentElement;
+    'cwc-moment': HTMLCwcMomentElement;
   }
   interface ElementTagNameMap {
-    "cwc-moment": HTMLCwcMomentElement;
+    'cwc-moment': HTMLCwcMomentElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "cwc-moment": JSXElements.CwcMomentAttributes;
+      'cwc-moment': JSXElements.CwcMomentAttributes;
     }
   }
   namespace JSXElements {
     export interface CwcMomentAttributes extends HTMLAttributes {
-      date?: string;
-      diff?: boolean;
-      duration?: string;
-      format?: string;
-      humanize?: boolean;
-      lang?: string;
-      separator?: string;
-      unit?: DurationInputArg2;
+      'date'?: string;
+      'diff'?: boolean;
+      'duration'?: string;
+      'format'?: string;
+      'humanize'?: boolean;
+      'lang'?: string;
+      'separator'?: string;
+      'unit'?: DurationInputArg2;
     }
   }
 }
 
 
-import {
-  CwcMultiselect as CwcMultiselect
-} from './components/cwc-multiselect/cwc-multiselect';
-
 declare global {
-  interface HTMLCwcMultiselectElement extends CwcMultiselect, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface CwcMultiselect {
+      /**
+       * Public methods
+       */
+      'close': () => void;
+      'data': any[];
+      'idValue': string;
+      'minSearchLength': number;
+      'placeholder': string;
+      'searchKey': string;
+    }
   }
+
+  interface HTMLCwcMultiselectElement extends StencilComponents.CwcMultiselect, HTMLStencilElement {}
+
   var HTMLCwcMultiselectElement: {
     prototype: HTMLCwcMultiselectElement;
     new (): HTMLCwcMultiselectElement;
   };
   interface HTMLElementTagNameMap {
-    "cwc-multiselect": HTMLCwcMultiselectElement;
+    'cwc-multiselect': HTMLCwcMultiselectElement;
   }
   interface ElementTagNameMap {
-    "cwc-multiselect": HTMLCwcMultiselectElement;
+    'cwc-multiselect': HTMLCwcMultiselectElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "cwc-multiselect": JSXElements.CwcMultiselectAttributes;
+      'cwc-multiselect': JSXElements.CwcMultiselectAttributes;
     }
   }
   namespace JSXElements {
     export interface CwcMultiselectAttributes extends HTMLAttributes {
-      data?: any[];
-      idValue?: string;
-      minSearchLength?: number;
-      placeholder?: string;
-      searchKey?: string;
+      'data'?: any[];
+      'idValue'?: string;
+      'minSearchLength'?: number;
+      'onMultiselectOnSubmit'?: (event: CustomEvent) => void;
+      'placeholder'?: string;
+      'searchKey'?: string;
     }
   }
 }
 
 
-import {
-  CwcProgressBar as CwcProgressBar
-} from './components/cwc-progress-bar/cwc-progress-bar';
-
 declare global {
-  interface HTMLCwcProgressBarElement extends CwcProgressBar, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface CwcProgressBar {
+      'animated': boolean;
+      'classes': string;
+      'closable': boolean;
+      'height': number;
+      'progress': number;
+      'progressBarType': BootstrapThemeColor;
+      'striped': boolean;
+      'text': string;
+    }
   }
+
+  interface HTMLCwcProgressBarElement extends StencilComponents.CwcProgressBar, HTMLStencilElement {}
+
   var HTMLCwcProgressBarElement: {
     prototype: HTMLCwcProgressBarElement;
     new (): HTMLCwcProgressBarElement;
   };
   interface HTMLElementTagNameMap {
-    "cwc-progress-bar": HTMLCwcProgressBarElement;
+    'cwc-progress-bar': HTMLCwcProgressBarElement;
   }
   interface ElementTagNameMap {
-    "cwc-progress-bar": HTMLCwcProgressBarElement;
+    'cwc-progress-bar': HTMLCwcProgressBarElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "cwc-progress-bar": JSXElements.CwcProgressBarAttributes;
+      'cwc-progress-bar': JSXElements.CwcProgressBarAttributes;
     }
   }
   namespace JSXElements {
     export interface CwcProgressBarAttributes extends HTMLAttributes {
-      animated?: boolean;
-      classes?: string;
-      closable?: boolean;
-      height?: number;
-      progress?: number;
-      progressBarType?: BootstrapThemeColor;
-      striped?: boolean;
-      text?: string;
+      'animated'?: boolean;
+      'classes'?: string;
+      'closable'?: boolean;
+      'height'?: number;
+      'progress'?: number;
+      'progressBarType'?: BootstrapThemeColor;
+      'striped'?: boolean;
+      'text'?: string;
     }
   }
 }
 
 
-import {
-  CwcStickyHeaderComponent as CwcStickyHeader
-} from './components/cwc-sticky/cwc-sticky-header';
-
 declare global {
-  interface HTMLCwcStickyHeaderElement extends CwcStickyHeader, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface CwcStickyHeader {
+      'background': string;
+      'color': string;
+    }
   }
+
+  interface HTMLCwcStickyHeaderElement extends StencilComponents.CwcStickyHeader, HTMLStencilElement {}
+
   var HTMLCwcStickyHeaderElement: {
     prototype: HTMLCwcStickyHeaderElement;
     new (): HTMLCwcStickyHeaderElement;
   };
   interface HTMLElementTagNameMap {
-    "cwc-sticky-header": HTMLCwcStickyHeaderElement;
+    'cwc-sticky-header': HTMLCwcStickyHeaderElement;
   }
   interface ElementTagNameMap {
-    "cwc-sticky-header": HTMLCwcStickyHeaderElement;
+    'cwc-sticky-header': HTMLCwcStickyHeaderElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "cwc-sticky-header": JSXElements.CwcStickyHeaderAttributes;
+      'cwc-sticky-header': JSXElements.CwcStickyHeaderAttributes;
     }
   }
   namespace JSXElements {
     export interface CwcStickyHeaderAttributes extends HTMLAttributes {
-      background?: string;
-      color?: string;
+      'background'?: string;
+      'color'?: string;
     }
   }
 }
 
 
-import {
-  CwcStickyComponent as CwcSticky
-} from './components/cwc-sticky/cwc-sticky';
-
 declare global {
-  interface HTMLCwcStickyElement extends CwcSticky, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface CwcSticky {
+
+    }
   }
+
+  interface HTMLCwcStickyElement extends StencilComponents.CwcSticky, HTMLStencilElement {}
+
   var HTMLCwcStickyElement: {
     prototype: HTMLCwcStickyElement;
     new (): HTMLCwcStickyElement;
   };
   interface HTMLElementTagNameMap {
-    "cwc-sticky": HTMLCwcStickyElement;
+    'cwc-sticky': HTMLCwcStickyElement;
   }
   interface ElementTagNameMap {
-    "cwc-sticky": HTMLCwcStickyElement;
+    'cwc-sticky': HTMLCwcStickyElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "cwc-sticky": JSXElements.CwcStickyAttributes;
+      'cwc-sticky': JSXElements.CwcStickyAttributes;
     }
   }
   namespace JSXElements {
     export interface CwcStickyAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  CwcTag as CwcTag
-} from './components/cwc-tag/cwc-tag';
-
 declare global {
-  interface HTMLCwcTagElement extends CwcTag, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface CwcTag {
+      'classes': string;
+      'closable': boolean;
+      'close': (e?: UIEvent) => void;
+      'imgLink': string;
+      'limitTo': number;
+      'link': string;
+      'onCloseData': any;
+      'removeOnClose': boolean;
+      'rounded': boolean;
+      'tagType': BootstrapThemeColor;
+      'text': string;
+    }
   }
+
+  interface HTMLCwcTagElement extends StencilComponents.CwcTag, HTMLStencilElement {}
+
   var HTMLCwcTagElement: {
     prototype: HTMLCwcTagElement;
     new (): HTMLCwcTagElement;
   };
   interface HTMLElementTagNameMap {
-    "cwc-tag": HTMLCwcTagElement;
+    'cwc-tag': HTMLCwcTagElement;
   }
   interface ElementTagNameMap {
-    "cwc-tag": HTMLCwcTagElement;
+    'cwc-tag': HTMLCwcTagElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "cwc-tag": JSXElements.CwcTagAttributes;
+      'cwc-tag': JSXElements.CwcTagAttributes;
     }
   }
   namespace JSXElements {
     export interface CwcTagAttributes extends HTMLAttributes {
-      classes?: string;
-      closable?: boolean;
-      imgLink?: string;
-      limitTo?: number;
-      link?: string;
-      onCloseData?: any;
-      removeOnClose?: boolean;
-      rounded?: boolean;
-      tagType?: BootstrapThemeColor;
-      text?: string;
+      'classes'?: string;
+      'closable'?: boolean;
+      'imgLink'?: string;
+      'limitTo'?: number;
+      'link'?: string;
+      'onCloseData'?: any;
+      'onTagCloseEvent'?: (event: CustomEvent) => void;
+      'removeOnClose'?: boolean;
+      'rounded'?: boolean;
+      'tagType'?: BootstrapThemeColor;
+      'text'?: string;
     }
   }
 }
 
 
-import {
-  CwcTypeahead as CwcTypeahead
-} from './components/cwc-typeahead/cwc-typeahead';
-
 declare global {
-  interface HTMLCwcTypeaheadElement extends CwcTypeahead, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface CwcTypeahead {
+      /**
+       * Public methods
+       */
+      'close': () => void;
+      'data': any[];
+      'googleAutocomplete': boolean;
+      'highlight': boolean;
+      'idValue': string;
+      'itemAs': string;
+      'minSearchLength': number;
+      'placeholder': string;
+      'searchKey': string;
+      'template': string;
+    }
   }
+
+  interface HTMLCwcTypeaheadElement extends StencilComponents.CwcTypeahead, HTMLStencilElement {}
+
   var HTMLCwcTypeaheadElement: {
     prototype: HTMLCwcTypeaheadElement;
     new (): HTMLCwcTypeaheadElement;
   };
   interface HTMLElementTagNameMap {
-    "cwc-typeahead": HTMLCwcTypeaheadElement;
+    'cwc-typeahead': HTMLCwcTypeaheadElement;
   }
   interface ElementTagNameMap {
-    "cwc-typeahead": HTMLCwcTypeaheadElement;
+    'cwc-typeahead': HTMLCwcTypeaheadElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "cwc-typeahead": JSXElements.CwcTypeaheadAttributes;
+      'cwc-typeahead': JSXElements.CwcTypeaheadAttributes;
     }
   }
   namespace JSXElements {
     export interface CwcTypeaheadAttributes extends HTMLAttributes {
-      data?: any[];
-      googleAutocomplete?: boolean;
-      highlight?: boolean;
-      idValue?: string;
-      itemAs?: string;
-      minSearchLength?: number;
-      placeholder?: string;
-      searchKey?: string;
-      template?: string;
+      'data'?: any[];
+      'googleAutocomplete'?: boolean;
+      'highlight'?: boolean;
+      'idValue'?: string;
+      'itemAs'?: string;
+      'minSearchLength'?: number;
+      'onTypeaheadOnSubmit'?: (event: CustomEvent) => void;
+      'placeholder'?: string;
+      'searchKey'?: string;
+      'template'?: string;
     }
   }
 }
 
 
-import {
-  FclImage as FclImage
-} from './components/fcl-image/fcl-image';
-
 declare global {
-  interface HTMLFclImageElement extends FclImage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface FclImage {
+      'brokenUrl': any;
+      'height': any;
+      'src': any;
+      'width': any;
+    }
   }
+
+  interface HTMLFclImageElement extends StencilComponents.FclImage, HTMLStencilElement {}
+
   var HTMLFclImageElement: {
     prototype: HTMLFclImageElement;
     new (): HTMLFclImageElement;
   };
   interface HTMLElementTagNameMap {
-    "fcl-image": HTMLFclImageElement;
+    'fcl-image': HTMLFclImageElement;
   }
   interface ElementTagNameMap {
-    "fcl-image": HTMLFclImageElement;
+    'fcl-image': HTMLFclImageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "fcl-image": JSXElements.FclImageAttributes;
+      'fcl-image': JSXElements.FclImageAttributes;
     }
   }
   namespace JSXElements {
     export interface FclImageAttributes extends HTMLAttributes {
-      brokenUrl?: any;
-      height?: any;
-      src?: any;
-      width?: any;
+      'brokenUrl'?: any;
+      'height'?: any;
+      'src'?: any;
+      'width'?: any;
     }
   }
 }
 
 
-import {
-  FclVideoPLayer as FclVideoPlayer
-} from './components/fcl-video-player/fcl-video-player';
-
 declare global {
-  interface HTMLFclVideoPlayerElement extends FclVideoPlayer, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface FclVideoPlayer {
+      'controls': boolean;
+      'poster': string;
+      'theme': string;
+      'thumbnail': any;
+    }
   }
+
+  interface HTMLFclVideoPlayerElement extends StencilComponents.FclVideoPlayer, HTMLStencilElement {}
+
   var HTMLFclVideoPlayerElement: {
     prototype: HTMLFclVideoPlayerElement;
     new (): HTMLFclVideoPlayerElement;
   };
   interface HTMLElementTagNameMap {
-    "fcl-video-player": HTMLFclVideoPlayerElement;
+    'fcl-video-player': HTMLFclVideoPlayerElement;
   }
   interface ElementTagNameMap {
-    "fcl-video-player": HTMLFclVideoPlayerElement;
+    'fcl-video-player': HTMLFclVideoPlayerElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "fcl-video-player": JSXElements.FclVideoPlayerAttributes;
+      'fcl-video-player': JSXElements.FclVideoPlayerAttributes;
     }
   }
   namespace JSXElements {
     export interface FclVideoPlayerAttributes extends HTMLAttributes {
-      controls?: boolean;
-      poster?: string;
-      theme?: string;
-      thumbnail?: any;
+      'controls'?: boolean;
+      'poster'?: string;
+      'theme'?: string;
+      'thumbnail'?: any;
     }
   }
 }
 
 
-import {
-  MWCSlider as MwcSlider
-} from './components/mwc-slider/mwc-slider';
-
 declare global {
-  interface HTMLMwcSliderElement extends MwcSlider, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface MwcSlider {
+      'disabled': boolean;
+      'max': number;
+      'min': number;
+      'slidercolor': string;
+      'step': number;
+      'stepdown': (amount?: number) => void;
+      'stepup': (amount?: number) => void;
+      'value': number;
+    }
   }
+
+  interface HTMLMwcSliderElement extends StencilComponents.MwcSlider, HTMLStencilElement {}
+
   var HTMLMwcSliderElement: {
     prototype: HTMLMwcSliderElement;
     new (): HTMLMwcSliderElement;
   };
   interface HTMLElementTagNameMap {
-    "mwc-slider": HTMLMwcSliderElement;
+    'mwc-slider': HTMLMwcSliderElement;
   }
   interface ElementTagNameMap {
-    "mwc-slider": HTMLMwcSliderElement;
+    'mwc-slider': HTMLMwcSliderElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "mwc-slider": JSXElements.MwcSliderAttributes;
+      'mwc-slider': JSXElements.MwcSliderAttributes;
     }
   }
   namespace JSXElements {
     export interface MwcSliderAttributes extends HTMLAttributes {
-      disabled?: boolean;
-      max?: number;
-      min?: number;
-      slidercolor?: string;
-      step?: number;
-      value?: number;
+      'disabled'?: boolean;
+      'max'?: number;
+      'min'?: number;
+      'onChange'?: (event: CustomEvent) => void;
+      'slidercolor'?: string;
+      'step'?: number;
+      'value'?: number;
     }
   }
 }
 
 
-import {
-  MyCheckbox as MyCheckbox
-} from './components/my-checkbox/my-checkbox';
-
 declare global {
-  interface HTMLMyCheckboxElement extends MyCheckbox, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface MyCheckbox {
+      'for': string;
+      'id': string;
+      'title': string;
+      'value': boolean;
+    }
   }
+
+  interface HTMLMyCheckboxElement extends StencilComponents.MyCheckbox, HTMLStencilElement {}
+
   var HTMLMyCheckboxElement: {
     prototype: HTMLMyCheckboxElement;
     new (): HTMLMyCheckboxElement;
   };
   interface HTMLElementTagNameMap {
-    "my-checkbox": HTMLMyCheckboxElement;
+    'my-checkbox': HTMLMyCheckboxElement;
   }
   interface ElementTagNameMap {
-    "my-checkbox": HTMLMyCheckboxElement;
+    'my-checkbox': HTMLMyCheckboxElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "my-checkbox": JSXElements.MyCheckboxAttributes;
+      'my-checkbox': JSXElements.MyCheckboxAttributes;
     }
   }
   namespace JSXElements {
     export interface MyCheckboxAttributes extends HTMLAttributes {
-      for?: string;
-      id?: string;
-      title?: string;
-      value?: boolean;
+      'for'?: string;
+      'id'?: string;
+      'onPostValue'?: (event: CustomEvent) => void;
+      'title'?: string;
+      'value'?: boolean;
     }
   }
 }
 
 
-import {
-  MyDropdown as MyDropdown
-} from './components/my-dropdown/my-dropdown';
-
 declare global {
-  interface HTMLMyDropdownElement extends MyDropdown, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface MyDropdown {
+      'for': string;
+      'id': string;
+      'title': string;
+      'value': string;
+    }
   }
+
+  interface HTMLMyDropdownElement extends StencilComponents.MyDropdown, HTMLStencilElement {}
+
   var HTMLMyDropdownElement: {
     prototype: HTMLMyDropdownElement;
     new (): HTMLMyDropdownElement;
   };
   interface HTMLElementTagNameMap {
-    "my-dropdown": HTMLMyDropdownElement;
+    'my-dropdown': HTMLMyDropdownElement;
   }
   interface ElementTagNameMap {
-    "my-dropdown": HTMLMyDropdownElement;
+    'my-dropdown': HTMLMyDropdownElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "my-dropdown": JSXElements.MyDropdownAttributes;
+      'my-dropdown': JSXElements.MyDropdownAttributes;
     }
   }
   namespace JSXElements {
     export interface MyDropdownAttributes extends HTMLAttributes {
-      for?: string;
-      id?: string;
-      title?: string;
-      value?: string;
+      'for'?: string;
+      'id'?: string;
+      'onPostValue'?: (event: CustomEvent) => void;
+      'title'?: string;
+      'value'?: string;
     }
   }
 }
 
 
-import {
-  MyDynamicForm as MyDynamicForm
-} from './components/my-dynamic-form/my-dynamic-form';
-
 declare global {
-  interface HTMLMyDynamicFormElement extends MyDynamicForm, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface MyDynamicForm {
+      'ajv': any;
+      'form': any;
+      'schema': any;
+    }
   }
+
+  interface HTMLMyDynamicFormElement extends StencilComponents.MyDynamicForm, HTMLStencilElement {}
+
   var HTMLMyDynamicFormElement: {
     prototype: HTMLMyDynamicFormElement;
     new (): HTMLMyDynamicFormElement;
   };
   interface HTMLElementTagNameMap {
-    "my-dynamic-form": HTMLMyDynamicFormElement;
+    'my-dynamic-form': HTMLMyDynamicFormElement;
   }
   interface ElementTagNameMap {
-    "my-dynamic-form": HTMLMyDynamicFormElement;
+    'my-dynamic-form': HTMLMyDynamicFormElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "my-dynamic-form": JSXElements.MyDynamicFormAttributes;
+      'my-dynamic-form': JSXElements.MyDynamicFormAttributes;
     }
   }
   namespace JSXElements {
     export interface MyDynamicFormAttributes extends HTMLAttributes {
-      ajv?: any;
-      form?: any;
-      schema?: any;
+      'ajv'?: any;
+      'form'?: any;
+      'schema'?: any;
     }
   }
 }
 
 
-import {
-  MyInput as MyInput
-} from './components/my-input/my-input';
-
 declare global {
-  interface HTMLMyInputElement extends MyInput, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface MyInput {
+      'for': string;
+      'format': any;
+      'id': string;
+      'title': string;
+      'value': any;
+    }
   }
+
+  interface HTMLMyInputElement extends StencilComponents.MyInput, HTMLStencilElement {}
+
   var HTMLMyInputElement: {
     prototype: HTMLMyInputElement;
     new (): HTMLMyInputElement;
   };
   interface HTMLElementTagNameMap {
-    "my-input": HTMLMyInputElement;
+    'my-input': HTMLMyInputElement;
   }
   interface ElementTagNameMap {
-    "my-input": HTMLMyInputElement;
+    'my-input': HTMLMyInputElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "my-input": JSXElements.MyInputAttributes;
+      'my-input': JSXElements.MyInputAttributes;
     }
   }
   namespace JSXElements {
     export interface MyInputAttributes extends HTMLAttributes {
-      for?: string;
-      format?: any;
-      id?: string;
-      title?: string;
-      value?: any;
+      'for'?: string;
+      'format'?: any;
+      'id'?: string;
+      'onPostValue'?: (event: CustomEvent) => void;
+      'title'?: string;
+      'value'?: any;
     }
   }
 }
 
 
-import {
-  ScbAlert as ScbAlert
-} from './components/scb-alert/scb-alert';
-
 declare global {
-  interface HTMLScbAlertElement extends ScbAlert, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface ScbAlert {
+      'animatable': boolean;
+      'dismiss': () => void;
+      'dismissible': boolean;
+      'onDismiss': (hostEl: HTMLElement) => void;
+      'show': boolean;
+      'type': string;
+    }
   }
+
+  interface HTMLScbAlertElement extends StencilComponents.ScbAlert, HTMLStencilElement {}
+
   var HTMLScbAlertElement: {
     prototype: HTMLScbAlertElement;
     new (): HTMLScbAlertElement;
   };
   interface HTMLElementTagNameMap {
-    "scb-alert": HTMLScbAlertElement;
+    'scb-alert': HTMLScbAlertElement;
   }
   interface ElementTagNameMap {
-    "scb-alert": HTMLScbAlertElement;
+    'scb-alert': HTMLScbAlertElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "scb-alert": JSXElements.ScbAlertAttributes;
+      'scb-alert': JSXElements.ScbAlertAttributes;
     }
   }
   namespace JSXElements {
     export interface ScbAlertAttributes extends HTMLAttributes {
-      animatable?: boolean;
-      dismissible?: boolean;
-      onDismiss?: (hostEl: HostElement) => void;
-      show?: boolean;
-      type?: string;
+      'animatable'?: boolean;
+      'dismissible'?: boolean;
+      'onDismiss'?: (hostEl: HTMLElement) => void;
+      'onToggleVisibility'?: (event: CustomEvent) => void;
+      'show'?: boolean;
+      'type'?: string;
     }
   }
 }
 
 
-import {
-  ScbBadge as ScbBadge
-} from './components/scb-badge/scb-badge';
-
 declare global {
-  interface HTMLScbBadgeElement extends ScbBadge, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface ScbBadge {
+      'link': string;
+      'pill': boolean;
+      'type': BootstrapThemeColor;
+    }
   }
+
+  interface HTMLScbBadgeElement extends StencilComponents.ScbBadge, HTMLStencilElement {}
+
   var HTMLScbBadgeElement: {
     prototype: HTMLScbBadgeElement;
     new (): HTMLScbBadgeElement;
   };
   interface HTMLElementTagNameMap {
-    "scb-badge": HTMLScbBadgeElement;
+    'scb-badge': HTMLScbBadgeElement;
   }
   interface ElementTagNameMap {
-    "scb-badge": HTMLScbBadgeElement;
+    'scb-badge': HTMLScbBadgeElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "scb-badge": JSXElements.ScbBadgeAttributes;
+      'scb-badge': JSXElements.ScbBadgeAttributes;
     }
   }
   namespace JSXElements {
     export interface ScbBadgeAttributes extends HTMLAttributes {
-      link?: string;
-      pill?: boolean;
-      type?: BootstrapThemeColor;
+      'link'?: string;
+      'pill'?: boolean;
+      'type'?: BootstrapThemeColor;
     }
   }
 }
 
 
-import {
-  ScbBreadcrumb as ScbBreadcrumb
-} from './components/scb-breadcrumb/scb-breadcrumb';
-
 declare global {
-  interface HTMLScbBreadcrumbElement extends ScbBreadcrumb, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface ScbBreadcrumb {
+      'items': IBreadcrumbItem[];
+    }
   }
+
+  interface HTMLScbBreadcrumbElement extends StencilComponents.ScbBreadcrumb, HTMLStencilElement {}
+
   var HTMLScbBreadcrumbElement: {
     prototype: HTMLScbBreadcrumbElement;
     new (): HTMLScbBreadcrumbElement;
   };
   interface HTMLElementTagNameMap {
-    "scb-breadcrumb": HTMLScbBreadcrumbElement;
+    'scb-breadcrumb': HTMLScbBreadcrumbElement;
   }
   interface ElementTagNameMap {
-    "scb-breadcrumb": HTMLScbBreadcrumbElement;
+    'scb-breadcrumb': HTMLScbBreadcrumbElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "scb-breadcrumb": JSXElements.ScbBreadcrumbAttributes;
+      'scb-breadcrumb': JSXElements.ScbBreadcrumbAttributes;
     }
   }
   namespace JSXElements {
     export interface ScbBreadcrumbAttributes extends HTMLAttributes {
-      items?: IBreadcrumbItem[];
+      'items'?: IBreadcrumbItem[];
     }
   }
 }
 
 
-import {
-  ScbCollapse as ScbCollapse
-} from './components/scb-collapse/scb-collapse';
-
 declare global {
-  interface HTMLScbCollapseElement extends ScbCollapse, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface ScbCollapse {
+      'collapseid': string;
+      'items': any[];
+    }
   }
+
+  interface HTMLScbCollapseElement extends StencilComponents.ScbCollapse, HTMLStencilElement {}
+
   var HTMLScbCollapseElement: {
     prototype: HTMLScbCollapseElement;
     new (): HTMLScbCollapseElement;
   };
   interface HTMLElementTagNameMap {
-    "scb-collapse": HTMLScbCollapseElement;
+    'scb-collapse': HTMLScbCollapseElement;
   }
   interface ElementTagNameMap {
-    "scb-collapse": HTMLScbCollapseElement;
+    'scb-collapse': HTMLScbCollapseElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "scb-collapse": JSXElements.ScbCollapseAttributes;
+      'scb-collapse': JSXElements.ScbCollapseAttributes;
     }
   }
   namespace JSXElements {
     export interface ScbCollapseAttributes extends HTMLAttributes {
-      collapseid?: string;
-      items?: any[];
+      'collapseid'?: string;
+      'items'?: any[];
     }
   }
 }
 
 
-import {
-  ScbFileInput as ScbFileInput
-} from './components/scb-file-input/scb-file-input';
-
 declare global {
-  interface HTMLScbFileInputElement extends ScbFileInput, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface ScbFileInput {
+      'accept': string;
+      'files': any[];
+      'formDataName': string;
+      'headers': string;
+      'maxFileSize': number;
+      'maxFiles': number;
+      'method': string;
+      'noAuto': boolean;
+      'nodrop': boolean;
+      'target': string;
+      'timeout': number;
+      'type': BootstrapThemeColor;
+    }
   }
+
+  interface HTMLScbFileInputElement extends StencilComponents.ScbFileInput, HTMLStencilElement {}
+
   var HTMLScbFileInputElement: {
     prototype: HTMLScbFileInputElement;
     new (): HTMLScbFileInputElement;
   };
   interface HTMLElementTagNameMap {
-    "scb-file-input": HTMLScbFileInputElement;
+    'scb-file-input': HTMLScbFileInputElement;
   }
   interface ElementTagNameMap {
-    "scb-file-input": HTMLScbFileInputElement;
+    'scb-file-input': HTMLScbFileInputElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "scb-file-input": JSXElements.ScbFileInputAttributes;
+      'scb-file-input': JSXElements.ScbFileInputAttributes;
     }
   }
   namespace JSXElements {
     export interface ScbFileInputAttributes extends HTMLAttributes {
-      accept?: string;
-      files?: any[];
-      formDataName?: string;
-      headers?: string;
-      maxFiles?: number;
-      maxFileSize?: number;
-      method?: string;
-      noAuto?: boolean;
-      nodrop?: boolean;
-      target?: string;
-      timeout?: number;
-      type?: BootstrapThemeColor;
+      'accept'?: string;
+      'files'?: any[];
+      'formDataName'?: string;
+      'headers'?: string;
+      'maxFileSize'?: number;
+      'maxFiles'?: number;
+      'method'?: string;
+      'noAuto'?: boolean;
+      'nodrop'?: boolean;
+      'target'?: string;
+      'timeout'?: number;
+      'type'?: BootstrapThemeColor;
     }
   }
 }
 
 
-import {
-  ScbNavbar as ScbNavbar
-} from './components/scb-navbar/scb-navbar';
-
 declare global {
-  interface HTMLScbNavbarElement extends ScbNavbar, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface ScbNavbar {
+      'bgcolor': string;
+      'navbarcolor': string;
+      'placement': string;
+      'size': string;
+    }
   }
+
+  interface HTMLScbNavbarElement extends StencilComponents.ScbNavbar, HTMLStencilElement {}
+
   var HTMLScbNavbarElement: {
     prototype: HTMLScbNavbarElement;
     new (): HTMLScbNavbarElement;
   };
   interface HTMLElementTagNameMap {
-    "scb-navbar": HTMLScbNavbarElement;
+    'scb-navbar': HTMLScbNavbarElement;
   }
   interface ElementTagNameMap {
-    "scb-navbar": HTMLScbNavbarElement;
+    'scb-navbar': HTMLScbNavbarElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "scb-navbar": JSXElements.ScbNavbarAttributes;
+      'scb-navbar': JSXElements.ScbNavbarAttributes;
     }
   }
   namespace JSXElements {
     export interface ScbNavbarAttributes extends HTMLAttributes {
-      bgcolor?: string;
-      navbarcolor?: string;
-      placement?: string;
-      size?: string;
+      'bgcolor'?: string;
+      'navbarcolor'?: string;
+      'placement'?: string;
+      'size'?: string;
     }
   }
 }
 
 
-import {
-  ScbTooltip as ScbTooltip
-} from './components/scb-tooltip/scb-tooltip';
-
 declare global {
-  interface HTMLScbTooltipElement extends ScbTooltip, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface ScbTooltip {
+      'delay': any;
+      'href': string;
+      'offset': string;
+      'placement': string;
+      'target': string;
+      'tooltipTitle': string;
+      'trigger': string;
+      'type': string;
+    }
   }
+
+  interface HTMLScbTooltipElement extends StencilComponents.ScbTooltip, HTMLStencilElement {}
+
   var HTMLScbTooltipElement: {
     prototype: HTMLScbTooltipElement;
     new (): HTMLScbTooltipElement;
   };
   interface HTMLElementTagNameMap {
-    "scb-tooltip": HTMLScbTooltipElement;
+    'scb-tooltip': HTMLScbTooltipElement;
   }
   interface ElementTagNameMap {
-    "scb-tooltip": HTMLScbTooltipElement;
+    'scb-tooltip': HTMLScbTooltipElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "scb-tooltip": JSXElements.ScbTooltipAttributes;
+      'scb-tooltip': JSXElements.ScbTooltipAttributes;
     }
   }
   namespace JSXElements {
     export interface ScbTooltipAttributes extends HTMLAttributes {
-      delay?: any;
-      href?: string;
-      offset?: string;
-      placement?: string;
-      target?: string;
-      tooltipTitle?: string;
-      trigger?: string;
-      type?: string;
+      'delay'?: any;
+      'href'?: string;
+      'offset'?: string;
+      'placement'?: string;
+      'target'?: string;
+      'tooltipTitle'?: string;
+      'trigger'?: string;
+      'type'?: string;
     }
   }
 }
 
 
-import {
-  StcTabContent as StcTabContent
-} from './components/stc-tabs/tab-content';
-
 declare global {
-  interface HTMLStcTabContentElement extends StcTabContent, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface StcTabContent {
+      'getChild': () => IStcTabContentData;
+      'name': string;
+    }
   }
+
+  interface HTMLStcTabContentElement extends StencilComponents.StcTabContent, HTMLStencilElement {}
+
   var HTMLStcTabContentElement: {
     prototype: HTMLStcTabContentElement;
     new (): HTMLStcTabContentElement;
   };
   interface HTMLElementTagNameMap {
-    "stc-tab-content": HTMLStcTabContentElement;
+    'stc-tab-content': HTMLStcTabContentElement;
   }
   interface ElementTagNameMap {
-    "stc-tab-content": HTMLStcTabContentElement;
+    'stc-tab-content': HTMLStcTabContentElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "stc-tab-content": JSXElements.StcTabContentAttributes;
+      'stc-tab-content': JSXElements.StcTabContentAttributes;
     }
   }
   namespace JSXElements {
     export interface StcTabContentAttributes extends HTMLAttributes {
-      name?: string;
+      'name'?: string;
     }
   }
 }
 
 
-import {
-  StcTabHeader as StcTabHeader
-} from './components/stc-tabs/tab-header';
-
 declare global {
-  interface HTMLStcTabHeaderElement extends StcTabHeader, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface StcTabHeader {
+      'getChild': () => IStcTabHeaderData;
+      'name': string;
+    }
   }
+
+  interface HTMLStcTabHeaderElement extends StencilComponents.StcTabHeader, HTMLStencilElement {}
+
   var HTMLStcTabHeaderElement: {
     prototype: HTMLStcTabHeaderElement;
     new (): HTMLStcTabHeaderElement;
   };
   interface HTMLElementTagNameMap {
-    "stc-tab-header": HTMLStcTabHeaderElement;
+    'stc-tab-header': HTMLStcTabHeaderElement;
   }
   interface ElementTagNameMap {
-    "stc-tab-header": HTMLStcTabHeaderElement;
+    'stc-tab-header': HTMLStcTabHeaderElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "stc-tab-header": JSXElements.StcTabHeaderAttributes;
+      'stc-tab-header': JSXElements.StcTabHeaderAttributes;
     }
   }
   namespace JSXElements {
     export interface StcTabHeaderAttributes extends HTMLAttributes {
-      name?: string;
+      'name'?: string;
+      'onOnSelect'?: (event: CustomEvent) => void;
     }
   }
 }
 
 
-import {
-  StcTabs as StcTabs
-} from './components/stc-tabs/tabs';
-
 declare global {
-  interface HTMLStcTabsElement extends StcTabs, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface StcTabs {
+
+    }
   }
+
+  interface HTMLStcTabsElement extends StencilComponents.StcTabs, HTMLStencilElement {}
+
   var HTMLStcTabsElement: {
     prototype: HTMLStcTabsElement;
     new (): HTMLStcTabsElement;
   };
   interface HTMLElementTagNameMap {
-    "stc-tabs": HTMLStcTabsElement;
+    'stc-tabs': HTMLStcTabsElement;
   }
   interface ElementTagNameMap {
-    "stc-tabs": HTMLStcTabsElement;
+    'stc-tabs': HTMLStcTabsElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "stc-tabs": JSXElements.StcTabsAttributes;
+      'stc-tabs': JSXElements.StcTabsAttributes;
     }
   }
   namespace JSXElements {
     export interface StcTabsAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  AlertsPage as AlertsPage
-} from './pages/alerts-page/alerts-page';
-
 declare global {
-  interface HTMLAlertsPageElement extends AlertsPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface AlertsPage {
+
+    }
   }
+
+  interface HTMLAlertsPageElement extends StencilComponents.AlertsPage, HTMLStencilElement {}
+
   var HTMLAlertsPageElement: {
     prototype: HTMLAlertsPageElement;
     new (): HTMLAlertsPageElement;
   };
   interface HTMLElementTagNameMap {
-    "alerts-page": HTMLAlertsPageElement;
+    'alerts-page': HTMLAlertsPageElement;
   }
   interface ElementTagNameMap {
-    "alerts-page": HTMLAlertsPageElement;
+    'alerts-page': HTMLAlertsPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "alerts-page": JSXElements.AlertsPageAttributes;
+      'alerts-page': JSXElements.AlertsPageAttributes;
     }
   }
   namespace JSXElements {
     export interface AlertsPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  AvatarPage as AvatarPage
-} from './pages/avatar-page/avatar-page';
-
 declare global {
-  interface HTMLAvatarPageElement extends AvatarPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface AvatarPage {
+
+    }
   }
+
+  interface HTMLAvatarPageElement extends StencilComponents.AvatarPage, HTMLStencilElement {}
+
   var HTMLAvatarPageElement: {
     prototype: HTMLAvatarPageElement;
     new (): HTMLAvatarPageElement;
   };
   interface HTMLElementTagNameMap {
-    "avatar-page": HTMLAvatarPageElement;
+    'avatar-page': HTMLAvatarPageElement;
   }
   interface ElementTagNameMap {
-    "avatar-page": HTMLAvatarPageElement;
+    'avatar-page': HTMLAvatarPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "avatar-page": JSXElements.AvatarPageAttributes;
+      'avatar-page': JSXElements.AvatarPageAttributes;
     }
   }
   namespace JSXElements {
     export interface AvatarPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  BadgePage as BadgePage
-} from './pages/badge-page/badge-page';
-
 declare global {
-  interface HTMLBadgePageElement extends BadgePage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface BadgePage {
+
+    }
   }
+
+  interface HTMLBadgePageElement extends StencilComponents.BadgePage, HTMLStencilElement {}
+
   var HTMLBadgePageElement: {
     prototype: HTMLBadgePageElement;
     new (): HTMLBadgePageElement;
   };
   interface HTMLElementTagNameMap {
-    "badge-page": HTMLBadgePageElement;
+    'badge-page': HTMLBadgePageElement;
   }
   interface ElementTagNameMap {
-    "badge-page": HTMLBadgePageElement;
+    'badge-page': HTMLBadgePageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "badge-page": JSXElements.BadgePageAttributes;
+      'badge-page': JSXElements.BadgePageAttributes;
     }
   }
   namespace JSXElements {
     export interface BadgePageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  BreadcrumbPage as BreadcrumbPage
-} from './pages/breadcrumb-page/breadcrumb-page';
-
 declare global {
-  interface HTMLBreadcrumbPageElement extends BreadcrumbPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface BreadcrumbPage {
+
+    }
   }
+
+  interface HTMLBreadcrumbPageElement extends StencilComponents.BreadcrumbPage, HTMLStencilElement {}
+
   var HTMLBreadcrumbPageElement: {
     prototype: HTMLBreadcrumbPageElement;
     new (): HTMLBreadcrumbPageElement;
   };
   interface HTMLElementTagNameMap {
-    "breadcrumb-page": HTMLBreadcrumbPageElement;
+    'breadcrumb-page': HTMLBreadcrumbPageElement;
   }
   interface ElementTagNameMap {
-    "breadcrumb-page": HTMLBreadcrumbPageElement;
+    'breadcrumb-page': HTMLBreadcrumbPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "breadcrumb-page": JSXElements.BreadcrumbPageAttributes;
+      'breadcrumb-page': JSXElements.BreadcrumbPageAttributes;
     }
   }
   namespace JSXElements {
     export interface BreadcrumbPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  CollapsePage as CollapsePage
-} from './pages/collapse-page/collapse-page';
-
 declare global {
-  interface HTMLCollapsePageElement extends CollapsePage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface CollapsePage {
+
+    }
   }
+
+  interface HTMLCollapsePageElement extends StencilComponents.CollapsePage, HTMLStencilElement {}
+
   var HTMLCollapsePageElement: {
     prototype: HTMLCollapsePageElement;
     new (): HTMLCollapsePageElement;
   };
   interface HTMLElementTagNameMap {
-    "collapse-page": HTMLCollapsePageElement;
+    'collapse-page': HTMLCollapsePageElement;
   }
   interface ElementTagNameMap {
-    "collapse-page": HTMLCollapsePageElement;
+    'collapse-page': HTMLCollapsePageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "collapse-page": JSXElements.CollapsePageAttributes;
+      'collapse-page': JSXElements.CollapsePageAttributes;
     }
   }
   namespace JSXElements {
     export interface CollapsePageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  DatepickerPage as DatepickerPage
-} from './pages/datepicker-page/datepicker-page';
-
 declare global {
-  interface HTMLDatepickerPageElement extends DatepickerPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface DatepickerPage {
+
+    }
   }
+
+  interface HTMLDatepickerPageElement extends StencilComponents.DatepickerPage, HTMLStencilElement {}
+
   var HTMLDatepickerPageElement: {
     prototype: HTMLDatepickerPageElement;
     new (): HTMLDatepickerPageElement;
   };
   interface HTMLElementTagNameMap {
-    "datepicker-page": HTMLDatepickerPageElement;
+    'datepicker-page': HTMLDatepickerPageElement;
   }
   interface ElementTagNameMap {
-    "datepicker-page": HTMLDatepickerPageElement;
+    'datepicker-page': HTMLDatepickerPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "datepicker-page": JSXElements.DatepickerPageAttributes;
+      'datepicker-page': JSXElements.DatepickerPageAttributes;
     }
   }
   namespace JSXElements {
     export interface DatepickerPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  StencilComponent as DropdownPage
-} from './pages/dropdown-page/dropdown-page';
-
 declare global {
-  interface HTMLDropdownPageElement extends DropdownPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface DropdownPage {
+
+    }
   }
+
+  interface HTMLDropdownPageElement extends StencilComponents.DropdownPage, HTMLStencilElement {}
+
   var HTMLDropdownPageElement: {
     prototype: HTMLDropdownPageElement;
     new (): HTMLDropdownPageElement;
   };
   interface HTMLElementTagNameMap {
-    "dropdown-page": HTMLDropdownPageElement;
+    'dropdown-page': HTMLDropdownPageElement;
   }
   interface ElementTagNameMap {
-    "dropdown-page": HTMLDropdownPageElement;
+    'dropdown-page': HTMLDropdownPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "dropdown-page": JSXElements.DropdownPageAttributes;
+      'dropdown-page': JSXElements.DropdownPageAttributes;
     }
   }
   namespace JSXElements {
     export interface DropdownPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  FclImagePage as FclImagePage
-} from './pages/fcl-image-page/fcl-image-page';
-
 declare global {
-  interface HTMLFclImagePageElement extends FclImagePage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface FclImagePage {
+
+    }
   }
+
+  interface HTMLFclImagePageElement extends StencilComponents.FclImagePage, HTMLStencilElement {}
+
   var HTMLFclImagePageElement: {
     prototype: HTMLFclImagePageElement;
     new (): HTMLFclImagePageElement;
   };
   interface HTMLElementTagNameMap {
-    "fcl-image-page": HTMLFclImagePageElement;
+    'fcl-image-page': HTMLFclImagePageElement;
   }
   interface ElementTagNameMap {
-    "fcl-image-page": HTMLFclImagePageElement;
+    'fcl-image-page': HTMLFclImagePageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "fcl-image-page": JSXElements.FclImagePageAttributes;
+      'fcl-image-page': JSXElements.FclImagePageAttributes;
     }
   }
   namespace JSXElements {
     export interface FclImagePageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  FileInputPage as FileInputPage
-} from './pages/file-input-page/file-input-page';
-
 declare global {
-  interface HTMLFileInputPageElement extends FileInputPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface FileInputPage {
+
+    }
   }
+
+  interface HTMLFileInputPageElement extends StencilComponents.FileInputPage, HTMLStencilElement {}
+
   var HTMLFileInputPageElement: {
     prototype: HTMLFileInputPageElement;
     new (): HTMLFileInputPageElement;
   };
   interface HTMLElementTagNameMap {
-    "file-input-page": HTMLFileInputPageElement;
+    'file-input-page': HTMLFileInputPageElement;
   }
   interface ElementTagNameMap {
-    "file-input-page": HTMLFileInputPageElement;
+    'file-input-page': HTMLFileInputPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "file-input-page": JSXElements.FileInputPageAttributes;
+      'file-input-page': JSXElements.FileInputPageAttributes;
     }
   }
   namespace JSXElements {
     export interface FileInputPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  FormPage as FormPage
-} from './pages/form-page/form-page';
-
 declare global {
-  interface HTMLFormPageElement extends FormPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface FormPage {
+
+    }
   }
+
+  interface HTMLFormPageElement extends StencilComponents.FormPage, HTMLStencilElement {}
+
   var HTMLFormPageElement: {
     prototype: HTMLFormPageElement;
     new (): HTMLFormPageElement;
   };
   interface HTMLElementTagNameMap {
-    "form-page": HTMLFormPageElement;
+    'form-page': HTMLFormPageElement;
   }
   interface ElementTagNameMap {
-    "form-page": HTMLFormPageElement;
+    'form-page': HTMLFormPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "form-page": JSXElements.FormPageAttributes;
+      'form-page': JSXElements.FormPageAttributes;
     }
   }
   namespace JSXElements {
     export interface FormPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  ListPage as ListPage
-} from './pages/list-page/list-page';
-
 declare global {
-  interface HTMLListPageElement extends ListPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface ListPage {
+
+    }
   }
+
+  interface HTMLListPageElement extends StencilComponents.ListPage, HTMLStencilElement {}
+
   var HTMLListPageElement: {
     prototype: HTMLListPageElement;
     new (): HTMLListPageElement;
   };
   interface HTMLElementTagNameMap {
-    "list-page": HTMLListPageElement;
+    'list-page': HTMLListPageElement;
   }
   interface ElementTagNameMap {
-    "list-page": HTMLListPageElement;
+    'list-page': HTMLListPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "list-page": JSXElements.ListPageAttributes;
+      'list-page': JSXElements.ListPageAttributes;
     }
   }
   namespace JSXElements {
     export interface ListPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  MarkdownPage as MarkdownPage
-} from './pages/markdown-page/markdown-page';
-
 declare global {
-  interface HTMLMarkdownPageElement extends MarkdownPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface MarkdownPage {
+
+    }
   }
+
+  interface HTMLMarkdownPageElement extends StencilComponents.MarkdownPage, HTMLStencilElement {}
+
   var HTMLMarkdownPageElement: {
     prototype: HTMLMarkdownPageElement;
     new (): HTMLMarkdownPageElement;
   };
   interface HTMLElementTagNameMap {
-    "markdown-page": HTMLMarkdownPageElement;
+    'markdown-page': HTMLMarkdownPageElement;
   }
   interface ElementTagNameMap {
-    "markdown-page": HTMLMarkdownPageElement;
+    'markdown-page': HTMLMarkdownPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "markdown-page": JSXElements.MarkdownPageAttributes;
+      'markdown-page': JSXElements.MarkdownPageAttributes;
     }
   }
   namespace JSXElements {
     export interface MarkdownPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  MomentPage as MomentPage
-} from './pages/moment-page/moment-page';
-
 declare global {
-  interface HTMLMomentPageElement extends MomentPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface MomentPage {
+
+    }
   }
+
+  interface HTMLMomentPageElement extends StencilComponents.MomentPage, HTMLStencilElement {}
+
   var HTMLMomentPageElement: {
     prototype: HTMLMomentPageElement;
     new (): HTMLMomentPageElement;
   };
   interface HTMLElementTagNameMap {
-    "moment-page": HTMLMomentPageElement;
+    'moment-page': HTMLMomentPageElement;
   }
   interface ElementTagNameMap {
-    "moment-page": HTMLMomentPageElement;
+    'moment-page': HTMLMomentPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "moment-page": JSXElements.MomentPageAttributes;
+      'moment-page': JSXElements.MomentPageAttributes;
     }
   }
   namespace JSXElements {
     export interface MomentPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  MultiselectPage as MultiselectPage
-} from './pages/multiselect-page/multiselect-page';
-
 declare global {
-  interface HTMLMultiselectPageElement extends MultiselectPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface MultiselectPage {
+
+    }
   }
+
+  interface HTMLMultiselectPageElement extends StencilComponents.MultiselectPage, HTMLStencilElement {}
+
   var HTMLMultiselectPageElement: {
     prototype: HTMLMultiselectPageElement;
     new (): HTMLMultiselectPageElement;
   };
   interface HTMLElementTagNameMap {
-    "multiselect-page": HTMLMultiselectPageElement;
+    'multiselect-page': HTMLMultiselectPageElement;
   }
   interface ElementTagNameMap {
-    "multiselect-page": HTMLMultiselectPageElement;
+    'multiselect-page': HTMLMultiselectPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "multiselect-page": JSXElements.MultiselectPageAttributes;
+      'multiselect-page': JSXElements.MultiselectPageAttributes;
     }
   }
   namespace JSXElements {
     export interface MultiselectPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  MwcSliderPage as MwcSliderPage
-} from './pages/mwc-slider-page/mwc-slider-page';
-
 declare global {
-  interface HTMLMwcSliderPageElement extends MwcSliderPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface MwcSliderPage {
+
+    }
   }
+
+  interface HTMLMwcSliderPageElement extends StencilComponents.MwcSliderPage, HTMLStencilElement {}
+
   var HTMLMwcSliderPageElement: {
     prototype: HTMLMwcSliderPageElement;
     new (): HTMLMwcSliderPageElement;
   };
   interface HTMLElementTagNameMap {
-    "mwc-slider-page": HTMLMwcSliderPageElement;
+    'mwc-slider-page': HTMLMwcSliderPageElement;
   }
   interface ElementTagNameMap {
-    "mwc-slider-page": HTMLMwcSliderPageElement;
+    'mwc-slider-page': HTMLMwcSliderPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "mwc-slider-page": JSXElements.MwcSliderPageAttributes;
+      'mwc-slider-page': JSXElements.MwcSliderPageAttributes;
     }
   }
   namespace JSXElements {
     export interface MwcSliderPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  NavbarPage as NavbarPage
-} from './pages/navbar-page/navbar-page';
-
 declare global {
-  interface HTMLNavbarPageElement extends NavbarPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface NavbarPage {
+
+    }
   }
+
+  interface HTMLNavbarPageElement extends StencilComponents.NavbarPage, HTMLStencilElement {}
+
   var HTMLNavbarPageElement: {
     prototype: HTMLNavbarPageElement;
     new (): HTMLNavbarPageElement;
   };
   interface HTMLElementTagNameMap {
-    "navbar-page": HTMLNavbarPageElement;
+    'navbar-page': HTMLNavbarPageElement;
   }
   interface ElementTagNameMap {
-    "navbar-page": HTMLNavbarPageElement;
+    'navbar-page': HTMLNavbarPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "navbar-page": JSXElements.NavbarPageAttributes;
+      'navbar-page': JSXElements.NavbarPageAttributes;
     }
   }
   namespace JSXElements {
     export interface NavbarPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  ProgressBarPage as ProgressBarPage
-} from './pages/progress-bar-page/progress-bar-page';
-
 declare global {
-  interface HTMLProgressBarPageElement extends ProgressBarPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface ProgressBarPage {
+
+    }
   }
+
+  interface HTMLProgressBarPageElement extends StencilComponents.ProgressBarPage, HTMLStencilElement {}
+
   var HTMLProgressBarPageElement: {
     prototype: HTMLProgressBarPageElement;
     new (): HTMLProgressBarPageElement;
   };
   interface HTMLElementTagNameMap {
-    "progress-bar-page": HTMLProgressBarPageElement;
+    'progress-bar-page': HTMLProgressBarPageElement;
   }
   interface ElementTagNameMap {
-    "progress-bar-page": HTMLProgressBarPageElement;
+    'progress-bar-page': HTMLProgressBarPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "progress-bar-page": JSXElements.ProgressBarPageAttributes;
+      'progress-bar-page': JSXElements.ProgressBarPageAttributes;
     }
   }
   namespace JSXElements {
     export interface ProgressBarPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  StencilBootstrapDemo as StencilBootstrapDemo
-} from './pages/stencil-bootstrap-demo/stencil-bootstrap-demo';
-
 declare global {
-  interface HTMLStencilBootstrapDemoElement extends StencilBootstrapDemo, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface StencilBootstrapDemo {
+
+    }
   }
+
+  interface HTMLStencilBootstrapDemoElement extends StencilComponents.StencilBootstrapDemo, HTMLStencilElement {}
+
   var HTMLStencilBootstrapDemoElement: {
     prototype: HTMLStencilBootstrapDemoElement;
     new (): HTMLStencilBootstrapDemoElement;
   };
   interface HTMLElementTagNameMap {
-    "stencil-bootstrap-demo": HTMLStencilBootstrapDemoElement;
+    'stencil-bootstrap-demo': HTMLStencilBootstrapDemoElement;
   }
   interface ElementTagNameMap {
-    "stencil-bootstrap-demo": HTMLStencilBootstrapDemoElement;
+    'stencil-bootstrap-demo': HTMLStencilBootstrapDemoElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "stencil-bootstrap-demo": JSXElements.StencilBootstrapDemoAttributes;
+      'stencil-bootstrap-demo': JSXElements.StencilBootstrapDemoAttributes;
     }
   }
   namespace JSXElements {
     export interface StencilBootstrapDemoAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  StencilBsDemoPage as StencilBsDemoPage
-} from './pages/stencil-bs-demo-page/stencil-bs-demo-page';
-
 declare global {
-  interface HTMLStencilBsDemoPageElement extends StencilBsDemoPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface StencilBsDemoPage {
+      'root': string;
+    }
   }
+
+  interface HTMLStencilBsDemoPageElement extends StencilComponents.StencilBsDemoPage, HTMLStencilElement {}
+
   var HTMLStencilBsDemoPageElement: {
     prototype: HTMLStencilBsDemoPageElement;
     new (): HTMLStencilBsDemoPageElement;
   };
   interface HTMLElementTagNameMap {
-    "stencil-bs-demo-page": HTMLStencilBsDemoPageElement;
+    'stencil-bs-demo-page': HTMLStencilBsDemoPageElement;
   }
   interface ElementTagNameMap {
-    "stencil-bs-demo-page": HTMLStencilBsDemoPageElement;
+    'stencil-bs-demo-page': HTMLStencilBsDemoPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "stencil-bs-demo-page": JSXElements.StencilBsDemoPageAttributes;
+      'stencil-bs-demo-page': JSXElements.StencilBsDemoPageAttributes;
     }
   }
   namespace JSXElements {
     export interface StencilBsDemoPageAttributes extends HTMLAttributes {
-      root?: string;
+      'root'?: string;
     }
   }
 }
 
 
-import {
-  StickyPage as StickyPage
-} from './pages/sticky-page/sticky-page';
-
 declare global {
-  interface HTMLStickyPageElement extends StickyPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface StickyPage {
+
+    }
   }
+
+  interface HTMLStickyPageElement extends StencilComponents.StickyPage, HTMLStencilElement {}
+
   var HTMLStickyPageElement: {
     prototype: HTMLStickyPageElement;
     new (): HTMLStickyPageElement;
   };
   interface HTMLElementTagNameMap {
-    "sticky-page": HTMLStickyPageElement;
+    'sticky-page': HTMLStickyPageElement;
   }
   interface ElementTagNameMap {
-    "sticky-page": HTMLStickyPageElement;
+    'sticky-page': HTMLStickyPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "sticky-page": JSXElements.StickyPageAttributes;
+      'sticky-page': JSXElements.StickyPageAttributes;
     }
   }
   namespace JSXElements {
     export interface StickyPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  TabsPage as TabsPage
-} from './pages/tabs-page/tabs-page';
-
 declare global {
-  interface HTMLTabsPageElement extends TabsPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface TabsPage {
+
+    }
   }
+
+  interface HTMLTabsPageElement extends StencilComponents.TabsPage, HTMLStencilElement {}
+
   var HTMLTabsPageElement: {
     prototype: HTMLTabsPageElement;
     new (): HTMLTabsPageElement;
   };
   interface HTMLElementTagNameMap {
-    "tabs-page": HTMLTabsPageElement;
+    'tabs-page': HTMLTabsPageElement;
   }
   interface ElementTagNameMap {
-    "tabs-page": HTMLTabsPageElement;
+    'tabs-page': HTMLTabsPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "tabs-page": JSXElements.TabsPageAttributes;
+      'tabs-page': JSXElements.TabsPageAttributes;
     }
   }
   namespace JSXElements {
     export interface TabsPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  TagPage as TagPage
-} from './pages/tag-page/tag-page';
-
 declare global {
-  interface HTMLTagPageElement extends TagPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface TagPage {
+
+    }
   }
+
+  interface HTMLTagPageElement extends StencilComponents.TagPage, HTMLStencilElement {}
+
   var HTMLTagPageElement: {
     prototype: HTMLTagPageElement;
     new (): HTMLTagPageElement;
   };
   interface HTMLElementTagNameMap {
-    "tag-page": HTMLTagPageElement;
+    'tag-page': HTMLTagPageElement;
   }
   interface ElementTagNameMap {
-    "tag-page": HTMLTagPageElement;
+    'tag-page': HTMLTagPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "tag-page": JSXElements.TagPageAttributes;
+      'tag-page': JSXElements.TagPageAttributes;
     }
   }
   namespace JSXElements {
     export interface TagPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  TolltipPage as TooltipPage
-} from './pages/tooltip-page/tooltip-page';
-
 declare global {
-  interface HTMLTooltipPageElement extends TooltipPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface TooltipPage {
+
+    }
   }
+
+  interface HTMLTooltipPageElement extends StencilComponents.TooltipPage, HTMLStencilElement {}
+
   var HTMLTooltipPageElement: {
     prototype: HTMLTooltipPageElement;
     new (): HTMLTooltipPageElement;
   };
   interface HTMLElementTagNameMap {
-    "tooltip-page": HTMLTooltipPageElement;
+    'tooltip-page': HTMLTooltipPageElement;
   }
   interface ElementTagNameMap {
-    "tooltip-page": HTMLTooltipPageElement;
+    'tooltip-page': HTMLTooltipPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "tooltip-page": JSXElements.TooltipPageAttributes;
+      'tooltip-page': JSXElements.TooltipPageAttributes;
     }
   }
   namespace JSXElements {
     export interface TooltipPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  StencilComponent as TypeaheadPage
-} from './pages/typeahead-page/typeahead-page';
-
 declare global {
-  interface HTMLTypeaheadPageElement extends TypeaheadPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface TypeaheadPage {
+
+    }
   }
+
+  interface HTMLTypeaheadPageElement extends StencilComponents.TypeaheadPage, HTMLStencilElement {}
+
   var HTMLTypeaheadPageElement: {
     prototype: HTMLTypeaheadPageElement;
     new (): HTMLTypeaheadPageElement;
   };
   interface HTMLElementTagNameMap {
-    "typeahead-page": HTMLTypeaheadPageElement;
+    'typeahead-page': HTMLTypeaheadPageElement;
   }
   interface ElementTagNameMap {
-    "typeahead-page": HTMLTypeaheadPageElement;
+    'typeahead-page': HTMLTypeaheadPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "typeahead-page": JSXElements.TypeaheadPageAttributes;
+      'typeahead-page': JSXElements.TypeaheadPageAttributes;
     }
   }
   namespace JSXElements {
     export interface TypeaheadPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }
 
 
-import {
-  VideoPlayerPage as VideoPlayerPage
-} from './pages/video-player-page/video-player-page';
-
 declare global {
-  interface HTMLVideoPlayerPageElement extends VideoPlayerPage, HTMLStencilElement {
+
+  namespace StencilComponents {
+    interface VideoPlayerPage {
+
+    }
   }
+
+  interface HTMLVideoPlayerPageElement extends StencilComponents.VideoPlayerPage, HTMLStencilElement {}
+
   var HTMLVideoPlayerPageElement: {
     prototype: HTMLVideoPlayerPageElement;
     new (): HTMLVideoPlayerPageElement;
   };
   interface HTMLElementTagNameMap {
-    "video-player-page": HTMLVideoPlayerPageElement;
+    'video-player-page': HTMLVideoPlayerPageElement;
   }
   interface ElementTagNameMap {
-    "video-player-page": HTMLVideoPlayerPageElement;
+    'video-player-page': HTMLVideoPlayerPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "video-player-page": JSXElements.VideoPlayerPageAttributes;
+      'video-player-page': JSXElements.VideoPlayerPageAttributes;
     }
   }
   namespace JSXElements {
     export interface VideoPlayerPageAttributes extends HTMLAttributes {
-      
+
     }
   }
 }

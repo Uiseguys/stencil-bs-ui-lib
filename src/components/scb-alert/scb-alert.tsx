@@ -1,7 +1,6 @@
 import {
   Component,
   Element,
-  HostElement,
   Prop,
   Watch,
   State,
@@ -14,12 +13,12 @@ import {
   tag: 'scb-alert'
 })
 export class ScbAlert {
-  @Element() el: HostElement;
+  @Element() el: HTMLElement;
 
   @Prop() dismissible = false;
   @Prop() animatable = true;
   @Prop() type: string ;
-  @Prop() onDismiss: (hostEl: HostElement) => void;
+  @Prop() onDismiss: (hostEl: HTMLElement) => void;
 
   @Prop() show: boolean = true;
   @State() fade: boolean;

@@ -20,7 +20,6 @@ import initThumbnail from '@divsbhalala/video-js-thumbnails';
 import {
     Component,
     Element,
-    HostElement,
     Prop, State
 } from '@stencil/core';
 
@@ -30,7 +29,7 @@ import {
     styleUrl: './css/vjs.scss'
 })
 export class FclVideoPLayer {
-    @Element() el: HostElement;
+    @Element() el: HTMLElement;
 
     @Prop() poster: string = null;
     @Prop() theme: string = null;

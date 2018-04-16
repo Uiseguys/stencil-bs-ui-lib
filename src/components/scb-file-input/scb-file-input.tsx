@@ -1,7 +1,6 @@
 import {
     Component,
     Element,
-    HostElement,
     Listen,
     Prop,
     State,
@@ -13,7 +12,7 @@ import { BootstrapThemeColor } from '../../common/index';
     styleUrl: './scb-file-input.scss',
 })
 export class ScbFileInput {
-    @Element() el: HostElement;
+    @Element() el: HTMLElement;
     @Prop() files: any[] = [];
     @Prop() type: BootstrapThemeColor = 'primary';
     @Prop() maxFiles = 0;
