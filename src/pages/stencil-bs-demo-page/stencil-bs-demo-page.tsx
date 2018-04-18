@@ -122,7 +122,12 @@ export class StencilBsDemoPage {
             url: '/datepicker',
             title: 'Datepicker Component',
             componentName: 'datepicker-page'
-        },        
+        },    
+        {
+            url: '/inlineedit',
+            title: 'Inlineedit Component',
+            componentName: 'inlineedit-page'
+        },            
     ];
 
     render() {

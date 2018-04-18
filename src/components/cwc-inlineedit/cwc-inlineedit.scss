@@ -1,0 +1,32 @@
+cwc-inlineedit {
+    .field-wrapper {
+        display: inline-block;
+        border-radius: 5px;
+        padding: 6px;
+    }
+    .field-wrapper:hover {
+        background-color: rgb(244, 245, 247);
+        border-color: rgb(244, 245, 247);
+    }
+    .input-wrapper {
+        display: none;
+        position: relative;
+        input {
+            width: 100%;
+        }
+        .button-wrapper {
+            position: absolute;
+            right: 5px;
+            z-index: 9999;
+            top: 45px;   
+            button:first-child {
+                margin-right: 3px;
+            }     
+        }
+    }
+    .label-wrapper {
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+}
