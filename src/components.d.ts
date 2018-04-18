@@ -206,6 +206,44 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface CwcInlineedit {
+      'label': string;
+      'value': string;
+    }
+  }
+
+  interface HTMLCwcInlineeditElement extends StencilComponents.CwcInlineedit, HTMLStencilElement {}
+
+  var HTMLCwcInlineeditElement: {
+    prototype: HTMLCwcInlineeditElement;
+    new (): HTMLCwcInlineeditElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-inlineedit': HTMLCwcInlineeditElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-inlineedit': HTMLCwcInlineeditElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-inlineedit': JSXElements.CwcInlineeditAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcInlineeditAttributes extends HTMLAttributes {
+      'label'?: string;
+      'onOncancel'?: (event: CustomEvent) => void;
+      'onOnchange'?: (event: CustomEvent) => void;
+      'onOnconfirm'?: (event: CustomEvent) => void;
+      'value'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface CwcList {
       'addClass': string;
       'addClassEven': string;
@@ -1598,6 +1636,39 @@ declare global {
   }
   namespace JSXElements {
     export interface FormPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface InlineeditPage {
+
+    }
+  }
+
+  interface HTMLInlineeditPageElement extends StencilComponents.InlineeditPage, HTMLStencilElement {}
+
+  var HTMLInlineeditPageElement: {
+    prototype: HTMLInlineeditPageElement;
+    new (): HTMLInlineeditPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'inlineedit-page': HTMLInlineeditPageElement;
+  }
+  interface ElementTagNameMap {
+    'inlineedit-page': HTMLInlineeditPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'inlineedit-page': JSXElements.InlineeditPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface InlineeditPageAttributes extends HTMLAttributes {
 
     }
   }
