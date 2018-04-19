@@ -29,11 +29,13 @@
     z-index: -20;
     // transform: translateX(-50%);
     transition: all 0.25s;
+    pointer-events: none;
 }
 
 .ex-inputs-picker-visible {
     opacity: 1;
     z-index: 1000;
+    pointer-events: auto;
 }
 
 @media (max-width: 616px),

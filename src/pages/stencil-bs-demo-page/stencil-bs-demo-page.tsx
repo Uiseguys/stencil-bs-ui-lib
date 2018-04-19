@@ -11,7 +11,8 @@ export class StencilBsDemoPage {
         {
             componentName: 'navbar-page',
             url: '/navbar',
-            title: 'Navbar Component'
+            title: 'Navbar Component',
+            isHiden: true
         },
         {
             componentName: 'moment-page',
@@ -21,12 +22,14 @@ export class StencilBsDemoPage {
         {
             url: '/collapse',
             title: 'Collapse Component',
-            componentName: 'collapse-page'
+            componentName: 'collapse-page',
+            isHiden: true
         },
         {
             url: '/tooltip',
             title: 'Tooltip Component',
-            componentName: 'tooltip-page'
+            componentName: 'tooltip-page',
+            isHiden: true
         },
         {
             url: '/video',
@@ -36,7 +39,8 @@ export class StencilBsDemoPage {
         {
             url: '/alert',
             title: 'Alert Component',
-            componentName: 'alerts-page'
+            componentName: 'alerts-page',
+            isHiden: true
         },
         {
             url: '/badge',
@@ -46,7 +50,8 @@ export class StencilBsDemoPage {
         {
             url: '/breadcrumb',
             title: 'Breadcrumb Component',
-            componentName: 'breadcrumb-page'
+            componentName: 'breadcrumb-page',
+            isHiden: true
         },
         {
             url: '/dropdown',
@@ -61,7 +66,8 @@ export class StencilBsDemoPage {
         {
             url: '/form',
             title: 'Form Component',
-            componentName: 'form-page'
+            componentName: 'form-page',
+            isHiden: true
         },
         {
             url: '/list',
@@ -76,7 +82,8 @@ export class StencilBsDemoPage {
         {
             url: '/tabs',
             title: 'Tabs Component',
-            componentName: 'tabs-page'
+            componentName: 'tabs-page',
+            isHiden: true
         },
         {
             url: '/tag',
@@ -101,12 +108,14 @@ export class StencilBsDemoPage {
         {
             url: '/schedule',
             title: 'Schedule Component',
-            componentName: 'schedule-page'
+            componentName: 'schedule-page',
+            isHiden: true
         },
         {
             url: '/slider',
             title: 'Slider Component',
-            componentName: 'mwc-slider-page'
+            componentName: 'mwc-slider-page',
+            isHiden: true
         },        
         {
             url: '/avatar',
@@ -116,7 +125,8 @@ export class StencilBsDemoPage {
         {
             url: '/sticky',
             title: 'Sticky Component',
-            componentName: 'sticky-page'
+            componentName: 'sticky-page',
+            isHiden: true
         },
         {
             url: '/datepicker',
@@ -135,14 +145,13 @@ export class StencilBsDemoPage {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h1>Web Components for Bootstrap 4 Beta</h1>
-                        <p>Built with <a href="https://stenciljs.com" target="blank">Stencil</a> &lt;3</p>
+                        <h1>UI Library</h1>
                     </div>
                 </div>            
                 <div class="row">
                     <nav class="col-2">
                         <ul class="nav flex-column">
-                            {this.components.map((cmp) =>
+                            {this.components.filter(cmp => !cmp.isHiden).map((cmp) =>
                                 <li class="nav-item">                
                                     <stencil-route-link
                                             url={cmp.url}
@@ -157,7 +166,7 @@ export class StencilBsDemoPage {
                     </nav>
                     <main class="col-10">
                         <stencil-router root={this.root}>
-                            {this.components.map((cmp) =>
+                            {this.components.filter(cmp => !cmp.isHiden).map((cmp) =>
                                     <stencil-route
                                         url={cmp.url}
                                         component={cmp.componentName}
