@@ -1,9 +1,9 @@
 import { Component, Prop } from '@stencil/core';
 import '@stencil/router';
+import 'bootstrap.native/dist/bootstrap-native-v4';
 
 @Component({
     tag: 'stencil-bs-demo-page',
-    styleUrl: '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 })
 export class StencilBsDemoPage {
     @Prop() root = '/';
@@ -141,7 +141,8 @@ export class StencilBsDemoPage {
     ];
 
     render() {
-        return (
+        return ([
+            <cwc-styles/>,
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 text-center">
@@ -176,6 +177,7 @@ export class StencilBsDemoPage {
                     </main>
                 </div>
             </div>
+        ]
         )
     }
 }

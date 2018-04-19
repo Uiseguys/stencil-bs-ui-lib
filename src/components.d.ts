@@ -534,6 +534,39 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface CwcStyles {
+
+    }
+  }
+
+  interface HTMLCwcStylesElement extends StencilComponents.CwcStyles, HTMLStencilElement {}
+
+  var HTMLCwcStylesElement: {
+    prototype: HTMLCwcStylesElement;
+    new (): HTMLCwcStylesElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-styles': HTMLCwcStylesElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-styles': HTMLCwcStylesElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-styles': JSXElements.CwcStylesAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcStylesAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface CwcTag {
       'classes': string;
       'closable': boolean;
