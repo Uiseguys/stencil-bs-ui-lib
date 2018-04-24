@@ -26,15 +26,15 @@ declare global {
 import '@stencil/router';
 
 import {
+  BootstrapThemeColor,
+  IBreadcrumbItem,
+} from './common/index';
+import {
   DurationInputArg2,
 } from 'moment';
 import {
-  BootstrapThemeColor,
-} from './common/bootstrap-theme-color.type';
-import {
   BootstrapThemeColor as BootstrapThemeColor2,
-  IBreadcrumbItem,
-} from './common/index';
+} from './common/bootstrap-theme-color.type';
 import {
   IStcTabContentData,
   IStcTabHeaderData,
@@ -153,6 +153,61 @@ declare global {
   namespace JSXElements {
     export interface CwcDropdownAttributes extends HTMLAttributes {
 
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface CwcFileInput {
+      'accept': string;
+      'files': any[];
+      'formDataName': string;
+      'headers': string;
+      'maxFileSize': number;
+      'maxFiles': number;
+      'method': string;
+      'noAuto': boolean;
+      'nodrop': boolean;
+      'target': string;
+      'timeout': number;
+      'type': BootstrapThemeColor;
+    }
+  }
+
+  interface HTMLCwcFileInputElement extends StencilComponents.CwcFileInput, HTMLStencilElement {}
+
+  var HTMLCwcFileInputElement: {
+    prototype: HTMLCwcFileInputElement;
+    new (): HTMLCwcFileInputElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-file-input': HTMLCwcFileInputElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-file-input': HTMLCwcFileInputElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-file-input': JSXElements.CwcFileInputAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcFileInputAttributes extends HTMLAttributes {
+      'accept'?: string;
+      'files'?: any[];
+      'formDataName'?: string;
+      'headers'?: string;
+      'maxFileSize'?: number;
+      'maxFiles'?: number;
+      'method'?: string;
+      'noAuto'?: boolean;
+      'nodrop'?: boolean;
+      'target'?: string;
+      'timeout'?: number;
+      'type'?: BootstrapThemeColor;
     }
   }
 }
@@ -1097,61 +1152,6 @@ declare global {
     export interface ScbCollapseAttributes extends HTMLAttributes {
       'collapseid'?: string;
       'items'?: any[];
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
-    interface ScbFileInput {
-      'accept': string;
-      'files': any[];
-      'formDataName': string;
-      'headers': string;
-      'maxFileSize': number;
-      'maxFiles': number;
-      'method': string;
-      'noAuto': boolean;
-      'nodrop': boolean;
-      'target': string;
-      'timeout': number;
-      'type': BootstrapThemeColor;
-    }
-  }
-
-  interface HTMLScbFileInputElement extends StencilComponents.ScbFileInput, HTMLStencilElement {}
-
-  var HTMLScbFileInputElement: {
-    prototype: HTMLScbFileInputElement;
-    new (): HTMLScbFileInputElement;
-  };
-  interface HTMLElementTagNameMap {
-    'scb-file-input': HTMLScbFileInputElement;
-  }
-  interface ElementTagNameMap {
-    'scb-file-input': HTMLScbFileInputElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'scb-file-input': JSXElements.ScbFileInputAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface ScbFileInputAttributes extends HTMLAttributes {
-      'accept'?: string;
-      'files'?: any[];
-      'formDataName'?: string;
-      'headers'?: string;
-      'maxFileSize'?: number;
-      'maxFiles'?: number;
-      'method'?: string;
-      'noAuto'?: boolean;
-      'nodrop'?: boolean;
-      'target'?: string;
-      'timeout'?: number;
-      'type'?: BootstrapThemeColor;
     }
   }
 }

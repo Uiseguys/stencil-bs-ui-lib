@@ -137,7 +137,12 @@ export class StencilBsDemoPage {
             url: '/inlineedit',
             title: 'Inlineedit Component',
             componentName: 'inlineedit-page'
-        },            
+        },     
+        {
+            url: '/fileinput',
+            title: 'Fileinput Component',
+            componentName: 'file-input-page'
+        },                 
     ];
 
     render() {
