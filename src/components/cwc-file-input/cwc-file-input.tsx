@@ -1,7 +1,7 @@
 import {
     Component,
     Element,
-    Listen,
+    // Listen,
     Prop,
     State,
 } from '@stencil/core';
@@ -36,6 +36,20 @@ export class ScbFileInput {
         };
     }
 
+    componentDidLoad() {
+        const dropArea = this.el.querySelector('.scb-fi-wrapper');
+
+        dropArea.addEventListener('dragenter', this.preventDefaults, false);
+        dropArea.addEventListener('dragleave', this.preventDefaults, false);
+        dropArea.addEventListener('dragover', this.preventDefaults, false);
+        dropArea.addEventListener('drop', this.onDrop.bind(this), false);
+    }
+
+    private preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();      
+    }
+
     /**
      * Fire hidden input click event on Button click
      */
@@ -68,9 +82,9 @@ export class ScbFileInput {
             this.initUploadStyle();
         }
 
-        console.log(this.cancelDefaultDragEnter);
-        console.log(this.cancelDefaultDragOver);
-        console.log(this.onDrop);
+        // console.log(this.cancelDefaultDragEnter);
+        // console.log(this.cancelDefaultDragOver);
+        // console.log(this.onDrop);
     }
 
     /**
@@ -101,37 +115,38 @@ export class ScbFileInput {
         return (Boolean)(file.uploadEnded && file.loadStatus !== 100);
     }
 
-    @Listen('dragenter')
-    /**
-     * Cancel default Drag Enter event
-     * @param {Object} event - dragenter event
-     * @returns {boolean}
-     */
-    private cancelDefaultDragEnter(event): boolean {
-        event.preventDefault();
-        return false;
-    }
+    // @Listen('dragenter')
+    // /**
+    //  * Cancel default Drag Enter event
+    //  * @param {Object} event - dragenter event
+    //  * @returns {boolean}
+    //  */
+    // private cancelDefaultDragEnter(event): boolean {
+    //     console.log(event);
+    //     event.preventDefault();
+    //     return false;
+    // }
 
-    @Listen('dragover')
-    /**
-     * Cancel default Drag Over event
-     * @param {Object} event - dragover event
-     * @returns {boolean}
-     */
-    private cancelDefaultDragOver(event): boolean {
-        event.preventDefault();
-        return false;
-    }
+    // @Listen('dragover')
+    // /**
+    //  * Cancel default Drag Over event
+    //  * @param {Object} event - dragover event
+    //  * @returns {boolean}
+    //  */
+    // private cancelDefaultDragOver(event): boolean {
+    //     console.log(event);
+    //     event.preventDefault();
+    //     return false;
+    // }
 
-    @Listen('drop')
+    // @Listen('drop')
     /**
      * Trigger addFiles function on drop event
      * @param {Object} event - drop event
      * @returns {boolean}
      */
-    private onDrop(e): boolean {
-        console.log('onDrop');        
-        event.preventDefault();
+    private onDrop(e): boolean { 
+        this.preventDefaults(e);
         if (!this.nodrop) {
             const dt = e.dataTransfer;
             this.addFiles(dt.files);
@@ -174,7 +189,6 @@ export class ScbFileInput {
                 file.elemId = 'file' + i + Date.now();
             });
             setTimeout(() => this.element.files = [...lastSelectedFiles, ...filesArray]);
-            console.log('filesArray:', filesArray);
             filesArray.forEach(file => this.readFile(file));
         }
     }
@@ -261,7 +275,6 @@ export class ScbFileInput {
             file.reading = false;
             file.isRead = true;
             this.changeFileUploadProgress(file, 100, isRequestDataPresent ? 'Queued' : '');
-            console.log('onLoad', isRequestDataPresent, this.noAuto);
             if (isRequestDataPresent && !this.noAuto) {
                 this.uploadFile(file);
             }
@@ -448,7 +461,10 @@ export class ScbFileInput {
                 setTimeout(() => {
                     progressEl.dataset.percentage = '0';
                     detailEl.innerHTML = '';
-                    progressEl.querySelector('img.img-checked.in-progress').classList.remove('in-progress');
+                    const imgCheckedEl = progressEl.querySelector('img.img-checked.in-progress');
+                    if (imgCheckedEl) {
+                        imgCheckedEl.classList.remove('in-progress');
+                    }
                 }, 3000); 
             }
         } else {

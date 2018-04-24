@@ -16,17 +16,17 @@ export class FileInputPage {
         <cwc-file-input type="info" class="mb-0"></cwc-file-input>
         <code class="mb-3 d-block p-3">&lt;cwc-file-input type="info"&gt;&lt;/cwc-file-input&gt;</code>
 
-        <h2>Max length</h2>
+        {/* <h2>Max length</h2>
         <cwc-file-input max-files="3" class="mb-0"></cwc-file-input>
-        <code class="mb-3 d-block p-3">&lt;cwc-file-input max-files="3"&gt;&lt;/cwc-file-input&gt;</code>
+        <code class="mb-3 d-block p-3">&lt;cwc-file-input max-files="3"&gt;&lt;/cwc-file-input&gt;</code> */}
 
-        <h2>No multiple</h2>
+        {/* <h2>No multiple</h2>
         <cwc-file-input max-files="1" class="mb-0"></cwc-file-input>
-        <code class="mb-3 d-block p-3">&lt;cwc-file-input max-files="1"&gt;&lt;/cwc-file-input&gt;</code>
+        <code class="mb-3 d-block p-3">&lt;cwc-file-input max-files="1"&gt;&lt;/cwc-file-input&gt;</code> */}
 
-        <h2>No drag and drop</h2>
+        {/* <h2>No drag and drop</h2>
         <cwc-file-input nodrop class="mb-0"></cwc-file-input>
-        <code class="mb-3 d-block p-3">&lt;cwc-file-input nodrop&gt;&lt;/cwc-file-input&gt;</code>
+        <code class="mb-3 d-block p-3">&lt;cwc-file-input nodrop&gt;&lt;/cwc-file-input&gt;</code> */}
 
         <h2>Upload Request Properties</h2>
         <cwc-file-input method="post" target="https://virtserver.swaggerhub.com/bakirmanar/POST_API/1.0.0/pet/1/uploadImage"
@@ -171,7 +171,7 @@ export class FileInputPage {
           &lt;/script&gt;
         </code>
 
-        <h2>Pre-Filling the File List in Advance</h2>
+        {/* <h2>Pre-Filling the File List in Advance</h2>
         <cwc-file-input id="preFillDemo" method="post" target="https://virtserver.swaggerhub.com/bakirmanar/POST_API/1.0.0/pet/1/uploadImage"
                         accept="application/pdf" form-data-name="file" class="mb-0"></cwc-file-input>
         <code class="mb-3 d-block p-3">
@@ -194,7 +194,7 @@ export class FileInputPage {
             &#125;);
           </div>
           &lt;/script&gt;
-        </code>
+        </code> */}
 
         <h2>Manual Upload Trigger</h2>
         <cwc-file-input id="manualUploadDemo" no-auto method="post" target="https://virtserver.swaggerhub.com/bakirmanar/POST_API/1.0.0/pet/1/uploadImage"
@@ -229,7 +229,7 @@ export class FileInputPage {
   componentDidLoad () {
     this.initCustomizingRequestDemo();
     this.initRawFilesDemo();
-    this.initPreFillDemo();
+    // this.initPreFillDemo();
     this.initManualUploadDemo();
     this.initResponseDemo();
   }
@@ -287,15 +287,15 @@ export class FileInputPage {
     this.addScript('cwc-file-input#rawFilesDemo', script);
   }
 
-  private initPreFillDemo () {
-    let script = 'var upload = document.querySelector(\'cwc-file-input#preFillDemo\');\n' +
-      '    upload.files = [\n' +
-      '      {name: \'Josh_CV.pdf\', loadStatus: 100, uploaded: true},\n' +
-      '      {name: \'Alex_CV.pdf\', loadStatus: 100, uploaded: true}\n' +
-      '    ];';
+  // private initPreFillDemo () {
+  //   let script = 'var upload = document.querySelector(\'cwc-file-input#preFillDemo\');\n' +
+  //     '    upload.files = [\n' +
+  //     '      {name: \'Josh_CV.pdf\', loadStatus: 100, uploaded: true},\n' +
+  //     '      {name: \'Alex_CV.pdf\', loadStatus: 100, uploaded: true}\n' +
+  //     '    ];';
 
-    this.addScript('cwc-file-input#preFillDemo', script);
-  }
+  //   this.addScript('cwc-file-input#preFillDemo', script);
+  // }
 
   private initManualUploadDemo () {
     let script = 'var manualUploadDemo = document.querySelector(\'cwc-file-input#manualUploadDemo\');\n' +
