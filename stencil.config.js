@@ -2,8 +2,12 @@ const sass = require('@stencil/sass');
 
 exports.config = {
     namespace: 'index',
-    generateDistribution: true,
-    serviceWorker: true,
+    // generateDistribution: true,
+    // serviceWorker: true,
+    outputTargets: [
+        { type: 'www' },
+        { type: 'dist' }
+    ],
     bundles: [{
         components: ['cwc-typeahead', 'cwc-tag', 'cwc-list', 'cwc-infinite-list-watcher']
     }],

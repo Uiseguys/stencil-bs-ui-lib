@@ -25,7 +25,7 @@
     },
     "dependencies": {
         "@divsbhalala/video-js-thumbnails": "^1.0.0",
-        "@stencil/core": "0.7.24",
+        "@stencil/core": "latest",
         "@stencil/dev-server": "latest",
         "@stencil/router": "0.0.28",
         "@stencil/sass": "0.0.2",

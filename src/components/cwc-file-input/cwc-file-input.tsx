@@ -1,21 +1,21 @@
 import {
     Component,
     Element,
-    Listen,
+    // Listen,
     Prop,
     State,
 } from '@stencil/core';
 import { BootstrapThemeColor } from '../../common/index';
 
 @Component({
-    tag: 'scb-file-input',
-    styleUrl: './scb-file-input.scss',
+    tag: 'cwc-file-input',
+    styleUrls: ['./cwc-file-input.scss', './circular-progress.scss'],
 })
 export class ScbFileInput {
     @Element() el: HTMLElement;
     @Prop() files: any[] = [];
     @Prop() type: BootstrapThemeColor = 'primary';
-    @Prop() maxFiles = 0;
+    @Prop() maxFiles = 1;
     @Prop() nodrop = false;
     @Prop() noAuto = false;
     @Prop() accept: string;
@@ -34,6 +34,20 @@ export class ScbFileInput {
         this.element.uploadFiles = () => {
             that.uploadFiles();
         };
+    }
+
+    componentDidLoad() {
+        const dropArea = this.el.querySelector('.scb-fi-wrapper');
+
+        dropArea.addEventListener('dragenter', this.preventDefaults, false);
+        dropArea.addEventListener('dragleave', this.preventDefaults, false);
+        dropArea.addEventListener('dragover', this.preventDefaults, false);
+        dropArea.addEventListener('drop', this.onDrop.bind(this), false);
+    }
+
+    private preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();      
     }
 
     /**
@@ -64,9 +78,13 @@ export class ScbFileInput {
         this.element.files = [];
         setTimeout(() => this.element.files = [...files]);
 
-        console.log(this.cancelDefaultDragEnter);
-        console.log(this.cancelDefaultDragOver);
-        console.log(this.onDrop);
+        if (!files.length) {
+            this.initUploadStyle();
+        }
+
+        // console.log(this.cancelDefaultDragEnter);
+        // console.log(this.cancelDefaultDragOver);
+        // console.log(this.onDrop);
     }
 
     /**
@@ -97,36 +115,38 @@ export class ScbFileInput {
         return (Boolean)(file.uploadEnded && file.loadStatus !== 100);
     }
 
-    @Listen('dragenter')
-    /**
-     * Cancel default Drag Enter event
-     * @param {Object} event - dragenter event
-     * @returns {boolean}
-     */
-    private cancelDefaultDragEnter(event): boolean {
-        event.preventDefault();
-        return false;
-    }
+    // @Listen('dragenter')
+    // /**
+    //  * Cancel default Drag Enter event
+    //  * @param {Object} event - dragenter event
+    //  * @returns {boolean}
+    //  */
+    // private cancelDefaultDragEnter(event): boolean {
+    //     console.log(event);
+    //     event.preventDefault();
+    //     return false;
+    // }
 
-    @Listen('dragover')
-    /**
-     * Cancel default Drag Over event
-     * @param {Object} event - dragover event
-     * @returns {boolean}
-     */
-    private cancelDefaultDragOver(event): boolean {
-        event.preventDefault();
-        return false;
-    }
+    // @Listen('dragover')
+    // /**
+    //  * Cancel default Drag Over event
+    //  * @param {Object} event - dragover event
+    //  * @returns {boolean}
+    //  */
+    // private cancelDefaultDragOver(event): boolean {
+    //     console.log(event);
+    //     event.preventDefault();
+    //     return false;
+    // }
 
-    @Listen('drop')
+    // @Listen('drop')
     /**
      * Trigger addFiles function on drop event
      * @param {Object} event - drop event
      * @returns {boolean}
      */
-    private onDrop(e): boolean {
-        event.preventDefault();
+    private onDrop(e): boolean { 
+        this.preventDefaults(e);
         if (!this.nodrop) {
             const dt = e.dataTransfer;
             this.addFiles(dt.files);
@@ -149,6 +169,7 @@ export class ScbFileInput {
      * @param {Array} files
      */
     private addFiles(files): void {
+        this.initProgress();
         const diff = this.maxFiles - this.element.files.length;
 
         if (files.length > 0 && (this.maxFiles === 0 || diff > 0)) {
@@ -171,6 +192,30 @@ export class ScbFileInput {
             filesArray.forEach(file => this.readFile(file));
         }
     }
+
+    private initProgress() {
+        const dropAreaEl: HTMLElement = this.el.querySelector('.scb-drop-area');
+        dropAreaEl.classList.add('loading');
+        const progressEl = this.el.querySelector('.progress-circle');
+        progressEl.classList.remove('no-loading');
+        const fileButtonEl = this.el.querySelector('.scb-fi-button-wrapper');
+        fileButtonEl.classList.add('loading');
+        const labelEl = this.el.querySelector('.scb-fi-label');
+        labelEl.classList.add('loading');
+    }
+
+    private initUploadStyle() {
+        const progressEl = this.el.querySelector('.progress-circle');
+        progressEl.classList.add('no-loading');        
+        progressEl.querySelector('img.img-checked').classList.add('in-progress');        
+        const dropAreaEl: HTMLElement = this.el.querySelector('.scb-drop-area');
+        dropAreaEl.classList.remove('loading');
+        const fileButtonEl = this.el.querySelector('.scb-fi-button-wrapper');
+        fileButtonEl.classList.remove('loading');
+        const labelEl = this.el.querySelector('.scb-fi-label');
+        labelEl.classList.remove('loading');
+    }
+   
 
     /**
      * Check if file is accepted type
@@ -405,18 +450,38 @@ export class ScbFileInput {
      * @param {string} status
      */
     private changeFileUploadProgress(file, loadedPercentage: number, status: string) {
-        const prBar = this.el.querySelector('#' + file.elemId + ' .progress-bar') as HTMLElement;
-        const statusBar = this.el.querySelector('#' + file.elemId + ' .scb-fi-status') as HTMLElement;
+        const isCircularProgres = true;
 
-        file.loadStatus = loadedPercentage;
-        file.status = status;
-        if (prBar) {
-            prBar.style.width = loadedPercentage + '%'
+        if (isCircularProgres) {
+            const progressEl: HTMLElement = this.el.querySelector('.progress-circle');
+            progressEl.dataset.percentage = String(loadedPercentage);
+            const detailEl: HTMLElement = progressEl.querySelector('.current-percentage');
+            detailEl.innerHTML = loadedPercentage + ' %';
+            if ( loadedPercentage === 100 ) {
+                setTimeout(() => {
+                    progressEl.dataset.percentage = '0';
+                    detailEl.innerHTML = '';
+                    const imgCheckedEl = progressEl.querySelector('img.img-checked.in-progress');
+                    if (imgCheckedEl) {
+                        imgCheckedEl.classList.remove('in-progress');
+                    }
+                }, 3000); 
+            }
+        } else {
+            const prBar = this.el.querySelector('#' + file.elemId + ' .progress-bar') as HTMLElement;
+            const statusBar = this.el.querySelector('#' + file.elemId + ' .scb-fi-status') as HTMLElement;
+    
+            file.loadStatus = loadedPercentage;
+            file.status = status;
+            if (prBar) {
+                prBar.style.width = loadedPercentage + '%'
+            }
+    
+            if (statusBar) {
+                statusBar.innerHTML = file.status || ''
+            }
         }
 
-        if (statusBar) {
-            statusBar.innerHTML = file.status || ''
-        }
     }
 
     /**
@@ -427,11 +492,12 @@ export class ScbFileInput {
         const buttonClasses = {
             'scb-fi-default-button': true,
             btn: true,
-            [`btn-outline-${this.type}`]: true,
+            [`btn-${this.type}`]: true,
+            'btn-lg': true,
         };
         const isMultiple = this.maxFiles !== 1;
-        const buttonText: string = isMultiple ? 'Upload Files' : 'Select File';
-        const dropLabel: string = isMultiple ? 'Drop files here...' : 'Drop file here...';
+        const buttonText: string = isMultiple ? 'Choose Files' : 'Choose File';
+        const dropLabel: string = isMultiple ? 'Drag files to upload, or' : 'Drag file to upload, or';
         const label = this.nodrop ? '' : <span class="scb-fi-label">
         <slot name="label"></slot>
         <span class="scb-fi-default-label">{dropLabel}</span>
@@ -455,13 +521,30 @@ export class ScbFileInput {
         return (
             <div class="scb-fi-wrapper">
                 <input class="scb-fi-hidden" type="file" onChange={() => this.onFileSelect(event)} {...inputAttrs}/>
+                <div class="progress-circle no-loading" data-percentage="0">
+                    <span class="progress-left">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <div class="progress-value">
+                        <div>
+                            <div class="current-percentage"></div>
+                            <img class="img-checked in-progress" src="assets/img/si-glyph-checked.svg"/>                            
+                        </div>
+                    </div>
+                </div>             
+                <div class="scb-drop-area">
+                    <img class="img-arrow" src="assets/img/si-glyph-arrow-thick-up.svg"/>
+                </div>
                 <fieldset class="scb-fi-button-wrapper" onClick={() => this.openFileInput()} {...buttonAttrs}>
                     <slot name="button"></slot>
                     <button class={buttonClasses}>{buttonText}</button>
                 </fieldset>
                 {label}
                 {this.files.map((file, i) =>
-                    <div class="scb-fi-row" id={file.elemId}>
+                    <div class="scb-fi-row with-progress-circle" id={file.elemId}>
                         <div class="scb-fi-row-header">
                             <span class="scb-fi-name">{file.name}</span>
                             <div class="scb-fi-controls">
@@ -478,7 +561,7 @@ export class ScbFileInput {
                             </div>
                         </div>
                         <div class="scb-fi-status">{file.status}</div>
-                        <div class="progress">
+                        <div class="progress" style={{display: 'none'}}>
                             <div class={{
                                 'progress-bar': true,
                                 [`bg-${this.type}`]: true,
