@@ -1,5 +1,7 @@
 import { Component, Prop, State } from '@stencil/core';
-import moment_, { Duration, DurationInputArg2 } from 'moment';
+// import moment_, { Duration, DurationInputArg2 } from 'moment';
+import { Duration, DurationInputArg2 } from 'moment';
+import moment from 'moment';
 import 'moment/min/locales.min';
 
 @Component({
@@ -19,7 +21,7 @@ export class CwcMoment {
     @State() durationFormatted: string;
 
     componentDidLoad() {
-        const moment = moment_;
+        // const moment = moment_;
         
         moment.locale(this.lang, {
             longDateFormat : {
@@ -59,6 +61,9 @@ export class CwcMoment {
                 } else {
                     this.momentNow = momentDate.fromNow();
                 }
+            } else if (!moment(this.date).isValid()) {
+                this.momentNow = '-';
+                console.log('momentNow:', this.momentNow);
             } else if (!this.format) {
                 this.momentNow = moment(this.date).calendar();
             } else {

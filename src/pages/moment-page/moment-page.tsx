@@ -92,6 +92,16 @@ export class MomentPage {
                                             </code></pre>                                              
                                             outputs: <cwc-moment date="2018-04-09 06:45" lang="en"></cwc-moment>
                                             <br />
+                                            No date
+                                            <pre><code class="lang-tsx">
+                                                <span>&lt;cwc-moment</span><br />
+                                                <span class="hljs-built_in ml-4">date=""</span><br />
+                                                <span class="hljs-built_in ml-4">lang="en";</span><span>&gt;</span>
+                                                <br />
+                                                <span>&lt;/cwc-moment&gt;</span>
+                                            </code></pre>                                              
+                                            outputs: <cwc-moment date="" lang="en"></cwc-moment>
+                                            <br />                                            
                                         </div>
                                     </div>
                                 </div>
