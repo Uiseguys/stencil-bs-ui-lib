@@ -207,7 +207,7 @@ export class ScbFileInput {
     private initUploadStyle() {
         const progressEl = this.el.querySelector('.progress-circle');
         progressEl.classList.add('no-loading');        
-        progressEl.querySelector('img.img-checked').classList.add('in-progress');        
+        progressEl.querySelector('span.img-checked').classList.add('in-progress');        
         const dropAreaEl: HTMLElement = this.el.querySelector('.scb-drop-area');
         dropAreaEl.classList.remove('loading');
         const fileButtonEl = this.el.querySelector('.scb-fi-button-wrapper');
@@ -461,7 +461,7 @@ export class ScbFileInput {
                 setTimeout(() => {
                     progressEl.dataset.percentage = '0';
                     detailEl.innerHTML = '';
-                    const imgCheckedEl = progressEl.querySelector('img.img-checked.in-progress');
+                    const imgCheckedEl = progressEl.querySelector('span.img-checked.in-progress');
                     if (imgCheckedEl) {
                         imgCheckedEl.classList.remove('in-progress');
                     }
@@ -515,6 +515,26 @@ export class ScbFileInput {
             inputAttrs['accept'] = this.accept;
         }
 
+
+        const svgCheckedContent = `<svg viewBox="0 0 17 16" width="30" height="30" version="1.1" 
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="si-glyph si-glyph-checked">
+        <!-- Generator: Sketch 3.0.3 (7891) - http://www.bohemiancoding.com/sketch -->
+        <title>1228</title>
+        
+        <defs></defs>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path d="M3.432,6.189 C3.824,5.798 4.455,5.798 4.847,6.189 L6.968,8.31 L13.147,2.131 C13.531,1.747 14.157,1.753 14.548,2.144 L16.67,4.266 C17.06,4.657 17.066,5.284 16.684,5.666 L7.662,14.687 C7.278,15.07 6.651,15.064 6.261,14.673 L1.311,9.723 C0.92,9.333 0.92,8.7 1.311,8.31 L3.432,6.189 Z" fill="#007bff" class="si-glyph-fill"></path>
+        </g>
+    </svg>`;
+        const svgArrowContent = `<svg viewBox="0 0 17 17" width="30" height="30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="si-glyph si-glyph-arrow-thick-up">
+        <!-- Generator: Sketch 3.0.3 (7891) - http://www.bohemiancoding.com/sketch -->
+        <title>1211</title>
+        
+        <defs></defs>
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path d="M8.65,1.158 L3.165,7.098 C2.954,7.332 2.956,7.712 3.167,7.947 L7.035,7.952 L7.035,15.976 C7.035,16.529 7.474,16.976 8.017,16.976 L9.982,16.976 C10.525,16.976 10.964,16.529 10.964,15.976 L10.964,7.956 L14.775,7.961 C14.984,7.73 14.982,7.349 14.771,7.113 L9.414,1.159 C9.201,0.927 8.861,0.925 8.65,1.158 L8.65,1.158 Z" fill="#007bff" class="si-glyph-fill"></path>
+        </g>
+    </svg>`;
         /*
          * Using the <fieldset> tag for having an ability to disable the custom button in <slot> that can't have disabled attribute set.
          */
@@ -531,12 +551,13 @@ export class ScbFileInput {
                     <div class="progress-value">
                         <div>
                             <div class="current-percentage"></div>
-                            <img class="img-checked in-progress" src="assets/img/si-glyph-checked.svg"/>                            
+                            <span class="img-checked in-progress" innerHTML={svgCheckedContent}>
+                            </span>                          
                         </div>
                     </div>
                 </div>             
                 <div class="scb-drop-area">
-                    <img class="img-arrow" src="assets/img/si-glyph-arrow-thick-up.svg"/>
+                    <span class="img-arrow" innerHTML={svgArrowContent}></span>
                 </div>
                 <fieldset class="scb-fi-button-wrapper" onClick={() => this.openFileInput()} {...buttonAttrs}>
                     <slot name="button"></slot>
