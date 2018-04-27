@@ -94,6 +94,9 @@ cwc-file-input {
         background-repeat: no-repeat;
         position: relative;
     }
+    .scb-fi-wrapper.hidden {
+        display: none;
+    }
     .scb-fi-hidden {
         width: 0;
         height: 0;
@@ -232,5 +235,15 @@ cwc-file-input {
         .progress-value div {
             margin-top: 0px;
         }
+    }
+    .image-preview {
+        height: 100%;
+        width: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .image-preview.hidden {
+        display: none;
     }
 }

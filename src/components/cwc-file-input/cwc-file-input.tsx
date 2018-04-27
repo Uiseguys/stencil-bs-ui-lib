@@ -11,7 +11,7 @@ import { BootstrapThemeColor } from '../../common/index';
     tag: 'cwc-file-input',
     styleUrls: ['./cwc-file-input.scss', './circular-progress.scss'],
 })
-export class ScbFileInput {
+export class CwcFileInput {
     @Element() el: HTMLElement;
     @Prop() files: any[] = [];
     @Prop() type: BootstrapThemeColor = 'primary';
@@ -28,6 +28,9 @@ export class ScbFileInput {
     @State()
     private element;
 
+    onHidePreview;
+    onShowPreview;
+
     componentWillLoad() {
         this.element = this.el;
         const that = this;
@@ -43,6 +46,9 @@ export class ScbFileInput {
         dropArea.addEventListener('dragleave', this.preventDefaults, false);
         dropArea.addEventListener('dragover', this.preventDefaults, false);
         dropArea.addEventListener('drop', this.onDrop.bind(this), false);
+
+        this.onHidePreview = this.hidePreview.bind(this);
+        this.onShowPreview = this.showPreview.bind(this);
     }
 
     private preventDefaults(e) {
@@ -214,6 +220,14 @@ export class ScbFileInput {
         fileButtonEl.classList.remove('loading');
         const labelEl = this.el.querySelector('.scb-fi-label');
         labelEl.classList.remove('loading');
+
+        const wrapperEl = this.el.querySelector('.scb-fi-wrapper'); 
+        wrapperEl.removeEventListener('mouseleave', this.onShowPreview);
+
+        const previewEl: HTMLElement = this.el.querySelector('.image-preview');
+        previewEl.removeEventListener('mouseover', this.onHidePreview);
+        previewEl.classList.add('hidden');  
+        previewEl.style['background-image'] = '';  
     }
    
 
@@ -275,6 +289,14 @@ export class ScbFileInput {
             file.reading = false;
             file.isRead = true;
             this.changeFileUploadProgress(file, 100, isRequestDataPresent ? 'Queued' : '');
+            
+            if (/^image\//.test(file.type)) {
+                const self = this;
+                setTimeout(() => {
+                    self.setPreviewMode(file);
+                }, 3000);
+            }
+
             if (isRequestDataPresent && !this.noAuto) {
                 this.uploadFile(file);
             }
@@ -464,7 +486,7 @@ export class ScbFileInput {
                     const imgCheckedEl = progressEl.querySelector('span.img-checked.in-progress');
                     if (imgCheckedEl) {
                         imgCheckedEl.classList.remove('in-progress');
-                    }
+                    }       
                 }, 3000); 
             }
         } else {
@@ -483,6 +505,37 @@ export class ScbFileInput {
         }
 
     }
+
+    private setPreviewMode(file) {      
+        const previewEl: HTMLElement = this.el.querySelector('.image-preview');
+        const wrapperEl = this.el.querySelector('.scb-fi-wrapper');        
+        wrapperEl.classList.add('hidden');
+        previewEl.style['background-image'] = 'url("' + file.fileReader.result + '")';
+        previewEl.classList.remove('hidden');
+        const self = this;
+        setTimeout(() => {
+            previewEl.addEventListener('mouseover', self.onHidePreview, {once: true});
+        }, 1000);        
+    }
+
+    private hidePreview(e) {
+        this.preventDefaults(e);
+        const previewEl = this.el.querySelector('.image-preview');
+        const wrapperEl = this.el.querySelector('.scb-fi-wrapper'); 
+        wrapperEl.classList.remove('hidden');
+        previewEl.classList.add('hidden');    
+        wrapperEl.addEventListener('mouseleave', this.onShowPreview, {once: true});
+    }
+
+    private showPreview(e) {
+        this.preventDefaults(e);
+        const previewEl = this.el.querySelector('.image-preview');
+        const wrapperEl = this.el.querySelector('.scb-fi-wrapper'); 
+        wrapperEl.classList.add('hidden');
+        previewEl.classList.remove('hidden');  
+        previewEl.addEventListener('mouseover', this.onHidePreview, {once: true}); 
+    }
+    
 
     /**
      * Render view based on the component data
@@ -538,7 +591,7 @@ export class ScbFileInput {
         /*
          * Using the <fieldset> tag for having an ability to disable the custom button in <slot> that can't have disabled attribute set.
          */
-        return (
+        return ([
             <div class="scb-fi-wrapper">
                 <input class="scb-fi-hidden" type="file" onChange={() => this.onFileSelect(event)} {...inputAttrs}/>
                 <div class="progress-circle no-loading" data-percentage="0">
@@ -592,7 +645,10 @@ export class ScbFileInput {
                         </div>
                     </div>,
                 )}
+            </div>,
+            <div class="image-preview hidden">
             </div>
+        ]
         );
     }
 }
