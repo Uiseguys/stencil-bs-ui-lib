@@ -293,7 +293,9 @@ export class CwcFileInput {
             if (/^image\//.test(file.type)) {
                 const self = this;
                 setTimeout(() => {
-                    self.setPreviewMode(file);
+                    if (self.element.files.length) {
+                        self.setPreviewMode(file);
+                    }
                 }, 3000);
             }
 
@@ -595,7 +597,7 @@ export class CwcFileInput {
          */
         return ([
             <div class="scb-fi-wrapper">
-                <input class="scb-fi-hidden" type="file" onChange={() => this.onFileSelect(event)} {...inputAttrs}/>
+                <input class="scb-fi-hidden" type="file" onChange={(event) => this.onFileSelect(event)} {...inputAttrs}/>
                 <div class="progress-circle no-loading" data-percentage="0">
                     <span class="progress-left">
                         <span class="progress-bar"></span>
