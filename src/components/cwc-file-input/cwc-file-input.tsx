@@ -211,9 +211,13 @@ export class CwcFileInput {
     }
 
     private initUploadStyle() {
-        const progressEl = this.el.querySelector('.progress-circle');
+        const progressEl: HTMLElement = this.el.querySelector('.progress-circle');
         progressEl.classList.add('no-loading');        
-        progressEl.querySelector('span.img-checked').classList.add('in-progress');        
+        progressEl.querySelector('span.img-checked').classList.add('in-progress');   
+        progressEl.dataset.percentage = '0';
+        const detailEl: HTMLElement = progressEl.querySelector('.current-percentage');        
+        detailEl.innerHTML = '';        
+        
         const dropAreaEl: HTMLElement = this.el.querySelector('.scb-drop-area');
         dropAreaEl.classList.remove('loading');
         const fileButtonEl = this.el.querySelector('.scb-fi-button-wrapper');
@@ -478,20 +482,30 @@ export class CwcFileInput {
         if (isCircularProgres) {
             const progressEl: HTMLElement = this.el.querySelector('.progress-circle');
             const newPercentage = String(Math.round(loadedPercentage / 10) * 10);
-            if (Number(progressEl.dataset.percentage) < Number(newPercentage)) {
+            const currentPercentage = Number(progressEl.dataset.percentage);
+            if (currentPercentage < Number(newPercentage)) {
+                // fix for continuos progress
+                if (currentPercentage < 60) {
+                    progressEl.dataset.continuous = '0';
+                } else {
+                    progressEl.dataset.continuous = '1';
+                }
                 progressEl.dataset.percentage = newPercentage;
             }
             const detailEl: HTMLElement = progressEl.querySelector('.current-percentage');
             detailEl.innerHTML = loadedPercentage + ' %';
             if ( loadedPercentage === 100 ) {
+                const self = this;
                 setTimeout(() => {
-                    progressEl.dataset.percentage = '0';
-                    detailEl.innerHTML = '';
-                    const imgCheckedEl = progressEl.querySelector('span.img-checked.in-progress');
-                    if (imgCheckedEl) {
-                        imgCheckedEl.classList.remove('in-progress');
-                    }       
-                }, 3000); 
+                    if (self.element.files.length) { // if file don't remove yet
+                        progressEl.dataset.percentage = '0';
+                        detailEl.innerHTML = '';
+                        const imgCheckedEl = progressEl.querySelector('span.img-checked.in-progress');
+                        if (imgCheckedEl) {
+                            imgCheckedEl.classList.remove('in-progress');
+                        }       
+                    }
+                }, 1000); 
             }
         } else {
             const prBar = this.el.querySelector('#' + file.elemId + ' .progress-bar') as HTMLElement;
@@ -598,7 +612,7 @@ export class CwcFileInput {
         return ([
             <div class="scb-fi-wrapper">
                 <input class="scb-fi-hidden" type="file" onChange={(event) => this.onFileSelect(event)} {...inputAttrs}/>
-                <div class="progress-circle no-loading" data-percentage="0">
+                <div class="progress-circle no-loading" data-percentage="0" data-continuous="0">
                     <span class="progress-left">
                         <span class="progress-bar"></span>
                     </span>
