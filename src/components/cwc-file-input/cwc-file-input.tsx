@@ -389,6 +389,7 @@ export class CwcFileInput {
             };
 
             request.upload.onloadstart = () => {
+                console.log('upload start');
                 this.el.dispatchEvent(new CustomEvent('upload-start', {
                     detail: {
                         file: file,
@@ -398,6 +399,7 @@ export class CwcFileInput {
             };
 
             request.upload.onloadend = () => {
+                console.log('upload end');
                 file.uploadEnded = true;
                 this.toggleRetryBtn(file);
             };
@@ -473,10 +475,14 @@ export class CwcFileInput {
      */
     private changeFileUploadProgress(file, loadedPercentage: number, status: string) {
         const isCircularProgres = true;
-
+        console.log('percent:', loadedPercentage, Math.round(loadedPercentage / 10) * 10);
         if (isCircularProgres) {
             const progressEl: HTMLElement = this.el.querySelector('.progress-circle');
-            progressEl.dataset.percentage = String(loadedPercentage);
+            const newPercentage = String(Math.round(loadedPercentage / 10) * 10);
+            console.log('current percentage', progressEl.dataset.percentage, newPercentage, Number(progressEl.dataset.percentage) < Number(newPercentage));            
+            if (Number(progressEl.dataset.percentage) < Number(newPercentage)) {
+                progressEl.dataset.percentage = newPercentage;
+            }
             const detailEl: HTMLElement = progressEl.querySelector('.current-percentage');
             detailEl.innerHTML = loadedPercentage + ' %';
             if ( loadedPercentage === 100 ) {
