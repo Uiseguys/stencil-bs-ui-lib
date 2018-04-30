@@ -175,7 +175,6 @@ export class CwcFileInput {
      * @param {Array} files
      */
     private addFiles(files): void {
-        this.initProgress();
         const diff = this.maxFiles - this.element.files.length;
 
         if (files.length > 0 && (this.maxFiles === 0 || diff > 0)) {
@@ -278,6 +277,7 @@ export class CwcFileInput {
      * @param {Object} file
      */
     private readFile(file): void {
+        this.initProgress();        
         const reader = new FileReader();
         const isRequestDataPresent = this.method && this.target && this.formDataName;
         this.changeFileUploadProgress(file, 0, 'Start reading');
@@ -294,15 +294,6 @@ export class CwcFileInput {
             file.isRead = true;
             this.changeFileUploadProgress(file, 100, isRequestDataPresent ? 'Queued' : '');
             
-            if (/^image\//.test(file.type)) {
-                const self = this;
-                setTimeout(() => {
-                    if (self.element.files.length) {
-                        self.setPreviewMode(file);
-                    }
-                }, 3000);
-            }
-
             if (isRequestDataPresent && !this.noAuto) {
                 this.uploadFile(file);
             }
@@ -483,7 +474,7 @@ export class CwcFileInput {
             const progressEl: HTMLElement = this.el.querySelector('.progress-circle');
             const newPercentage = String(Math.round(loadedPercentage / 10) * 10);
             const currentPercentage = Number(progressEl.dataset.percentage);
-            if (currentPercentage < Number(newPercentage)) {
+            if (Number(newPercentage) === 0 || currentPercentage < Number(newPercentage)) {
                 // fix for continuos progress
                 if (currentPercentage < 60) {
                     progressEl.dataset.continuous = '0';
@@ -493,8 +484,10 @@ export class CwcFileInput {
                 progressEl.dataset.percentage = newPercentage;
             }
             const detailEl: HTMLElement = progressEl.querySelector('.current-percentage');
+            const detailTextEl: HTMLElement = progressEl.querySelector('.progress-detail');
             detailEl.innerHTML = loadedPercentage + ' %';
-            if ( loadedPercentage === 100 ) {
+            detailTextEl.innerHTML = status;
+            if ( loadedPercentage === 100 && ( !this.target && status === 'Reading' || status === 'Uploading') ) {
                 const self = this;
                 setTimeout(() => {
                     if (self.element.files.length) { // if file don't remove yet
@@ -506,6 +499,14 @@ export class CwcFileInput {
                         }       
                     }
                 }, 1000); 
+
+                if (/^image\//.test(file.type)) {
+                    setTimeout(() => {
+                        if (self.element.files.length) {
+                            self.setPreviewMode(file);
+                        }
+                    }, 2000);
+                }                
             }
         } else {
             const prBar = this.el.querySelector('#' + file.elemId + ' .progress-bar') as HTMLElement;
@@ -524,7 +525,7 @@ export class CwcFileInput {
 
     }
 
-    private setPreviewMode(file) {      
+    private setPreviewMode(file) {   
         const previewEl: HTMLElement = this.el.querySelector('.image-preview');
         const wrapperEl = this.el.querySelector('.scb-fi-wrapper');        
         wrapperEl.classList.add('hidden');
@@ -622,6 +623,7 @@ export class CwcFileInput {
                     <div class="progress-value">
                         <div>
                             <div class="current-percentage"></div>
+                            <div class="progress-detail"></div>
                             <span class="img-checked in-progress" innerHTML={svgCheckedContent}>
                             </span>                          
                         </div>
