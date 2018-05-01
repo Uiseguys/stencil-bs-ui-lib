@@ -14,6 +14,8 @@ export class CwcDatepicker {
     @Prop() startDate: string;
     @Prop() endDate: string;
 
+    @Prop() lang: string = 'en';
+
     @Event() statechange: EventEmitter;
 
     @Element() el: HTMLElement;
@@ -25,19 +27,48 @@ export class CwcDatepicker {
         const txtEnd: HTMLInputElement = this.el.querySelector('.ex-inputs-end');
         const self = this;
 
-        // Inject DateRangePicker into our container
-        const dp = DateRangePicker.DateRangePicker(this.container)
+        const lang = {
+
+            en: {
+                days: 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
+                months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_'),
+                today: 'Today',
+                clear: 'Clear',
+                close: 'Close',
+            },
+            de: {
+                days: 'So._Mo._Di._Mi._Do._Fr._Sa.'.split('_'),
+                months: 'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'.split('_'),
+                today: 'Heute',
+                clear: 'Klar',
+                close: 'Schließen'
+            }
+        }
+        const dp = DateRangePicker.DateRangePicker(this.container, {
+            startOpts: {
+                lang: lang[this.lang] || lang['en']
+            }
+        })
             .on('statechange', function (_, rp) {
                 // Update the inputs when the state changes
                 const range = rp.state;
                 txtStart.value = range.start ? moment(range.start).format('MM/DD/YYYY') : '';
                 txtEnd.value = range.end ? moment(range.end).format('MM/DD/YYYY') : '';
                 self.statechange.emit({
-                    start: range.start, 
+                    start: range.start,
                     end: range.end
                 });
-            });
-        
+            })
+
+        console.log('DP DEBUG')
+        console.log(dp)
+        // dp.DatePickerOptions(
+
+        // )
+
+
+
+
         if (this.startDate) {
             dp.setState({
                 start: new Date(this.startDate)
@@ -64,7 +95,7 @@ export class CwcDatepicker {
             dp.setState({
                 end: !isNaN(date.getTime()) ? date : ''
             });
-        });        
+        });
 
         // If focus leaves the root element, it is not in the date
         // picker or the inputs, so we should hide the date picker
@@ -73,12 +104,12 @@ export class CwcDatepicker {
         let previousTimeout;
         this.el.addEventListener('focusout', function hidePicker() {
             clearTimeout(previousTimeout);
-            previousTimeout = setTimeout(function() {
+            previousTimeout = setTimeout(function () {
                 if (!self.el.contains(document.activeElement)) {
                     self.container.classList.remove('ex-inputs-picker-visible');
                 }
             }, 10);
-        });        
+        });
 
     }
 
