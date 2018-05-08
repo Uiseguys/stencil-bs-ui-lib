@@ -92,6 +92,7 @@ declare global {
   namespace StencilComponents {
     interface CwcDatepicker {
       'endDate': string;
+      'format': string;
       'lang': string;
       'startDate': string;
     }
@@ -117,6 +118,7 @@ declare global {
   namespace JSXElements {
     export interface CwcDatepickerAttributes extends HTMLAttributes {
       'endDate'?: string;
+      'format'?: string;
       'lang'?: string;
       'onStatechange'?: (event: CustomEvent) => void;
       'startDate'?: string;

@@ -1,89 +1,103 @@
 .ex-inputs {
-    position: relative;
+  position: relative;
 }
 
 .ex-inputs-header {
-    text-align: center;
-    margin-bottom: 8px;
+  text-align: center;
+  margin-bottom: 8px;
 }
 
-.ex-inputs-start,
-.ex-inputs-end {
-    padding: 8px;
-    font-size: 1em;
-    border: 1px solid #CCC;
-    border-radius: 2px;
+.ex-input-daterange {
+  padding: 8px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='22' height='22' viewBox='0 0 2048 2048' xmlns='http://www.w3.org/2000/svg'><path d='M320 1792h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: 3% center;
+  padding-left: 35px;
 }
 
-.ex-inputs-start:focus,
-.ex-inputs-end:focus {
-    border-color: #46A5F5;
+.ecus,
+.ex-input-daterange:focus {
+  border-color: #46a5f5;
 }
 
 .ex-inputs-picker {
-    position: absolute;
-    z-index: 1000; // left: 50%;
-    top: calc(100% + 16px);
-    opacity: 0;
-    z-index: -20; // transform: translateX(-50%);
-    transition: all 0.25s;
-    pointer-events: none;
+  position: absolute;
+  z-index: 1000;
+  //  left: 50%;
+  top: calc(100% + 16px);
+  opacity: 0;
+  z-index: -20; 
+  // transform: translateX(-50%);
+  transition: all 0.25s;
+  pointer-events: none;
 }
 
 .ex-inputs-picker-visible {
-    opacity: 1;
-    z-index: 1000;
-    pointer-events: auto;
+  opacity: 1;
+  z-index: 1000;
+  pointer-events: auto;
+  transform: translateX(-33%);
 }
 
-@media (max-width: 616px),
-(max-height: 480px) {
-    .ex-inputs-start,
-    .ex-inputs-end {
-        width: 100%;
+@media (max-width: 616px), (max-height: 480px) {
+
+  .ex-input-daterange {
+    width: 100%;
     }
+
+  .ex-inputs-picker-visible {
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
 }
 
 .ex-inputs-picker-visible:after {
-    bottom: 100%;
-    left: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-color: rgba(255, 255, 255, 0);
-    border-bottom-color: #ffffff;
-    border-width: 15px;
-    margin-left: -15px;
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(255, 255, 255, 0);
+  border-bottom-color: #ffffff;
+  border-width: 15px;
+  margin-left: -15px;
 }
 
 .dp-days {
-    span.dp-col-header {
-        font-size: 0px;
-        &::first-letter {
-            font-size: 10px;
-        }
+  span.dp-col-header {
+    font-size: 0px;
+    &::first-letter {
+      font-size: 10px;
     }
+  }
 }
 
 div.dr-cals {
-    border-radius: 4px;
-    padding-top: 0;
-    &:before {
-        background: white;
-    }
-    header.dp-cal-header {
-        background: white;
-        font-size: 0.7em;
-    }
-    .dr-cal-end .dp {
-        border-left: 8px solid white;
-    }
-    button.dp-cal-month,
-    button.dp-cal-year {
-        padding-top: 23px;
-        font-weight: 700;
-    }
+  border-radius: 4px;
+  padding-top: 0;
+  &:before {
+    background: white;
+  }
+  header.dp-cal-header {
+    background: white;
+    font-size: 0.7em;
+  }
+  .dr-cal-end .dp {
+    border-left: 8px solid white;
+  }
+  button.dp-cal-month,
+  button.dp-cal-year {
+    padding-top: 23px;
+    font-weight: 700;
+  }
+}
+
+.ex-inputs .ex-inputs-start {
+  display: none;
 }

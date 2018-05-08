@@ -34,7 +34,7 @@ export class DatepickerPage {
                                     </div>
                                     <br />
                                     <div class="row">
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-4">
                                             <pre><code class="lang-tsx">
                                                 <span>&lt;cwc-datepicker</span><br />
                                                 <span class="hljs-built_in ml-4">start-date="03/25/2018"</span><br />
@@ -45,6 +45,8 @@ export class DatepickerPage {
                                                 <span>&lt;/cwc-datepicker&gt;</span>
                                             </code></pre>
 
+                                            </div>
+                                            <div class="col-lg-8">
                                             outputs: <cwc-datepicker
                                                 start-date="03/25/2018"
                                                 end-date="04/12/2018"
@@ -93,6 +95,13 @@ export class DatepickerPage {
                                                 <td><code>'en'</code></td>
                                                 <td>Datepicker i18n. Currently supported:
                                                     <code>'en'</code>, <code>'de'</code>. Default: <code>'en'</code>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>format</td>
+                                                <td><code>String</code></td>
+                                                <td><code>'MM.DD.YYYY'</code></td>
+                                                <td>Date format
                                                 </td>
                                             </tr>
                                         </tbody>
