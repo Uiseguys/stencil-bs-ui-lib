@@ -1517,39 +1517,6 @@ declare global {
 declare global {
 
   namespace StencilComponents {
-    interface DatepickerPage {
-
-    }
-  }
-
-  interface HTMLDatepickerPageElement extends StencilComponents.DatepickerPage, HTMLStencilElement {}
-
-  var HTMLDatepickerPageElement: {
-    prototype: HTMLDatepickerPageElement;
-    new (): HTMLDatepickerPageElement;
-  };
-  interface HTMLElementTagNameMap {
-    'datepicker-page': HTMLDatepickerPageElement;
-  }
-  interface ElementTagNameMap {
-    'datepicker-page': HTMLDatepickerPageElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'datepicker-page': JSXElements.DatepickerPageAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface DatepickerPageAttributes extends HTMLAttributes {
-
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
     interface DropdownPage {
 
     }

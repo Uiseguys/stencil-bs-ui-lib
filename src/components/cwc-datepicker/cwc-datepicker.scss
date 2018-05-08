@@ -96,7 +96,40 @@ div.dr-cals {
     padding-top: 23px;
     font-weight: 700;
   }
+  button.dp-day {
+
+
+    
+    &:hover {
+      background: rgba(75, 81, 93, 0.42);
+      color: #3B404D;
+    }
+    
+    &.dr-in-range {
+      background:  rgba(75, 81, 93, 0.19);
+      color: #3B404D;
+    }
+    
+    &.dr-selected {
+      background: rgba(75, 81, 93, 0.42);
+      color: #3B404D;
+    }
+    
+    .dp-day-today:after {
+      border: 7px solid grey;
+    }
+    
+  }
+  button.dp-cal-month:hover,
+  button.dp-cal-year:hover,
+  button.dp-year:hover,
+  button.dp-month:hover {
+    background:  rgba(75, 81, 93, 0.19);
+    color: #3B404D;
+  }
 }
+
+
 
 .ex-inputs .ex-inputs-start {
   display: none;

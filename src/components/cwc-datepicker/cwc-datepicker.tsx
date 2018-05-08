@@ -130,7 +130,7 @@ export class CwcDatepicker {
     render() {
         return (
             <div class="ex-inputs">
-                <input class="ex-input-daterange" placeholder="To date" />
+                <input class="ex-input-daterange" placeholder={`${this.langConstants[this.lang].startDate} - ${this.langConstants[this.lang].endDate}`} />
                 <div class="ex-inputs-picker"></div>
             </div>
         )
