@@ -127,6 +127,12 @@ div.dr-cals {
     background:  rgba(75, 81, 93, 0.19);
     color: #3B404D;
   }
+
+  .dp-day-today:after {
+    border: 7px solid #5f5f5f;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
 }
 
 
