@@ -152,7 +152,7 @@ declare global {
   }
   namespace JSXElements {
     export interface CwcDropdownAttributes extends HTMLAttributes {
-
+      'onChange'?: (event: CustomEvent) => void;
     }
   }
 }
