@@ -773,6 +773,8 @@ declare global {
 
   namespace StencilComponents {
     interface FclVideoPlayer {
+      'autoinit': boolean;
+      'className': string;
       'controls': boolean;
       'poster': string;
       'theme': string;
@@ -799,6 +801,8 @@ declare global {
   }
   namespace JSXElements {
     export interface FclVideoPlayerAttributes extends HTMLAttributes {
+      'autoinit'?: boolean;
+      'className'?: string;
       'controls'?: boolean;
       'poster'?: string;
       'theme'?: string;
