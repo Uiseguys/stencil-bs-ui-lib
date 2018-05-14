@@ -1,7 +1,35 @@
 @import "video-js.scss";
 /* a wrapper element that tracks the mouse vertically */
 
-
+.custom-btn.video-js{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  .vjs-big-play-button.custom{
+    z-index: 9999999;
+    border: none;
+    display: block;
+    position: absolute;
+    left: 40%;
+    top: 40%;
+    border: none;
+    background: transparent;
+    z-index: 999999;
+    background-color: rgba(43, 51, 63, 0.7);
+  }
+  &:hover{
+    .vjs-big-play-button.custom{
+      border-color: #fff;
+      background-color: #73859f;
+      background-color: rgba(115, 133, 159, 0.5);
+      -webkit-transition: all 0s;
+      -moz-transition: all 0s;
+      -ms-transition: all 0s;
+      -o-transition: all 0s;
+      transition: all 0s;
+    }
+  }
+}
 @media \0screen {
   .vjs-user-inactive.vjs-playing .vjs-control-bar :before {
     content: "";

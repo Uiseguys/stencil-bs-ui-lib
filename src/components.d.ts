@@ -92,6 +92,8 @@ declare global {
   namespace StencilComponents {
     interface CwcDatepicker {
       'endDate': string;
+      'format': string;
+      'lang': string;
       'startDate': string;
     }
   }
@@ -116,6 +118,8 @@ declare global {
   namespace JSXElements {
     export interface CwcDatepickerAttributes extends HTMLAttributes {
       'endDate'?: string;
+      'format'?: string;
+      'lang'?: string;
       'onStatechange'?: (event: CustomEvent) => void;
       'startDate'?: string;
     }
@@ -769,6 +773,8 @@ declare global {
 
   namespace StencilComponents {
     interface FclVideoPlayer {
+      'autoinit': boolean;
+      'className': string;
       'controls': boolean;
       'poster': string;
       'theme': string;
@@ -795,6 +801,8 @@ declare global {
   }
   namespace JSXElements {
     export interface FclVideoPlayerAttributes extends HTMLAttributes {
+      'autoinit'?: boolean;
+      'className'?: string;
       'controls'?: boolean;
       'poster'?: string;
       'theme'?: string;
