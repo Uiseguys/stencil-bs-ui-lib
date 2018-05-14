@@ -143,6 +143,9 @@ export class FclVideoPLayer {
         if(this.isautoinit){
             let player = videojs(this.el.getElementsByTagName('video')[0], options);
             player.on('play', function () {
+                if(self.el.querySelector(".video-js.custom-btn")){
+                    self.el.querySelector(".video-js.custom-btn").style.display = 'none';
+                }
                 if(self.el.querySelector("fcl-image")){
                     self.el.querySelector("fcl-image").style.display = 'none';
                 }
@@ -172,8 +175,14 @@ export class FclVideoPLayer {
             let player = videojs(this.el.getElementsByTagName('video')[0], options);
             if(this.isautoinit && this.autoPlay && player){
                 player.play();
+                if(self.el.querySelector(".video-js.custom-btn")){
+                    self.el.querySelector(".video-js.custom-btn").style.display = 'none';
+                }
             }
             player.on('play', function () {
+                if(self.el.querySelector(".video-js.custom-btn")){
+                    self.el.querySelector(".video-js.custom-btn").style.display = 'none';
+                }
                 if(self.el.querySelector("fcl-image")){
                     self.el.querySelector("fcl-image").style.display = 'none';
                 }
