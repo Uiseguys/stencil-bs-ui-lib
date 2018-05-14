@@ -90,7 +90,7 @@ export class FclVideoPLayer {
                     <fcl-image class="video-img-block"
                                onClick={() => this.toggleClick()}
                                brokenUrl="assets/img/broken-image.png" src={this.poster}></fcl-image>
-                    <div class="video-js custom-btn" onClick={() => this.toggleClick()}>
+                    <div class={"video-js custom-btn " + (this.autoPlay && this.isautoinit ? "hide" : "")} onClick={() => this.toggleClick()}>
                         <button class="vjs-big-play-button custom" type="button" aria-live="polite" title="Play Video" aria-disabled="false">
                             <span aria-hidden="true" class="vjs-icon-placeholder"></span><
                             span class="vjs-control-text">Play Video</span>
@@ -143,9 +143,6 @@ export class FclVideoPLayer {
         if(this.isautoinit){
             let player = videojs(this.el.getElementsByTagName('video')[0], options);
             player.on('play', function () {
-                if(self.el.querySelector(".video-js.custom-btn")){
-                    self.el.querySelector(".video-js.custom-btn").style.display = 'none';
-                }
                 if(self.el.querySelector("fcl-image")){
                     self.el.querySelector("fcl-image").style.display = 'none';
                 }
@@ -175,14 +172,8 @@ export class FclVideoPLayer {
             let player = videojs(this.el.getElementsByTagName('video')[0], options);
             if(this.isautoinit && this.autoPlay && player){
                 player.play();
-                if(self.el.querySelector(".video-js.custom-btn")){
-                    self.el.querySelector(".video-js.custom-btn").style.display = 'none';
-                }
             }
             player.on('play', function () {
-                if(self.el.querySelector(".video-js.custom-btn")){
-                    self.el.querySelector(".video-js.custom-btn").style.display = 'none';
-                }
                 if(self.el.querySelector("fcl-image")){
                     self.el.querySelector("fcl-image").style.display = 'none';
                 }
