@@ -265,6 +265,44 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface CwcInlineeditTextarea {
+      'label': string;
+      'value': string;
+    }
+  }
+
+  interface HTMLCwcInlineeditTextareaElement extends StencilComponents.CwcInlineeditTextarea, HTMLStencilElement {}
+
+  var HTMLCwcInlineeditTextareaElement: {
+    prototype: HTMLCwcInlineeditTextareaElement;
+    new (): HTMLCwcInlineeditTextareaElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-inlineedit-textarea': HTMLCwcInlineeditTextareaElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-inlineedit-textarea': HTMLCwcInlineeditTextareaElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-inlineedit-textarea': JSXElements.CwcInlineeditTextareaAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcInlineeditTextareaAttributes extends HTMLAttributes {
+      'label'?: string;
+      'onOncancel'?: (event: CustomEvent) => void;
+      'onOnchange'?: (event: CustomEvent) => void;
+      'onOnconfirm'?: (event: CustomEvent) => void;
+      'value'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface CwcInlineedit {
       'label': string;
       'value': string;

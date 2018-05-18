@@ -139,6 +139,11 @@ export class StencilBsDemoPage {
             componentName: 'inlineedit-page'
         },     
         {
+            url: '/inlineedit-textarea',
+            title: 'Inlineedit Textarea Component',
+            componentName: 'inlineedit-textarea-page'
+        },     
+        {
             url: '/fileinput',
             title: 'Fileinput Component',
             componentName: 'file-input-page'

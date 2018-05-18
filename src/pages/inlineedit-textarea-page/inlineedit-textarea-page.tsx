@@ -1,9 +1,9 @@
 import { Component, State, Listen } from '@stencil/core';
 
 @Component({
-    tag: 'inlineedit-page',
+    tag: 'inlineedit-textarea-page',
 })
-export class InlineeditPage {
+export class InlineeditTextareaPage {
 
     @State() changeResult;
 
@@ -16,7 +16,7 @@ export class InlineeditPage {
     render() {
         return (
             <div class="container pt-4">
-                <h2 class="mb-4">Inlineedit component </h2>
+                <h2 class="mb-4">Inlineedit-textarea component </h2>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="pt-3">
@@ -35,19 +35,19 @@ export class InlineeditPage {
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <pre><code class="lang-tsx">
-                                                <span>&lt;cwc-inlineedit</span><br />
+                                                <span>&lt;cwc-inlineedit-textarea</span><br />
                                                 <span class="hljs-built_in ml-4">label="Field label"</span><br />
                                                 <span class="hljs-built_in ml-4">value="Example of text"</span><span>&gt;</span>
                                                 <br />
-                                                <span>&lt;/cwc-inlineedit&gt;</span>
+                                                <span>&lt;/cwc-inlineedit-textarea&gt;</span>
                                             </code></pre>
 
                                             outputs:<br/><br/> 
-                                            <cwc-inlineedit
-                                                        label="Field label inlineedit"
+                                            <cwc-inlineedit-textarea 
+                                                        label="Field label textarea"
                                                         value="Example of text"
                                                     >
-                                            </cwc-inlineedit>
+                                            </cwc-inlineedit-textarea>
                                             <br />
                                             <pre>onchange event: {this.changeResult}</pre>
                                         </div>
