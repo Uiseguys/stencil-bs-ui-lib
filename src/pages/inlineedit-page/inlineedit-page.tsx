@@ -44,7 +44,7 @@ export class InlineeditPage {
 
                                             outputs:<br/><br/> 
                                             <cwc-inlineedit
-                                                        label="Field label inlineedit"
+                                                        label="Field label"
                                                         value="Example of text"
                                                     >
                                             </cwc-inlineedit>

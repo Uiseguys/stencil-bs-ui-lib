@@ -1757,6 +1757,39 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface InlineeditTextareaPage {
+
+    }
+  }
+
+  interface HTMLInlineeditTextareaPageElement extends StencilComponents.InlineeditTextareaPage, HTMLStencilElement {}
+
+  var HTMLInlineeditTextareaPageElement: {
+    prototype: HTMLInlineeditTextareaPageElement;
+    new (): HTMLInlineeditTextareaPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'inlineedit-textarea-page': HTMLInlineeditTextareaPageElement;
+  }
+  interface ElementTagNameMap {
+    'inlineedit-textarea-page': HTMLInlineeditTextareaPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'inlineedit-textarea-page': JSXElements.InlineeditTextareaPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface InlineeditTextareaPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface ListPage {
 
     }

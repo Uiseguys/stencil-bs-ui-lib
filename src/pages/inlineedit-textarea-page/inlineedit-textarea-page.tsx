@@ -44,7 +44,7 @@ export class InlineeditTextareaPage {
 
                                             outputs:<br/><br/> 
                                             <cwc-inlineedit-textarea 
-                                                        label="Field label textarea"
+                                                        label="Field label"
                                                         value="Example of text"
                                                     >
                                             </cwc-inlineedit-textarea>
