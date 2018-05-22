@@ -265,6 +265,44 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface CwcInlineeditTextarea {
+      'label': string;
+      'value': string;
+    }
+  }
+
+  interface HTMLCwcInlineeditTextareaElement extends StencilComponents.CwcInlineeditTextarea, HTMLStencilElement {}
+
+  var HTMLCwcInlineeditTextareaElement: {
+    prototype: HTMLCwcInlineeditTextareaElement;
+    new (): HTMLCwcInlineeditTextareaElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-inlineedit-textarea': HTMLCwcInlineeditTextareaElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-inlineedit-textarea': HTMLCwcInlineeditTextareaElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-inlineedit-textarea': JSXElements.CwcInlineeditTextareaAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcInlineeditTextareaAttributes extends HTMLAttributes {
+      'label'?: string;
+      'onOncancel'?: (event: CustomEvent) => void;
+      'onOnchange'?: (event: CustomEvent) => void;
+      'onOnconfirm'?: (event: CustomEvent) => void;
+      'value'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface CwcInlineedit {
       'label': string;
       'value': string;
@@ -1710,6 +1748,39 @@ declare global {
   }
   namespace JSXElements {
     export interface InlineeditPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface InlineeditTextareaPage {
+
+    }
+  }
+
+  interface HTMLInlineeditTextareaPageElement extends StencilComponents.InlineeditTextareaPage, HTMLStencilElement {}
+
+  var HTMLInlineeditTextareaPageElement: {
+    prototype: HTMLInlineeditTextareaPageElement;
+    new (): HTMLInlineeditTextareaPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'inlineedit-textarea-page': HTMLInlineeditTextareaPageElement;
+  }
+  interface ElementTagNameMap {
+    'inlineedit-textarea-page': HTMLInlineeditTextareaPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'inlineedit-textarea-page': JSXElements.InlineeditTextareaPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface InlineeditTextareaPageAttributes extends HTMLAttributes {
 
     }
   }
