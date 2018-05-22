@@ -17,8 +17,6 @@ export class MomentPage {
                                         <div class="col-lg-12">
                                             <h3>Usage </h3>
                                             <div>
-
-
                                             </div>
                                         </div>
                                     </div>
