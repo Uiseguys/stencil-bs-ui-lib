@@ -1726,6 +1726,39 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface InfiniteListPage {
+
+    }
+  }
+
+  interface HTMLInfiniteListPageElement extends StencilComponents.InfiniteListPage, HTMLStencilElement {}
+
+  var HTMLInfiniteListPageElement: {
+    prototype: HTMLInfiniteListPageElement;
+    new (): HTMLInfiniteListPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'infinite-list-page': HTMLInfiniteListPageElement;
+  }
+  interface ElementTagNameMap {
+    'infinite-list-page': HTMLInfiniteListPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'infinite-list-page': JSXElements.InfiniteListPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface InfiniteListPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface InlineeditPage {
 
     }

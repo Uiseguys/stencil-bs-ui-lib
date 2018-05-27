@@ -18,6 +18,21 @@ export class ListPage {
         { name: 'third' }
     ]
 
+    pizzas = [
+        {
+            name: 'Pepperoni',
+            price: 10
+        },
+        {   
+            name: 'Quattro formaggi',
+            price: 12
+        },
+        {
+            name: 'Havaiian',
+            price: 14
+        }
+    ]
+
     getLodashTemplate() {
         return `<h3 class="demo"><%=item.name%></h3>`
 
@@ -126,8 +141,11 @@ export class ListPage {
 
                 <div>
 
-                    <h1 id="infinite-list-component" class="mb-2">Infinite list component</h1>
-                    <h2 id="api-and-usage-">API and usage:</h2>
+                    <h1 id="infinite-list-component" class="mb-2">List component</h1>
+                    <h2 id="api-and-usage-">Overview</h2>
+
+                    <p>This component renders list of given template according to provided data in <code>`items` @Prop()</code>. <br/>
+                    Template interpolation is performed with <a href="https://lodash.com/docs/4.17.10#template" target="_blank">Lodash template engine</a>.</p>
                     <h3 id="props">Props</h3>
                     <table>
                         <thead>
@@ -148,40 +166,41 @@ export class ListPage {
                                 <td>Array of objects to iterate with template.</td>
                             </tr>
                             <tr>
+                                <td><code>template</code></td>
+                                <td><code>String</code></td>
+                                <td>yes</td>
+                                <td>-</td>
+                                <td>Template to render.</td>
+                            </tr>
+                            <tr>
                                 <td><code>itemAs</code></td>
                                 <td><code>string</code></td>
                                 <td>no</td>
                                 <td><code>&#39;item&#39;</code></td>
                                 <td>Value associated with current value in template.</td>
                             </tr>
-                            <tr>
-                                <td><code>template</code></td>
-                                <td><code>VirtualNode</code></td>
-                                <td>yes</td>
-                                <td>-</td>
-                                <td>Template to render.</td>
-                            </tr>
-                            <tr>
+
+                            {/* <tr>
                                 <td><code>bindToList</code></td>
                                 <td><code>boolean</code></td>
                                 <td>no</td>
                                 <td><code>false</code></td>
                                 <td>Value which sets if component renders in fixed height wrapper or with infinite height.</td>
-                            </tr>
-                            <tr>
+                            </tr> */}
+                            {/* <tr>
                                 <td><code>debounce</code></td>
                                 <td><code>number</code></td>
                                 <td>no</td>
                                 <td><code>300</code></td>
                                 <td>Debounce time between fired <code>&#39;onBottomReach&#39;</code> event</td>
-                            </tr>
-                            <tr>
+                            </tr> */}
+                            {/* <tr>
                                 <td><code>bottomOffset</code></td>
                                 <td><code>number</code></td>
                                 <td>no</td>
                                 <td><code>false</code></td>
                                 <td>Offset in <code>px</code> from bottom of last list element.</td>
-                            </tr>
+                            </tr> */}
                             <tr>
                                 <td><code>addClass</code></td>
                                 <td><code>string</code></td>
@@ -229,9 +248,51 @@ export class ListPage {
 
                 </div>
 
+                <h2 class="mt-5">Usage</h2>
+                
+                <h5 class="mt-4">Alerts list with simple list data:</h5>
+
+                <code>
+                    <p>
+                   const pizzas = [&#123;name: 'Pepperoni',price: 10&#125;, &#123;name: 'Quattro formaggi',price: 12&#125;,&#123;name: 'Havaiian',price: 14&#125;]
+                    </p>
+                    <p>
+                    <span>&lt;cwc-list</span><br/>
+                        <span class="ml-2">template=<span class="text-info">'&lt;div class="alert alert-primary" role="alert"&gt;&lt;%=item.name%&gt; pizza is cooked!&lt;/div&gt;'</span></span><br/>
+
+                        <span class="ml-2">items=<span class="text-danger">&#123;<span class="text-alert">this.pizzas</span>&#125;</span>&gt;</span><br/>
+                    &lt;/cwc-list&gt; 
+                    </p>
+                </code>
+                <div>
+                    <cwc-list template='<div class="alert alert-primary" role="alert"><%=item.name%> pizza is cooked!</div>'
+                        items={this.pizzas}>
+                    </cwc-list>
+                </div>
+
+                <h5 class="mt-4">Alerts list with <code>addClassOdd</code>,<code>addClassEven</code> and <code>wrapperClass</code> props.</h5>
+
+                
+                <code>
+                    <p>
+                    <span>&lt;cwc-list</span><br/>
+                        <span class="ml-2">template=<span class="text-info">'&lt;div class="alert alert-primary" role="alert"&gt;&lt;%=item.name%&gt; pizza is cooked!&lt;/div&gt;'</span></span><br/>
+
+                        <span class="ml-2">addClassOdd=<span class="text-info">"alert-secondary"</span></span><br/>
+                        <span class="ml-2">items=<span class="text-danger">&#123;<span class="text-alert">this.pizzas</span>&#125;</span>&gt;</span><br/>
+                    &lt;/cwc-list&gt; 
+                    </p>
+                </code>
+                <div>
+                    <cwc-list template='<div class="alert " role="alert"><%=item.name%> pizza is cooked!</div>'
+                        items={this.pizzas}
+                        addClassEven="alert-success"
+                        addClassOdd="alert-secondary"
+                        wrapperClass="border-left border-dark">
+                    </cwc-list>
+                </div>
 
 
-                <h4 class="mt-5">Boxed list of users with random data: </h4> <br />
 
                 <cwc-list id="users-boxed"
                     items={this.users2}
