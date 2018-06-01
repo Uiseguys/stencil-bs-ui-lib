@@ -1,7 +1,7 @@
-# Themeable UI Library - based on StencilJS and Bootstrap 4
+# Themeable UI Library - based on StencilJS and Bootstrap4
 
 ## Live Demo
-[https://stencil-bs-ui-lib.herokuapp.com/](https://stencil-bs-ui-lib.herokuapp.com/)
+[https://stencil-bs-lib.netlify.com/](https://stencil-bs-lib.netlify.com/)
 
 ## Goal
 The goal of this project is to provide an extensive and themeable UI library based on StencilJS and Bootstrap.
@@ -13,7 +13,7 @@ https://atlassian.design/guidelines/product/overview
 To create new component, please prefix component's name with `cwc-` (for e.g. `cwc-list`).
 New component must be created in a separate git branch prefixed with `feature|bugfix|release` like `feature/my-new-shiny-component`. 
 When the component is done you must provide demo with API reference and component usage on the demo page. 
-After pushing your branch to the repository, create pull request assigning the @ui-guys for review and verify automatically deployed demo:
+After pushing your branch to the repository, create pull request assigning the @ui-guys for review. For every pull request there is an automatically created [Netlify](https://www.netlify.com/) deploy. You can check your changes and confirm successfull merge:
 ![netlify-deploy-verify](https://user-images.githubusercontent.com/6415224/40789279-bad06eb2-64fa-11e8-881e-174c7e99269f.png)
 
 
