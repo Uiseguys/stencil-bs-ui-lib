@@ -1,5 +1,6 @@
 import { Component, Prop, Element } from '@stencil/core';
 import template from 'lodash/template';
+import templateSettings from 'lodash/templateSettings';
 
 
 @Component({
@@ -11,8 +12,6 @@ export class CwcList {
 
     @Prop() items: object[];
     @Prop() itemAs: string = 'item';
-    @Prop() template: string = '';
-
     @Prop() addClass?: string = '';
     @Prop() addClassFirst?: string = '';
     @Prop() addClassLast?: string = '';
@@ -20,7 +19,7 @@ export class CwcList {
     @Prop() addClassOdd?: string = '';
     @Prop() wrapperClass: string = '';
 
-    regex = /\[\[+(.*?) ?\]\]+/g;
+    @Prop() interpolationRegex = /\[\[=+(.*?) ?\]\]+/g;
 
     @Element() el: HTMLElement;
 
@@ -91,7 +90,10 @@ export class CwcList {
 
     render() {
 
-        let tmpl = template(this.template)
+        templateSettings.interpolate = this.interpolationRegex;
+
+        let tmpl = template(this.el.firstElementChild.outerHTML)
+        this.el.removeChild(this.el.firstElementChild)
 
         let str = ''
         this.items.map((item, index) => {
@@ -106,8 +108,6 @@ export class CwcList {
         return (
 
             <div id={this.el.id} class={"item-list-wrapper " + this.wrapperClass}
-
-
                 innerHTML={str}>
             </div>
         );

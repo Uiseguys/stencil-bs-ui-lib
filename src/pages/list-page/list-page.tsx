@@ -132,8 +132,6 @@ export class ListPage {
     }
 
 
-
-
     render() {
         return (
 
@@ -144,8 +142,8 @@ export class ListPage {
                     <h1 id="infinite-list-component" class="mb-2">List component</h1>
                     <h2 id="api-and-usage-">Overview</h2>
 
-                    <p>This component renders list of given template according to provided data in <code>`items` @Prop()</code>. <br/>
-                    Template interpolation is performed with <a href="https://lodash.com/docs/4.17.10#template" target="_blank">Lodash template engine</a>.</p>
+                    <p>This component renders list of given <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot">slot</a> template.<br/>
+                    Template interpolation is performed with double square brackets `[[ ]]` like in <a href="https://angular.io">Angular</a> or <a href="https://github.com/janl/mustache.js">Mustache</a> templates.</p>
                     <h3 id="props">Props</h3>
                     <table>
                         <thead>
@@ -164,13 +162,6 @@ export class ListPage {
                                 <td>yes</td>
                                 <td><code>[]</code></td>
                                 <td>Array of objects to iterate with template.</td>
-                            </tr>
-                            <tr>
-                                <td><code>template</code></td>
-                                <td><code>String</code></td>
-                                <td>yes</td>
-                                <td>-</td>
-                                <td>Template to render.</td>
                             </tr>
                             <tr>
                                 <td><code>itemAs</code></td>
@@ -265,12 +256,15 @@ export class ListPage {
                     </p>
                 </code>
                 <div>
-                    <cwc-list template='<div class="alert alert-primary" role="alert"><%=item.name%> pizza is cooked!</div>'
-                        items={this.pizzas}>
+                    <cwc-list items={this.pizzas}>
+                        <slot>
+                           <div class="alert alert-primary" title="[[=item.name]]" role="alert">[[=item.name]] pizza is cooked!</div>
+                        </slot>
                     </cwc-list>
                 </div>
 
                 <h5 class="mt-4">Alerts list with <code>addClassOdd</code>,<code>addClassEven</code> and <code>wrapperClass</code> props.</h5>
+                <p>You can also redefine interpolated value as </p>
 
                 
                 <code>
@@ -284,17 +278,19 @@ export class ListPage {
                     </p>
                 </code>
                 <div>
-                    <cwc-list template='<div class="alert " role="alert"><%=item.name%> pizza is cooked!</div>'
-                        items={this.pizzas}
+                    <cwc-list items={this.pizzas}
                         addClassEven="alert-success"
                         addClassOdd="alert-secondary"
                         wrapperClass="border-left border-dark">
+                        <slot>
+                            <div class="alert " role="alert"> [[=item.name]] pizza is cooked!</div>
+                        </slot>
                     </cwc-list>
                 </div>
 
 
 
-                <cwc-list id="users-boxed"
+                {/* <cwc-list id="users-boxed"
                     items={this.users2}
                     itemAs='user'
                     template={this.getUser2Template()}
@@ -321,7 +317,7 @@ export class ListPage {
                         addClassFirst='custom-first'>
 
                     </cwc-list>
-                </div>
+                </div> */}
             </div>
         )
     }

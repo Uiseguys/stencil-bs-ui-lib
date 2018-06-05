@@ -9,10 +9,10 @@ export class StencilBsDemoPage {
     @Prop() root = '/';
     components = [
         {
-            componentName: 'navbar-page',
-            url: '/navbar',
-            title: 'Navbar Component',
-            isHiden: true
+            componentName: 'list-slot-page',
+            url: '/cwc-list-slot',
+            title: 'List-slot Component',
+            isHiden: false
         },
         {
             componentName: 'moment-page',
