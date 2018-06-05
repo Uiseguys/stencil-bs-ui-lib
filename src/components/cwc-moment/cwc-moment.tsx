@@ -53,10 +53,11 @@ export class CwcMoment {
                     this.momentNow = 'a moment ago';
                 } else if (momentDate.isBetween(todayBegin, todayEnd)) {
                     const calendarFormat = moment(this.date).calendar();
-                    this.momentNow = calendarFormat.split(' ')[0] + ', ' + momentDate.format("hh:mm a");
+                    console.log(calendarFormat)
+                    this.momentNow = calendarFormat
                 } else if (momentDate.isBetween(yesterdayBegin, yesterdayEnd)) {
                     const calendarFormat = moment(this.date).calendar();
-                    this.momentNow = calendarFormat.split(' ')[0] + ', ' + momentDate.format("hh:mm a");
+                    this.momentNow = calendarFormat
                 } else {
                     this.momentNow = momentDate.fromNow();
                 }
