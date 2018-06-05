@@ -63,7 +63,6 @@ export class CwcMoment {
                 }
             } else if (!moment(this.date).isValid()) {
                 this.momentNow = '-';
-                console.log('momentNow:', this.momentNow);
             } else if (!this.format) {
                 this.momentNow = moment(this.date).calendar();
             } else {
