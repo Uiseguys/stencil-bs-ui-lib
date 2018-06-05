@@ -424,7 +424,6 @@ declare global {
 
   namespace StencilComponents {
     interface CwcMoment {
-      'calendarI18n': any;
       'date': string;
       'diff': boolean;
       'duration': string;
@@ -455,7 +454,6 @@ declare global {
   }
   namespace JSXElements {
     export interface CwcMomentAttributes extends HTMLAttributes {
-      'calendarI18n'?: any;
       'date'?: string;
       'diff'?: boolean;
       'duration'?: string;
