@@ -150,9 +150,9 @@ export class MomentPage {
                                                 lang={'en'} diff={true} humanize={true}></cwc-moment>
                                             </p>
                                             <p>
-                                                <cwc-moment date="2019-08-07 14:30" format="L" 
+                                                <cwc-moment date={new Date().toString()} format="L" 
                                                 lang={'de'} diff={true} humanize={true}></cwc-moment>
-                                                <cwc-moment date="2019-08-07 14:30" format="L" 
+                                                <cwc-moment date={new Date().toString()} format="L" 
                                                 lang={'en'} diff={true} humanize={true}></cwc-moment>
                                             </p>
                                         </div>
