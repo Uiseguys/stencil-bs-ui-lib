@@ -563,6 +563,41 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface CwcResolutionInfo {
+      'height': number;
+      'width': number;
+    }
+  }
+
+  interface HTMLCwcResolutionInfoElement extends StencilComponents.CwcResolutionInfo, HTMLStencilElement {}
+
+  var HTMLCwcResolutionInfoElement: {
+    prototype: HTMLCwcResolutionInfoElement;
+    new (): HTMLCwcResolutionInfoElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-resolution-info': HTMLCwcResolutionInfoElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-resolution-info': HTMLCwcResolutionInfoElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-resolution-info': JSXElements.CwcResolutionInfoAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcResolutionInfoAttributes extends HTMLAttributes {
+      'height'?: number;
+      'width'?: number;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface CwcStickyHeader {
       'background': string;
       'color': string;
@@ -2012,6 +2047,39 @@ declare global {
   }
   namespace JSXElements {
     export interface ProgressBarPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface ResolutionInfoPage {
+
+    }
+  }
+
+  interface HTMLResolutionInfoPageElement extends StencilComponents.ResolutionInfoPage, HTMLStencilElement {}
+
+  var HTMLResolutionInfoPageElement: {
+    prototype: HTMLResolutionInfoPageElement;
+    new (): HTMLResolutionInfoPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'resolution-info-page': HTMLResolutionInfoPageElement;
+  }
+  interface ElementTagNameMap {
+    'resolution-info-page': HTMLResolutionInfoPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'resolution-info-page': JSXElements.ResolutionInfoPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ResolutionInfoPageAttributes extends HTMLAttributes {
 
     }
   }

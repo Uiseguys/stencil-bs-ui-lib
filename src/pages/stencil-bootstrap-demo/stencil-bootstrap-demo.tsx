@@ -13,6 +13,13 @@ export class StencilBootstrapDemo {
             showOnInit: false
         },
         {
+            cardHeaderId: 'resolution-info-heading',
+            cardBodyId: 'resolution-info-collapse',
+            cardHeaderContent: 'Resolution Info Component',
+            cardBodyContent: '<resolution-info-page></resolution-info-page>',
+            showOnInit: false
+        },
+        {
             cardHeaderId: 'momentHeading',
             cardBodyId: 'momentCollapse',
             cardHeaderContent: 'Moment Component',

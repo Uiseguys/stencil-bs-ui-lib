@@ -15,6 +15,11 @@ export class StencilBsDemoPage {
             isHiden: true
         },
         {
+            componentName: 'resolution-info-page',
+            url: '/resolution-info',
+            title: 'Resolution Info Component'
+        },
+        {
             componentName: 'moment-page',
             url: '/moment',
             title: 'Moment Component'
