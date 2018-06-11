@@ -12,8 +12,6 @@ export class ResolutionInfoPage {
             <cwc-resolution-info width={2560} height={1440} />,
             <cwc-resolution-info width={2048} height={1080} />,
 
-            <cwc-resolution-info width={2048} height={1023} />,
-
             <cwc-resolution-info width={204} height={204} />
         ]
     }
