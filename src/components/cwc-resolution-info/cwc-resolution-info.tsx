@@ -61,30 +61,20 @@ export class ResolutionInfo {
             ratioTemplate;
 
         if (this.width <= this.screenData.web.w && this.height <= this.screenData.web.h ) {
-            resolutionTemplate = [
-                <div class="icon icon-res-web"></div>,   
-                <span class="text-center resolution res-web">web</span> 
-            ]
+            resolutionTemplate = <span class="text-center resolution res-web">web</span> 
+            
         } else if (this.width >= this.screenData.uhd.w && this.height >= this.screenData.uhd.h ) {
-            resolutionTemplate = [
-                <div class="icon icon-res-uhd"></div>,   
-                <span class="text-center resolution res-uhd">uhd</span>
-            ]
+            resolutionTemplate = <span class="text-center resolution res-uhd">uhd</span>
+            
         } else if (this.width >= this.screenData.qhd.w && this.height >= this.screenData.qhd.h ) {
-            resolutionTemplate = [
-                <div class="icon icon-res-qhd"></div>,   
-                <span class="text-center resolution res-qhd">qhd</span>
-            ]
+            resolutionTemplate = <span class="text-center resolution res-qhd">qhd</span>
+            
         } else if (this.width >= this.screenData.hd.w && this.height >= this.screenData.hd.h ) {
-            resolutionTemplate = [
-                <div class="icon icon-res-hd"></div>,   
-                <span class="text-center resolution res-hd">hd</span>
-            ]
+            resolutionTemplate = <span class="text-center resolution res-hd">hd</span>
+            
         } else if (this.width >= this.screenData.sd.w && this.height >= this.screenData.sd.h ) {
-            resolutionTemplate = [
-                <div class="icon icon-res-sd"></div>,   
-                <span class="text-center resolution res-sd">sd</span>
-            ]
+            resolutionTemplate = <span class="text-center resolution res-sd">sd</span>
+            
         }
         const ratio = this.getRatio()
 
