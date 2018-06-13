@@ -60,10 +60,7 @@ export class ResolutionInfo {
         let resolutionTemplate,
             ratioTemplate;
 
-        if (this.width <= this.screenData.web.w && this.height <= this.screenData.web.h ) {
-            resolutionTemplate = <span class="text-center resolution res-web">web</span> 
-            
-        } else if (this.width >= this.screenData.uhd.w && this.height >= this.screenData.uhd.h ) {
+      if (this.width >= this.screenData.uhd.w && this.height >= this.screenData.uhd.h ) {
             resolutionTemplate = <span class="text-center resolution res-uhd">uhd</span>
             
         } else if (this.width >= this.screenData.qhd.w && this.height >= this.screenData.qhd.h ) {
@@ -72,10 +69,13 @@ export class ResolutionInfo {
         } else if (this.width >= this.screenData.hd.w && this.height >= this.screenData.hd.h ) {
             resolutionTemplate = <span class="text-center resolution res-hd">hd</span>
             
-        } else if (this.width >= this.screenData.sd.w && this.height >= this.screenData.sd.h ) {
+        } else if (this.width > this.screenData.sd.w && this.height > this.screenData.sd.h ) {
             resolutionTemplate = <span class="text-center resolution res-sd">sd</span>
-            
-        }
+        } else if (this.width <= this.screenData.sd.w && this.height <= this.screenData.sd.h ) {
+            resolutionTemplate = <span class="text-center resolution res-web">web</span> 
+        } 
+
+        
         const ratio = this.getRatio()
 
         if (ratio > 2 ) {
