@@ -130,6 +130,54 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface CwcDnd {
+      'draculaOpts': any;
+      'getDrake': () => any;
+      'rows': string[];
+    }
+  }
+
+  interface HTMLCwcDndElement extends StencilComponents.CwcDnd, HTMLStencilElement {}
+
+  var HTMLCwcDndElement: {
+    prototype: HTMLCwcDndElement;
+    new (): HTMLCwcDndElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-dnd': HTMLCwcDndElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-dnd': HTMLCwcDndElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-dnd': JSXElements.CwcDndAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcDndAttributes extends HTMLAttributes {
+      'draculaOpts'?: any;
+      'onDndcancel'?: (event: CustomEvent) => void;
+      'onDndcloned'?: (event: CustomEvent) => void;
+      /**
+       * Dragula events
+       */
+      'onDnddrag'?: (event: CustomEvent) => void;
+      'onDnddragend'?: (event: CustomEvent) => void;
+      'onDnddrop'?: (event: CustomEvent) => void;
+      'onDndout'?: (event: CustomEvent) => void;
+      'onDndover'?: (event: CustomEvent) => void;
+      'onDndremove'?: (event: CustomEvent) => void;
+      'onDndshadow'?: (event: CustomEvent) => void;
+      'rows'?: string[];
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface CwcDropdown {
       'close': () => void;
       'open': () => void;
@@ -1627,6 +1675,39 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface DndPage {
+
+    }
+  }
+
+  interface HTMLDndPageElement extends StencilComponents.DndPage, HTMLStencilElement {}
+
+  var HTMLDndPageElement: {
+    prototype: HTMLDndPageElement;
+    new (): HTMLDndPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'dnd-page': HTMLDndPageElement;
+  }
+  interface ElementTagNameMap {
+    'dnd-page': HTMLDndPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'dnd-page': JSXElements.DndPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface DndPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface DropdownPage {
 
     }
@@ -2080,39 +2161,6 @@ declare global {
   }
   namespace JSXElements {
     export interface ResolutionInfoPageAttributes extends HTMLAttributes {
-
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
-    interface StencilBootstrapDemo {
-
-    }
-  }
-
-  interface HTMLStencilBootstrapDemoElement extends StencilComponents.StencilBootstrapDemo, HTMLStencilElement {}
-
-  var HTMLStencilBootstrapDemoElement: {
-    prototype: HTMLStencilBootstrapDemoElement;
-    new (): HTMLStencilBootstrapDemoElement;
-  };
-  interface HTMLElementTagNameMap {
-    'stencil-bootstrap-demo': HTMLStencilBootstrapDemoElement;
-  }
-  interface ElementTagNameMap {
-    'stencil-bootstrap-demo': HTMLStencilBootstrapDemoElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'stencil-bootstrap-demo': JSXElements.StencilBootstrapDemoAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface StencilBootstrapDemoAttributes extends HTMLAttributes {
 
     }
   }
