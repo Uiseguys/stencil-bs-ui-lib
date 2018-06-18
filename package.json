@@ -1,82 +1,151 @@
 {
-    "name": "@ui-guys/stencil-bs-ui-lib",
-    "private": false,
-    "version": "0.5.2",
-    "description": "Bootstrap componentes built with StencilJS",
-    "engines": {
-        "node": ">=6.11.0 <9.0"
+  "name": "@ui-guys/stencil-bs-ui-lib",
+  "private": false,
+  "version": "0.5.3",
+  "description": "Bootstrap componentes built with StencilJS",
+  "engines": {
+    "node": ">=6.11.0 <9.0"
+  },
+  "main": "dist/index.js",
+  "types": "dist/types/components.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "browser": "dist/index.js",
+  "files": [
+    "dist/"
+  ],
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "js",
+    "json",
+    "jsx"
+  ],
+  "scripts": {
+    "build": "stencil build --no-cache",
+    "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
+    "serve": "stencil-dev-server",
+    "start": "npm run dev",
+    "test": "jest --no-cache",
+    "test.watch": "jest --watch --no-cache",
+    "heroku-postbuild": "npm run build",
+    "serve:heroku": "http-server www",
+    "prepublish": "stencil build --prod --es5"
+  },
+  "dependencies": {
+    "@stencil/core": "0.7.24",
+    "@stencil/dev-server": "latest",
+    "@stencil/router": "0.0.28",
+    "@stencil/sass": "0.0.2",
+    "@stencil/utils": "latest",
+    "@types/bootstrap": "^4.0.1",
+    "@types/jest": "^21.1.1",
+    "@types/video.js": "^6.2.3",
+    "ajv": "^6.1.1",
+    "bootstrap": "^4.0.0",
+    "bootstrap.native": "^2.0.21",
+    "dragula": "^3.7.2",
+    "http-server": "^0.11.1",
+    "jest": "^21.2.1",
+    "lodash": "^4.17.4",
+    "moment": "^2.20.1",
+    "pikaday": "^1.7.0",
+    "popper.js": "^1.12.9",
+    "tiny-date-picker": "^3.2.4",
+    "tooltip.js": "^1.1.7",
+    "tslint": "^5.7.0",
+    "video.js": "^6.6.0",
+    "videojs-font": "^2.0.0"
+  },
+  "devDependencies": {
+    "@stencil/sass": "0.0.2",
+    "@types/googlemaps": "^3.30.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Uiseguys/stencil-bs-ui-lib.git"
+  },
+  "author": "wiseguys-admin <admin@uiguys.berlin>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Uiseguys/stencil-bs-ui-lib/issues"
+  },
+  "homepage": "https://github.com/Uiseguys/stencil-bs-ui-lib",
+  "jest": {
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
     },
     "main": "dist/index.js",
     "types": "dist/types/components.d.ts",
     "collection": "dist/collection/collection-manifest.json",
     "browser": "dist/index.js",
     "files": [
-        "dist/"
+      "dist/"
     ],
     "scripts": {
-        "build": "stencil build --no-cache",
-        "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
-        "serve": "stencil-dev-server",
-        "start": "npm run dev",
-        "test": "jest --no-cache",
-        "test.watch": "jest --watch --no-cache",
-        "heroku-postbuild": "npm run build",
-        "serve:heroku": "http-server www",
-        "prepublish": "stencil build --prod --es5"
+      "build": "stencil build --no-cache",
+      "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
+      "serve": "stencil-dev-server",
+      "start": "npm run dev",
+      "test": "jest --no-cache",
+      "test.watch": "jest --watch --no-cache",
+      "heroku-postbuild": "npm run build",
+      "serve:heroku": "http-server www",
+      "prepublish": "stencil build --prod --es5"
     },
     "dependencies": {
-        "@stencil/core": "0.7.24",
-        "@stencil/dev-server": "latest",
-        "@stencil/router": "0.0.28",
-        "@stencil/sass": "0.0.2",
-        "@stencil/utils": "latest",
-        "@types/bootstrap": "^4.0.1",
-        "@types/dragula": "^2.1.33",
-        "@types/jest": "^21.1.1",
-        "@types/video.js": "^6.2.3",
-        "@ui-guys/bootstra-slider": "^10.0.1",
-        "@ui-guys/stencil-markdown": "^1.0.0",
-        "ajv": "^6.1.1",
-        "bootstrap": "^4.0.0",
-        "bootstrap.native": "^2.0.21",
-        "dragula": "^3.7.2",
-        "http-server": "^0.11.1",
-        "jest": "^21.2.1",
-        "lodash": "^4.17.4",
-        "moment": "^2.20.1",
-        "pikaday": "^1.7.0",
-        "popper.js": "^1.12.9",
-        "tiny-date-picker": "^3.2.4",
-        "tooltip.js": "^1.1.7",
-        "tslint": "^5.7.0",
-        "video.js": "^6.6.0",
-        "videojs-font": "^2.0.0"
+      "@stencil/core": "0.7.24",
+      "@stencil/dev-server": "latest",
+      "@stencil/router": "0.0.28",
+      "@stencil/sass": "0.0.2",
+      "@stencil/utils": "latest",
+      "@types/bootstrap": "^4.0.1",
+      "@types/dragula": "^2.1.33",
+      "@types/jest": "^21.1.1",
+      "@types/video.js": "^6.2.3",
+      "@ui-guys/bootstra-slider": "^10.0.1",
+      "@ui-guys/stencil-markdown": "^1.0.0",
+      "ajv": "^6.1.1",
+      "bootstrap": "^4.0.0",
+      "bootstrap.native": "^2.0.21",
+      "dragula": "^3.7.2",
+      "http-server": "^0.11.1",
+      "jest": "^21.2.1",
+      "lodash": "^4.17.4",
+      "moment": "^2.20.1",
+      "pikaday": "^1.7.0",
+      "popper.js": "^1.12.9",
+      "tiny-date-picker": "^3.2.4",
+      "tooltip.js": "^1.1.7",
+      "tslint": "^5.7.0",
+      "video.js": "^6.6.0",
+      "videojs-font": "^2.0.0"
     },
     "devDependencies": {
-        "@stencil/sass": "0.0.2",
-        "@types/googlemaps": "^3.30.7"
+      "@stencil/sass": "0.0.2",
+      "@types/googlemaps": "^3.30.7"
     },
     "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Uiseguys/stencil-bs-ui-lib.git"
+      "type": "git",
+      "url": "git+https://github.com/Uiseguys/stencil-bs-ui-lib.git"
     },
     "author": "wiseguys-admin <admin@uiguys.berlin>",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/Uiseguys/stencil-bs-ui-lib/issues"
+      "url": "https://github.com/Uiseguys/stencil-bs-ui-lib/issues"
     },
     "homepage": "https://github.com/Uiseguys/stencil-bs-ui-lib",
     "jest": {
-        "transform": {
-            "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
-        },
-        "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
-        "moduleFileExtensions": [
-            "ts",
-            "tsx",
-            "js",
-            "json",
-            "jsx"
-        ]
+      "transform": {
+        "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
+      },
+      "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
+      "moduleFileExtensions": [
+        "ts",
+        "tsx",
+        "js",
+        "json",
+        "jsx"
+      ]
     }
+  }
 }
