@@ -12,11 +12,11 @@ export class ResolutionInfo {
     @State() ratio: number;
 
     /*
-    896x504 or less -> WEB
-    Greater than 896x504 up to 1152x648 -> SD
-    Greater than 1152x648 up to 2048x1080 -> HD
-    Greater than 2048x1080 up to 2560x1440 -> QHD
     Greater than 2560x1440 up to 4096x2160 -> UHD
+    Greater than 2048x1080 up to 2560x1440 -> QHD
+    Greater than 1152x648 up to 2048x1080 -> HD
+    Greater than 896x504 up to 1152x648 -> SD
+    896x504 or less -> WEB
 
     value 0.9 to 1.1 -> 1:1
 
@@ -27,27 +27,27 @@ export class ResolutionInfo {
     value over 2 -> cinema
     */
 
-    screenData = {
-        web: {
-            w: 896,
-            h: 504
-        }, 
-        sd: {
-            w: 1152,
-            h: 648
-        },
-        hd: { 
-            w: 2048,
-            h: 1080
+    data = {
+        uhd: {
+            w: 4096,
+            h: 2160
         },
         qhd: {
             w: 2560,
             h: 1440
         },
-        uhd: {
-            w: 4096,
-            h: 2160
-        }
+        hd: { 
+            w: 2048,
+            h: 1080
+        },
+        sd: {
+            w: 1152,
+            h: 648
+        },
+        web: {
+            w: 896,
+            h: 504
+        }, 
 
     }
 
@@ -60,18 +60,22 @@ export class ResolutionInfo {
         let resolutionTemplate,
             ratioTemplate;
 
-      if (this.width >= this.screenData.uhd.w && this.height >= this.screenData.uhd.h ) {
+      if (this.height <= this.data.uhd.h && this.width <= this.data.uhd.w 
+          && this.width > this.data.qhd.w && this.height > this.data.qhd.h ) {
             resolutionTemplate = <span class="text-center resolution res-uhd">uhd</span>
             
-        } else if (this.width >= this.screenData.qhd.w && this.height >= this.screenData.qhd.h ) {
+        } else if (this.width <= this.data.qhd.w && this.height <= this.data.qhd.h 
+                   && this.width > this.data.hd.w && this.height > this.data.hd.h ) {
             resolutionTemplate = <span class="text-center resolution res-qhd">qhd</span>
             
-        } else if (this.width >= this.screenData.hd.w && this.height >= this.screenData.hd.h ) {
+        } else if (this.width <= this.data.hd.w && this.height <= this.data.hd.h
+                   && this.width > this.data.sd.w && this.height > this.data.sd.h ) {
             resolutionTemplate = <span class="text-center resolution res-hd">hd</span>
             
-        } else if (this.width > this.screenData.sd.w && this.height > this.screenData.sd.h ) {
+        } else if (this.width <= this.data.sd.w && this.height <= this.data.sd.h
+                   && this.width > this.data.web.w && this.height > this.data.web.h ) {
             resolutionTemplate = <span class="text-center resolution res-sd">sd</span>
-        } else if (this.width <= this.screenData.sd.w && this.height <= this.screenData.sd.h ) {
+        } else if (this.width < this.data.sd.w && this.height < this.data.sd.h ) {
             resolutionTemplate = <span class="text-center resolution res-web">web</span> 
         } 
 
