@@ -15,6 +15,11 @@ export class StencilBsDemoPage {
             isHiden: true
         },
         {
+            componentName: 'dnd-page',
+            url: '/dnd',
+            title: 'DragAndDrop Component'
+        },
+        {
             componentName: 'resolution-info-page',
             url: '/resolution-info',
             title: 'Resolution Info Component'
