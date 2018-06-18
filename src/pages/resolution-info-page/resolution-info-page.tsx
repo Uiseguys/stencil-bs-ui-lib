@@ -8,8 +8,9 @@ export class ResolutionInfoPage {
 
     render() {
         return [
-            <p>5000x4000:</p>, 
-            <cwc-resolution-info width={5000} height={4000} />,
+            <br/>,
+            <p>4096x2160:</p>, 
+            <cwc-resolution-info width={4096} height={2160} />,
             <br/>,
             <p>2560x1440:</p>, 
             <cwc-resolution-info width={2560} height={1440} />,
@@ -26,6 +27,8 @@ export class ResolutionInfoPage {
             <br/>,
             <p>4096x540:</p>, 
             <cwc-resolution-info width={4096} height={540} />,
+            <p>1280x720:</p>, 
+            <cwc-resolution-info width={1280} height={720} />,
         ]
     }
 }
