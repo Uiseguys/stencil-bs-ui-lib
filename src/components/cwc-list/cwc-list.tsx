@@ -5,7 +5,7 @@ import templateSettings from 'lodash/templateSettings';
 
 @Component({
     tag: 'cwc-list',
-    // styleUrl: 'cwc-list-2.scss'
+    styleUrl: 'cwc-list.scss'
 })
 export class CwcList {
 
@@ -73,12 +73,12 @@ export class CwcList {
      * @memberof CwcList
      */
     insertClassList(str, index): string {
-        let indexCloseTag = str.indexOf('>'),
+        const indexCloseTag = str.indexOf('>'),
             indexClass = str.indexOf('class="')
 
-        let isClassPresent = indexClass !== -1 && indexClass < indexCloseTag
+        const isClassPresent = indexClass !== -1 && indexClass < indexCloseTag
 
-        let finalClassList = isClassPresent ?
+        const finalClassList = isClassPresent ?
             this.insert(str, str.indexOf('"', indexClass + 7), this.addListClasses('', index, this.items.length)) :
             this.insert(str, indexCloseTag, this.addListClasses('', index, this.items.length))
 
@@ -92,7 +92,7 @@ export class CwcList {
 
         templateSettings.interpolate = this.interpolationRegex;
 
-        let tmpl = template(this.el.firstElementChild.outerHTML)
+        const tmpl = template(this.el.firstElementChild.outerHTML)
         this.el.removeChild(this.el.firstElementChild)
 
         let str = ''

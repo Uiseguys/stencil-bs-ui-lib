@@ -9,12 +9,6 @@ export class StencilBsDemoPage {
     @Prop() root = '/';
     components = [
         {
-            componentName: 'list-slot-page',
-            url: '/cwc-list-slot',
-            title: 'List-slot Component',
-            isHiden: false
-        },
-        {
             componentName: 'moment-page',
             url: '/moment',
             title: 'Moment Component'

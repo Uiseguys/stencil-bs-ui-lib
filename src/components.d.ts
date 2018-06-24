@@ -341,39 +341,6 @@ declare global {
 declare global {
 
   namespace StencilComponents {
-    interface CwcListSlot {
-      'data': any[];
-    }
-  }
-
-  interface HTMLCwcListSlotElement extends StencilComponents.CwcListSlot, HTMLStencilElement {}
-
-  var HTMLCwcListSlotElement: {
-    prototype: HTMLCwcListSlotElement;
-    new (): HTMLCwcListSlotElement;
-  };
-  interface HTMLElementTagNameMap {
-    'cwc-list-slot': HTMLCwcListSlotElement;
-  }
-  interface ElementTagNameMap {
-    'cwc-list-slot': HTMLCwcListSlotElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'cwc-list-slot': JSXElements.CwcListSlotAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface CwcListSlotAttributes extends HTMLAttributes {
-      'data'?: any[];
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
     interface CwcList {
       'addClass': string;
       'addClassEven': string;
@@ -1882,39 +1849,6 @@ declare global {
   }
   namespace JSXElements {
     export interface ListPageAttributes extends HTMLAttributes {
-
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
-    interface ListSlotPage {
-
-    }
-  }
-
-  interface HTMLListSlotPageElement extends StencilComponents.ListSlotPage, HTMLStencilElement {}
-
-  var HTMLListSlotPageElement: {
-    prototype: HTMLListSlotPageElement;
-    new (): HTMLListSlotPageElement;
-  };
-  interface HTMLElementTagNameMap {
-    'list-slot-page': HTMLListSlotPageElement;
-  }
-  interface ElementTagNameMap {
-    'list-slot-page': HTMLListSlotPageElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'list-slot-page': JSXElements.ListSlotPageAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface ListSlotPageAttributes extends HTMLAttributes {
 
     }
   }

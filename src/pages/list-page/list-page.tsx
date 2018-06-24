@@ -143,7 +143,7 @@ export class ListPage {
                     <h2 id="api-and-usage-">Overview</h2>
 
                     <p>This component renders list of given <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot">slot</a> template.<br/>
-                    Template interpolation is performed with double square brackets `[[ ]]` like in <a href="https://angular.io">Angular</a> or <a href="https://github.com/janl/mustache.js">Mustache</a> templates.</p>
+                    Template interpolation is performed with double square brackets <code>`[[ ]]`</code> like in <a href="https://angular.io">Angular</a> or <a href="https://github.com/janl/mustache.js">Mustache</a> templates.</p>
                     <h3 id="props">Props</h3>
                     <table>
                         <thead>
@@ -249,9 +249,14 @@ export class ListPage {
                     </p>
                     <p>
                     <span>&lt;cwc-list</span><br/>
-                        <span class="ml-2">template=<span class="text-info">'&lt;div class="alert alert-primary" role="alert"&gt;&lt;%=item.name%&gt; pizza is cooked!&lt;/div&gt;'</span></span><br/>
-
                         <span class="ml-2">items=<span class="text-danger">&#123;<span class="text-alert">this.pizzas</span>&#125;</span>&gt;</span><br/>
+                        <span class="ml-4 pl-2"> 
+                            &lt;slot&gt; <br/>
+                            <span class="ml-4 pl-4">
+                                &lt;div class="alert alert-primary" role="alert"&gt;<span class="text-success">[[=item.name]]</span> pizza is cooked!&lt;/div&gt;<br/>
+                            </span>
+                            <span class="ml-4 pl-2">&lt;/slot&gt;</span>
+                        </span><br/>
                     &lt;/cwc-list&gt; 
                     </p>
                 </code>
@@ -263,27 +268,39 @@ export class ListPage {
                     </cwc-list>
                 </div>
 
-                <h5 class="mt-4">Alerts list with <code>addClassOdd</code>,<code>addClassEven</code> and <code>wrapperClass</code> props.</h5>
-                <p>You can also redefine interpolated value as </p>
+                <h5 class="mt-4 pt-2">Alerts list with <code>addClassOdd</code>,<code>addClassEven</code>, <code>addClassLast</code> and <code>wrapperClass</code> props.</h5>
+                <p>You can also redefine interpolated value with <code>itemAs</code> property.</p>
 
                 
                 <code>
+
                     <p>
                     <span>&lt;cwc-list</span><br/>
-                        <span class="ml-2">template=<span class="text-info">'&lt;div class="alert alert-primary" role="alert"&gt;&lt;%=item.name%&gt; pizza is cooked!&lt;/div&gt;'</span></span><br/>
-
+                        <span class="ml-2">items=<span class="text-danger">&#123;<span class="text-alert">this.pizzas</span>&#125;</span></span><br/>
                         <span class="ml-2">addClassOdd=<span class="text-info">"alert-secondary"</span></span><br/>
-                        <span class="ml-2">items=<span class="text-danger">&#123;<span class="text-alert">this.pizzas</span>&#125;</span>&gt;</span><br/>
+                        <span class="ml-2">addClassEven=<span class="text-info">"alert-success"</span></span><br/>
+                        <span class="ml-2">addClassLast=<span class="text-info">"text-center"</span></span><br/>
+                        <span class="ml-2">wrapperClass=<span class="text-info">"border-left border-dark"</span></span><br/>
+                        <span class="ml-2">itemAs=<span class="text-info">"pizza"</span>&gt;</span><br/>
+                        <span class="ml-4 pl-2"> 
+                            &lt;slot&gt; <br/>
+                            <span class="ml-4 pl-4">
+                                &lt;div class="alert alert-primary" role="alert"&gt;<span class="text-success">[[=pizza.name]]</span> pizza is cooked!&lt;/div&gt;<br/>
+                            </span>
+                            <span class="ml-4 pl-2">&lt;/slot&gt;</span>
+                        </span><br/>
                     &lt;/cwc-list&gt; 
                     </p>
                 </code>
                 <div>
                     <cwc-list items={this.pizzas}
+                        itemAs="pizza"
                         addClassEven="alert-success"
                         addClassOdd="alert-secondary"
+                        addClassLast="text-center"
                         wrapperClass="border-left border-dark">
                         <slot>
-                            <div class="alert " role="alert"> [[=item.name]] pizza is cooked!</div>
+                            <div class="alert " role="alert"> [[=pizza.name]] pizza is cooked!</div>
                         </slot>
                     </cwc-list>
                 </div>
