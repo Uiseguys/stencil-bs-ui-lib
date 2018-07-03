@@ -3,7 +3,7 @@ import { Component, Prop, Event, EventEmitter, Method, State } from '@stencil/co
 
 @Component({
     tag: 'cwc-infinite-list-watcher',
-    // styleUrl: 'cwc-infinite-list-watcher.scss'
+    styleUrl: 'cwc-infinite-list-watcher.scss'
 })
 export class CwcInfiniteListWatcher {
 

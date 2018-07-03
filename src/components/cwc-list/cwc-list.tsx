@@ -10,7 +10,7 @@ import templateSettings from 'lodash/templateSettings';
 export class CwcList {
 
 
-    @Prop() items: object[];
+    @Prop() items: object[] = [];
     @Prop() itemAs: string = 'item';
     @Prop() addClass?: string = '';
     @Prop() addClassFirst?: string = '';
@@ -93,7 +93,11 @@ export class CwcList {
         templateSettings.interpolate = this.interpolationRegex;
 
         const tmpl = template(this.el.firstElementChild.outerHTML)
-        this.el.removeChild(this.el.firstElementChild)
+        // this.el.removeChild(this.el.firstElementChild)
+        // this.el.firstElementChild.setAttribute('style', 'visibility:hidden;')
+
+        // console.l
+        console.log('Template: ', tmpl)
 
         let str = ''
         this.items.map((item, index) => {

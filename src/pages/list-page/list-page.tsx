@@ -143,7 +143,7 @@ export class ListPage {
                     <h2 id="api-and-usage-">Overview</h2>
 
                     <p>This component renders list of given <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot">slot</a> template.<br/>
-                    Template interpolation is performed with double square brackets <code>`[[ ]]`</code> like in <a href="https://angular.io">Angular</a> or <a href="https://github.com/janl/mustache.js">Mustache</a> templates.</p>
+                    Template interpolation is performed with double square brackets and equals sign <code>`[[= ]]`</code> like in <a href="https://angular.io">Angular</a> or <a href="https://github.com/janl/mustache.js">Mustache</a> templates.</p>
                     <h3 id="props">Props</h3>
                     <table>
                         <thead>
@@ -253,7 +253,7 @@ export class ListPage {
                         <span class="ml-4 pl-2"> 
                             &lt;slot&gt; <br/>
                             <span class="ml-4 pl-4">
-                                &lt;div class="alert alert-primary" role="alert"&gt;<span class="text-success">[[=item.name]]</span> pizza is cooked!&lt;/div&gt;<br/>
+                                &lt;div class="alert alert-primary" role="alert" title=[[=pizza.name]]&gt;<span class="text-success">[[=item.name]]</span> pizza is cooked!&lt;/div&gt;<br/>
                             </span>
                             <span class="ml-4 pl-2">&lt;/slot&gt;</span>
                         </span><br/>
@@ -285,7 +285,7 @@ export class ListPage {
                         <span class="ml-4 pl-2"> 
                             &lt;slot&gt; <br/>
                             <span class="ml-4 pl-4">
-                                &lt;div class="alert alert-primary" role="alert"&gt;<span class="text-success">[[=pizza.name]]</span> pizza is cooked!&lt;/div&gt;<br/>
+                                &lt;div class="alert alert-primary" role="alert" title=[[=pizza.name]]&gt;<span class="text-success">[[=pizza.name]]</span> pizza is cooked!&lt;/div&gt;<br/>
                             </span>
                             <span class="ml-4 pl-2">&lt;/slot&gt;</span>
                         </span><br/>
@@ -300,7 +300,7 @@ export class ListPage {
                         addClassLast="text-center"
                         wrapperClass="border-left border-dark">
                         <slot>
-                            <div class="alert " role="alert"> [[=pizza.name]] pizza is cooked!</div>
+                            <div class="alert " title="[[=item.name]]"  role="alert"> [[=pizza.name]] pizza is cooked!</div>
                         </slot>
                     </cwc-list>
                 </div>
@@ -322,18 +322,6 @@ export class ListPage {
 
                     <br />
 
-                    <cwc-infinite-list-watcher listSelector="#users-infinite"></cwc-infinite-list-watcher>
-
-                    <cwc-list id="users-infinite"
-                        items={this.users1}
-                        itemAs='user'
-                        template={this.getUserTemplate()}
-                        wrapperClass='row'
-                        addClass='custom mxy-2'
-                        addClassEven='custom-even'
-                        addClassFirst='custom-first'>
-
-                    </cwc-list>
                 </div> */}
             </div>
         )
