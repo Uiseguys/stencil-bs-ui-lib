@@ -1289,6 +1289,64 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface ScbModal {
+      'animation': boolean;
+      'backdrop': any;
+      'btntype': string;
+      'centered': boolean;
+      'customId': string;
+      'getModalRef': () => this;
+      'keyboard': boolean;
+      'modalContent': string;
+      'modalTitle': string;
+      'modalfocus': boolean;
+      'show': boolean;
+      'showButton': boolean;
+      'size': string;
+    }
+  }
+
+  interface HTMLScbModalElement extends StencilComponents.ScbModal, HTMLStencilElement {}
+
+  var HTMLScbModalElement: {
+    prototype: HTMLScbModalElement;
+    new (): HTMLScbModalElement;
+  };
+  interface HTMLElementTagNameMap {
+    'scb-modal': HTMLScbModalElement;
+  }
+  interface ElementTagNameMap {
+    'scb-modal': HTMLScbModalElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'scb-modal': JSXElements.ScbModalAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ScbModalAttributes extends HTMLAttributes {
+      'animation'?: boolean;
+      'backdrop'?: any;
+      'btntype'?: string;
+      'centered'?: boolean;
+      'customId'?: string;
+      'keyboard'?: boolean;
+      'modalContent'?: string;
+      'modalTitle'?: string;
+      'modalfocus'?: boolean;
+      'onOnCloseModal'?: (event: CustomEvent) => void;
+      'onOnOpenModal'?: (event: CustomEvent) => void;
+      'show'?: boolean;
+      'showButton'?: boolean;
+      'size'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface ScbNavbar {
       'bgcolor': string;
       'navbarcolor': string;
@@ -1963,6 +2021,39 @@ declare global {
   }
   namespace JSXElements {
     export interface MarkdownPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface ModalPage {
+
+    }
+  }
+
+  interface HTMLModalPageElement extends StencilComponents.ModalPage, HTMLStencilElement {}
+
+  var HTMLModalPageElement: {
+    prototype: HTMLModalPageElement;
+    new (): HTMLModalPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'modal-page': HTMLModalPageElement;
+  }
+  interface ElementTagNameMap {
+    'modal-page': HTMLModalPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'modal-page': JSXElements.ModalPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ModalPageAttributes extends HTMLAttributes {
 
     }
   }
