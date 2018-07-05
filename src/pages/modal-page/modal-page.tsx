@@ -49,7 +49,6 @@ export class ModalPage {
                           keyboard={true}
                           modalfocus={true}
                           showButton={true}
-                          show={true}
                         >
                           Put your modal contents here. You can put any content<br />
                           <input
@@ -93,6 +92,8 @@ export class ModalPage {
                           <br />
                           <span class="hljs-built_in ml-4">show=true</span>
                           <span>&gt;</span>
+                          <br />
+                          <span class="hljs-built_in ml-4">...</span>
                           <br />
                           <span>&lt;/scb-modal&gt;</span>
                         </code>
