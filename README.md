@@ -15,7 +15,7 @@ New component must be created in a separate git branch prefixed with `feature|bu
 When the component is done you must provide demo with API reference and component usage on the demo page. 
 After pushing your branch to the repository, create pull request assigning the @ui-guys for review. For every pull request there is an automatically created [Netlify](https://www.netlify.com/) deploy. You can check your changes and confirm successfull merge:
 ![netlify-deploy-verify](https://user-images.githubusercontent.com/6415224/40789279-bad06eb2-64fa-11e8-881e-174c7e99269f.png)
-
+**Note**: Your browser may cache previous version of the app, so you may need to empty cache and reload the page.
 
 
 
