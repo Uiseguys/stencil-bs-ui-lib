@@ -42,7 +42,6 @@ export class ModalPage {
                         <scb-modal
                           btntype="success"
                           modalTitle="Info"
-                          modalContent="Modal Content"
                           centered={true}
                           animation={true}
                           size=""
@@ -50,8 +49,15 @@ export class ModalPage {
                           keyboard={true}
                           modalfocus={true}
                           showButton={true}
-                          show={true}
-                        />
+                        >
+                          Put your modal contents here. You can put any content<br />
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="Name"
+                            placeholder="Input your name"
+                          />
+                        </scb-modal>
                       </div>
                     </div>
                   </div>
@@ -70,10 +76,6 @@ export class ModalPage {
                             modalTitle="Info"
                           </span>
                           <br />
-                          <span class="hljs-built_in ml-4">
-                            modalContent="Modal Content"
-                          </span>
-                          <br />
                           <span class="hljs-built_in ml-4">centered=true</span>
                           <br />
                           <span class="hljs-built_in ml-4">animation=true</span>
@@ -90,6 +92,8 @@ export class ModalPage {
                           <br />
                           <span class="hljs-built_in ml-4">show=true</span>
                           <span>&gt;</span>
+                          <br />
+                          <span class="hljs-built_in ml-4">...</span>
                           <br />
                           <span>&lt;/scb-modal&gt;</span>
                         </code>
@@ -139,18 +143,6 @@ export class ModalPage {
                           <code>'Modal Title'</code>
                         </td>
                         <td>Sets the Modal title</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <code>modalContent</code>
-                        </td>
-                        <td>
-                          <code>string</code>
-                        </td>
-                        <td>
-                          <code>'Modal Content'</code>
-                        </td>
-                        <td>Sets the Modal content</td>
                       </tr>
                       <tr>
                         <td>
@@ -245,7 +237,7 @@ export class ModalPage {
                           <code>boolean</code>
                         </td>
                         <td>
-                          <code>true</code>
+                          <code>false</code>
                         </td>
                         <td>Shows the modal when initialized.</td>
                       </tr>

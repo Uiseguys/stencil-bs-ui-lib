@@ -1,4 +1,4 @@
-import { Component, Listen } from "@stencil/core";
+import { Component, Listen, State } from '@stencil/core';
 // import template from 'lodash/template'
 
 @Component({
@@ -12,6 +12,8 @@ export class DndPage {
 
   columns = ["#animals", "#birds"];
 
+  @State() framework: Framework = Framework.stencil
+
   @Listen("dnddragend")
   customEventHandler(event) {
     console.log("Received the custom event: ", event);
@@ -20,7 +22,10 @@ export class DndPage {
   componentDidLoad() {
     console.log("The component has been rendered");
   }
-
+  
+  setFramework(framework: Framework): void {
+    this.framework = framework
+  }
   render() {
     // const usageCompiled = template('<%- code %> ')
 
@@ -44,95 +49,189 @@ export class DndPage {
                 <div class="col-12 mt-4">
                   <h3>Usage </h3>
 
-                  <p class="mt-1">
+                  <p class="mt-1 my-0">
                     To instantiate one or more draggable list columns please
                     provide them right into{" "}
                     <code>`&lt;cwc-dnd&gt;&lt;/cwc-dnd&gt;`</code>
                     component. Also you must pass array of selectors of this
                     lists with <code>`rows: string[]`</code> property.
                   </p>
-                  <p>So with provided code:</p>
                 </div>
-
                 <div class="col-12 mt-1">
+
+                  <div class="buttons-wrapper my-2">
+                  <div class={`btn btn-sm ${this.framework === Framework.stencil ? 'btn-primary' : 'btn-secondary' }`}
+                      onClick={() => this.setFramework(Framework.stencil)}>Stencil usage</div>
+                    <div class={`btn btn-sm ml-2 ${this.framework === Framework.angular ? 'btn-primary' : 'btn-secondary' }`}
+                        onClick={() => this.setFramework(Framework.angular)}>Angular usage</div>
+                  </div>
+
+                    {/* <h3>angular</h3> : */}
+                    {/* <h3>stencil</h3> */}
+                  {/* } */}
+
                   <pre>
                     <code class="lang-tsx">
-                      <span>
-                        &lt;cwc-dnd rows=&#123;[&#x27;#animals&#x27;,
-                        &#x27;#birds&#x27;]&#125; class=&quot;row&quot;&gt;
-                      </span>
-                      <br />
-                      <span class="ml-2">
-                        &lt;div id=&quot;animals&quot; class=&quot;col-5
-                        offset-col-1&quot;&gt;
-                      </span>
-                      <br />
-                      <span class="ml-4">
-                        &lt;div class=&quot;column card p-2&quot;&gt;
-                      </span>
-                      <br />
-                      <span class="ml-4 pl-3">&lt;p&gt;cat&lt;&#x2F;p&gt;</span>
-                      <br />
-                      <span class="ml-4">&lt;&#x2F;div&gt;</span>
-                      <br />
-                      <span class="ml-4">
-                        &lt;div class=&quot;column card p-2&quot;&gt;
-                      </span>
-                      <br />
-                      <span class="ml-4 pl-3">&lt;p&gt;dog&lt;&#x2F;p&gt;</span>
-                      <br />
-                      <span class="ml-4">&lt;&#x2F;div&gt;</span>
-                      <br />
-                      <span class="ml-4">
-                        &lt;div class=&quot;column card p-2&quot;&gt;
-                      </span>
-                      <br />
-                      <span class="ml-4 pl-3">
-                        &lt;p&gt;elephant&lt;&#x2F;p&gt;
-                      </span>
-                      <br />
-                      <span class="ml-4">&lt;&#x2F;div&gt;</span>
-                      <br />
-                      <span class="ml-2">&lt;&#x2F;div&gt;</span>
-                      <br />
-                      <span class="ml-2">
-                        &lt;div id=&quot;birds&quot; class=&quot;col-5
-                        offset-col-1&quot;&gt;
-                      </span>
-                      <br />
-                      <span class="ml-4">
-                        &lt;div class=&quot;column card p-2&quot;&gt;
-                      </span>
-                      <br />
-                      <span class="ml-4 pl-3">
-                        &lt;p&gt;tucano&lt;&#x2F;p&gt;
-                      </span>
-                      <br />
-                      <span class="ml-4">&lt;&#x2F;div&gt;</span>
-                      <br />
-                      <span class="ml-4">
-                        &lt;div class=&quot;column card p-2&quot;&gt;
-                      </span>
-                      <br />
-                      <span class="ml-4 pl-3">
-                        &lt;p&gt;crown&lt;&#x2F;p&gt;
-                      </span>
-                      <br />
-                      <span class="ml-4">&lt;&#x2F;div&gt;</span>
-                      <br />
-                      <span class="ml-4">
-                        &lt;div class=&quot;column card p-2&quot;&gt;
-                      </span>
-                      <br />
-                      <span class="ml-4 pl-3">
-                        &lt;p&gt;parrot&lt;&#x2F;p&gt;
-                      </span>
-                      <br />
-                      <span class="ml-4">&lt;&#x2F;div&gt;</span>
-                      <br />
-                      <span class="ml-2">&lt;&#x2F;div&gt;</span>
-                      <br />
-                      <span>&lt;&#x2F;cwc-dnd&gt;</span>
+                  {
+                    this.framework === Framework.stencil ?
+
+                      <div class="stencil-wrapper">
+                        <span>
+                          &lt;cwc-dnd rows=&#123;[&#x27;#animals&#x27;,
+                          &#x27;#birds&#x27;]&#125; class=&quot;row&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-2">
+                          &lt;div id=&quot;animals&quot; class=&quot;col-5
+                          offset-col-1&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4">
+                          &lt;div class=&quot;column card p-2&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4 pl-3">&lt;p&gt;cat&lt;&#x2F;p&gt;</span>
+                        <br />
+                        <span class="ml-4">&lt;&#x2F;div&gt;</span>
+                        <br />
+                        <span class="ml-4">
+                          &lt;div class=&quot;column card p-2&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4 pl-3">&lt;p&gt;dog&lt;&#x2F;p&gt;</span>
+                        <br />
+                        <span class="ml-4">&lt;&#x2F;div&gt;</span>
+                        <br />
+                        <span class="ml-4">
+                          &lt;div class=&quot;column card p-2&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4 pl-3">
+                          &lt;p&gt;elephant&lt;&#x2F;p&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4">&lt;&#x2F;div&gt;</span>
+                        <br />
+                        <span class="ml-2">&lt;&#x2F;div&gt;</span>
+                        <br />
+                        <span class="ml-2">
+                          &lt;div id=&quot;birds&quot; class=&quot;col-5
+                          offset-col-1&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4">
+                          &lt;div class=&quot;column card p-2&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4 pl-3">
+                          &lt;p&gt;tucano&lt;&#x2F;p&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4">&lt;&#x2F;div&gt;</span>
+                        <br />
+                        <span class="ml-4">
+                          &lt;div class=&quot;column card p-2&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4 pl-3">
+                          &lt;p&gt;crown&lt;&#x2F;p&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4">&lt;&#x2F;div&gt;</span>
+                        <br />
+                        <span class="ml-4">
+                          &lt;div class=&quot;column card p-2&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4 pl-3">
+                          &lt;p&gt;parrot&lt;&#x2F;p&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4">&lt;&#x2F;div&gt;</span>
+                        <br />
+                        <span class="ml-2">&lt;&#x2F;div&gt;</span>
+                        <br />
+                        <span>&lt;&#x2F;cwc-dnd&gt;</span>
+                      </div> :
+                      <div class="angular-wrapper">
+                        <span>
+                          &lt;cwc-dnd [rows]="[&#x27;#animals&#x27;,
+                          &#x27;#birds&#x27;]" class=&quot;row&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-2">
+                          &lt;div id=&quot;animals&quot; class=&quot;col-5
+                          offset-col-1&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4">
+                          &lt;div class=&quot;column card p-2&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4 pl-3">&lt;p&gt;cat&lt;&#x2F;p&gt;</span>
+                        <br />
+                        <span class="ml-4">&lt;&#x2F;div&gt;</span>
+                        <br />
+                        <span class="ml-4">
+                          &lt;div class=&quot;column card p-2&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4 pl-3">&lt;p&gt;dog&lt;&#x2F;p&gt;</span>
+                        <br />
+                        <span class="ml-4">&lt;&#x2F;div&gt;</span>
+                        <br />
+                        <span class="ml-4">
+                          &lt;div class=&quot;column card p-2&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4 pl-3">
+                          &lt;p&gt;elephant&lt;&#x2F;p&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4">&lt;&#x2F;div&gt;</span>
+                        <br />
+                        <span class="ml-2">&lt;&#x2F;div&gt;</span>
+                        <br />
+                        <span class="ml-2">
+                          &lt;div id=&quot;birds&quot; class=&quot;col-5
+                          offset-col-1&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4">
+                          &lt;div class=&quot;column card p-2&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4 pl-3">
+                          &lt;p&gt;tucano&lt;&#x2F;p&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4">&lt;&#x2F;div&gt;</span>
+                        <br />
+                        <span class="ml-4">
+                          &lt;div class=&quot;column card p-2&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4 pl-3">
+                          &lt;p&gt;crown&lt;&#x2F;p&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4">&lt;&#x2F;div&gt;</span>
+                        <br />
+                        <span class="ml-4">
+                          &lt;div class=&quot;column card p-2&quot;&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4 pl-3">
+                          &lt;p&gt;parrot&lt;&#x2F;p&gt;
+                        </span>
+                        <br />
+                        <span class="ml-4">&lt;&#x2F;div&gt;</span>
+                        <br />
+                        <span class="ml-2">&lt;&#x2F;div&gt;</span>
+                        <br />
+                        <span>&lt;&#x2F;cwc-dnd&gt;</span>
+                      </div>
+                      }
                     </code>
                   </pre>
                 </div>
@@ -382,4 +481,10 @@ export class DndPage {
       </div>
     ];
   }
+}
+
+
+export enum Framework {
+  'angular',
+  'stencil'
 }

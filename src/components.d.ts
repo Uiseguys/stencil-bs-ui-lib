@@ -1299,7 +1299,6 @@ declare global {
       'customId': string;
       'getModalRef': () => this;
       'keyboard': boolean;
-      'modalContent': string;
       'modalTitle': string;
       'modalfocus': boolean;
       'show': boolean;
@@ -1333,7 +1332,6 @@ declare global {
       'centered'?: boolean;
       'customId'?: string;
       'keyboard'?: boolean;
-      'modalContent'?: string;
       'modalTitle'?: string;
       'modalfocus'?: boolean;
       'onOnCloseModal'?: (event: CustomEvent) => void;
