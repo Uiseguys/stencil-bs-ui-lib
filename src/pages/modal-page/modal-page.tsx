@@ -237,7 +237,7 @@ export class ModalPage {
                           <code>boolean</code>
                         </td>
                         <td>
-                          <code>true</code>
+                          <code>false</code>
                         </td>
                         <td>Shows the modal when initialized.</td>
                       </tr>
