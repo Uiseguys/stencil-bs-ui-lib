@@ -133,7 +133,7 @@ declare global {
     interface CwcDnd {
       'dragulaOpts': any;
       'getDrake': () => any;
-      'handleSelector': string;
+      'handleClass': string;
       'rows': string[];
     }
   }
@@ -158,7 +158,7 @@ declare global {
   namespace JSXElements {
     export interface CwcDndAttributes extends HTMLAttributes {
       'dragulaOpts'?: any;
-      'handleSelector'?: string;
+      'handleClass'?: string;
       'onDndcancel'?: (event: CustomEvent) => void;
       'onDndcloned'?: (event: CustomEvent) => void;
       /**

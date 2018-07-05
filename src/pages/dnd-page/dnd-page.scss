@@ -1,3 +1,11 @@
+.handler {
+    position: absolute;
+    right: 2px;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 table {
     thead th {
         min-width: 100px;

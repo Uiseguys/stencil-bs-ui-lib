@@ -13,8 +13,8 @@ export class CwcDnd {
     
     @Element() el: HTMLElement;
     @Prop() rows: string[] = ['div.row-holder'];
-    @Prop() dragulaOpts: any;
-    @Prop() handleSelector: string = undefined;
+    @Prop() dragulaOpts: any = {};
+    @Prop() handleClass: string = undefined;
 
 
     /**
@@ -47,11 +47,12 @@ export class CwcDnd {
 
         const rowElements = this.rows.map(rowSelector => this.el.querySelector(rowSelector))
 
-        if (this.handleSelector) {
-            this.dragulaOpts.moves = function (el, container, handle) {
-                console.log(el, container);
-                
-                return handle.classList.contains(this.handleSelector);
+        if (this.handleClass) {
+            this.dragulaOpts.moves = (el, container, handle) => {
+                // HACK: Ugly hack to prevent compiler TS6133 error "value is declared, but its value is never read"
+                // Maybe we need to disable 'noUnusedParameters' compiler option.
+                container = container, el = el 
+                return handle.classList.contains(this.handleClass);
             }
         }
 
