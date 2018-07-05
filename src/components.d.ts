@@ -131,8 +131,9 @@ declare global {
 
   namespace StencilComponents {
     interface CwcDnd {
-      'draculaOpts': any;
+      'dragulaOpts': any;
       'getDrake': () => any;
+      'handleSelector': string;
       'rows': string[];
     }
   }
@@ -156,7 +157,8 @@ declare global {
   }
   namespace JSXElements {
     export interface CwcDndAttributes extends HTMLAttributes {
-      'draculaOpts'?: any;
+      'dragulaOpts'?: any;
+      'handleSelector'?: string;
       'onDndcancel'?: (event: CustomEvent) => void;
       'onDndcloned'?: (event: CustomEvent) => void;
       /**

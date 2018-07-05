@@ -13,7 +13,8 @@ export class CwcDnd {
     
     @Element() el: HTMLElement;
     @Prop() rows: string[] = ['div.row-holder'];
-    @Prop() draculaOpts: any;
+    @Prop() dragulaOpts: any;
+    @Prop() handleSelector: string = undefined;
 
 
     /**
@@ -46,9 +47,17 @@ export class CwcDnd {
 
         const rowElements = this.rows.map(rowSelector => this.el.querySelector(rowSelector))
 
+        if (this.handleSelector) {
+            this.dragulaOpts.moves = function (el, container, handle) {
+                console.log(el, container);
+                
+                return handle.classList.contains(this.handleSelector);
+            }
+        }
+
         this.drake = dragula(
             rowElements, 
-            this.draculaOpts
+            this.dragulaOpts
         )
 
         this.drake.on('drag', (el, source) => this.dnddrag.emit({ el, source }) )

@@ -163,7 +163,73 @@ export class DndPage {
                 </div>
 
               </div>
-                <div class="col-12 mt-4">
+
+              <div class="col-12 mt-4">
+                  <h3>Props</h3>
+
+                  <table class="table mt-2">
+                    <thead>
+                      <tr>
+                        <th>Property</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <code>rows</code>
+                        </td>
+                        <td>
+                          <code>string[]</code>
+                        </td>
+                        <td>
+                          <code>[]</code>
+                        </td>
+                        <td>
+                          Array of columns selectors.
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>handleSelector</code>
+                        </td>
+                        <td>
+                          <code>string</code>
+                        </td>
+                        <td>
+                          <code>undefined</code>
+                        </td>
+                        <td>
+                          Selector of handle to drag. If not defined, full element will be dragable.
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <code>dragulaOpts</code>
+                        </td>
+                        <td>
+                          <a target="_blank" href="https://github.com/bevacqua/dragula#optionsmoves">dragulaOpts</a>
+                        </td>
+                        <td>
+                          <code>&#123;&#125;</code>
+                        </td>
+                        <td>
+                          Dragula options object.
+                        </td>
+                      </tr>
+                   
+                    </tbody>
+                  </table>
+
+                </div>
+
+                      
+
+                <div class="col-12">
 
                   <h3>Events</h3>
 
