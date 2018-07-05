@@ -28,7 +28,7 @@ export class ScbModal {
   @Prop() backdrop: any = true;
   @Prop() keyboard: boolean = true;
   @Prop() modalfocus: boolean = true;
-  @Prop() show: boolean = true;
+  @Prop() show: boolean = false;
 
   @Prop() showButton: boolean = true;
   @Prop() customId: string = 'scb-modal';
