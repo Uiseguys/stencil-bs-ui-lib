@@ -17,7 +17,6 @@ export class ScbModal {
 
   @Prop() btntype: string = 'primary';
   @Prop() modalTitle: string = 'Modal Title';
-  @Prop() modalContent: string = 'Modal Content';
   @Prop() centered: boolean = true;
   @Prop() animation: boolean = true;
 
@@ -209,7 +208,9 @@ export class ScbModal {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">{this.modalContent}</div>
+              <div class="modal-body">
+                <slot />
+              </div>
               <div class="modal-footer">
                 <button
                   type="button"

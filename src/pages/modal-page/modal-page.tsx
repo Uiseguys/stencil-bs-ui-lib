@@ -42,7 +42,6 @@ export class ModalPage {
                         <scb-modal
                           btntype="success"
                           modalTitle="Info"
-                          modalContent="Modal Content"
                           centered={true}
                           animation={true}
                           size=""
@@ -51,7 +50,15 @@ export class ModalPage {
                           modalfocus={true}
                           showButton={true}
                           show={true}
-                        />
+                        >
+                          Put your modal contents here. You can put any content<br />
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="Name"
+                            placeholder="Input your name"
+                          />
+                        </scb-modal>
                       </div>
                     </div>
                   </div>
@@ -68,10 +75,6 @@ export class ModalPage {
                           <br />
                           <span class="hljs-built_in ml-4">
                             modalTitle="Info"
-                          </span>
-                          <br />
-                          <span class="hljs-built_in ml-4">
-                            modalContent="Modal Content"
                           </span>
                           <br />
                           <span class="hljs-built_in ml-4">centered=true</span>
@@ -139,18 +142,6 @@ export class ModalPage {
                           <code>'Modal Title'</code>
                         </td>
                         <td>Sets the Modal title</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <code>modalContent</code>
-                        </td>
-                        <td>
-                          <code>string</code>
-                        </td>
-                        <td>
-                          <code>'Modal Content'</code>
-                        </td>
-                        <td>Sets the Modal content</td>
                       </tr>
                       <tr>
                         <td>
