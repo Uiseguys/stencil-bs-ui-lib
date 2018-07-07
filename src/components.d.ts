@@ -567,9 +567,9 @@ declare global {
 
   namespace StencilComponents {
     interface CwcMultiselect {
+      'dataDisplay': string;
       'selected': Array<any>;
       'value': Array<any>;
-      'valueDisplay': string;
     }
   }
 
@@ -592,10 +592,10 @@ declare global {
   }
   namespace JSXElements {
     export interface CwcMultiselectAttributes extends HTMLAttributes {
+      'dataDisplay'?: string;
       'onQange'?: (event: CustomEvent) => void;
       'selected'?: Array<any>;
       'value'?: Array<any>;
-      'valueDisplay'?: string;
     }
   }
 }

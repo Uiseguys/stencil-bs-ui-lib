@@ -16,7 +16,7 @@ import {
 export class CwcMultiselect {
   // public members
   @Prop() value: Array<any> = [];
-  @Prop() valueDisplay: string = 'name';
+  @Prop() dataDisplay: string = 'name';
   @Prop() selected: Array<any> = [];
   @Event() qange: EventEmitter;
 
@@ -72,6 +72,8 @@ export class CwcMultiselect {
   };
 
   render() {
+    console.log('multiselect value');
+    console.log(this.value);
     if (!this.value || !this.value.length) return null;
 
     if (!this._isComplex) {
@@ -85,7 +87,7 @@ export class CwcMultiselect {
     return this.value.map(item => {
       let label;
       if (typeof item === 'object') {
-        label = item[this.valueDisplay];
+        label = item[this.dataDisplay];
       } else {
         label = item;
       }
