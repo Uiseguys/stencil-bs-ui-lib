@@ -178,6 +178,7 @@ declare global {
   namespace StencilComponents {
     interface CwcDnd {
       'dragulaOpts': any;
+      'getDataModel': () => any[];
       'getDrake': () => any;
       'handleClass': string;
       'rows': string[];
@@ -213,6 +214,7 @@ declare global {
       'onDnddrag'?: (event: CustomEvent) => void;
       'onDnddragend'?: (event: CustomEvent) => void;
       'onDnddrop'?: (event: CustomEvent) => void;
+      'onDndmodelupdate'?: (event: CustomEvent) => void;
       'onDndout'?: (event: CustomEvent) => void;
       'onDndover'?: (event: CustomEvent) => void;
       'onDndremove'?: (event: CustomEvent) => void;

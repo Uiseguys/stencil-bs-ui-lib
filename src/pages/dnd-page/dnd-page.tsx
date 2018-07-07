@@ -1,4 +1,4 @@
-import { Component, Listen, State } from "@stencil/core";
+import { Component, Listen, State, Element } from '@stencil/core';
 // import template from 'lodash/template'
 
 @Component({
@@ -11,12 +11,20 @@ export class DndPage {
   birds = ["tucano", "crown", "parrot"];
 
   columns = ["#animals", "#birds"];
+  @Element() element: HTMLElement;
 
   @State() framework: Framework = Framework.stencil;
+  @State() dataModel: string = undefined
 
-  @Listen("dnddragend")
-  customEventHandler(event) {
-    console.log("Received the custom event: ", event);
+  // @Listen("dnddragend")
+  // customEventHandler(event) {
+  //   console.log("Received the custom event: ", event);
+  // }
+
+  @Listen('dndmodelupdate') 
+    dndModelUpdateHandler(event: CustomEvent) {
+      console.log('got model change: ', event.detail)
+      this.dataModel = JSON.stringify(event.detail, null, 4)
   }
 
   componentDidLoad() {
@@ -39,9 +47,7 @@ export class DndPage {
                   <h3>Overview </h3>
 
                   <p class="mt-1">
-                    This is a wrapper component for{" "}
-                    <a href="https://bevacqua.github.io/dragula/">Dragula</a>{" "}
-                    drag'n'drop library.
+                    This is a wrapper component for <a href="https://bevacqua.github.io/dragula/">Dragula</a> drag'n'drop library.
                   </p>
                 </div>
                 <div class="col-12 mt-4">
@@ -49,12 +55,11 @@ export class DndPage {
 
                   <p class="mt-1 my-0">
                     To instantiate one or more draggable list columns please
-                    provide them right into{" "}
-                    <code>&lt;cwc-dnd&gt;&lt;/cwc-dnd&gt;</code>
-                    component. Also you must pass array of selectors of this
+                    provide them right into <code>&lt;cwc-dnd&gt;&lt;/cwc-dnd&gt;</code> component. 
+                    Also you must pass array of selectors of this
                     lists with <code>rows: string[]</code> property. Also you
-                    can declare a <code>handleClass: string</code>
-                    property to make the element not draggable itself, but by
+                    can declare a <code>handleClass: string</code> property
+                    to make the element not draggable itself, but by
                     handler child element with specified class.
                   </p>
                 </div>
@@ -265,7 +270,7 @@ export class DndPage {
                       <div class="wrapper row">
                         <div id="animals" class="col-5 offset-col-1">
                           {this.animals.map(item => (
-                            <div class="column card p-2">
+                            <div class="column card p-2" >
                               <p>{item}</p>
                             </div>
                           ))}
@@ -283,7 +288,13 @@ export class DndPage {
                 </div>
                 <div class="usage-block col-12">
                   <div class="col-12 mt-1">
-                    <h4>Usage with specified handler</h4>
+                    <h4>Usage with specified handler and model tracking</h4>
+                    <p>You can specify class for dedicated handler element with <code>handleClass</code> property. 
+                    In the next example we had added a child element with text "Drag me!" and <code>handle</code> class. 
+                    Also we specifieed <code>handleClass="handler"</code> property in drag and drop component. </p>
+                    <p>For model tracking we are listening to the <code>dndmodelupdate</code> event 
+                    which is emitted every time draggable elements order is changed. Every draggable element you want to track must 
+                    have <code>data-dnd</code> attribute which value will be emited in the event.</p>
 
                     <div class="buttons-wrapper my-2">
                       <div
@@ -325,7 +336,7 @@ export class DndPage {
                             </span>
                             <br />
                             <span class="ml-4">
-                              &lt;div class=&quot;column card p-2&quot;&gt;
+                              &lt;div class=&quot;column card p-2&quot; data-dnd=&quot;cat-id&quot;&gt;
                             </span>
                             <br />
                             <span class="ml-4 pl-3">
@@ -340,7 +351,7 @@ export class DndPage {
                             <span class="ml-4">&lt;&#x2F;div&gt;</span>
                             <br />
                             <span class="ml-4">
-                              &lt;div class=&quot;column card p-2&quot;&gt;
+                              &lt;div class=&quot;column card p-2&quot; data-dnd=&quot;dog-id&quot;&gt;
                             </span>
                             <br />
                             <span class="ml-4 pl-3">
@@ -355,7 +366,7 @@ export class DndPage {
                             <span class="ml-4">&lt;&#x2F;div&gt;</span>
                             <br />
                             <span class="ml-4">
-                              &lt;div class=&quot;column card p-2&quot;&gt;
+                              &lt;div class=&quot;column card p-2&quot; data-dnd=&quot;elephant-id&quot;&gt;
                             </span>
                             <br />
                             <span class="ml-4 pl-3">
@@ -377,7 +388,7 @@ export class DndPage {
                             </span>
                             <br />
                             <span class="ml-4">
-                              &lt;div class=&quot;column card p-2&quot;&gt;
+                              &lt;div class=&quot;column card p-2&quot; data-dnd=&quot;tucano-id&quot;&gt;
                             </span>
                             <br />
                             <span class="ml-4 pl-3">
@@ -392,7 +403,7 @@ export class DndPage {
                             <span class="ml-4">&lt;&#x2F;div&gt;</span>
                             <br />
                             <span class="ml-4">
-                              &lt;div class=&quot;column card p-2&quot;&gt;
+                              &lt;div class=&quot;column card p-2&quot; data-dnd=&quot;crown-id&quot;&gt;
                             </span>
                             <br />
                             <span class="ml-4 pl-3">
@@ -407,7 +418,7 @@ export class DndPage {
                             <span class="ml-4">&lt;&#x2F;div&gt;</span>
                             <br />
                             <span class="ml-4">
-                              &lt;div class=&quot;column card p-2&quot;&gt;
+                              &lt;div class=&quot;column card p-2&quot; data-dnd=&quot;parrot-id&quot;&gt;
                             </span>
                             <br />
                             <span class="ml-4 pl-3">
@@ -441,7 +452,7 @@ export class DndPage {
                             </span>
                             <br />
                             <span class="ml-4">
-                              &lt;div class=&quot;column card p-2&quot;&gt;
+                              &lt;div class=&quot;column card p-2&quot; data-dnd=&quot;cat-id&quot;&gt;
                             </span>
                             <br />
                             <span class="ml-4 pl-3">
@@ -456,7 +467,7 @@ export class DndPage {
                             <span class="ml-4">&lt;&#x2F;div&gt;</span>
                             <br />
                             <span class="ml-4">
-                              &lt;div class=&quot;column card p-2&quot;&gt;
+                              &lt;div class=&quot;column card p-2&quot; data-dnd=&quot;dog-id&quot;&gt;
                             </span>
                             <br />
                             <span class="ml-4 pl-3">
@@ -471,7 +482,7 @@ export class DndPage {
                             <span class="ml-4">&lt;&#x2F;div&gt;</span>
                             <br />
                             <span class="ml-4">
-                              &lt;div class=&quot;column card p-2&quot;&gt;
+                              &lt;div class=&quot;column card p-2&quot; data-dnd=&quot;elephant-id&quot;&gt;
                             </span>
                             <br />
                             <span class="ml-4 pl-3">
@@ -493,7 +504,7 @@ export class DndPage {
                             </span>
                             <br />
                             <span class="ml-4">
-                              &lt;div class=&quot;column card p-2&quot;&gt;
+                              &lt;div class=&quot;column card p-2&quot; data-dnd=&quot;tucano-id&quot;&gt;
                             </span>
                             <br />
                             <span class="ml-4 pl-3">
@@ -508,7 +519,7 @@ export class DndPage {
                             <span class="ml-4">&lt;&#x2F;div&gt;</span>
                             <br />
                             <span class="ml-4">
-                              &lt;div class=&quot;column card p-2&quot;&gt;
+                              &lt;div class=&quot;column card p-2&quot; data-dnd=&quot;crown-id&quot;&gt;
                             </span>
                             <br />
                             <span class="ml-4 pl-3">
@@ -523,7 +534,7 @@ export class DndPage {
                             <span class="ml-4">&lt;&#x2F;div&gt;</span>
                             <br />
                             <span class="ml-4">
-                              &lt;div class=&quot;column card p-2&quot;&gt;
+                              &lt;div class=&quot;column card p-2&quot; data-dnd=&quot;parrot-id&quot;&gt;
                             </span>
                             <br />
                             <span class="ml-4 pl-3">
@@ -557,7 +568,7 @@ export class DndPage {
                           class="col-5 offset-col-1"
                         >
                           {this.animals.map(item => (
-                            <div class="column card p-2">
+                            <div class="column card p-2" data-dnd={`${item}-id`}>
                               <p>{item}</p>
                               <span class="badge badge-primary handler w-25 m-2">
                                 Drag me!
@@ -567,7 +578,7 @@ export class DndPage {
                         </div>
                         <div id="birds-with-handler" class="col-5 offset-col-1">
                           {this.birds.map(item => (
-                            <div class="column card p-2">
+                            <div class="column card p-2" data-dnd={`${item}-id`}>
                               <p>{item}</p>
                               <span class="badge badge-primary handler w-25 m-2">
                                 Drag me!
@@ -577,6 +588,18 @@ export class DndPage {
                         </div>
                       </div>
                     </cwc-dnd>
+                    <br/>
+                    <h5>Data model: </h5>
+                    <div class="model-tracking">
+                          <pre id="model-data-target">
+
+                          {
+                            this.dataModel ? this.dataModel : <p>Please drag one of elements above to check data model</p> 
+                          }
+
+                          </pre>
+                    
+                    </div>
                   </div>
                 </div>
               </div>
@@ -784,10 +807,32 @@ export class DndPage {
               <div class="col-12">
                 <h3>Methods</h3>
 
-                <p>
-                  Anytime, you can get Dragula instance by{" "}
-                  <code>`getDrake(): Drake`</code> component method.
-                </p>
+                  <table class="table mt-2">
+                    <thead>
+                      <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <code>getDrake()</code>
+                        </td>
+                        <td>
+                          <a target="_blank" href="https://github.com/bevacqua/dragula#api">Drake</a> instance.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <code>getDataModel()</code>
+                        </td>
+                        <td>
+                          Method to retrieve data model.
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
               </div>
             </div>
           </div>
