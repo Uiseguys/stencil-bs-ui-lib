@@ -3,7 +3,8 @@ import '@stencil/router';
 import 'bootstrap.native/dist/bootstrap-native-v4';
 
 @Component({
-  tag: 'stencil-bs-demo-page'
+  tag: 'stencil-bs-demo-page',
+  styleUrl: 'stencil-bs-demo-page.scss'
 })
 export class StencilBsDemoPage {
   @Prop() root = '/';
@@ -88,6 +89,11 @@ export class StencilBsDemoPage {
       url: '/multiselect',
       title: 'Multiselect Component',
       componentName: 'multiselect-page'
+    },
+    {
+      url: '/autocomplete-select',
+      title: 'AutocompleteSelect Component',
+      componentName: 'autocomplete-select-page'
     },
     {
       url: '/modal',

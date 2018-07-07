@@ -1,0 +1,14 @@
+.item {
+  cursor: pointer;
+}
+.item.selected:before {
+  content: '✔';
+  display: inline-block;
+  vertical-align: top;
+  line-height: 1em;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.3em;
+  text-align: center;
+  color: #999;
+}

@@ -43,6 +43,52 @@ import {
 declare global {
 
   namespace StencilComponents {
+    interface CwcAutocompleteSelect {
+      /**
+       * Public methods
+       */
+      'close': () => void;
+      'data': any[];
+      'idValue': string;
+      'minSearchLength': number;
+      'placeholder': string;
+      'searchKey': string;
+    }
+  }
+
+  interface HTMLCwcAutocompleteSelectElement extends StencilComponents.CwcAutocompleteSelect, HTMLStencilElement {}
+
+  var HTMLCwcAutocompleteSelectElement: {
+    prototype: HTMLCwcAutocompleteSelectElement;
+    new (): HTMLCwcAutocompleteSelectElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-autocomplete-select': HTMLCwcAutocompleteSelectElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-autocomplete-select': HTMLCwcAutocompleteSelectElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-autocomplete-select': JSXElements.CwcAutocompleteSelectAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcAutocompleteSelectAttributes extends HTMLAttributes {
+      'data'?: any[];
+      'idValue'?: string;
+      'minSearchLength'?: number;
+      'onMultiselectOnSubmit'?: (event: CustomEvent) => void;
+      'placeholder'?: string;
+      'searchKey'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface CwcAvatar {
       'background': string;
       'color': string;
@@ -519,15 +565,9 @@ declare global {
 
   namespace StencilComponents {
     interface CwcMultiselect {
-      /**
-       * Public methods
-       */
-      'close': () => void;
-      'data': any[];
-      'idValue': string;
-      'minSearchLength': number;
-      'placeholder': string;
-      'searchKey': string;
+      'selected': Array<any>;
+      'value': Array<any>;
+      'valueDisplay': string;
     }
   }
 
@@ -550,12 +590,10 @@ declare global {
   }
   namespace JSXElements {
     export interface CwcMultiselectAttributes extends HTMLAttributes {
-      'data'?: any[];
-      'idValue'?: string;
-      'minSearchLength'?: number;
-      'onMultiselectOnSubmit'?: (event: CustomEvent) => void;
-      'placeholder'?: string;
-      'searchKey'?: string;
+      'onQange'?: (event: CustomEvent) => void;
+      'selected'?: Array<any>;
+      'value'?: Array<any>;
+      'valueDisplay'?: string;
     }
   }
 }
@@ -1557,6 +1595,39 @@ declare global {
   }
   namespace JSXElements {
     export interface AlertsPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface AutocompleteSelectPage {
+
+    }
+  }
+
+  interface HTMLAutocompleteSelectPageElement extends StencilComponents.AutocompleteSelectPage, HTMLStencilElement {}
+
+  var HTMLAutocompleteSelectPageElement: {
+    prototype: HTMLAutocompleteSelectPageElement;
+    new (): HTMLAutocompleteSelectPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'autocomplete-select-page': HTMLAutocompleteSelectPageElement;
+  }
+  interface ElementTagNameMap {
+    'autocomplete-select-page': HTMLAutocompleteSelectPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'autocomplete-select-page': JSXElements.AutocompleteSelectPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface AutocompleteSelectPageAttributes extends HTMLAttributes {
 
     }
   }

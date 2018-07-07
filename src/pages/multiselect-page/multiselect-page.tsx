@@ -1,95 +1,109 @@
-import { Component, Listen, State } from '@stencil/core';
+import { Component, State } from '@stencil/core';
 
 @Component({
-    tag: 'multiselect-page',
-    styleUrl: 'multiselect-page.scss'
+  tag: 'multiselect-page',
+  styleUrl: 'multiselect-page.scss'
 })
 export class MultiselectPage {
+  simple = ['apple', 'mango', 'banana'];
+  advanced = [
+    { id: 'fruit1', name: 'apple' },
+    { id: 'fruit2', name: 'mango' },
+    { id: 'fruit3', name: 'banana' }
+  ];
 
-    complex = [
-        {
-            type: 'country',
-            data: {
-                name: 'Austria',
-                capital: 'Vienna'
-            }
-        },
-        {
-            type: 'country',
-            data: {
-                name: 'Australia',
-                capital: 'Canberra'
-            }
-        },
-        {
-            type: 'country',
-            data: {
-                name: 'Argentina',
-                capital: 'Buenos Aires'
-            }
-        }
-    ];
+  @State() _simple = [];
+  @State() _advanced = [];
+  @State() _complex = [];
+  @State() flag = false;
 
-    searchString = 'data.name';
+  handleSimpleChange = e => {
+    this._simple = e.detail;
+  };
 
-    complexResult = [];
+  handleAdvancedChange = e => {
+    this._advanced = e.detail;
+  };
 
-    data = ['Alex', 'Alabama', 'Alaska', 'andreas', 'alexandro']
+  handleComplexChange = e => {
+    this._complex = e.detail;
+  };
 
-    @State() result;
+  toggleFlag = () => {
+    this.flag = !this.flag;
+  };
 
-    @Listen('multiselectOnSubmit')
-    typeaheadOnSubmit(e) {
-        console.log('got results: ', e.detail)
-        this.result = e.detail
-    }
-
-    render() {
-        return [
-            <h3>Simple String[] data demo!</h3>,
-            <cwc-multiselect
-                data={this.data}></cwc-multiselect>,
-
-            <br />,
-            <br />,
-            <h3>Complex Object[] demo!</h3>,
-            <cwc-multiselect
-                data={this.complex}
-                searchKey={this.searchString}
-                placeholder="Search something e.g. 'Argentina'"></ cwc-multiselect>,
-            <br />, <h4>result: </h4>,
-            <pre>{JSON.stringify(this.result, null, 2)}</pre>,
-            <br />, <br />, <cwc-tag
-                text='Holla tag'
-            />,
-            <br />, <br />, <cwc-tag
-                text='Holla link'
-                imgLink='../../assets/icon/favicon.ico'
-                closable={true}
-            />,
-            <br />, <br />, <cwc-tag
-                text='Holla rounded tag'
-                rounded={true}
-                closable={true}
-            />,
-            <br />, <br />, <cwc-tag
-                text='Holla rounded link'
-                imgLink='../../assets/icon/favicon.ico'
-    />,
-        <br />, <br />, <cwc-tag
-            text='Holla rounded img tag'
-            imgLink='../../assets/icon/favicon.ico'
-            rounded={true}
-        />,
-            <br />, <br />, <cwc-tag
-            text='Holla rounded img link'
-            limitTo={10}
-            imgLink='../../assets/icon/favicon.ico'
-            rounded={true}
-            closable={true}
+  render() {
+    return (
+      <div>
+        <h3>simplest case:</h3>
+        <pre class="code">
+          <code>
+            {`<cwc-mulitselect value="['apple', 'mango', 'banana']" qange="onChange(selectedItems)">
+</cwc-multiselect>`}
+          </code>
+        </pre>
+        <cwc-multiselect
+          value={this.simple}
+          onQange={this.handleSimpleChange}
         />
-        // link='https://google.com'
-        // <img src=" ../../assets/icon/favicon.ico" alt="" />
-    ]
-    }
+        <h5>result: </h5>
+        <pre>{JSON.stringify(this._simple, null, 2)}</pre>
+
+        <br />
+        <br />
+        <h3>slightly advanced case:</h3>
+        <pre class="code">
+          <code>
+            {`<cwc-mulitselect 
+  value="[
+     {id: 'fruit1', name: 'apple'},
+     {id: 'fruit2, name: 'mango'},
+     {id: 'fruit3', name: 'banana'}
+   ]"
+  data-display="name"
+  qange="onChange(selectedItems)">
+</cwc-multiselect>`}
+          </code>
+        </pre>
+        <cwc-multiselect
+          value={this.advanced}
+          onQange={this.handleAdvancedChange}
+        />
+        <h5>result: </h5>
+        <pre>{JSON.stringify(this._advanced, null, 2)}</pre>
+
+        <h3>most complex use case:</h3>
+        <pre class="code">
+          <code>
+            {`<cwc-mulitselect 
+  value="[
+     {id: 'fruit1', name: 'apple'},
+     {id: 'fruit2, name: 'mango'},
+     {id: 'fruit3', name: 'banana'}
+   ]"
+  data-display="name"
+  qange="onChange(selectedItems)">
+
+    <div class="item">Apple</div>
+    <div class="item">Mango</div>
+    <div class="item">Banana</div>
+
+</cwc-multiselect>`}
+          </code>
+        </pre>
+        <cwc-multiselect
+          value={this.advanced}
+          onQange={this.handleComplexChange}
+        >
+          <div class="item">Apple</div>
+          <div class="item">Mango</div>
+          <div class="item">Banana</div>
+        </cwc-multiselect>
+        {/* <button onClick={this.toggleFlag}>Test</button> */}
+        <h5>result: </h5>
+        <pre>{JSON.stringify(this._complex, null, 2)}</pre>
+      </div>
+    );
+  }
 }

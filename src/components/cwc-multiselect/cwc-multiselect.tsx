@@ -1,315 +1,114 @@
-import { Component, State, Prop, Listen, Method, Event, EventEmitter } from '@stencil/core';
-import filter from 'lodash/filter'
-import get from 'lodash/get';
+import {
+  Element,
+  Event,
+  EventEmitter,
+  Component,
+  Listen,
+  Prop,
+  State,
+  Watch
+} from '@stencil/core';
 
 @Component({
-    tag: 'cwc-multiselect',
-    styleUrl: 'cwc-multiselect.scss'
+  tag: 'cwc-multiselect',
+  styleUrl: 'cwc-multiselect.scss'
 })
 export class CwcMultiselect {
+  // public members
+  @Prop() value: Array<any> = [];
+  @Prop() valueDisplay: string = 'name';
+  @Prop() selected: Array<any> = [];
+  @Event() qange: EventEmitter;
 
-    @Prop() minSearchLength = 1;
-    @Prop() data: any[] = [];
-    @Prop() idValue: string = 'multiselect-' + Date.now();
-    @Prop() searchKey: string;
-    @Prop() placeholder = 'Search something e.g. "Alabama"';
+  // private members
+  @Element() _container: HTMLElement;
+  @State() _selected: Array<any> = [];
+  _isComplex: boolean = false;
 
-
-    @State() filterValue = '';
-    @State() optionsShown = false;
-    @State() focusIndex = 0;
-    @State() justAddedLabel = false;
-
-    @State() labels: any[] = [];
-    @State() results: any[] = [];
-
-    private filtered: any[] = [];
-
-    @Event() multiselectOnSubmit: EventEmitter;
-
-    @Listen('destroy')
-    destroyHandler(event) {
-        console.log('Received the custom event: ', event);
+  componentWillLoad() {
+    if (this.selected !== undefined) {
+      this._selected = this.selected;
     }
+    this._isComplex = this._container.children.length > 0;
+  }
 
-    addLabel(label) {
-        this.labels = [...this.labels, label];
-        this.justAddedLabel = true;
-        this.renderLabels();
-    }
+  @Watch('selected')
+  watchHandler(newValue) {
+    this._selected = newValue;
+  }
 
-    addResult(result: any) {
-        if (typeof result === 'string') {
-            this.results = [...this.results, result]
+  @Listen('click')
+  handleClick(e) {
+    if (!this._isComplex) return;
+
+    // toggle check
+    const elem = document.elementFromPoint(e.clientX, e.clientY);
+    for (let i = 0; i < this._container.children.length; i += 1) {
+      if (
+        this._container.children[i] == elem ||
+        this._container.children[i].contains(elem)
+      ) {
+        const isChecked = this._selected.indexOf(this.value[i]) >= 0;
+        if (isChecked) {
+          this._selected = this._selected.filter(v => v !== this.value[i]);
+          this._container.children[i].classList.remove('selected');
         } else {
-            this.results = [...this.results, result.data]
+          this._selected.push(this.value[i]);
+          this._container.children[i].classList.add('selected');
         }
+        this.qange.emit([...this._selected]);
+        break;
+      }
     }
+  }
 
-    removeResult(index) {
-        this.results = this.results.filter((_, i) => i !== index );
-        this.multiselectOnSubmit.emit(this.results)
+  handleChange = (e, item) => {
+    if (e.target.checked) {
+      this._selected.push(item);
+    } else {
+      this._selected = this._selected.filter(v => v !== item);
     }
+    this.qange.emit([...this._selected]);
+  };
 
-    clearLabels() {
-        this.labels = []
-        this.renderLabels();
+  render() {
+    if (!this.value || !this.value.length) return null;
+
+    if (!this._isComplex) {
+      return this.renderSimple();
+    } else {
+      return this.renderComplex();
     }
+  }
 
-    removeLabel(label) {
-        const index = this.labels.indexOf(label);
-        this.removeResult(index);
-        this.labels = this.labels.filter((_, i) =>  i !== index )
-        this.renderLabels();
-    }
+  renderSimple() {
+    return this.value.map(item => {
+      let label;
+      if (typeof item === 'object') {
+        label = item[this.valueDisplay];
+      } else {
+        label = item;
+      }
 
-    multiselectOnSubmitHandler(result) {
-        this.addLabel(result);
-        this.filterValue = '';
-        this.clearTextNodes();
+      return (
+        <div class="position-relative form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              checked={this._selected.indexOf(item) > -1}
+              onChange={e => {
+                this.handleChange(e, item);
+              }}
+            />
+            {label}
+          </label>
+        </div>
+      );
+    });
+  }
 
-        typeof this.filtered[this.focusIndex - 1] === 'string' ?
-            this.addResult(this.filtered[this.focusIndex - 1]) :
-            this.addResult(this.filtered[this.focusIndex - 1].data);
-
-        this.multiselectOnSubmit.emit(this.results)
-    }
-
-    /**
-     * Life cycle hooks
-     */
-    componentWillUpdate() {
-        if (this.filterValue) {
-
-            if (this.filterValue.length >= this.minSearchLength) {
-                this.filtered = this.filter();
-
-                if (this.filtered.length > 0) {
-                    this.optionsShown = true
-                }
-            }
-        }
-    }
-
-    componentDidUpdate() {
-        if (this.justAddedLabel) {
-            this.setCaretPositionEnd();
-            this.justAddedLabel = false
-        }
-    }
-
-    private removeAlllabels() {
-        const labels = document.querySelectorAll(`#${this.idValue} div.form-control scb-badge`);
-        let i = labels.length - 1;
-        while (i >= 0) {
-            labels[i].remove();
-            i--;
-        }      
-    }
-
-    private renderLabels() {
-        this.removeAlllabels();
-        const input: HTMLInputElement = document.querySelector(`#${this.idValue} div.form-control`);
-        this.labels.forEach(label => {
-            const labelEl = document.createElement('scb-badge');
-            labelEl.contentEditable = "false";
-            const spanEl = document.createElement('span');
-            spanEl.contentEditable = "false";
-            spanEl.className = "badge badge-secondary";
-            spanEl.innerText = this.getStringValue(label);
-            const spanHidden = document.createElement('span');
-            spanHidden.contentEditable = "false";
-            spanHidden['aria-hidden'] = "true";
-            spanHidden.onclick = () => this.removeLabel(label);
-            spanHidden.innerHTML = "&times;";
-            spanEl.appendChild(spanHidden);
-            labelEl.appendChild(spanEl);
-            input.insertBefore(labelEl, input.childNodes[0]);
-        });
-    }
-
-    /**
-     * Private functions
-     */
-    private filter() {
-        if (typeof this.data[0] === 'string') {
-            return this.filterStringArray(this.data);
-        }
-
-        if (typeof this.data[0] === 'object') {
-            return this.findInComplex(this.data, this.searchKey)
-        }
-
-    }
-
-    private filterStringArray(data) {
-        return filter(data, value => {
-            const v = typeof value === 'string'
-                ? value
-                : value.index;
-
-            return v.toLowerCase().indexOf(
-                    this.filterValue.toLowerCase()) >= 0
-        })
-    }
-
-    private findInComplex(data, address) {
-
-        const temporary = data.map(value =>
-            ({
-                index: get(value, address),
-                data: value
-            })
-        );
-        return this.filterStringArray(temporary)
-    }
-
-    getStringValue(val: string | any): string {
-        if (typeof val === 'string') {
-            return val
-        } else {
-            return get(val.data, this.searchKey)
-        }
-    }
-
-    /**
-     * Handlers
-     */
-    handleInputChange(e) {
-        this.filterValue = e.data
-        if (['deleteContentBackward', 'deleteContentForward'].indexOf(e.inputType) !== -1) {
-            const caretEl = document.querySelector(`#${this.idValue} div.form-control span.caret`);
-            if (!caretEl) {
-                this.createCaretEl();
-            }
-            this.renderLabels();
-        }
-    }
-
-    handleSelect(value, index) {
-        const input: HTMLInputElement = document.querySelector(`#${this.idValue} div.form-control`);
-        input.value = value;
-
-        const result = this.getStringValue(this.filtered[index]);
-        this.multiselectOnSubmitHandler(result);
-
-        this.close()
-    }
-
-    handleHover(i: number) {
-        this.focusIndex = i
-    }
-
-    /**
-     * Public methods
-     */
-    @Method()
-    close() {
-        this.focusIndex = 0;
-        this.filterValue = '';
-        this.filtered = []
-    }
-
-    render() {
-
-        return ([
-            <div id={this.idValue}>
-                <div onInput={(e) => this.handleInputChange(e)}
-                     class="form-control" contentEditable={true}>
-                     <span class="caret">&nbsp;</span>
-                </div>
-            </div>,
-            <div>
-            {
-                this.filtered.length > 0 &&
-                    <div class="card">
-                        {
-                            this.filtered.map((val, i) =>
-                                <option
-                                    class={"dropdown-item".concat((this.focusIndex == i + 1) ? ' active' : '')}
-                                    onClick={(e: any) => this.handleSelect(e.target.value, i)}
-                                    onMouseEnter={() => this.handleHover(i + 1)}
-                                >{typeof val === 'string' ? val : val.index}</option>)
-                        }
-                    </div>
-            }
-            </div>
-        ])
-    }
-
-
-    /**
-     * Keyboard handlers
-     *
-     **/
-
-    @Listen('keydown.down')
-    handleDownArrow() {
-        if (this.focusIndex < this.filtered.length) {
-            this.focusIndex = this.focusIndex + 1
-        }
-    }
-
-    @Listen('keydown.up')
-    handleUpArrow(ev) {
-        if (this.focusIndex > 0) {
-            this.focusIndex = this.focusIndex - 1;
-            ev.preventDefault()
-        }
-    }
-
-    @Listen('keydown.escape')
-    handleEscape() {
-        if (this.focusIndex > 0) {
-            this.focusIndex = 0
-        }
-        this.close()
-    }
-
-    @Listen('keydown.enter')
-    handleEnter(ev) {
-        if (this.focusIndex > 0) {
-            const options = document.querySelector(`#${this.idValue}`).nextElementSibling.querySelectorAll('option');
-            this.handleSelect(options[this.focusIndex - 1].textContent, this.focusIndex - 1)
-            ev.preventDefault()
-        }
-    }
-
-    /*
-     DOM API functions
-     */
-
-    setCaretPositionEnd() {
-        const input = document.querySelector(`#${this.idValue} div.form-control`);
-        const range = document && document.createRange && document.createRange();
-        range.selectNodeContents(input);
-        range.collapse(false);
-        const selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range)
-    }
-
-    clearTextNodes() {
-        const input: HTMLInputElement = document.querySelector(`#${this.idValue} div.form-control`);
-        for (let i = 0; i < input.childNodes.length; i++) {
-            if (input.childNodes[i].nodeName === '#text') {
-                input.removeChild(input.childNodes[i])
-            }
-        }
-        const caretEl = document.querySelector(`#${this.idValue} div.form-control span.caret`);
-        if (caretEl) {
-            caretEl.innerHTML = "&nbsp;";
-        } else {
-            this.createCaretEl();
-        }
-    }
-
-    private createCaretEl() {
-        const input: HTMLInputElement = document.querySelector(`#${this.idValue} div.form-control`);
-        const caretEl = document.createElement('span');
-        caretEl.className = "caret";
-        caretEl.innerHTML = "&nbsp;";
-        input.appendChild(caretEl);
-    }
-
+  renderComplex() {
+    return <slot />;
+  }
 }
