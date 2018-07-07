@@ -22,6 +22,7 @@ export class CwcList {
     @Prop() interpolationRegex = /\[\[=+(.*?) ?\]\]+/g;
 
     @Element() el: HTMLElement;
+    templateElement = undefined
 
 
     /**
@@ -87,22 +88,31 @@ export class CwcList {
 
 
 
+    componentWillUpdate() {
+        console.log('The component will update');
+    }
 
     render() {
+        console.log('render start');
+        
 
         templateSettings.interpolate = this.interpolationRegex;
 
-        const tmpl = template(this.el.firstElementChild.outerHTML)
+        if (!this.templateElement) {
+
+             this.templateElement = template(this.el.firstElementChild.outerHTML)
+        }
         // this.el.removeChild(this.el.firstElementChild)
         // this.el.firstElementChild.setAttribute('style', 'visibility:hidden;')
+        this.el.firstElementChild.setAttribute('style', 'display:none;')
 
         // console.l
-        console.log('Template: ', tmpl)
+        console.log('Template: ', this.templateElement)
 
         let str = ''
         this.items.map((item, index) => {
 
-            let templateString = tmpl({ [this.itemAs]: item })
+            let templateString = this.templateElement({ [this.itemAs]: item })
             templateString = this.insertClassList(templateString, index)
 
             str += templateString
@@ -112,7 +122,7 @@ export class CwcList {
         return (
 
             <div id={this.el.id} class={"item-list-wrapper " + this.wrapperClass}
-                innerHTML={str}>
+                innerHTML={str ? str : '<div></div>'}>
             </div>
         );
     }

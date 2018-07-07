@@ -30,7 +30,6 @@ export class CwcInfiniteList {
     duplicateArray() {
         this.users1 = [...this.users1, ...this.users1]
         console.log('now length is: ', this.users1.length);
-        
     }
 
     // Users data methods
@@ -44,25 +43,16 @@ export class CwcInfiniteList {
 
         this.getUsers(count).then(
             users => {
-                console.log(users)
-                
+                console.log(users)                
                 // this.users1 = this.users1.concat(users)
             } 
         )
     }
-    // initUsers2Data(count?: number) {
-    //     this.getUsers(count).then(
-    //         users =>
-    //             this.users2 = this.users2.concat(users)
 
-    //     )
-    // }
-
-    getUser2Template() {
-    }
 
     render() {
         
+        console.log('infinite list page render')
         return (
             <div>
 

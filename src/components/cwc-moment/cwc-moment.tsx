@@ -1,7 +1,7 @@
 import { Component, Prop, State } from '@stencil/core';
 import { Duration, DurationInputArg2 } from 'moment';
 import moment from 'moment';
-import 'moment/min/locales.min';
+import 'moment/src/locale/de';
 
 @Component({
     tag: 'cwc-moment'
@@ -15,33 +15,13 @@ export class CwcMoment {
     @Prop() diff: boolean;
     @Prop() humanize: boolean;
     @Prop() lang = 'en';
-    @Prop() calendarI18n = {
-        en: {
-            lastDay : '[Yesterday]',
-            sameDay : '[Today]',
-            nextDay : '[Tomorrow]',
-            lastWeek : '[last] dddd',
-            nextWeek : 'dddd',
-            sameElse : 'L',
-            spacer: 'at'
-        },
-        de: {
-            lastDay: '[Gestern]',
-            sameDay: '[Heute]',
-            nextDay : '[Morgen]',
-            lastWeek : '[letzte] dddd',
-            nextWeek : 'dddd',
-            sameElse : 'L',
-            spacer: 'um'
-        }
-    }
 
     @State() momentNow: string;
     @State() durationFormatted: string;
 
 
     componentDidLoad() {        
-        
+
         moment.locale(this.lang, {
             longDateFormat : {
                 LT : 'HH:mm',
@@ -70,19 +50,18 @@ export class CwcMoment {
 
                 const momentDate = moment(this.date);
                 if (momentDate.isBetween(oneMinutesBefore, moment())) {
-                    this.momentNow = 'a moment ago';
+                    this.momentNow = momentDate.fromNow()
                 } else if (momentDate.isBetween(todayBegin, todayEnd)) {
-                    const calendarFormat = moment(this.date).calendar(null, this.calendarI18n[this.lang]);
-                    this.momentNow = calendarFormat.split(' ')[0] + ` ${this.calendarI18n[this.lang].spacer} ` + momentDate.format("hh:mm a");
+                    const calendarFormat = moment(this.date).calendar();
+                    this.momentNow = calendarFormat
                 } else if (momentDate.isBetween(yesterdayBegin, yesterdayEnd)) {
-                    const calendarFormat = moment(this.date).calendar(null, this.calendarI18n[this.lang]);
-                    this.momentNow = calendarFormat.split(' ')[0] + ` ${this.calendarI18n[this.lang].spacer} ` + momentDate.format("hh:mm a");
+                    const calendarFormat = moment(this.date).calendar();
+                    this.momentNow = calendarFormat
                 } else {
                     this.momentNow = momentDate.fromNow();
                 }
             } else if (!moment(this.date).isValid()) {
                 this.momentNow = '-';
-                console.log('momentNow:', this.momentNow);
             } else if (!this.format) {
                 this.momentNow = moment(this.date).calendar();
             } else {

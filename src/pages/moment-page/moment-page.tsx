@@ -100,6 +100,61 @@ export class MomentPage {
                                             </code></pre>                                              
                                             outputs: <cwc-moment date="" lang="en"></cwc-moment>
                                             <br />                                            
+                                            <h4>Humanized outputs: </h4>
+                                            <p>
+                                                <cwc-moment date="2017-05-01 14:30" format="L" 
+                                                lang={'de'} diff={true} humanize={true}></cwc-moment>
+                                                <cwc-moment date="2017-05-01 14:30" format="L" 
+                                                lang={'en'} diff={true} humanize={true}></cwc-moment>
+                                            </p>
+                                            <p>
+                                                <cwc-moment date="2018-05-01 14:30" format="L" 
+                                                lang={'de'} diff={true} humanize={true}></cwc-moment>
+                                                <cwc-moment date="2018-05-01 14:30" format="L" 
+                                                lang={'en'} diff={true} humanize={true}></cwc-moment>
+                                            </p>
+                                            <p>
+                                                <cwc-moment date="2018-06-01 14:30" format="L" 
+                                                lang={'de'} diff={true} humanize={true}></cwc-moment>
+                                                <cwc-moment date="2018-06-01 14:30" format="L" 
+                                                lang={'en'} diff={true} humanize={true}></cwc-moment>
+                                            </p>
+                                            <p>
+                                                <cwc-moment date="2018-06-03 14:30" format="L" 
+                                                lang={'de'} diff={true} humanize={true}></cwc-moment>
+                                                <cwc-moment date="2018-06-03 14:30" format="L" 
+                                                lang={'en'} diff={true} humanize={true}></cwc-moment>
+                                            </p>
+                                            <p>
+                                                <cwc-moment date="2018-06-05 14:30" format="L" 
+                                                lang={'de'} diff={true} humanize={true}></cwc-moment>
+                                                <cwc-moment date="2018-06-05 14:30" format="L" 
+                                                lang={'en'} diff={true} humanize={true}></cwc-moment>
+                                            </p>
+                                            <p>
+                                                <cwc-moment date="2018-06-07 14:30" format="L" 
+                                                lang={'de'} diff={true} humanize={true}></cwc-moment>
+                                                <cwc-moment date="2018-06-07 14:30" format="L" 
+                                                lang={'en'} diff={true} humanize={true}></cwc-moment>
+                                            </p>
+                                            <p>
+                                                <cwc-moment date="2018-07-07 14:30" format="L" 
+                                                lang={'de'} diff={true} humanize={true}></cwc-moment>
+                                                <cwc-moment date="2018-07-07 14:30" format="L" 
+                                                lang={'en'} diff={true} humanize={true}></cwc-moment>
+                                            </p>
+                                            <p>
+                                                <cwc-moment date="2018-08-07 14:30" format="L" 
+                                                lang={'de'} diff={true} humanize={true}></cwc-moment>
+                                                <cwc-moment date="2018-08-07 14:30" format="L" 
+                                                lang={'en'} diff={true} humanize={true}></cwc-moment>
+                                            </p>
+                                            <p>
+                                                <cwc-moment date={new Date().toString()} format="L" 
+                                                lang={'de'} diff={true} humanize={true}></cwc-moment>
+                                                <cwc-moment date={new Date().toString()} format="L" 
+                                                lang={'en'} diff={true} humanize={true}></cwc-moment>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

@@ -130,6 +130,54 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface CwcDnd {
+      'draculaOpts': any;
+      'getDrake': () => any;
+      'rows': string[];
+    }
+  }
+
+  interface HTMLCwcDndElement extends StencilComponents.CwcDnd, HTMLStencilElement {}
+
+  var HTMLCwcDndElement: {
+    prototype: HTMLCwcDndElement;
+    new (): HTMLCwcDndElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-dnd': HTMLCwcDndElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-dnd': HTMLCwcDndElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-dnd': JSXElements.CwcDndAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcDndAttributes extends HTMLAttributes {
+      'draculaOpts'?: any;
+      'onDndcancel'?: (event: CustomEvent) => void;
+      'onDndcloned'?: (event: CustomEvent) => void;
+      /**
+       * Dragula events
+       */
+      'onDnddrag'?: (event: CustomEvent) => void;
+      'onDnddragend'?: (event: CustomEvent) => void;
+      'onDnddrop'?: (event: CustomEvent) => void;
+      'onDndout'?: (event: CustomEvent) => void;
+      'onDndover'?: (event: CustomEvent) => void;
+      'onDndremove'?: (event: CustomEvent) => void;
+      'onDndshadow'?: (event: CustomEvent) => void;
+      'rows'?: string[];
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface CwcDropdown {
       'close': () => void;
       'open': () => void;
@@ -424,7 +472,6 @@ declare global {
 
   namespace StencilComponents {
     interface CwcMoment {
-      'calendarI18n': any;
       'date': string;
       'diff': boolean;
       'duration': string;
@@ -455,7 +502,6 @@ declare global {
   }
   namespace JSXElements {
     export interface CwcMomentAttributes extends HTMLAttributes {
-      'calendarI18n'?: any;
       'date'?: string;
       'diff'?: boolean;
       'duration'?: string;
@@ -557,6 +603,41 @@ declare global {
       'progressBarType'?: BootstrapThemeColor;
       'striped'?: boolean;
       'text'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface CwcResolutionInfo {
+      'height': number;
+      'width': number;
+    }
+  }
+
+  interface HTMLCwcResolutionInfoElement extends StencilComponents.CwcResolutionInfo, HTMLStencilElement {}
+
+  var HTMLCwcResolutionInfoElement: {
+    prototype: HTMLCwcResolutionInfoElement;
+    new (): HTMLCwcResolutionInfoElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-resolution-info': HTMLCwcResolutionInfoElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-resolution-info': HTMLCwcResolutionInfoElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-resolution-info': JSXElements.CwcResolutionInfoAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcResolutionInfoAttributes extends HTMLAttributes {
+      'height'?: number;
+      'width'?: number;
     }
   }
 }
@@ -1208,6 +1289,62 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface ScbModal {
+      'animation': boolean;
+      'backdrop': any;
+      'btntype': string;
+      'centered': boolean;
+      'customId': string;
+      'getModalRef': () => this;
+      'keyboard': boolean;
+      'modalTitle': string;
+      'modalfocus': boolean;
+      'show': boolean;
+      'showButton': boolean;
+      'size': string;
+    }
+  }
+
+  interface HTMLScbModalElement extends StencilComponents.ScbModal, HTMLStencilElement {}
+
+  var HTMLScbModalElement: {
+    prototype: HTMLScbModalElement;
+    new (): HTMLScbModalElement;
+  };
+  interface HTMLElementTagNameMap {
+    'scb-modal': HTMLScbModalElement;
+  }
+  interface ElementTagNameMap {
+    'scb-modal': HTMLScbModalElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'scb-modal': JSXElements.ScbModalAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ScbModalAttributes extends HTMLAttributes {
+      'animation'?: boolean;
+      'backdrop'?: any;
+      'btntype'?: string;
+      'centered'?: boolean;
+      'customId'?: string;
+      'keyboard'?: boolean;
+      'modalTitle'?: string;
+      'modalfocus'?: boolean;
+      'onOnCloseModal'?: (event: CustomEvent) => void;
+      'onOnOpenModal'?: (event: CustomEvent) => void;
+      'show'?: boolean;
+      'showButton'?: boolean;
+      'size'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface ScbNavbar {
       'bgcolor': string;
       'navbarcolor': string;
@@ -1594,6 +1731,39 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface DndPage {
+
+    }
+  }
+
+  interface HTMLDndPageElement extends StencilComponents.DndPage, HTMLStencilElement {}
+
+  var HTMLDndPageElement: {
+    prototype: HTMLDndPageElement;
+    new (): HTMLDndPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'dnd-page': HTMLDndPageElement;
+  }
+  interface ElementTagNameMap {
+    'dnd-page': HTMLDndPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'dnd-page': JSXElements.DndPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface DndPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface DropdownPage {
 
     }
@@ -1891,6 +2061,39 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface ModalPage {
+
+    }
+  }
+
+  interface HTMLModalPageElement extends StencilComponents.ModalPage, HTMLStencilElement {}
+
+  var HTMLModalPageElement: {
+    prototype: HTMLModalPageElement;
+    new (): HTMLModalPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'modal-page': HTMLModalPageElement;
+  }
+  interface ElementTagNameMap {
+    'modal-page': HTMLModalPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'modal-page': JSXElements.ModalPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ModalPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface MomentPage {
 
     }
@@ -2056,30 +2259,30 @@ declare global {
 declare global {
 
   namespace StencilComponents {
-    interface StencilBootstrapDemo {
+    interface ResolutionInfoPage {
 
     }
   }
 
-  interface HTMLStencilBootstrapDemoElement extends StencilComponents.StencilBootstrapDemo, HTMLStencilElement {}
+  interface HTMLResolutionInfoPageElement extends StencilComponents.ResolutionInfoPage, HTMLStencilElement {}
 
-  var HTMLStencilBootstrapDemoElement: {
-    prototype: HTMLStencilBootstrapDemoElement;
-    new (): HTMLStencilBootstrapDemoElement;
+  var HTMLResolutionInfoPageElement: {
+    prototype: HTMLResolutionInfoPageElement;
+    new (): HTMLResolutionInfoPageElement;
   };
   interface HTMLElementTagNameMap {
-    'stencil-bootstrap-demo': HTMLStencilBootstrapDemoElement;
+    'resolution-info-page': HTMLResolutionInfoPageElement;
   }
   interface ElementTagNameMap {
-    'stencil-bootstrap-demo': HTMLStencilBootstrapDemoElement;
+    'resolution-info-page': HTMLResolutionInfoPageElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      'stencil-bootstrap-demo': JSXElements.StencilBootstrapDemoAttributes;
+      'resolution-info-page': JSXElements.ResolutionInfoPageAttributes;
     }
   }
   namespace JSXElements {
-    export interface StencilBootstrapDemoAttributes extends HTMLAttributes {
+    export interface ResolutionInfoPageAttributes extends HTMLAttributes {
 
     }
   }

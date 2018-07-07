@@ -3,9 +3,7 @@ import { Component, State, Listen } from '@stencil/core';
 
 @Component({
     tag: 'list-page',
-    styleUrls: [
-        'list-page.scss'
-    ]
+    styleUrl: 'list-page.scss'
 })
 export class ListPage {
 
