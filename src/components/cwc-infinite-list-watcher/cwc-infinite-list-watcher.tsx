@@ -38,6 +38,8 @@ export class CwcInfiniteListWatcher {
     }
 
     componentWillLoad() {
+        console.log('Yo list selector is: ', this.listSelector);
+        
 
         this.listElement = document.querySelector(this.listSelector)
 

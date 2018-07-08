@@ -86,28 +86,16 @@ export class CwcList {
         return finalClassList
     }
 
-
-
-    componentWillUpdate() {
-        console.log('The component will update');
-    }
-
     render() {
-        console.log('render start');
-        
-
         templateSettings.interpolate = this.interpolationRegex;
 
         if (!this.templateElement) {
 
              this.templateElement = template(this.el.firstElementChild.outerHTML)
         }
-        // this.el.removeChild(this.el.firstElementChild)
-        // this.el.firstElementChild.setAttribute('style', 'visibility:hidden;')
+  
         this.el.firstElementChild.setAttribute('style', 'display:none;')
 
-        // console.l
-        console.log('Template: ', this.templateElement)
 
         let str = ''
         this.items.map((item, index) => {
@@ -122,7 +110,7 @@ export class CwcList {
         return (
 
             <div id={this.el.id} class={"item-list-wrapper " + this.wrapperClass}
-                innerHTML={str ? str : '<div></div>'}>
+                innerHTML={str}>
             </div>
         );
     }

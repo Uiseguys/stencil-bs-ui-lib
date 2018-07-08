@@ -1,6 +1,5 @@
 import { Component, State, Listen } from '@stencil/core';
 
-
 @Component({
     tag: 'list-page',
     styleUrl: 'list-page.scss'
@@ -10,13 +9,7 @@ export class ListPage {
     @State() users1: any[] = [];
     @State() users2: any[] = [];
 
-    @State() lodashData = [
-        { name: 'one' },
-        { name: 'second' },
-        { name: 'third' }
-    ]
-
-    pizzas = [
+  @State()  pizzas = [
         {
             name: 'Pepperoni',
             price: 10
@@ -30,11 +23,20 @@ export class ListPage {
             price: 14
         }
     ]
-
-    getLodashTemplate() {
-        return `<h3 class="demo"><%=item.name%></h3>`
-
-    }
+    @State() pizzas2 = [
+        {   
+            name: 'Quattroformaggi2',
+            price: 12
+        },
+        {
+            name: 'Pepperoni2',
+            price: 10
+        },
+        {
+            name: 'Havaiian2',
+            price: 14
+        }
+    ]
 
     @Listen('onBottomReach')
     customEventHandler(event) {
@@ -44,91 +46,14 @@ export class ListPage {
         }
 
         if (event.detail === 'users-boxed') {
-            this.initUsers2Data()
         }
 
     }
-    // doc: string = 'cwc-list?.md'
 
     componentWillLoad() {
         this.initUsers1Data(20);
-        this.initUsers2Data(20);
-        console.log(this.customEventHandler);
+        // this.initUsers2Data(20);
     }
-
-    initUsers1Data(count?: number) {
-        this.getUsers(count).then(
-            users => this.users1 = this.users1.concat(users)
-        )
-    }
-    initUsers2Data(count?: number) {
-        this.getUsers(count).then(
-            users =>
-                this.users2 = this.users2.concat(users)
-
-        )
-    }
-
-    getUser2Template() {
-        return `<div class="card card-18">
-            <img class="card-img-top" src="<%=user.picture.large%>" alt="Card image cap" />
-                <div class="card-body">
-                    <h5 class="card-title capitalized"><%=user.name.first%> <%=user.name.last%></h5>
-                    <a href="#" class="btn btn-primary">Send message</a>
-                </div>
-            </div > `
-
-    }
-
-    getUserTemplate() {
-        return `<div class="card col-md-6 col-sm-12">
-            <div class="card-body" >
-                <div class="media">
-                    <img class="d-flex mr-3 rounded" src="<%=user.picture.medium%>" alt="Generic placeholder image" />
-                    <div class="media-body">
-                        <h5 class="mt-0 capitalized"><%=user.name.first%> <%=user.name.last%></h5>
-
-                        <div>
-                            <span class="capitalized">
-                                <%=user.location.city%>, <%=user.location.state%>,
-                                </span>
-                            <span> <%=user.location.street%> </span>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div> `
-
-    }
-
-    getUsersPage(): number {
-        return (this.users1.length + this.users2.length) / 10 + 1
-    }
-
-    getUsers(count = 10) {
-
-        return new Promise((resolve) => {
-
-            const request = new XMLHttpRequest();
-            request.open('GET', `https://randomuser.me/api/?page=${this.getUsersPage()}&results=${count}&seed=abc`, true);
-            request.onload = () => {
-                if (request.status >= 200 && request.status < 400) {
-                    const data = JSON.parse(request.responseText);
-                    const users = data.results;
-                    resolve(users);
-                } else {
-                    resolve(false);
-                    console.error("Users endpoint can't be reached. Status: ", request.status)
-
-                }
-            };
-
-            request.onerror = () => console.error("Users endpoint can't be reached.")
-
-            request.send();
-        })
-    }
-
 
     render() {
         return (
@@ -259,10 +184,8 @@ export class ListPage {
                     </p>
                 </code>
                 <div>
-                    <cwc-list items={this.pizzas}>
-                        <slot>
+                    <cwc-list id="pizza-list-first" items={this.pizzas}>
                            <div class="alert alert-primary" title="[[=item.name]]" role="alert">[[=item.name]] pizza is cooked!</div>
-                        </slot>
                     </cwc-list>
                 </div>
 
@@ -291,15 +214,16 @@ export class ListPage {
                     </p>
                 </code>
                 <div>
-                    <cwc-list items={this.pizzas}
+                    <cwc-list id="pizzas-list-second" items={this.pizzas2}
                         itemAs="pizza"
                         addClassEven="alert-success"
                         addClassOdd="alert-secondary"
                         addClassLast="text-center"
                         wrapperClass="border-left border-dark">
-                        <slot>
-                            <div class="alert " title="[[=item.name]]"  role="alert"> [[=pizza.name]] pizza is cooked!</div>
-                        </slot>
+
+               
+                            <div class="alert " title="[[=pizza.name]]"  role="alert"> [[= pizza.name ]] pizza is cooked!</div>
+
                     </cwc-list>
                 </div>
 
@@ -309,7 +233,8 @@ export class ListPage {
                     items={this.users2}
                     itemAs='user'
                     template={this.getUser2Template()}
-                    wrapperClass='row d-flex justify-content-around mx-0'
+                    wrapperCla
+                    ss='row d-flex justify-content-around mx-0'
                     addClass='my-3'> </cwc-list>
 
                 <br /><br />
@@ -324,4 +249,47 @@ export class ListPage {
             </div>
         )
     }
+
+    initUsers1Data(count?: number) {
+        this.getUsers(count).then(
+            users => this.users1 = this.users1.concat(users)
+        )
+    }
+    // initUsers2Data(count?: number) {
+    //     this.getUsers(count).then(
+    //         users =>
+    //             this.users2 = this.users2.concat(users)
+
+    //     )
+    // }
+
+    getUsersPage(): number {
+        return (this.users1.length
+             + this.users2.length) / 10 + 1
+    }
+
+    getUsers(count = 10) {
+
+        return new Promise((resolve) => {
+
+            const request = new XMLHttpRequest();
+            request.open('GET', `https://randomuser.me/api/?page=${this.getUsersPage()}&results=${count}&seed=abc`, true);
+            request.onload = () => {
+                if (request.status >= 200 && request.status < 400) {
+                    const data = JSON.parse(request.responseText);
+                    const users = data.results;
+                    resolve(users);
+                } else {
+                    resolve(false);
+                    console.error("Users endpoint can't be reached. Status: ", request.status)
+
+                }
+            };
+
+            request.onerror = () => console.error("Users endpoint can't be reached.")
+
+            request.send();
+        })
+    }
+
 }
