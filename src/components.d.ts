@@ -33,6 +33,9 @@ import {
   DurationInputArg2,
 } from 'moment';
 import {
+  Placement,
+} from 'popper.js';
+import {
   BootstrapThemeColor as BootstrapThemeColor2,
 } from './common/bootstrap-theme-color.type';
 import {
@@ -178,6 +181,7 @@ declare global {
   namespace StencilComponents {
     interface CwcDnd {
       'dragulaOpts': any;
+      'getDataModel': () => any[];
       'getDrake': () => any;
       'handleClass': string;
       'rows': string[];
@@ -213,6 +217,7 @@ declare global {
       'onDnddrag'?: (event: CustomEvent) => void;
       'onDnddragend'?: (event: CustomEvent) => void;
       'onDnddrop'?: (event: CustomEvent) => void;
+      'onDndmodelupdate'?: (event: CustomEvent) => void;
       'onDndout'?: (event: CustomEvent) => void;
       'onDndover'?: (event: CustomEvent) => void;
       'onDndremove'?: (event: CustomEvent) => void;
@@ -400,8 +405,11 @@ declare global {
 
   namespace StencilComponents {
     interface CwcInlineedit {
+      'for': string;
+      'id': string;
       'label': string;
-      'value': string;
+      'placeholder': string;
+      'value': any;
     }
   }
 
@@ -424,11 +432,15 @@ declare global {
   }
   namespace JSXElements {
     export interface CwcInlineeditAttributes extends HTMLAttributes {
+      'for'?: string;
+      'id'?: string;
       'label'?: string;
       'onOncancel'?: (event: CustomEvent) => void;
       'onOnchange'?: (event: CustomEvent) => void;
       'onOnconfirm'?: (event: CustomEvent) => void;
-      'value'?: string;
+      'onPostValue'?: (event: CustomEvent) => void;
+      'placeholder'?: string;
+      'value'?: any;
     }
   }
 }
@@ -596,6 +608,50 @@ declare global {
       'onQange'?: (event: CustomEvent) => void;
       'selected'?: Array<any>;
       'value'?: Array<any>;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface CwcPopper {
+      'arrow': boolean;
+      'close': () => void;
+      'closeable': boolean;
+      'open': () => void;
+      'placement': Placement;
+      'refid': string;
+      'toggle': () => void;
+      'trigger': string;
+    }
+  }
+
+  interface HTMLCwcPopperElement extends StencilComponents.CwcPopper, HTMLStencilElement {}
+
+  var HTMLCwcPopperElement: {
+    prototype: HTMLCwcPopperElement;
+    new (): HTMLCwcPopperElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-popper': HTMLCwcPopperElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-popper': HTMLCwcPopperElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-popper': JSXElements.CwcPopperAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcPopperAttributes extends HTMLAttributes {
+      'arrow'?: boolean;
+      'closeable'?: boolean;
+      'placement'?: Placement;
+      'refid'?: string;
+      'trigger'?: string;
     }
   }
 }
@@ -2257,6 +2313,39 @@ declare global {
   }
   namespace JSXElements {
     export interface NavbarPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface PopperPage {
+
+    }
+  }
+
+  interface HTMLPopperPageElement extends StencilComponents.PopperPage, HTMLStencilElement {}
+
+  var HTMLPopperPageElement: {
+    prototype: HTMLPopperPageElement;
+    new (): HTMLPopperPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'popper-page': HTMLPopperPageElement;
+  }
+  interface ElementTagNameMap {
+    'popper-page': HTMLPopperPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'popper-page': JSXElements.PopperPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface PopperPageAttributes extends HTMLAttributes {
 
     }
   }
