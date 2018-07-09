@@ -82,7 +82,6 @@ export class MultiselectPage {
      {id: 'fruit2, name: 'mango'},
      {id: 'fruit3', name: 'banana'}
    ]"
-  data-display="name"
   qange="onChange(selectedItems)">
 
     <div class="item">Apple</div>
