@@ -49,7 +49,7 @@
     "lodash": "^4.17.4",
     "moment": "^2.20.1",
     "pikaday": "^1.7.0",
-    "popper.js": "^1.12.9",
+    "popper.js": "1.14.3",
     "tiny-date-picker": "^3.2.4",
     "tooltip.js": "^1.1.7",
     "tslint": "^5.7.0",
