@@ -34,7 +34,7 @@ import {
 } from 'moment';
 import {
   Placement,
-} from 'popper.js';
+} from 'bootstrap';
 import {
   BootstrapThemeColor as BootstrapThemeColor2,
 } from './common/bootstrap-theme-color.type';
@@ -605,7 +605,7 @@ declare global {
   namespace JSXElements {
     export interface CwcMultiselectAttributes extends HTMLAttributes {
       'dataDisplay'?: string;
-      'onQange'?: (event: CustomEvent) => void;
+      'onOnchange'?: (event: CustomEvent) => void;
       'selected'?: Array<any>;
       'value'?: Array<any>;
     }

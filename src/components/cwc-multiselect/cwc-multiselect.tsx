@@ -18,7 +18,7 @@ export class CwcMultiselect {
   @Prop() value: Array<any> = [];
   @Prop() dataDisplay: string = 'name';
   @Prop() selected: Array<any> = [];
-  @Event() qange: EventEmitter;
+  @Event() onchange: EventEmitter;
 
   // private members
   @Element() _container: HTMLElement;
@@ -56,7 +56,7 @@ export class CwcMultiselect {
           this._selected.push(this.value[i]);
           this._container.children[i].classList.add('selected');
         }
-        this.qange.emit([...this._selected]);
+        this.onchange.emit([...this._selected]);
         break;
       }
     }
@@ -68,12 +68,10 @@ export class CwcMultiselect {
     } else {
       this._selected = this._selected.filter(v => v !== item);
     }
-    this.qange.emit([...this._selected]);
+    this.onchange.emit([...this._selected]);
   };
 
   render() {
-    console.log('multiselect value');
-    console.log(this.value);
     if (!this.value || !this.value.length) return null;
 
     if (!this._isComplex) {

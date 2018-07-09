@@ -1,4 +1,4 @@
-import { Component, State } from '@stencil/core';
+import { Component, State, Listen } from '@stencil/core';
 
 @Component({
   tag: 'multiselect-page',
@@ -17,21 +17,16 @@ export class MultiselectPage {
   @State() _complex = [];
   @State() flag = false;
 
-  handleSimpleChange = e => {
-    this._simple = e.detail;
-  };
-
-  handleAdvancedChange = e => {
-    this._advanced = e.detail;
-  };
-
-  handleComplexChange = e => {
-    this._complex = e.detail;
-  };
-
-  toggleFlag = () => {
-    this.flag = !this.flag;
-  };
+  @Listen('onchange')
+  handleOnChange(e) {
+    if (e.target.id === 'select1') {
+      this._simple = e.detail;
+    } else if (e.target.id === 'select2') {
+      this._advanced = e.detail;
+    } else {
+      this._complex = e.detail;
+    }
+  }
 
   render() {
     return (
@@ -39,14 +34,11 @@ export class MultiselectPage {
         <h3>simplest case:</h3>
         <pre class="code">
           <code>
-            {`<cwc-mulitselect value="['apple', 'mango', 'banana']" qange="onChange(selectedItems)">
+            {`<cwc-mulitselect value="['apple', 'mango', 'banana']" onchange="onChange(selectedItems)">
 </cwc-multiselect>`}
           </code>
         </pre>
-        <cwc-multiselect
-          value={this.simple}
-          onQange={this.handleSimpleChange}
-        />
+        <cwc-multiselect id="select1" value={this.simple} />
         <h5>result: </h5>
         <pre>{JSON.stringify(this._simple, null, 2)}</pre>
 
@@ -62,14 +54,11 @@ export class MultiselectPage {
      {id: 'fruit3', name: 'banana'}
    ]"
   data-display="name"
-  qange="onChange(selectedItems)">
+  onchange="onChange(selectedItems)">
 </cwc-multiselect>`}
           </code>
         </pre>
-        <cwc-multiselect
-          value={this.advanced}
-          onQange={this.handleAdvancedChange}
-        />
+        <cwc-multiselect id="select2" value={this.advanced} />
         <h5>result: </h5>
         <pre>{JSON.stringify(this._advanced, null, 2)}</pre>
 
@@ -82,7 +71,7 @@ export class MultiselectPage {
      {id: 'fruit2, name: 'mango'},
      {id: 'fruit3', name: 'banana'}
    ]"
-  qange="onChange(selectedItems)">
+  onchange="onChange(selectedItems)">
 
     <div class="item">Apple</div>
     <div class="item">Mango</div>
@@ -91,10 +80,7 @@ export class MultiselectPage {
 </cwc-multiselect>`}
           </code>
         </pre>
-        <cwc-multiselect
-          value={this.advanced}
-          onQange={this.handleComplexChange}
-        >
+        <cwc-multiselect id="select3" value={this.advanced}>
           <div class="item">Apple</div>
           <div class="item">Mango</div>
           <div class="item">Banana</div>
