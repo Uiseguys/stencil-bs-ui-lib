@@ -1390,11 +1390,13 @@ declare global {
       'backdrop': any;
       'btntype': string;
       'centered': boolean;
+      'closeModal': () => void;
       'customId': string;
       'getModalRef': () => this;
       'keyboard': boolean;
       'modalTitle': string;
       'modalfocus': boolean;
+      'openModal': () => void;
       'show': boolean;
       'showButton': boolean;
       'size': string;
