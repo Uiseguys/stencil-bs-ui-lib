@@ -1,4 +1,4 @@
-import { Component, State, Listen } from '@stencil/core';
+import { Component, State } from '@stencil/core';
 
 @Component({
     tag: 'list-page',
@@ -23,37 +23,6 @@ export class ListPage {
             price: 14
         }
     ]
-    @State() pizzas2 = [
-        {   
-            name: 'Quattroformaggi2',
-            price: 12
-        },
-        {
-            name: 'Pepperoni2',
-            price: 10
-        },
-        {
-            name: 'Havaiian2',
-            price: 14
-        }
-    ]
-
-    @Listen('onBottomReach')
-    customEventHandler(event) {
-
-        if (event.detail === 'users-infinite') {
-            this.initUsers1Data()
-        }
-
-        if (event.detail === 'users-boxed') {
-        }
-
-    }
-
-    componentWillLoad() {
-        this.initUsers1Data(20);
-        // this.initUsers2Data(20);
-    }
 
     render() {
         return (
@@ -214,7 +183,7 @@ export class ListPage {
                     </p>
                 </code>
                 <div>
-                    <cwc-list id="pizzas-list-second" items={this.pizzas2}
+                    <cwc-list id="pizzas-list-second" items={this.pizzas}
                         itemAs="pizza"
                         addClassEven="alert-success"
                         addClassOdd="alert-secondary"
@@ -249,47 +218,4 @@ export class ListPage {
             </div>
         )
     }
-
-    initUsers1Data(count?: number) {
-        this.getUsers(count).then(
-            users => this.users1 = this.users1.concat(users)
-        )
-    }
-    // initUsers2Data(count?: number) {
-    //     this.getUsers(count).then(
-    //         users =>
-    //             this.users2 = this.users2.concat(users)
-
-    //     )
-    // }
-
-    getUsersPage(): number {
-        return (this.users1.length
-             + this.users2.length) / 10 + 1
-    }
-
-    getUsers(count = 10) {
-
-        return new Promise((resolve) => {
-
-            const request = new XMLHttpRequest();
-            request.open('GET', `https://randomuser.me/api/?page=${this.getUsersPage()}&results=${count}&seed=abc`, true);
-            request.onload = () => {
-                if (request.status >= 200 && request.status < 400) {
-                    const data = JSON.parse(request.responseText);
-                    const users = data.results;
-                    resolve(users);
-                } else {
-                    resolve(false);
-                    console.error("Users endpoint can't be reached. Status: ", request.status)
-
-                }
-            };
-
-            request.onerror = () => console.error("Users endpoint can't be reached.")
-
-            request.send();
-        })
-    }
-
 }

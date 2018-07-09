@@ -3,7 +3,9 @@ import { Component, Prop, Event, EventEmitter, Method, State } from '@stencil/co
 
 @Component({
     tag: 'cwc-infinite-list-watcher',
-    styleUrl: 'cwc-infinite-list-watcher.scss'
+    styleUrls: [
+        'cwc-infinite-list-watcher.scss'
+    ]
 })
 export class CwcInfiniteListWatcher {
 
@@ -19,6 +21,11 @@ export class CwcInfiniteListWatcher {
     debounceStatus: boolean = false
 
     @Event() onBottomReach: EventEmitter
+
+    constructor() {
+        console.log('Holla watcher!');
+        
+    }
 
     @Method()
     loadMore() {
@@ -37,15 +44,17 @@ export class CwcInfiniteListWatcher {
             , this.debounce)
     }
 
-    componentWillLoad() {
-        console.log('Yo list selector is: ', this.listSelector);
-        
-
+    componentDidLoad() {
         this.listElement = document.querySelector(this.listSelector)
 
-        this.bindToList ?
-            this.listElement.addEventListener('scroll', this.listScrollHandler.bind(this))
-            : document.addEventListener('scroll', this.windowScrollHandler.bind(this))
+        if (this.listElement) {
+            
+                    this.bindToList ?
+                        this.listElement.addEventListener('scroll', this.listScrollHandler.bind(this))
+                        : document.addEventListener('scroll', this.windowScrollHandler.bind(this))
+        } else {
+            console.error(`List watcher component can't bind to given selector ${this.listSelector}.`)
+        }        
     }
 
 
@@ -63,8 +72,6 @@ export class CwcInfiniteListWatcher {
             this.loadMore()
         }
     }
-
-
 
     render() {
         return (

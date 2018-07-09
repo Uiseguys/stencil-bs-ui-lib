@@ -407,6 +407,8 @@ export class DndPage {
                       <p>Anytime, you can get Dragula instance by <code>`getDrake(): Drake`</code> component method.</p>
 
                 </div>
+                {/* <cwc-infinite-list-watcher listSelector="#users-infinite-2"></cwc-infinite-list-watcher> */}
+
 
 
             </div>

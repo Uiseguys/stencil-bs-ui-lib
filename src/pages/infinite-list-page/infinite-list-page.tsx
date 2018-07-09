@@ -22,6 +22,7 @@ export class CwcInfiniteList {
             // this.initUsers1Data()
 
             console.log('NEW ');
+            this.initUsers1Data(10)
             
         }
 
@@ -54,14 +55,41 @@ export class CwcInfiniteList {
         )
     }
 
+    getUsersPage(): number {
+        return (this.users1.length ) / 10 + 1
+    }
+
+    getUsers(count = 10) {
+
+        return new Promise((resolve) => {
+
+
+            const request = new XMLHttpRequest();
+            request.open('GET', `https://randomuser.me/api/?page=${this.getUsersPage()}&results=${count}&seed=abc`, true);
+            request.onload = () => {
+                if (request.status >= 200 && request.status < 400) {
+                    const data = JSON.parse(request.responseText);
+                    const users = data.results;
+                    resolve(users);
+                } else {
+                    resolve(false);
+                    console.error("Users endpoint can't be reached. Status: ", request.status)
+
+                }
+            };
+
+            request.onerror = () => console.error("Users endpoint can't be reached.")
+
+            request.send();
+        })
+    }
 
     render() {
         
-            return (
-                <div>
+            return [
 
-                <div class="btn btn-info" onClick={() => this.initUsers1Data()}>duplicate</div>
-                <cwc-infinite-list-watcher listSelector="#users-infinite"></cwc-infinite-list-watcher>
+                <cwc-infinite-list-watcher listSelector="#users-infinite"></cwc-infinite-list-watcher>,
+                <div class="btn btn-info" onClick={() => this.initUsers1Data()}>duplicate</div>,
                     <cwc-list id="users-infinite"
                         items={this.users1}
                         itemAs='user'
@@ -90,35 +118,8 @@ export class CwcInfiniteList {
                             </div> 
 
                     </cwc-list>
-            </div>
-        );
+        ]
     }
     
-    getUsersPage(): number {
-        return (this.users1.length ) / 10 + 1
-    }
-
-    getUsers(count = 10) {
-
-        return new Promise((resolve) => {
-
-            const request = new XMLHttpRequest();
-            request.open('GET', `https://randomuser.me/api/?page=${this.getUsersPage()}&results=${count}&seed=abc`, true);
-            request.onload = () => {
-                if (request.status >= 200 && request.status < 400) {
-                    const data = JSON.parse(request.responseText);
-                    const users = data.results;
-                    resolve(users);
-                } else {
-                    resolve(false);
-                    console.error("Users endpoint can't be reached. Status: ", request.status)
-
-                }
-            };
-
-            request.onerror = () => console.error("Users endpoint can't be reached.")
-
-            request.send();
-        })
-    }
+ 
 }
