@@ -1,6 +1,5 @@
 import {Component, Element, HostElement, Prop, State, Method} from '@stencil/core';
-import Popper from 'popper.js';
-import {Placement} from 'bootstrap'
+import Popper, {Placement}from 'popper.js';
 
 @Component({
     tag: 'cwc-popper',
@@ -11,11 +10,12 @@ export class CwcPopper {
     content: Element;
     mouse: any;
     openState: boolean = false;
+    timer: any;
 
     @Element() el: HostElement;
 
     @Prop() refid: string;
-    @Prop() placement: Placement = 'top';
+    @Prop() placement: Placement = 'bottom';
     @Prop() trigger: string = 'click';
     @Prop() arrow: boolean = false;
     @Prop() closeable: boolean = true;
@@ -57,18 +57,28 @@ export class CwcPopper {
         if (this.refid) {
             const popperDropdown = document.querySelector("cwc-popper");
             const trigger = this.trigger === 'hover' ? 'mouseover' : this.trigger;
-            this.btn.addEventListener(trigger, () =>  this.open());
-            popperDropdown.addEventListener(trigger, () =>  this.open());
+            this.btn.addEventListener(trigger, () => this.open());
+            popperDropdown.addEventListener(trigger, () => this.open());
             this.close();
 
             popperDropdown.addEventListener("mouseup", (event) => {
                 event.stopPropagation();
             });
             if (trigger !== "click") {
-                this.btn.addEventListener("mouseleave", () => this.close());
+
+                popperDropdown.addEventListener("mouseenter", () => {
+                    clearTimeout(this.timer);
+                });
+
+                this.btn.addEventListener("mouseleave", () => {
+                    this.timer = setTimeout(() => {
+                        this.close()
+                    }, 100)
+                });
+
                 popperDropdown.addEventListener("mouseleave", () => {
                     this.close();
-                })
+                });
             } else {
                 document.addEventListener("mouseup", (event) => {
                     if (event.target !== this.btn) {
@@ -100,9 +110,11 @@ export class CwcPopper {
             placement: this.placement,
             modifiers: {
                 flip: {
-                    behavior: ['left', 'bottom', 'top']
+                    behavior: ['left', 'right', 'top', 'bottom']
                 },
-
+                preventOverflow: {
+                    boundariesElement: 'window',
+                },
             },
             onCreate({instance}) {
                 if (!self.refid) {

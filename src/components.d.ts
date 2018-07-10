@@ -36,7 +36,7 @@ import {
 } from 'moment';
 import {
   Placement,
-} from 'bootstrap';
+} from 'popper.js';
 import {
   BootstrapThemeColor as BootstrapThemeColor2,
 } from './common/bootstrap-theme-color.type';
