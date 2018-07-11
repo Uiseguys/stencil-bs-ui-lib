@@ -58,7 +58,7 @@ export class ScbModal {
   }
 
   @Method()
-  openModal = () => {
+  openModal() {
     if (this.modalShown) return;
 
     this.modalElem.style.display = 'block';
@@ -75,10 +75,10 @@ export class ScbModal {
         this.modalContentElem.focus();
       });
     }
-  };
+  }
 
   @Method()
-  closeModal = () => {
+  closeModal() {
     if (!this.modalShown) return;
 
     this.modalShown = false;
@@ -90,7 +90,7 @@ export class ScbModal {
     setTimeout(() => {
       this.modalElem.style.display = 'none';
     }, this.animation ? 100 : 0);
-  };
+  }
 
   @Method()
   getModalRef() {
@@ -98,6 +98,8 @@ export class ScbModal {
   }
 
   _addBackDrop() {
+    if (!this.backdrop) return;
+
     this.backdropElem = document.createElement('div');
     this.backdropElem.className = 'modal-backdrop fade show';
     document.body.appendChild(this.backdropElem);
