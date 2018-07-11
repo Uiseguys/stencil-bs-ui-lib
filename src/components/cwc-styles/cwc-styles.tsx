@@ -6,5 +6,7 @@ import { Component } from '@stencil/core';
 })
 export class CwcStylesComponent {
 
-    render() {}
+    render() {
+      return;
+    }
 }

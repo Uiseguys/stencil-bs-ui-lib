@@ -12,7 +12,7 @@ export class MyCheckbox {
     @Prop() id: string;
     @Prop() for: string;
     @Prop() value: boolean;
-    @Prop() title: string;
+    @Prop() checkboxTitle: string;
 
     @Event() postValue: EventEmitter;
     @Element()
@@ -33,7 +33,7 @@ export class MyCheckbox {
         return (
             <div class="form-check">
                 <label class="form-check-label">
-                    {this.title}<br/>
+                    {this.checkboxTitle}<br/>
                     <input class="form-check-input" id={this.id} value={`${this.currentValue}` || `${parsedValue}`}
                            type="checkbox" onClick={() => {this.checkWatcher()}}/><br/><br/>
                 </label>

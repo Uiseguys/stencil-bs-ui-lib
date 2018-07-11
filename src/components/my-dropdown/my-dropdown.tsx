@@ -11,8 +11,8 @@ export class MyDropdown {
 
     @Prop() id: string;
     @Prop() for: string;
-    @Prop() value: string;
-    @Prop() title: string;
+    @Prop() dropdownValue: string;
+    @Prop() dropdownTitle: string;
 
     @Event() postValue: EventEmitter;
     @Element()
@@ -24,11 +24,11 @@ export class MyDropdown {
     };
 
     render() {
-        const parsedValue = this.value ? JSON.parse(this.value) : null;
+        const parsedValue = this.dropdownValue ? JSON.parse(this.dropdownValue) : null;
 
         return (
             <div class="input-group col-3">
-                <select class="custom-select" id={this.id} value={this.currentValue}
+                <select class="custom-select" id={this.id} data-value={this.currentValue}
                         onClick={(event) => this.getSelectValues(event)}>
                     {parsedValue && parsedValue.map((value) =>
                         <option>{value}</option>
