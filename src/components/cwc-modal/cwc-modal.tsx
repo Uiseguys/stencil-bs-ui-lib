@@ -10,9 +10,9 @@ import {
 } from '@stencil/core';
 
 @Component({
-  tag: 'scb-modal'
+  tag: 'cwc-modal'
 })
-export class ScbModal {
+export class CwcModal {
   @Element() el;
 
   @Prop() btntype: string = 'primary';
@@ -30,7 +30,7 @@ export class ScbModal {
   @Prop() show: boolean = false;
 
   @Prop() showButton: boolean = true;
-  @Prop() customId: string = 'scb-modal';
+  @Prop() customId: string = 'cwc-modal';
 
   @Event() onOpenModal: EventEmitter;
   @Event() onCloseModal: EventEmitter;

@@ -31,7 +31,7 @@ import '@stencil/state-tunnel';
 import {
   BootstrapThemeColor,
   IBreadcrumbItem,
-} from './common/index';
+} from './common';
 import {
   DurationInputArg2,
 } from 'moment';
@@ -526,6 +526,64 @@ declare global {
   namespace JSXElements {
     export interface CwcMarkdownAttributes extends HTMLAttributes {
       'data'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface CwcModal {
+      'animation': boolean;
+      'backdrop': any;
+      'btntype': string;
+      'centered': boolean;
+      'closeModal': () => void;
+      'customId': string;
+      'getModalRef': () => this;
+      'keyboard': boolean;
+      'modalTitle': string;
+      'modalfocus': boolean;
+      'openModal': () => void;
+      'show': boolean;
+      'showButton': boolean;
+      'size': string;
+    }
+  }
+
+  interface HTMLCwcModalElement extends StencilComponents.CwcModal, HTMLStencilElement {}
+
+  var HTMLCwcModalElement: {
+    prototype: HTMLCwcModalElement;
+    new (): HTMLCwcModalElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-modal': HTMLCwcModalElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-modal': HTMLCwcModalElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-modal': JSXElements.CwcModalAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcModalAttributes extends HTMLAttributes {
+      'animation'?: boolean;
+      'backdrop'?: any;
+      'btntype'?: string;
+      'centered'?: boolean;
+      'customId'?: string;
+      'keyboard'?: boolean;
+      'modalTitle'?: string;
+      'modalfocus'?: boolean;
+      'onOnCloseModal'?: (event: CustomEvent) => void;
+      'onOnOpenModal'?: (event: CustomEvent) => void;
+      'show'?: boolean;
+      'showButton'?: boolean;
+      'size'?: string;
     }
   }
 }
@@ -1380,64 +1438,6 @@ declare global {
     export interface ScbCollapseAttributes extends HTMLAttributes {
       'collapseid'?: string;
       'items'?: any[];
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
-    interface ScbModal {
-      'animation': boolean;
-      'backdrop': any;
-      'btntype': string;
-      'centered': boolean;
-      'closeModal': () => void;
-      'customId': string;
-      'getModalRef': () => this;
-      'keyboard': boolean;
-      'modalTitle': string;
-      'modalfocus': boolean;
-      'openModal': () => void;
-      'show': boolean;
-      'showButton': boolean;
-      'size': string;
-    }
-  }
-
-  interface HTMLScbModalElement extends StencilComponents.ScbModal, HTMLStencilElement {}
-
-  var HTMLScbModalElement: {
-    prototype: HTMLScbModalElement;
-    new (): HTMLScbModalElement;
-  };
-  interface HTMLElementTagNameMap {
-    'scb-modal': HTMLScbModalElement;
-  }
-  interface ElementTagNameMap {
-    'scb-modal': HTMLScbModalElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'scb-modal': JSXElements.ScbModalAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface ScbModalAttributes extends HTMLAttributes {
-      'animation'?: boolean;
-      'backdrop'?: any;
-      'btntype'?: string;
-      'centered'?: boolean;
-      'customId'?: string;
-      'keyboard'?: boolean;
-      'modalTitle'?: string;
-      'modalfocus'?: boolean;
-      'onOnCloseModal'?: (event: CustomEvent) => void;
-      'onOnOpenModal'?: (event: CustomEvent) => void;
-      'show'?: boolean;
-      'showButton'?: boolean;
-      'size'?: string;
     }
   }
 }
