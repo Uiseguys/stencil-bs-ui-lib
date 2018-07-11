@@ -30,21 +30,21 @@ export class AlertsPage {
   render() {
     return [
       this.alertTypes.map(type =>
-        <scb-alert type={type}>
+        <cwc-alert type={type}>
           This is a {type} alert-check it out!
-        </scb-alert>,
+        </cwc-alert>,
       ),
 
       <div>
         <h2>Content Projection</h2>
         <h4>Link Color</h4>
-        <scb-alert type="primary">
+        <cwc-alert type="primary">
           This is a primary alert with <a href="#" class="alert-link">an example link</a>.
           Give it a click if you like.
-        </scb-alert>
+        </cwc-alert>
 
         <h4>More Content</h4>
-        <scb-alert type="success">
+        <cwc-alert type="success">
           <h4 class="alert-heading">Well done!</h4>
           <p>
             Aww yeah, you successfully read this important alert message.
@@ -55,7 +55,7 @@ export class AlertsPage {
           <p class="mb-0">
             Whenever you need to, be sure to use margin utilities to keep things nice and tidy.
           </p>
-        </scb-alert>
+        </cwc-alert>
       </div>,
 
       <div id="dismissible-alert-container">
@@ -81,13 +81,13 @@ export class AlertsPage {
         : this.onAlertDismiss();
 
     return (
-      <scb-alert type="warning"
+      <cwc-alert type="warning"
         dismissible
         onDismiss={onDismiss.bind(this)}
         animatable={animatable}
       >
         <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-      </scb-alert>
+      </cwc-alert>
     );
   }
 
