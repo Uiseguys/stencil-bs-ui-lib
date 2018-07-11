@@ -92,16 +92,16 @@ export class StencilBsDemoPage {
         },
         {
             url: '/autocomplete-select',
-      title: 'AutocompleteSelect Component',
-      componentName: 'autocomplete-select-page'
-    },
-    {
-      url: '/modal',
-      title: 'Modal Component',
-      componentName: 'modal-page'
-    },
-    {
-      url: '/tabs',
+            title: 'AutocompleteSelect Component',
+            componentName: 'autocomplete-select-page'
+        },
+        {
+            url: '/modal',
+            title: 'Modal Component',
+            componentName: 'modal-page'
+        },
+        {
+                url: '/tabs',
             title: 'Tabs Component',
             componentName: 'tabs-page',
             isHiden: true

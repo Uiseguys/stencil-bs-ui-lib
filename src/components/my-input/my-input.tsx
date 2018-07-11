@@ -15,7 +15,7 @@ export class MyInput {
     @Prop() id: string;
     @Prop() for: string;
     @Prop() value: any;
-    @Prop() title: string;
+    @Prop() inputTitle: string;
     @Prop() format: any;
 
     @Event() postValue: EventEmitter;
@@ -80,7 +80,7 @@ export class MyInput {
         return (
             <div class="form-group">
                 <label>
-                    {this.title}<br/>
+                    {this.inputTitle}<br/>
                     {content}<br/>
                 </label>
             </div>
