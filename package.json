@@ -1,15 +1,15 @@
 {
   "name": "@ui-guys/stencil-bs-ui-lib",
   "private": false,
-  "version": "0.5.7",
+  "version": "0.6.2",
   "description": "Bootstrap componentes built with StencilJS",
   "engines": {
     "node": ">=6.11.0 <9.0"
   },
   "main": "dist/index.js",
   "types": "dist/types/components.d.ts",
+  "module" : "dist/esm/index.js",
   "collection": "dist/collection/collection-manifest.json",
-  "browser": "dist/index.js",
   "files": [
     "dist/"
   ],
@@ -22,7 +22,7 @@
   ],
   "scripts": {
     "build": "stencil build --no-cache",
-    "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
+    "dev": "stencil build --dev --watch --serve",
     "serve": "stencil-dev-server",
     "start": "npm run dev",
     "test": "jest --no-cache",
@@ -32,34 +32,33 @@
     "prepublish": "stencil build --prod --es5"
   },
   "dependencies": {
-    "@stencil/core": "0.7.24",
+    "@stencil/core": "latest",
     "@stencil/dev-server": "latest",
-    "@stencil/router": "0.0.28",
-    "@stencil/sass": "0.0.2",
+    "@stencil/router": "latest",
+    "@stencil/sass": "latest",
     "@stencil/utils": "latest",
-    "@types/bootstrap": "^4.0.1",
+    "@types/bootstrap": "^4.1.2",
     "@types/jest": "^21.1.1",
-    "@types/lodash": "^4.14.110",
-    "@types/video.js": "^6.2.3",
-    "ajv": "^6.1.1",
-    "bootstrap": "^4.0.0",
-    "bootstrap.native": "^2.0.21",
+    "@types/video.js": "^6.2.7",
+    "ajv": "^6.5.2",
+    "bootstrap": "^4.1.1",
+    "bootstrap.native": "^2.0.23",
     "dragula": "^3.7.2",
     "http-server": "^0.11.1",
     "jest": "^21.2.1",
     "lodash": "^4.17.10",
-    "moment": "^2.20.1",
+    "moment": "^2.22.2",
     "pikaday": "^1.7.0",
-    "popper.js": "^1.12.9",
-    "tiny-date-picker": "^3.2.4",
-    "tooltip.js": "^1.1.7",
-    "tslint": "^5.7.0",
-    "video.js": "^6.6.0",
+    "popper.js": "1.14.3",
+    "tiny-date-picker": "^3.2.5",
+    "tooltip.js": "^1.2.0",
+    "tslint": "^5.10.0",
+    "video.js": "^6.10.3",
     "videojs-font": "^2.0.0"
   },
   "devDependencies": {
     "@stencil/sass": "0.0.2",
-    "@types/googlemaps": "^3.30.7"
+    "@types/googlemaps": "^3.30.11"
   },
   "repository": {
     "type": "git",

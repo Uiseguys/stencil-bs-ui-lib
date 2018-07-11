@@ -3,7 +3,8 @@ import '@stencil/router';
 import 'bootstrap.native/dist/bootstrap-native-v4';
 
 @Component({
-  tag: 'stencil-bs-demo-page'
+  tag: 'stencil-bs-demo-page',
+  styleUrl: 'stencil-bs-demo-page.scss'
 })
 export class StencilBsDemoPage {
   @Prop() root = '/';
@@ -95,6 +96,11 @@ export class StencilBsDemoPage {
       componentName: 'multiselect-page'
     },
     {
+      url: '/autocomplete-select',
+      title: 'AutocompleteSelect Component',
+      componentName: 'autocomplete-select-page'
+    },
+    {
       url: '/modal',
       title: 'Modal Component',
       componentName: 'modal-page'
@@ -167,9 +173,14 @@ export class StencilBsDemoPage {
       url: '/fileinput',
       title: 'Fileinput Component',
       componentName: 'file-input-page'
-    }
+    },
+    {
+      url: '/popper',
+      title: 'Popper Component',
+      componentName: 'popper-page'
+  },
   ];
-
+    
   render() {
     return [
       <cwc-styles />,

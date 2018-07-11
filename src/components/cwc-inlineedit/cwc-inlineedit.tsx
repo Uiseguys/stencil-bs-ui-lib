@@ -5,13 +5,19 @@ import { Component, Prop, Element, Event, EventEmitter } from '@stencil/core';
     styleUrl: 'cwc-inlineedit.scss'
 })
 export class CwcInlineedit {
+    @Prop() id: string;
+    @Prop() for: string;
+    @Prop() value: any;
     @Prop() label: string;
-    @Prop() value = 'A field value';
+    @Prop() placeholder: string;
+
     @Element() el: HTMLElement;
+    @Element() element: HTMLInputElement;
 
     @Event() onchange: EventEmitter;
-    @Event() onconfirm: EventEmitter;  
+    @Event() onconfirm: EventEmitter;
     @Event() oncancel: EventEmitter;
+    @Event() postValue: EventEmitter;
 
     fieldWrapper: HTMLElement;
     inputWrapper: HTMLElement;
@@ -30,12 +36,12 @@ export class CwcInlineedit {
                 if (!self.buttonWrapper.contains(document.activeElement)) {
                     self.saveInputText();
                 }
-            }, 10);            
+            }, 10);
 
-        });        
-        this.inputWrapper.querySelector('input').addEventListener('input', () => { 
+        });
+        this.inputWrapper.querySelector('input').addEventListener('input', () => {
             self.onchange.emit(self.inputWrapper.querySelector('input').value);
-        });  
+        });
     }
 
     handleFieldClick() {
@@ -44,12 +50,12 @@ export class CwcInlineedit {
         this.fieldWrapper.style.display = 'none';
         this.inputWrapper.style.display = 'block';
         inputEl.value = text;
-        inputEl.focus();        
+        inputEl.focus();
     }
 
     handleOkClick() {
         this.saveInputText();
-    }    
+    }
 
     handleCancelClick() {
         this.inputWrapper.style.display = 'none';
@@ -59,14 +65,24 @@ export class CwcInlineedit {
             this.inputWrapper.querySelector('input').value = this.fieldWrapper.innerText;
             this.onchange.emit(this.inputWrapper.querySelector('input').value);
         }
-    }     
+    }
 
     private saveInputText() {
+        let currentValue: any;
         const value = this.inputWrapper.querySelector('input').value;
-        this.fieldWrapper.innerText = value;        
+        this.fieldWrapper.innerText = value;
         this.inputWrapper.style.display = 'none';
         this.fieldWrapper.style.display = 'inline-block';
         this.onconfirm.emit(value);
+
+        //used for form-generator component
+        if (value) {
+            currentValue = value;
+        } else {
+            currentValue = null;
+        }
+        this.element.value = currentValue;
+        this.postValue.emit(this.element);
     }
 
     render() {
@@ -75,11 +91,14 @@ export class CwcInlineedit {
                 <div class="label-wrapper">
                     <label>{this.label}</label>
                 </div>
-                <div class="field-wrapper" onClick={ () => this.handleFieldClick()}> 
+                <div class="field-wrapper" onClick={ () => this.handleFieldClick()}>
                     {this.value}
                 </div>
                 <div class="input-wrapper">
-                    <input class="form-control"/>
+                    <input id={this.id} class="form-control"
+                        type={this.for === "integer" ? "number" : "text"}
+                        placeholder={this.placeholder}
+                    />
                     <div class="button-wrapper">
                         <button type="button" class="btn btn-light btn-sm" onClick={() => this.handleOkClick()}>
                             <span><svg width="16" height="16" viewBox="0 0 24 24">
