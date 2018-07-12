@@ -10,9 +10,9 @@ import {
 } from '@stencil/core';
 
 @Component({
-  tag: 'scb-alert'
+  tag: 'cwc-alert'
 })
-export class ScbAlert {
+export class CwcAlert {
   @Element() el: HTMLElement;
 
   @Prop() dismissible = false;

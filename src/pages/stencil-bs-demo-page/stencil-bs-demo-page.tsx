@@ -51,7 +51,6 @@ export class StencilBsDemoPage {
             url: '/alert',
             title: 'Alert Component',
             componentName: 'alerts-page',
-            isHiden: true
         },
         {
             url: '/badge',
