@@ -30,7 +30,7 @@ import '@stencil/router';
 import {
   BootstrapThemeColor,
   IBreadcrumbItem,
-} from './common';
+} from './common/index';
 import {
   DurationInputArg2,
 } from 'moment';
