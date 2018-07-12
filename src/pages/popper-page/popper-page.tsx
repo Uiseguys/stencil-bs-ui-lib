@@ -14,13 +14,13 @@ export class TolltipPage {
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="row">
-                                        <h3 id="test">Usage </h3>
+                                        <h3 id="test-popper">Usage </h3>
                                         <div>
                                             <cwc-popper
                                                 arrow
-                                                placement="left"
-                                                refid="test"
-                                                trigger="hover">
+                                                placement="top"
+                                                refid="test-popper"
+                                                trigger="click">
                                                 <div slot="dropdown-menu" class="dropdown-menu" >
                                                     <div class="dropdown-item" data-value="Automatic">Automatic</div>
                                                     <div class="dropdown-item" data-value="Manual" >Manual</div>
@@ -60,7 +60,8 @@ export class TolltipPage {
                                             <td>refid</td>
                                             <td>String</td>
                                             <td>'div1'</td>
-                                            <td>Id of the target element were we need to show popup. If we new set refid by default this will show parallel to mouse pointer</td>
+                                            <td>Id of the target element were we need to show popup.
+                                                If we new set refid by default this will show parallel to mouse pointer</td>
                                         </tr>
                                         <tr>
                                             <td>placement</td>
@@ -71,7 +72,7 @@ export class TolltipPage {
                                         <tr>
                                             <td>trigger</td>
                                             <td>String</td>
-                                            <td>'hover'</td>
+                                            <td>'click'</td>
                                             <td>How tooltip is triggered - click, hover, focus. You need to pass single triggers;</td>
                                         </tr>
                                         <tr>
