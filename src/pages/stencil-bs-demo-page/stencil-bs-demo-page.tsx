@@ -173,6 +173,11 @@ export class StencilBsDemoPage {
             title: 'Popper Component',
             componentName: 'popper-page'
         },
+        {
+          url: '/wysiwyg-editor',
+          title: 'Wysiwyg Editor Component',
+          componentName: 'wysiwyg-editor-page'
+        }
     ];
 
   render() {

@@ -1060,6 +1060,39 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface CwcWysiwygEditor {
+
+    }
+  }
+
+  interface HTMLCwcWysiwygEditorElement extends StencilComponents.CwcWysiwygEditor, HTMLStencilElement {}
+
+  var HTMLCwcWysiwygEditorElement: {
+    prototype: HTMLCwcWysiwygEditorElement;
+    new (): HTMLCwcWysiwygEditorElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-wysiwyg-editor': HTMLCwcWysiwygEditorElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-wysiwyg-editor': HTMLCwcWysiwygEditorElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-wysiwyg-editor': JSXElements.CwcWysiwygEditorAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcWysiwygEditorAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface FclImage {
       'brokenUrl': any;
       'height': any;
@@ -2654,6 +2687,39 @@ declare global {
   }
   namespace JSXElements {
     export interface VideoPlayerPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface WysiwygEditorPage {
+
+    }
+  }
+
+  interface HTMLWysiwygEditorPageElement extends StencilComponents.WysiwygEditorPage, HTMLStencilElement {}
+
+  var HTMLWysiwygEditorPageElement: {
+    prototype: HTMLWysiwygEditorPageElement;
+    new (): HTMLWysiwygEditorPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'wysiwyg-editor-page': HTMLWysiwygEditorPageElement;
+  }
+  interface ElementTagNameMap {
+    'wysiwyg-editor-page': HTMLWysiwygEditorPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'wysiwyg-editor-page': JSXElements.WysiwygEditorPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface WysiwygEditorPageAttributes extends HTMLAttributes {
 
     }
   }
