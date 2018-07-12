@@ -1,6 +1,7 @@
 import {Component, Element, HostElement, Prop, State, Method} from '@stencil/core';
-import Popper, {Placement}from 'popper.js';
+import Popper , {Placement}from 'popper.js';
 
+declare var self;
 @Component({
     tag: 'cwc-popper',
     styleUrl: 'cwc-popper.scss'
@@ -18,11 +19,14 @@ export class CwcPopper {
     @Prop() placement: Placement = 'bottom';
     @Prop() trigger: string = 'click';
     @Prop() arrow: boolean = false;
+    @Prop() isToggleBtn: boolean = false;
+    @Prop() autoClose: boolean = false;
     @Prop() closeable: boolean = true;
 
     @State() popper: Popper;
 
     componentDidLoad() {
+        self = this;
         if (this.refid) {
             this.btn = document.getElementById(this.refid);
         } else {
@@ -57,14 +61,21 @@ export class CwcPopper {
         if (this.refid) {
             const popperDropdown = document.querySelector("cwc-popper");
             const trigger = this.trigger === 'hover' ? 'mouseover' : this.trigger;
-            this.btn.addEventListener(trigger, () => this.open());
-            popperDropdown.addEventListener(trigger, () => this.open());
+            if (this.isToggleBtn) {
+                this.btn.addEventListener(trigger, () => this.toggle());
+            } else {
+                this.btn.addEventListener(trigger, () => this.open());
+            }
+            if (!this.autoClose) {
+                popperDropdown.addEventListener(trigger, () => this.open());
+                popperDropdown.addEventListener("mouseup", (event) => {
+                    event.stopPropagation();
+                });
+            } else {
+                popperDropdown.addEventListener('click', () => this.close());
+            }
             this.close();
-
-            popperDropdown.addEventListener("mouseup", (event) => {
-                event.stopPropagation();
-            });
-            if (trigger !== "click") {
+            if (trigger !== "click" && trigger !== "keyup" && trigger !== "keydown" && !this.autoClose) {
 
                 popperDropdown.addEventListener("mouseenter", () => {
                     clearTimeout(this.timer);
@@ -81,7 +92,9 @@ export class CwcPopper {
                 });
             } else {
                 document.addEventListener("mouseup", (event) => {
-                    if (event.target !== this.btn) {
+                    if (this.autoClose) {
+                        this.close();
+                    } else if (event.target !== this.btn && event.target !== this.btn.children[0]) {
                         this.close();
                     }
                 });
@@ -102,10 +115,11 @@ export class CwcPopper {
     @Method()
     open() {
         this.openState = true;
+        self.openState = true;
         this.content.classList.add("show");
         this.content.classList.add("popper");
         this.content.classList.add(this.placement);
-        const self = this;
+
         this.popper = new Popper(this.btn, this.content, {
             placement: this.placement,
             modifiers: {
@@ -117,6 +131,7 @@ export class CwcPopper {
                 },
             },
             onCreate({instance}) {
+                self.openState = true;
                 if (!self.refid) {
                     document.onmousemove = ({pageX, pageY}) => {
                         self.mouse = {pageX, pageY};
