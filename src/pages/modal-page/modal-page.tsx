@@ -1,12 +1,10 @@
-import { Component, Listen, State } from '@stencil/core';
+import { Component, Listen } from '@stencil/core';
 
 @Component({
   tag: 'modal-page',
   styleUrls: ['./modal-page.scss']
 })
 export class ModalPage {
-  @State() modal: boolean = false;
-
   @Listen('onOpenModal')
   openModalHandler() {
     console.log('openModalHandler');
@@ -17,8 +15,9 @@ export class ModalPage {
     console.log('closeModalHandler');
   }
 
-  toggleModal = () => {
-    this.modal = !this.modal;
+  openModal = () => {
+    const modal: any = document.getElementById('example_modal');
+    modal.openModal();
   };
 
   render() {
@@ -28,7 +27,7 @@ export class ModalPage {
         <div class="jumbotron pt-3">
           <h4>Usage:</h4>
           <pre>
-            {`<scb-modal
+            {`<cwc-modal
   btntype="success"
   modalTitle="Info"
   centered={true}
@@ -46,7 +45,7 @@ export class ModalPage {
     name="Name"
     placeholder="Input your name"
   />
-</scb-modal>`}
+</cwc-modal>`}
           </pre>
 
           <h4 class="mb-4">Properties:</h4>
@@ -181,14 +180,10 @@ export class ModalPage {
                   <code>boolean</code>
                 </td>
                 <td>
-                  <code>undefined</code>
+                  <code>false</code>
                 </td>
                 <td>No</td>
-                <td>
-                  Shows the modal when initialized. Setting this value means
-                  that you control modal using this property. toggle function
-                  should be used together.
-                </td>
+                <td>Shows the modal when initialized.</td>
               </tr>
               <tr>
                 <td>
@@ -214,25 +209,10 @@ export class ModalPage {
                   <code>string</code>
                 </td>
                 <td>
-                  <code>'scb-modal'</code>
+                  <code>'cwc-modal'</code>
                 </td>
                 <td>No</td>
                 <td>Id for modal element</td>
-              </tr>
-              <tr>
-                <td>
-                  <code>toggle</code>
-                </td>
-                <td>
-                  <code>function</code>
-                </td>
-                <td />
-                <td>No</td>
-                <td>
-                  This function is used when you control modal using show
-                  property. This function is called when you click on close
-                  button or close icon when show property is used.
-                </td>
               </tr>
             </tbody>
           </table>
@@ -240,7 +220,7 @@ export class ModalPage {
           <h4>Functions: </h4>
           <p>
             You can get modal instance like following:<br />
-            <code>const modal = document.querySelector('scb-modal');</code>
+            <code>const modal = document.querySelector('cwc-modal');</code>
           </p>
           <table class="table">
             <thead>
@@ -276,74 +256,72 @@ export class ModalPage {
         <h3 class="mt-3">simplest case:</h3>
         <pre class="code">
           <code>
-            {`<scb-modal>
+            {`<cwc-modal>
   Put your modal contents here. You can put any content.
-</scb-modal>`}
+</cwc-modal>`}
           </code>
         </pre>
-        <scb-modal>
+        <cwc-modal>
           Put your modal contents here. You can put any content.
-        </scb-modal>
+        </cwc-modal>
 
         <h3 class="mt-3">Change Title and button color:</h3>
         <pre class="code">
           <code>
-            {`<scb-modal modalTitle="Custom" btntype="success">
+            {`<cwc-modal modalTitle="Custom" btntype="success">
   Put your modal contents here. You can put any content.
-</scb-modal>`}
+</cwc-modal>`}
           </code>
         </pre>
-        <scb-modal modalTitle="Custom" btntype="success">
+        <cwc-modal modalTitle="Custom" btntype="success">
           Put your modal contents here. You can put any content.
-        </scb-modal>
+        </cwc-modal>
 
         <h3 class="mt-3">No backdrop, No centered, No animation:</h3>
         <pre class="code">
           <code>
-            {`<scb-modal 
+            {`<cwc-modal 
     backdrop={false} 
     animation={false} 
     keyboard={false} 
   >
   Put your modal contents here. You can put any content.
-</scb-modal>`}
+</cwc-modal>`}
           </code>
         </pre>
-        <scb-modal
+        <cwc-modal
           backdrop={false}
           animation={false}
           keyboard={false}
           centered={false}
         >
           Put your modal contents here. You can put any content.
-        </scb-modal>
+        </cwc-modal>
 
-        <h3 class="mt-3">
-          Don't display button and control display using show property:
-        </h3>
+        <h3 class="mt-3">Don't display button:</h3>
         <pre class="code">
           <code>
-            {`<scb-modal
-    show={this.modal}
-    toggle={() => {this.modal = !this.modal}}
+            {`<cwc-modal
+    id="example_modal" 
+    showButton={false}
+    id="exampleModal"
   >
   Put your modal contents here. You can put any content.
-</scb-modal>
-<button class="btn btn-secondary mr-2" onClick={() => {this.modal = !this.modal}}>
+</cwc-modal>
+<button class="btn btn-secondary mr-2" onClick={() => {document.getElementById('example_modal').openModal()}}>
   Custom Button
 </button>
 `}
           </code>
         </pre>
-        <scb-modal
+        <cwc-modal
           id="example_modal"
           showButton={false}
-          show={this.modal}
-          toggle={this.toggleModal}
+          onClick={this.openModal}
         >
           Put your modal contents here. You can put any content.
-        </scb-modal>
-        <button class="btn btn-secondary mr-2" onClick={this.toggleModal}>
+        </cwc-modal>
+        <button class="btn btn-secondary mr-2" onClick={this.openModal}>
           Custom Button
         </button>
       </div>
