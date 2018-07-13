@@ -9,6 +9,7 @@ import {
   Watch
 } from '@stencil/core';
 
+const TRANSITION_TIME = 100;
 @Component({
   tag: 'cwc-modal'
 })
@@ -27,10 +28,11 @@ export class CwcModal {
   @Prop() backdrop: any = true;
   @Prop() keyboard: boolean = true;
   @Prop() modalfocus: boolean = true;
-  @Prop() show: boolean = false;
+  @Prop() show: boolean = undefined;
 
   @Prop() showButton: boolean = true;
-  @Prop() customId: string = 'cwc-modal';
+  @Prop() customId: string = 'scb-modal';
+  @Prop() toggle: () => any = null;
 
   @Event() onOpenModal: EventEmitter;
   @Event() onCloseModal: EventEmitter;
@@ -53,7 +55,13 @@ export class CwcModal {
   @Watch('show')
   watchHandler(newValue: boolean, oldValue: boolean) {
     if (newValue !== oldValue) {
-      this.modalShown = newValue;
+      if (newValue) {
+        setTimeout(() => {
+          this.openModal();
+        }, 10); // wait until rerendered
+      } else {
+        this.closeModal();
+      }
     }
   }
 
@@ -89,7 +97,7 @@ export class CwcModal {
     this._removeKeyListener();
     setTimeout(() => {
       this.modalElem.style.display = 'none';
-    }, this.animation ? 100 : 0);
+    }, this.animation ? TRANSITION_TIME : 0);
   }
 
   @Method()
@@ -146,11 +154,13 @@ export class CwcModal {
   };
 
   openModalHandler = () => {
-    this.openModal();
+    if (this.show === undefined) this.openModal();
+    else if (this.toggle) this.toggle();
   };
 
   closeModalHandler = () => {
-    this.closeModal();
+    if (this.show === undefined) this.closeModal();
+    else if (this.toggle) this.toggle();
   };
 
   render() {

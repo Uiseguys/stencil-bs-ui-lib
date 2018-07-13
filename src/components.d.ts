@@ -589,6 +589,7 @@ declare global {
       'show': boolean;
       'showButton': boolean;
       'size': string;
+      'toggle': () => any;
     }
   }
 
@@ -624,6 +625,7 @@ declare global {
       'show'?: boolean;
       'showButton'?: boolean;
       'size'?: string;
+      'toggle'?: () => any;
     }
   }
 }
