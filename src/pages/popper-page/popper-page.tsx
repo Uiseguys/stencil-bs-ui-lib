@@ -3,7 +3,7 @@ import { Component } from '@stencil/core';
 @Component({
     tag: 'popper-page',
 })
-export class TolltipPage {
+export class PopperPage {
     render() {
         return (
             <div class="container pt-4" >

@@ -4,7 +4,7 @@ import { Component, Listen, State } from '@stencil/core';
     tag: 'typeahead-page',
     styleUrl: 'typeahead-page.scss'
 })
-export class StencilComponent {
+export class TypeaheadPage {
 
     complex = [
         {

@@ -6,15 +6,15 @@ import 'bootstrap.native/dist/bootstrap-native-v4';
     tag: 'cwc-dropdown',
     styleUrl: 'cwc-dropdown.scss'
 })
-export class StencilComponent {
+export class DropdownComponent {
     btn: Element;
     id: string = 'cwc_' + Math.floor(Math.random() * 90000) + 10000;
     content: Element;
     buttons: NodeList;
     openState: boolean = false;
-    
+
     @Element() el: HostElement;
-    
+
     @Event() change: EventEmitter;
 
     componentDidLoad() {
