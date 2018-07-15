@@ -11,11 +11,11 @@ export class CwcInfiniteListWatcher {
 
     @Prop() listSelector: string = '';
     @Prop() lastItemSelector: string = '.list-item-last'
-    @Prop() containerSelector: string = '';
 
     @Prop() bindToList: boolean = false;
-    @Prop() bottomOffset?: number = 100;
+    @Prop() bottomOffset?: number = 50;
     @Prop() debounce: number = 300;
+    
     @State() listElement: HTMLElement;
 
     debounceStatus: boolean = false
@@ -33,15 +33,23 @@ export class CwcInfiniteListWatcher {
             this.startDebounce()
 
             this.onBottomReach.emit(this.listElement.id && this.listElement.id)
+        } else {
+            console.log('debounce is enabled');
+            
         }
     }
 
     startDebounce(): void {
         this.debounceStatus = true;
 
-        setTimeout(() =>
+        setTimeout(() => {
+
+            // Triggers additional check if list was scrolled down during debounce
             this.debounceStatus = false
-            , this.debounce)
+            this.bindToList ? 
+                this.listScrollHandler() : 
+                this.windowScrollHandler()
+        }, this.debounce)
     }
 
     componentDidLoad() {
@@ -49,9 +57,9 @@ export class CwcInfiniteListWatcher {
 
         if (this.listElement) {
             
-                    this.bindToList ?
-                        this.listElement.addEventListener('scroll', this.listScrollHandler.bind(this))
-                        : document.addEventListener('scroll', this.windowScrollHandler.bind(this))
+            this.bindToList ?
+                this.listElement.addEventListener('scroll', this.listScrollHandler.bind(this))
+                : document.addEventListener('scroll', this.windowScrollHandler.bind(this))
         } else {
             console.error(`List watcher component can't bind to given selector ${this.listSelector}.`)
         }        

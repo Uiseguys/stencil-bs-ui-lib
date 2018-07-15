@@ -16,11 +16,6 @@ export class DndPage {
   @State() framework: Framework = Framework.stencil;
   @State() dataModel: string = undefined
 
-  // @Listen("dnddragend")
-  // customEventHandler(event) {
-  //   console.log("Received the custom event: ", event);
-  // }
-
   @Listen('dndmodelupdate') 
     dndModelUpdateHandler(event: CustomEvent) {
       console.log('got model change: ', event.detail)

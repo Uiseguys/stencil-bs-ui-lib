@@ -26,12 +26,11 @@ declare global {
 }
 
 import '@stencil/router';
-import '@stencil/state-tunnel';
 
 import {
   BootstrapThemeColor,
   IBreadcrumbItem,
-} from './common';
+} from './common/index';
 import {
   DurationInputArg2,
 } from 'moment';
@@ -327,7 +326,6 @@ declare global {
     interface CwcInfiniteListWatcher {
       'bindToList': boolean;
       'bottomOffset': number;
-      'containerSelector': string;
       'debounce': number;
       'lastItemSelector': string;
       'listSelector': string;
@@ -356,7 +354,6 @@ declare global {
     export interface CwcInfiniteListWatcherAttributes extends HTMLAttributes {
       'bindToList'?: boolean;
       'bottomOffset'?: number;
-      'containerSelector'?: string;
       'debounce'?: number;
       'lastItemSelector'?: string;
       'listSelector'?: string;
@@ -460,7 +457,8 @@ declare global {
       'addClassOdd': string;
       'interpolationRegex': any;
       'itemAs': string;
-      'items': object[];
+      'items': any[];
+      'listId': string;
       'wrapperClass': string;
     }
   }
@@ -491,7 +489,8 @@ declare global {
       'addClassOdd'?: string;
       'interpolationRegex'?: any;
       'itemAs'?: string;
-      'items'?: object[];
+      'items'?: any[];
+      'listId'?: string;
       'wrapperClass'?: string;
     }
   }

@@ -10,8 +10,9 @@ import templateSettings from 'lodash/templateSettings';
 export class CwcList {
 
 
-    @Prop() items: object[] = [];
+    @Prop() items: any[] = [];
     @Prop() itemAs: string = 'item';
+    @Prop() listId: string = '';
     @Prop() addClass?: string = '';
     @Prop() addClassFirst?: string = '';
     @Prop() addClassLast?: string = '';
@@ -109,7 +110,7 @@ export class CwcList {
 
         return (
 
-            <div id={this.el.id} class={"item-list-wrapper " + this.wrapperClass}
+            <div id={this.listId} class={"item-list-wrapper " + this.wrapperClass}
                 innerHTML={str}>
             </div>
         );

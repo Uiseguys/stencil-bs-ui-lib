@@ -34,7 +34,7 @@ export class ListPage {
                     <h1 id="infinite-list-component" class="mb-2">List component</h1>
                     <h2 id="api-and-usage-">Overview</h2>
 
-                    <p>This component renders list of given <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot">slot</a> template.<br/>
+                    <p>This component renders list of given child elements according to provided data model.<br/>
                     Template interpolation is performed with double square brackets and equals sign <code>`[[= ]]`</code> like in <a href="https://angular.io">Angular</a> or <a href="https://github.com/janl/mustache.js">Mustache</a> templates.</p>
                     <h3 id="props">Props</h3>
                     <table>
@@ -62,28 +62,6 @@ export class ListPage {
                                 <td><code>&#39;item&#39;</code></td>
                                 <td>Value associated with current value in template.</td>
                             </tr>
-
-                            {/* <tr>
-                                <td><code>bindToList</code></td>
-                                <td><code>boolean</code></td>
-                                <td>no</td>
-                                <td><code>false</code></td>
-                                <td>Value which sets if component renders in fixed height wrapper or with infinite height.</td>
-                            </tr> */}
-                            {/* <tr>
-                                <td><code>debounce</code></td>
-                                <td><code>number</code></td>
-                                <td>no</td>
-                                <td><code>300</code></td>
-                                <td>Debounce time between fired <code>&#39;onBottomReach&#39;</code> event</td>
-                            </tr> */}
-                            {/* <tr>
-                                <td><code>bottomOffset</code></td>
-                                <td><code>number</code></td>
-                                <td>no</td>
-                                <td><code>false</code></td>
-                                <td>Offset in <code>px</code> from bottom of last list element.</td>
-                            </tr> */}
                             <tr>
                                 <td><code>addClass</code></td>
                                 <td><code>string</code></td>
@@ -143,11 +121,9 @@ export class ListPage {
                     <span>&lt;cwc-list</span><br/>
                         <span class="ml-2">items=<span class="text-danger">&#123;<span class="text-alert">this.pizzas</span>&#125;</span>&gt;</span><br/>
                         <span class="ml-4 pl-2"> 
-                            &lt;slot&gt; <br/>
                             <span class="ml-4 pl-4">
                                 &lt;div class="alert alert-primary" role="alert" title=[[=pizza.name]]&gt;<span class="text-success">[[=item.name]]</span> pizza is cooked!&lt;/div&gt;<br/>
                             </span>
-                            <span class="ml-4 pl-2">&lt;/slot&gt;</span>
                         </span><br/>
                     &lt;/cwc-list&gt; 
                     </p>
@@ -173,11 +149,9 @@ export class ListPage {
                         <span class="ml-2">wrapperClass=<span class="text-info">"border-left border-dark"</span></span><br/>
                         <span class="ml-2">itemAs=<span class="text-info">"pizza"</span>&gt;</span><br/>
                         <span class="ml-4 pl-2"> 
-                            &lt;slot&gt; <br/>
                             <span class="ml-4 pl-4">
                                 &lt;div class="alert alert-primary" role="alert" title=[[=pizza.name]]&gt;<span class="text-success">[[=pizza.name]]</span> pizza is cooked!&lt;/div&gt;<br/>
                             </span>
-                            <span class="ml-4 pl-2">&lt;/slot&gt;</span>
                         </span><br/>
                     &lt;/cwc-list&gt; 
                     </p>
