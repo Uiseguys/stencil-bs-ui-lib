@@ -7,178 +7,178 @@ import 'bootstrap.native/dist/bootstrap-native-v4';
   styleUrl: 'stencil-bs-demo-page.scss'
 })
 export class StencilBsDemoPage {
-    @Prop() root = '/';
-    components = [
-        {
-            componentName: 'navbar-page',
-            url: '/navbar',
-            title: 'Navbar Component',
-            isHiden: true
-        },
-        {
-            componentName: 'dnd-page',
-            url: '/dnd',
-            title: 'DragAndDrop Component'
-        },
-        {
-            componentName: 'resolution-info-page',
-            url: '/resolution-info',
-            title: 'Resolution Info Component'
-        },
-        {
-            componentName: 'moment-page',
-            url: '/moment',
-            title: 'Moment Component'
-        },
-        {
-            url: '/collapse',
-            title: 'Collapse Component',
-            componentName: 'collapse-page',
-            isHiden: true
-        },
-        {
-            url: '/tooltip',
-            title: 'Tooltip Component',
-            componentName: 'tooltip-page',
-            isHiden: true
-        },
-        {
-            url: '/video',
-            title: 'Video Component',
-            componentName: 'video-player-page'
-        },
-        {
-            url: '/alert',
-            title: 'Alert Component',
-            componentName: 'alerts-page',
-        },
-        {
-            url: '/badge',
-            title: 'Badge Component',
-            componentName: 'badge-page'
-        },
-        {
-            url: '/breadcrumb',
-            title: 'Breadcrumb Component',
-            componentName: 'breadcrumb-page',
-            isHiden: true
-        },
-        {
-            url: '/dropdown',
-            title: 'Dropdown Component',
-            componentName: 'dropdown-page'
-        },
-        {
-            url: '/fclImage',
-            title: 'Fcl Image Component',
-            componentName: 'fcl-image-page'
-        },
-        {
-            url: '/form',
-            title: 'Form Component',
-            componentName: 'form-page',
-            isHiden: true
-        },
-        {
-            url: '/list',
-            title: 'List Component',
-            componentName: 'list-page'
-        },
-        {
-            url: '/multiselect',
-            title: 'Multiselect Component',
-            componentName: 'multiselect-page'
-        },
-        {
-            url: '/autocomplete-select',
-            title: 'AutocompleteSelect Component',
-            componentName: 'autocomplete-select-page'
-        },
-        {
-            url: '/modal',
-            title: 'Modal Component',
-            componentName: 'modal-page'
-        },
-        {
-                url: '/tabs',
-            title: 'Tabs Component',
-            componentName: 'tabs-page',
-            isHiden: true
-        },
-        {
-            url: '/tag',
-            title: 'Tag Component',
-            componentName: 'tag-page'
-        },
-        {
-            url: '/markdown',
-            title: 'Markdown Component',
-            componentName: 'markdown-page'
-        },
-        {
-            url: '/progressbar',
-            title: 'Progress bar Component',
-            componentName: 'progress-bar-page'
-        },
-        {
-            url: '/typeahead',
-            title: 'Typeahead Component',
-            componentName: 'typeahead-page'
-        },
-        {
-            url: '/schedule',
-            title: 'Schedule Component',
-            componentName: 'schedule-page',
-            isHiden: true
-        },
-        {
-            url: '/slider',
-            title: 'Slider Component',
-            componentName: 'mwc-slider-page',
-            isHiden: true
-        },
-        {
-            url: '/avatar',
-            title: 'Avatar Component',
-            componentName: 'avatar-page'
-        },
-        {
-            url: '/sticky',
-            title: 'Sticky Component',
-            componentName: 'sticky-page',
-            isHiden: true
-        },
-        {
-            url: '/datepicker',
-            title: 'Datepicker Component',
-            componentName: 'datepicker-page'
-        },
-        {
-            url: '/inlineedit',
-            title: 'Inlineedit Component',
-            componentName: 'inlineedit-page'
-        },
-        {
-            url: '/inlineedit-textarea',
-            title: 'Inlineedit Textarea Component',
-            componentName: 'inlineedit-textarea-page'
-        },
-        {
-            url: '/fileinput',
-            title: 'Fileinput Component',
-            componentName: 'file-input-page'
-        }  ,
-        {
-            url: '/popper',
-            title: 'Popper Component',
-            componentName: 'popper-page'
-        },
-        {
-          url: '/wysiwyg-editor',
-          title: 'Wysiwyg Editor Component',
-          componentName: 'wysiwyg-editor-page'
-        }
-    ];
+  @Prop() root = '/';
+  components = [
+    {
+      componentName: 'navbar-page',
+      url: '/navbar',
+      title: 'Navbar Component',
+      isHiden: true
+    },
+    {
+      componentName: 'dnd-page',
+      url: '/dnd',
+      title: 'DragAndDrop Component'
+    },
+    {
+      componentName: 'resolution-info-page',
+      url: '/resolution-info',
+      title: 'Resolution Info Component'
+    },
+    {
+      componentName: 'moment-page',
+      url: '/moment',
+      title: 'Moment Component'
+    },
+    {
+      url: '/collapse',
+      title: 'Collapse Component',
+      componentName: 'collapse-page',
+      isHiden: true
+    },
+    {
+      url: '/tooltip',
+      title: 'Tooltip Component',
+      componentName: 'tooltip-page',
+      isHiden: true
+    },
+    {
+      url: '/video',
+      title: 'Video Component',
+      componentName: 'video-player-page'
+    },
+    {
+      url: '/alert',
+      title: 'Alert Component',
+      componentName: 'alerts-page'
+    },
+    {
+      url: '/badge',
+      title: 'Badge Component',
+      componentName: 'badge-page'
+    },
+    {
+      url: '/breadcrumb',
+      title: 'Breadcrumb Component',
+      componentName: 'breadcrumb-page',
+      isHiden: true
+    },
+    {
+      url: '/dropdown',
+      title: 'Dropdown Component',
+      componentName: 'dropdown-page'
+    },
+    {
+      url: '/fclImage',
+      title: 'Fcl Image Component',
+      componentName: 'fcl-image-page'
+    },
+    {
+      url: '/form',
+      title: 'Form Component',
+      componentName: 'form-page',
+      isHiden: true
+    },
+    {
+      url: '/list',
+      title: 'List Component',
+      componentName: 'list-page'
+    },
+    {
+      url: '/multiselect',
+      title: 'Multiselect Component',
+      componentName: 'multiselect-page'
+    },
+    {
+      url: '/autocomplete-select',
+      title: 'AutocompleteSelect Component',
+      componentName: 'autocomplete-select-page'
+    },
+    {
+      url: '/modal',
+      title: 'Modal Component',
+      componentName: 'modal-page'
+    },
+    {
+      url: '/tabs',
+      title: 'Tabs Component',
+      componentName: 'tabs-page',
+      isHiden: true
+    },
+    {
+      url: '/tag',
+      title: 'Tag Component',
+      componentName: 'tag-page'
+    },
+    {
+      url: '/markdown',
+      title: 'Markdown Component',
+      componentName: 'markdown-page'
+    },
+    {
+      url: '/progressbar',
+      title: 'Progress bar Component',
+      componentName: 'progress-bar-page'
+    },
+    {
+      url: '/typeahead',
+      title: 'Typeahead Component',
+      componentName: 'typeahead-page'
+    },
+    {
+      url: '/schedule',
+      title: 'Schedule Component',
+      componentName: 'schedule-page',
+      isHiden: true
+    },
+    {
+      url: '/slider',
+      title: 'Slider Component',
+      componentName: 'mwc-slider-page',
+      isHiden: true
+    },
+    {
+      url: '/avatar',
+      title: 'Avatar Component',
+      componentName: 'avatar-page'
+    },
+    {
+      url: '/sticky',
+      title: 'Sticky Component',
+      componentName: 'sticky-page',
+      isHiden: true
+    },
+    {
+      url: '/datepicker',
+      title: 'Datepicker Component',
+      componentName: 'datepicker-page'
+    },
+    {
+      url: '/inlineedit',
+      title: 'Inlineedit Component',
+      componentName: 'inlineedit-page'
+    },
+    {
+      url: '/inlineedit-textarea',
+      title: 'Inlineedit Textarea Component',
+      componentName: 'inlineedit-textarea-page'
+    },
+    {
+      url: '/fileinput',
+      title: 'Fileinput Component',
+      componentName: 'file-input-page'
+    },
+    {
+      url: '/popper',
+      title: 'Popper Component',
+      componentName: 'popper-page'
+    },
+    {
+      url: '/wysiwyg-editor',
+      title: 'Wysiwyg Editor Component',
+      componentName: 'wysiwyg-editor-page'
+    }
+  ];
 
   render() {
     return [

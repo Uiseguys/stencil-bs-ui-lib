@@ -26,7 +26,6 @@ declare global {
 }
 
 import '@stencil/router';
-import '@stencil/state-tunnel';
 
 import {
   BootstrapThemeColor,
@@ -1061,7 +1060,28 @@ declare global {
 
   namespace StencilComponents {
     interface CwcWysiwygEditor {
-
+      'autoDownloadFontAwesome': boolean;
+      'autofocus': boolean;
+      'blockStyles': object;
+      'forceSync': boolean;
+      'getRef': () => any;
+      'hideIcons': Array<any>;
+      'indentWithTabs': boolean;
+      'insertTexts': object;
+      'lineWrapping': boolean;
+      'parsingConfig': object;
+      'placeholder': string;
+      'previewRender': (string?) => string;
+      'promptURLs': boolean;
+      'renderingConfig': object;
+      'shortcuts': object;
+      'showIcons': Array<string>;
+      'spellChecker': boolean;
+      'status': any;
+      'styleSelectedText': boolean;
+      'tabSize': number;
+      'toolbar': any;
+      'toolbarTips': boolean;
     }
   }
 
@@ -1084,7 +1104,28 @@ declare global {
   }
   namespace JSXElements {
     export interface CwcWysiwygEditorAttributes extends HTMLAttributes {
-
+      'autoDownloadFontAwesome'?: boolean;
+      'autofocus'?: boolean;
+      'blockStyles'?: object;
+      'forceSync'?: boolean;
+      'hideIcons'?: Array<any>;
+      'indentWithTabs'?: boolean;
+      'insertTexts'?: object;
+      'lineWrapping'?: boolean;
+      'onOnchange'?: (event: CustomEvent) => void;
+      'parsingConfig'?: object;
+      'placeholder'?: string;
+      'previewRender'?: (string?) => string;
+      'promptURLs'?: boolean;
+      'renderingConfig'?: object;
+      'shortcuts'?: object;
+      'showIcons'?: Array<string>;
+      'spellChecker'?: boolean;
+      'status'?: any;
+      'styleSelectedText'?: boolean;
+      'tabSize'?: number;
+      'toolbar'?: any;
+      'toolbarTips'?: boolean;
     }
   }
 }
