@@ -1068,28 +1068,13 @@ declare global {
 
   namespace StencilComponents {
     interface CwcWysiwygEditor {
-      'autoDownloadFontAwesome': boolean;
-      'autofocus': boolean;
-      'blockStyles': object;
-      'forceSync': boolean;
+      'defaultMode': string;
+      'fencing': boolean;
       'getRef': () => any;
-      'hideIcons': Array<any>;
-      'indentWithTabs': boolean;
-      'insertTexts': object;
-      'lineWrapping': boolean;
-      'parsingConfig': object;
-      'placeholder': string;
-      'previewRender': (string?) => string;
-      'promptURLs': boolean;
-      'renderingConfig': object;
-      'shortcuts': object;
-      'showIcons': Array<string>;
-      'spellChecker': boolean;
-      'status': any;
-      'styleSelectedText': boolean;
-      'tabSize': number;
-      'toolbar': any;
-      'toolbarTips': boolean;
+      'html': boolean;
+      'images': object;
+      'markdown': boolean;
+      'wysiwyg': boolean;
     }
   }
 
@@ -1112,28 +1097,12 @@ declare global {
   }
   namespace JSXElements {
     export interface CwcWysiwygEditorAttributes extends HTMLAttributes {
-      'autoDownloadFontAwesome'?: boolean;
-      'autofocus'?: boolean;
-      'blockStyles'?: object;
-      'forceSync'?: boolean;
-      'hideIcons'?: Array<any>;
-      'indentWithTabs'?: boolean;
-      'insertTexts'?: object;
-      'lineWrapping'?: boolean;
-      'onOnchange'?: (event: CustomEvent) => void;
-      'parsingConfig'?: object;
-      'placeholder'?: string;
-      'previewRender'?: (string?) => string;
-      'promptURLs'?: boolean;
-      'renderingConfig'?: object;
-      'shortcuts'?: object;
-      'showIcons'?: Array<string>;
-      'spellChecker'?: boolean;
-      'status'?: any;
-      'styleSelectedText'?: boolean;
-      'tabSize'?: number;
-      'toolbar'?: any;
-      'toolbarTips'?: boolean;
+      'defaultMode'?: string;
+      'fencing'?: boolean;
+      'html'?: boolean;
+      'images'?: object;
+      'markdown'?: boolean;
+      'wysiwyg'?: boolean;
     }
   }
 }

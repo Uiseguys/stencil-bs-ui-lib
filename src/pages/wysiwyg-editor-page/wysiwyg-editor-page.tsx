@@ -14,8 +14,8 @@ export class WysiwygEditorPage {
           {`# This one autosaves!
 By default, it saves every 10 seconds, but this can be changed. When this textarea is included in a form, it will automatically forget the saved value when the form is submitted.`}
         </cwc-wysiwyg-editor>
-        <h3 class="mt-2">Hidden toolbar and status bar:</h3>
-        <cwc-wysiwyg-editor status={false} toolbar={false}>
+        <h3 class="mt-2">disable html and markdown:</h3>
+        <cwc-wysiwyg-editor markdown={false} html={false}>
           {`# This one is bare
 You can also choose to hide the statusbar and/or toolbar for a simple and clean appearance. This one also checks for misspelled words as you type!`}
         </cwc-wysiwyg-editor>
@@ -39,102 +39,7 @@ You can also choose to hide the statusbar and/or toolbar for a simple and clean 
             <tbody>
               <tr>
                 <td>
-                  <code>autoDownloadFontAwesome</code>
-                </td>
-                <td>
-                  <code>boolean</code>
-                </td>
-                <td>
-                  <code>undefined</code>
-                </td>
-                <td>No</td>
-                <td>
-                  If set to <code>true</code>, force downloads Font Awesome
-                  (used for icons). If set to <code>false</code>, prevents
-                  downloading. Defaults to undefined, which will intelligently
-                  check whether Font Awesome has already been included, then
-                  download accordingly.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <code>autofocus</code>
-                </td>
-                <td>
-                  <code>boolean</code>
-                </td>
-                <td>
-                  <code>false</code>
-                </td>
-                <td>No</td>
-                <td>
-                  If set to <code>true</code>, autofocuses the editor.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <code>blockStyles</code>
-                </td>
-                <td>
-                  <code>object</code>
-                </td>
-                <td />
-                <td>No</td>
-                <td>
-                  Customize how certain buttons that style blocks of text
-                  behave.<br />
-                  <ul>
-                    <li>
-                      <strong>bold</strong> Can be set to <code>**</code> or{' '}
-                      <code>__</code>. Defaults to <code>**</code>.
-                    </li>
-                    <li>
-                      <strong>code</strong> Can be set to <code>```</code> or{' '}
-                      <code>~~~</code>. Defaults to <code>```</code>.
-                    </li>
-                    <li>
-                      <strong>italic</strong> Can be set to <code>*</code> or{' '}
-                      <code>_</code>. Defaults to <code>*</code>.
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <code>forceSync</code>
-                </td>
-                <td>
-                  <code>boolean</code>
-                </td>
-                <td>
-                  <code>false</code>
-                </td>
-                <td>No</td>
-                <td>
-                  If set to <code>true</code>, force text changes made in
-                  SimpleMDE to be immediately stored in original textarea.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <code>hideIcons</code>
-                </td>
-                <td>
-                  <code>array</code>
-                </td>
-                <td>
-                  <code />
-                </td>
-                <td>No</td>
-                <td>
-                  An array of icon names to hide. Can be used to hide specific
-                  icons shown by default without completely customizing the
-                  toolbar.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <code>indentWithTabs</code>
+                  <code>fencing</code>
                 </td>
                 <td>
                   <code>boolean</code>
@@ -144,36 +49,13 @@ You can also choose to hide the statusbar and/or toolbar for a simple and clean 
                 </td>
                 <td>No</td>
                 <td>
-                  If set to <code>false</code>, indent using spaces instead of
-                  tabs.
+                  Prefers to wrap code blocks in "fences" (GitHub style) instead
+                  of indenting code blocks using four spaces.
                 </td>
               </tr>
               <tr>
                 <td>
-                  <code>insertTexts</code>
-                </td>
-                <td>
-                  <code>object</code>
-                </td>
-                <td />
-                <td>No</td>
-                <td>
-                  Customize how certain buttons that insert text behave. Takes
-                  an array with two elements. The first element will be the text
-                  inserted before the cursor or highlight, and the second
-                  element will be inserted after. For example, this is the
-                  default link value: <code>["[", "](http://)"]</code>.
-                  <ul>
-                    <li>horizontalRule</li>
-                    <li>image</li>
-                    <li>link</li>
-                    <li>table</li>
-                  </ul>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <code>lineWrapping</code>
+                  <code>markdown</code>
                 </td>
                 <td>
                   <code>boolean</code>
@@ -182,234 +64,207 @@ You can also choose to hide the statusbar and/or toolbar for a simple and clean 
                   <code>true</code>
                 </td>
                 <td>No</td>
-                <td>
-                  If set to <code>false</code>, disable line wrapping.
-                </td>
+                <td>Enables Markdown user input mode.</td>
               </tr>
               <tr>
                 <td>
-                  <code>parsingConfig</code>
+                  <code>html</code>
                 </td>
                 <td>
-                  <code>object</code>
+                  <code>boolean</code>
                 </td>
-                <td />
+                <td>
+                  <code>true</code>
+                </td>
                 <td>No</td>
-                <td>
-                  Adjust settings for parsing the Markdown during editing (not
-                  previewing).<br />
-                  <ul>
-                    <li>
-                      <strong>allowAtxHeaderWithoutSpace</strong>: If set to{' '}
-                      <code>true</code>, will render headers without a space
-                      after the #. Defaults to
-                      <code>false</code>.
-                    </li>
-                    <li>
-                      <strong>strikethrough</strong>: If set to{' '}
-                      <code>false</code>, will not process GFM strikethrough
-                      syntax. Defaults to <code>true</code>.
-                    </li>
-                    <li>
-                      <strong>underscoresBreakWords</strong>: If set to{' '}
-                      <code>true</code>, let underscores be a delimiter for
-                      separating words. Defaults to
-                      <code>false</code>.
-                    </li>
-                  </ul>
-                </td>
+                <td>Enables HTML user input mode.</td>
               </tr>
               <tr>
                 <td>
-                  <code>placeholder</code>
+                  <code>wysiwyg</code>
+                </td>
+                <td>
+                  <code>boolean</code>
+                </td>
+                <td>
+                  <code>true</code>
+                </td>
+                <td>No</td>
+                <td>Enables WYSIWYG user input mode.</td>
+              </tr>
+              <tr>
+                <td>
+                  <code>defaultMode</code>
                 </td>
                 <td>
                   <code>string</code>
                 </td>
-                <td>
-                  <code />
-                </td>
-                <td>No</td>
-                <td>Custom placeholder that should be displayed</td>
-              </tr>
-              <tr>
-                <td>
-                  <code>previewRender</code>
-                </td>
-                <td>
-                  <code>function</code>
-                </td>
                 <td />
                 <td>No</td>
-                <td>
-                  Custom function for parsing the plaintext Markdown and
-                  returning HTML. Used when user previews.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <code>promptURLs</code>
-                </td>
-                <td>
-                  <code>boolean</code>
-                </td>
-                <td>
-                  <code>false</code>
-                </td>
-                <td>No</td>
-                <td>
-                  If set to <code>true</code>, a JS alert window appears asking
-                  for the link or image URL.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <code>renderingConfig</code>
-                </td>
-                <td>
-                  <code>object</code>
-                </td>
-                <td />
-                <td>No</td>
-                <td>
-                  If set to <code>true</code>, a JS alert window appears asking
-                  for the link or image URL.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <code>shortcuts</code>
-                </td>
-                <td>
-                  <code>array</code>
-                </td>
-                <td />
-                <td>No</td>
-                <td>
-                  Keyboard shortcuts associated with this instance. Defaults to
-                  the array of shortcuts.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <code>showIcons</code>
-                </td>
-                <td>
-                  <code>array</code>
-                </td>
-                <td />
-                <td>No</td>
-                <td>
-                  An array of icon names to show. Can be used to show specific
-                  icons hidden by default without completely customizing the
-                  toolbar.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <code>spellChecker</code>
-                </td>
-                <td>
-                  <code>boolean</code>
-                </td>
-                <td>
-                  <code>true</code>
-                </td>
-                <td>No</td>
-                <td>
-                  If set to <code>false</code>, disable the spell checker.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <code>status</code>
-                </td>
-                <td />
-                <td />
-                <td>No</td>
-                <td>
-                  If set to <code>false</code>, hide the status bar. Defaults to
-                  the array of built-in status bar items.
-                  <ul>
-                    <li>
-                      Optionally, you can set an array of status bar items to
-                      include, and in what order. You can even define your own
-                      custom status bar items.
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <code>styleSelectedText</code>
-                </td>
-                <td>
-                  <code>boolean</code>
-                </td>
-                <td>
-                  <code>true</code>
-                </td>
-                <td>No</td>
-                <td>
-                  If set to <code>false</code>, remove the
-                  CodeMirror-selectedtext class from selected lines.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <code>tabSize</code>
-                </td>
-                <td>
-                  <code>number</code>
-                </td>
-                <td>
-                  <code>2</code>
-                </td>
-                <td>No</td>
-                <td>If set, customize the tab size.</td>
-              </tr>
-              <tr>
-                <td>
-                  <code>toolbar</code>
-                </td>
-                <td />
-                <td />
-                <td>No</td>
-                <td>
-                  If set to <code>false</code>, hide the toolbar. Defaults to
-                  the array of icons.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <code>toolbarTips</code>
-                </td>
-                <td>
-                  <code>boolean</code>
-                </td>
-                <td>
-                  <code>false</code>
-                </td>
-                <td>No</td>
-                <td>
-                  If set to <code>false</code>, disable toolbar button tips.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <code>onchange</code>
-                </td>
-                <td>
-                  <code>function</code>
-                </td>
-                <td>
-                  <code />
-                </td>
-                <td>No</td>
-                <td>This function is called when content is changed.</td>
+                <td>Sets the default mode for the editor.</td>
               </tr>
             </tbody>
           </table>
+          <h4>Functions: </h4>
+          <p>
+            The editor API allows you to interact with woofmark editor
+            instances. This is what you get back from woofmark(textarea,
+            options) or woofmark.find(textarea).
+          </p>
+          <h4>
+            <code>editor.addCommand(combo, fn)</code>
+          </h4>
+          <div>
+            Binds a keyboard key combination such as cmd+shift+b to a method
+            using kanye. Please note that you should always use cmd rather than
+            ctrl. In non-OSX environments it'll be properly mapped to ctrl. When
+            the combo is entered, fn(e, mode, chunks) will be called.
+          </div>
+          <ul>
+            <li>
+              e is the original event object mode can be markdown, html, or
+            </li>
+            <li>
+              wysiwyg chunks is a chunks object, describing the current state of
+            </li>
+            <li>the editor</li>
+          </ul>
+          <p>
+            In addition, fn is given a this context similar to that of Grunt
+            tasks, where you can choose to do nothing and the command is assumed
+            to be synchronous, or you can call this.async() and get back a done
+            callback like in the example below.
+          </p>
+          <pre class="code">
+            {`editor.addCommand('cmd+j', function jump (e, mode, chunks) {
+  var done = this.async();
+  // TODO: async operation
+  done();
+});
+`}
+          </pre>
+
+          <h4>
+            <code>editor.addCommandButton(id, combo?, fn)</code>
+          </h4>
+          <p>
+            Adds a button to the editor using an id and an event handler. When
+            the button is pressed, fn(e, mode, chunks) will be called with the
+            same arguments as the ones passed if using editor.addCommand(combo,
+            fn).
+          </p>
+          <p>
+            You can optionally pass in a combo, in which case
+            editor.addCommand(combo, fn) will be called, in addition to creating
+            the command button.
+          </p>
+
+          <h4>
+            <code>editor.runCommand(fn)</code>
+          </h4>
+          <p>
+            If you just want to run a command without setting up a keyboard
+            shortcut or a button, you can use this method. Note that there won't
+            be any e event argument in this case, you'll only get chunks, mode
+            passed to fn. You can still run the command asynchronously using
+            this.async(). Note that the argument order chunks, mode is the
+            reverse of that passed to addCommand (mode, chunks).
+          </p>
+
+          <h4>
+            <code>editor.parseMarkdown()</code>
+          </h4>
+          <p>This is the same method passed as an option.</p>
+
+          <h4>
+            <code>editor.parseHTML()</code>
+          </h4>
+          <p>This is the same method passed as an option.</p>
+
+          <h4>
+            <code>editor.destroy()</code>
+          </h4>
+          <p
+          >{`Destroys the editor instance, removing all event handlers. The editor is reverted to markdown mode, and assigned the proper Markdown source code if needed. Then we go back to being a plain old and dull <textarea> element.`}</p>
+
+          <h4>
+            <code>editor.value(text)</code>
+          </h4>
+          <p>
+            If optional Markdown string text is provided, it is used to
+            overwrite the current editor content, parsing into HTML if
+            necessary. Regardless of whether text is provided, value() returns
+            the current Markdown value for the editor.
+          </p>
+
+          <h4>
+            <code>editor.editable</code>
+          </h4>
+          <p>
+            {`If options.wysiwyg then this will be the contentEditable <div>. Otherwise it'll be set to null.`}
+          </p>
+
+          <h4>
+            <code>editor.mode</code>
+          </h4>
+          <p>
+            {`The current mode for the editor. Can be markdown, html, or wysiwyg.`}
+          </p>
+
+          <h4>
+            <code>editor.setMode(mode)</code>
+          </h4>
+          <p>{`Sets the current mode of the editor.`}</p>
+
+          <h4>
+            <code>editor.showLinkDialog()</code>
+          </h4>
+          <p>
+            {`Shows the insert link dialog as if the button to insert a link had been clicked.`}
+          </p>
+
+          <h4>
+            <code>editor.showImageDialog()</code>
+          </h4>
+          <p>
+            {`Shows the insert image dialog as if the button to insert a image had been clicked.`}
+          </p>
+
+          <h4>
+            <code>editor.showAttachmentDialog()</code>
+          </h4>
+          <p>
+            {`Shows the insert attachment dialog as if the button to insert a attachment had been clicked.`}
+          </p>
+
+          <h4>
+            <code>editor.history</code>
+          </h4>
+          <p>
+            {`Exposes a few methods to gain insight into the operation history for the editor instance.`}
+          </p>
+
+          <h5>
+            <code>editor.history.undo()</code>
+          </h5>
+          <p>{`Undo the last operation.`}</p>
+
+          <h5>
+            <code>editor.history.redo()</code>
+          </h5>
+          <p>{`Re-applies the most recently undone operation.`}</p>
+
+          <h5>
+            <code>editor.history.canUndo()</code>
+          </h5>
+          <p
+          >{`Returns a boolean value indicating whether there are any operations left to undo.`}</p>
+
+          <h5>
+            <code>editor.history.canRedo()</code>
+          </h5>
+          <p
+          >{`Returns a boolean value indicating whether there are any operations left to redo.`}</p>
         </div>
       </div>
     );
