@@ -242,13 +242,13 @@ export class CwcAutocompleteSelect {
                             <div class="popper">
                                 <div class="dropdown-menu cwc-popper-autocomplete">
                                     {this.filtered.map((val, i) => (
-                                        <option class={'dropdown-item'.concat(this.focusIndex === i + 1 ? ' active' : '')}
+                                        <div class={'dropdown-item'.concat(this.focusIndex === i + 1 ? ' active' : '')}
                                                 onClick={(e: any) => this.handleSelect(e.target.value, i)}
                                                 onMouseEnter={() => this.handleHover(i + 1)}
                                                 data-value={typeof val === 'string' ? val : val.index}>
                                             {typeof val === 'string' ? val : val.index}
 
-                                        </option>
+                                        </div>
                                     ))}
                                 </div>
                             </div>
