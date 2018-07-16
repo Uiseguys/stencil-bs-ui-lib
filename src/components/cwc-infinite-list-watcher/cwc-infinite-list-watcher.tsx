@@ -33,10 +33,7 @@ export class CwcInfiniteListWatcher {
             this.startDebounce()
 
             this.onBottomReach.emit(this.listElement.id && this.listElement.id)
-        } else {
-            console.log('debounce is enabled');
-            
-        }
+        } 
     }
 
     startDebounce(): void {
