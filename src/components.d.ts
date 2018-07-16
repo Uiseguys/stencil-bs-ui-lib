@@ -26,6 +26,7 @@ declare global {
 }
 
 import '@stencil/router';
+import '@stencil/state-tunnel';
 
 import {
   BootstrapThemeColor,
@@ -36,7 +37,7 @@ import {
 } from 'moment';
 import {
   Placement,
-} from 'bootstrap';
+} from 'popper.js';
 import {
   BootstrapThemeColor as BootstrapThemeColor2,
 } from './common/bootstrap-theme-color.type';
@@ -44,6 +45,49 @@ import {
   IStcTabContentData,
   IStcTabHeaderData,
 } from './components/stc-tabs/interfaces';
+
+declare global {
+
+  namespace StencilComponents {
+    interface CwcAlert {
+      'animatable': boolean;
+      'dismiss': () => void;
+      'dismissible': boolean;
+      'onDismiss': (hostEl: HTMLElement) => void;
+      'show': boolean;
+      'type': string;
+    }
+  }
+
+  interface HTMLCwcAlertElement extends StencilComponents.CwcAlert, HTMLStencilElement {}
+
+  var HTMLCwcAlertElement: {
+    prototype: HTMLCwcAlertElement;
+    new (): HTMLCwcAlertElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-alert': HTMLCwcAlertElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-alert': HTMLCwcAlertElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-alert': JSXElements.CwcAlertAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcAlertAttributes extends HTMLAttributes {
+      'animatable'?: boolean;
+      'dismissible'?: boolean;
+      'onDismiss'?: (hostEl: HTMLElement) => void;
+      'onToggleVisibility'?: (event: CustomEvent) => void;
+      'show'?: boolean;
+      'type'?: string;
+    }
+  }
+}
+
 
 declare global {
 
@@ -143,7 +187,10 @@ declare global {
   namespace StencilComponents {
     interface CwcDatepicker {
       'endDate': string;
+      'for': string;
       'format': string;
+      'id': string;
+      'label': string;
       'lang': string;
       'startDate': string;
     }
@@ -169,8 +216,12 @@ declare global {
   namespace JSXElements {
     export interface CwcDatepickerAttributes extends HTMLAttributes {
       'endDate'?: string;
+      'for'?: string;
       'format'?: string;
+      'id'?: string;
+      'label'?: string;
       'lang'?: string;
+      'onPostValue'?: (event: CustomEvent) => void;
       'onStatechange'?: (event: CustomEvent) => void;
       'startDate'?: string;
     }
@@ -548,6 +599,7 @@ declare global {
       'show': boolean;
       'showButton': boolean;
       'size': string;
+      'toggle': () => any;
     }
   }
 
@@ -583,6 +635,7 @@ declare global {
       'show'?: boolean;
       'showButton'?: boolean;
       'size'?: string;
+      'toggle'?: () => any;
     }
   }
 }
@@ -678,8 +731,10 @@ declare global {
   namespace StencilComponents {
     interface CwcPopper {
       'arrow': boolean;
+      'autoClose': boolean;
       'close': () => void;
       'closeable': boolean;
+      'isToggleBtn': boolean;
       'open': () => void;
       'placement': Placement;
       'refid': string;
@@ -708,7 +763,9 @@ declare global {
   namespace JSXElements {
     export interface CwcPopperAttributes extends HTMLAttributes {
       'arrow'?: boolean;
+      'autoClose'?: boolean;
       'closeable'?: boolean;
+      'isToggleBtn'?: boolean;
       'placement'?: Placement;
       'refid'?: string;
       'trigger'?: string;
@@ -1010,6 +1067,81 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface CwcWysiwygEditor {
+      'autoDownloadFontAwesome': boolean;
+      'autofocus': boolean;
+      'blockStyles': object;
+      'forceSync': boolean;
+      'getRef': () => any;
+      'hideIcons': Array<any>;
+      'indentWithTabs': boolean;
+      'insertTexts': object;
+      'lineWrapping': boolean;
+      'parsingConfig': object;
+      'placeholder': string;
+      'previewRender': (string?) => string;
+      'promptURLs': boolean;
+      'renderingConfig': object;
+      'shortcuts': object;
+      'showIcons': Array<string>;
+      'spellChecker': boolean;
+      'status': any;
+      'styleSelectedText': boolean;
+      'tabSize': number;
+      'toolbar': any;
+      'toolbarTips': boolean;
+    }
+  }
+
+  interface HTMLCwcWysiwygEditorElement extends StencilComponents.CwcWysiwygEditor, HTMLStencilElement {}
+
+  var HTMLCwcWysiwygEditorElement: {
+    prototype: HTMLCwcWysiwygEditorElement;
+    new (): HTMLCwcWysiwygEditorElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-wysiwyg-editor': HTMLCwcWysiwygEditorElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-wysiwyg-editor': HTMLCwcWysiwygEditorElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-wysiwyg-editor': JSXElements.CwcWysiwygEditorAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcWysiwygEditorAttributes extends HTMLAttributes {
+      'autoDownloadFontAwesome'?: boolean;
+      'autofocus'?: boolean;
+      'blockStyles'?: object;
+      'forceSync'?: boolean;
+      'hideIcons'?: Array<any>;
+      'indentWithTabs'?: boolean;
+      'insertTexts'?: object;
+      'lineWrapping'?: boolean;
+      'onOnchange'?: (event: CustomEvent) => void;
+      'parsingConfig'?: object;
+      'placeholder'?: string;
+      'previewRender'?: (string?) => string;
+      'promptURLs'?: boolean;
+      'renderingConfig'?: object;
+      'shortcuts'?: object;
+      'showIcons'?: Array<string>;
+      'spellChecker'?: boolean;
+      'status'?: any;
+      'styleSelectedText'?: boolean;
+      'tabSize'?: number;
+      'toolbar'?: any;
+      'toolbarTips'?: boolean;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface FclImage {
       'brokenUrl': any;
       'height': any;
@@ -1289,49 +1421,6 @@ declare global {
       'inputTitle'?: string;
       'onPostValue'?: (event: CustomEvent) => void;
       'value'?: any;
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
-    interface ScbAlert {
-      'animatable': boolean;
-      'dismiss': () => void;
-      'dismissible': boolean;
-      'onDismiss': (hostEl: HTMLElement) => void;
-      'show': boolean;
-      'type': string;
-    }
-  }
-
-  interface HTMLScbAlertElement extends StencilComponents.ScbAlert, HTMLStencilElement {}
-
-  var HTMLScbAlertElement: {
-    prototype: HTMLScbAlertElement;
-    new (): HTMLScbAlertElement;
-  };
-  interface HTMLElementTagNameMap {
-    'scb-alert': HTMLScbAlertElement;
-  }
-  interface ElementTagNameMap {
-    'scb-alert': HTMLScbAlertElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'scb-alert': JSXElements.ScbAlertAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface ScbAlertAttributes extends HTMLAttributes {
-      'animatable'?: boolean;
-      'dismissible'?: boolean;
-      'onDismiss'?: (hostEl: HTMLElement) => void;
-      'onToggleVisibility'?: (event: CustomEvent) => void;
-      'show'?: boolean;
-      'type'?: string;
     }
   }
 }
@@ -2680,6 +2769,39 @@ declare global {
   }
   namespace JSXElements {
     export interface VideoPlayerPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface WysiwygEditorPage {
+
+    }
+  }
+
+  interface HTMLWysiwygEditorPageElement extends StencilComponents.WysiwygEditorPage, HTMLStencilElement {}
+
+  var HTMLWysiwygEditorPageElement: {
+    prototype: HTMLWysiwygEditorPageElement;
+    new (): HTMLWysiwygEditorPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'wysiwyg-editor-page': HTMLWysiwygEditorPageElement;
+  }
+  interface ElementTagNameMap {
+    'wysiwyg-editor-page': HTMLWysiwygEditorPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'wysiwyg-editor-page': JSXElements.WysiwygEditorPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface WysiwygEditorPageAttributes extends HTMLAttributes {
 
     }
   }

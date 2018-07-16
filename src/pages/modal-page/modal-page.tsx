@@ -1,10 +1,12 @@
-import { Component, Listen } from '@stencil/core';
+import { Component, State, Listen } from '@stencil/core';
 
 @Component({
   tag: 'modal-page',
   styleUrls: ['./modal-page.scss']
 })
 export class ModalPage {
+  @State() modal: boolean = false;
+
   @Listen('onOpenModal')
   openModalHandler() {
     console.log('openModalHandler');
@@ -15,9 +17,8 @@ export class ModalPage {
     console.log('closeModalHandler');
   }
 
-  openModal = () => {
-    const modal: any = document.getElementById('example_modal');
-    modal.openModal();
+  toggleModal = () => {
+    this.modal = !this.modal;
   };
 
   render() {
@@ -180,10 +181,14 @@ export class ModalPage {
                   <code>boolean</code>
                 </td>
                 <td>
-                  <code>false</code>
+                  <code>undefined</code>
                 </td>
                 <td>No</td>
-                <td>Shows the modal when initialized.</td>
+                <td>
+                  Shows the modal when initialized. Setting this value means
+                  that you control modal using this property. toggle function
+                  should be used together.
+                </td>
               </tr>
               <tr>
                 <td>
@@ -213,6 +218,21 @@ export class ModalPage {
                 </td>
                 <td>No</td>
                 <td>Id for modal element</td>
+              </tr>
+              <tr>
+                <td>
+                  <code>toggle</code>
+                </td>
+                <td>
+                  <code>function</code>
+                </td>
+                <td />
+                <td>No</td>
+                <td>
+                  This function is used when you control modal using show
+                  property. This function is called when you click on close
+                  button or close icon when show property is used.
+                </td>
               </tr>
             </tbody>
           </table>
@@ -302,13 +322,12 @@ export class ModalPage {
         <pre class="code">
           <code>
             {`<cwc-modal
-    id="example_modal" 
-    showButton={false}
-    id="exampleModal"
+    show={this.modal}
+    toggle={() => {this.modal = !this.modal}}
   >
   Put your modal contents here. You can put any content.
 </cwc-modal>
-<button class="btn btn-secondary mr-2" onClick={() => {document.getElementById('example_modal').openModal()}}>
+<button class="btn btn-secondary mr-2" onClick={() => {this.modal = !this.modal}}>
   Custom Button
 </button>
 `}
@@ -317,11 +336,12 @@ export class ModalPage {
         <cwc-modal
           id="example_modal"
           showButton={false}
-          onClick={this.openModal}
+          show={this.modal}
+          toggle={this.toggleModal}
         >
           Put your modal contents here. You can put any content.
         </cwc-modal>
-        <button class="btn btn-secondary mr-2" onClick={this.openModal}>
+        <button class="btn btn-secondary mr-2" onClick={this.toggleModal}>
           Custom Button
         </button>
       </div>

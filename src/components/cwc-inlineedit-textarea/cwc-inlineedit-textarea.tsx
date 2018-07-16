@@ -4,7 +4,7 @@ import { Component, Prop, Element, Event, EventEmitter } from '@stencil/core';
     tag: 'cwc-inlineedit-textarea',
     styleUrl: 'cwc-inlineedit-textarea.scss'
 })
-export class CwcInlineedit {
+export class CwcInlineeditTextArea {
     @Prop() label: string;
     @Prop() value = 'A field value';
     @Element() el: HTMLElement;

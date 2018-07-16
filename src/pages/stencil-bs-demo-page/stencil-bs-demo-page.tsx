@@ -50,8 +50,7 @@ export class StencilBsDemoPage {
     {
       url: '/alert',
       title: 'Alert Component',
-      componentName: 'alerts-page',
-      isHiden: true
+      componentName: 'alerts-page'
     },
     {
       url: '/badge',
@@ -178,9 +177,14 @@ export class StencilBsDemoPage {
       url: '/popper',
       title: 'Popper Component',
       componentName: 'popper-page'
-  },
+    },
+    {
+      url: '/wysiwyg-editor',
+      title: 'Wysiwyg Editor Component',
+      componentName: 'wysiwyg-editor-page'
+    }
   ];
-    
+
   render() {
     return [
       <cwc-styles />,

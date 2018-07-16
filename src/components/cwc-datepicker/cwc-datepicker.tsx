@@ -10,6 +10,9 @@ import moment from 'moment';
     ]
 })
 export class CwcDatepicker {
+    @Prop() id: string;
+    @Prop() for: string;
+    @Prop() label: string;
 
     @Prop() startDate: string;
     @Prop() endDate: string;
@@ -18,7 +21,9 @@ export class CwcDatepicker {
     @Prop() format: string = 'MM.DD.YYYY'
 
     @Event() statechange: EventEmitter;
+    @Event() postValue: EventEmitter;
 
+    @Element() element: HTMLInputElement;
     @Element() el: HTMLElement;
     container: HTMLElement;
 
@@ -41,39 +46,54 @@ export class CwcDatepicker {
             close: 'Schließen',
             startDate: 'Frühestens',
             endDate: 'Spätestens'
-            
+
         }
     }
 
-    rangeInputElement: HTMLInputElement 
+    rangeInputElement: HTMLInputElement
     dp: any
-    range 
+    initIndex: number
+    range
 
     componentDidLoad() {
         this.container = this.el.querySelector('.ex-inputs-picker');
         this.rangeInputElement = this.el.querySelector('.ex-input-daterange');
         const self = this;
+        this.initIndex = 0;
 
         this.dp = DateRangePicker.DateRangePicker(this.container, {
             startOpts: {
                 lang: this.langConstants[this.lang] || this.langConstants['en']
             }
-        })
-            .on('statechange', function (_, rp) {
-                // Update the inputs when the state changes
-                self.range = rp.state;
-            
-                self.rangeInputElement.value = self.formInputValueString(self.range.start, self.range.end)
+        }).on('statechange', function (_, rp) {
+            // Update the inputs when the state changes
+            self.range = rp.state;
 
-                self.statechange.emit({
-                    start: self.range.start,
-                    end: self.range.end
-                });
-            })
+            self.rangeInputElement.value = self.formInputValueString(self.range.start, self.range.end)
+
+            self.statechange.emit({
+                start: self.range.start,
+                end: self.range.end
+            });
+
+            if (self.initIndex < 2) {
+                self.initIndex++;
+            } else {
+                self.rangeInputElement.setAttribute(
+                    "start-date",
+                    self.range.start ? self.startDateValueString(self.range.start) : null
+                );
+                self.rangeInputElement.setAttribute(
+                    "end-date",
+                    self.range.end ? self.endDateValueString(self.range.end) : null
+                );
+                self.postValue.emit(self.rangeInputElement);
+            }
+        })
 
 
         if (this.startDate) {
-            
+
             this.dp.setState({
                 start: new Date(this.startDate)
             });
@@ -119,8 +139,15 @@ export class CwcDatepicker {
     }
 
     private formInputValueString(startDate, endDate): string {
-        return `${startDate ? moment(startDate).format(this.format) : this.langConstants[this.lang].startDate} - ${
-            endDate ? moment(endDate).format(this.format) : this.langConstants[this.lang].endDate}`;
+        return `${this.startDateValueString(startDate)} - ${this.endDateValueString(endDate)}`;
+    }
+
+    private startDateValueString(startDate) {
+        return startDate ? moment(startDate).format(this.format) : this.langConstants[this.lang].startDate;
+    }
+
+    private endDateValueString(endDate) {
+        return endDate ? moment(endDate).format(this.format) : this.langConstants[this.lang].endDate;
     }
 
     private showPicker() {
@@ -129,9 +156,17 @@ export class CwcDatepicker {
 
     render() {
         return (
-            <div class="ex-inputs">
-                <input class="ex-input-daterange" placeholder={`${this.langConstants[this.lang].startDate} - ${this.langConstants[this.lang].endDate}`} />
-                <div class="ex-inputs-picker"></div>
+            <div>
+                <div class="ex-inputs">
+                    <div class="label-wrapper">
+                        <label>{this.label}</label>
+                    </div>
+                    <input id={this.id}
+                        type={this.for}
+                        class="ex-input-daterange"
+                        placeholder={`${this.langConstants[this.lang].startDate} - ${this.langConstants[this.lang].endDate}`} />
+                    <div class="ex-inputs-picker"></div>
+                </div>
             </div>
         )
     }

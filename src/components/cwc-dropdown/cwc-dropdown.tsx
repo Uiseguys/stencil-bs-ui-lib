@@ -1,34 +1,33 @@
 import { Component, Element, HostElement, Method, Event, EventEmitter } from '@stencil/core';
 import 'bootstrap.native/dist/bootstrap-native-v4';
-declare var window: any;
+// declare var window: any;
 
 @Component({
     tag: 'cwc-dropdown',
     styleUrl: 'cwc-dropdown.scss'
 })
-export class StencilComponent {
+export class DropdownComponent {
     btn: Element;
+    id: string = 'cwc_' + Math.floor(Math.random() * 90000) + 10000;
     content: Element;
     buttons: NodeList;
     openState: boolean = false;
-    
+
     @Element() el: HostElement;
-    
+
     @Event() change: EventEmitter;
 
     componentDidLoad() {
-        window.BSN.initCallback();
+        // window.BSN.initCallback();
         this.btn = this.el.children[0].children[0];
         this.content = this.el.children[0].children[1];
-        this.btn.addEventListener('click', () => this.toggle())
-        this.close()
-
-        this.buttons = this.el.querySelectorAll('.dropdown-item')
-
+        this.btn.addEventListener('click', () => this.toggle());
+        this.close();
+        this.buttons = this.el.querySelectorAll('.dropdown-item');
         for ( let i = 0; i < this.buttons.length; i ++ ) {
             this.buttons[i].addEventListener('click', this.selectHandler.bind(this))
         }
-        
+
     }
 
     selectHandler(e) {
@@ -71,10 +70,15 @@ export class StencilComponent {
 
     render() {
         return (
-            <div class="dropdown">
-                <slot name="dropdown-trigger"></slot>
-
-                <slot name="dropdown-menu"></slot>
+            <div class="dropdown cwc-dropdown">
+                <div id={this.id}>
+                    <slot name="dropdown-trigger"></slot>
+                </div>
+                <cwc-popper refid={this.id} arrow={false} isToggleBtn={true}  trigger="click" placement="top" class="cwc-popper-dropdown">
+                      <div>
+                          <slot name="dropdown-menu"></slot>
+                      </div>
+                </cwc-popper>
             </div >
         )
     }
