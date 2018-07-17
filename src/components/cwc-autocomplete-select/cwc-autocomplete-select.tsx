@@ -1,5 +1,6 @@
 import {
     Component,
+    Element,
     State,
     Prop,
     Listen,
@@ -20,6 +21,11 @@ import get from 'lodash/get';
     styleUrl: 'cwc-autocomplete-select.scss',
 })
 export class CwcAutocompleteSelect {
+    /* used for form-generator component */
+    @Prop() id: string;
+    @Prop() label: string;
+    /* /used for form-generator component */
+
     @Prop() minSearchLength = 1;
     @Prop() data: any[] = [];
     @Prop() idValue: string = 'multiselect-' + Date.now();
@@ -36,7 +42,10 @@ export class CwcAutocompleteSelect {
 
     private filtered: any[] = [];
 
+    @Element() el: HTMLElement;
+
     @Event() multiselectOnSubmit: EventEmitter;
+    @Event() postValue: EventEmitter;
 
     @Listen('destroy')
     destroyHandler(event) {
@@ -60,6 +69,14 @@ export class CwcAutocompleteSelect {
     removeResult(index) {
         this.results = this.results.filter((_, i) => i !== index);
         this.multiselectOnSubmit.emit(this.results);
+
+        /* used for form-generator component */
+        this.postValue.emit({
+          id: this.id,
+          data: this.results,
+          type: 'autocomplete'
+        });
+        /* /used for form-generator component */
     }
 
     clearLabels() {
@@ -84,6 +101,14 @@ export class CwcAutocompleteSelect {
             : this.addResult(this.filtered[this.focusIndex - 1].data);
 
         this.multiselectOnSubmit.emit(this.results);
+
+        /* used for form-generator component */
+        this.postValue.emit({
+          id: this.id,
+          data: this.results,
+          type: 'autocomplete'
+        });
+        /* /used for form-generator component */
     }
 
     /**
@@ -228,9 +253,10 @@ export class CwcAutocompleteSelect {
         return [
             <div id={this.idValue} class="cwc-autocomplete">
                 <div
-                    onInput={e => this.handleInputChange(e)}
+                    id={this.id}
                     class="form-control"
                     contentEditable={true}
+                    onInput={e => this.handleInputChange(e)}
                 >
                     <span class="caret">&nbsp;</span>
                 </div>
