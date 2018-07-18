@@ -47,7 +47,7 @@
     "http-server": "^0.11.1",
     "jest": "^21.2.1",
     "lodash": "^4.17.10",
-    "moment": "2.19.0",
+    "moment": "2.18.1",
     "pikaday": "^1.7.0",
     "popper.js": "1.14.3",
     "tiny-date-picker": "^3.2.5",
