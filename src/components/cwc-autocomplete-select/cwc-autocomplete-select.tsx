@@ -73,7 +73,7 @@ export class CwcAutocompleteSelect {
         /* used for form-generator component */
         this.postValue.emit({
           id: this.id,
-          data: this.results,
+          value: this.results.length ? this.results : null,
           type: 'autocomplete'
         });
         /* /used for form-generator component */
@@ -105,7 +105,7 @@ export class CwcAutocompleteSelect {
         /* used for form-generator component */
         this.postValue.emit({
           id: this.id,
-          data: this.results,
+          value: this.results,
           type: 'autocomplete'
         });
         /* /used for form-generator component */
