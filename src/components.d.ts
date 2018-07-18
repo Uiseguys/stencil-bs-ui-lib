@@ -1249,48 +1249,6 @@ declare global {
 declare global {
 
   namespace StencilComponents {
-    interface MyInput {
-      'for': string;
-      'format': any;
-      'id': string;
-      'inputTitle': string;
-      'value': any;
-    }
-  }
-
-  interface HTMLMyInputElement extends StencilComponents.MyInput, HTMLStencilElement {}
-
-  var HTMLMyInputElement: {
-    prototype: HTMLMyInputElement;
-    new (): HTMLMyInputElement;
-  };
-  interface HTMLElementTagNameMap {
-    'my-input': HTMLMyInputElement;
-  }
-  interface ElementTagNameMap {
-    'my-input': HTMLMyInputElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'my-input': JSXElements.MyInputAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface MyInputAttributes extends HTMLAttributes {
-      'for'?: string;
-      'format'?: any;
-      'id'?: string;
-      'inputTitle'?: string;
-      'onPostValue'?: (event: CustomEvent) => void;
-      'value'?: any;
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
     interface ScbBadge {
       'link': string;
       'pill': boolean;
@@ -1905,39 +1863,6 @@ declare global {
   }
   namespace JSXElements {
     export interface FileInputPageAttributes extends HTMLAttributes {
-
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
-    interface FormPage {
-
-    }
-  }
-
-  interface HTMLFormPageElement extends StencilComponents.FormPage, HTMLStencilElement {}
-
-  var HTMLFormPageElement: {
-    prototype: HTMLFormPageElement;
-    new (): HTMLFormPageElement;
-  };
-  interface HTMLElementTagNameMap {
-    'form-page': HTMLFormPageElement;
-  }
-  interface ElementTagNameMap {
-    'form-page': HTMLFormPageElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'form-page': JSXElements.FormPageAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface FormPageAttributes extends HTMLAttributes {
 
     }
   }
