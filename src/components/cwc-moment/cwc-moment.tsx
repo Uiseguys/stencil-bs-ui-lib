@@ -2,6 +2,7 @@ import { Component, Prop, State } from '@stencil/core';
 import { Duration, DurationInputArg2 } from 'moment';
 import moment from 'moment';
 import 'moment/src/locale/de';
+moment.locale("de");
 
 @Component({
     tag: 'cwc-moment'
