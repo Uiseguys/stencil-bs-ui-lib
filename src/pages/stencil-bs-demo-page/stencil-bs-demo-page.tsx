@@ -177,6 +177,16 @@ export class StencilBsDemoPage {
       url: '/wysiwyg-editor',
       title: 'Wysiwyg Editor Component',
       componentName: 'wysiwyg-editor-page'
+    },
+    {
+      url: '/mycheckbox',
+      title: 'My Checkbox',
+      componentName: 'my-checkbox-page'
+    },
+    {
+      url: '/myswitch',
+      title: 'My Switch',
+      componentName: 'my-switch-page'
     }
   ];
 
