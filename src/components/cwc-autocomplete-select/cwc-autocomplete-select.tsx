@@ -232,7 +232,7 @@ export class CwcAutocompleteSelect {
         const result = this.getStringValue(this.filtered[index]);
         this.multiselectOnSubmitHandler(result);
 
-        // this.close();
+        this.close();
     }
 
     handleHover(i: number) {
@@ -252,6 +252,9 @@ export class CwcAutocompleteSelect {
     render() {
         return [
             <div id={this.idValue} class="cwc-autocomplete">
+                <div class="label-wrapper">
+                    <label>{this.label}</label>
+                </div>
                 <div
                     id={this.id}
                     class="form-control"
