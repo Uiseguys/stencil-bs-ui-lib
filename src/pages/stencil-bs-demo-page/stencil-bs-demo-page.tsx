@@ -132,12 +132,6 @@ export class StencilBsDemoPage {
       isHiden: true
     },
     {
-      url: '/slider',
-      title: 'Slider Component',
-      componentName: 'mwc-slider-page',
-      isHiden: true
-    },
-    {
       url: '/avatar',
       title: 'Avatar Component',
       componentName: 'avatar-page'

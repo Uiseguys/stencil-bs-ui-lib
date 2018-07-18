@@ -98,7 +98,9 @@ declare global {
        */
       'close': () => void;
       'data': any[];
+      'id': string;
       'idValue': string;
+      'label': string;
       'minSearchLength': number;
       'placeholder': string;
       'searchKey': string;
@@ -125,9 +127,12 @@ declare global {
   namespace JSXElements {
     export interface CwcAutocompleteSelectAttributes extends HTMLAttributes {
       'data'?: any[];
+      'id'?: string;
       'idValue'?: string;
+      'label'?: string;
       'minSearchLength'?: number;
       'onMultiselectOnSubmit'?: (event: CustomEvent) => void;
+      'onPostValue'?: (event: CustomEvent) => void;
       'placeholder'?: string;
       'searchKey'?: string;
     }
@@ -1224,52 +1229,6 @@ declare global {
 declare global {
 
   namespace StencilComponents {
-    interface MwcSlider {
-      'disabled': boolean;
-      'max': number;
-      'min': number;
-      'slidercolor': string;
-      'step': number;
-      'stepdown': (amount?: number) => void;
-      'stepup': (amount?: number) => void;
-      'value': number;
-    }
-  }
-
-  interface HTMLMwcSliderElement extends StencilComponents.MwcSlider, HTMLStencilElement {}
-
-  var HTMLMwcSliderElement: {
-    prototype: HTMLMwcSliderElement;
-    new (): HTMLMwcSliderElement;
-  };
-  interface HTMLElementTagNameMap {
-    'mwc-slider': HTMLMwcSliderElement;
-  }
-  interface ElementTagNameMap {
-    'mwc-slider': HTMLMwcSliderElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'mwc-slider': JSXElements.MwcSliderAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface MwcSliderAttributes extends HTMLAttributes {
-      'disabled'?: boolean;
-      'max'?: number;
-      'min'?: number;
-      'onChange'?: (event: CustomEvent) => void;
-      'slidercolor'?: string;
-      'step'?: number;
-      'value'?: number;
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
     interface MyCheckbox {
       'checkboxTitle': string;
       'for': string;
@@ -2340,39 +2299,6 @@ declare global {
   }
   namespace JSXElements {
     export interface MultiselectPageAttributes extends HTMLAttributes {
-
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
-    interface MwcSliderPage {
-
-    }
-  }
-
-  interface HTMLMwcSliderPageElement extends StencilComponents.MwcSliderPage, HTMLStencilElement {}
-
-  var HTMLMwcSliderPageElement: {
-    prototype: HTMLMwcSliderPageElement;
-    new (): HTMLMwcSliderPageElement;
-  };
-  interface HTMLElementTagNameMap {
-    'mwc-slider-page': HTMLMwcSliderPageElement;
-  }
-  interface ElementTagNameMap {
-    'mwc-slider-page': HTMLMwcSliderPageElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'mwc-slider-page': JSXElements.MwcSliderPageAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface MwcSliderPageAttributes extends HTMLAttributes {
 
     }
   }
