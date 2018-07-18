@@ -33,9 +33,6 @@ import {
   IBreadcrumbItem,
 } from './common/index';
 import {
-  DurationInputArg2,
-} from 'moment';
-import {
   Placement,
 } from 'popper.js';
 import {
@@ -641,53 +638,6 @@ declare global {
       'showButton'?: boolean;
       'size'?: string;
       'toggle'?: () => any;
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
-    interface CwcMoment {
-      'date': string;
-      'diff': boolean;
-      'duration': string;
-      'format': string;
-      'humanize': boolean;
-      'lang': string;
-      'separator': string;
-      'unit': DurationInputArg2;
-    }
-  }
-
-  interface HTMLCwcMomentElement extends StencilComponents.CwcMoment, HTMLStencilElement {}
-
-  var HTMLCwcMomentElement: {
-    prototype: HTMLCwcMomentElement;
-    new (): HTMLCwcMomentElement;
-  };
-  interface HTMLElementTagNameMap {
-    'cwc-moment': HTMLCwcMomentElement;
-  }
-  interface ElementTagNameMap {
-    'cwc-moment': HTMLCwcMomentElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'cwc-moment': JSXElements.CwcMomentAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface CwcMomentAttributes extends HTMLAttributes {
-      'date'?: string;
-      'diff'?: boolean;
-      'duration'?: string;
-      'format'?: string;
-      'humanize'?: boolean;
-      'lang'?: string;
-      'separator'?: string;
-      'unit'?: DurationInputArg2;
     }
   }
 }
@@ -2233,39 +2183,6 @@ declare global {
   }
   namespace JSXElements {
     export interface ModalPageAttributes extends HTMLAttributes {
-
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
-    interface MomentPage {
-
-    }
-  }
-
-  interface HTMLMomentPageElement extends StencilComponents.MomentPage, HTMLStencilElement {}
-
-  var HTMLMomentPageElement: {
-    prototype: HTMLMomentPageElement;
-    new (): HTMLMomentPageElement;
-  };
-  interface HTMLElementTagNameMap {
-    'moment-page': HTMLMomentPageElement;
-  }
-  interface ElementTagNameMap {
-    'moment-page': HTMLMomentPageElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'moment-page': JSXElements.MomentPageAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface MomentPageAttributes extends HTMLAttributes {
 
     }
   }

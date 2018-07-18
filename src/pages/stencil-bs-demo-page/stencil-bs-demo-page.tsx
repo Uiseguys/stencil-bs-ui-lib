@@ -25,11 +25,11 @@ export class StencilBsDemoPage {
       url: '/resolution-info',
       title: 'Resolution Info Component'
     },
-    {
-      componentName: 'moment-page',
-      url: '/moment',
-      title: 'Moment Component'
-    },
+    // {
+    //   componentName: 'moment-page',
+    //   url: '/moment',
+    //   title: 'Moment Component'
+    // },
     {
       url: '/collapse',
       title: 'Collapse Component',
