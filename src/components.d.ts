@@ -187,53 +187,6 @@ declare global {
 declare global {
 
   namespace StencilComponents {
-    interface CwcDatepicker {
-      'endDate': string;
-      'for': string;
-      'format': string;
-      'id': string;
-      'label': string;
-      'lang': string;
-      'startDate': string;
-    }
-  }
-
-  interface HTMLCwcDatepickerElement extends StencilComponents.CwcDatepicker, HTMLStencilElement {}
-
-  var HTMLCwcDatepickerElement: {
-    prototype: HTMLCwcDatepickerElement;
-    new (): HTMLCwcDatepickerElement;
-  };
-  interface HTMLElementTagNameMap {
-    'cwc-datepicker': HTMLCwcDatepickerElement;
-  }
-  interface ElementTagNameMap {
-    'cwc-datepicker': HTMLCwcDatepickerElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'cwc-datepicker': JSXElements.CwcDatepickerAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface CwcDatepickerAttributes extends HTMLAttributes {
-      'endDate'?: string;
-      'for'?: string;
-      'format'?: string;
-      'id'?: string;
-      'label'?: string;
-      'lang'?: string;
-      'onPostValue'?: (event: CustomEvent) => void;
-      'onStatechange'?: (event: CustomEvent) => void;
-      'startDate'?: string;
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
     interface CwcDnd {
       'dragulaOpts': any;
       'getDataModel': () => any[];
@@ -1820,39 +1773,6 @@ declare global {
   }
   namespace JSXElements {
     export interface CollapsePageAttributes extends HTMLAttributes {
-
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
-    interface DatepickerPage {
-
-    }
-  }
-
-  interface HTMLDatepickerPageElement extends StencilComponents.DatepickerPage, HTMLStencilElement {}
-
-  var HTMLDatepickerPageElement: {
-    prototype: HTMLDatepickerPageElement;
-    new (): HTMLDatepickerPageElement;
-  };
-  interface HTMLElementTagNameMap {
-    'datepicker-page': HTMLDatepickerPageElement;
-  }
-  interface ElementTagNameMap {
-    'datepicker-page': HTMLDatepickerPageElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'datepicker-page': JSXElements.DatepickerPageAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface DatepickerPageAttributes extends HTMLAttributes {
 
     }
   }

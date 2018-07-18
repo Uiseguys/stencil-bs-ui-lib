@@ -142,11 +142,11 @@ export class StencilBsDemoPage {
       componentName: 'sticky-page',
       isHiden: true
     },
-    {
-      url: '/datepicker',
-      title: 'Datepicker Component',
-      componentName: 'datepicker-page'
-    },
+    // {
+    //   url: '/datepicker',
+    //   title: 'Datepicker Component',
+    //   componentName: 'datepicker-page'
+    // },
     {
       url: '/inlineedit',
       title: 'Inlineedit Component',
