@@ -369,4 +369,12 @@ export class CwcAutocompleteSelect {
         caretEl.innerHTML = '&nbsp;';
         input.appendChild(caretEl);
     }
+
+    @Listen('focusout')
+    clearResultOnFocusout() {
+        setTimeout(() => {
+            this.close()
+        }, 100)
+    }
+
 }
