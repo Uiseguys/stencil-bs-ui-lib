@@ -405,7 +405,8 @@ export class CwcAutocompleteSelect {
     @Listen('focusout')
     clearResultOnFocusout() {
         setTimeout(() => {
-            this.close()
+            this.close();
+            this.clearTextNodes();
         }, 100)
     }
 
