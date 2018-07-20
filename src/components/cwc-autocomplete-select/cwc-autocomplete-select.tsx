@@ -348,9 +348,8 @@ export class CwcAutocompleteSelect {
     @Listen('keydown.enter')
     handleEnter(ev) {
         if (this.focusIndex > 0) {
-            const options = document
-                .querySelector(`#${this.idValue}`)
-                .nextElementSibling.querySelectorAll('option');
+            //const options = document.querySelector(`#${this.idValue}`).nextElementSibling.querySelectorAll('div.dropdown-item');
+            const options = document.querySelector(`#${this.idValue} .popper > div.cwc-popper-autocomplete`).querySelectorAll('div.dropdown-item');
             this.handleSelect(
                 options[this.focusIndex - 1].textContent,
                 this.focusIndex - 1
