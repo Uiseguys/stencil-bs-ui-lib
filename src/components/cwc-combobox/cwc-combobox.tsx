@@ -6,7 +6,9 @@ import { Component, Prop, State, Listen, Event, EventEmitter } from '@stencil/co
 export class ComboboxComponent {
     @Prop() id: string;
     @Prop() value: any;
+    @Prop() data: any[] = [];
     @Prop() label: string;
+    @Prop() btnText: string = "Select";
     @Prop() placeholder: string;
 
     @State() dropdownValue: string
@@ -34,8 +36,17 @@ export class ComboboxComponent {
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <cwc-dropdown id="comboboxDropdown">
-                            <slot name="dropdown-trigger" slot="dropdown-trigger"></slot>
-                            <slot name="dropdown-menu" slot="dropdown-menu"></slot>
+                            <button slot="dropdown-trigger" class="btn btn-primary"
+                                type="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="true">
+                                {this.btnText}
+                            </button>
+
+                            <div slot="dropdown-menu" class="dropdown-menu">
+                                {this.data.map((value) =>  (
+                                    <div class="dropdown-item" data-value={value}>{value}</div>
+                                ))}
+                            </div>
                         </cwc-dropdown>
                     </div>
                     <input
