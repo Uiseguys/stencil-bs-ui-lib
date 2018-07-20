@@ -79,15 +79,14 @@ export class CwcDatepicker {
             if (self.initIndex < 2) {
                 self.initIndex++;
             } else {
-                self.rangeInputElement.setAttribute(
-                    "start-date",
-                    self.range.start ? self.startDateValueString(self.range.start) : null
-                );
-                self.rangeInputElement.setAttribute(
-                    "end-date",
-                    self.range.end ? self.endDateValueString(self.range.end) : null
-                );
-                self.postValue.emit(self.rangeInputElement);
+                self.postValue.emit({
+                    id: self.id,
+                    value: {
+                        endDate: self.range.end ? self.endDateValueString(self.range.end) : null,
+                        startDate: self.range.start ? self.startDateValueString(self.range.start) : null
+                    },
+                    type: 'date'
+                });
             }
         })
 

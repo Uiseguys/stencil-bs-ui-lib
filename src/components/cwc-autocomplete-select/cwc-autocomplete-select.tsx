@@ -73,7 +73,7 @@ export class CwcAutocompleteSelect {
         /* used for form-generator component */
         this.postValue.emit({
           id: this.id,
-          data: this.results,
+          value: this.results.length ? this.results : null,
           type: 'autocomplete'
         });
         /* /used for form-generator component */
@@ -105,7 +105,7 @@ export class CwcAutocompleteSelect {
         /* used for form-generator component */
         this.postValue.emit({
           id: this.id,
-          data: this.results,
+          value: this.results,
           type: 'autocomplete'
         });
         /* /used for form-generator component */
@@ -232,7 +232,7 @@ export class CwcAutocompleteSelect {
         const result = this.getStringValue(this.filtered[index]);
         this.multiselectOnSubmitHandler(result);
 
-        // this.close();
+        this.close();
     }
 
     handleHover(i: number) {
@@ -252,6 +252,9 @@ export class CwcAutocompleteSelect {
     render() {
         return [
             <div id={this.idValue} class="cwc-autocomplete">
+                <div class="label-wrapper">
+                    <label>{this.label}</label>
+                </div>
                 <div
                     id={this.id}
                     class="form-control"
