@@ -15,6 +15,13 @@
         margin-top: 0px;
         display: block;
         width: -webkit-fill-available;
-        margin-left: 20px;
+        margin-left: 5px;
     }
+    display: inline-block;
+    width: 100%;
+}
+
+cwc-autocomplete-select{
+    width: 100%;
+    display: inline-block;
 }
