@@ -208,7 +208,9 @@ export class CwcAutocompleteSelect {
      * Handlers
      */
     handleInputChange(e) {
-        this.filterValue = e.data;
+        let elText = (typeof e.target.textContent !== 'undefined' && typeof e.target.textContent.length !== 'undefined') ? e.target.textContent[e.target.textContent.length-1] : '';
+        this.filterValue = e.data || elText;
+
         if (
             ['deleteContentBackward', 'deleteContentForward'].indexOf(e.inputType) !==
             -1
@@ -259,7 +261,7 @@ export class CwcAutocompleteSelect {
                     id={this.id}
                     class="form-control"
                     contentEditable={true}
-                    onInput={e => this.handleInputChange(e)}
+                    onInput={(e) => this.handleInputChange(e)}
                 >
                     <span class="caret">&nbsp;</span>
                 </div>
@@ -294,7 +296,7 @@ export class CwcAutocompleteSelect {
      **/
 
     @Listen('keyup')
-    handlKeyeDown() {
+    handlKeyeUp() {
         //Set popper width dynamic
         if(this.idValue){
             let formSelector = `#${this.idValue} div.form-control`;
