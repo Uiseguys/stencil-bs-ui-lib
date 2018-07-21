@@ -12,7 +12,6 @@ export class CwcInlineedit {
     @Prop() placeholder: string;
 
     @Element() el: HTMLElement;
-    @Element() element: HTMLInputElement;
 
     @Event() onchange: EventEmitter;
     @Event() onconfirm: EventEmitter;
@@ -81,8 +80,11 @@ export class CwcInlineedit {
         } else {
             currentValue = null;
         }
-        this.element.value = currentValue;
-        this.postValue.emit(this.element);
+        this.postValue.emit({
+            id: this.id,
+            value: currentValue,
+            type: this.for
+        });
     }
 
     render() {
