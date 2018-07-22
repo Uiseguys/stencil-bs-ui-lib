@@ -18,10 +18,10 @@ cwc-inlineedit {
             position: absolute;
             right: 5px;
             z-index: 9999;
-            top: 45px;   
+            top: 45px;
             button:first-child {
                 margin-right: 3px;
-            }     
+            }
         }
     }
     .label-wrapper {
@@ -29,4 +29,7 @@ cwc-inlineedit {
         font-weight: 600;
     }
 
+    .control-label {
+        text-transform: capitalize;
+    }
 }
