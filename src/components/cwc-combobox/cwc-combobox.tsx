@@ -37,13 +37,16 @@ export class ComboboxComponent {
                 <label class="control-label">{this.label}</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <cwc-dropdown id="comboboxDropdown">
-                            <button slot="dropdown-trigger" class="btn btn-primary"
-                                type="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="true">
-                                {this.btnText}
-                            </button>
-
+                        <cwc-dropdown>
+                            <div slot="dropdown-trigger">
+                                <div class="btn-group w-100">
+                                    <button
+                                        class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                        type="button" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="true">
+                                    </button>
+                                </div>
+                            </div>
                             <div slot="dropdown-menu" class="dropdown-menu">
                                 {this.data.map((value) =>  (
                                     <div class="dropdown-item" data-value={value}>{value}</div>
