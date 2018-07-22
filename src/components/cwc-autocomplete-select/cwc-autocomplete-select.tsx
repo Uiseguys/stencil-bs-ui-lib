@@ -253,10 +253,8 @@ export class CwcAutocompleteSelect {
 
     render() {
         return [
-            <div id={this.idValue} class="cwc-autocomplete">
-                <div class="label-wrapper">
-                    <label>{this.label}</label>
-                </div>
+            <div id={this.idValue} class="form-group cwc-autocomplete">
+                <label class="control-label">{this.label}</label>
                 <div
                     id={this.id}
                     class="form-control"
