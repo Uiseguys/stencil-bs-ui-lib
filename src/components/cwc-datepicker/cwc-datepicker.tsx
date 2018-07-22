@@ -156,14 +156,14 @@ export class CwcDatepicker {
     render() {
         return (
             <div>
-                <div class="ex-inputs">
-                    <div class="label-wrapper">
-                        <label>{this.label}</label>
-                    </div>
-                    <input id={this.id}
+                <div class="form-group ex-inputs">
+                    <label class="control-label">{this.label}</label>
+                    <input
+                        id={this.id}
                         type={this.for}
-                        class="ex-input-daterange"
-                        placeholder={`${this.langConstants[this.lang].startDate} - ${this.langConstants[this.lang].endDate}`} />
+                        class="form-control ex-input-daterange"
+                        placeholder={`${this.langConstants[this.lang].startDate} - ${this.langConstants[this.lang].endDate}`}
+                    />
                     <div class="ex-inputs-picker"></div>
                 </div>
             </div>
