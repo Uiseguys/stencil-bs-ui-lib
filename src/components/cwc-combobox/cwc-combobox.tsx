@@ -36,6 +36,14 @@ export class ComboboxComponent {
             <div class="form-group">
                 <label class="control-label">{this.label}</label>
                 <div class="input-group mb-3">
+                    <input
+                        id={this.id}
+                        type="text"
+                        class="form-control"
+                        value={this.dropdownValue}
+                        placeholder={this.placeholder}
+                        readonly
+                    />
                     <div class="input-group-prepend">
                         <cwc-dropdown>
                             <div slot="dropdown-trigger">
@@ -54,14 +62,6 @@ export class ComboboxComponent {
                             </div>
                         </cwc-dropdown>
                     </div>
-                    <input
-                        id={this.id}
-                        type="text"
-                        class="form-control"
-                        value={this.dropdownValue}
-                        placeholder={this.placeholder}
-                        readonly
-                    />
                 </div>
             </div>
         );
