@@ -20,7 +20,7 @@ export class MySwitchPage {
                             <div class="row">
                                 <div class="col-lg-2">
                                     <div class="row">
-                                        <cwc-switch id="testswitch" onPostValue={this.onChange} labelON="On" labelOFF="Off" value={true} ></cwc-switch>
+                                        <cwc-switch id="testswitch" onPostValue={this.onChange} labelON="On" labelOFF="Off" value={false} ></cwc-switch>
                                     </div>
                                 </div>
 
