@@ -26,7 +26,6 @@ declare global {
 }
 
 import '@stencil/router';
-import '@stencil/state-tunnel';
 
 import {
   BootstrapThemeColor,
@@ -952,6 +951,50 @@ declare global {
   namespace JSXElements {
     export interface CwcStylesAttributes extends HTMLAttributes {
 
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface CwcSwitch {
+      'checkboxTitle': string;
+      'for': string;
+      'id': string;
+      'labelOFF': string;
+      'labelON': string;
+      'value': boolean;
+    }
+  }
+
+  interface HTMLCwcSwitchElement extends StencilComponents.CwcSwitch, HTMLStencilElement {}
+
+  var HTMLCwcSwitchElement: {
+    prototype: HTMLCwcSwitchElement;
+    new (): HTMLCwcSwitchElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-switch': HTMLCwcSwitchElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-switch': HTMLCwcSwitchElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-switch': JSXElements.CwcSwitchAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcSwitchAttributes extends HTMLAttributes {
+      'checkboxTitle'?: string;
+      'for'?: string;
+      'id'?: string;
+      'labelOFF'?: string;
+      'labelON'?: string;
+      'onPostValue'?: (event: CustomEvent) => void;
+      'value'?: boolean;
     }
   }
 }
@@ -2373,6 +2416,72 @@ declare global {
   }
   namespace JSXElements {
     export interface MwcSliderPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface MyCheckboxPage {
+
+    }
+  }
+
+  interface HTMLMyCheckboxPageElement extends StencilComponents.MyCheckboxPage, HTMLStencilElement {}
+
+  var HTMLMyCheckboxPageElement: {
+    prototype: HTMLMyCheckboxPageElement;
+    new (): HTMLMyCheckboxPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'my-checkbox-page': HTMLMyCheckboxPageElement;
+  }
+  interface ElementTagNameMap {
+    'my-checkbox-page': HTMLMyCheckboxPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'my-checkbox-page': JSXElements.MyCheckboxPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MyCheckboxPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface MySwitchPage {
+
+    }
+  }
+
+  interface HTMLMySwitchPageElement extends StencilComponents.MySwitchPage, HTMLStencilElement {}
+
+  var HTMLMySwitchPageElement: {
+    prototype: HTMLMySwitchPageElement;
+    new (): HTMLMySwitchPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'my-switch-page': HTMLMySwitchPageElement;
+  }
+  interface ElementTagNameMap {
+    'my-switch-page': HTMLMySwitchPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'my-switch-page': JSXElements.MySwitchPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MySwitchPageAttributes extends HTMLAttributes {
 
     }
   }

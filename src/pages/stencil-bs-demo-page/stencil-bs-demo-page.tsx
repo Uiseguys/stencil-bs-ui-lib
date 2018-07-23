@@ -178,10 +178,20 @@ export class StencilBsDemoPage {
       title: 'Wysiwyg Editor Component',
       componentName: 'wysiwyg-editor-page'
     },
+      {
+          url: '/combobox',
+          title: 'Combobox Component',
+          componentName: 'combobox-page'
+      },
     {
-      url: '/combobox',
-      title: 'Combobox Component',
-      componentName: 'combobox-page'
+      url: '/mycheckbox',
+      title: 'My Checkbox',
+      componentName: 'my-checkbox-page'
+    },
+    {
+      url: '/myswitch',
+      title: 'My Switch',
+      componentName: 'my-switch-page'
     }
   ];
 
