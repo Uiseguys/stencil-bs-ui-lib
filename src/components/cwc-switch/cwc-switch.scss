@@ -27,7 +27,7 @@
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
+  width: 70px;
   height: 34px;
 }
 
@@ -68,9 +68,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  -webkit-transform: translateX(36px);
+  -ms-transform: translateX(36px);
+  transform: translateX(36px);
 }
 
 /* Rounded sliders */
@@ -82,13 +82,13 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-input[value="true"] + .labelON{
-  opacity: 1;
+.switch-status{
+  opacity: 1 !important;
+  transition: .4s;
 }
-input[value="false"] + .labelON{
+
+.labelON {
   opacity: 0;
-}
-.labelON{
   color: #fff;
   position: absolute;
   font-size: 14px;
@@ -102,14 +102,8 @@ input[value="false"] + .labelON{
   -ms-user-select: none;
   user-select: none;
 }
-
-input[value="true"] + .labelOFF{
-  opacity: 0;
-}
-input[value="false"] + .labelOFF{
-  opacity: 1;
-}
 .labelOFF{
+  opacity: 0;
   color: #fff;
   position: absolute;
   font-size: 14px;

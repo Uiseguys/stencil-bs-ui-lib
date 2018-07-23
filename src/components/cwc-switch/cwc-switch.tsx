@@ -13,6 +13,7 @@ export class CwcSwitchbox {
     @Prop() for: string;
     @Prop() value: boolean;
     @Prop() checkboxTitle: string;
+    @Prop() checked: boolean;
     @Prop() labelON: string;
     @Prop() labelOFF: string;
 
@@ -22,25 +23,31 @@ export class CwcSwitchbox {
     element: HTMLElement;
 
     /**
+     * Before render default value assigned
+     * @param event
+     */
+    componentWillLoad(){
+        this.currentValue = this.value ? this.value : false;
+    }
+
+    /**
      * Changing value of 'checked' attribute
      * @param event
      */
     checkWatcher() {
-        this.currentValue ? this.currentValue = false : this.currentValue = true;
+        this.currentValue = !this.currentValue;
         this.postValue.emit(this.element);
     };
 
     render() {
-        console.log('this.labelON-',this.labelON);
-        console.log('this.labelOFF-',this.labelOFF);
-        const parsedValue = this.value ? this.value : false;
         return (
             <div class="form-check">
                 <label class="switch">
-                    <input class="form-check-input" id={this.id} value={`${this.currentValue}` || `${parsedValue}`} type="checkbox" onClick={() => {this.checkWatcher()}} />
+                    <input class="form-check-input" id={this.id} value={`${this.currentValue}`}
+                           type="checkbox" checked={this.currentValue} onClick={() => {this.checkWatcher()}} />
                     <span class="slider round"></span>
-                    <span class="labelON">{this.labelON}</span>
-                    <span class="labelOFF">{this.labelOFF}</span>
+                    <span class={{'labelON': true, 'switch-status': this.currentValue}}>{this.labelON}</span>
+                    <span class={{'labelOFF': true, 'switch-status': !this.currentValue}}>{this.labelOFF}</span>
                 </label>
             </div>
         );

@@ -6,8 +6,8 @@ import { Component } from '@stencil/core';
 })
 
 export class MyCheckboxPage {
-    onChange(event) {
-        console.log("event", event);
+    onChange() {
+
     };
 
     render() {

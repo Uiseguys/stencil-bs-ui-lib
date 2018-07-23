@@ -13,27 +13,34 @@ export class MyCheckbox {
     @Prop() for: string;
     @Prop() value: boolean;
     @Prop() checkboxTitle: string;
+    @Prop() checked: boolean;
 
     @Event() postValue: EventEmitter;
     @Element()
     element: HTMLElement;
 
     /**
+     * Before render default value assigned
+     * @param event
+     */
+    componentWillLoad(){
+        this.currentValue = this.value ? this.value : false;
+    }
+
+    /**
      * Changing value of 'checked' attribute
      * @param event
      */
     checkWatcher() {
-        this.currentValue ? this.currentValue = false : this.currentValue = true;
+        this.currentValue = !this.currentValue;
         this.postValue.emit(this.element);
     };
 
     render() {
-        const parsedValue = this.value ? this.value : false;
-
         return (
             <div class="form-check">
-                <input class="form-check-input" id={this.id} value={`${this.currentValue}` || `${parsedValue}`}
-                       type="checkbox" onClick={() => {this.checkWatcher()}} />
+                <input class="form-check-input" id={this.id} value={`${this.currentValue}`}
+                       type="checkbox" checked={this.currentValue} onClick={() => {this.checkWatcher()}} />
                 <label class="form-check-label" htmlFor={this.id}>
                     {this.checkboxTitle}
                 </label>

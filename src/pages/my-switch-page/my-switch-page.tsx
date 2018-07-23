@@ -6,8 +6,8 @@ import { Component } from '@stencil/core';
 })
 
 export class MySwitchPage {
-    onChange(event) {
-        console.log("event", event);
+    onChange() {
+        //console.log("event", event);
     };
 
     render() {
@@ -20,7 +20,7 @@ export class MySwitchPage {
                             <div class="row">
                                 <div class="col-lg-2">
                                     <div class="row">
-                                        <cwc-switch id="testswitch" onPostValue={this.onChange} labelON="On" labelOFF="Off" value={false} ></cwc-switch>
+                                        <cwc-switch id="testswitch" onPostValue={this.onChange} labelON="On" labelOFF="Off" value={true} ></cwc-switch>
                                     </div>
                                 </div>
 
@@ -53,12 +53,24 @@ export class MySwitchPage {
                                             <td><code>false</code></td>
                                             <td>Use to set the checkbox status checked or unchecked, Default value is <code>false</code>.</td>
                                         </tr>
-                                        {/*<tr>
-                                            <td><code>checkboxTitle</code></td>
+                                        <tr>
+                                            <td><code>onPostValue</code></td>
+                                            <td><code>function</code></td>
+                                            <td><code>''</code></td>
+                                            <td>This will called when value will change.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>labelON</code></td>
                                             <td><code>String</code></td>
                                             <td><code>''</code></td>
-                                            <td>This is use to show the label after the checkbox.</td>
-                                        </tr>*/}
+                                            <td>This label will show when switch value is <code>true</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>labelOFF</code></td>
+                                            <td><code>String</code></td>
+                                            <td><code>''</code></td>
+                                            <td>This label will show when switch value is <code>false</code></td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
