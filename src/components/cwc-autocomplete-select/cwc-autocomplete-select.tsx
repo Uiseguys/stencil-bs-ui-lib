@@ -293,8 +293,10 @@ export class CwcAutocompleteSelect {
      *
      **/
 
+
     @Listen('keyup')
-    handlKeyeUp() {
+    @Listen('keydown')
+    handlKeyeUpDown() {
         //Set popper width dynamic
         if(this.idValue){
             let formSelector = `#${this.idValue} div.form-control`;
@@ -305,7 +307,8 @@ export class CwcAutocompleteSelect {
                     let targetElem = document.querySelector(formSelector + ' + div > cwc-popper > .popper > .cwc-popper-autocomplete');
                     if(targetElem instanceof HTMLElement){
                         targetElem.style.width = positionInfo.width + 'px';
-                        if(targetElem.style.transform){
+
+                        /*if(targetElem.style.transform){
                             let transformProp = targetElem.style.transform;
                             transformProp = transformProp.replace('translate3d(', '');
                             transformProp = transformProp.replace(')', '');
@@ -313,15 +316,16 @@ export class CwcAutocompleteSelect {
                                 let transformPropArr = [];
                                 transformPropArr = transformProp.split(',');
                                 if(typeof transformPropArr[1] !== 'undefined' && typeof transformPropArr[2] !== 'undefined'){
-                                    targetElem.style.transform = 'translate3d(12px,' + transformPropArr[1] + ','+ transformPropArr[2] + ')';
+                                    targetElem.style.transform = 'translate3d(1%,' + transformPropArr[1] + ','+ transformPropArr[2] + ')';
                                 }
                             }
-                        }
+                        }*/
                     }
                 });
             }
         }
     }
+
     @Listen('keydown.down')
     handleDownArrow() {
         if (this.focusIndex < this.filtered.length) {
