@@ -296,7 +296,7 @@ export class CwcAutocompleteSelect {
 
     @Listen('keyup')
     @Listen('keydown')
-    handlKeyeUpDown() {
+    handleKeyUpDown() {
         //Set popper width dynamic
         if(this.idValue){
             let formSelector = `#${this.idValue} div.form-control`;
@@ -307,6 +307,8 @@ export class CwcAutocompleteSelect {
                     let targetElem = document.querySelector(formSelector + ' + div > cwc-popper > .popper > .cwc-popper-autocomplete');
                     if(targetElem instanceof HTMLElement){
                         targetElem.style.width = positionInfo.width + 'px';
+                        // targetElem.style.top = 'auto';
+                        // targetElem.style.bottom = '100%';
 
                         /*if(targetElem.style.transform){
                             let transformProp = targetElem.style.transform;
@@ -408,7 +410,7 @@ export class CwcAutocompleteSelect {
     @Listen('focusout')
     clearResultOnFocusout() {
         setTimeout(() => {
-            this.close();
+            //this.close();
             this.clearTextNodes();
         }, 100)
     }
