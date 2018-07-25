@@ -77,7 +77,7 @@ export class DropdownComponent {
                 <div id={this.id}>
                     <slot name="dropdown-trigger"></slot>
                 </div>
-                <cwc-popper refid={this.id} arrow={false} isToggleBtn={true}  trigger="click" placement="top" class="cwc-popper-dropdown">
+                <cwc-popper refid={this.id} arrow={false} isToggleBtn={true}  trigger="click" placement="bottom" class="cwc-popper-dropdown">
                       <div>
                           <slot name="dropdown-menu"></slot>
                       </div>
