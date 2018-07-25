@@ -4,6 +4,14 @@
     }
 }
 
+autocomplete-select-page {
+    cwc-autocomplete-select{
+        scb-badge > .badge {
+            font-size: 100% !important;
+            padding: 1px 1px !important;
+        }
+    }
+}
 .badge {
     margin-right: 3px;
     span {
