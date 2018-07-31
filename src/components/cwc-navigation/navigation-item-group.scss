@@ -1,0 +1,28 @@
+navigation-item-group {
+    margin-top: 50px;
+    margin-bottom: 10px;
+
+    div.separator {
+        margin-top: 19px;
+        margin-bottom: 19px;
+        margin-left: -8px;
+        height: 2px;
+        background: rgba(9, 30, 66, 0.08);
+        border-radius: 1px;
+        width: 80%;
+    }
+
+    .group-header {
+        text-transform: uppercase;
+        font-size: 11px;
+        line-height: 1.45455;
+        font-weight: 600;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+        margin-bottom: 8px;
+        margin-top: 20px;
+
+    }
+}

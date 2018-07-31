@@ -226,6 +226,7 @@ export class StencilBsDemoPage {
         
         <cwc-navigation isCollapsed={this.navContainerShown}>
 
+           
             <div slot="primary-actions"> 
 
               <cwc-navigation-global-item 
@@ -244,11 +245,11 @@ export class StencilBsDemoPage {
 
             {/* <cwc-navigation-global-item 
                 titleText={'Secondary action'} 
-                icon="./assets/icon/sharp_send_white_48dp.png"/>
+                  icon="./assets/sharp_send_white_48dp.png"/>
                 
                 <cwc-navigation-global-item 
                 titleText={'Secondary action'} 
-              icon="./assets/icon/sharp_send_white_48dp.png"/> */}
+                  icon="./assets/sharp_send_white_48dp.png"/> */}
 
               <cwc-navigation-global-item 
                   titleText={'Secondary action'} 
@@ -262,23 +263,37 @@ export class StencilBsDemoPage {
               <navigation-title text="Nav Title" 
               icon="./assets/icon/sharp_flip_to_front_white_18dp.png"/>
 
+
+              <navigation-item-group text="Actions group">
+
+                <div slot="navigation-items">
+
               <navigation-item text="Navigation item" />
               <navigation-item text="With subtext"
                 subText="Subtext of nav item" />
               <navigation-item text="Basic link" />
 
               <navigation-item text="With drop icon" 
-                icon="./assets/icon/sharp_flip_to_front_white_18dp.png"
+                        icon="./assets/icon/sharp_flip_to_front_white_18dp.png"
                 dropIcon={true}/>
 
+                </div>
+              </navigation-item-group>
 
+              <navigation-item-group text="Group with separator" hasSeparator={true}>
+
+                <div slot="navigation-items">
               <navigation-item text="With dropicon and subtext" 
-              icon="./assets/icon/sharp_flip_to_front_white_18dp.png" 
+                    icon="./assets/icon/sharp_flip_to_front_white_18dp.png" 
               subText="My small subtext"
               dropIcon={true}/>
 
               <navigation-item text="With mouse events" />
             </div>
+              </navigation-item-group>
+
+              </div>
+
 
       </cwc-navigation> : null
 

@@ -923,6 +923,43 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface NavigationItemGroup {
+      'hasSeparator': boolean;
+      'text': string;
+      'titleText': string;
+    }
+  }
+
+  interface HTMLNavigationItemGroupElement extends StencilComponents.NavigationItemGroup, HTMLStencilElement {}
+
+  var HTMLNavigationItemGroupElement: {
+    prototype: HTMLNavigationItemGroupElement;
+    new (): HTMLNavigationItemGroupElement;
+  };
+  interface HTMLElementTagNameMap {
+    'navigation-item-group': HTMLNavigationItemGroupElement;
+  }
+  interface ElementTagNameMap {
+    'navigation-item-group': HTMLNavigationItemGroupElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'navigation-item-group': JSXElements.NavigationItemGroupAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface NavigationItemGroupAttributes extends HTMLAttributes {
+      'hasSeparator'?: boolean;
+      'text'?: string;
+      'titleText'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface NavigationItem {
       'compact': boolean;
       'dropIcon': boolean;

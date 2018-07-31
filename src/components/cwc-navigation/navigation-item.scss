@@ -17,12 +17,7 @@ navigation-item {
 
 
     .navigation-item-wrapper {
-
-        // display: flex;
         width: 100%;
-
-        // align-items: center;
-        // justify-content: space-between;
     }
 
     div.flex-row {
@@ -42,6 +37,10 @@ navigation-item {
             justify-content: center;
             height: 35px;
             /* align-items: end; */
+    }
+
+    .navigation-text {
+        height: 18px;
     }
 
     &:hover {
