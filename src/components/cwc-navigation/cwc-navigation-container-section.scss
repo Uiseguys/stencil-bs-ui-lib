@@ -1,0 +1,28 @@
+cwc-navigation-container-section {
+    
+            -webkit-box-flex: 1;
+            flex-grow: 1;
+            flex-shrink: 1;
+            min-width: 64px;
+            display: flex;
+
+            margin-top: -100vh;
+            height: 100%;
+            margin-left: 64px;
+
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+    div.cwc-navigation-container-section-inner {
+
+        background-color: rgb(7, 71, 166);
+        color: rgb(222, 235, 255);
+        display: flex;
+        flex-direction: column;
+        padding-top: 16px;
+        width: 100%;
+        min-width: 164px;
+    }
+}
