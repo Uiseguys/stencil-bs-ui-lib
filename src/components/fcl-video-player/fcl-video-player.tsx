@@ -48,7 +48,7 @@ export class FclVideoPLayer {
 
   @Watch('isautoinit')
   validateName(newValue: string, oldValue: string) {
-    console.log(newValue, oldValue);
+    //console.log(newValue, oldValue);
   }
 
   // When clicked invert the state of the toggle property
@@ -124,6 +124,7 @@ export class FclVideoPLayer {
 
   componentDidLoad() {
     let self = this;
+    let player = null;
     this.isautoinit = this.autoinit;
     if (this.poster == null) {
       this.autoPlay = false;
@@ -137,7 +138,7 @@ export class FclVideoPLayer {
       preload: 'metadata'
     };
     if (this.isautoinit) {
-      let player = videojs(this.el.getElementsByTagName('video')[0], options);
+      player = videojs(this.el.getElementsByTagName('video')[0], options);
       player.on('play', function() {
         if (self.el.querySelector('fcl-image')) {
           self.el.querySelector('fcl-image').style.display = 'none';
@@ -155,6 +156,7 @@ export class FclVideoPLayer {
 
   componentWillUpdate() {
     let self = this;
+    let isPlaying = false;
     if (this.poster == null) {
       this.autoPlay = false;
     }
@@ -167,9 +169,14 @@ export class FclVideoPLayer {
 
       let player = videojs(this.el.getElementsByTagName('video')[0], options);
       if (this.isautoinit && this.autoPlay && player) {
-        player.play();
+        setTimeout(() =>{
+          if(!isPlaying){
+            player.play();
+          }
+        }, 500)
       }
       player.on('play', function() {
+        isPlaying = true;
         if (self.el.querySelector('fcl-image')) {
           self.el.querySelector('fcl-image').style.display = 'none';
         }
