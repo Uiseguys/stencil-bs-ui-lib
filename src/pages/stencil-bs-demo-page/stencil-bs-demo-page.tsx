@@ -10,6 +10,7 @@ export class StencilBsDemoPage {
   @Prop() root = '/';
   @State() navigationShown: boolean = false;
   @State() navContainerShown: boolean = false;
+  @State() isIconsShown: boolean = true;
   
   
   components = [
@@ -213,6 +214,10 @@ export class StencilBsDemoPage {
   containerToggle() {
     this.navContainerShown = !this.navContainerShown
   }
+  @Listen('showniconstoggle')
+  iconsToggle() {
+    this.isIconsShown = !this.isIconsShown
+  }
 
   render() {
 
@@ -226,74 +231,68 @@ export class StencilBsDemoPage {
         
         <cwc-navigation isCollapsed={this.navContainerShown}>
 
-           
-            <div slot="primary-actions"> 
+          
+          <div slot="primary-actions"> 
 
-              <cwc-navigation-global-item 
-                  titleText={'Title text'} 
-                  icon="./assets/icon/sharp_send_white_48dp.png"/>
-              <cwc-navigation-global-item 
-                  titleText={'Title text'} 
-                  icon="./assets/icon/sharp_check_circle_outline_white_18dp.png"/>
-              <cwc-navigation-global-item 
-                  titleText={'Title text'} 
-                  icon="./assets/icon/baseline_add_white_18dp.png"/>
-                
-            </div>
+<cwc-navigation-global-item 
+    titleText={'Title text'} 
+    icon="./assets/icon/sharp_send_white_48dp.png"/>
+<cwc-navigation-global-item 
+    titleText={'Title text'} 
+    icon="./assets/icon/sharp_check_circle_outline_white_18dp.png"/>
+<cwc-navigation-global-item 
+    titleText={'Title text'} 
+    icon="./assets/icon/baseline_add_white_18dp.png"/>
+    
+</div>
 
-            <div slot="secondary-actions">
-
-            {/* <cwc-navigation-global-item 
-                titleText={'Secondary action'} 
-                  icon="./assets/sharp_send_white_48dp.png"/>
-                
-                <cwc-navigation-global-item 
-                titleText={'Secondary action'} 
-                  icon="./assets/sharp_send_white_48dp.png"/> */}
-
-              <cwc-navigation-global-item 
-                  titleText={'Secondary action'} 
-                  icon="./assets/icon/baseline_face_white_48dp.png"/>
-            </div>
+<div slot="secondary-actions">
+<cwc-navigation-global-item 
+    titleText={'Secondary action'} 
+    icon="./assets/icon/sharp_send_white_48dp.png"/>
+</div>
 
 
 
 
-            <div slot="container-actions">
-              <navigation-title text="Nav Title" 
-              icon="./assets/icon/sharp_flip_to_front_white_18dp.png"/>
+<div slot="container-actions">
+<navigation-title text="Nav Title" 
+icon="./assets/icon/sharp_flip_to_front_white_18dp.png"/>
 
 
-              <navigation-item-group text="Actions group">
+<navigation-item-group text="Actions group">
 
-                <div slot="navigation-items">
+  <div slot="navigation-items">
 
-              <navigation-item text="Navigation item" />
-              <navigation-item text="With subtext"
-                subText="Subtext of nav item" />
-              <navigation-item text="Basic link" />
+      <navigation-item  showIcon={this.isIconsShown}text="Navigation item" />
+      <navigation-item  showIcon={this.isIconsShown}text="With subtext"
+          subText="Subtext of nav item" />
+      <navigation-item  showIcon={this.isIconsShown}text="Basic link" />
 
-              <navigation-item text="With drop icon" 
-                        icon="./assets/icon/sharp_flip_to_front_white_18dp.png"
-                dropIcon={true}/>
+      <navigation-item  showIcon={this.isIconsShown}text="With drop icon" 
+          dropIcon="./assets/icon/sharp_flip_to_front_white_18dp.png"/>
+  
+  </div>
+</navigation-item-group>
 
-                </div>
-              </navigation-item-group>
+<navigation-item-group text="Group with separator" hasSeparator={true}>
 
-              <navigation-item-group text="Group with separator" hasSeparator={true}>
+  <div slot="navigation-items">
+      <navigation-item  showIcon={this.isIconsShown}text="With dropicon and subasdfastext" 
+      subText="My small subtext"
+      icon={'./assets/icon/sharp_flip_to_front_white_18dp.png'}
+      dropIcon={'./assets/icon/sharp_flip_to_front_white_18dp.png'}/>
 
-                <div slot="navigation-items">
-              <navigation-item text="With dropicon and subtext" 
-                    icon="./assets/icon/sharp_flip_to_front_white_18dp.png" 
-              subText="My small subtext"
-              dropIcon={true}/>
+      <navigation-item  showIcon={this.isIconsShown}text="With dropicon and subtext" 
+      subText="My small subtext"
+      icon={'./assets/icon/sharp_flip_to_front_white_18dp.png'}
+      dropIcon={'./assets/icon/sharp_flip_to_front_white_18dp.png'}/>
+      
+      <navigation-item  showIcon={this.isIconsShown}text="With mouse events" />
+  </div>
+</navigation-item-group>
 
-              <navigation-item text="With mouse events" />
-            </div>
-              </navigation-item-group>
-
-              </div>
-
+</div>
 
       </cwc-navigation> : null
 
