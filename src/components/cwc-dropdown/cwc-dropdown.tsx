@@ -24,10 +24,11 @@ export class DropdownComponent {
         this.btn.addEventListener('click', () => this.toggle());
         this.close();
         this.buttons = this.el.querySelectorAll('.dropdown-item');
-        for ( let i = 0; i < this.buttons.length; i ++ ) {
-            this.buttons[i].addEventListener('click', this.selectHandler.bind(this))
+        if(this.buttons) {
+            for ( let i = 0; i < this.buttons.length; i ++ ) {
+                this.buttons[i].addEventListener('click', this.selectHandler.bind(this))
+            }
         }
-
     }
 
     selectHandler(e) {
@@ -41,8 +42,10 @@ export class DropdownComponent {
     }
 
     componentDidUnload() {
-        for ( let i = 0; i < this.buttons.length; i ++ ) {
-            this.buttons[i].removeEventListener('click', this.selectHandler.bind(this))
+        if(this.buttons) {
+            for ( let i = 0; i < this.buttons.length; i ++ ) {
+                this.buttons[i].removeEventListener('click', this.selectHandler.bind(this))
+            }
         }
     }
 
@@ -74,7 +77,7 @@ export class DropdownComponent {
                 <div id={this.id}>
                     <slot name="dropdown-trigger"></slot>
                 </div>
-                <cwc-popper refid={this.id} arrow={false} isToggleBtn={true}  trigger="click" placement="top" class="cwc-popper-dropdown">
+                <cwc-popper refid={this.id} arrow={false} isToggleBtn={true}  trigger="click" placement="bottom" class="cwc-popper-dropdown">
                       <div>
                           <slot name="dropdown-menu"></slot>
                       </div>

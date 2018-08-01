@@ -1,12 +1,12 @@
 {
   "name": "@ui-guys/stencil-bs-ui-lib",
   "private": false,
-  "version": "0.7.4",
+  "version": "0.8.19",
   "description": "Bootstrap componentes built with StencilJS",
   "engines": {
     "node": ">=6.11.0 <9.0"
   },
-  "main": "dist/uiLib.js",
+  "main": "dist/index.js",
   "types": "dist/types/components.d.ts",
   "module": "dist/esm/index.js",
   "collection": "dist/collection/collection-manifest.json",

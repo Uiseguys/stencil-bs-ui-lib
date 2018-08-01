@@ -52,7 +52,7 @@ export class DropdownPage {
                                 <div class="col-12 mt-4">
                                     <h3>Usage </h3>
 
-                                    <p class="mt-1">To use this component, you must pass two named slots into component's tag: <code>dropdown-trigger</code>
+                                    <p class="mt-1">To use this component, you must pass two named slots into component's tag: <code>dropdown-trigger </code>
                                      and <code>dropdown-menu</code>.
                                         Every dropdown item in <code>dropdown-menu</code> slot must contain <code>data-value</code> attribute.
                                         Event with this value will be emited after user iteraction.</p>

@@ -26,7 +26,6 @@ declare global {
 }
 
 import '@stencil/router';
-import '@stencil/state-tunnel';
 
 import {
   BootstrapThemeColor,
@@ -98,7 +97,9 @@ declare global {
        */
       'close': () => void;
       'data': any[];
+      'id': string;
       'idValue': string;
+      'label': string;
       'minSearchLength': number;
       'placeholder': string;
       'searchKey': string;
@@ -125,9 +126,12 @@ declare global {
   namespace JSXElements {
     export interface CwcAutocompleteSelectAttributes extends HTMLAttributes {
       'data'?: any[];
+      'id'?: string;
       'idValue'?: string;
+      'label'?: string;
       'minSearchLength'?: number;
       'onMultiselectOnSubmit'?: (event: CustomEvent) => void;
+      'onPostValue'?: (event: CustomEvent) => void;
       'placeholder'?: string;
       'searchKey'?: string;
     }
@@ -177,6 +181,54 @@ declare global {
       'rounded'?: boolean;
       'size'?: number;
       'uppercase'?: boolean;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface CwcCombobox {
+      'btnLeftPosition': boolean;
+      'btnText': string;
+      'data': Array<string|number>;
+      'id': string;
+      'label': string;
+      'placeholder': string;
+      'readonly': boolean;
+      'value': any;
+    }
+  }
+
+  interface HTMLCwcComboboxElement extends StencilComponents.CwcCombobox, HTMLStencilElement {}
+
+  var HTMLCwcComboboxElement: {
+    prototype: HTMLCwcComboboxElement;
+    new (): HTMLCwcComboboxElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-combobox': HTMLCwcComboboxElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-combobox': HTMLCwcComboboxElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-combobox': JSXElements.CwcComboboxAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcComboboxAttributes extends HTMLAttributes {
+      'btnLeftPosition'?: boolean;
+      'btnText'?: string;
+      'data'?: Array<string|number>;
+      'id'?: string;
+      'label'?: string;
+      'onPostValue'?: (event: CustomEvent) => void;
+      'placeholder'?: string;
+      'readonly'?: boolean;
+      'value'?: any;
     }
   }
 }
@@ -729,6 +781,273 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface CwcNavigationContainerSection {
+
+    }
+  }
+
+  interface HTMLCwcNavigationContainerSectionElement extends StencilComponents.CwcNavigationContainerSection, HTMLStencilElement {}
+
+  var HTMLCwcNavigationContainerSectionElement: {
+    prototype: HTMLCwcNavigationContainerSectionElement;
+    new (): HTMLCwcNavigationContainerSectionElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-navigation-container-section': HTMLCwcNavigationContainerSectionElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-navigation-container-section': HTMLCwcNavigationContainerSectionElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-navigation-container-section': JSXElements.CwcNavigationContainerSectionAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcNavigationContainerSectionAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface CwcNavigationGlobalItem {
+      'icon': any;
+      'link': string;
+      'titleText': string;
+    }
+  }
+
+  interface HTMLCwcNavigationGlobalItemElement extends StencilComponents.CwcNavigationGlobalItem, HTMLStencilElement {}
+
+  var HTMLCwcNavigationGlobalItemElement: {
+    prototype: HTMLCwcNavigationGlobalItemElement;
+    new (): HTMLCwcNavigationGlobalItemElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-navigation-global-item': HTMLCwcNavigationGlobalItemElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-navigation-global-item': HTMLCwcNavigationGlobalItemElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-navigation-global-item': JSXElements.CwcNavigationGlobalItemAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcNavigationGlobalItemAttributes extends HTMLAttributes {
+      'icon'?: any;
+      'link'?: string;
+      'titleText'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface CwcNavigationGlobalSection {
+
+    }
+  }
+
+  interface HTMLCwcNavigationGlobalSectionElement extends StencilComponents.CwcNavigationGlobalSection, HTMLStencilElement {}
+
+  var HTMLCwcNavigationGlobalSectionElement: {
+    prototype: HTMLCwcNavigationGlobalSectionElement;
+    new (): HTMLCwcNavigationGlobalSectionElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-navigation-global-section': HTMLCwcNavigationGlobalSectionElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-navigation-global-section': HTMLCwcNavigationGlobalSectionElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-navigation-global-section': JSXElements.CwcNavigationGlobalSectionAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcNavigationGlobalSectionAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface CwcNavigation {
+      'containerChildren': any[];
+      'isCollapsed': boolean;
+      'primaryActions': any[];
+      'secondaryActions': any[];
+    }
+  }
+
+  interface HTMLCwcNavigationElement extends StencilComponents.CwcNavigation, HTMLStencilElement {}
+
+  var HTMLCwcNavigationElement: {
+    prototype: HTMLCwcNavigationElement;
+    new (): HTMLCwcNavigationElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-navigation': HTMLCwcNavigationElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-navigation': HTMLCwcNavigationElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-navigation': JSXElements.CwcNavigationAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcNavigationAttributes extends HTMLAttributes {
+      'containerChildren'?: any[];
+      'isCollapsed'?: boolean;
+      'primaryActions'?: any[];
+      'secondaryActions'?: any[];
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface NavigationItemGroup {
+      'hasSeparator': boolean;
+      'text': string;
+      'titleText': string;
+    }
+  }
+
+  interface HTMLNavigationItemGroupElement extends StencilComponents.NavigationItemGroup, HTMLStencilElement {}
+
+  var HTMLNavigationItemGroupElement: {
+    prototype: HTMLNavigationItemGroupElement;
+    new (): HTMLNavigationItemGroupElement;
+  };
+  interface HTMLElementTagNameMap {
+    'navigation-item-group': HTMLNavigationItemGroupElement;
+  }
+  interface ElementTagNameMap {
+    'navigation-item-group': HTMLNavigationItemGroupElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'navigation-item-group': JSXElements.NavigationItemGroupAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface NavigationItemGroupAttributes extends HTMLAttributes {
+      'hasSeparator'?: boolean;
+      'text'?: string;
+      'titleText'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface NavigationItem {
+      'compact': boolean;
+      'dropIcon': boolean;
+      'icon': any;
+      'link': string;
+      'showIcon': boolean;
+      'subText': string;
+      'text': string;
+      'titleText': string;
+    }
+  }
+
+  interface HTMLNavigationItemElement extends StencilComponents.NavigationItem, HTMLStencilElement {}
+
+  var HTMLNavigationItemElement: {
+    prototype: HTMLNavigationItemElement;
+    new (): HTMLNavigationItemElement;
+  };
+  interface HTMLElementTagNameMap {
+    'navigation-item': HTMLNavigationItemElement;
+  }
+  interface ElementTagNameMap {
+    'navigation-item': HTMLNavigationItemElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'navigation-item': JSXElements.NavigationItemAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface NavigationItemAttributes extends HTMLAttributes {
+      'compact'?: boolean;
+      'dropIcon'?: boolean;
+      'icon'?: any;
+      'link'?: string;
+      'showIcon'?: boolean;
+      'subText'?: string;
+      'text'?: string;
+      'titleText'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface NavigationTitle {
+      'compact': boolean;
+      'icon': string;
+      'showIcon': boolean;
+      'text': string;
+      'titleText': string;
+    }
+  }
+
+  interface HTMLNavigationTitleElement extends StencilComponents.NavigationTitle, HTMLStencilElement {}
+
+  var HTMLNavigationTitleElement: {
+    prototype: HTMLNavigationTitleElement;
+    new (): HTMLNavigationTitleElement;
+  };
+  interface HTMLElementTagNameMap {
+    'navigation-title': HTMLNavigationTitleElement;
+  }
+  interface ElementTagNameMap {
+    'navigation-title': HTMLNavigationTitleElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'navigation-title': JSXElements.NavigationTitleAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface NavigationTitleAttributes extends HTMLAttributes {
+      'compact'?: boolean;
+      'icon'?: string;
+      'showIcon'?: boolean;
+      'text'?: string;
+      'titleText'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface CwcPopper {
       'arrow': boolean;
       'autoClose': boolean;
@@ -952,6 +1271,52 @@ declare global {
   namespace JSXElements {
     export interface CwcStylesAttributes extends HTMLAttributes {
 
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface CwcSwitch {
+      'checkboxTitle': string;
+      'checked': boolean;
+      'for': string;
+      'id': string;
+      'labelOFF': string;
+      'labelON': string;
+      'value': boolean;
+    }
+  }
+
+  interface HTMLCwcSwitchElement extends StencilComponents.CwcSwitch, HTMLStencilElement {}
+
+  var HTMLCwcSwitchElement: {
+    prototype: HTMLCwcSwitchElement;
+    new (): HTMLCwcSwitchElement;
+  };
+  interface HTMLElementTagNameMap {
+    'cwc-switch': HTMLCwcSwitchElement;
+  }
+  interface ElementTagNameMap {
+    'cwc-switch': HTMLCwcSwitchElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'cwc-switch': JSXElements.CwcSwitchAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface CwcSwitchAttributes extends HTMLAttributes {
+      'checkboxTitle'?: string;
+      'checked'?: boolean;
+      'for'?: string;
+      'id'?: string;
+      'labelOFF'?: string;
+      'labelON'?: string;
+      'onPostValue'?: (event: CustomEvent) => void;
+      'value'?: boolean;
     }
   }
 }
@@ -1241,6 +1606,7 @@ declare global {
   namespace StencilComponents {
     interface MyCheckbox {
       'checkboxTitle': string;
+      'checked': boolean;
       'for': string;
       'id': string;
       'value': boolean;
@@ -1267,6 +1633,7 @@ declare global {
   namespace JSXElements {
     export interface MyCheckboxAttributes extends HTMLAttributes {
       'checkboxTitle'?: string;
+      'checked'?: boolean;
       'for'?: string;
       'id'?: string;
       'onPostValue'?: (event: CustomEvent) => void;
@@ -1889,6 +2256,39 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface ComboboxPage {
+
+    }
+  }
+
+  interface HTMLComboboxPageElement extends StencilComponents.ComboboxPage, HTMLStencilElement {}
+
+  var HTMLComboboxPageElement: {
+    prototype: HTMLComboboxPageElement;
+    new (): HTMLComboboxPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'combobox-page': HTMLComboboxPageElement;
+  }
+  interface ElementTagNameMap {
+    'combobox-page': HTMLComboboxPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'combobox-page': JSXElements.ComboboxPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ComboboxPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface DatepickerPage {
 
     }
@@ -2351,6 +2751,72 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface MyCheckboxPage {
+
+    }
+  }
+
+  interface HTMLMyCheckboxPageElement extends StencilComponents.MyCheckboxPage, HTMLStencilElement {}
+
+  var HTMLMyCheckboxPageElement: {
+    prototype: HTMLMyCheckboxPageElement;
+    new (): HTMLMyCheckboxPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'my-checkbox-page': HTMLMyCheckboxPageElement;
+  }
+  interface ElementTagNameMap {
+    'my-checkbox-page': HTMLMyCheckboxPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'my-checkbox-page': JSXElements.MyCheckboxPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MyCheckboxPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface MySwitchPage {
+
+    }
+  }
+
+  interface HTMLMySwitchPageElement extends StencilComponents.MySwitchPage, HTMLStencilElement {}
+
+  var HTMLMySwitchPageElement: {
+    prototype: HTMLMySwitchPageElement;
+    new (): HTMLMySwitchPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'my-switch-page': HTMLMySwitchPageElement;
+  }
+  interface ElementTagNameMap {
+    'my-switch-page': HTMLMySwitchPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'my-switch-page': JSXElements.MySwitchPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MySwitchPageAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface NavbarPage {
 
     }
@@ -2376,6 +2842,40 @@ declare global {
   namespace JSXElements {
     export interface NavbarPageAttributes extends HTMLAttributes {
 
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface NavigationPage {
+
+    }
+  }
+
+  interface HTMLNavigationPageElement extends StencilComponents.NavigationPage, HTMLStencilElement {}
+
+  var HTMLNavigationPageElement: {
+    prototype: HTMLNavigationPageElement;
+    new (): HTMLNavigationPageElement;
+  };
+  interface HTMLElementTagNameMap {
+    'navigation-page': HTMLNavigationPageElement;
+  }
+  interface ElementTagNameMap {
+    'navigation-page': HTMLNavigationPageElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'navigation-page': JSXElements.NavigationPageAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface NavigationPageAttributes extends HTMLAttributes {
+      'onShownavigationcontainertoggle'?: (event: CustomEvent) => void;
+      'onShownavigationtoggle'?: (event: CustomEvent) => void;
     }
   }
 }

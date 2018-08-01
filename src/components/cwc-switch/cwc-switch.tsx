@@ -1,11 +1,11 @@
 import {Component, Prop, Event, EventEmitter, Element, State} from '@stencil/core';
 
 @Component({
-    tag: 'my-checkbox',
+    tag: 'cwc-switch',
     shadow: true,
-    styleUrl: 'my-checkbox.scss'
+    styleUrl: 'cwc-switch.scss'
 })
-export class MyCheckbox {
+export class CwcSwitchbox {
 
     @State() currentValue: boolean = false;
 
@@ -14,6 +14,9 @@ export class MyCheckbox {
     @Prop() value: boolean;
     @Prop() checkboxTitle: string;
     @Prop() checked: boolean;
+    @Prop() labelON: string;
+    @Prop() labelOFF: string;
+
 
     @Event() postValue: EventEmitter;
     @Element()
@@ -39,10 +42,12 @@ export class MyCheckbox {
     render() {
         return (
             <div class="form-check">
-                <input class="form-check-input" id={this.id} value={`${this.currentValue}`}
-                       type="checkbox" checked={this.currentValue} onClick={() => {this.checkWatcher()}} />
-                <label class="form-check-label" htmlFor={this.id}>
-                    {this.checkboxTitle}
+                <label class="switch">
+                    <input class="form-check-input" id={this.id} value={`${this.currentValue}`}
+                           type="checkbox" checked={this.currentValue} onClick={() => {this.checkWatcher()}} />
+                    <span class="slider round"></span>
+                    <span class={{'labelON': true, 'switch-status': this.currentValue}}>{this.labelON}</span>
+                    <span class={{'labelOFF': true, 'switch-status': !this.currentValue}}>{this.labelOFF}</span>
                 </label>
             </div>
         );

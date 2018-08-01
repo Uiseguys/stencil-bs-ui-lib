@@ -1,7 +1,7 @@
 const sass = require('@stencil/sass');
 
 exports.config = {
-  namespace: 'uiLib',
+  namespace: 'ui-lib',
   // generateDistribution: true,
   // serviceWorker: true,
   outputTargets: [{ type: 'www' }, { type: 'dist' }],

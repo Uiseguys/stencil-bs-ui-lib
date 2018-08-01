@@ -1,5 +1,6 @@
 import {
     Component,
+    Element,
     State,
     Prop,
     Listen,
@@ -20,6 +21,11 @@ import get from 'lodash/get';
     styleUrl: 'cwc-autocomplete-select.scss',
 })
 export class CwcAutocompleteSelect {
+    /* used for form-generator component */
+    @Prop() id: string;
+    @Prop() label: string;
+    /* /used for form-generator component */
+
     @Prop() minSearchLength = 1;
     @Prop() data: any[] = [];
     @Prop() idValue: string = 'multiselect-' + Date.now();
@@ -36,7 +42,10 @@ export class CwcAutocompleteSelect {
 
     private filtered: any[] = [];
 
+    @Element() el: HTMLElement;
+
     @Event() multiselectOnSubmit: EventEmitter;
+    @Event() postValue: EventEmitter;
 
     @Listen('destroy')
     destroyHandler(event) {
@@ -60,6 +69,14 @@ export class CwcAutocompleteSelect {
     removeResult(index) {
         this.results = this.results.filter((_, i) => i !== index);
         this.multiselectOnSubmit.emit(this.results);
+
+        /* used for form-generator component */
+        this.postValue.emit({
+          id: this.id,
+          value: this.results.length ? this.results : null,
+          type: 'autocomplete'
+        });
+        /* /used for form-generator component */
     }
 
     clearLabels() {
@@ -84,6 +101,14 @@ export class CwcAutocompleteSelect {
             : this.addResult(this.filtered[this.focusIndex - 1].data);
 
         this.multiselectOnSubmit.emit(this.results);
+
+        /* used for form-generator component */
+        this.postValue.emit({
+          id: this.id,
+          value: this.results,
+          type: 'autocomplete'
+        });
+        /* /used for form-generator component */
     }
 
     /**
@@ -183,7 +208,9 @@ export class CwcAutocompleteSelect {
      * Handlers
      */
     handleInputChange(e) {
-        this.filterValue = e.data;
+        let elText = (typeof e.target.textContent !== 'undefined' && typeof e.target.textContent.length !== 'undefined') ? e.target.textContent[e.target.textContent.length-1] : '';
+        this.filterValue = e.data || elText;
+
         if (
             ['deleteContentBackward', 'deleteContentForward'].indexOf(e.inputType) !==
             -1
@@ -207,7 +234,7 @@ export class CwcAutocompleteSelect {
         const result = this.getStringValue(this.filtered[index]);
         this.multiselectOnSubmitHandler(result);
 
-        // this.close();
+        this.close();
     }
 
     handleHover(i: number) {
@@ -226,11 +253,13 @@ export class CwcAutocompleteSelect {
 
     render() {
         return [
-            <div id={this.idValue} class="cwc-autocomplete">
+            <div id={this.idValue} class="form-group cwc-autocomplete">
+                <label class="control-label">{this.label}</label>
                 <div
-                    onInput={e => this.handleInputChange(e)}
+                    id={this.id}
                     class="form-control"
                     contentEditable={true}
+                    onInput={(e) => this.handleInputChange(e)}
                 >
                     <span class="caret">&nbsp;</span>
                 </div>
@@ -264,6 +293,41 @@ export class CwcAutocompleteSelect {
      *
      **/
 
+
+    @Listen('keyup')
+    @Listen('keydown')
+    handleKeyUpDown() {
+        //Set popper width dynamic
+        if(this.idValue){
+            let formSelector = `#${this.idValue} div.form-control`;
+            let HTMLInputEle = document.querySelector(formSelector);
+            if(HTMLInputEle != null){
+                let positionInfo = HTMLInputEle.getBoundingClientRect();
+                setTimeout(() => {
+                    let targetElem = document.querySelector(formSelector + ' + div > cwc-popper > .popper > .cwc-popper-autocomplete');
+                    if(targetElem instanceof HTMLElement){
+                        targetElem.style.width = positionInfo.width + 'px';
+                        // targetElem.style.top = 'auto';
+                        // targetElem.style.bottom = '100%';
+
+                        /*if(targetElem.style.transform){
+                            let transformProp = targetElem.style.transform;
+                            transformProp = transformProp.replace('translate3d(', '');
+                            transformProp = transformProp.replace(')', '');
+                            if(transformProp){
+                                let transformPropArr = [];
+                                transformPropArr = transformProp.split(',');
+                                if(typeof transformPropArr[1] !== 'undefined' && typeof transformPropArr[2] !== 'undefined'){
+                                    targetElem.style.transform = 'translate3d(1%,' + transformPropArr[1] + ','+ transformPropArr[2] + ')';
+                                }
+                            }
+                        }*/
+                    }
+                });
+            }
+        }
+    }
+
     @Listen('keydown.down')
     handleDownArrow() {
         if (this.focusIndex < this.filtered.length) {
@@ -290,9 +354,8 @@ export class CwcAutocompleteSelect {
     @Listen('keydown.enter')
     handleEnter(ev) {
         if (this.focusIndex > 0) {
-            const options = document
-                .querySelector(`#${this.idValue}`)
-                .nextElementSibling.querySelectorAll('option');
+            //const options = document.querySelector(`#${this.idValue}`).nextElementSibling.querySelectorAll('div.dropdown-item');
+            const options = document.querySelector(`#${this.idValue} .popper > div.cwc-popper-autocomplete`).querySelectorAll('div.dropdown-item');
             this.handleSelect(
                 options[this.focusIndex - 1].textContent,
                 this.focusIndex - 1
@@ -343,4 +406,13 @@ export class CwcAutocompleteSelect {
         caretEl.innerHTML = '&nbsp;';
         input.appendChild(caretEl);
     }
+
+    @Listen('focusout')
+    clearResultOnFocusout() {
+        setTimeout(() => {
+            //this.close();
+            this.clearTextNodes();
+        }, 100)
+    }
+
 }

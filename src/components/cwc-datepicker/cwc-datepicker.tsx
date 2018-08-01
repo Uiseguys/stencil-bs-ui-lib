@@ -79,15 +79,14 @@ export class CwcDatepicker {
             if (self.initIndex < 2) {
                 self.initIndex++;
             } else {
-                self.rangeInputElement.setAttribute(
-                    "start-date",
-                    self.range.start ? self.startDateValueString(self.range.start) : null
-                );
-                self.rangeInputElement.setAttribute(
-                    "end-date",
-                    self.range.end ? self.endDateValueString(self.range.end) : null
-                );
-                self.postValue.emit(self.rangeInputElement);
+                self.postValue.emit({
+                    id: self.id,
+                    value: {
+                        endDate: self.range.end ? self.endDateValueString(self.range.end) : null,
+                        startDate: self.range.start ? self.startDateValueString(self.range.start) : null
+                    },
+                    type: 'date'
+                });
             }
         })
 
@@ -157,14 +156,14 @@ export class CwcDatepicker {
     render() {
         return (
             <div>
-                <div class="ex-inputs">
-                    <div class="label-wrapper">
-                        <label>{this.label}</label>
-                    </div>
-                    <input id={this.id}
+                <div class="form-group ex-inputs">
+                    <label class="control-label">{this.label}</label>
+                    <input
+                        id={this.id}
                         type={this.for}
-                        class="ex-input-daterange"
-                        placeholder={`${this.langConstants[this.lang].startDate} - ${this.langConstants[this.lang].endDate}`} />
+                        class="form-control ex-input-daterange"
+                        placeholder={`${this.langConstants[this.lang].startDate} - ${this.langConstants[this.lang].endDate}`}
+                    />
                     <div class="ex-inputs-picker"></div>
                 </div>
             </div>
