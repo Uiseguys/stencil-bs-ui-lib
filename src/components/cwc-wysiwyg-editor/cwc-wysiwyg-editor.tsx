@@ -1,4 +1,4 @@
-import { Component, Element, Method, Prop } from '@stencil/core';
+import { Component, Element, Method, Prop, Event, EventEmitter } from '@stencil/core';
 import '../../lib/woofmark/woofmark.min';
 import '../../lib/woofmark/megamark.min';
 import '../../lib/woofmark/domador.min';
@@ -12,13 +12,20 @@ declare var domador: any;
   styleUrl: 'cwc-wysiwyg-editor.scss'
 })
 export class CwcWysiwygEditor {
+  /* used for form-generator */
+  @Prop() id: string;
+  @Prop() for: string;
+  /* /used for form-generator */
   @Prop() fencing: boolean = true;
   @Prop() markdown: boolean = true;
   @Prop() html: boolean = true;
   @Prop() wysiwyg: boolean = true;
   @Prop() defaultMode: string;
   @Prop() images: object;
+
   @Element() _element: HTMLElement;
+
+  @Event() postValue: EventEmitter;
 
   private _woofmark: any = null;
 
@@ -35,6 +42,14 @@ export class CwcWysiwygEditor {
       parseMarkdown: megamark,
       parseHTML: domador,
       render: {
+        modes: function (button, id) {
+          const modes = {
+            html: "HTML",
+            markdown: "Markdown",
+            wysiwyg: "Preview"
+          };
+          button.textContent = modes[id];
+        },
         commands: function(button, id) {
           const classNames = {
             bold: 'fa fa-bold',
@@ -57,7 +72,16 @@ export class CwcWysiwygEditor {
   }
 
   componentDidLoad() {
+    const self = this;
     this._initEditor();
+
+    this._woofmark.editable.addEventListener('DOMSubtreeModified', function(e) {
+      self.postValue.emit({
+          id: self.id,
+          value: e.currentTarget.innerHTML,
+          type: self.for
+      });
+    });
   }
 
   componentDidUpdate() {
