@@ -47,9 +47,6 @@ export class FclVideoPLayer {
   @State() isautoinit: boolean = false;
 
   @Watch('isautoinit')
-  validateName(newValue: string, oldValue: string) {
-    //console.log(newValue, oldValue);
-  }
 
   // When clicked invert the state of the toggle property
   toggleClick() {
