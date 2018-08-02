@@ -40,6 +40,7 @@ export class CwcAutocompleteSelect {
     @State() autoOpen = false;
 
     @State() labels: any[] = [];
+    @State() labelsAdded: boolean = false;
     @State() results: any[] = [];
 
     private filtered: any[] = [];
@@ -63,6 +64,8 @@ export class CwcAutocompleteSelect {
         this.labels = [...this.labels, label];
         this.justAddedLabel = true;
         this.renderLabels();
+        this.autoOpen=false;
+
     }
 
     addResult(result: any) {
@@ -136,6 +139,8 @@ export class CwcAutocompleteSelect {
         if (this.justAddedLabel) {
             this.setCaretPositionEnd();
             this.justAddedLabel = false;
+            this.labelsAdded=true;
+
         }else
         {
             this.filtered=this.filter();
@@ -309,7 +314,7 @@ export class CwcAutocompleteSelect {
     handleKeyUpDown(e) {
         setTimeout(() => {
             //popper will be appear on click if data length will be '<=25'
-            if(this.data.length <= 25)
+            if(this.data.length <= 25 && !this.labelsAdded)
                 this.autoOpen = true;
             //End
             let popperContainer = document.querySelector(`#${this.idValue} .popper-container`);
@@ -338,6 +343,7 @@ export class CwcAutocompleteSelect {
             }
         },200);
 
+        this.labelsAdded=false;
         if(e.type === 'keydown' || e.type === 'keyup')
             this.textChange.emit(e.target.textContent);
     }
