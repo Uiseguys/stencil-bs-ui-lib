@@ -36,17 +36,24 @@ export class AutocompleteSelectPage {
   data = ['Alex', 'Alabama', 'Alaska', 'andreas', 'alexandro'];
 
   @State() result;
+  @State() textChangeResult;
 
   @Listen('multiselectOnSubmit')
   typeaheadOnSubmit(e) {
     console.log('got results: ', e.detail);
     this.result = e.detail;
   }
-
+  //Listening textchange event from cec-autocomplete-select
+  @Listen('textChange')
+  textChange(e) {
+    this.textChangeResult = e.detail;
+  }
+  //End
   render() {
     return [
       <h3>Simple String[] data demo!</h3>,
-      <cwc-autocomplete-select data={this.data} />,
+      <cwc-autocomplete-select data = {this.data}/>,
+      <h6>Text Change result: {this.textChangeResult}</h6>,
 
       <br />,
       <br />,
