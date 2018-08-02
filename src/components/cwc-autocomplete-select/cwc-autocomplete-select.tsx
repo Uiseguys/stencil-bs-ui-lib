@@ -29,7 +29,7 @@ export class CwcAutocompleteSelect {
 
     @Prop() minSearchLength = 1;
     @Prop() data: any[] = [];
-    @Prop() idValue: string = 'multiselect-' + Date.now();
+    @Prop() idValue: string = 'multiselect-' + Math.floor(1000 + Math.random() * 9000) + new Date().getUTCMilliseconds();
     @Prop() searchKey: string;
     @Prop() placeholder = 'Search something e.g. "Alabama"';
 
@@ -48,6 +48,7 @@ export class CwcAutocompleteSelect {
 
     @Event() multiselectOnSubmit: EventEmitter;
     @Event() postValue: EventEmitter;
+    @Event() textChange: EventEmitter;
 
     @Listen('destroy')
     destroyHandler(event) {
@@ -337,6 +338,8 @@ export class CwcAutocompleteSelect {
             }
         },200);
 
+        if(e.type === 'keydown' || e.type === 'keyup')
+            this.textChange.emit(e.target.textContent);
     }
 
     @Listen('keydown.down')
