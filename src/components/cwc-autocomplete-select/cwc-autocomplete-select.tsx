@@ -6,7 +6,8 @@ import {
     Listen,
     Method,
     Event,
-    EventEmitter
+    EventEmitter,
+    Watch
 } from '@stencil/core';
 import filter from 'lodash/filter';
 import get from 'lodash/get';
@@ -32,10 +33,12 @@ export class CwcAutocompleteSelect {
     @Prop() searchKey: string;
     @Prop() placeholder = 'Search something e.g. "Alabama"';
 
-    @State() filterValue = '';
+    @State() openState: boolean = false;
+    @State() filterValue: string = '';
     @State() optionsShown = false;
     @State() focusIndex = 0;
     @State() justAddedLabel = false;
+    @State() autoOpen = false;
 
     @State() labels: any[] = [];
     @State() results: any[] = [];
@@ -50,6 +53,10 @@ export class CwcAutocompleteSelect {
     @Listen('destroy')
     destroyHandler(event) {
         console.log('Received the custom event: ', event);
+    }
+    @Watch('autoOpen')
+    onAutoOpen(newVal){
+        console.log("auto open", newVal);
     }
 
     addLabel(label) {
@@ -183,7 +190,7 @@ export class CwcAutocompleteSelect {
     private filterStringArray(data) {
         return filter(data, value => {
             const v = typeof value === 'string' ? value : value.index;
-
+            this.filterValue = this.filterValue || '';
             return v.toLowerCase().indexOf(this.filterValue.toLowerCase()) >= 0;
         });
     }
@@ -209,8 +216,8 @@ export class CwcAutocompleteSelect {
      */
     handleInputChange(e) {
         let elText = (typeof e.target.textContent !== 'undefined' && typeof e.target.textContent.length !== 'undefined') ? e.target.textContent[e.target.textContent.length-1] : '';
-        this.filterValue = e.data || elText;
-
+        this.filterValue =  e.target.textContent || elText;
+        this.openState = true;
         if (
             ['deleteContentBackward', 'deleteContentForward'].indexOf(e.inputType) !==
             -1
@@ -249,6 +256,7 @@ export class CwcAutocompleteSelect {
         this.focusIndex = 0;
         this.filterValue = '';
         this.filtered = [];
+        this.openState = false;
     }
 
     render() {
@@ -261,11 +269,12 @@ export class CwcAutocompleteSelect {
                     contentEditable={true}
                     onInput={(e) => this.handleInputChange(e)}
                 >
-                    <span class="caret">&nbsp;</span>
+                    <span class="caret" />
                 </div>
-                <div>
+                <div class="popper-container">
                     {this.filtered.length > 0 && (
                         <cwc-popper
+                            autoOpen={this.autoOpen}
                             id={`cwc-popper-autocomplete-${this.idValue}`}
                             refid={this.idValue} trigger="keyup" placement="bottom" arrow={false} autoClose={true}>
                             <div class="popper">
@@ -295,10 +304,30 @@ export class CwcAutocompleteSelect {
 
 
     @Listen('keyup')
+    @Listen('click')
     @Listen('keydown')
-    handleKeyUpDown() {
-        //Set popper width dynamic
-        if(this.idValue){
+    handleKeyUpDown(e) {
+
+
+        if(this.data.length <= 3)
+            this.autoOpen = true;
+        let popperContainer = document.querySelector(`#${this.idValue} .popper-container`);
+        if(e && typeof e.type !== 'undefined' && e.type === 'click'){
+            // Popper will be appear if result length will be <= 25'
+            this.filtered = this.filter();
+            /*if(this.data.length == 5)
+                this.openState=true;*/
+            //End
+            if(popperContainer instanceof HTMLElement){
+                popperContainer.style.position = 'relative';
+            }
+        }else{
+            if(popperContainer instanceof HTMLElement){
+                popperContainer.style.position = 'unset';
+            }
+        }
+
+        setTimeout(() => {
             let formSelector = `#${this.idValue} div.form-control`;
             let HTMLInputEle = document.querySelector(formSelector);
             if(HTMLInputEle != null){
@@ -307,25 +336,11 @@ export class CwcAutocompleteSelect {
                     let targetElem = document.querySelector(formSelector + ' + div > cwc-popper > .popper > .cwc-popper-autocomplete');
                     if(targetElem instanceof HTMLElement){
                         targetElem.style.width = positionInfo.width + 'px';
-                        // targetElem.style.top = 'auto';
-                        // targetElem.style.bottom = '100%';
-
-                        /*if(targetElem.style.transform){
-                            let transformProp = targetElem.style.transform;
-                            transformProp = transformProp.replace('translate3d(', '');
-                            transformProp = transformProp.replace(')', '');
-                            if(transformProp){
-                                let transformPropArr = [];
-                                transformPropArr = transformProp.split(',');
-                                if(typeof transformPropArr[1] !== 'undefined' && typeof transformPropArr[2] !== 'undefined'){
-                                    targetElem.style.transform = 'translate3d(1%,' + transformPropArr[1] + ','+ transformPropArr[2] + ')';
-                                }
-                            }
-                        }*/
                     }
                 });
             }
-        }
+        },300);
+
     }
 
     @Listen('keydown.down')
@@ -391,7 +406,7 @@ export class CwcAutocompleteSelect {
             `#${this.idValue} div.form-control span.caret`
         );
         if (caretEl) {
-            caretEl.innerHTML = '&nbsp;';
+           // caretEl.innerHTML = '&nbsp;';
         } else {
             this.createCaretEl();
         }
@@ -403,7 +418,7 @@ export class CwcAutocompleteSelect {
         );
         const caretEl = document.createElement('span');
         caretEl.className = 'caret';
-        caretEl.innerHTML = '&nbsp;';
+       // caretEl.innerHTML = '&nbsp;';
         input.appendChild(caretEl);
     }
 
@@ -412,7 +427,11 @@ export class CwcAutocompleteSelect {
         setTimeout(() => {
             //this.close();
             this.clearTextNodes();
-        }, 100)
+            // this.openState = false;
+            this.autoOpen = false;
+             this.close();
+
+        }, 150)
     }
 
 }
