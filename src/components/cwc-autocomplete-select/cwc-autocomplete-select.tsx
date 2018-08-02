@@ -33,7 +33,6 @@ export class CwcAutocompleteSelect {
     @Prop() searchKey: string;
     @Prop() placeholder = 'Search something e.g. "Alabama"';
 
-    @State() openState: boolean = false;
     @State() filterValue: string = '';
     @State() optionsShown = false;
     @State() focusIndex = 0;
@@ -125,7 +124,6 @@ export class CwcAutocompleteSelect {
         if (this.filterValue) {
             if (this.filterValue.length >= this.minSearchLength) {
                 this.filtered = this.filter();
-
                 if (this.filtered.length > 0) {
                     this.optionsShown = true;
                 }
@@ -137,6 +135,9 @@ export class CwcAutocompleteSelect {
         if (this.justAddedLabel) {
             this.setCaretPositionEnd();
             this.justAddedLabel = false;
+        }else
+        {
+            this.filtered=this.filter();
         }
     }
 
@@ -217,7 +218,6 @@ export class CwcAutocompleteSelect {
     handleInputChange(e) {
         let elText = (typeof e.target.textContent !== 'undefined' && typeof e.target.textContent.length !== 'undefined') ? e.target.textContent[e.target.textContent.length-1] : '';
         this.filterValue =  e.target.textContent || elText;
-        this.openState = true;
         if (
             ['deleteContentBackward', 'deleteContentForward'].indexOf(e.inputType) !==
             -1
@@ -256,7 +256,6 @@ export class CwcAutocompleteSelect {
         this.focusIndex = 0;
         this.filterValue = '';
         this.filtered = [];
-        this.openState = false;
     }
 
     render() {
@@ -307,27 +306,24 @@ export class CwcAutocompleteSelect {
     @Listen('click')
     @Listen('keydown')
     handleKeyUpDown(e) {
-
-
-        if(this.data.length <= 3)
-            this.autoOpen = true;
-        let popperContainer = document.querySelector(`#${this.idValue} .popper-container`);
-        if(e && typeof e.type !== 'undefined' && e.type === 'click'){
-            // Popper will be appear if result length will be <= 25'
-            this.filtered = this.filter();
-            /*if(this.data.length == 5)
-                this.openState=true;*/
-            //End
-            if(popperContainer instanceof HTMLElement){
-                popperContainer.style.position = 'relative';
-            }
-        }else{
-            if(popperContainer instanceof HTMLElement){
-                popperContainer.style.position = 'unset';
-            }
-        }
-
         setTimeout(() => {
+            //popper will be appear on click if data length will be '<=25'
+            if(this.data.length <= 25)
+                this.autoOpen = true;
+            //End
+            let popperContainer = document.querySelector(`#${this.idValue} .popper-container`);
+            if(e && typeof e.type !== 'undefined' && e.type === 'click'){
+                this.filtered = this.filter();
+                if(popperContainer instanceof HTMLElement){
+                    popperContainer.style.position = 'relative';
+                }
+            }else{
+                if(popperContainer instanceof HTMLElement){
+                    popperContainer.style.position = 'unset';
+                }
+            }
+
+
             let formSelector = `#${this.idValue} div.form-control`;
             let HTMLInputEle = document.querySelector(formSelector);
             if(HTMLInputEle != null){
@@ -339,7 +335,7 @@ export class CwcAutocompleteSelect {
                     }
                 });
             }
-        },300);
+        },200);
 
     }
 
@@ -427,9 +423,8 @@ export class CwcAutocompleteSelect {
         setTimeout(() => {
             //this.close();
             this.clearTextNodes();
-            // this.openState = false;
             this.autoOpen = false;
-             this.close();
+            this.close();
 
         }, 150)
     }
