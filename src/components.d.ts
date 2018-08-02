@@ -26,6 +26,7 @@ declare global {
 }
 
 import '@stencil/router';
+import '@stencil/state-tunnel';
 
 import {
   BootstrapThemeColor,
@@ -962,7 +963,7 @@ declare global {
   namespace StencilComponents {
     interface NavigationItem {
       'compact': boolean;
-      'dropIcon': boolean;
+      'dropIcon': string;
       'icon': any;
       'link': string;
       'showIcon': boolean;
@@ -992,7 +993,7 @@ declare global {
   namespace JSXElements {
     export interface NavigationItemAttributes extends HTMLAttributes {
       'compact'?: boolean;
-      'dropIcon'?: boolean;
+      'dropIcon'?: string;
       'icon'?: any;
       'link'?: string;
       'showIcon'?: boolean;
@@ -2907,6 +2908,7 @@ declare global {
     export interface NavigationPageAttributes extends HTMLAttributes {
       'onShownavigationcontainertoggle'?: (event: CustomEvent) => void;
       'onShownavigationtoggle'?: (event: CustomEvent) => void;
+      'onShowniconstoggle'?: (event: CustomEvent) => void;
     }
   }
 }

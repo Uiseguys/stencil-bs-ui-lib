@@ -23,17 +23,21 @@ export class NavigationItem {
 
     @Prop() compact: boolean = false
     @Prop() showIcon: boolean = false
-    @Prop() dropIcon: boolean = false
+    @Prop() dropIcon: string = undefined
     
     render() {
         
         return (
-            <div class="navigation-item-wrapper ">
+            <div class={`navigation-item-wrapper ${this.showIcon ? 'icon-shown' : ''}`  }>
 
               <div class="flex-row">
                     {
                         this.showIcon ? 
-                        <div class="icon-wrapper"></div> : null
+
+                        this.icon ? 
+                        <img class="icon icon-left" src={this.icon} alt={this.titleText}/> :
+                        <div class="icon no-icon" />
+                        : null
                     }
                     <div class="text-wrapper">
                         <div class="navigation-text">{this.text}</div>
@@ -46,7 +50,7 @@ export class NavigationItem {
                     {
                         this.dropIcon ? 
                         // <div class="icon-wrapper">
-                        <img class="icon-drop" src={this.icon} alt={this.titleText}/> : null
+                        <img class="icon" src={this.dropIcon} alt={this.titleText}/> : null
                         // </div> : null
                     }
                 </div>
