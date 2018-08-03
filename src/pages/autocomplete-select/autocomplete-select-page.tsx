@@ -40,7 +40,6 @@ export class AutocompleteSelectPage {
 
   @Listen('multiselectOnSubmit')
   typeaheadOnSubmit(e) {
-    console.log('got results: ', e.detail);
     this.result = e.detail;
   }
   //Listening textchange event from cec-autocomplete-select
