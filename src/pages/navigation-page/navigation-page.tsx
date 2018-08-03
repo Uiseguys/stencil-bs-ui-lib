@@ -9,12 +9,16 @@ export class NavigationPage {
     
     @Event() shownavigationtoggle: EventEmitter;
     @Event() shownavigationcontainertoggle: EventEmitter;
+    @Event() showniconstoggle: EventEmitter;
 
     toggleComponentShownClickHandler () {
         this.shownavigationtoggle.emit()
     }
     toggleContainerShownClickHandler () {
         this.shownavigationcontainertoggle.emit()
+    }
+    toggleIconsShownClickHandler () {
+        this.showniconstoggle.emit()
     }
 
     render() {
@@ -24,10 +28,13 @@ export class NavigationPage {
 
             
 
-                <h3>Component settings</h3>
+                <h3>Overview</h3>
+                <h3>Demo controls</h3>
+
+                <p>This is a navigation component made with Atlassian's design guidelines and concepts.</p>
 
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-9 offset-3">
                     
                     
                     <form>
@@ -38,6 +45,10 @@ export class NavigationPage {
                     <div class="form-group form-check">
                         <div class="btn btn-sm btn-primary mx-2" onClick={ () => this.toggleContainerShownClickHandler()}>Toggle</div>
                         <label class="form-check-label mx-2" >Toggle show navigation section</label>
+                    </div>
+                    <div class="form-group form-check">
+                        <div class="btn btn-sm btn-primary mx-2" onClick={ () => this.toggleIconsShownClickHandler()}>Toggle</div>
+                        <label class="form-check-label mx-2" >Toggle icons shown</label>
                     </div>
                     </form>
                     

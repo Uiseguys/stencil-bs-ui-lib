@@ -6,7 +6,8 @@ import {
     Listen,
     Method,
     Event,
-    EventEmitter
+    EventEmitter,
+    Watch
 } from '@stencil/core';
 import filter from 'lodash/filter';
 import get from 'lodash/get';
@@ -28,16 +29,18 @@ export class CwcAutocompleteSelect {
 
     @Prop() minSearchLength = 1;
     @Prop() data: any[] = [];
-    @Prop() idValue: string = 'multiselect-' + Date.now();
+    @Prop() idValue: string = 'multiselect-' + Math.floor(1000 + Math.random() * 9000) + new Date().getUTCMilliseconds();
     @Prop() searchKey: string;
     @Prop() placeholder = 'Search something e.g. "Alabama"';
 
-    @State() filterValue = '';
+    @State() filterValue: string = '';
     @State() optionsShown = false;
     @State() focusIndex = 0;
     @State() justAddedLabel = false;
+    @State() autoOpen = false;
 
     @State() labels: any[] = [];
+    @State() labelsAdded: boolean = false;
     @State() results: any[] = [];
 
     private filtered: any[] = [];
@@ -46,16 +49,23 @@ export class CwcAutocompleteSelect {
 
     @Event() multiselectOnSubmit: EventEmitter;
     @Event() postValue: EventEmitter;
+    @Event() textChange: EventEmitter;
 
     @Listen('destroy')
     destroyHandler(event) {
         console.log('Received the custom event: ', event);
+    }
+    @Watch('autoOpen')
+    onAutoOpen(newVal){
+        console.log("auto open", newVal);
     }
 
     addLabel(label) {
         this.labels = [...this.labels, label];
         this.justAddedLabel = true;
         this.renderLabels();
+        this.autoOpen=false;
+
     }
 
     addResult(result: any) {
@@ -118,7 +128,6 @@ export class CwcAutocompleteSelect {
         if (this.filterValue) {
             if (this.filterValue.length >= this.minSearchLength) {
                 this.filtered = this.filter();
-
                 if (this.filtered.length > 0) {
                     this.optionsShown = true;
                 }
@@ -130,6 +139,11 @@ export class CwcAutocompleteSelect {
         if (this.justAddedLabel) {
             this.setCaretPositionEnd();
             this.justAddedLabel = false;
+            this.labelsAdded=true;
+
+        }else
+        {
+            this.filtered=this.filter();
         }
     }
 
@@ -183,7 +197,7 @@ export class CwcAutocompleteSelect {
     private filterStringArray(data) {
         return filter(data, value => {
             const v = typeof value === 'string' ? value : value.index;
-
+            this.filterValue = this.filterValue || '';
             return v.toLowerCase().indexOf(this.filterValue.toLowerCase()) >= 0;
         });
     }
@@ -208,8 +222,13 @@ export class CwcAutocompleteSelect {
      * Handlers
      */
     handleInputChange(e) {
-        let elText = (typeof e.target.textContent !== 'undefined' && typeof e.target.textContent.length !== 'undefined') ? e.target.textContent[e.target.textContent.length-1] : '';
-        this.filterValue = e.data || elText;
+        //let elText = (typeof e.target.textContent !== 'undefined' && typeof e.target.textContent.length !== 'undefined') ? e.target.textContent[e.target.textContent.length-1] : '';
+        //this.filterValue = (e && e.target && e.target.childNodes && e.target.childNodes && e.target.childNodes.length && e.target.childNodes[e.target.childNodes.length - 1]) ? e.target.childNodes[e.target.childNodes.length-1].textContent : '';
+        if(e && e.target && e.target.childNodes && e.target.childNodes.length && e.target.childNodes[0] && e.target.childNodes[0].nodeName && e.target.childNodes[0].nodeName == '#text' && e.target.childNodes[0].textContent){
+            this.filterValue = e.target.childNodes[0].textContent;
+        }else{
+            this.filterValue = (e && e.target && e.target.childNodes && e.target.childNodes.length && e.target.childNodes[e.target.childNodes.length-1] && e.target.childNodes[e.target.childNodes.length-1].textContent) ? e.target.childNodes[e.target.childNodes.length-1].textContent : '';
+        }
 
         if (
             ['deleteContentBackward', 'deleteContentForward'].indexOf(e.inputType) !==
@@ -261,11 +280,12 @@ export class CwcAutocompleteSelect {
                     contentEditable={true}
                     onInput={(e) => this.handleInputChange(e)}
                 >
-                    <span class="caret">&nbsp;</span>
+                    <span class="caret" />
                 </div>
-                <div>
+                <div class="popper-container">
                     {this.filtered.length > 0 && (
                         <cwc-popper
+                            autoOpen={this.autoOpen}
                             id={`cwc-popper-autocomplete-${this.idValue}`}
                             refid={this.idValue} trigger="keyup" placement="bottom" arrow={false} autoClose={true}>
                             <div class="popper">
@@ -295,10 +315,27 @@ export class CwcAutocompleteSelect {
 
 
     @Listen('keyup')
+    @Listen('click')
     @Listen('keydown')
-    handleKeyUpDown() {
-        //Set popper width dynamic
-        if(this.idValue){
+    handleKeyUpDown(e) {
+        setTimeout(() => {
+            //popper will be appear on click if data length will be '<=25'
+            if(this.data.length <= 25 && !this.labelsAdded)
+                this.autoOpen = true;
+            //End
+            let popperContainer = document.querySelector(`#${this.idValue} .popper-container`);
+            if(e && typeof e.type !== 'undefined' && e.type === 'click'){
+                this.filtered = this.filter();
+                if(popperContainer instanceof HTMLElement){
+                    popperContainer.style.position = 'relative';
+                }
+            }else{
+                if(popperContainer instanceof HTMLElement){
+                    popperContainer.style.position = 'unset';
+                }
+            }
+
+
             let formSelector = `#${this.idValue} div.form-control`;
             let HTMLInputEle = document.querySelector(formSelector);
             if(HTMLInputEle != null){
@@ -307,24 +344,21 @@ export class CwcAutocompleteSelect {
                     let targetElem = document.querySelector(formSelector + ' + div > cwc-popper > .popper > .cwc-popper-autocomplete');
                     if(targetElem instanceof HTMLElement){
                         targetElem.style.width = positionInfo.width + 'px';
-                        // targetElem.style.top = 'auto';
-                        // targetElem.style.bottom = '100%';
-
-                        /*if(targetElem.style.transform){
-                            let transformProp = targetElem.style.transform;
-                            transformProp = transformProp.replace('translate3d(', '');
-                            transformProp = transformProp.replace(')', '');
-                            if(transformProp){
-                                let transformPropArr = [];
-                                transformPropArr = transformProp.split(',');
-                                if(typeof transformPropArr[1] !== 'undefined' && typeof transformPropArr[2] !== 'undefined'){
-                                    targetElem.style.transform = 'translate3d(1%,' + transformPropArr[1] + ','+ transformPropArr[2] + ')';
-                                }
-                            }
-                        }*/
                     }
                 });
             }
+        },200);
+
+        this.labelsAdded=false;
+        if(e && (e.type === 'keydown' || e.type === 'keyup')){
+            //this.textChange.emit((e && typeof e.target !== 'undefined' && typeof e.target.childNodes !== 'undefined' && typeof e.target.childNodes.length !== 'undefined') ? e.target.childNodes[e.target.childNodes.length-1].textContent : '');
+            let searchText = '';
+            if(e && e.target && e.target.childNodes && e.target.childNodes.length && e.target.childNodes[0] && e.target.childNodes[0].nodeName && e.target.childNodes[0].nodeName == '#text' && e.target.childNodes[0].textContent){
+                searchText = e.target.childNodes[0].textContent;
+            }else{
+                searchText = (e && e.target && e.target.childNodes && e.target.childNodes.length && e.target.childNodes[e.target.childNodes.length-1] && e.target.childNodes[e.target.childNodes.length-1].textContent) ? e.target.childNodes[e.target.childNodes.length-1].textContent : '';
+            }
+            this.textChange.emit(searchText);
         }
     }
 
@@ -391,7 +425,8 @@ export class CwcAutocompleteSelect {
             `#${this.idValue} div.form-control span.caret`
         );
         if (caretEl) {
-            caretEl.innerHTML = '&nbsp;';
+            //caretEl.innerHTML = '&nbsp;';
+            caretEl.innerHTML = '';
         } else {
             this.createCaretEl();
         }
@@ -403,7 +438,7 @@ export class CwcAutocompleteSelect {
         );
         const caretEl = document.createElement('span');
         caretEl.className = 'caret';
-        caretEl.innerHTML = '&nbsp;';
+       // caretEl.innerHTML = '&nbsp;';
         input.appendChild(caretEl);
     }
 
@@ -412,7 +447,10 @@ export class CwcAutocompleteSelect {
         setTimeout(() => {
             //this.close();
             this.clearTextNodes();
-        }, 100)
+            this.autoOpen = false;
+            this.close();
+            this.textChange.emit('');
+        }, 150)
     }
 
 }
