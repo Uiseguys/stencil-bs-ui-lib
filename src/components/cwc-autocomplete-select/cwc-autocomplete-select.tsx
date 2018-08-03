@@ -227,7 +227,7 @@ export class CwcAutocompleteSelect {
         if(e && e.target && e.target.childNodes && e.target.childNodes.length && e.target.childNodes[0] && e.target.childNodes[0].nodeName && e.target.childNodes[0].nodeName == '#text' && e.target.childNodes[0].textContent){
             this.filterValue = e.target.childNodes[0].textContent;
         }else{
-            this.filterValue = (e && typeof e.target !== 'undefined' && typeof e.target.childNodes !== 'undefined' && typeof e.target.childNodes.length !== 'undefined') ? e.target.childNodes[e.target.childNodes.length-1].textContent : '';
+            this.filterValue = (e && e.target && e.target.childNodes && e.target.childNodes.length && e.target.childNodes[e.target.childNodes.length-1] && e.target.childNodes[e.target.childNodes.length-1].textContent) ? e.target.childNodes[e.target.childNodes.length-1].textContent : '';
         }
 
         if (
@@ -356,7 +356,7 @@ export class CwcAutocompleteSelect {
             if(e && e.target && e.target.childNodes && e.target.childNodes.length && e.target.childNodes[0] && e.target.childNodes[0].nodeName && e.target.childNodes[0].nodeName == '#text' && e.target.childNodes[0].textContent){
                 searchText = e.target.childNodes[0].textContent;
             }else{
-                searchText = (e && typeof e.target !== 'undefined' && typeof e.target.childNodes !== 'undefined' && typeof e.target.childNodes.length !== 'undefined') ? e.target.childNodes[e.target.childNodes.length-1].textContent : '';
+                searchText = (e && e.target && e.target.childNodes && e.target.childNodes.length && e.target.childNodes[e.target.childNodes.length-1] && e.target.childNodes[e.target.childNodes.length-1].textContent) ? e.target.childNodes[e.target.childNodes.length-1].textContent : '';
             }
             this.textChange.emit(searchText);
         }
