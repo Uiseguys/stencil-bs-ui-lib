@@ -9,16 +9,15 @@ export class NavigationPage {
     
     @Event() shownavigationtoggle: EventEmitter;
     @Event() shownavigationcontainertoggle: EventEmitter;
-    @Event() showniconstoggle: EventEmitter;
-
+    @Event() naviconstoggle: EventEmitter;
     toggleComponentShownClickHandler () {
         this.shownavigationtoggle.emit()
     }
     toggleContainerShownClickHandler () {
         this.shownavigationcontainertoggle.emit()
     }
-    toggleIconsShownClickHandler () {
-        this.showniconstoggle.emit()
+    toggleShowIconsClickHandler() {
+        this.naviconstoggle.emit()
     }
 
     render() {
@@ -47,8 +46,8 @@ export class NavigationPage {
                         <label class="form-check-label mx-2" >Toggle show navigation section</label>
                     </div>
                     <div class="form-group form-check">
-                        <div class="btn btn-sm btn-primary mx-2" onClick={ () => this.toggleIconsShownClickHandler()}>Toggle</div>
-                        <label class="form-check-label mx-2" >Toggle icons shown</label>
+                        <div class="btn btn-sm btn-primary mx-2" onClick={ () => this.toggleShowIconsClickHandler()}>Toggle</div>
+                        <label class="form-check-label mx-2" >Toggle show navigation items icons</label>
                     </div>
                     </form>
                     

@@ -15,7 +15,7 @@ import { Component, Prop } from '@stencil/core';
 
 export class NavigationItem {
 
-    @Prop() icon: any
+    @Prop() icon: string
     @Prop() text: string
     @Prop() subText: string
     @Prop() titleText: string

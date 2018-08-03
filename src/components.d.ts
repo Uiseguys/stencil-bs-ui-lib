@@ -964,7 +964,7 @@ declare global {
     interface NavigationItem {
       'compact': boolean;
       'dropIcon': string;
-      'icon': any;
+      'icon': string;
       'link': string;
       'showIcon': boolean;
       'subText': string;
@@ -994,7 +994,7 @@ declare global {
     export interface NavigationItemAttributes extends HTMLAttributes {
       'compact'?: boolean;
       'dropIcon'?: string;
-      'icon'?: any;
+      'icon'?: string;
       'link'?: string;
       'showIcon'?: boolean;
       'subText'?: string;
@@ -2906,9 +2906,9 @@ declare global {
   }
   namespace JSXElements {
     export interface NavigationPageAttributes extends HTMLAttributes {
+      'onNaviconstoggle'?: (event: CustomEvent) => void;
       'onShownavigationcontainertoggle'?: (event: CustomEvent) => void;
       'onShownavigationtoggle'?: (event: CustomEvent) => void;
-      'onShowniconstoggle'?: (event: CustomEvent) => void;
     }
   }
 }
