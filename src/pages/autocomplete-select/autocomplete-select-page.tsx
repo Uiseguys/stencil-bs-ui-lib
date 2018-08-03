@@ -40,7 +40,6 @@ export class AutocompleteSelectPage {
 
   @Listen('multiselectOnSubmit')
   typeaheadOnSubmit(e) {
-    console.log('got results: ', e.detail);
     this.result = e.detail;
   }
   //Listening textchange event from cec-autocomplete-select
@@ -67,6 +66,8 @@ export class AutocompleteSelectPage {
       <h4>result: </h4>,
       <pre>{JSON.stringify(this.result, null, 2)}</pre>,
       <br />,
+
+      <h6>Text Change result: {this.textChangeResult}</h6>,
       <br />,
       <cwc-tag text="Holla tag" />,
       <br />,

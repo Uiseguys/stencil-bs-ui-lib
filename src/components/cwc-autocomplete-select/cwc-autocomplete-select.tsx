@@ -222,8 +222,8 @@ export class CwcAutocompleteSelect {
      * Handlers
      */
     handleInputChange(e) {
-        let elText = (typeof e.target.textContent !== 'undefined' && typeof e.target.textContent.length !== 'undefined') ? e.target.textContent[e.target.textContent.length-1] : '';
-        this.filterValue =  e.target.textContent || elText;
+        //let elText = (typeof e.target.textContent !== 'undefined' && typeof e.target.textContent.length !== 'undefined') ? e.target.textContent[e.target.textContent.length-1] : '';
+        this.filterValue = (e && typeof e.target !== 'undefined' && typeof e.target.childNodes !== 'undefined' && typeof e.target.childNodes.length !== 'undefined') ? e.target.childNodes[e.target.childNodes.length-1].textContent : '';
         if (
             ['deleteContentBackward', 'deleteContentForward'].indexOf(e.inputType) !==
             -1
@@ -344,8 +344,16 @@ export class CwcAutocompleteSelect {
         },200);
 
         this.labelsAdded=false;
-        if(e.type === 'keydown' || e.type === 'keyup')
-            this.textChange.emit(e.target.textContent);
+        if(e.type === 'keydown' || e.type === 'keyup'){
+            //this.textChange.emit((e && typeof e.target !== 'undefined' && typeof e.target.childNodes !== 'undefined' && typeof e.target.childNodes.length !== 'undefined') ? e.target.childNodes[e.target.childNodes.length-1].textContent : '');
+            let searchText = '';
+            if(e && e.target && e.target.childNodes && e.target.childNodes.length && e.target.childNodes[0] && e.target.childNodes[0].nodeName && e.target.childNodes[0].nodeName == '#text' && e.target.childNodes[0].textContent){
+                searchText = e.target.childNodes[0].textContent;
+            }else{
+                searchText = (e && typeof e.target !== 'undefined' && typeof e.target.childNodes !== 'undefined' && typeof e.target.childNodes.length !== 'undefined') ? e.target.childNodes[e.target.childNodes.length-1].textContent : '';
+            }
+            this.textChange.emit(searchText);
+        }
     }
 
     @Listen('keydown.down')
@@ -411,7 +419,8 @@ export class CwcAutocompleteSelect {
             `#${this.idValue} div.form-control span.caret`
         );
         if (caretEl) {
-           // caretEl.innerHTML = '&nbsp;';
+            //caretEl.innerHTML = '&nbsp;';
+            caretEl.innerHTML = '';
         } else {
             this.createCaretEl();
         }
@@ -434,7 +443,7 @@ export class CwcAutocompleteSelect {
             this.clearTextNodes();
             this.autoOpen = false;
             this.close();
-
+            this.textChange.emit('');
         }, 150)
     }
 
