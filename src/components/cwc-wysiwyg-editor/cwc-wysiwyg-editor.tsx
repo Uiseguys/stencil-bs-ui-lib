@@ -1,11 +1,7 @@
 import { Component, Element, Method, Prop, Event, EventEmitter } from '@stencil/core';
-import '../../lib/woofmark/woofmark.min';
-import '../../lib/woofmark/megamark.min';
-import '../../lib/woofmark/domador.min';
-
-declare var woofmark: any;
-declare var megamark: any;
-declare var domador: any;
+import woofmark from '../../../node_modules/woofmark/dist/woofmark.min';
+import megamark from '../../../node_modules/megamark/dist/megamark.min';
+import domador from '../../../node_modules/domador/dist/domador.min';
 
 @Component({
   tag: 'cwc-wysiwyg-editor',
@@ -35,7 +31,7 @@ export class CwcWysiwygEditor {
   }
 
   private _initEditor() {
-    this._woofmark = woofmark(this._element.children[0], {
+    this._woofmark = woofmark(this._element.children[0].children[0], {
       fencing: this.fencing,
       markdown: this.markdown,
       html: this.html,
@@ -90,9 +86,11 @@ export class CwcWysiwygEditor {
 
   render() {
     return (
-      <textarea>
-        <slot />
-      </textarea>
+      <div class="cwc-wysiwyg-editor-container">
+        <textarea>
+          <slot />
+        </textarea>
+      </div>
     );
   }
 }
