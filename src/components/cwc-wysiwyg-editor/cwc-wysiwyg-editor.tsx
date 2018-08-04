@@ -11,6 +11,7 @@ export class CwcWysiwygEditor {
   /* used for form-generator */
   @Prop() id: string;
   @Prop() for: string;
+  @Prop() label: string;
   /* /used for form-generator */
   @Prop() fencing: boolean = true;
   @Prop() markdown: boolean = true;
@@ -31,7 +32,7 @@ export class CwcWysiwygEditor {
   }
 
   private _initEditor() {
-    this._woofmark = woofmark(this._element.children[0].children[0], {
+    this._woofmark = woofmark(this._element.children[0].children[1].children[0], {
       fencing: this.fencing,
       markdown: this.markdown,
       html: this.html,
@@ -86,10 +87,11 @@ export class CwcWysiwygEditor {
 
   render() {
     return (
-      <div class="cwc-wysiwyg-editor-container">
-        <textarea>
-          <slot />
-        </textarea>
+      <div class="form-group cwc-wysiwyg-editor-container">
+        <label class="control-label">{this.label}</label>
+        <div class="woofmark-target">
+          <textarea><slot /></textarea>
+        </div>
       </div>
     );
   }
