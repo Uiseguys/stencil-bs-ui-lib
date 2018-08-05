@@ -37,8 +37,15 @@ export class ModalPage {
   backdrop={true}
   keyboard={true}
   modalfocus={true}
-  showButton={true}
->
+  showButton={true}>
+  <span slot="modal-btn-close">
+    <button type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+   </span>
   Put your modal contents here. You can put any content<br />
   <input
     type="text"
@@ -277,8 +284,16 @@ export class ModalPage {
         <pre class="code">
           <code>
             {`<cwc-modal>
+  <span slot="modal-btn-close">
+    <button type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close">
+       <span aria-hidden="true">&times;</span>
+     </button>
+  </span>
   Put your modal contents here. You can put any content.
-</cwc-modal>`}
+  </cwc-modal>`}
           </code>
         </pre>
         <cwc-modal>
@@ -298,7 +313,15 @@ export class ModalPage {
         <pre class="code">
           <code>
             {`<cwc-modal modalTitle="Custom" btntype="success">
-  Put your modal contents here. You can put any content.
+  <span slot="modal-btn-close">
+    <button type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+   </span>
+   Put your modal contents here. You can put any content.
 </cwc-modal>`}
           </code>
         </pre>
@@ -321,9 +344,16 @@ export class ModalPage {
             {`<cwc-modal 
     backdrop={false} 
     animation={false} 
-    keyboard={false} 
-  >
-  Put your modal contents here. You can put any content.
+    keyboard={false}>
+    <span slot="modal-btn-close">
+      <button type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </span>
+    Put your modal contents here. You can put any content.
 </cwc-modal>`}
           </code>
         </pre>
@@ -350,8 +380,15 @@ export class ModalPage {
           <code>
             {`<cwc-modal
     show={this.modal}
-    toggle={() => {this.modal = !this.modal}}
-  >
+    toggle={() => {this.modal = !this.modal}}>
+    <span slot="modal-btn-close">
+    <button type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+   </span>
   Put your modal contents here. You can put any content.
 </cwc-modal>
 <button class="btn btn-secondary mr-2" onClick={() => {this.modal = !this.modal}}>
