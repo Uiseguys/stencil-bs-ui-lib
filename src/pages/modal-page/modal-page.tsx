@@ -282,6 +282,15 @@ export class ModalPage {
           </code>
         </pre>
         <cwc-modal>
+          <span slot="modal-btn-close">
+            <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </span>
           Put your modal contents here. You can put any content.
         </cwc-modal>
 
@@ -294,6 +303,15 @@ export class ModalPage {
           </code>
         </pre>
         <cwc-modal modalTitle="Custom" btntype="success">
+          <span slot="modal-btn-close">
+            <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </span>
           Put your modal contents here. You can put any content.
         </cwc-modal>
 
@@ -315,6 +333,15 @@ export class ModalPage {
           keyboard={false}
           centered={false}
         >
+          <span slot="modal-btn-close">
+            <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </span>
           Put your modal contents here. You can put any content.
         </cwc-modal>
 
@@ -339,6 +366,15 @@ export class ModalPage {
           show={this.modal}
           toggle={this.toggleModal}
         >
+          <span slot="modal-btn-close">
+            <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </span>
           Put your modal contents here. You can put any content.
         </cwc-modal>
         <button class="btn btn-secondary mr-2" onClick={this.toggleModal}>
