@@ -53,6 +53,12 @@ export class ModalPage {
     name="Name"
     placeholder="Input your name"
   />
+  <span slot="modal-footer-content">
+    <button
+      type="button"
+      class="btn btn-secondary footer-cancel"
+      data-dismiss="modal">Close</button>
+  </span>
 </cwc-modal>`}
           </pre>
 
@@ -293,6 +299,12 @@ export class ModalPage {
      </button>
   </span>
   Put your modal contents here. You can put any content.
+  <span slot="modal-footer-content">
+    <button
+      type="button"
+      class="btn btn-secondary footer-cancel"
+      data-dismiss="modal">Close</button>
+  </span>
   </cwc-modal>`}
           </code>
         </pre>
@@ -307,6 +319,13 @@ export class ModalPage {
             </button>
           </span>
           Put your modal contents here. You can put any content.
+
+          <span slot="modal-footer-content">
+              <button
+                  type="button"
+                  class="btn btn-secondary footer-cancel"
+                  data-dismiss="modal">Close</button>
+          </span>
         </cwc-modal>
 
         <h3 class="mt-3">Change Title and button color:</h3>
@@ -320,8 +339,14 @@ export class ModalPage {
       aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-   </span>
-   Put your modal contents here. You can put any content.
+  </span>
+  Put your modal contents here. You can put any content.
+  <span slot="modal-footer-content">
+    <button
+      type="button"
+      class="btn btn-secondary footer-cancel"
+      data-dismiss="modal">Close</button>
+  </span>
 </cwc-modal>`}
           </code>
         </pre>
@@ -336,6 +361,12 @@ export class ModalPage {
             </button>
           </span>
           Put your modal contents here. You can put any content.
+          <span slot="modal-footer-content">
+              <button
+                  type="button"
+                  class="btn btn-secondary footer-cancel"
+                  data-dismiss="modal">Close</button>
+          </span>
         </cwc-modal>
 
         <h3 class="mt-3">No backdrop, No centered, No animation:</h3>
@@ -354,6 +385,12 @@ export class ModalPage {
       </button>
     </span>
     Put your modal contents here. You can put any content.
+    <span slot="modal-footer-content">
+      <button
+        type="button"
+        class="btn btn-secondary footer-cancel"
+        data-dismiss="modal">Close</button>
+    </span>
 </cwc-modal>`}
           </code>
         </pre>
@@ -373,6 +410,12 @@ export class ModalPage {
             </button>
           </span>
           Put your modal contents here. You can put any content.
+          <span slot="modal-footer-content">
+              <button
+                  type="button"
+                  class="btn btn-secondary footer-cancel"
+                  data-dismiss="modal">Close</button>
+          </span>
         </cwc-modal>
 
         <h3 class="mt-3">Don't display button:</h3>
@@ -390,6 +433,12 @@ export class ModalPage {
     </button>
    </span>
   Put your modal contents here. You can put any content.
+  <span slot="modal-footer-content">
+    <button
+      type="button"
+      class="btn btn-secondary footer-cancel"
+      data-dismiss="modal">Close</button>
+  </span>
 </cwc-modal>
 <button class="btn btn-secondary mr-2" onClick={() => {this.modal = !this.modal}}>
   Custom Button
@@ -401,8 +450,7 @@ export class ModalPage {
           id="example_modal"
           showButton={false}
           show={this.modal}
-          toggle={this.toggleModal}
-        >
+          toggle={this.toggleModal}>
           <span slot="modal-btn-close">
             <button
                 type="button"
@@ -413,6 +461,12 @@ export class ModalPage {
             </button>
           </span>
           Put your modal contents here. You can put any content.
+          <span slot="modal-footer-content">
+              <button
+                  type="button"
+                  class="btn btn-secondary footer-cancel"
+                  data-dismiss="modal">Close</button>
+          </span>
         </cwc-modal>
         <button class="btn btn-secondary mr-2" onClick={this.toggleModal}>
           Custom Button
