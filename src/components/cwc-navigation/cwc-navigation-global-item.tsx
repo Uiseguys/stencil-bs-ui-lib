@@ -11,12 +11,18 @@ export class CwcNavigationGlobalItem {
     @Prop() link: string;
     
     render() {
-        return (
+
+        return this.link ? 
+         (
             <div class="navigation-global-item-wrapper">
-                <a href="https://github.com">
+                <a href={this.link}>
                     <img class="item-img" src={this.icon} alt={this.titleText} title={this.titleText}/>
                 </a>
             </div>
-        );
+        ) : (
+            <div class="navigation-global-item-wrapper">
+                <img class="item-img" src={this.icon} alt={this.titleText} title={this.titleText}/>
+            </div>
+        )
     }
 }
