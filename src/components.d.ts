@@ -26,7 +26,6 @@ declare global {
 }
 
 import '@stencil/router';
-import '@stencil/state-tunnel';
 
 import {
   BootstrapThemeColor,
@@ -964,7 +963,7 @@ declare global {
     interface NavigationItem {
       'compact': boolean;
       'dropIcon': string;
-      'icon': string;
+      'icon': any;
       'link': string;
       'showIcon': boolean;
       'subText': string;
@@ -994,7 +993,7 @@ declare global {
     export interface NavigationItemAttributes extends HTMLAttributes {
       'compact'?: boolean;
       'dropIcon'?: string;
-      'icon'?: string;
+      'icon'?: any;
       'link'?: string;
       'showIcon'?: boolean;
       'subText'?: string;
