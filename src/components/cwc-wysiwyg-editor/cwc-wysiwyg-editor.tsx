@@ -8,11 +8,10 @@ import domador from '../../../node_modules/domador/dist/domador.min';
   styleUrl: 'cwc-wysiwyg-editor.scss'
 })
 export class CwcWysiwygEditor {
-  /* used for form-generator */
   @Prop() id: string;
   @Prop() for: string;
   @Prop() label: string;
-  /* /used for form-generator */
+
   @Prop() fencing: boolean = true;
   @Prop() markdown: boolean = true;
   @Prop() html: boolean = true;

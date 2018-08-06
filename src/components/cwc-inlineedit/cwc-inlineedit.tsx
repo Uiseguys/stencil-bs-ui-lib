@@ -74,7 +74,6 @@ export class CwcInlineedit {
         this.fieldWrapper.style.display = 'inline-block';
         this.onconfirm.emit(value);
 
-        //used for form-generator component
         if (value) {
             currentValue = value;
         } else {

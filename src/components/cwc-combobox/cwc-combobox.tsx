@@ -6,10 +6,9 @@ import 'bootstrap.native/dist/bootstrap-native-v4';
     styleUrl: 'cwc-combobox.scss'
 })
 export class ComboboxComponent {
-    /* Used for form-generator component */
     @Prop() id: string;
     @Prop() value: any;
-    /* Used for form-generator component */
+
     @Prop() data: Array<string|number> = [];
     @Prop() label: string;
     @Prop() btnText: string;

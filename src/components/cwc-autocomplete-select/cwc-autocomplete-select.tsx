@@ -22,10 +22,8 @@ import get from 'lodash/get';
     styleUrl: 'cwc-autocomplete-select.scss',
 })
 export class CwcAutocompleteSelect {
-    /* used for form-generator component */
     @Prop() id: string;
     @Prop() label: string;
-    /* /used for form-generator component */
 
     @Prop() minSearchLength = 1;
     @Prop() data: any[] = [];
@@ -80,13 +78,11 @@ export class CwcAutocompleteSelect {
         this.results = this.results.filter((_, i) => i !== index);
         this.multiselectOnSubmit.emit(this.results);
 
-        /* used for form-generator component */
         this.postValue.emit({
           id: this.id,
           value: this.results.length ? this.results : null,
           type: 'autocomplete'
         });
-        /* /used for form-generator component */
     }
 
     clearLabels() {
@@ -112,13 +108,11 @@ export class CwcAutocompleteSelect {
 
         this.multiselectOnSubmit.emit(this.results);
 
-        /* used for form-generator component */
         this.postValue.emit({
           id: this.id,
           value: this.results,
           type: 'autocomplete'
         });
-        /* /used for form-generator component */
     }
 
     /**
