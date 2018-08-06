@@ -31,7 +31,7 @@ export class CwcModal {
   @Prop() show: boolean = undefined;
 
   @Prop() showButton: boolean = true;
-  @Prop() customId: string = 'cwc-modal';
+  @Prop() customId: string = 'cwc-modal-' + Math.floor(1000 + Math.random() * 9000) + new Date().getUTCMilliseconds();
   @Prop() toggle: () => any = null;
 
   @Event() onOpenModal: EventEmitter;
@@ -83,6 +83,16 @@ export class CwcModal {
         this.modalContentElem.focus();
       });
     }
+
+    //Add `click` event listener for modal footer cancel/close button
+    setTimeout(() => {
+      if(this.customId){
+        let footerCancelBtn = document.querySelectorAll(`#${this.customId}.show .modal-footer button.footer-cancel`);
+        if(footerCancelBtn && footerCancelBtn[0]){
+          footerCancelBtn[0].addEventListener('click', this._handleClickOnFooterCancelButton);
+        }
+      }
+    },300);
   }
 
   @Method()
@@ -158,9 +168,22 @@ export class CwcModal {
     else if (this.toggle) this.toggle();
   };
 
+  _handleClickOnFooterCancelButton = () => {
+    this.closeModalHandler();
+  };
+
   closeModalHandler = () => {
     if (this.show === undefined) this.closeModal();
     else if (this.toggle) this.toggle();
+
+    if(this.customId){
+      let footerCancelBtn = document.querySelectorAll(`#${this.customId} .modal-footer button.footer-cancel`);
+      if(footerCancelBtn && footerCancelBtn[0]){
+        footerCancelBtn[0].removeEventListener('click', () => {
+
+        });
+      }
+    }
   };
 
   render() {
@@ -198,7 +221,8 @@ export class CwcModal {
               'modal-dialog': true,
               'modal-dialog-centered': this.centered,
               'modal-lg': this.size === 'large',
-              'modal-sm': this.size === 'small'
+              'modal-sm': this.size === 'small',
+
             }}
             role="document"
           >
@@ -210,28 +234,15 @@ export class CwcModal {
             >
               <div class="modal-header">
                 <h5 class="modal-title">{this.modalTitle}</h5>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                  onClick={this.closeModalHandler}
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                <span onClick={this.closeModalHandler}>
+                  <slot name="modal-btn-close"></slot>
+                </span>
               </div>
               <div class="modal-body">
                 <slot />
               </div>
               <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-dismiss="modal"
-                  onClick={this.closeModalHandler}
-                >
-                  Close
-                </button>
+                <slot name="modal-footer-content"></slot>
               </div>
             </div>
           </div>
