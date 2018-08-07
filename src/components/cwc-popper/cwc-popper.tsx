@@ -21,6 +21,7 @@ export class CwcPopper {
     @Prop() arrow: boolean = false;
     @Prop() isToggleBtn: boolean = false;
     @Prop() autoClose: boolean = false;
+    @Prop() autoOpen: boolean = false;
     @Prop() closeable: boolean = true;
 
     @State() popper: Popper;
@@ -65,6 +66,9 @@ export class CwcPopper {
                 this.btn.addEventListener(trigger, () => this.toggle());
             } else {
                 this.btn.addEventListener(trigger, () => this.open());
+            }
+            if(this.autoOpen){
+                popperDropdown.addEventListener('click', () => this.open());
             }
             if (!this.autoClose) {
                 popperDropdown.addEventListener(trigger, () => this.open());
