@@ -236,10 +236,10 @@ export class StencilBsDemoPage {
                 <cwc-navigation-global-item 
                     titleText={'Title text'} 
                     icon="./assets/icon/sharp_send_white_48dp.png"/>
-                <cwc-navigation-global-item 
+                <cwc-navigation-global-item
                     titleText={'Title text'} 
                     icon="./assets/icon/sharp_check_circle_outline_white_18dp.png"/>
-                <cwc-navigation-global-item 
+                <cwc-navigation-global-item isActive={true}
                     titleText={'Title text'} 
                     icon="./assets/icon/baseline_add_white_18dp.png"/>
           
@@ -262,12 +262,12 @@ export class StencilBsDemoPage {
 
               <div slot="navigation-items">
 
-                  <navigation-item  showIcon={this.isIconsShown}text="Navigation item" />
-                  <navigation-item  showIcon={this.isIconsShown}text="With subtext"
+                  <navigation-item  showIcon={this.isIconsShown} text="Navigation item" />
+                  <navigation-item  showIcon={this.isIconsShown} isActive={true} text={'Active nav item with subtext'}
                       subText="Subtext of nav item" />
-                  <navigation-item  showIcon={this.isIconsShown}text="Basic link" />
+                  <navigation-item  showIcon={this.isIconsShown} text="Basic link" />
 
-                  <navigation-item  showIcon={this.isIconsShown}text="With drop icon" 
+                  <navigation-item  showIcon={this.isIconsShown}  text="With drop icon" 
                       dropIcon="./assets/icon/sharp_flip_to_front_white_18dp.png"/>
               
               </div>
@@ -276,17 +276,17 @@ export class StencilBsDemoPage {
           <navigation-item-group text="Group with separator" hasSeparator={true}>
 
             <div slot="navigation-items">
-                <navigation-item  showIcon={this.isIconsShown}text="With dropicon and subasdfastext" 
+                <navigation-item  showIcon={this.isIconsShown} text="With dropicon and subasdfastext" 
                 subText="My small subtext"
                 icon={'./assets/icon/baseline_add_white_18dp.png'}
                 dropIcon={'./assets/icon/sharp_flip_to_front_white_18dp.png'}/>
 
-                <navigation-item  showIcon={this.isIconsShown}text="With dropicon and subtext" 
+                <navigation-item  showIcon={this.isIconsShown} text="With dropicon and subtext" 
                 subText="My small subtext"
                 icon={'./assets/icon/baseline_add_white_18dp.png'}
                 dropIcon={'./assets/icon/sharp_flip_to_front_white_18dp.png'}/>
                 
-                <navigation-item  showIcon={this.isIconsShown}text="With mouse events" />
+                <navigation-item  showIcon={this.isIconsShown} text="With mouse events" />
             </div>
           </navigation-item-group>
 
