@@ -167,9 +167,9 @@ export class AutocompleteSelectPage {
                                         <div class="col-lg-12">
                                             <pre><code class="lang-tsx">
 
-                                                {`<cwc-autocomplete-select searchKey="data.name" data={{ type: 'country', data: { name: 'Austria', capital: 'Vienna' } },
+                                                {`<cwc-autocomplete-select searchKey="data.name" data={[{ type: 'country', data: { name: 'Austria', capital: 'Vienna' } },
 { type: 'country', data: { name: 'Australia', capital: 'Canberra' } },
-{ type: 'country', data: { name: 'Argentina', capital: 'Buenos Aires' } }}/>`}
+{ type: 'country', data: { name: 'Argentina', capital: 'Buenos Aires' } }]}/>`}
                                             </code></pre>
                                         </div>
                                     </div>
