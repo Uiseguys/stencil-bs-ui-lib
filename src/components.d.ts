@@ -817,6 +817,7 @@ declare global {
   namespace StencilComponents {
     interface CwcNavigationGlobalItem {
       'icon': any;
+      'isActive': boolean;
       'link': string;
       'titleText': string;
     }
@@ -842,6 +843,7 @@ declare global {
   namespace JSXElements {
     export interface CwcNavigationGlobalItemAttributes extends HTMLAttributes {
       'icon'?: any;
+      'isActive'?: boolean;
       'link'?: string;
       'titleText'?: string;
     }
@@ -964,7 +966,8 @@ declare global {
     interface NavigationItem {
       'compact': boolean;
       'dropIcon': string;
-      'icon': any;
+      'icon': string;
+      'isActive': boolean;
       'link': string;
       'showIcon': boolean;
       'subText': string;
@@ -994,7 +997,8 @@ declare global {
     export interface NavigationItemAttributes extends HTMLAttributes {
       'compact'?: boolean;
       'dropIcon'?: string;
-      'icon'?: any;
+      'icon'?: string;
+      'isActive'?: boolean;
       'link'?: string;
       'showIcon'?: boolean;
       'subText'?: string;
@@ -2875,9 +2879,9 @@ declare global {
   }
   namespace JSXElements {
     export interface NavigationPageAttributes extends HTMLAttributes {
+      'onNaviconstoggle'?: (event: CustomEvent) => void;
       'onShownavigationcontainertoggle'?: (event: CustomEvent) => void;
       'onShownavigationtoggle'?: (event: CustomEvent) => void;
-      'onShowniconstoggle'?: (event: CustomEvent) => void;
     }
   }
 }

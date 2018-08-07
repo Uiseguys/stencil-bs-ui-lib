@@ -13,7 +13,7 @@ navigation-item {
     text-decoration: none;
     padding: 10px 10px 4px 12px;
     margin-right: 6px;
-    height: 40px;
+    height: 42px;
 
 
     .navigation-item-wrapper {
@@ -60,12 +60,13 @@ navigation-item {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: 35px;
+            height: 40px;
             margin-right: 10px;
             /* align-items: end; */
     }
 
-    &:hover {
+    &:hover,
+    &.is-active {
         background-color: rgba(9, 30, 66, 0.42);
         color: rgb(222, 235, 255);
         fill: rgba(9, 30, 66, 0.42);
