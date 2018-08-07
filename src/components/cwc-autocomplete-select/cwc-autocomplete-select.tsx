@@ -102,9 +102,10 @@ export class CwcAutocompleteSelect {
         this.filterValue = '';
         this.clearTextNodes();
 
-        typeof this.filtered[this.focusIndex - 1] === 'string'
+        /*typeof this.filtered[this.focusIndex - 1] === 'string'
             ? this.addResult(this.filtered[this.focusIndex - 1])
-            : this.addResult(this.filtered[this.focusIndex - 1].data);
+            : this.addResult(this.filtered[this.focusIndex - 1].data);*/
+        this.addResult(this.filtered[this.focusIndex - 1]);
 
         this.multiselectOnSubmit.emit(this.results);
 
