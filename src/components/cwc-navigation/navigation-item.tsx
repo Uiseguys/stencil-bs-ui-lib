@@ -28,7 +28,7 @@ export class NavigationItem {
     @Prop() showIcon: boolean = false
     @Prop() dropIcon: string = undefined
 
-    componentDidLoad() {
+    componentWillLoad() {
         this.isActive && this.hostEl.classList.add('is-active')
     }
     
