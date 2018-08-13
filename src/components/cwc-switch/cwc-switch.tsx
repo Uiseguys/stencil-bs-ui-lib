@@ -2,7 +2,6 @@ import {Component, Prop, Event, EventEmitter, Element, State} from '@stencil/cor
 
 @Component({
     tag: 'cwc-switch',
-    shadow: true,
     styleUrl: 'cwc-switch.scss'
 })
 export class CwcSwitchbox {

@@ -166,11 +166,15 @@ export class FclVideoPLayer {
 
       let player = videojs(this.el.getElementsByTagName('video')[0], options);
       if (this.isautoinit && this.autoPlay && player) {
-        setTimeout(() =>{
-          if(!isPlaying){
-            player.play();
-          }
-        }, 500)
+        if(this.autoinit){
+          player.play();
+        }else{
+          setTimeout(() =>{
+            if(!isPlaying){
+              player.play();
+            }
+          }, 500);
+        }
       }
       player.on('play', function() {
         isPlaying = true;
