@@ -30,7 +30,7 @@ export class CwcAutocompleteSelect {
     @Prop() value: any[] = [];
     @Prop() idValue: string = 'multiselect-' + Math.floor(1000 + Math.random() * 9000) + new Date().getUTCMilliseconds();
     @Prop() searchKey: string;
-    @Prop() placeholder = 'Search something e.g. "Alabama"';
+    @Prop() placeholder = 'Search something';
 
     @State() filterValue: string = '';
     @State() optionsShown = false;
@@ -162,6 +162,7 @@ export class CwcAutocompleteSelect {
                         this.close();
                         this.textChange.emit('');
                         this.renderLabels();
+                        this.checkForPlaceholder();
                     }, 500);
                 }
             });
@@ -281,6 +282,19 @@ export class CwcAutocompleteSelect {
         this.focusIndex = i;
     }
 
+    /** Start - Set Placeholder **/
+    checkForPlaceholder(){
+        let tagContainerEle = document.querySelector(`#${this.idValue} .form-control`);
+        if(tagContainerEle){
+            if (tagContainerEle.children && tagContainerEle.children.length > 1 && tagContainerEle.classList){
+                tagContainerEle.classList.remove("isPlaceholder");
+            } else {
+                tagContainerEle.classList.add("isPlaceholder");
+            }
+        }
+    }
+    /** End - Set Placeholder **/
+
     /**
      * Public methods
      */
@@ -297,9 +311,10 @@ export class CwcAutocompleteSelect {
                 <label class="control-label">{this.label}</label>
                 <div
                     id={this.id}
-                    class="form-control"
+                    class="form-control isPlaceholder"
                     contentEditable={true}
                     onInput={(e) => this.handleInputChange(e)}
+                    data-placeholder={this.placeholder}
                 >
                     <span class="caret" />
                 </div>
@@ -465,6 +480,8 @@ export class CwcAutocompleteSelect {
 
     @Listen('focusout')
     clearResultOnFocusout() {
+        this.checkForPlaceholder();
+
         setTimeout(() => {
             //this.close();
             this.clearTextNodes();
