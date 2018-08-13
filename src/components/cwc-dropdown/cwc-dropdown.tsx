@@ -1,4 +1,4 @@
-import { Component, Element, HostElement, Method, Event, EventEmitter } from '@stencil/core';
+import { Component, Element, HostElement, Method, Event, EventEmitter, State } from '@stencil/core';
 import 'bootstrap.native/dist/bootstrap-native-v4';
 // declare var window: any;
 
@@ -11,7 +11,8 @@ export class DropdownComponent {
     id: string = 'cwc_' + Math.floor(Math.random() * 90000) + 10000;
     content: Element;
     buttons: NodeList;
-    openState: boolean = false;
+    @State() openState: boolean = false;
+    @State() didload: boolean = false;
 
     @Element() el: HostElement;
 
@@ -29,6 +30,9 @@ export class DropdownComponent {
                 this.buttons[i].addEventListener('click', this.selectHandler.bind(this))
             }
         }
+
+
+        
     }
 
     selectHandler(e) {
@@ -77,6 +81,7 @@ export class DropdownComponent {
                 <div id={this.id}>
                     <slot name="dropdown-trigger"></slot>
                 </div>
+                
                 <cwc-popper refid={this.id} arrow={false} isToggleBtn={true}  trigger="click" placement="bottom" class="cwc-popper-dropdown">
                       <div>
                           <slot name="dropdown-menu"></slot>
