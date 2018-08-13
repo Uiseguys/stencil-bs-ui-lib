@@ -55,7 +55,7 @@ export class AutocompleteSelectPage {
         <div>
             <div class="container pt-4">
                 <h3>Simple String[] data demo!</h3>
-                <cwc-autocomplete-select data={this.data} placeholder="Search something e.g. 'Alabama'" />
+                <cwc-autocomplete-select value={['Alex']} data={this.data} placeholder="Search something e.g. 'Alabama'" />
                 <br />
 
                 <h6>Text Change result: {this.textChangeResult}</h6>
