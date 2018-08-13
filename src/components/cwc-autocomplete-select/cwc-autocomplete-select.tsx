@@ -27,6 +27,7 @@ export class CwcAutocompleteSelect {
 
     @Prop() minSearchLength = 1;
     @Prop() data: any[] = [];
+    @Prop() value: any[] = [];
     @Prop() idValue: string = 'multiselect-' + Math.floor(1000 + Math.random() * 9000) + new Date().getUTCMilliseconds();
     @Prop() searchKey: string;
     @Prop() placeholder = 'Search something e.g. "Alabama"';
@@ -139,6 +140,31 @@ export class CwcAutocompleteSelect {
         }else
         {
             this.filtered=this.filter();
+        }
+    }
+
+    componentDidLoad() {
+        if(this.value && this.value && this.value.length >= 1){
+            this.results = this.value;
+            this.value.map((val, key) => {
+                if (typeof val === 'string') {
+                    this.labels.push(val);
+                } else {
+                    let tempLabel = get(val, this.searchKey);
+                    this.labels.push(tempLabel);
+                }
+
+                if(key === this.value.length-1){
+                    this.multiselectOnSubmit.emit(this.results);
+                    setTimeout(() => {
+                        this.clearTextNodes();
+                        this.autoOpen = false;
+                        this.close();
+                        this.textChange.emit('');
+                        this.renderLabels();
+                    }, 500);
+                }
+            });
         }
     }
 
