@@ -81,9 +81,12 @@ declare global {
 
     interface CwcCheckboxGroup {
       'allowSelectAll': boolean;
+      'check': () => void;
       'data': Array<Object>;
       'displayProp': string;
       'selectAllLabel': string;
+      'toggle': () => void;
+      'uncheck': () => void;
       'value': Array<Object>;
     }
 
