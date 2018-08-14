@@ -157,12 +157,13 @@ export class CwcAutocompleteSelect {
                 if(key === this.value.length-1){
                     this.multiselectOnSubmit.emit(this.results);
                     setTimeout(() => {
+                        this.renderLabels();
+                        this.checkForPlaceholder();
+
                         this.clearTextNodes();
                         this.autoOpen = false;
                         this.close();
                         this.textChange.emit('');
-                        this.renderLabels();
-                        this.checkForPlaceholder();
                     }, 500);
                 }
             });
