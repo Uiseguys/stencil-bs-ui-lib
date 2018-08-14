@@ -55,7 +55,7 @@ declare global {
 
     interface CwcAutocompleteSelect {
       /**
-       * Public methods
+       * End - Set Placeholder * Public methods
        */
       'close': () => void;
       'data': any[];
@@ -65,6 +65,7 @@ declare global {
       'minSearchLength': number;
       'placeholder': string;
       'searchKey': string;
+      'value': any[];
     }
 
     interface CwcAvatar {
@@ -1379,6 +1380,7 @@ declare global {
       'onTextChange'?: (event: CustomEvent) => void;
       'placeholder'?: string;
       'searchKey'?: string;
+      'value'?: any[];
     }
 
     export interface CwcAvatarAttributes extends HTMLAttributes {
