@@ -55,7 +55,7 @@ export class AutocompleteSelectPage {
         <div>
             <div class="container pt-4">
                 <h3>Simple String[] data demo!</h3>
-                <cwc-autocomplete-select data={this.data} />
+                <cwc-autocomplete-select value={['Alex']} data={this.data} placeholder="Search something e.g. 'Alabama'" />
                 <br />
 
                 <h6>Text Change result: {this.textChangeResult}</h6>
@@ -78,7 +78,7 @@ export class AutocompleteSelectPage {
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <pre><code class="lang-tsx">
-                                                {`<cwc-autocomplete-select data={['Alex', 'Alabama', 'Alaska', 'andreas', 'alexandro']}/>`}
+                                                {`<cwc-autocomplete-select placeholder="Search something e.g. 'Alabama'" value={['Alex']} data={['Alex', 'Alabama', 'Alaska', 'andreas', 'alexandro']}/>`}
                                             </code></pre>
                                         </div>
                                     </div>
@@ -115,6 +115,18 @@ export class AutocompleteSelectPage {
                                             <td>This is to set label of auto complete select</td>
                                         </tr>
                                         <tr>
+                                            <td>value</td>
+                                            <td><code>Array</code></td>
+                                            <td><code>[]</code></td>
+                                            <td>Set default value as selected</td>
+                                        </tr>
+                                        <tr>
+                                            <td>placeholder</td>
+                                            <td><code>String</code></td>
+                                            <td><code>Search something</code></td>
+                                            <td>This is to set placeholder</td>
+                                        </tr>
+                                        <tr>
                                             <td>textChange</td>
                                             <td><code>Event</code></td>
                                             <td></td>
@@ -142,6 +154,8 @@ export class AutocompleteSelectPage {
                 <cwc-autocomplete-select
                     data={this.complex}
                     searchKey={this.searchString}
+                    value={[{ type: 'country', data: { name: 'Austria', capital: 'Vienna' } }, { type: 'country', data: { name: 'Australia', capital: 'Canberra' } }]}
+                    placeholder="Search something e.g. 'Alabama'"
                 />
                 <br />
 
@@ -167,7 +181,7 @@ export class AutocompleteSelectPage {
                                         <div class="col-lg-12">
                                             <pre><code class="lang-tsx">
 
-                                                {`<cwc-autocomplete-select searchKey="data.name" data={[{ type: 'country', data: { name: 'Austria', capital: 'Vienna' } },
+                                                {`<cwc-autocomplete-select placeholder="Search something e.g. 'Alabama'" searchKey="data.name" value={[{ type: 'country', data: { name: 'Austria', capital: 'Vienna' } }, { type: 'country', data: { name: 'Australia', capital: 'Canberra' } }]} data={[{ type: 'country', data: { name: 'Austria', capital: 'Vienna' } },
 { type: 'country', data: { name: 'Australia', capital: 'Canberra' } },
 { type: 'country', data: { name: 'Argentina', capital: 'Buenos Aires' } }]}/>`}
                                             </code></pre>
@@ -210,6 +224,18 @@ export class AutocompleteSelectPage {
                                             <td><code>String</code></td>
                                             <td><code>''</code></td>
                                             <td>This is to search in complex data where we can set the key to get the result</td>
+                                        </tr>
+                                        <tr>
+                                            <td>value</td>
+                                            <td><code>Array</code></td>
+                                            <td><code>[]</code></td>
+                                            <td>Set default value as selected</td>
+                                        </tr>
+                                        <tr>
+                                            <td>placeholder</td>
+                                            <td><code>String</code></td>
+                                            <td><code>Search something</code></td>
+                                            <td>This is to set placeholder</td>
                                         </tr>
                                         <tr>
                                             <td>textChange</td>
