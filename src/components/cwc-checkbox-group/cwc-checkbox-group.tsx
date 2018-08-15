@@ -1,4 +1,4 @@
-import { Component, Prop, HostElement, Element, State, Method } from '@stencil/core';
+import { Component, Prop, HostElement, Element, State, Method, Watch } from '@stencil/core';
 import 'bootstrap.native/dist/bootstrap-native-v4';
 
 @Component({
@@ -13,36 +13,69 @@ export class ChecboxGroupComponent {
   @Prop() selectAllLabel: string = 'Select all my items';
 
   @State() allCheckedState: boolean = false;
+  @State() checkboxStates: Object = {};
 
   @Element() el: HostElement;
 
     componentDidLoad() {
       this.el.querySelector('.form-check-input[value=select-all-items]').addEventListener('click', () => this.toggleAll());
+      this.data.forEach((checkbox) => {
+        this.checkboxStates[checkbox['key']] = false;
+        this.el.querySelector(`.form-check-input[value=${checkbox['key']}]`).addEventListener('click', () => this.toggle(checkbox));
+      });
+    }
+
+    @Watch('value')
+    watchHandler(newValue: Array<Object>) {
+      console.log('The new value of checkbox value array is: ', newValue);
     }
 
     @Method()
     toggleAll() {
-        this.allCheckedState
-            ? this.uncheckAll()
-            : this.checkAll()
+      this.allCheckedState
+          ? this.uncheckAll()
+          : this.checkAll()
+    }
+
+    @Method()
+    toggle(checkbox) {
+      this.checkboxStates[checkbox['key']]
+          ? this.uncheck(checkbox)
+          : this.check(checkbox)
     }
 
     @Method()
     uncheckAll() {
       this.allCheckedState = false;
-      this.value = [];
       this.data.forEach((checkbox) => {
+        this.checkboxStates[checkbox['key']] = false;
         this.el.querySelector(`.form-check-input[value=${checkbox['key']}]`)['checked'] = false;
       });
+      this.value = [];
+    }
+
+    @Method()
+    uncheck(checkbox) {
+      this.checkboxStates[checkbox['key']] = false;
+      this.el.querySelector(`.form-check-input[value=${checkbox['key']}]`)['checked'] = false;
+      this.value = this.value.filter((valueObj) => valueObj['key'] !== checkbox['key']);
     }
 
     @Method()
     checkAll() {
       this.allCheckedState = true;
-      this.value = this.data;
       this.data.forEach((checkbox) => {
+        this.checkboxStates[checkbox['key']] = true;
         this.el.querySelector(`.form-check-input[value=${checkbox['key']}]`)['checked'] = true;
       });
+      this.value = [ ...this.data ];
+    }
+
+    @Method()
+    check(checkbox) {
+      this.checkboxStates[checkbox['key']] = true;
+      this.el.querySelector(`.form-check-input[value=${checkbox['key']}]`)['checked'] = true;
+      this.value = [ ...this.value, ...[checkbox]];
     }
 
     render() {
