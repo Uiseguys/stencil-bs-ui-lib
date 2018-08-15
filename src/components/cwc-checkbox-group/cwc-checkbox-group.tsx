@@ -26,6 +26,12 @@ export class ChecboxGroupComponent {
         this.checkboxStates[checkbox['key']] = false;
         this.el.querySelector(`.form-check-input[value=${checkbox['key']}]`).addEventListener('click', () => this.toggle(checkbox));
       });
+      if (this.value.length) {
+        this.value.forEach((checkbox) => {
+          this.checkboxStates[checkbox['key']] = true;
+          this.el.querySelector(`.form-check-input[value=${checkbox['key']}]`)['checked'] = true;
+        });
+      }
     }
 
     @Watch('value')
