@@ -19,7 +19,9 @@ export class ChecboxGroupComponent {
   @Element() el: HostElement;
 
     componentDidLoad() {
-      this.el.querySelector('.form-check-input[value=select-all-items]').addEventListener('click', () => this.toggleAll());
+      if (this.allowSelectAll) {
+        this.el.querySelector('.form-check-input[value=select-all-items]').addEventListener('click', () => this.toggleAll());
+      }
       this.data.forEach((checkbox) => {
         this.checkboxStates[checkbox['key']] = false;
         this.el.querySelector(`.form-check-input[value=${checkbox['key']}]`).addEventListener('click', () => this.toggle(checkbox));
