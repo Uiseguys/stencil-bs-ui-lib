@@ -20,16 +20,17 @@ export class ChecboxGroupComponent {
 
     componentDidLoad() {
       if (this.allowSelectAll) {
-        this.el.querySelector('.form-check-input[value=select-all-items]').addEventListener('click', () => this.toggleAll());
+        this.el.querySelector(`.form-check-input[value="${this.selectAllLabel}"]`).addEventListener('click', () => this.toggleAll());
       }
       this.data.forEach((checkbox) => {
-        this.checkboxStates[checkbox['key']] = false;
-        this.el.querySelector(`.form-check-input[value=${checkbox['key']}]`).addEventListener('click', () => this.toggle(checkbox));
+        this.checkboxStates[checkbox[this.displayProp]] = false;
+        this.el.querySelector(`.form-check-input[value="${checkbox[this.displayProp]}"]`)
+        .addEventListener('click', () => this.toggle(checkbox));
       });
       if (this.value.length) {
         this.value.forEach((checkbox) => {
-          this.checkboxStates[checkbox['key']] = true;
-          this.el.querySelector(`.form-check-input[value=${checkbox['key']}]`)['checked'] = true;
+          this.checkboxStates[checkbox[this.displayProp]] = true;
+          this.el.querySelector(`.form-check-input[value="${checkbox[this.displayProp]}"]`)['checked'] = true;
         });
       }
     }
@@ -50,7 +51,7 @@ export class ChecboxGroupComponent {
 
     @Method()
     toggle(checkbox) {
-      this.checkboxStates[checkbox['key']]
+      this.checkboxStates[checkbox[this.displayProp]]
           ? this.uncheck(checkbox)
           : this.check(checkbox)
     }
@@ -59,40 +60,40 @@ export class ChecboxGroupComponent {
     uncheckAll() {
       this.allCheckedState = false;
       this.data.forEach((checkbox) => {
-        this.checkboxStates[checkbox['key']] = false;
-        this.el.querySelector(`.form-check-input[value=${checkbox['key']}]`)['checked'] = false;
+        this.checkboxStates[checkbox[this.displayProp]] = false;
+        this.el.querySelector(`.form-check-input[value="${checkbox[this.displayProp]}"]`)['checked'] = false;
       });
       this.value = [];
     }
 
     @Method()
     uncheck(checkbox) {
-      this.checkboxStates[checkbox['key']] = false;
-      this.el.querySelector(`.form-check-input[value=${checkbox['key']}]`)['checked'] = false;
-      this.value = this.value.filter((valueObj) => valueObj['key'] !== checkbox['key']);
+      this.checkboxStates[checkbox[this.displayProp]] = false;
+      this.el.querySelector(`.form-check-input[value="${checkbox[this.displayProp]}"]`)['checked'] = false;
+      this.value = this.value.filter((valueObj) => valueObj[this.displayProp] !== checkbox[this.displayProp]);
     }
 
     @Method()
     checkAll() {
       this.allCheckedState = true;
       this.data.forEach((checkbox) => {
-        this.checkboxStates[checkbox['key']] = true;
-        this.el.querySelector(`.form-check-input[value=${checkbox['key']}]`)['checked'] = true;
+        this.checkboxStates[checkbox[this.displayProp]] = true;
+        this.el.querySelector(`.form-check-input[value="${checkbox[this.displayProp]}"]`)['checked'] = true;
       });
       this.value = [ ...this.data ];
     }
 
     @Method()
     check(checkbox) {
-      this.checkboxStates[checkbox['key']] = true;
-      this.el.querySelector(`.form-check-input[value=${checkbox['key']}]`)['checked'] = true;
+      this.checkboxStates[checkbox[this.displayProp]] = true;
+      this.el.querySelector(`.form-check-input[value="${checkbox[this.displayProp]}"]`)['checked'] = true;
       this.value = [ ...this.value, ...[checkbox]];
     }
 
     render() {
       const finalData = [ ...this.data ];
       if (this.allowSelectAll) {
-        finalData.unshift({ [this.displayProp]: this.selectAllLabel, key: 'select-all-items' });
+        finalData.unshift({ [this.displayProp]: this.selectAllLabel });
       }
       const checkboxesPerColumn = Math.ceil(finalData.length / 2);
       const checkboxColumn1 = finalData.slice(0, checkboxesPerColumn);
@@ -104,7 +105,7 @@ export class ChecboxGroupComponent {
             {
               checkboxColumn1.map((input) =>
                 <div class="form-check">
-                <input class="form-check-input" type="checkbox" value={input['key']}/>
+                <input class="form-check-input" type="checkbox" value={input[this.displayProp]}/>
                   <label class="form-check-label">
                     {input[this.displayProp]}
                   </label>
@@ -115,7 +116,7 @@ export class ChecboxGroupComponent {
             {
               checkboxColumn2.map((input) =>
                 <div class="form-check">
-                <input class="form-check-input" type="checkbox" value={input['key']}/>
+                <input class="form-check-input" type="checkbox" value={input[this.displayProp]}/>
                   <label class="form-check-label">
                     {input[this.displayProp]}
                   </label>

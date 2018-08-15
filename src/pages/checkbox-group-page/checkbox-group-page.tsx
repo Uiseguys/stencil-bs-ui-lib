@@ -8,13 +8,13 @@ import { Component } from '@stencil/core';
 export class DropdownPage {
     render() {
         const data = [
-          {test: 'myname', key: 'mykey'},
-          {test: 'myname1', key: 'mykey1'},
-          {test: 'myname2', key: 'mykey2'},
+          {name: 'my name', age: '21'},
+          {name: 'my name1', age: '22'},
+          {name: 'my name2', age: '23'},
         ];
 
         const value = [
-          {test: 'myname', key: 'mykey'},
+          {name: 'my name', age: '21'},
         ];
 
         const testFn = (newValue) => {
@@ -24,7 +24,7 @@ export class DropdownPage {
         return (
           <div>
             <cwc-checkbox-group
-            displayProp='test' value={value} data={data} selectionChanged={testFn}
+            displayProp='name' value={value} data={data} selectionChanged={testFn}
             ></cwc-checkbox-group>
           </div>
         );
