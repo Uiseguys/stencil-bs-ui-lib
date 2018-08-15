@@ -7,7 +7,7 @@ import 'bootstrap.native/dist/bootstrap-native-v4';
 })
 export class ChecboxGroupComponent {
   @Prop() data: Array<Object> = [];
-  @Prop() displayProp: string;
+  @Prop() displayProp: string = 'name';
   @Prop({ mutable: true }) value: Array<Object> = [];
   @Prop() allowSelectAll: boolean = true;
   @Prop() selectAllLabel: string = 'Select all my items';
@@ -17,39 +17,38 @@ export class ChecboxGroupComponent {
   @Element() el: HostElement;
 
     componentDidLoad() {
-      this.el.querySelector('.form-check-input[value=select-all-items]').addEventListener('click', () => this.toggle());
-    }
-
-    componentDidUpdate() {
-      if (this.allCheckedState) {
-        this.value = this.data;
-        this.data.forEach((checkbox) => {
-          this.el.querySelector(`.form-check-input[value=${checkbox['key']}]`)['checked'] = true;
-        });
-      }
+      this.el.querySelector('.form-check-input[value=select-all-items]').addEventListener('click', () => this.toggleAll());
     }
 
     @Method()
-    toggle() {
+    toggleAll() {
         this.allCheckedState
-            ? this.uncheck()
-            : this.check()
+            ? this.uncheckAll()
+            : this.checkAll()
     }
 
     @Method()
-    uncheck() {
+    uncheckAll() {
       this.allCheckedState = false;
+      this.value = [];
+      this.data.forEach((checkbox) => {
+        this.el.querySelector(`.form-check-input[value=${checkbox['key']}]`)['checked'] = false;
+      });
     }
 
     @Method()
-    check() {
+    checkAll() {
       this.allCheckedState = true;
+      this.value = this.data;
+      this.data.forEach((checkbox) => {
+        this.el.querySelector(`.form-check-input[value=${checkbox['key']}]`)['checked'] = true;
+      });
     }
 
     render() {
       const finalData = [ ...this.data ];
       if (this.allowSelectAll) {
-        finalData.unshift({ name: this.selectAllLabel, key: 'select-all-items' });
+        finalData.unshift({ [this.displayProp]: this.selectAllLabel, key: 'select-all-items' });
       }
       const checkboxesPerColumn = Math.ceil(finalData.length / 2);
       const checkboxColumn1 = finalData.slice(0, checkboxesPerColumn);
@@ -63,7 +62,7 @@ export class ChecboxGroupComponent {
                 <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={input['key']}/>
                   <label class="form-check-label">
-                    {input['name']}
+                    {input[this.displayProp]}
                   </label>
                 </div>
               )}
@@ -74,7 +73,7 @@ export class ChecboxGroupComponent {
                 <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={input['key']}/>
                   <label class="form-check-label">
-                    {input['name']}
+                    {input[this.displayProp]}
                   </label>
                 </div>
               )}
