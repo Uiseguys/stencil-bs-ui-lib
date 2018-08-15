@@ -486,7 +486,7 @@ declare global {
     }
 
     interface CheckboxGroupPage {
-
+      'value': Array<Object>;
     }
 
     interface CollapsePage {
@@ -1847,7 +1847,7 @@ declare global {
     }
 
     export interface CheckboxGroupPageAttributes extends HTMLAttributes {
-
+      'value'?: Array<Object>;
     }
 
     export interface CollapsePageAttributes extends HTMLAttributes {
