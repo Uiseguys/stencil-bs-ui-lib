@@ -11,6 +11,7 @@ export class ChecboxGroupComponent {
   @Prop({ mutable: true }) value: Array<Object> = [];
   @Prop() allowSelectAll: boolean = true;
   @Prop() selectAllLabel: string = 'Select all my items';
+  @Prop() selectionChanged: Function;
 
   @State() allCheckedState: boolean = false;
   @State() checkboxStates: Object = {};
@@ -27,7 +28,9 @@ export class ChecboxGroupComponent {
 
     @Watch('value')
     watchHandler(newValue: Array<Object>) {
-      console.log('The new value of checkbox value array is: ', newValue);
+      if (this.selectionChanged) {
+        this.selectionChanged(newValue);
+      }
     }
 
     @Method()

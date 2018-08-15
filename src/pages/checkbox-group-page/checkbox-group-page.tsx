@@ -13,9 +13,13 @@ export class DropdownPage {
           {test: 'myname2', key: 'mykey2'},
         ];
 
+        const testFn = (newValue) => {
+          console.log('this external fn: ', newValue)
+        };
+
         return (
           <div>
-            <cwc-checkbox-group displayProp='test' data={data}></cwc-checkbox-group>
+            <cwc-checkbox-group displayProp='test' data={data} selectionChanged={testFn}></cwc-checkbox-group>
           </div>
         );
     }
