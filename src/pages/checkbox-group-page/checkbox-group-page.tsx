@@ -24,7 +24,7 @@ export class DropdownPage {
         return (
           <div>
             <cwc-checkbox-group
-            allowSelectAll={false} displayProp='test' value={value} data={data} selectionChanged={testFn}
+            displayProp='test' value={value} data={data} selectionChanged={testFn}
             ></cwc-checkbox-group>
           </div>
         );
