@@ -1,4 +1,4 @@
-import { Component, Prop, State } from '@stencil/core';
+import { Component, Prop, State, Listen } from '@stencil/core';
 
 @Component({
     tag: 'checkbox-group-page',
@@ -11,6 +11,11 @@ export class DropdownPage {
     ];
     @State() selectedValues: Array<Object> = this.value;
 
+    @Listen('selectionChanged')
+    stateChangeHandler(e) {
+      this.selectedValues = e.detail;
+    }
+
     render() {
         const data = [
           {name: 'my name', age: '21', address: 'ph'},
@@ -18,15 +23,10 @@ export class DropdownPage {
           {name: 'my name2', age: '23' , address: 'us'},
         ];
 
-        const testFn = (newValue) => {
-          this.selectedValues = newValue;
-          console.log('test', this.selectedValues);
-        };
-
         return (
           <div>
             <cwc-checkbox-group
-            displayProp='name' value={this.selectedValues} data={data} selectionChanged={testFn}
+            displayProp='name' value={this.selectedValues} data={data}
             ></cwc-checkbox-group>
             {this.selectedValues
               ? <div>

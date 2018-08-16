@@ -1,4 +1,4 @@
-import { Component, Prop, HostElement, Element, State, Method, Watch } from '@stencil/core';
+import { Component, Prop, HostElement, Element, Event, EventEmitter, State, Method, Watch } from '@stencil/core';
 import 'bootstrap.native/dist/bootstrap-native-v4';
 
 @Component({
@@ -11,7 +11,8 @@ export class ChecboxGroupComponent {
   @Prop({ mutable: true }) value: Array<Object> = [];
   @Prop() allowSelectAll: boolean = true;
   @Prop() selectAllLabel: string = 'Select all my items';
-  @Prop() selectionChanged: Function;
+
+  @Event() selectionChanged: EventEmitter;
 
   @State() allCheckedState: boolean = false;
   @State() checkboxStates: Object = {};
@@ -37,9 +38,7 @@ export class ChecboxGroupComponent {
 
     @Watch('value')
     watchHandler(newValue: Array<Object>) {
-      if (this.selectionChanged) {
-        this.selectionChanged(newValue);
-      }
+      this.selectionChanged.emit(newValue);
     }
 
     @Method()

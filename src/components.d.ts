@@ -86,7 +86,6 @@ declare global {
       'data': Array<Object>;
       'displayProp': string;
       'selectAllLabel': string;
-      'selectionChanged': Function;
       'toggle': (checkbox: any) => void;
       'toggleAll': () => void;
       'uncheck': (checkbox: any) => void;
@@ -1435,8 +1434,8 @@ declare global {
       'allowSelectAll'?: boolean;
       'data'?: Array<Object>;
       'displayProp'?: string;
+      'onSelectionChanged'?: (event: CustomEvent) => void;
       'selectAllLabel'?: string;
-      'selectionChanged'?: Function;
       'value'?: Array<Object>;
     }
 
