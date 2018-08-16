@@ -265,6 +265,10 @@ declare global {
       'titleText': string;
     }
 
+    interface CwcNumberInput {
+
+    }
+
     interface CwcPopper {
       'arrow': boolean;
       'autoClose': boolean;
@@ -568,6 +572,10 @@ declare global {
 
     }
 
+    interface NumberInputPage {
+
+    }
+
     interface PopperPage {
 
     }
@@ -803,6 +811,14 @@ declare global {
     var HTMLNavigationTitleElement: {
       prototype: HTMLNavigationTitleElement;
       new (): HTMLNavigationTitleElement;
+    };
+    
+
+    interface HTMLCwcNumberInputElement extends StencilComponents.CwcNumberInput, HTMLStencilElement {}
+
+    var HTMLCwcNumberInputElement: {
+      prototype: HTMLCwcNumberInputElement;
+      new (): HTMLCwcNumberInputElement;
     };
     
 
@@ -1214,6 +1230,14 @@ declare global {
     };
     
 
+    interface HTMLNumberInputPageElement extends StencilComponents.NumberInputPage, HTMLStencilElement {}
+
+    var HTMLNumberInputPageElement: {
+      prototype: HTMLNumberInputPageElement;
+      new (): HTMLNumberInputPageElement;
+    };
+    
+
     interface HTMLPopperPageElement extends StencilComponents.PopperPage, HTMLStencilElement {}
 
     var HTMLPopperPageElement: {
@@ -1329,6 +1353,7 @@ declare global {
     'navigation-item-group': JSXElements.NavigationItemGroupAttributes;
     'navigation-item': JSXElements.NavigationItemAttributes;
     'navigation-title': JSXElements.NavigationTitleAttributes;
+    'cwc-number-input': JSXElements.CwcNumberInputAttributes;
     'cwc-popper': JSXElements.CwcPopperAttributes;
     'cwc-progress-bar': JSXElements.CwcProgressBarAttributes;
     'cwc-resolution-info': JSXElements.CwcResolutionInfoAttributes;
@@ -1380,6 +1405,7 @@ declare global {
     'my-switch-page': JSXElements.MySwitchPageAttributes;
     'navbar-page': JSXElements.NavbarPageAttributes;
     'navigation-page': JSXElements.NavigationPageAttributes;
+    'number-input-page': JSXElements.NumberInputPageAttributes;
     'popper-page': JSXElements.PopperPageAttributes;
     'progress-bar-page': JSXElements.ProgressBarPageAttributes;
     'resolution-info-page': JSXElements.ResolutionInfoPageAttributes;
@@ -1628,6 +1654,10 @@ declare global {
       'showIcon'?: boolean;
       'text'?: string;
       'titleText'?: string;
+    }
+
+    export interface CwcNumberInputAttributes extends HTMLAttributes {
+
     }
 
     export interface CwcPopperAttributes extends HTMLAttributes {
@@ -1931,6 +1961,10 @@ declare global {
       'onShownavigationtoggle'?: (event: CustomEvent) => void;
     }
 
+    export interface NumberInputPageAttributes extends HTMLAttributes {
+
+    }
+
     export interface PopperPageAttributes extends HTMLAttributes {
 
     }
@@ -2001,6 +2035,7 @@ declare global {
     'navigation-item-group': HTMLNavigationItemGroupElement
     'navigation-item': HTMLNavigationItemElement
     'navigation-title': HTMLNavigationTitleElement
+    'cwc-number-input': HTMLCwcNumberInputElement
     'cwc-popper': HTMLCwcPopperElement
     'cwc-progress-bar': HTMLCwcProgressBarElement
     'cwc-resolution-info': HTMLCwcResolutionInfoElement
@@ -2052,6 +2087,7 @@ declare global {
     'my-switch-page': HTMLMySwitchPageElement
     'navbar-page': HTMLNavbarPageElement
     'navigation-page': HTMLNavigationPageElement
+    'number-input-page': HTMLNumberInputPageElement
     'popper-page': HTMLPopperPageElement
     'progress-bar-page': HTMLProgressBarPageElement
     'resolution-info-page': HTMLResolutionInfoPageElement
@@ -2090,6 +2126,7 @@ declare global {
     'navigation-item-group': HTMLNavigationItemGroupElement;
     'navigation-item': HTMLNavigationItemElement;
     'navigation-title': HTMLNavigationTitleElement;
+    'cwc-number-input': HTMLCwcNumberInputElement;
     'cwc-popper': HTMLCwcPopperElement;
     'cwc-progress-bar': HTMLCwcProgressBarElement;
     'cwc-resolution-info': HTMLCwcResolutionInfoElement;
@@ -2141,6 +2178,7 @@ declare global {
     'my-switch-page': HTMLMySwitchPageElement;
     'navbar-page': HTMLNavbarPageElement;
     'navigation-page': HTMLNavigationPageElement;
+    'number-input-page': HTMLNumberInputPageElement;
     'popper-page': HTMLPopperPageElement;
     'progress-bar-page': HTMLProgressBarPageElement;
     'resolution-info-page': HTMLResolutionInfoPageElement;
