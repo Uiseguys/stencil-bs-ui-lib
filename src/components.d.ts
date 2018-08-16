@@ -55,7 +55,7 @@ declare global {
 
     interface CwcAutocompleteSelect {
       /**
-       * Public methods
+       * End - Set Placeholder * Public methods
        */
       'close': () => void;
       'data': any[];
@@ -65,6 +65,7 @@ declare global {
       'minSearchLength': number;
       'placeholder': string;
       'searchKey': string;
+      'value': any[];
     }
 
     interface CwcAvatar {
@@ -76,6 +77,20 @@ declare global {
       'rounded': boolean;
       'size': number;
       'uppercase': boolean;
+    }
+
+    interface CwcCheckboxGroup {
+      'allowSelectAll': boolean;
+      'check': (checkbox: any) => void;
+      'checkAll': () => void;
+      'data': Array<Object>;
+      'displayProp': string;
+      'selectAllLabel': string;
+      'toggle': (checkbox: any) => void;
+      'toggleAll': () => void;
+      'uncheck': (checkbox: any) => void;
+      'uncheckAll': () => void;
+      'value': Array<Object>;
     }
 
     interface CwcCombobox {
@@ -469,6 +484,10 @@ declare global {
 
     }
 
+    interface CheckboxGroupPage {
+      'value': Array<Object>;
+    }
+
     interface CollapsePage {
 
     }
@@ -616,6 +635,14 @@ declare global {
     var HTMLCwcAvatarElement: {
       prototype: HTMLCwcAvatarElement;
       new (): HTMLCwcAvatarElement;
+    };
+    
+
+    interface HTMLCwcCheckboxGroupElement extends StencilComponents.CwcCheckboxGroup, HTMLStencilElement {}
+
+    var HTMLCwcCheckboxGroupElement: {
+      prototype: HTMLCwcCheckboxGroupElement;
+      new (): HTMLCwcCheckboxGroupElement;
     };
     
 
@@ -1019,6 +1046,14 @@ declare global {
     };
     
 
+    interface HTMLCheckboxGroupPageElement extends StencilComponents.CheckboxGroupPage, HTMLStencilElement {}
+
+    var HTMLCheckboxGroupPageElement: {
+      prototype: HTMLCheckboxGroupPageElement;
+      new (): HTMLCheckboxGroupPageElement;
+    };
+    
+
     interface HTMLCollapsePageElement extends StencilComponents.CollapsePage, HTMLStencilElement {}
 
     var HTMLCollapsePageElement: {
@@ -1273,6 +1308,7 @@ declare global {
     'cwc-alert': JSXElements.CwcAlertAttributes;
     'cwc-autocomplete-select': JSXElements.CwcAutocompleteSelectAttributes;
     'cwc-avatar': JSXElements.CwcAvatarAttributes;
+    'cwc-checkbox-group': JSXElements.CwcCheckboxGroupAttributes;
     'cwc-combobox': JSXElements.CwcComboboxAttributes;
     'cwc-datepicker': JSXElements.CwcDatepickerAttributes;
     'cwc-dnd': JSXElements.CwcDndAttributes;
@@ -1323,6 +1359,7 @@ declare global {
     'avatar-page': JSXElements.AvatarPageAttributes;
     'badge-page': JSXElements.BadgePageAttributes;
     'breadcrumb-page': JSXElements.BreadcrumbPageAttributes;
+    'checkbox-group-page': JSXElements.CheckboxGroupPageAttributes;
     'collapse-page': JSXElements.CollapsePageAttributes;
     'combobox-page': JSXElements.ComboboxPageAttributes;
     'datepicker-page': JSXElements.DatepickerPageAttributes;
@@ -1379,6 +1416,7 @@ declare global {
       'onTextChange'?: (event: CustomEvent) => void;
       'placeholder'?: string;
       'searchKey'?: string;
+      'value'?: any[];
     }
 
     export interface CwcAvatarAttributes extends HTMLAttributes {
@@ -1390,6 +1428,15 @@ declare global {
       'rounded'?: boolean;
       'size'?: number;
       'uppercase'?: boolean;
+    }
+
+    export interface CwcCheckboxGroupAttributes extends HTMLAttributes {
+      'allowSelectAll'?: boolean;
+      'data'?: Array<Object>;
+      'displayProp'?: string;
+      'onSelectionChanged'?: (event: CustomEvent) => void;
+      'selectAllLabel'?: string;
+      'value'?: Array<Object>;
     }
 
     export interface CwcComboboxAttributes extends HTMLAttributes {
@@ -1798,6 +1845,10 @@ declare global {
 
     }
 
+    export interface CheckboxGroupPageAttributes extends HTMLAttributes {
+      'value'?: Array<Object>;
+    }
+
     export interface CollapsePageAttributes extends HTMLAttributes {
 
     }
@@ -1929,6 +1980,7 @@ declare global {
     'cwc-alert': HTMLCwcAlertElement
     'cwc-autocomplete-select': HTMLCwcAutocompleteSelectElement
     'cwc-avatar': HTMLCwcAvatarElement
+    'cwc-checkbox-group': HTMLCwcCheckboxGroupElement
     'cwc-combobox': HTMLCwcComboboxElement
     'cwc-datepicker': HTMLCwcDatepickerElement
     'cwc-dnd': HTMLCwcDndElement
@@ -1979,6 +2031,7 @@ declare global {
     'avatar-page': HTMLAvatarPageElement
     'badge-page': HTMLBadgePageElement
     'breadcrumb-page': HTMLBreadcrumbPageElement
+    'checkbox-group-page': HTMLCheckboxGroupPageElement
     'collapse-page': HTMLCollapsePageElement
     'combobox-page': HTMLComboboxPageElement
     'datepicker-page': HTMLDatepickerPageElement
@@ -2016,6 +2069,7 @@ declare global {
     'cwc-alert': HTMLCwcAlertElement;
     'cwc-autocomplete-select': HTMLCwcAutocompleteSelectElement;
     'cwc-avatar': HTMLCwcAvatarElement;
+    'cwc-checkbox-group': HTMLCwcCheckboxGroupElement;
     'cwc-combobox': HTMLCwcComboboxElement;
     'cwc-datepicker': HTMLCwcDatepickerElement;
     'cwc-dnd': HTMLCwcDndElement;
@@ -2066,6 +2120,7 @@ declare global {
     'avatar-page': HTMLAvatarPageElement;
     'badge-page': HTMLBadgePageElement;
     'breadcrumb-page': HTMLBreadcrumbPageElement;
+    'checkbox-group-page': HTMLCheckboxGroupPageElement;
     'collapse-page': HTMLCollapsePageElement;
     'combobox-page': HTMLComboboxPageElement;
     'datepicker-page': HTMLDatepickerPageElement;
