@@ -266,7 +266,7 @@ declare global {
     }
 
     interface CwcNumberInput {
-
+      'alwaysSign': boolean;
     }
 
     interface CwcPopper {
@@ -1657,7 +1657,7 @@ declare global {
     }
 
     export interface CwcNumberInputAttributes extends HTMLAttributes {
-
+      'alwaysSign'?: boolean;
     }
 
     export interface CwcPopperAttributes extends HTMLAttributes {

@@ -9,7 +9,7 @@ export class DropdownPage {
     render() {
         return (
           <div>
-            <cwc-number-input></cwc-number-input>
+            <cwc-number-input alwaysSign={true}></cwc-number-input>
           </div>
         );
     }

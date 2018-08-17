@@ -1,4 +1,4 @@
-import { Component, State } from '@stencil/core';
+import { Component, State, Prop } from '@stencil/core';
 import 'bootstrap.native/dist/bootstrap-native-v4';
 
 @Component({
@@ -6,6 +6,7 @@ import 'bootstrap.native/dist/bootstrap-native-v4';
     styleUrl: 'cwc-number-input.scss'
 })
 export class NumberInputComponent {
+  @Prop() alwaysSign: boolean = false;
   @State() value: string;
 
   handleChange(event) {
@@ -13,6 +14,9 @@ export class NumberInputComponent {
     this.value = event.target.value;
     if (isNaN(event.target.value) && this.value) {
       this.value = oldvalue;
+    }
+    if (this.alwaysSign && parseFloat(this.value) > 0 && !this.value.startsWith('+')) {
+      this.value = `+${this.value}`;
     }
   }
 
