@@ -11,7 +11,7 @@ export class NumberInputComponent {
   handleChange(event) {
     const oldvalue = this.value;
     this.value = event.target.value;
-    if (isNaN(parseInt(event.data, 0))) {
+    if (isNaN(event.target.value) && this.value) {
       this.value = oldvalue;
     }
   }
