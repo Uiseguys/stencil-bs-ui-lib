@@ -11,8 +11,8 @@ export class StencilBsDemoPage {
   @State() navigationShown: boolean = false;
   @State() navContainerShown: boolean = false;
   @State() isIconsShown: boolean = true;
-  
-  
+
+
   components = [
     {
       componentName: 'navbar-page',
@@ -202,6 +202,11 @@ export class StencilBsDemoPage {
       url: '/myswitch',
       title: 'My Switch',
       componentName: 'my-switch-page'
+    },
+    {
+      url: '/checkboxgroup',
+      title: 'Checkbox Group',
+      componentName: 'checkbox-group-page'
     }
   ];
 
@@ -221,40 +226,40 @@ export class StencilBsDemoPage {
 
   render() {
 
-    
+
 
     return [
       (
-        this.navigationShown ? 
+        this.navigationShown ?
 
 
-        
+
         <cwc-navigation isCollapsed={this.navContainerShown}>
 
-             <div slot="primary-actions"> 
+             <div slot="primary-actions">
 
-                <cwc-navigation-global-item 
-                    titleText={'Title text'} 
+                <cwc-navigation-global-item
+                    titleText={'Title text'}
                     icon="./assets/icon/sharp_send_white_48dp.png"/>
                 <cwc-navigation-global-item
-                    titleText={'Title text'} 
+                    titleText={'Title text'}
                     icon="./assets/icon/sharp_check_circle_outline_white_18dp.png"/>
                 <cwc-navigation-global-item isActive={true}
-                    titleText={'Title text'} 
+                    titleText={'Title text'}
                     icon="./assets/icon/baseline_add_white_18dp.png"/>
-          
+
             </div>
 
 
             <div slot="secondary-actions">
-            <cwc-navigation-global-item 
-                titleText={'Secondary action'} 
+            <cwc-navigation-global-item
+                titleText={'Secondary action'}
                 icon="./assets/icon/sharp_send_white_48dp.png"/>
             </div>
 
 
       <div slot="container-actions">
-              <navigation-title text="Nav Title" 
+              <navigation-title text="Nav Title"
               icon="./assets/icon/sharp_flip_to_front_white_18dp.png"/>
 
 
@@ -267,25 +272,25 @@ export class StencilBsDemoPage {
                       subText="Subtext of nav item" />
                   <navigation-item  showIcon={this.isIconsShown} text="Basic link" />
 
-                  <navigation-item  showIcon={this.isIconsShown}  text="With drop icon" 
+                  <navigation-item  showIcon={this.isIconsShown}  text="With drop icon"
                       dropIcon="./assets/icon/sharp_flip_to_front_white_18dp.png"/>
-              
+
               </div>
           </navigation-item-group>
 
           <navigation-item-group text="Group with separator" hasSeparator={true}>
 
             <div slot="navigation-items">
-                <navigation-item  showIcon={this.isIconsShown} text="With dropicon and subasdfastext" 
+                <navigation-item  showIcon={this.isIconsShown} text="With dropicon and subasdfastext"
                 subText="My small subtext"
                 icon={'./assets/icon/baseline_add_white_18dp.png'}
                 dropIcon={'./assets/icon/sharp_flip_to_front_white_18dp.png'}/>
 
-                <navigation-item  showIcon={this.isIconsShown} text="With dropicon and subtext" 
+                <navigation-item  showIcon={this.isIconsShown} text="With dropicon and subtext"
                 subText="My small subtext"
                 icon={'./assets/icon/baseline_add_white_18dp.png'}
                 dropIcon={'./assets/icon/sharp_flip_to_front_white_18dp.png'}/>
-                
+
                 <navigation-item  showIcon={this.isIconsShown} text="With mouse events" />
             </div>
           </navigation-item-group>
