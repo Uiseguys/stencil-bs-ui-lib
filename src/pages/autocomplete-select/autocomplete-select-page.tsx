@@ -50,12 +50,23 @@ export class AutocompleteSelectPage {
   }
   //End
 
+  getTemplate() {
+    return `
+      <span><%=option.data.name%> <%=option.data.capital%></span>
+    `
+  }
+
   render() {
     return (
       <div>
         <div class="container pt-4">
           <h3>Simple String[] data demo!</h3>
-          <cwc-autocomplete-select value={['Alex']} data={this.data} placeholder="Search something e.g. 'Alabama'" /><br />
+          <cwc-autocomplete-select
+            data={this.data}
+            value={['Alex']}
+            placeholder="Search something e.g. 'Alabama'"
+          />
+          <br />
           <h6>Text Change result: {this.textChangeResult}</h6>
 
           <div class="row">
@@ -144,11 +155,13 @@ export class AutocompleteSelectPage {
           <h3>Complex Object[] demo!</h3>
           <cwc-autocomplete-select
             data={this.complex}
+            itemAs='option'
             searchKey={this.searchString}
+            template={this.getTemplate()}
             value={[{ type: 'country', data: { name: 'Austria', capital: 'Vienna' } }, { type: 'country', data: { name: 'Australia', capital: 'Canberra' } }]}
             placeholder="Search something e.g. 'Alabama'"
-          /><br />
-
+          />
+          <br />
           <h4>result: </h4>
           <pre>{JSON.stringify(this.result, null, 2)}</pre>
 

@@ -9,6 +9,7 @@ import {
   EventEmitter,
   Watch
 } from '@stencil/core';
+import template from 'lodash/template';
 import filter from 'lodash/filter';
 import get from 'lodash/get';
 
@@ -28,8 +29,10 @@ export class CwcAutocompleteSelect {
   @Prop() minSearchLength = 1;
   @Prop() data: any[] = [];
   @Prop() value: any[] = [];
+  @Prop() itemAs: string = 'item';
   @Prop() idValue: string = 'multiselect-' + Math.floor(1000 + Math.random() * 9000) + new Date().getUTCMilliseconds();
   @Prop() searchKey: string;
+  @Prop() template: string;
   @Prop() placeholder = 'Search something';
 
   @State() filterValue: string = '';
@@ -134,14 +137,14 @@ export class CwcAutocompleteSelect {
     if (this.justAddedLabel) {
       this.setCaretPositionEnd();
       this.justAddedLabel = false;
-      this.labelsAdded=true;
+      this.labelsAdded = true;
     } else {
-      this.filtered=this.filter();
+      this.filtered = this.filter();
     }
   }
 
   componentDidLoad() {
-    if(this.value && this.value && this.value.length >= 1){
+    if(this.value && this.value.length >= 1){
       this.results = this.value;
       this.value.map((val, key) => {
         if (typeof val === 'string') {
@@ -301,6 +304,33 @@ export class CwcAutocompleteSelect {
     this.filtered = [];
   }
 
+  populateDropdown() {
+    let tmpl, list, templateString, itemValue;
+
+    if (this.template) {
+      tmpl = template(this.template);
+    }
+
+    list = this.filtered.map((val, i) => {
+      if (this.template) {
+        templateString = tmpl({ [this.itemAs]: val.data });
+      } else {
+        itemValue = (typeof val == 'string') ? val : val.index;
+      }
+
+      return (
+        <div class={'dropdown-item'.concat(this.focusIndex === i + 1 ? ' active' : '')}
+          onClick={(e: any) => this.handleSelect(e.target.value, i)}
+          onMouseEnter={() => this.handleHover(i + 1)}
+          data-value={(this.template) ? templateString : itemValue}
+          innerHTML={(this.template) ? templateString : itemValue}>
+        </div>
+      );
+    });
+
+    return list;
+  }
+
   render() {
     return [
       <div id={this.idValue} class="form-group cwc-autocomplete">
@@ -327,15 +357,7 @@ export class CwcAutocompleteSelect {
             >
               <div class="popper">
                 <div class="dropdown-menu cwc-popper-autocomplete">
-                  {this.filtered.map((val, i) => (
-                    <div class={'dropdown-item'.concat(this.focusIndex === i + 1 ? ' active' : '')}
-                      onClick={(e: any) => this.handleSelect(e.target.value, i)}
-                      onMouseEnter={() => this.handleHover(i + 1)}
-                      data-value={typeof val === 'string' ? val : val.index}
-                    >
-                      {typeof val === 'string' ? val : val.index}
-                    </div>
-                  ))}
+                  {this.populateDropdown()}
                 </div>
               </div>
             </cwc-popper>
