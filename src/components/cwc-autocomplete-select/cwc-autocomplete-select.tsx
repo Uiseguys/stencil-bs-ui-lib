@@ -23,6 +23,7 @@ import get from 'lodash/get';
   styleUrl: 'cwc-autocomplete-select.scss',
 })
 export class CwcAutocompleteSelect {
+  retainedInitialValues: any[] = [];
   @Prop() id: string;
   @Prop() label: string;
 
@@ -60,6 +61,14 @@ export class CwcAutocompleteSelect {
   @Watch('autoOpen')
   onAutoOpen(newVal){
       console.log("auto open", newVal);
+  }
+
+  @Watch('value')
+  reloadValueProp() {
+    if (this.retainedInitialValues.toString() !== this.value.toString()) {
+      this.retainedInitialValues = this.value;
+      this.loadValueProp();
+    }
   }
 
   addLabel(label) {
@@ -144,6 +153,12 @@ export class CwcAutocompleteSelect {
   }
 
   componentDidLoad() {
+    this.loadValueProp();
+  }
+
+  loadValueProp() {
+    console.log('loadValueProp');
+    this.retainedInitialValues = this.value;
     if(this.value && this.value.length >= 1){
       this.results = this.value;
       this.value.map((val, key) => {
