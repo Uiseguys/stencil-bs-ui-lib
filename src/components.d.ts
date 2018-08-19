@@ -269,6 +269,8 @@ declare global {
       'alwaysSign': boolean;
       'default': string;
       'disabled': boolean;
+      'handleAlwaysSign': () => void;
+      'handlePad': () => void;
       'hidden': boolean;
       'max': number;
       'maximumFractionDigits': number;

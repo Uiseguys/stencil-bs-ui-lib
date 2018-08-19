@@ -1,4 +1,4 @@
-import { Component, State, Prop } from '@stencil/core';
+import { Component, State, Prop, Method } from '@stencil/core';
 import 'bootstrap.native/dist/bootstrap-native-v4';
 
 @Component({
@@ -21,10 +21,8 @@ export class NumberInputComponent {
 
   componentDidLoad() {
     this.value = this.default || '';
-    const actualLength = this.value.replace('+', '').replace('-', '').length;
-    if (this.padLength && actualLength < this.padLength) {
-      this.value = `${'0'.repeat(this.padLength - this.value.length)}${this.value}`;
-    }
+    this.handlePad();
+    this.handleAlwaysSign();
   }
 
   handleChange(event) {
@@ -48,11 +46,23 @@ export class NumberInputComponent {
     if (invalidValue && this.value) {
       this.value = oldvalue;
     }
-    const actualLength = this.value.replace('+', '').replace('-', '').length;
+    this.handlePad();
+    this.handleAlwaysSign();
+  }
+
+  @Method()
+  handlePad() {
+    const decimalIndex = this.value.indexOf('.') !== -1 ? this.value.indexOf('.') : undefined;
+    const actualValue = this.value.slice(0, decimalIndex).replace('+', '').replace('-', '');
+    const actualLength = actualValue.length;
     if (this.padLength && actualLength < this.padLength) {
       const sign  =  this.value.startsWith('+') || this.value.startsWith('-') ? this.value.split('')[0] : '';
       this.value = `${sign}${'0'.repeat(this.padLength - actualLength)}${this.value.replace('+', '').replace('-', '')}`;
     }
+  }
+
+  @Method()
+  handleAlwaysSign() {
     if (this.alwaysSign && parseFloat(this.value) > 0 && !this.value.startsWith('+')) {
       this.value = `+${this.value}`;
     }
