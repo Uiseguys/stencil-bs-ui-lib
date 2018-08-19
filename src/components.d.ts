@@ -267,6 +267,15 @@ declare global {
 
     interface CwcNumberInput {
       'alwaysSign': boolean;
+      'default': string;
+      'disabled': boolean;
+      'hidden': boolean;
+      'max': number;
+      'maximumFractionDigits': number;
+      'min': number;
+      'minimumFractionDigits': number;
+      'padLength': number;
+      'placeholder': string;
     }
 
     interface CwcPopper {
@@ -1658,6 +1667,15 @@ declare global {
 
     export interface CwcNumberInputAttributes extends HTMLAttributes {
       'alwaysSign'?: boolean;
+      'default'?: string;
+      'disabled'?: boolean;
+      'hidden'?: boolean;
+      'max'?: number;
+      'maximumFractionDigits'?: number;
+      'min'?: number;
+      'minimumFractionDigits'?: number;
+      'padLength'?: number;
+      'placeholder'?: string;
     }
 
     export interface CwcPopperAttributes extends HTMLAttributes {
