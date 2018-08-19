@@ -289,6 +289,7 @@ export class CwcAutocompleteSelect {
     const result = this.getStringValue(this.filtered[index]);
     this.multiselectOnSubmitHandler(result);
 
+    this.checkForPlaceholder();
     this.close();
   }
 
