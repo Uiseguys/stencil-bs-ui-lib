@@ -270,6 +270,8 @@ declare global {
       'default': string;
       'disabled': boolean;
       'handleAlwaysSign': () => void;
+      'handleLackingPad': () => void;
+      'handleOverPad': () => void;
       'handlePad': () => void;
       'hidden': boolean;
       'max': number;
