@@ -61,10 +61,12 @@ declare global {
       'data': any[];
       'id': string;
       'idValue': string;
+      'itemAs': string;
       'label': string;
       'minSearchLength': number;
       'placeholder': string;
       'searchKey': string;
+      'template': string;
       'value': any[];
     }
 
@@ -233,10 +235,7 @@ declare global {
     }
 
     interface CwcNavigation {
-      'containerChildren': any[];
       'isCollapsed': boolean;
-      'primaryActions': any[];
-      'secondaryActions': any[];
     }
 
     interface NavigationItemGroup {
@@ -556,11 +555,11 @@ declare global {
 
     }
 
-    interface MySwitchPage {
+    interface NavbarPage {
 
     }
 
-    interface NavbarPage {
+    interface MySwitchPage {
 
     }
 
@@ -1190,19 +1189,19 @@ declare global {
     };
     
 
-    interface HTMLMySwitchPageElement extends StencilComponents.MySwitchPage, HTMLStencilElement {}
-
-    var HTMLMySwitchPageElement: {
-      prototype: HTMLMySwitchPageElement;
-      new (): HTMLMySwitchPageElement;
-    };
-    
-
     interface HTMLNavbarPageElement extends StencilComponents.NavbarPage, HTMLStencilElement {}
 
     var HTMLNavbarPageElement: {
       prototype: HTMLNavbarPageElement;
       new (): HTMLNavbarPageElement;
+    };
+    
+
+    interface HTMLMySwitchPageElement extends StencilComponents.MySwitchPage, HTMLStencilElement {}
+
+    var HTMLMySwitchPageElement: {
+      prototype: HTMLMySwitchPageElement;
+      new (): HTMLMySwitchPageElement;
     };
     
 
@@ -1377,8 +1376,8 @@ declare global {
     'multiselect-page': JSXElements.MultiselectPageAttributes;
     'mwc-slider-page': JSXElements.MwcSliderPageAttributes;
     'my-checkbox-page': JSXElements.MyCheckboxPageAttributes;
-    'my-switch-page': JSXElements.MySwitchPageAttributes;
     'navbar-page': JSXElements.NavbarPageAttributes;
+    'my-switch-page': JSXElements.MySwitchPageAttributes;
     'navigation-page': JSXElements.NavigationPageAttributes;
     'popper-page': JSXElements.PopperPageAttributes;
     'progress-bar-page': JSXElements.ProgressBarPageAttributes;
@@ -1409,6 +1408,7 @@ declare global {
       'data'?: any[];
       'id'?: string;
       'idValue'?: string;
+      'itemAs'?: string;
       'label'?: string;
       'minSearchLength'?: number;
       'onMultiselectOnSubmit'?: (event: CustomEvent) => void;
@@ -1416,6 +1416,7 @@ declare global {
       'onTextChange'?: (event: CustomEvent) => void;
       'placeholder'?: string;
       'searchKey'?: string;
+      'template'?: string;
       'value'?: any[];
     }
 
@@ -1598,10 +1599,7 @@ declare global {
     }
 
     export interface CwcNavigationAttributes extends HTMLAttributes {
-      'containerChildren'?: any[];
       'isCollapsed'?: boolean;
-      'primaryActions'?: any[];
-      'secondaryActions'?: any[];
     }
 
     export interface NavigationItemGroupAttributes extends HTMLAttributes {
@@ -1917,16 +1915,18 @@ declare global {
 
     }
 
-    export interface MySwitchPageAttributes extends HTMLAttributes {
+    export interface NavbarPageAttributes extends HTMLAttributes {
 
     }
 
-    export interface NavbarPageAttributes extends HTMLAttributes {
+    export interface MySwitchPageAttributes extends HTMLAttributes {
 
     }
 
     export interface NavigationPageAttributes extends HTMLAttributes {
       'onNaviconstoggle'?: (event: CustomEvent) => void;
+      'onNavigationcomponentnumber'?: (event: CustomEvent) => void;
+      'onNavigationshowcontrol'?: (event: CustomEvent) => void;
       'onShownavigationcontainertoggle'?: (event: CustomEvent) => void;
       'onShownavigationtoggle'?: (event: CustomEvent) => void;
     }
@@ -2049,8 +2049,8 @@ declare global {
     'multiselect-page': HTMLMultiselectPageElement
     'mwc-slider-page': HTMLMwcSliderPageElement
     'my-checkbox-page': HTMLMyCheckboxPageElement
-    'my-switch-page': HTMLMySwitchPageElement
     'navbar-page': HTMLNavbarPageElement
+    'my-switch-page': HTMLMySwitchPageElement
     'navigation-page': HTMLNavigationPageElement
     'popper-page': HTMLPopperPageElement
     'progress-bar-page': HTMLProgressBarPageElement
@@ -2138,8 +2138,8 @@ declare global {
     'multiselect-page': HTMLMultiselectPageElement;
     'mwc-slider-page': HTMLMwcSliderPageElement;
     'my-checkbox-page': HTMLMyCheckboxPageElement;
-    'my-switch-page': HTMLMySwitchPageElement;
     'navbar-page': HTMLNavbarPageElement;
+    'my-switch-page': HTMLMySwitchPageElement;
     'navigation-page': HTMLNavigationPageElement;
     'popper-page': HTMLPopperPageElement;
     'progress-bar-page': HTMLProgressBarPageElement;
