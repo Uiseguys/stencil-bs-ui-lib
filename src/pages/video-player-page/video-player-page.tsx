@@ -46,10 +46,20 @@ export class VideoPlayerPage {
       <div>
         <h2>Video Player</h2>
         <div>
-          <fcl-video-player autoinit={this.autoinit} poster="http://images.telvi.de/images/originals/2017/50/1/319b47392316aa2c54d5fbab.jpg"
-                            thumbnail={this.thumbnail} theme={this.theme}>
-            <source src="http://techslides.com/demos/sample-videos/small.mp4" type='video/mp4' />
-          </fcl-video-player>
+          <div class="row">
+            <div class="col-md-5">
+              <fcl-video-player autoinit={true} poster="http://images.telvi.de/images/originals/2017/50/1/319b47392316aa2c54d5fbab.jpg"
+                                thumbnail={this.thumbnail} theme={this.theme}>
+                <source src="http://techslides.com/demos/sample-videos/small.mp4" type='video/mp4' />
+              </fcl-video-player>
+            </div>
+            <div class="col-md-5 offset-md-1">
+              <fcl-video-player autoinit={false} poster="http://images.telvi.de/images/originals/2017/50/1/319b47392316aa2c54d5fbab.jpg"
+                                thumbnail={this.thumbnail} theme={this.theme}>
+                <source src="http://techslides.com/demos/sample-videos/small.mp4" type='video/mp4' />
+              </fcl-video-player>
+            </div>
+          </div>
 
           <section class="box top">
             <div class="ntitle">Summary</div>

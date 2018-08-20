@@ -48,14 +48,14 @@ export class CwcWysiwygEditor {
         },
         commands: function(button, id) {
           const classNames = {
-            bold: 'fa fa-bold',
-            italic: 'fa fa-italic',
-            quote: 'fa fa-quote-left',
-            code: 'fa fa-code',
-            ol: 'fa fa-list-ol',
-            ul: 'fa fa-list-ul',
-            link: 'fa fa-link',
-            image: 'fa fa-image'
+            bold: 'btn bold',
+            italic: 'btn italic',
+            quote: 'btn quote-left',
+            code: 'btn code',
+            ol: 'btn list-ol',
+            ul: 'btn list-ul',
+            link: 'btn link',
+            image: 'btn image'
           };
           if (id === 'heading') {
             button.innerHTML = 'H1';

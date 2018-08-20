@@ -50,6 +50,7 @@ export class CwcPopper {
         }
 
         this.content = this.el.children[0].children[0];
+        
         if (this.arrow) {
             const caretEl = document.createElement('div');
             caretEl.className = "popper__arrow";

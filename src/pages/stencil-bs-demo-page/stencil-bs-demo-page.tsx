@@ -204,6 +204,11 @@ export class StencilBsDemoPage {
       url: '/myswitch',
       title: 'My Switch',
       componentName: 'my-switch-page'
+    },
+    {
+      url: '/checkboxgroup',
+      title: 'Checkbox Group',
+      componentName: 'checkbox-group-page'
     }
   ];
 
