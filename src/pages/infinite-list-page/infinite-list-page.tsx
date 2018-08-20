@@ -8,8 +8,6 @@ export class CwcInfiniteList {
   @State() users1: any[] = [];
   @State() users2: any[] = [];
 
-
-  // Users data methods
   componentWillLoad() {
     this.initUsers1()
     this.initUsers2()
@@ -17,12 +15,12 @@ export class CwcInfiniteList {
 
   initUsers1(count?: number) {
     const page = this.getPage(this.users1)
-    this.getUsers(count, page ).then(users => this.users1 = this.users1.concat(users) );
+    this.getUsers(count, page).then(users => this.users1 = this.users1.concat(users));
   }
 
   initUsers2(count?: number) {
     const page = this.getPage(this.users2)
-    this.getUsers(count, page ).then(users => this.users2 = this.users2.concat(users) );
+    this.getUsers(count, page).then(users => this.users2 = this.users2.concat(users));
   }
 
   getPage(data: any[]): number {
@@ -118,12 +116,12 @@ export class CwcInfiniteList {
               addClass="my-1 shadow-sm p-3 mb-2 mx-2 bg-white rounded"
             >
 
-                <div class="card rounded my-1 p-2 w-100 text-capitalize">
+              <div class="card rounded my-1 p-2 w-100 text-capitalize">
                 <h3 class="my-0">
                   [[= user.name.first ]] [[= user.name.last ]]
                 </h3>
               </div>
-    
+
             </cwc-list>
           </cwc-infinite-list-watcher>
 
@@ -253,7 +251,7 @@ export class CwcInfiniteList {
       </div>,
 
       <pre>
-{`
+        {`
           <cwc-infinite-list-watcher
             onOnBottomReach={() => this.loadMoreUsers()}
             listSelector="#users-infinite"
@@ -299,7 +297,7 @@ export class CwcInfiniteList {
         listSelector="#users-infinite"
         lastItemSelector=".custom-last"
       />,
-  
+
       <cwc-list
         id="users-infinite"
         items={this.users2}
