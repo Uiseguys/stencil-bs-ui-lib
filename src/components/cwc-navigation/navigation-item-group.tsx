@@ -6,11 +6,11 @@ import { Component, Prop } from '@stencil/core';
     styleUrl: 'navigation-item-group.scss'
 })
 export class NavigationItemGroup {
-    
+
 
     @Prop() text: string;
     @Prop() titleText: string;
-    @Prop() hasSeparator: boolean;
+    @Prop() hasSeparator: boolean = true;
 
 
     render() {
@@ -20,7 +20,7 @@ export class NavigationItemGroup {
 
                 {
                     this.hasSeparator ?
-                    <div class="separator"></div> : null
+                        <div class="separator"></div> : null
                 }
 
                 <div class="group-header" title={this.titleText}>
