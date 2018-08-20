@@ -218,10 +218,7 @@ declare global {
     }
 
     interface CwcNavigation {
-      'containerChildren': any[];
       'isCollapsed': boolean;
-      'primaryActions': any[];
-      'secondaryActions': any[];
     }
 
     interface NavigationItemGroup {
@@ -1551,10 +1548,7 @@ declare global {
     }
 
     export interface CwcNavigationAttributes extends HTMLAttributes {
-      'containerChildren'?: any[];
       'isCollapsed'?: boolean;
-      'primaryActions'?: any[];
-      'secondaryActions'?: any[];
     }
 
     export interface NavigationItemGroupAttributes extends HTMLAttributes {
@@ -1876,6 +1870,8 @@ declare global {
 
     export interface NavigationPageAttributes extends HTMLAttributes {
       'onNaviconstoggle'?: (event: CustomEvent) => void;
+      'onNavigationcomponentnumber'?: (event: CustomEvent) => void;
+      'onNavigationshowcontrol'?: (event: CustomEvent) => void;
       'onShownavigationcontainertoggle'?: (event: CustomEvent) => void;
       'onShownavigationtoggle'?: (event: CustomEvent) => void;
     }
