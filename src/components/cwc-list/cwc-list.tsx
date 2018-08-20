@@ -1,18 +1,18 @@
 import { Component, Prop, Element } from '@stencil/core';
 import template from 'lodash/template';
+import templateSettings from 'lodash/templateSettings';
 
 
 @Component({
     tag: 'cwc-list',
-    // styleUrl: 'cwc-list-2.scss'
+    styleUrl: 'cwc-list.scss'
 })
 export class CwcList {
 
 
-    @Prop() items: object[];
+    @Prop() items: any[] = [];
     @Prop() itemAs: string = 'item';
-    @Prop() template: string = '';
-
+    @Prop() listId: string = '';
     @Prop() addClass?: string = '';
     @Prop() addClassFirst?: string = '';
     @Prop() addClassLast?: string = '';
@@ -20,9 +20,10 @@ export class CwcList {
     @Prop() addClassOdd?: string = '';
     @Prop() wrapperClass: string = '';
 
-    regex = /\[\[+(.*?) ?\]\]+/g;
+    @Prop() interpolationRegex = /\[\[=+(.*?) ?\]\]+/g;
 
     @Element() el: HTMLElement;
+    templateElement = undefined
 
 
     /**
@@ -74,29 +75,33 @@ export class CwcList {
      * @memberof CwcList
      */
     insertClassList(str, index): string {
-        let indexCloseTag = str.indexOf('>'),
+        const indexCloseTag = str.indexOf('>'),
             indexClass = str.indexOf('class="')
 
-        let isClassPresent = indexClass !== -1 && indexClass < indexCloseTag
+        const isClassPresent = indexClass !== -1 && indexClass < indexCloseTag
 
-        let finalClassList = isClassPresent ?
+        const finalClassList = isClassPresent ?
             this.insert(str, str.indexOf('"', indexClass + 7), this.addListClasses('', index, this.items.length)) :
             this.insert(str, indexCloseTag, this.addListClasses('', index, this.items.length))
 
         return finalClassList
     }
 
-
-
-
     render() {
+        templateSettings.interpolate = this.interpolationRegex;
 
-        let tmpl = template(this.template)
+        if (!this.templateElement) {
+
+             this.templateElement = template(this.el.firstElementChild.outerHTML)
+        }
+  
+        this.el.firstElementChild.setAttribute('style', 'display:none;')
+
 
         let str = ''
         this.items.map((item, index) => {
 
-            let templateString = tmpl({ [this.itemAs]: item })
+            let templateString = this.templateElement({ [this.itemAs]: item })
             templateString = this.insertClassList(templateString, index)
 
             str += templateString
@@ -105,9 +110,7 @@ export class CwcList {
 
         return (
 
-            <div id={this.el.id} class={"item-list-wrapper " + this.wrapperClass}
-
-
+            <div id={this.listId} class={"item-list-wrapper " + this.wrapperClass}
                 innerHTML={str}>
             </div>
         );

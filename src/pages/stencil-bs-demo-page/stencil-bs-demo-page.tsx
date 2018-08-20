@@ -97,6 +97,11 @@ export class StencilBsDemoPage {
       componentName: 'list-page'
     },
     {
+      url: '/list-infinite',
+      title: 'Infinite List Watcher Component',
+      componentName: 'infinite-list-page'
+    },
+    {
       url: '/multiselect',
       title: 'Multiselect Component',
       componentName: 'multiselect-page'

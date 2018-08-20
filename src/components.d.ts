@@ -148,7 +148,6 @@ declare global {
     interface CwcInfiniteListWatcher {
       'bindToList': boolean;
       'bottomOffset': number;
-      'containerSelector': string;
       'debounce': number;
       'lastItemSelector': string;
       'listSelector': string;
@@ -174,9 +173,10 @@ declare global {
       'addClassFirst': string;
       'addClassLast': string;
       'addClassOdd': string;
+      'interpolationRegex': any;
       'itemAs': string;
-      'items': object[];
-      'template': string;
+      'items': any[];
+      'listId': string;
       'wrapperClass': string;
     }
 
@@ -516,6 +516,10 @@ declare global {
     }
 
     interface FormPage {
+
+    }
+
+    interface InfiniteListPage {
 
     }
 
@@ -1117,6 +1121,14 @@ declare global {
     };
     
 
+    interface HTMLInfiniteListPageElement extends StencilComponents.InfiniteListPage, HTMLStencilElement {}
+
+    var HTMLInfiniteListPageElement: {
+      prototype: HTMLInfiniteListPageElement;
+      new (): HTMLInfiniteListPageElement;
+    };
+    
+
     interface HTMLInlineeditPageElement extends StencilComponents.InlineeditPage, HTMLStencilElement {}
 
     var HTMLInlineeditPageElement: {
@@ -1367,6 +1379,7 @@ declare global {
     'fcl-image-page': JSXElements.FclImagePageAttributes;
     'file-input-page': JSXElements.FileInputPageAttributes;
     'form-page': JSXElements.FormPageAttributes;
+    'infinite-list-page': JSXElements.InfiniteListPageAttributes;
     'inlineedit-page': JSXElements.InlineeditPageAttributes;
     'inlineedit-textarea-page': JSXElements.InlineeditTextareaPageAttributes;
     'list-page': JSXElements.ListPageAttributes;
@@ -1505,7 +1518,6 @@ declare global {
     export interface CwcInfiniteListWatcherAttributes extends HTMLAttributes {
       'bindToList'?: boolean;
       'bottomOffset'?: number;
-      'containerSelector'?: string;
       'debounce'?: number;
       'lastItemSelector'?: string;
       'listSelector'?: string;
@@ -1538,9 +1550,10 @@ declare global {
       'addClassFirst'?: string;
       'addClassLast'?: string;
       'addClassOdd'?: string;
+      'interpolationRegex'?: any;
       'itemAs'?: string;
-      'items'?: object[];
-      'template'?: string;
+      'items'?: any[];
+      'listId'?: string;
       'wrapperClass'?: string;
     }
 
@@ -1879,6 +1892,10 @@ declare global {
 
     }
 
+    export interface InfiniteListPageAttributes extends HTMLAttributes {
+
+    }
+
     export interface InlineeditPageAttributes extends HTMLAttributes {
 
     }
@@ -2040,6 +2057,7 @@ declare global {
     'fcl-image-page': HTMLFclImagePageElement
     'file-input-page': HTMLFileInputPageElement
     'form-page': HTMLFormPageElement
+    'infinite-list-page': HTMLInfiniteListPageElement
     'inlineedit-page': HTMLInlineeditPageElement
     'inlineedit-textarea-page': HTMLInlineeditTextareaPageElement
     'list-page': HTMLListPageElement
@@ -2129,6 +2147,7 @@ declare global {
     'fcl-image-page': HTMLFclImagePageElement;
     'file-input-page': HTMLFileInputPageElement;
     'form-page': HTMLFormPageElement;
+    'infinite-list-page': HTMLInfiniteListPageElement;
     'inlineedit-page': HTMLInlineeditPageElement;
     'inlineedit-textarea-page': HTMLInlineeditTextareaPageElement;
     'list-page': HTMLListPageElement;
