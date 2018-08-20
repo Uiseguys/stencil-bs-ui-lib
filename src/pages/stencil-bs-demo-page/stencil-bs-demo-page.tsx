@@ -95,6 +95,11 @@ export class StencilBsDemoPage {
       componentName: 'list-page'
     },
     {
+      url: '/list-infinite',
+      title: 'Infinite List Watcher Component',
+      componentName: 'infinite-list-page'
+    },
+    {
       url: '/multiselect',
       title: 'Multiselect Component',
       componentName: 'multiselect-page'
@@ -188,11 +193,11 @@ export class StencilBsDemoPage {
       title: 'Wysiwyg Editor Component',
       componentName: 'wysiwyg-editor-page'
     },
-      {
-          url: '/combobox',
-          title: 'Combobox Component',
-          componentName: 'combobox-page'
-      },
+    {
+      url: '/combobox',
+      title: 'Combobox Component',
+      componentName: 'combobox-page'
+    },
     {
       url: '/mycheckbox',
       title: 'My Checkbox',
@@ -234,75 +239,75 @@ export class StencilBsDemoPage {
 
 
 
-        <cwc-navigation isCollapsed={this.navContainerShown}>
+          <cwc-navigation isCollapsed={this.navContainerShown}>
 
-             <div slot="primary-actions">
+            <div slot="primary-actions">
 
-                <cwc-navigation-global-item
-                    titleText={'Title text'}
-                    icon="./assets/icon/sharp_send_white_48dp.png"/>
-                <cwc-navigation-global-item
-                    titleText={'Title text'}
-                    icon="./assets/icon/sharp_check_circle_outline_white_18dp.png"/>
-                <cwc-navigation-global-item isActive={true}
-                    titleText={'Title text'}
-                    icon="./assets/icon/baseline_add_white_18dp.png"/>
+              <cwc-navigation-global-item
+                titleText={'Title text'}
+                icon="./assets/icon/sharp_send_white_48dp.png" />
+              <cwc-navigation-global-item
+                titleText={'Title text'}
+                icon="./assets/icon/sharp_check_circle_outline_white_18dp.png" />
+              <cwc-navigation-global-item isActive={true}
+                titleText={'Title text'}
+                icon="./assets/icon/baseline_add_white_18dp.png" />
 
             </div>
 
 
             <div slot="secondary-actions">
-            <cwc-navigation-global-item
+              <cwc-navigation-global-item
                 titleText={'Secondary action'}
-                icon="./assets/icon/sharp_send_white_48dp.png"/>
+                icon="./assets/icon/sharp_send_white_48dp.png" />
             </div>
 
 
-      <div slot="container-actions">
+            <div slot="container-actions">
               <navigation-title text="Nav Title"
-              icon="./assets/icon/sharp_flip_to_front_white_18dp.png"/>
+                icon="./assets/icon/sharp_flip_to_front_white_18dp.png" />
 
 
-          <navigation-item-group text="Actions group">
+              <navigation-item-group text="Actions group">
 
-              <div slot="navigation-items">
+                <div slot="navigation-items">
 
-                  <navigation-item  showIcon={this.isIconsShown} text="Navigation item" />
-                  <navigation-item  showIcon={this.isIconsShown} isActive={true} text={'Active nav item with subtext'}
-                      subText="Subtext of nav item" />
-                  <navigation-item  showIcon={this.isIconsShown} text="Basic link" />
+                  <navigation-item showIcon={this.isIconsShown} text="Navigation item" />
+                  <navigation-item showIcon={this.isIconsShown} isActive={true} text={'Active nav item with subtext'}
+                    subText="Subtext of nav item" />
+                  <navigation-item showIcon={this.isIconsShown} text="Basic link" />
 
-                  <navigation-item  showIcon={this.isIconsShown}  text="With drop icon"
-                      dropIcon="./assets/icon/sharp_flip_to_front_white_18dp.png"/>
+                  <navigation-item showIcon={this.isIconsShown} text="With drop icon"
+                    dropIcon="./assets/icon/sharp_flip_to_front_white_18dp.png" />
 
-              </div>
-          </navigation-item-group>
+                </div>
+              </navigation-item-group>
 
-          <navigation-item-group text="Group with separator" hasSeparator={true}>
+              <navigation-item-group text="Group with separator" hasSeparator={true}>
 
-            <div slot="navigation-items">
-                <navigation-item  showIcon={this.isIconsShown} text="With dropicon and subasdfastext"
-                subText="My small subtext"
-                icon={'./assets/icon/baseline_add_white_18dp.png'}
-                dropIcon={'./assets/icon/sharp_flip_to_front_white_18dp.png'}/>
+                <div slot="navigation-items">
+                  <navigation-item showIcon={this.isIconsShown} text="With dropicon and subasdfastext"
+                    subText="My small subtext"
+                    icon={'./assets/icon/baseline_add_white_18dp.png'}
+                    dropIcon={'./assets/icon/sharp_flip_to_front_white_18dp.png'} />
 
-                <navigation-item  showIcon={this.isIconsShown} text="With dropicon and subtext"
-                subText="My small subtext"
-                icon={'./assets/icon/baseline_add_white_18dp.png'}
-                dropIcon={'./assets/icon/sharp_flip_to_front_white_18dp.png'}/>
+                  <navigation-item showIcon={this.isIconsShown} text="With dropicon and subtext"
+                    subText="My small subtext"
+                    icon={'./assets/icon/baseline_add_white_18dp.png'}
+                    dropIcon={'./assets/icon/sharp_flip_to_front_white_18dp.png'} />
 
-                <navigation-item  showIcon={this.isIconsShown} text="With mouse events" />
+                  <navigation-item showIcon={this.isIconsShown} text="With mouse events" />
+                </div>
+              </navigation-item-group>
+
             </div>
-          </navigation-item-group>
+            {/* // </div> */}
 
-      </div>
-{/* // </div> */}
+          </cwc-navigation> : null
 
-      </cwc-navigation> : null
-
-  ),
+      ),
       <cwc-styles />,
-      <div class={`container-fluid ${this.navigationShown ? 'with-navigation' : '' }`}>
+      <div class={`container-fluid ${this.navigationShown ? 'with-navigation' : ''}`}>
         <div class="row">
           <div class="col-12 text-center">
             <h1>UI Library</h1>
