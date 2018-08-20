@@ -12,6 +12,7 @@ export class NumberInputComponent {
   @Prop() required: boolean;
   @Prop() autoResize: boolean;
   @Prop() autoPadding: boolean;
+  @Prop() numberStyle: string = 'decimal';
   @Prop() placeholder: string;
   @Prop() default: string;
   @Prop() type: string = 'number';

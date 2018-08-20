@@ -284,6 +284,7 @@ declare global {
       'minimumFractionDigits': number;
       'minlength': number;
       'name': string;
+      'numberStyle': string;
       'padLength': number;
       'placeholder': string;
       'required': boolean;
@@ -1693,6 +1694,7 @@ declare global {
       'minimumFractionDigits'?: number;
       'minlength'?: number;
       'name'?: string;
+      'numberStyle'?: string;
       'padLength'?: number;
       'placeholder'?: string;
       'required'?: boolean;
