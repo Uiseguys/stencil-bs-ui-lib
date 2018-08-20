@@ -75,7 +75,7 @@ export class CwcAutocompleteSelect {
     this.labels = [...this.labels, label];
     this.justAddedLabel = true;
     this.renderLabels();
-    this.autoOpen=false;
+    this.autoOpen = false;
   }
 
   addResult(result: any) {
@@ -110,6 +110,7 @@ export class CwcAutocompleteSelect {
   }
 
   multiselectOnSubmitHandler(result) {
+    if (this.labels.includes(result)) return;
     this.addLabel(result);
     this.filterValue = '';
     this.clearTextNodes();
@@ -157,7 +158,6 @@ export class CwcAutocompleteSelect {
   }
 
   loadValueProp() {
-    console.log('loadValueProp');
     this.retainedInitialValues = this.value;
     if(this.value && this.value.length >= 1){
       this.results = this.value;
@@ -287,6 +287,7 @@ export class CwcAutocompleteSelect {
     input.value = value;
 
     const result = this.getStringValue(this.filtered[index]);
+
     this.multiselectOnSubmitHandler(result);
 
     this.checkForPlaceholder();
@@ -391,7 +392,7 @@ export class CwcAutocompleteSelect {
   @Listen('click')
   @Listen('keydown')
   handleKeyUpDown(e) {
-    setTimeout(() => {
+    // setTimeout(() => {
       //popper will be appear on click if data length will be '<=25'
       if (this.data.length <= 25 && !this.labelsAdded) {
         this.autoOpen = true;
@@ -420,9 +421,9 @@ export class CwcAutocompleteSelect {
           }
         });
       }
-    },200);
+    // },200);
 
-    this.labelsAdded=false;
+    this.labelsAdded = false;
     if (e && (e.type === 'keydown' || e.type === 'keyup')) {
       //this.textChange.emit((e && typeof e.target !== 'undefined' && typeof e.target.childNodes !== 'undefined' && typeof e.target.childNodes.length !== 'undefined') ? e.target.childNodes[e.target.childNodes.length-1].textContent : '');
       let searchText = '';
