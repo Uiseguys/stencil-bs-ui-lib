@@ -61,10 +61,12 @@ declare global {
       'data': any[];
       'id': string;
       'idValue': string;
+      'itemAs': string;
       'label': string;
       'minSearchLength': number;
       'placeholder': string;
       'searchKey': string;
+      'template': string;
       'value': any[];
     }
 
@@ -267,6 +269,8 @@ declare global {
 
     interface CwcNumberInput {
       'alwaysSign': boolean;
+      'autoPadding': boolean;
+      'autoResize': boolean;
       'default': string;
       'disabled': boolean;
       'handleAlwaysSign': () => void;
@@ -278,8 +282,13 @@ declare global {
       'maximumFractionDigits': number;
       'min': number;
       'minimumFractionDigits': number;
+      'minlength': number;
+      'name': string;
       'padLength': number;
       'placeholder': string;
+      'required': boolean;
+      'step': number;
+      'type': string;
     }
 
     interface CwcPopper {
@@ -1448,6 +1457,7 @@ declare global {
       'data'?: any[];
       'id'?: string;
       'idValue'?: string;
+      'itemAs'?: string;
       'label'?: string;
       'minSearchLength'?: number;
       'onMultiselectOnSubmit'?: (event: CustomEvent) => void;
@@ -1455,6 +1465,7 @@ declare global {
       'onTextChange'?: (event: CustomEvent) => void;
       'placeholder'?: string;
       'searchKey'?: string;
+      'template'?: string;
       'value'?: any[];
     }
 
@@ -1671,6 +1682,8 @@ declare global {
 
     export interface CwcNumberInputAttributes extends HTMLAttributes {
       'alwaysSign'?: boolean;
+      'autoPadding'?: boolean;
+      'autoResize'?: boolean;
       'default'?: string;
       'disabled'?: boolean;
       'hidden'?: boolean;
@@ -1678,8 +1691,13 @@ declare global {
       'maximumFractionDigits'?: number;
       'min'?: number;
       'minimumFractionDigits'?: number;
+      'minlength'?: number;
+      'name'?: string;
       'padLength'?: number;
       'placeholder'?: string;
+      'required'?: boolean;
+      'step'?: number;
+      'type'?: string;
     }
 
     export interface CwcPopperAttributes extends HTMLAttributes {

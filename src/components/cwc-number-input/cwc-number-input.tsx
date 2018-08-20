@@ -1,4 +1,4 @@
-import { Component, State, Prop, Method } from '@stencil/core';
+import { Component, State, Prop, Method, Element, HostElement } from '@stencil/core';
 import 'bootstrap.native/dist/bootstrap-native-v4';
 
 @Component({
@@ -6,21 +6,36 @@ import 'bootstrap.native/dist/bootstrap-native-v4';
     styleUrl: 'cwc-number-input.scss'
 })
 export class NumberInputComponent {
-  @Prop() alwaysSign: boolean = false;
-  @Prop() disabled: boolean = false;
-  @Prop() hidden: boolean = false;
+  @Prop() alwaysSign: boolean;
+  @Prop() disabled: boolean;
+  @Prop() hidden: boolean;
+  @Prop() required: boolean;
+  @Prop() autoResize: boolean;
+  @Prop() autoPadding: boolean;
   @Prop() placeholder: string;
   @Prop() default: string;
+  @Prop() type: string = 'number';
+  @Prop() name: string;
   @Prop() max: number;
   @Prop() min: number;
+  @Prop() minlength: number;
   @Prop() maximumFractionDigits: number;
   @Prop() minimumFractionDigits: number;
-  @Prop() padLength: number;
+  @Prop({ mutable: true }) padLength: number;
+  @Prop() step: number;
 
   @State() value: string;
 
+  @Element() el: HostElement;
+
   componentDidLoad() {
     this.value = this.default || '';
+    if (this.autoPadding && this.max) {
+      this.padLength = this.max.toString().length;
+    }
+    if (this.minlength && this.value.length < this.minlength) {
+      this.el.querySelector('input').setAttribute('invalid', '');
+    }
     if (this.padLength) {
       this.handlePad();
     }
@@ -31,11 +46,10 @@ export class NumberInputComponent {
     const oldvalue = this.value;
     this.value = event.target.value;
     let invalidValue = isNaN(event.target.value);
-    if (this.max) {
-      invalidValue = invalidValue || parseFloat(this.value) > this.max;
-    }
-    if (this.min) {
-      invalidValue = invalidValue || parseFloat(this.value) < this.min;
+    if (this.minlength && this.value.length < this.minlength) {
+      this.el.querySelector('input').setAttribute('invalid', '');
+    } else {
+      this.el.querySelector('input').removeAttribute('invalid');
     }
     if (this.maximumFractionDigits && this.value && Math.floor(parseFloat(this.value)) !== parseFloat(this.value)) {
       invalidValue = invalidValue
@@ -96,14 +110,23 @@ export class NumberInputComponent {
   }
 
   render() {
+    const size = this.autoResize && this.value && this.value.length
+      ? this.value.length : undefined;
+
     return (
         <div>
           <input
           disabled={this.disabled}
           hidden={this.hidden}
-          type="text"
+          required={this.required}
+          type={this.type}
+          max={this.max}
+          min={this.min}
+          step={this.step}
+          name={this.name}
           placeholder={this.placeholder}
           value={this.value}
+          style={{width: `${size}em`}}
           onInput={(e) => this.handleChange(e)}
           />
         </div>
