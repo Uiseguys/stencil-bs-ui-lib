@@ -391,7 +391,7 @@ export class CwcAutocompleteSelect {
   @Listen('click')
   @Listen('keydown')
   handleKeyUpDown(e) {
-    // setTimeout(() => {
+    setTimeout(() => {
       //popper will be appear on click if data length will be '<=25'
       if (this.data.length <= 25 && !this.labelsAdded) {
         this.autoOpen = true;
@@ -420,7 +420,7 @@ export class CwcAutocompleteSelect {
           }
         });
       }
-    // },200);
+    },200);
 
     this.labelsAdded = false;
     if (e && (e.type === 'keydown' || e.type === 'keyup')) {
