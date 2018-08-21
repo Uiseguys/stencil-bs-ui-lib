@@ -51,9 +51,6 @@ export class AutocompleteSelectPage {
   //End
 
   getTemplate() {
-    // return `
-    //   <span><%=option.data.name%> <%=option.data.capital%></span>
-    // `
     return '${option.data.name} ${option.data.capital}';
   }
 
