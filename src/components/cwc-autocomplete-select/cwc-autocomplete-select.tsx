@@ -66,7 +66,6 @@ export class CwcAutocompleteSelect {
   @Watch('value')
   reloadValueProp() {
     if (this.retainedInitialValues.toString() !== this.value.toString()) {
-      this.retainedInitialValues = this.value;
       this.loadValueProp();
     }
   }
@@ -159,17 +158,17 @@ export class CwcAutocompleteSelect {
 
   loadValueProp() {
     this.retainedInitialValues = this.value;
-    if(this.value && this.value.length >= 1){
+    if (this.value && this.value.length >= 1) {
       this.results = this.value;
       this.value.map((val, key) => {
         if (typeof val === 'string') {
-          this.labels.push(val);
+          if (!this.labels.includes(val)) this.labels.push(val);
         } else {
           let tempLabel = get(val, this.searchKey);
-          this.labels.push(tempLabel);
+          if (!this.labels.includes(tempLabel)) this.labels.push(tempLabel);
         }
 
-        if(key === this.value.length-1){
+        if (key === this.value.length - 1) {
           this.multiselectOnSubmit.emit(this.results);
           setTimeout(() => {
             this.renderLabels();
