@@ -9,7 +9,7 @@ import {
   EventEmitter,
   Watch
 } from '@stencil/core';
-// import template from 'lodash/template';
+import template from 'lodash/template';
 import filter from 'lodash/filter';
 import get from 'lodash/get';
 
@@ -128,9 +128,7 @@ export class CwcAutocompleteSelect {
     });
   }
 
-  /**
-   * Life cycle hooks
-   */
+  /** Life cycle hooks **/
   componentWillUpdate() {
     if (this.filterValue) {
       if (this.filterValue.length >= this.minSearchLength) {
@@ -153,6 +151,10 @@ export class CwcAutocompleteSelect {
   }
 
   componentDidLoad() {
+    // TODO: this line of code is here because removing "import template from 'lodash/template';" will cause this error to happen when you build the project:
+    // [ ERROR ]  Minify JS e.name.definition is not a function
+    if (this.focusIndex > 999) console.log(template);
+    /** */
     this.loadValueProp();
   }
 
@@ -184,7 +186,7 @@ export class CwcAutocompleteSelect {
     }
   }
 
-  private interpolate(template, variables, fallback?) {
+  private interpolate(template, variables, fallback = '') {
     const regex = /\${[^{]+}/g;
     return template.replace(regex, (match) => {
       const path = match.slice(2, -1).trim();
@@ -192,9 +194,9 @@ export class CwcAutocompleteSelect {
     });
   }
 
-  //get the specified property or nested property of an object
+  /** get the specified property or nested property of an object **/
   private getObjPath(path, obj, fallback = '') {
-      return path.split('.').reduce((res, key) => res[key] || fallback, obj);
+    return path.split('.').reduce((res, key) => res[key] || fallback, obj);
   }
 
   private removeAlllabels() {
@@ -232,9 +234,7 @@ export class CwcAutocompleteSelect {
     });
   }
 
-  /**
-   * Private functions
-   */
+  /** Private functions **/
   private filter() {
     if (typeof this.data[0] === 'string') {
       return this.filterStringArray(this.data);
@@ -269,9 +269,7 @@ export class CwcAutocompleteSelect {
     }
   }
 
-  /**
-   * Handlers
-   */
+  /** Handlers **/
   handleInputChange(e) {
     //let elText = (typeof e.target.textContent !== 'undefined' && typeof e.target.textContent.length !== 'undefined') ? e.target.textContent[e.target.textContent.length-1] : '';
     //this.filterValue = (e && e.target && e.target.childNodes && e.target.childNodes && e.target.childNodes.length && e.target.childNodes[e.target.childNodes.length - 1]) ? e.target.childNodes[e.target.childNodes.length-1].textContent : '';
@@ -323,9 +321,7 @@ export class CwcAutocompleteSelect {
   }
   /** End - Set Placeholder **/
 
-  /**
-   * Public methods
-   */
+  /** Public methods **/
   @Method()
   close() {
     this.focusIndex = 0;
@@ -336,14 +332,9 @@ export class CwcAutocompleteSelect {
   populateDropdown() {
     let list, templateString, itemValue;
 
-    // if (this.template) {
-    //   tmpl = template(this.template);
-    // }
-
     list = this.filtered.map((val, i) => {
       if (this.template) {
         templateString = this.interpolate(this.template, { [this.itemAs]: val.data });
-        // templateString = tmpl({ [this.itemAs]: val.data });
       } else {
         itemValue = (typeof val == 'string') ? val : val.index;
       }
@@ -397,10 +388,7 @@ export class CwcAutocompleteSelect {
     ];
   }
 
-  /**
-   * Keyboard handlers
-   *
-   **/
+  /** Keyboard handlers **/
   @Listen('keyup')
   @Listen('click')
   @Listen('keydown')
@@ -485,9 +473,7 @@ export class CwcAutocompleteSelect {
     }
   }
 
-  /*
-   DOM API functions
-   */
+  /** DOM API functions **/
   setCaretPositionEnd() {
     const input = document.querySelector(`#${this.idValue} div.form-control`);
     const range = document && document.createRange && document.createRange();
