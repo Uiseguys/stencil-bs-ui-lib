@@ -184,9 +184,6 @@ export class CwcAutocompleteSelect {
     }
   }
 
-
-
-
   private interpolate(template, variables, fallback?) {
     const regex = /\${[^{]+}/g;
     return template.replace(regex, (match) => {
@@ -199,9 +196,6 @@ export class CwcAutocompleteSelect {
   private getObjPath(path, obj, fallback = '') {
       return path.split('.').reduce((res, key) => res[key] || fallback, obj);
   }
-
-
-
 
   private removeAlllabels() {
     const labels = document.querySelectorAll(
@@ -348,7 +342,7 @@ export class CwcAutocompleteSelect {
 
     list = this.filtered.map((val, i) => {
       if (this.template) {
-        templateString = this.interpolate(this.template, { [this.itemAs]: val.data })
+        templateString = this.interpolate(this.template, { [this.itemAs]: val.data });
         // templateString = tmpl({ [this.itemAs]: val.data });
       } else {
         itemValue = (typeof val == 'string') ? val : val.index;
