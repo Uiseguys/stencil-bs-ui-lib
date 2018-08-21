@@ -9,7 +9,7 @@ import {
   EventEmitter,
   Watch
 } from '@stencil/core';
-import template from 'lodash/template';
+// import template from 'lodash/template';
 import filter from 'lodash/filter';
 import get from 'lodash/get';
 
@@ -184,6 +184,25 @@ export class CwcAutocompleteSelect {
     }
   }
 
+
+
+
+  private interpolate(template, variables, fallback?) {
+    const regex = /\${[^{]+}/g;
+    return template.replace(regex, (match) => {
+      const path = match.slice(2, -1).trim();
+      return this.getObjPath(path, variables, fallback);
+    });
+  }
+
+  //get the specified property or nested property of an object
+  private getObjPath(path, obj, fallback = '') {
+      return path.split('.').reduce((res, key) => res[key] || fallback, obj);
+  }
+
+
+
+
   private removeAlllabels() {
     const labels = document.querySelectorAll(
       `#${this.idValue} div.form-control scb-badge`
@@ -321,15 +340,16 @@ export class CwcAutocompleteSelect {
   }
 
   populateDropdown() {
-    let tmpl, list, templateString, itemValue;
+    let list, templateString, itemValue;
 
-    if (this.template) {
-      tmpl = template(this.template);
-    }
+    // if (this.template) {
+    //   tmpl = template(this.template);
+    // }
 
     list = this.filtered.map((val, i) => {
       if (this.template) {
-        templateString = tmpl({ [this.itemAs]: val.data });
+        templateString = this.interpolate(this.template, { [this.itemAs]: val.data })
+        // templateString = tmpl({ [this.itemAs]: val.data });
       } else {
         itemValue = (typeof val == 'string') ? val : val.index;
       }
