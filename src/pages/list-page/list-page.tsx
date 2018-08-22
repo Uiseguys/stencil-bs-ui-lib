@@ -9,12 +9,12 @@ export class ListPage {
     @State() users1: any[] = [];
     @State() users2: any[] = [];
 
-  @State()  pizzas = [
+    @State() pizzas = [
         {
             name: 'Pepperoni',
             price: 10
         },
-        {   
+        {
             name: 'Quattro formaggi',
             price: 12
         },
@@ -34,8 +34,8 @@ export class ListPage {
                     <h1 id="infinite-list-component" class="mb-2">List component</h1>
                     <h2 id="api-and-usage-">Overview</h2>
 
-                    <p>This component renders list of given child elements according to provided data model.<br/>
-                    Template interpolation is performed with double square brackets and equals sign <code>`[[= ]]`</code> like in <a href="https://angular.io">Angular</a> or <a href="https://github.com/janl/mustache.js">Mustache</a> templates.</p>
+                    <p>This component renders list of given child elements according to provided data model.<br />
+                        Template interpolation is performed with double square brackets and equals sign <code>`[[= ]]`</code> like in <a href="https://angular.io">Angular</a> or <a href="https://github.com/janl/mustache.js">Mustache</a> templates.</p>
                     <h3 id="props">Props</h3>
                     <table>
                         <thead>
@@ -110,50 +110,50 @@ export class ListPage {
                 </div>
 
                 <h2 class="mt-5">Usage</h2>
-                
+
                 <h5 class="mt-4">Alerts list with simple list data:</h5>
 
                 <code>
                     <p>
-                   const pizzas = [&#123;name: 'Pepperoni',price: 10&#125;, &#123;name: 'Quattro formaggi',price: 12&#125;,&#123;name: 'Havaiian',price: 14&#125;]
+                        const pizzas = [&#123;name: 'Pepperoni',price: 10&#125;, &#123;name: 'Quattro formaggi',price: 12&#125;,&#123;name: 'Havaiian',price: 14&#125;]
                     </p>
                     <p>
-                    <span>&lt;cwc-list</span><br/>
-                        <span class="ml-2">items=<span class="text-danger">&#123;<span class="text-alert">this.pizzas</span>&#125;</span>&gt;</span><br/>
-                        <span class="ml-4 pl-2"> 
+                        <span>&lt;cwc-list</span><br />
+                        <span class="ml-2">items=<span class="text-danger">&#123;<span class="text-alert">this.pizzas</span>&#125;</span>&gt;</span><br />
+                        <span class="ml-4 pl-2">
                             <span class="ml-4 pl-4">
-                                &lt;div class="alert alert-primary" role="alert" title=[[=pizza.name]]&gt;<span class="text-success">[[=item.name]]</span> pizza is cooked!&lt;/div&gt;<br/>
+                                &lt;div class="alert alert-primary" role="alert" title=[[=pizza.name]]&gt;<span class="text-success">[[=item.name]]</span> pizza is cooked!&lt;/div&gt;<br />
                             </span>
-                        </span><br/>
-                    &lt;/cwc-list&gt; 
+                        </span><br />
+                        &lt;/cwc-list&gt;
                     </p>
                 </code>
                 <div>
                     <cwc-list id="pizza-list-first" items={this.pizzas}>
-                           <div class="alert alert-primary" title="[[=item.name]]" role="alert">[[=item.name]] pizza is cooked!</div>
+                        <div class="alert alert-primary" title="[[= item.name ]]" role="alert">[[= item.name ]] pizza is cooked!</div>
                     </cwc-list>
                 </div>
 
                 <h5 class="mt-4 pt-2">Alerts list with <code>addClassOdd</code>,<code>addClassEven</code>, <code>addClassLast</code> and <code>wrapperClass</code> props.</h5>
                 <p>You can also redefine interpolated value with <code>itemAs</code> property.</p>
 
-                
+
                 <code>
 
                     <p>
-                    <span>&lt;cwc-list</span><br/>
-                        <span class="ml-2">items=<span class="text-danger">&#123;<span class="text-alert">this.pizzas</span>&#125;</span></span><br/>
-                        <span class="ml-2">addClassOdd=<span class="text-info">"alert-secondary"</span></span><br/>
-                        <span class="ml-2">addClassEven=<span class="text-info">"alert-success"</span></span><br/>
-                        <span class="ml-2">addClassLast=<span class="text-info">"text-center"</span></span><br/>
-                        <span class="ml-2">wrapperClass=<span class="text-info">"border-left border-dark"</span></span><br/>
-                        <span class="ml-2">itemAs=<span class="text-info">"pizza"</span>&gt;</span><br/>
-                        <span class="ml-4 pl-2"> 
+                        <span>&lt;cwc-list</span><br />
+                        <span class="ml-2">items=<span class="text-danger">&#123;<span class="text-alert">this.pizzas</span>&#125;</span></span><br />
+                        <span class="ml-2">addClassOdd=<span class="text-info">"alert-secondary"</span></span><br />
+                        <span class="ml-2">addClassEven=<span class="text-info">"alert-success"</span></span><br />
+                        <span class="ml-2">addClassLast=<span class="text-info">"text-center"</span></span><br />
+                        <span class="ml-2">wrapperClass=<span class="text-info">"border-left border-dark"</span></span><br />
+                        <span class="ml-2">itemAs=<span class="text-info">"pizza"</span>&gt;</span><br />
+                        <span class="ml-4 pl-2">
                             <span class="ml-4 pl-4">
-                                &lt;div class="alert alert-primary" role="alert" title=[[=pizza.name]]&gt;<span class="text-success">[[=pizza.name]]</span> pizza is cooked!&lt;/div&gt;<br/>
+                                &lt;div class="alert alert-primary" role="alert" title=[[=pizza.name]]&gt;<span class="text-success">[[=pizza.name]]</span> pizza is cooked!&lt;/div&gt;<br />
                             </span>
-                        </span><br/>
-                    &lt;/cwc-list&gt; 
+                        </span><br />
+                        &lt;/cwc-list&gt;
                     </p>
                 </code>
                 <div>
@@ -164,8 +164,8 @@ export class ListPage {
                         addClassLast="text-center"
                         wrapperClass="border-left border-dark">
 
-               
-                            <div class="alert " title="[[=pizza.name]]"  role="alert"> [[= pizza.name ]] pizza is cooked!</div>
+
+                        <div class="alert " title="[[=pizza.name]]" role="alert"> [[= pizza.name ]] pizza is cooked!</div>
 
                     </cwc-list>
                 </div>

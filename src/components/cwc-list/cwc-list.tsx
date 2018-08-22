@@ -1,6 +1,6 @@
 import { Component, Prop, Element } from '@stencil/core';
-import template from 'lodash/template';
-import templateSettings from 'lodash/templateSettings';
+import _ from 'lodash';
+// import templateSettings from 'lodash/templateSettings';
 
 
 @Component({
@@ -24,6 +24,14 @@ export class CwcList {
 
     @Element() el: HTMLElement;
     templateElement = undefined
+
+    templateFn;
+    templateSettingsFn;
+    constructor() {
+        this.templateFn = _.template;
+        this.templateSettingsFn = _.templateSettings;
+
+    }
 
 
     /**
@@ -88,15 +96,34 @@ export class CwcList {
     }
 
     render() {
-        templateSettings.interpolate = this.interpolationRegex;
+        console.log('Render method! 2');
+        console.log('template: ', this.templateFn)
+        console.log('templateFn: ', this.templateFn)
+
+        this.templateSettingsFn.interpolate = this.interpolationRegex;
+
+
 
         if (!this.templateElement) {
 
-             this.templateElement = template(this.el.firstElementChild.outerHTML)
+            console.log('template element NOT present')
+            debugger;
+
+            this.templateElement = this.templateFn(this.el.firstElementChild.outerHTML)
+            console.log('... and now it is: ', this.templateElement);
+
+        } else {
+            console.log('template element present')
+
         }
-  
+
+
+        console.log('suka pre items')
+        console.log('suka pre items', this.items)
+
         this.el.firstElementChild.setAttribute('style', 'display:none;')
 
+        console.log('suka items: ', this.items);
 
         let str = ''
         this.items.map((item, index) => {
@@ -105,7 +132,15 @@ export class CwcList {
             templateString = this.insertClassList(templateString, index)
 
             str += templateString
+
+            console.log(
+
+                'str updated and is: ', str
+            );
+
         })
+
+        console.log('template suka: ', str)
 
 
         return (

@@ -21,7 +21,7 @@
     "jsx"
   ],
   "scripts": {
-    "build": "stencil build --no-cache",
+    "build": "stencil build",
     "dev": "stencil build --dev --watch --serve",
     "serve": "stencil-dev-server",
     "start": "npm run dev",
@@ -38,6 +38,7 @@
     "@stencil/utils": "latest",
     "@types/bootstrap": "^4.1.2",
     "@types/jest": "^21.1.1",
+    "@types/lodash": "^4.14.116",
     "@types/video.js": "^6.2.9",
     "ajv": "^6.5.3",
     "bootstrap": "^4.1.3",
