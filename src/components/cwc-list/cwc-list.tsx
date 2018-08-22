@@ -1,6 +1,5 @@
 import { Component, Prop, Element } from '@stencil/core';
 import _ from 'lodash';
-// import templateSettings from 'lodash/templateSettings';
 
 
 @Component({
@@ -96,34 +95,16 @@ export class CwcList {
     }
 
     render() {
-        console.log('Render method! 2');
-        console.log('template: ', this.templateFn)
-        console.log('templateFn: ', this.templateFn)
 
         this.templateSettingsFn.interpolate = this.interpolationRegex;
 
 
 
         if (!this.templateElement) {
-
-            console.log('template element NOT present')
-            debugger;
-
             this.templateElement = this.templateFn(this.el.firstElementChild.outerHTML)
-            console.log('... and now it is: ', this.templateElement);
-
-        } else {
-            console.log('template element present')
-
         }
 
-
-        console.log('suka pre items')
-        console.log('suka pre items', this.items)
-
         this.el.firstElementChild.setAttribute('style', 'display:none;')
-
-        console.log('suka items: ', this.items);
 
         let str = ''
         this.items.map((item, index) => {
@@ -133,15 +114,7 @@ export class CwcList {
 
             str += templateString
 
-            console.log(
-
-                'str updated and is: ', str
-            );
-
         })
-
-        console.log('template suka: ', str)
-
 
         return (
 

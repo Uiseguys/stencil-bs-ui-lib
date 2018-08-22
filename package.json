@@ -21,7 +21,7 @@
     "jsx"
   ],
   "scripts": {
-    "build": "stencil build",
+    "build": "stencil build --prod  --no-cache",
     "dev": "stencil build --dev --watch --serve",
     "serve": "stencil-dev-server",
     "start": "npm run dev",
