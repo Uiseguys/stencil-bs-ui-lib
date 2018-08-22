@@ -55,7 +55,7 @@ declare global {
 
     interface CwcAutocompleteSelect {
       /**
-       * End - Set Placeholder * Public methods
+       * End - Set Placeholder * Public methods *
        */
       'close': () => void;
       'data': any[];
