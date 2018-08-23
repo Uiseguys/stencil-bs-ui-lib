@@ -32,6 +32,8 @@
     "prepublish": "stencil build --prod --es5"
   },
   "dependencies": {
+    "@livingui/cwc-popper": "^0.1.1",
+    "@livingui/cwc-tag": "^0.1.3",
     "@stencil/core": "^0.11.2",
     "@stencil/dev-server": "latest",
     "@stencil/router": "^0.2.5",

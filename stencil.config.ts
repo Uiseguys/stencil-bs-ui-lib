@@ -14,6 +14,18 @@ export const config: Config = {
     //   dir: '../path-to-copy-distributive'
     // }
   ],
-  copy: [{ src: 'lib' }],
+  copy: [
+    {
+      src: 'lib'
+    },
+    {
+      src: '../node_modules/@livingui/cwc-tag/dist',
+      dest: 'tag-integration'
+    },
+    {
+      src: '../node_modules/@livingui/cwc-popper/dist',
+      dest: 'popper-integration'
+    }
+  ],
   plugins: [sass()]
 };

@@ -317,20 +317,6 @@ declare global {
       'value': boolean;
     }
 
-    interface CwcTag {
-      'classes': string;
-      'closable': boolean;
-      'close': (e?: UIEvent) => void;
-      'imgLink': string;
-      'limitTo': number;
-      'link': string;
-      'onCloseData': any;
-      'removeOnClose': boolean;
-      'rounded': boolean;
-      'tagType': BootstrapThemeColor;
-      'text': string;
-    }
-
     interface CwcTypeahead {
       /**
        * Public methods
@@ -865,14 +851,6 @@ declare global {
     };
     
 
-    interface HTMLCwcTagElement extends StencilComponents.CwcTag, HTMLStencilElement {}
-
-    var HTMLCwcTagElement: {
-      prototype: HTMLCwcTagElement;
-      new (): HTMLCwcTagElement;
-    };
-    
-
     interface HTMLCwcTypeaheadElement extends StencilComponents.CwcTypeahead, HTMLStencilElement {}
 
     var HTMLCwcTypeaheadElement: {
@@ -1347,7 +1325,6 @@ declare global {
     'cwc-sticky': JSXElements.CwcStickyAttributes;
     'cwc-styles': JSXElements.CwcStylesAttributes;
     'cwc-switch': JSXElements.CwcSwitchAttributes;
-    'cwc-tag': JSXElements.CwcTagAttributes;
     'cwc-typeahead': JSXElements.CwcTypeaheadAttributes;
     'cwc-wysiwyg-editor': JSXElements.CwcWysiwygEditorAttributes;
     'fcl-image': JSXElements.FclImageAttributes;
@@ -1692,20 +1669,6 @@ declare global {
       'value'?: boolean;
     }
 
-    export interface CwcTagAttributes extends HTMLAttributes {
-      'classes'?: string;
-      'closable'?: boolean;
-      'imgLink'?: string;
-      'limitTo'?: number;
-      'link'?: string;
-      'onCloseData'?: any;
-      'onTagCloseEvent'?: (event: CustomEvent) => void;
-      'removeOnClose'?: boolean;
-      'rounded'?: boolean;
-      'tagType'?: BootstrapThemeColor;
-      'text'?: string;
-    }
-
     export interface CwcTypeaheadAttributes extends HTMLAttributes {
       'data'?: any[];
       'googleAutocomplete'?: boolean;
@@ -2025,7 +1988,6 @@ declare global {
     'cwc-sticky': HTMLCwcStickyElement
     'cwc-styles': HTMLCwcStylesElement
     'cwc-switch': HTMLCwcSwitchElement
-    'cwc-tag': HTMLCwcTagElement
     'cwc-typeahead': HTMLCwcTypeaheadElement
     'cwc-wysiwyg-editor': HTMLCwcWysiwygEditorElement
     'fcl-image': HTMLFclImageElement
@@ -2115,7 +2077,6 @@ declare global {
     'cwc-sticky': HTMLCwcStickyElement;
     'cwc-styles': HTMLCwcStylesElement;
     'cwc-switch': HTMLCwcSwitchElement;
-    'cwc-tag': HTMLCwcTagElement;
     'cwc-typeahead': HTMLCwcTypeaheadElement;
     'cwc-wysiwyg-editor': HTMLCwcWysiwygEditorElement;
     'fcl-image': HTMLFclImageElement;
