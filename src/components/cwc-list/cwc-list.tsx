@@ -1,5 +1,6 @@
 import { Component, Prop, Element } from '@stencil/core';
-import _ from 'lodash';
+import template from 'lodash/template';
+import templateSettings from 'lodash/templateSettings';
 
 
 @Component({
@@ -23,14 +24,6 @@ export class CwcList {
 
     @Element() el: HTMLElement;
     templateElement = undefined
-
-    templateFn;
-    templateSettingsFn;
-    constructor() {
-        this.templateFn = _.template;
-        this.templateSettingsFn = _.templateSettings;
-
-    }
 
 
     /**
@@ -95,16 +88,15 @@ export class CwcList {
     }
 
     render() {
-
-        this.templateSettingsFn.interpolate = this.interpolationRegex;
-
-
+        templateSettings.interpolate = this.interpolationRegex;
 
         if (!this.templateElement) {
-            this.templateElement = this.templateFn(this.el.firstElementChild.outerHTML)
-        }
 
+             this.templateElement = template(this.el.firstElementChild.outerHTML)
+        }
+  
         this.el.firstElementChild.setAttribute('style', 'display:none;')
+
 
         let str = ''
         this.items.map((item, index) => {
@@ -113,8 +105,8 @@ export class CwcList {
             templateString = this.insertClassList(templateString, index)
 
             str += templateString
-
         })
+
 
         return (
 
