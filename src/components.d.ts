@@ -18,9 +18,6 @@ import {
   DurationInputArg2,
 } from 'moment';
 import {
-  Placement,
-} from 'popper.js';
-import {
   BootstrapThemeColor as BootstrapThemeColor2,
 } from './common/bootstrap-theme-color.type';
 import {
@@ -51,23 +48,6 @@ declare global {
       'onDismiss': (hostEl: HTMLElement) => void;
       'show': boolean;
       'type': string;
-    }
-
-    interface CwcAutocompleteSelect {
-      /**
-       * End - Set Placeholder * Public methods *
-       */
-      'close': () => void;
-      'data': any[];
-      'id': string;
-      'idValue': string;
-      'itemAs': string;
-      'label': string;
-      'minSearchLength': number;
-      'placeholder': string;
-      'searchKey': string;
-      'template': string;
-      'value': any[];
     }
 
     interface CwcAvatar {
@@ -264,20 +244,6 @@ declare global {
       'titleText': string;
     }
 
-    interface CwcPopper {
-      'arrow': boolean;
-      'autoClose': boolean;
-      'autoOpen': boolean;
-      'close': () => void;
-      'closeable': boolean;
-      'isToggleBtn': boolean;
-      'open': () => void;
-      'placement': Placement;
-      'refid': string;
-      'toggle': () => void;
-      'trigger': string;
-    }
-
     interface CwcProgressBar {
       'animated': boolean;
       'classes': string;
@@ -315,20 +281,6 @@ declare global {
       'labelOFF': string;
       'labelON': string;
       'value': boolean;
-    }
-
-    interface CwcTag {
-      'classes': string;
-      'closable': boolean;
-      'close': (e?: UIEvent) => void;
-      'imgLink': string;
-      'limitTo': number;
-      'link': string;
-      'onCloseData': any;
-      'removeOnClose': boolean;
-      'rounded': boolean;
-      'tagType': BootstrapThemeColor;
-      'text': string;
     }
 
     interface CwcTypeahead {
@@ -625,14 +577,6 @@ declare global {
     };
     
 
-    interface HTMLCwcAutocompleteSelectElement extends StencilComponents.CwcAutocompleteSelect, HTMLStencilElement {}
-
-    var HTMLCwcAutocompleteSelectElement: {
-      prototype: HTMLCwcAutocompleteSelectElement;
-      new (): HTMLCwcAutocompleteSelectElement;
-    };
-    
-
     interface HTMLCwcAvatarElement extends StencilComponents.CwcAvatar, HTMLStencilElement {}
 
     var HTMLCwcAvatarElement: {
@@ -809,14 +753,6 @@ declare global {
     };
     
 
-    interface HTMLCwcPopperElement extends StencilComponents.CwcPopper, HTMLStencilElement {}
-
-    var HTMLCwcPopperElement: {
-      prototype: HTMLCwcPopperElement;
-      new (): HTMLCwcPopperElement;
-    };
-    
-
     interface HTMLCwcProgressBarElement extends StencilComponents.CwcProgressBar, HTMLStencilElement {}
 
     var HTMLCwcProgressBarElement: {
@@ -862,14 +798,6 @@ declare global {
     var HTMLCwcSwitchElement: {
       prototype: HTMLCwcSwitchElement;
       new (): HTMLCwcSwitchElement;
-    };
-    
-
-    interface HTMLCwcTagElement extends StencilComponents.CwcTag, HTMLStencilElement {}
-
-    var HTMLCwcTagElement: {
-      prototype: HTMLCwcTagElement;
-      new (): HTMLCwcTagElement;
     };
     
 
@@ -1317,7 +1245,6 @@ declare global {
     interface Element {}
     export interface IntrinsicElements {
     'cwc-alert': JSXElements.CwcAlertAttributes;
-    'cwc-autocomplete-select': JSXElements.CwcAutocompleteSelectAttributes;
     'cwc-avatar': JSXElements.CwcAvatarAttributes;
     'cwc-checkbox-group': JSXElements.CwcCheckboxGroupAttributes;
     'cwc-combobox': JSXElements.CwcComboboxAttributes;
@@ -1340,14 +1267,12 @@ declare global {
     'navigation-item-group': JSXElements.NavigationItemGroupAttributes;
     'navigation-item': JSXElements.NavigationItemAttributes;
     'navigation-title': JSXElements.NavigationTitleAttributes;
-    'cwc-popper': JSXElements.CwcPopperAttributes;
     'cwc-progress-bar': JSXElements.CwcProgressBarAttributes;
     'cwc-resolution-info': JSXElements.CwcResolutionInfoAttributes;
     'cwc-sticky-header': JSXElements.CwcStickyHeaderAttributes;
     'cwc-sticky': JSXElements.CwcStickyAttributes;
     'cwc-styles': JSXElements.CwcStylesAttributes;
     'cwc-switch': JSXElements.CwcSwitchAttributes;
-    'cwc-tag': JSXElements.CwcTagAttributes;
     'cwc-typeahead': JSXElements.CwcTypeaheadAttributes;
     'cwc-wysiwyg-editor': JSXElements.CwcWysiwygEditorAttributes;
     'fcl-image': JSXElements.FclImageAttributes;
@@ -1415,22 +1340,6 @@ declare global {
       'onToggleVisibility'?: (event: CustomEvent) => void;
       'show'?: boolean;
       'type'?: string;
-    }
-
-    export interface CwcAutocompleteSelectAttributes extends HTMLAttributes {
-      'data'?: any[];
-      'id'?: string;
-      'idValue'?: string;
-      'itemAs'?: string;
-      'label'?: string;
-      'minSearchLength'?: number;
-      'onMultiselectOnSubmit'?: (event: CustomEvent) => void;
-      'onPostValue'?: (event: CustomEvent) => void;
-      'onTextChange'?: (event: CustomEvent) => void;
-      'placeholder'?: string;
-      'searchKey'?: string;
-      'template'?: string;
-      'value'?: any[];
     }
 
     export interface CwcAvatarAttributes extends HTMLAttributes {
@@ -1641,17 +1550,6 @@ declare global {
       'titleText'?: string;
     }
 
-    export interface CwcPopperAttributes extends HTMLAttributes {
-      'arrow'?: boolean;
-      'autoClose'?: boolean;
-      'autoOpen'?: boolean;
-      'closeable'?: boolean;
-      'isToggleBtn'?: boolean;
-      'placement'?: Placement;
-      'refid'?: string;
-      'trigger'?: string;
-    }
-
     export interface CwcProgressBarAttributes extends HTMLAttributes {
       'animated'?: boolean;
       'classes'?: string;
@@ -1690,20 +1588,6 @@ declare global {
       'labelON'?: string;
       'onPostValue'?: (event: CustomEvent) => void;
       'value'?: boolean;
-    }
-
-    export interface CwcTagAttributes extends HTMLAttributes {
-      'classes'?: string;
-      'closable'?: boolean;
-      'imgLink'?: string;
-      'limitTo'?: number;
-      'link'?: string;
-      'onCloseData'?: any;
-      'onTagCloseEvent'?: (event: CustomEvent) => void;
-      'removeOnClose'?: boolean;
-      'rounded'?: boolean;
-      'tagType'?: BootstrapThemeColor;
-      'text'?: string;
     }
 
     export interface CwcTypeaheadAttributes extends HTMLAttributes {
@@ -1995,7 +1879,6 @@ declare global {
 
   interface HTMLElementTagNameMap {
     'cwc-alert': HTMLCwcAlertElement
-    'cwc-autocomplete-select': HTMLCwcAutocompleteSelectElement
     'cwc-avatar': HTMLCwcAvatarElement
     'cwc-checkbox-group': HTMLCwcCheckboxGroupElement
     'cwc-combobox': HTMLCwcComboboxElement
@@ -2018,14 +1901,12 @@ declare global {
     'navigation-item-group': HTMLNavigationItemGroupElement
     'navigation-item': HTMLNavigationItemElement
     'navigation-title': HTMLNavigationTitleElement
-    'cwc-popper': HTMLCwcPopperElement
     'cwc-progress-bar': HTMLCwcProgressBarElement
     'cwc-resolution-info': HTMLCwcResolutionInfoElement
     'cwc-sticky-header': HTMLCwcStickyHeaderElement
     'cwc-sticky': HTMLCwcStickyElement
     'cwc-styles': HTMLCwcStylesElement
     'cwc-switch': HTMLCwcSwitchElement
-    'cwc-tag': HTMLCwcTagElement
     'cwc-typeahead': HTMLCwcTypeaheadElement
     'cwc-wysiwyg-editor': HTMLCwcWysiwygEditorElement
     'fcl-image': HTMLFclImageElement
@@ -2085,7 +1966,6 @@ declare global {
 
   interface ElementTagNameMap {
     'cwc-alert': HTMLCwcAlertElement;
-    'cwc-autocomplete-select': HTMLCwcAutocompleteSelectElement;
     'cwc-avatar': HTMLCwcAvatarElement;
     'cwc-checkbox-group': HTMLCwcCheckboxGroupElement;
     'cwc-combobox': HTMLCwcComboboxElement;
@@ -2108,14 +1988,12 @@ declare global {
     'navigation-item-group': HTMLNavigationItemGroupElement;
     'navigation-item': HTMLNavigationItemElement;
     'navigation-title': HTMLNavigationTitleElement;
-    'cwc-popper': HTMLCwcPopperElement;
     'cwc-progress-bar': HTMLCwcProgressBarElement;
     'cwc-resolution-info': HTMLCwcResolutionInfoElement;
     'cwc-sticky-header': HTMLCwcStickyHeaderElement;
     'cwc-sticky': HTMLCwcStickyElement;
     'cwc-styles': HTMLCwcStylesElement;
     'cwc-switch': HTMLCwcSwitchElement;
-    'cwc-tag': HTMLCwcTagElement;
     'cwc-typeahead': HTMLCwcTypeaheadElement;
     'cwc-wysiwyg-editor': HTMLCwcWysiwygEditorElement;
     'fcl-image': HTMLFclImageElement;
