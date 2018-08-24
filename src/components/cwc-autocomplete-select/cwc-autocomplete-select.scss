@@ -19,14 +19,18 @@ autocomplete-select-page {
     }
 }
 .cwc-autocomplete{
-    .cwc-popper-autocomplete{
-        margin-top: 0px;
-        display: block;
-        width: -webkit-fill-available;
-        margin-left: 5px;
-    }
-    display: inline-block;
-    width: 100%;
+  display: inline-block;
+  width: 100%;
+
+  .popper-container {
+    position: relative;
+  }
+
+  .cwc-popper-autocomplete{
+    margin-top: 0px;
+    display: block;
+    width: -webkit-fill-available;
+  }
 }
 
 cwc-autocomplete-select{
