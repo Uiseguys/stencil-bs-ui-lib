@@ -390,6 +390,7 @@ export class CwcAutocompleteSelect {
 
   handlePopperContainer(e) {
     let popperContainer = document.querySelector(`#${this.idValue} .popper-container`);
+
     if (e && typeof e.type !== 'undefined' && e.type === 'click') {
       this.filtered = this.filter();
       if (popperContainer instanceof HTMLElement) {
