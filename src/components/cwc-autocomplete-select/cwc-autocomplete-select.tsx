@@ -142,9 +142,9 @@ export class CwcAutocompleteSelect {
 
   componentDidUpdate() {
     if (this.justAddedLabel) {
-      this.setCaretPositionEnd();
       this.justAddedLabel = false;
       this.labelsAdded = true;
+      this.setCaretPositionEnd();
     } else {
       this.filtered = this.filter();
     }
@@ -366,7 +366,7 @@ export class CwcAutocompleteSelect {
           <span class="caret" />
         </div>
         <div class="popper-container">
-          {this.filtered.length > 0 && (
+          {this.autoOpen && this.filtered.length > 0 && (
             <cwc-popper
               autoOpen={this.autoOpen}
               id={`cwc-popper-autocomplete-${this.idValue}`}
@@ -388,41 +388,28 @@ export class CwcAutocompleteSelect {
     ];
   }
 
-  /** Keyboard handlers **/
-  @Listen('keyup')
-  @Listen('click')
-  @Listen('keydown')
-  handleKeyUpDown(e) {
-    // setTimeout(() => {
-      //popper will be appear on click if data length will be '<=25'
-      if (this.data.length <= 25 && !this.labelsAdded) {
-        this.autoOpen = true;
+  handlePopperContainer(e) {
+    let popperContainer = document.querySelector(`#${this.idValue} .popper-container`);
+    if (e && typeof e.type !== 'undefined' && e.type === 'click') {
+      this.filtered = this.filter();
+      if (popperContainer instanceof HTMLElement) {
+        popperContainer.style.position = 'relative';
       }
-      //End
-      let popperContainer = document.querySelector(`#${this.idValue} .popper-container`);
-      if (e && typeof e.type !== 'undefined' && e.type === 'click') {
-        this.filtered = this.filter();
-        if (popperContainer instanceof HTMLElement) {
-          popperContainer.style.position = 'relative';
-        }
-      } else {
-        if (popperContainer instanceof HTMLElement) {
-          popperContainer.style.position = 'unset';
-        }
+    } else {
+      if (popperContainer instanceof HTMLElement) {
+        popperContainer.style.position = 'unset';
       }
+    }
 
-      let formSelector = `#${this.idValue} div.form-control`;
-      let HTMLInputEle = document.querySelector(formSelector);
-      if (HTMLInputEle != null) {
-        let positionInfo = HTMLInputEle.getBoundingClientRect();
-        setTimeout(() => {
-          let targetElem = document.querySelector(formSelector + ' + div > cwc-popper > .popper > .cwc-popper-autocomplete');
-          if (targetElem instanceof HTMLElement) {
-            targetElem.style.width = positionInfo.width + 'px';
-          }
-        });
+    let formSelector = `#${this.idValue} div.form-control`;
+    let HTMLInputEle = document.querySelector(formSelector);
+    if (HTMLInputEle != null) {
+      let positionInfo = HTMLInputEle.getBoundingClientRect();
+      let targetElem = document.querySelector(formSelector + ' + div > cwc-popper > .popper > .cwc-popper-autocomplete');
+      if (targetElem instanceof HTMLElement) {
+        targetElem.style.width = positionInfo.width + 'px';
       }
-    // },200);
+    }
 
     this.labelsAdded = false;
     if (e && (e.type === 'keydown' || e.type === 'keyup')) {
@@ -435,6 +422,21 @@ export class CwcAutocompleteSelect {
       }
       this.textChange.emit(searchText);
     }
+  }
+
+  /** Keyboard handlers **/
+  @Listen('click')
+  handleClick(e) {
+    //popper will be appear on click if data length is '<=25'
+    if (this.data.length <= 25) this.autoOpen = true;
+    this.handlePopperContainer(e);
+  }
+
+
+  @Listen('keydown')
+  handleKeyUpDown(e) {
+    this.autoOpen = true;
+    this.handlePopperContainer(e);
   }
 
   @Listen('keydown.down')
