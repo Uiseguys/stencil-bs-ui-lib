@@ -166,7 +166,8 @@ export class CwcAutocompleteSelect {
         if (typeof val === 'string') {
           if (!this.labels.includes(val)) this.labels.push(val);
         } else {
-          let tempLabel = get(val, this.searchKey);
+          // let tempLabel = get(val, this.searchKey);
+          let tempLabel = this.interpolate(this.template, { [this.itemAs]: val });
           if (!this.labels.includes(tempLabel)) this.labels.push(tempLabel);
         }
 
@@ -265,7 +266,8 @@ export class CwcAutocompleteSelect {
     if (typeof val === 'string') {
       return val;
     } else {
-      return get(val.data, this.searchKey);
+      // return get(val.data, this.searchKey);
+      return this.interpolate(this.template, { [this.itemAs]: val.data });
     }
   }
 
