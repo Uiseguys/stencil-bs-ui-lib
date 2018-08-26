@@ -1,0 +1,51 @@
+.cwc-typeahead {
+    option:hover {
+        cursor: pointer;
+    }
+}
+
+autocomplete-select-page {
+    cwc-autocomplete-select{
+        scb-badge > .badge {
+            font-size: 100% !important;
+            padding: 1px 1px !important;
+        }
+    }
+}
+
+.badge {
+    margin-right: 3px;
+    span {
+        margin-left: 3px;
+    }
+}
+.cwc-autocomplete{
+  display: inline-block;
+  width: 100%;
+
+  .popper-container {
+    position: relative;
+  }
+
+  .cwc-popper-autocomplete{
+    margin-top: 0px;
+    display: block;
+    width: -webkit-fill-available;
+  }
+}
+
+cwc-autocomplete-select{
+    width: 100%;
+    display: inline-block;
+}
+
+.control-label {
+    text-transform: capitalize;
+}
+
+div.form-control.isPlaceholder[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
+    content: attr(data-placeholder);
+    float: left;
+    margin-left: 2px;
+    color: #b3b3b3;
+}
