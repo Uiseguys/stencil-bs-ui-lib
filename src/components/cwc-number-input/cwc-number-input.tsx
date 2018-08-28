@@ -35,8 +35,8 @@ export class NumberInputComponent {
   @Prop({ mutable: true }) formatNumber: Function;
   @Prop({ mutable: true }) parseNumber: Function;
 
-  @State() _numberOptions: Object;
-  @State() _regExpNotInNumber: RegExp = /[^\d\-+.e]/g;
+  _numberOptions: Object;
+  _regExpNotInNumber: RegExp = /[^\d\-+.e]/g;
   // @State() _numberOptions: number;
   // @State() _regExpNotInNumber: number = /[^\d\-+.e]/g;
 
@@ -60,7 +60,7 @@ export class NumberInputComponent {
   @Prop({ mutable: true }) name: string;
   @Prop({ mutable: true }) value: Object;
 
-  @State() _valueIsSet: boolean = false;
+  _valueIsSet: boolean = false;
 
   // Range
   @Prop({ mutable: true }) min: number;
@@ -71,13 +71,16 @@ export class NumberInputComponent {
   @Prop({ mutable: true }) saturate: boolean;
   @Prop({ mutable: true }) noClamp: boolean;
 
-  @State() _step: number = 1;
+  _step: number = 1;
 
   @State() _activeResizeJob: any;
   @State() _minSizeJob: any;
   @State() _minWidthComputionJob: any;
 
   componentDidLoad() {
+    // change step
+    this._stepChanged();
+
     // intl num format
     this._numberOptions = this._computeNumberOptions(
       this.minimumIntegerDigits, this.minimumFractionDigits,
@@ -97,6 +100,17 @@ export class NumberInputComponent {
     this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
       this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
     );
+
+    // from connectedCallback
+    this.focusMethod = this.focusMethod.bind(this);
+    this._updateValue = this._updateValue.bind(this);
+    this._checkInput = this._checkInput.bind(this);
+    this._checkKeycode = this._checkKeycode.bind(this);
+    this._addEventListeners();
+    setTimeout(this.resize.bind(this), 0);
+    if (this.valueAsNumber === undefined && !isNaN(this.default)) {
+      this.valueAsNumber = parseFloat(this.default);
+    }
   }
 
   // Range
@@ -120,7 +134,7 @@ export class NumberInputComponent {
     }
   }
 
-  _checkValue(value, oldValue) {
+  private _checkValue(value, oldValue) {
     const defaultStr = this.default;
     if (isNaN(value)) {
       if (!isNaN(oldValue)) {
@@ -155,7 +169,7 @@ export class NumberInputComponent {
     return this._checkStep(value, this._step);
   }
 
-  _updateValue() {
+  private _updateValue() {
     if (this.valueAsNumber !== undefined) {
       this._valueAsNumberChanged(this.valueAsNumber, this.valueAsNumber);
     }
@@ -181,7 +195,7 @@ export class NumberInputComponent {
     this._updateValue();
   }
 
-  _checkStep(value, step) {
+  private _checkStep(value, step) {
     if (!step) {
       return value;
     }
@@ -197,7 +211,7 @@ export class NumberInputComponent {
     return this._safeMult(Math.round(value / step), step);
   }
 
-  _safeMult(a, b) {
+  private _safeMult(a, b) {
     a = '' + (a || 0);
     b = '' + (b || 0);
 
@@ -223,7 +237,7 @@ export class NumberInputComponent {
     return +(sign + wholeStr.slice(0, wholeStr.length - decimal) + '.' + wholeStr.slice(wholeStr.length - decimal));
   }
 
-  _safeAdd(a, b) {
+  private _safeAdd(a, b) {
     const _a = '' + (a || 0),
       _b = '' + (b || 0),
       decimal = Math.max(_a.slice(_a.indexOf('.')).length, _b.slice(_b.indexOf('.')).length) - 1;
@@ -242,7 +256,7 @@ export class NumberInputComponent {
     return +(sign + wholeStr.slice(0, wholeStr.length - decimal) + '.' + wholeStr.slice(wholeStr.length - decimal));
   }
 
-  _stepChanged() {
+  private _stepChanged() {
     const step = this.step || 0;
     if (step !== Math.abs(step)) {
       this.step = Math.abs(step);
@@ -328,14 +342,14 @@ export class NumberInputComponent {
     this._removeEventListeners();
   }
 
-  _addEventListeners() {
+  private _addEventListeners() {
     this.el.addEventListener('focus', this.focusMethod, false);
     this.el.querySelector('#input').addEventListener('focus', this._updateValue, false);
     this.el.querySelector('#input').addEventListener('blur', this._checkInput, false);
     this.el.querySelector('#input').addEventListener('keydown', this._checkKeycode, false);
   }
 
-  _removeEventListeners() {
+  private _removeEventListeners() {
     this.el.removeEventListener('focus', this.focusMethod, false);
     this.el.querySelector('#input').removeEventListener('focus', this._updateValue, false);
     this.el.querySelector('#input').removeEventListener('blur', this._checkInput, false);
@@ -416,14 +430,14 @@ export class NumberInputComponent {
     this.resize();
   }
 
-  _debouncedComputeWidth() {
+  private _debouncedComputeWidth() {
     if (this._activeResizeJob) {
       clearTimeout(this._activeResizeJob);
     }
     this._activeResizeJob = setTimeout(this._computeWidth.bind(this), 0);
   }
 
-  _computeWidth() {
+  private _computeWidth() {
     if (!this.el.querySelector('#input')['style']) {
       this.el.querySelector('#input')['style'] = {};
     }
@@ -491,7 +505,7 @@ export class NumberInputComponent {
         this.groupingSeparator = groupingSeparator;
   }
 
-  _computeNumberOptions(
+  private _computeNumberOptions(
     minimumIntegerDigits, minimumFractionDigits,
     maximumFractionDigits, minimumSignificantDigits,
     maximumSignificantDigits, useGrouping,
@@ -522,7 +536,7 @@ export class NumberInputComponent {
         return options;
       }
 
-    _computeFormatNumber(locale, numberOptions, unit) {
+    private _computeFormatNumber(locale, numberOptions, unit) {
         if (numberOptions && numberOptions.style === 'currency' && !numberOptions.currency) {
           console.warn('No currency is given. Using number style: \'decimal\'.');
           numberOptions.style = 'decimal';
@@ -541,7 +555,7 @@ export class NumberInputComponent {
         }
       }
 
-    _computeParseNumber(decimalSeparator, numberStyle, useGrouping) {
+    private _computeParseNumber(decimalSeparator, numberStyle, useGrouping) {
         const regExpGrouping = new RegExp('[' + (this.groupingSeparator || '') + ']', 'g');
         if (numberStyle === 'percent') {
           if (useGrouping) {
@@ -565,9 +579,16 @@ export class NumberInputComponent {
         }
       }
 
+  private increase() {
+    this.valueAsNumber = this.valueAsNumber + this._step;
+  }
+
+  private decrease() {
+    this.valueAsNumber = this.valueAsNumber - this._step;
+  }
 
   // number input
-  _checkKeycode(e) {
+  private _checkKeycode(e) {
     switch (e.keyCode) {
       case 9:  // tab // falls-through
       case 13: // enter
@@ -577,17 +598,17 @@ export class NumberInputComponent {
         this._updateValue();
         this.el.querySelector('#input')['blur']();
         break;
-        case 38: // up
+      case 38: // up
         e.preventDefault();
         e.stopPropagation();
         // TODO - vanessa: fix
-        // this.increase();
+        this.increase();
         break;
       case 40: // down
         e.preventDefault();
         e.stopPropagation();
         // TODO - vanessa: fix
-        // this.decrease();
+        this.decrease();
         break;
     }
   }
@@ -606,7 +627,7 @@ export class NumberInputComponent {
     this.invalid = this.required && isNaN(newValue[this.propertyForValue]);
   }
 
-  _checkInput() {
+  private _checkInput() {
     if (!this.input) {
       if (!isNaN(this.default)) {
         this.input = this.formatNumber(this.default);
@@ -649,13 +670,13 @@ export class NumberInputComponent {
     this.input = this.formatNumber(this.valueAsNumber);
   }
 
-  _defaultChanged(newDef) {
+  private _defaultChanged(newDef) {
     if (isNaN(this.valueAsNumber) && !isNaN(newDef)) {
       this.valueAsNumber = newDef;
     }
   }
 
-  _computeMinWidth() {
+  private _computeMinWidth() {
     if (this._minWidthComputionJob) {
       clearTimeout(this._minWidthComputionJob);
       this._minWidthComputionJob = null;
@@ -683,7 +704,7 @@ export class NumberInputComponent {
     this._computeMinWidth();
   }
 
-  _computeType() {
+  private _computeType() {
     // maximize compatibility for mobile keyboards
     if (this.decimalSeparator === '.') {
       if (this.numberStyle === 'decimal' && !this.unit && !this.alwaysSign  && !this.padLength && !this.autoPadding) {
@@ -744,7 +765,7 @@ export class NumberInputComponent {
     this._computeMinWidth();
   }
 
-  _computeMinimumIntegerDigits(autoPadding, padLength, def, startAt, min, max, step, numberStyle) {
+  private _computeMinimumIntegerDigits(autoPadding, padLength, def, startAt, min, max, step, numberStyle) {
     if (numberStyle === 'percent') {
       min = Math.round(min * 100);
       max = Math.round(max * 100);
@@ -770,7 +791,7 @@ export class NumberInputComponent {
     return padLength || 1;
   }
 
-  _computeMinimumFractionDigits(step, min, max, numberStyle) {
+  private _computeMinimumFractionDigits(step, min, max, numberStyle) {
     if (numberStyle === 'percent') {
       min = this._safeMult(min || 0, 100);
       max = this._safeMult(max || 0, 100);
@@ -787,7 +808,7 @@ export class NumberInputComponent {
     });
   }
 
-  _computeMaximumFractionDigits(minimumFractionDigits, noClamp) {
+  private _computeMaximumFractionDigits(minimumFractionDigits, noClamp) {
     if (noClamp) {
       return 20;
     }
@@ -797,15 +818,15 @@ export class NumberInputComponent {
   render() {
     return (
       <div>
-      <input id="input"
-            type={this._type}
-            value={this.input}
-            step={this.step}
-            required={this.required}
-            disabled={this.disabled}
-            placeholder={this.placeholder}
-            spellcheck="false"
-            autocomplete="off" />
+        <input id="input"
+              type={this._type}
+              value={this.input}
+              step={this.step}
+              required={this.required}
+              disabled={this.disabled}
+              placeholder={this.placeholder}
+              spellcheck="false"
+              autocomplete="off" />
         <div id="size">{this.input}</div>
         <div id="minsize">{this._minWidthString}</div>
       </div>

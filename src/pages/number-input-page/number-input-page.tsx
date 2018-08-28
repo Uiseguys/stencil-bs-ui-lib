@@ -10,8 +10,8 @@ export class DropdownPage {
         return (
           <div>
             <cwc-number-input
-            placeholder='type number'
-            required={true}
+            // required={true}
+            step={0.001} min={-1} max={1} placeholder="0" startAt={0}
             ></cwc-number-input>
           </div>
         );
