@@ -163,11 +163,15 @@ export class CwcAutocompleteSelect {
     if (this.value && this.value.length >= 1) {
       this.results = this.value;
       this.value.map((val, key) => {
+        let tempLabel;
         if (typeof val === 'string') {
           if (!this.labels.includes(val)) this.labels.push(val);
         } else {
-          // let tempLabel = get(val, this.searchKey);
-          let tempLabel = this.interpolate(this.template, { [this.itemAs]: val });
+          if (this.template) {
+            tempLabel = this.interpolate(this.template, { [this.itemAs]: val });
+          } else {
+            tempLabel = get(val, this.searchKey);
+          }
           if (!this.labels.includes(tempLabel)) this.labels.push(tempLabel);
         }
 
@@ -266,8 +270,10 @@ export class CwcAutocompleteSelect {
     if (typeof val === 'string') {
       return val;
     } else {
-      // return get(val.data, this.searchKey);
-      return this.interpolate(this.template, { [this.itemAs]: val.data });
+      if (this.template) {
+        return this.interpolate(this.template, { [this.itemAs]: val.data });
+      }
+      return get(val.data, this.searchKey);
     }
   }
 
