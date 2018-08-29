@@ -3,11 +3,15 @@ import 'bootstrap.native/dist/bootstrap-native-v4';
 
 // TODO: test first before proceeding
 
+// TODO: observers, computed values, should also fire on load
+// TODO: complex observers and computed values should only fire if all args are !==undefined
+
 @Component({
     tag: 'cwc-number-input',
     styleUrl: 'cwc-number-input.scss'
 })
 export class NumberInputComponent {
+  // -- intl number format
   @Prop({ mutable: true }) locale: string = window.navigator.language;
   @Prop({ mutable: true }) minimumFractionDigits: number;
   @Prop({ mutable: true }) maximumFractionDigits: number;
@@ -29,6 +33,18 @@ export class NumberInputComponent {
   _numberOptions: Object;
   _regExpNotInNumber: RegExp = /[^\d\-+.e]/g;
 
+  // -- form element
+  @Prop({ mutable: true, reflectToAttr: true }) required: boolean;
+  @Prop({ mutable: true, reflectToAttr: true }) invalid: boolean;
+  @Prop({ mutable: true, reflectToAttr: true }) disabled: boolean;
+  @Prop({ mutable: true }) name: string;
+  @Prop({ mutable: true }) value: Object;
+  @Prop({ mutable: true }) propertyForValue: string;
+  @Prop({ mutable: true }) default: Object;
+
+  @State() _valueIsSet: boolean = false;
+
+  // ** number utilities
   _numberUtilities = {
     _safeMult: function(a, b) {
       a = '' + (a || 0);
