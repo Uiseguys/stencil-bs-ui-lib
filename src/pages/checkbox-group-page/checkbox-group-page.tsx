@@ -5,7 +5,7 @@ import { Component, Prop, State, Listen } from '@stencil/core';
     styleUrl: 'checkbox-group-page.scss'
 })
 
-export class DropdownPage {
+export class CheckboxGroupPage {
     @Prop() value: Array<Object> = [
       {name: 'my name', age: '21', address: 'ph'},
     ];

@@ -267,32 +267,7 @@ declare global {
       'titleText': string;
     }
 
-    interface CwcNumberInputOlder {
-      'alwaysSign': boolean;
-      'autoPadding': boolean;
-      'autoResize': boolean;
-      'default': string;
-      'disabled': boolean;
-      'handleAlwaysSign': () => void;
-      'handleLackingPad': () => void;
-      'handleOverPad': () => void;
-      'handlePad': () => void;
-      'hidden': boolean;
-      'max': number;
-      'maximumFractionDigits': number;
-      'min': number;
-      'minimumFractionDigits': number;
-      'minlength': number;
-      'name': string;
-      'numberStyle': string;
-      'padLength': number;
-      'placeholder': string;
-      'required': boolean;
-      'step': number;
-      'type': string;
-    }
-
-    interface CwcNumberInput {
+    interface CwcNumberInputOld {
       'alwaysSign': boolean;
       'autoPadding': boolean;
       'autoResize': boolean;
@@ -340,6 +315,49 @@ declare global {
       'validate': () => boolean;
       'value': Object;
       'valueAsNumber': number;
+    }
+
+    interface CwcNumberInputOlder {
+      'alwaysSign': boolean;
+      'autoPadding': boolean;
+      'autoResize': boolean;
+      'default': string;
+      'disabled': boolean;
+      'handleAlwaysSign': () => void;
+      'handleLackingPad': () => void;
+      'handleOverPad': () => void;
+      'handlePad': () => void;
+      'hidden': boolean;
+      'max': number;
+      'maximumFractionDigits': number;
+      'min': number;
+      'minimumFractionDigits': number;
+      'minlength': number;
+      'name': string;
+      'numberStyle': string;
+      'padLength': number;
+      'placeholder': string;
+      'required': boolean;
+      'step': number;
+      'type': string;
+    }
+
+    interface CwcNumberInput {
+      'alwaysSign': boolean;
+      'currency': string;
+      'currencyDisplay': string;
+      'formatNumber': Function;
+      'locale': string;
+      'maximumFractionDigits': number;
+      'maximumSignificantDigits': number;
+      'minimumFractionDigits': number;
+      'minimumIntegerDigits': number;
+      'minimumSignificantDigits': number;
+      'numberStyle': string;
+      'parseNumber': Function;
+      'unit': string;
+      'unitSeparator': string;
+      'useGrouping': boolean;
     }
 
     interface CwcPopper {
@@ -884,6 +902,14 @@ declare global {
     var HTMLNavigationTitleElement: {
       prototype: HTMLNavigationTitleElement;
       new (): HTMLNavigationTitleElement;
+    };
+    
+
+    interface HTMLCwcNumberInputOldElement extends StencilComponents.CwcNumberInputOld, HTMLStencilElement {}
+
+    var HTMLCwcNumberInputOldElement: {
+      prototype: HTMLCwcNumberInputOldElement;
+      new (): HTMLCwcNumberInputOldElement;
     };
     
 
@@ -1434,6 +1460,7 @@ declare global {
     'navigation-item-group': JSXElements.NavigationItemGroupAttributes;
     'navigation-item': JSXElements.NavigationItemAttributes;
     'navigation-title': JSXElements.NavigationTitleAttributes;
+    'cwc-number-input-old': JSXElements.CwcNumberInputOldAttributes;
     'cwc-number-input-older': JSXElements.CwcNumberInputOlderAttributes;
     'cwc-number-input': JSXElements.CwcNumberInputAttributes;
     'cwc-popper': JSXElements.CwcPopperAttributes;
@@ -1740,28 +1767,7 @@ declare global {
       'titleText'?: string;
     }
 
-    export interface CwcNumberInputOlderAttributes extends HTMLAttributes {
-      'alwaysSign'?: boolean;
-      'autoPadding'?: boolean;
-      'autoResize'?: boolean;
-      'default'?: string;
-      'disabled'?: boolean;
-      'hidden'?: boolean;
-      'max'?: number;
-      'maximumFractionDigits'?: number;
-      'min'?: number;
-      'minimumFractionDigits'?: number;
-      'minlength'?: number;
-      'name'?: string;
-      'numberStyle'?: string;
-      'padLength'?: number;
-      'placeholder'?: string;
-      'required'?: boolean;
-      'step'?: number;
-      'type'?: string;
-    }
-
-    export interface CwcNumberInputAttributes extends HTMLAttributes {
+    export interface CwcNumberInputOldAttributes extends HTMLAttributes {
       'alwaysSign'?: boolean;
       'autoPadding'?: boolean;
       'autoResize'?: boolean;
@@ -1803,6 +1809,45 @@ declare global {
       'useGrouping'?: boolean;
       'value'?: Object;
       'valueAsNumber'?: number;
+    }
+
+    export interface CwcNumberInputOlderAttributes extends HTMLAttributes {
+      'alwaysSign'?: boolean;
+      'autoPadding'?: boolean;
+      'autoResize'?: boolean;
+      'default'?: string;
+      'disabled'?: boolean;
+      'hidden'?: boolean;
+      'max'?: number;
+      'maximumFractionDigits'?: number;
+      'min'?: number;
+      'minimumFractionDigits'?: number;
+      'minlength'?: number;
+      'name'?: string;
+      'numberStyle'?: string;
+      'padLength'?: number;
+      'placeholder'?: string;
+      'required'?: boolean;
+      'step'?: number;
+      'type'?: string;
+    }
+
+    export interface CwcNumberInputAttributes extends HTMLAttributes {
+      'alwaysSign'?: boolean;
+      'currency'?: string;
+      'currencyDisplay'?: string;
+      'formatNumber'?: Function;
+      'locale'?: string;
+      'maximumFractionDigits'?: number;
+      'maximumSignificantDigits'?: number;
+      'minimumFractionDigits'?: number;
+      'minimumIntegerDigits'?: number;
+      'minimumSignificantDigits'?: number;
+      'numberStyle'?: string;
+      'parseNumber'?: Function;
+      'unit'?: string;
+      'unitSeparator'?: string;
+      'useGrouping'?: boolean;
     }
 
     export interface CwcPopperAttributes extends HTMLAttributes {
@@ -2180,6 +2225,7 @@ declare global {
     'navigation-item-group': HTMLNavigationItemGroupElement
     'navigation-item': HTMLNavigationItemElement
     'navigation-title': HTMLNavigationTitleElement
+    'cwc-number-input-old': HTMLCwcNumberInputOldElement
     'cwc-number-input-older': HTMLCwcNumberInputOlderElement
     'cwc-number-input': HTMLCwcNumberInputElement
     'cwc-popper': HTMLCwcPopperElement
@@ -2272,6 +2318,7 @@ declare global {
     'navigation-item-group': HTMLNavigationItemGroupElement;
     'navigation-item': HTMLNavigationItemElement;
     'navigation-title': HTMLNavigationTitleElement;
+    'cwc-number-input-old': HTMLCwcNumberInputOldElement;
     'cwc-number-input-older': HTMLCwcNumberInputOlderElement;
     'cwc-number-input': HTMLCwcNumberInputElement;
     'cwc-popper': HTMLCwcPopperElement;
