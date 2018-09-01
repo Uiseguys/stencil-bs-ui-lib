@@ -70,6 +70,73 @@ export class CwcAutocompleteSelect {
     }
   }
 
+  componentWillLoad() {
+    if (this.value == null) this.value = [];
+  }
+
+  componentDidLoad() {
+    // TODO: this line of code is here because removing "import template from 'lodash/template';" will cause this error to happen when you build the project:
+    // [ ERROR ]  Minify JS e.name.definition is not a function
+    if (this.focusIndex > 999) console.log(template);
+    /** */
+    this.loadValueProp();
+  }
+
+  /** Life cycle hooks **/
+  componentWillUpdate() {
+    if (this.filterValue) {
+      if (this.filterValue.length >= this.minSearchLength) {
+        this.filtered = this.filter();
+        if (this.filtered.length > 0) {
+          this.optionsShown = true;
+        }
+      }
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.justAddedLabel) {
+      this.justAddedLabel = false;
+      this.labelsAdded = true;
+      this.setCaretPositionEnd();
+    } else {
+      this.filtered = this.filter();
+    }
+  }
+
+  loadValueProp() {
+    this.retainedInitialValues = this.value;
+    if (this.value && this.value.length >= 1) {
+      this.results = this.value;
+      this.value.map((val, key) => {
+        let tempLabel;
+        if (typeof val === 'string') {
+          if (!this.labels.includes(val)) this.labels.push(val);
+        } else {
+          if (this.template) {
+            tempLabel = this.interpolate(this.template, { [this.itemAs]: val });
+          } else {
+            tempLabel = get(val, this.searchKey);
+          }
+          if (!this.labels.includes(tempLabel)) this.labels.push(tempLabel);
+        }
+
+        if (key === this.value.length - 1) {
+          this.multiselectOnSubmit.emit(this.results);
+          setTimeout(() => {
+            this.renderLabels();
+            this.checkForPlaceholder();
+
+            this.clearTextNodes();
+            this.autoOpen = false;
+            this.close();
+            this.textChange.emit('');
+          }, 500);
+        }
+      });
+    }
+  }
+
   addLabel(label) {
     this.labels = [...this.labels, label];
     this.justAddedLabel = true;
@@ -126,69 +193,6 @@ export class CwcAutocompleteSelect {
       value: this.results,
       type: 'autocomplete'
     });
-  }
-
-  /** Life cycle hooks **/
-  componentWillUpdate() {
-    if (this.filterValue) {
-      if (this.filterValue.length >= this.minSearchLength) {
-        this.filtered = this.filter();
-        if (this.filtered.length > 0) {
-          this.optionsShown = true;
-        }
-      }
-    }
-  }
-
-  componentDidUpdate() {
-    if (this.justAddedLabel) {
-      this.justAddedLabel = false;
-      this.labelsAdded = true;
-      this.setCaretPositionEnd();
-    } else {
-      this.filtered = this.filter();
-    }
-  }
-
-  componentDidLoad() {
-    // TODO: this line of code is here because removing "import template from 'lodash/template';" will cause this error to happen when you build the project:
-    // [ ERROR ]  Minify JS e.name.definition is not a function
-    if (this.focusIndex > 999) console.log(template);
-    /** */
-    this.loadValueProp();
-  }
-
-  loadValueProp() {
-    this.retainedInitialValues = this.value;
-    if (this.value && this.value.length >= 1) {
-      this.results = this.value;
-      this.value.map((val, key) => {
-        let tempLabel;
-        if (typeof val === 'string') {
-          if (!this.labels.includes(val)) this.labels.push(val);
-        } else {
-          if (this.template) {
-            tempLabel = this.interpolate(this.template, { [this.itemAs]: val });
-          } else {
-            tempLabel = get(val, this.searchKey);
-          }
-          if (!this.labels.includes(tempLabel)) this.labels.push(tempLabel);
-        }
-
-        if (key === this.value.length - 1) {
-          this.multiselectOnSubmit.emit(this.results);
-          setTimeout(() => {
-            this.renderLabels();
-            this.checkForPlaceholder();
-
-            this.clearTextNodes();
-            this.autoOpen = false;
-            this.close();
-            this.textChange.emit('');
-          }, 500);
-        }
-      });
-    }
   }
 
   private interpolate(template, variables, fallback = '') {

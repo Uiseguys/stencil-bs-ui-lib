@@ -25,10 +25,10 @@ export const config: Config = {
     //   src: '../node_modules/@livingui/cwc-popper/dist',
     //   dest: 'popper-integration'
     // },
-    {
-      src: '../node_modules/@livingui/cwc-autocomplete-select/dist',
-      dest: 'autocomplete-select-integration'
-    }
+    // {
+    //   src: '../node_modules/@livingui/cwc-autocomplete-select/dist',
+    //   dest: 'autocomplete-select-integration'
+    // }
   ],
   plugins: [sass()]
 };

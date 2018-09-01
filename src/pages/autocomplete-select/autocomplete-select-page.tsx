@@ -5,6 +5,23 @@ import { Component, Listen, State } from '@stencil/core';
   styleUrl: 'autocomplete-select-page.scss'
 })
 export class AutocompleteSelectPage {
+  initialValue = [
+    {
+      type: 'country',
+      data: {
+        name: 'Austria',
+        capital: 'Vienna'
+      }
+    },
+    {
+      type: 'country',
+      data: {
+        name: 'Australia',
+        capital: 'Canberra'
+      }
+    }
+  ];
+
   complex = [
     {
       type: 'country',
@@ -30,8 +47,6 @@ export class AutocompleteSelectPage {
   ];
 
   searchString = 'data.name';
-
-  complexResult = [];
 
   data = ['Alex', 'Alabama', 'Alaska', 'andreas', 'alexandro'];
 
@@ -156,7 +171,7 @@ export class AutocompleteSelectPage {
             itemAs='option'
             searchKey={this.searchString}
             template={this.getTemplate()}
-            value={[{ type: 'country', data: { name: 'Austria', capital: 'Vienna' } }, { type: 'country', data: { name: 'Australia', capital: 'Canberra' } }]}
+            value={this.initialValue}
             placeholder="Search something e.g. 'Alabama'"
           />
           <br />
