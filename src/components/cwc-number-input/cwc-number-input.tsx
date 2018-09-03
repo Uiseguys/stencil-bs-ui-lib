@@ -30,7 +30,7 @@ export class NumberInputComponent {
 
   @State() separators: Object = { decimal: null, grouping: null };
 
-  _numberOptions: Object;
+  @State() _numberOptions: Object;
   _regExpNotInNumber: RegExp = /[^\d\-+.e]/g;
 
   // -- form element
@@ -93,28 +93,181 @@ export class NumberInputComponent {
   componentWillLoad() {
     this._handleLocale(this.locale);
 
-    this._numberOptions = this._computeNumberOptions(
-      this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
-      this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
-      this.currency, this.currencyDisplay
-    );
-    this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
-    this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
+    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
+    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
+    this.currency && this.currencyDisplay) {
+      this._numberOptions = this._computeNumberOptions(
+        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+        this.currency, this.currencyDisplay
+      );
+    }
+    if (this.locale && this._numberOptions && this.unit) {
+      this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
+    }
+    if (this.separators['decimal'] && this.numberStyle && this.useGrouping) {
+      this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
+    }
   }
 
-  componentWillUpdate() {
-    // TODO: find way to only listen for clean changes
-    this._numberOptions = this._computeNumberOptions(
-      this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
-      this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
-      this.currency, this.currencyDisplay
-    );
-    this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
-    this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
+  @Watch('separators')
+  separatorsChanged() {
+    if (this.separators['decimal'] && this.numberStyle && this.useGrouping) {
+      this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
+    }
+  }
+
+  @Watch('alwaysSign')
+  alwaysSignChanged() {
+    if (this.locale && this._numberOptions && this.unit) {
+      this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
+    }
+  }
+
+  @Watch('unitSeparator')
+  unitSeparatorChanged() {
+    if (this.locale && this._numberOptions && this.unit) {
+      this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
+    }
+  }
+
+  @Watch('_numberOptions')
+  _numberOptionsChanged() {
+    if (this.locale && this._numberOptions && this.unit) {
+      this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
+    }
+  }
+
+  @Watch('unit')
+  unitChanged() {
+    if (this.locale && this._numberOptions && this.unit) {
+      this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
+    }
+  }
+
+  @Watch('minimumIntegerDigits')
+  minimumIntegerDigitsChanged() {
+    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
+    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
+    this.currency && this.currencyDisplay) {
+      this._numberOptions = this._computeNumberOptions(
+        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+        this.currency, this.currencyDisplay
+      );
+    }
+  }
+  @Watch('minimumFractionDigits')
+  minimumFractionDigitsChanged() {
+    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
+    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
+    this.currency && this.currencyDisplay) {
+      this._numberOptions = this._computeNumberOptions(
+        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+        this.currency, this.currencyDisplay
+      );
+    }
+  }
+  @Watch('maximumFractionDigits')
+  maximumFractionDigitsChanged() {
+    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
+    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
+    this.currency && this.currencyDisplay) {
+      this._numberOptions = this._computeNumberOptions(
+        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+        this.currency, this.currencyDisplay
+      );
+    }
+  }
+  @Watch('minimumSignificantDigits')
+  minimumSignificantDigitsChanged() {
+    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
+    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
+    this.currency && this.currencyDisplay) {
+      this._numberOptions = this._computeNumberOptions(
+        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+        this.currency, this.currencyDisplay
+      );
+    }
+  }
+  @Watch('maximumSignificantDigits')
+  maximumSignificantDigitsChanged() {
+    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
+    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
+    this.currency && this.currencyDisplay) {
+      this._numberOptions = this._computeNumberOptions(
+        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+        this.currency, this.currencyDisplay
+      );
+    }
+  }
+  @Watch('useGrouping')
+  useGroupingChanged() {
+    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
+    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
+    this.currency && this.currencyDisplay) {
+      this._numberOptions = this._computeNumberOptions(
+        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+        this.currency, this.currencyDisplay
+      );
+    }
+
+    if (this.separators['decimal'] && this.numberStyle && this.useGrouping) {
+      this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
+    }
+  }
+  @Watch('numberStyle')
+  numberStyleChanged() {
+    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
+    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
+    this.currency && this.currencyDisplay) {
+      this._numberOptions = this._computeNumberOptions(
+        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+        this.currency, this.currencyDisplay
+      );
+    }
+
+    if (this.separators['decimal'] && this.numberStyle && this.useGrouping) {
+      this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
+    }
+  }
+  @Watch('currency')
+  currencyChanged() {
+    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
+    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
+    this.currency && this.currencyDisplay) {
+      this._numberOptions = this._computeNumberOptions(
+        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+        this.currency, this.currencyDisplay
+      );
+    }
+  }
+  @Watch('currencyDisplay')
+  currencyDisplayChanged() {
+    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
+    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
+    this.currency && this.currencyDisplay) {
+      this._numberOptions = this._computeNumberOptions(
+        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+        this.currency, this.currencyDisplay
+      );
+    }
   }
 
   @Watch('locale')
   _localeChanged(locale: string) {
+    if (this.locale && this._numberOptions && this.unit) {
+      this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
+    }
+
     this._handleLocale(locale);
   }
 

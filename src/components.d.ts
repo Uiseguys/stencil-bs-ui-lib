@@ -346,18 +346,25 @@ declare global {
       'alwaysSign': boolean;
       'currency': string;
       'currencyDisplay': string;
+      'default': Object;
+      'disabled': boolean;
       'formatNumber': Function;
+      'invalid': boolean;
       'locale': string;
       'maximumFractionDigits': number;
       'maximumSignificantDigits': number;
       'minimumFractionDigits': number;
       'minimumIntegerDigits': number;
       'minimumSignificantDigits': number;
+      'name': string;
       'numberStyle': string;
       'parseNumber': Function;
+      'propertyForValue': string;
+      'required': boolean;
       'unit': string;
       'unitSeparator': string;
       'useGrouping': boolean;
+      'value': Object;
     }
 
     interface CwcPopper {
@@ -1836,18 +1843,25 @@ declare global {
       'alwaysSign'?: boolean;
       'currency'?: string;
       'currencyDisplay'?: string;
+      'default'?: Object;
+      'disabled'?: boolean;
       'formatNumber'?: Function;
+      'invalid'?: boolean;
       'locale'?: string;
       'maximumFractionDigits'?: number;
       'maximumSignificantDigits'?: number;
       'minimumFractionDigits'?: number;
       'minimumIntegerDigits'?: number;
       'minimumSignificantDigits'?: number;
+      'name'?: string;
       'numberStyle'?: string;
       'parseNumber'?: Function;
+      'propertyForValue'?: string;
+      'required'?: boolean;
       'unit'?: string;
       'unitSeparator'?: string;
       'useGrouping'?: boolean;
+      'value'?: Object;
     }
 
     export interface CwcPopperAttributes extends HTMLAttributes {
