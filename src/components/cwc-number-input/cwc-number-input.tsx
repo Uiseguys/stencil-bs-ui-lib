@@ -93,63 +93,63 @@ export class NumberInputComponent {
   componentWillLoad() {
     this._handleLocale(this.locale);
 
-    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
-    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
-    this.currency && this.currencyDisplay) {
+    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
         this.currency, this.currencyDisplay
       );
     }
-    if (this.locale && this._numberOptions && this.unit) {
+    if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
       this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
     }
-    if (this.separators['decimal'] && this.numberStyle && this.useGrouping) {
+    if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
       this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
     }
   }
 
   @Watch('separators')
   separatorsChanged() {
-    if (this.separators['decimal'] && this.numberStyle && this.useGrouping) {
+    if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
       this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
     }
   }
 
   @Watch('alwaysSign')
   alwaysSignChanged() {
-    if (this.locale && this._numberOptions && this.unit) {
+    if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
       this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
     }
   }
 
   @Watch('unitSeparator')
   unitSeparatorChanged() {
-    if (this.locale && this._numberOptions && this.unit) {
+    if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
       this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
     }
   }
 
   @Watch('_numberOptions')
   _numberOptionsChanged() {
-    if (this.locale && this._numberOptions && this.unit) {
+    if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
       this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
     }
   }
 
   @Watch('unit')
   unitChanged() {
-    if (this.locale && this._numberOptions && this.unit) {
+    if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
       this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
     }
   }
 
   @Watch('minimumIntegerDigits')
   minimumIntegerDigitsChanged() {
-    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
-    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
-    this.currency && this.currencyDisplay) {
+    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
@@ -159,9 +159,9 @@ export class NumberInputComponent {
   }
   @Watch('minimumFractionDigits')
   minimumFractionDigitsChanged() {
-    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
-    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
-    this.currency && this.currencyDisplay) {
+    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
@@ -171,9 +171,9 @@ export class NumberInputComponent {
   }
   @Watch('maximumFractionDigits')
   maximumFractionDigitsChanged() {
-    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
-    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
-    this.currency && this.currencyDisplay) {
+    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
@@ -183,9 +183,9 @@ export class NumberInputComponent {
   }
   @Watch('minimumSignificantDigits')
   minimumSignificantDigitsChanged() {
-    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
-    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
-    this.currency && this.currencyDisplay) {
+    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
@@ -195,9 +195,9 @@ export class NumberInputComponent {
   }
   @Watch('maximumSignificantDigits')
   maximumSignificantDigitsChanged() {
-    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
-    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
-    this.currency && this.currencyDisplay) {
+    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
@@ -207,9 +207,9 @@ export class NumberInputComponent {
   }
   @Watch('useGrouping')
   useGroupingChanged() {
-    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
-    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
-    this.currency && this.currencyDisplay) {
+    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
@@ -217,15 +217,15 @@ export class NumberInputComponent {
       );
     }
 
-    if (this.separators['decimal'] && this.numberStyle && this.useGrouping) {
+    if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
       this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
     }
   }
   @Watch('numberStyle')
   numberStyleChanged() {
-    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
-    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
-    this.currency && this.currencyDisplay) {
+    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
@@ -233,15 +233,15 @@ export class NumberInputComponent {
       );
     }
 
-    if (this.separators['decimal'] && this.numberStyle && this.useGrouping) {
+    if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
       this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
     }
   }
   @Watch('currency')
   currencyChanged() {
-    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
-    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
-    this.currency && this.currencyDisplay) {
+    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
@@ -251,9 +251,9 @@ export class NumberInputComponent {
   }
   @Watch('currencyDisplay')
   currencyDisplayChanged() {
-    if (this.minimumIntegerDigits && this.minimumFractionDigits && this.maximumFractionDigits &&
-    this.minimumSignificantDigits && this.maximumSignificantDigits && this.useGrouping && this.numberStyle &&
-    this.currency && this.currencyDisplay) {
+    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
@@ -264,12 +264,14 @@ export class NumberInputComponent {
 
   @Watch('locale')
   _localeChanged(locale: string) {
-    if (this.locale && this._numberOptions && this.unit) {
+    if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
       this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
     }
 
     this._handleLocale(locale);
   }
+
+  // intl number format
 
   private _handleLocale(locale) {
     if (!(locale && Intl.NumberFormat && Intl.NumberFormat.supportedLocalesOf(locale))) {
@@ -399,6 +401,16 @@ export class NumberInputComponent {
         return parseFloat(input.replace(decimalSeparator, '.').replace(this._regExpNotInNumber, ''));
       }
     }
+  }
+
+  // form element
+
+  private _computeInvalid(required, value) {
+    this.invalid = Boolean(required && !value);
+  }
+
+  private _computeValueIsSet(value) {
+    this._valueIsSet = value !== undefined;
   }
 
   render() {
