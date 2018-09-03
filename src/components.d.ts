@@ -359,7 +359,6 @@ declare global {
       'name': string;
       'numberStyle': string;
       'parseNumber': Function;
-      'propertyForValue': string;
       'required': boolean;
       'unit': string;
       'unitSeparator': string;
@@ -1856,7 +1855,6 @@ declare global {
       'name'?: string;
       'numberStyle'?: string;
       'parseNumber'?: Function;
-      'propertyForValue'?: string;
       'required'?: boolean;
       'unit'?: string;
       'unitSeparator'?: string;

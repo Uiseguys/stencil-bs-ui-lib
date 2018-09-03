@@ -1,4 +1,4 @@
-import { Component, Prop, State, Watch } from '@stencil/core';
+import { Component, Prop, State, Watch, Element, HostElement } from '@stencil/core';
 import 'bootstrap.native/dist/bootstrap-native-v4';
 
 // TODO: test first before proceeding
@@ -39,10 +39,11 @@ export class NumberInputComponent {
   @Prop({ mutable: true, reflectToAttr: true }) disabled: boolean;
   @Prop({ mutable: true }) name: string;
   @Prop({ mutable: true }) value: Object;
-  @Prop({ mutable: true }) propertyForValue: string;
   @Prop({ mutable: true }) default: Object;
 
   @State() _valueIsSet: boolean = false;
+
+  @Element() el: HostElement;
 
   // ** number utilities
   _numberUtilities = {
@@ -91,6 +92,7 @@ export class NumberInputComponent {
   };
 
   componentWillLoad() {
+    // intl num format
     this._handleLocale(this.locale);
 
     if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
@@ -108,7 +110,17 @@ export class NumberInputComponent {
     if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
       this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
     }
+
+    // form element
+    this.el['tabindex'] = 0;
+    if (this.required !== undefined && this.value !== undefined) {
+      this._computeInvalid(this.required, this.value);
+    }
+    this._computeValueIsSet(this.value);
+    this._defaultChanged(this.default);
   }
+
+  // intl number format
 
   @Watch('separators')
   separatorsChanged() {
@@ -271,6 +283,28 @@ export class NumberInputComponent {
     this._handleLocale(locale);
   }
 
+  // form element
+
+  @Watch('required')
+  requiredChanged() {
+    if (this.required !== undefined && this.value !== undefined) {
+      this._computeInvalid(this.required, this.value);
+    }
+  }
+
+  @Watch('value')
+  valueChanged() {
+    if (this.required !== undefined && this.value !== undefined) {
+      this._computeInvalid(this.required, this.value);
+    }
+    this._computeValueIsSet(this.value);
+  }
+
+  @Watch('default')
+  defaultChanged() {
+    this._defaultChanged(this.default);
+  }
+
   // intl number format
 
   private _handleLocale(locale) {
@@ -412,6 +446,32 @@ export class NumberInputComponent {
   private _computeValueIsSet(value) {
     this._valueIsSet = value !== undefined;
   }
+
+  private _defaultChanged(def) {
+    // TODO: find a way to simultaneously update value and ${propertyForValue}
+    if (def && this.value === undefined) {
+      this.value = def;
+      if (this.propertyForValue) {
+        this[this.propertyForValue] = def;
+      }
+    }
+  }
+
+  validate() {
+    return !this.invalid;
+  }
+
+  // TODO: might remove this
+  // _attachDom(dom) {
+  //   if (!this.shadowRoot) {
+  //     this.attachShadow({
+  //         mode: 'open',
+  //         delegatesFocus: true
+  //     });
+  //     this.shadowRoot.appendChild(dom);
+  //   }
+  //   return this.shadowRoot;
+  // }
 
   render() {
     return(
