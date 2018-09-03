@@ -39,11 +39,27 @@ export class NumberInputComponent {
   @Prop({ mutable: true, reflectToAttr: true }) disabled: boolean;
   @Prop({ mutable: true }) name: string;
   @Prop({ mutable: true }) value: Object;
-  @Prop({ mutable: true }) default: Object;
+  // @Prop({ mutable: true }) default: Object;
 
   @State() _valueIsSet: boolean = false;
 
   @Element() el: HostElement;
+
+  // -- input pattern
+  @Prop({ mutable: true }) type: string = 'text';
+  @Prop({ mutable: true }) input: string;
+  @Prop({ mutable: true }) placeholder: string;
+  @Prop({ mutable: true }) default: string;
+  @Prop({ mutable: true }) minlength: number;
+  @Prop({ mutable: true }) noAutoWidth: boolean;
+  @Prop({ mutable: true }) autoResize: boolean;
+  @Prop({ mutable: true }) hidden: boolean;
+  @Prop({ mutable: true }) propertyForValue: string = 'input';
+
+  @State() _minWidthString: string;
+  _minWidthComputionJob: any;
+  _minSizeJob: any;
+  _activeResizeJob: any;
 
   // ** number utilities
   _numberUtilities = {
@@ -118,6 +134,26 @@ export class NumberInputComponent {
     }
     this._computeValueIsSet(this.value);
     this._defaultChanged(this.default);
+
+    // input pattern
+    this.focusMethod = this.focusMethod.bind(this);
+    this._updateValue = this._updateValue.bind(this);
+    this._checkInput = this._checkInput.bind(this);
+    this._checkKeycode = this._checkKeycode.bind(this);
+    this._addEventListeners();
+    setTimeout(this.resize.bind(this), 0);
+    if (this.noAutoWidth !== undefined && this.minlength !== undefined
+      && this.default !== undefined && this.placeholder !== undefined) {
+      this._computeMinWidth();
+    }
+    if (this._minWidthString !== undefined && this.hidden !== undefined) {
+      this.resize();
+    }
+    this._inputChanged(this.input);
+  }
+
+  componentDidUnload() {
+    this._removeEventListeners();
   }
 
   // intl number format
@@ -303,6 +339,52 @@ export class NumberInputComponent {
   @Watch('default')
   defaultChanged() {
     this._defaultChanged(this.default);
+
+    if (this.noAutoWidth !== undefined && this.minlength !== undefined
+      && this.default !== undefined && this.placeholder !== undefined) {
+      this._computeMinWidth();
+    }
+  }
+
+  // input pattern
+  @Watch('noAutoWidth')
+  noAutoWidthChanged() {
+    if (this.noAutoWidth !== undefined && this.minlength !== undefined
+      && this.default !== undefined && this.placeholder !== undefined) {
+      this._computeMinWidth();
+    }
+  }
+  @Watch('minlength')
+  minlengthChanged() {
+    if (this.noAutoWidth !== undefined && this.minlength !== undefined
+      && this.default !== undefined && this.placeholder !== undefined) {
+      this._computeMinWidth();
+    }
+  }
+  @Watch('placeholder')
+  placeholderChanged() {
+    if (this.noAutoWidth !== undefined && this.minlength !== undefined
+      && this.default !== undefined && this.placeholder !== undefined) {
+      this._computeMinWidth();
+    }
+  }
+
+  @Watch('_minWidthString')
+  _minWidthStringChanged() {
+    if (this._minWidthString !== undefined && this.hidden !== undefined) {
+      this.resize();
+    }
+  }
+  @Watch('hidden')
+  hiddenChanged() {
+    if (this._minWidthString !== undefined && this.hidden !== undefined) {
+      this.resize();
+    }
+  }
+
+  @Watch('input')
+  inputChanged() {
+    this._inputChanged(this.input);
   }
 
   // intl number format
@@ -449,11 +531,14 @@ export class NumberInputComponent {
 
   private _defaultChanged(def) {
     // TODO: find a way to simultaneously update value and ${propertyForValue}
-    if (def && this.value === undefined) {
-      this.value = def;
-      if (this.propertyForValue) {
-        this[this.propertyForValue] = def;
-      }
+    // if (def && this.value === undefined) {
+    //   this.value = def;
+    //   if (this.propertyForValue) {
+    //     this[this.propertyForValue] = def;
+    //   }
+    // }
+    if (!this.input && def) {
+      this.input = def;
     }
   }
 
@@ -473,10 +558,164 @@ export class NumberInputComponent {
   //   return this.shadowRoot;
   // }
 
+  // input pattern
+  private _addEventListeners() {
+    this.el.addEventListener('focus', this.focusMethod, false);
+    this.el.querySelector('#input').addEventListener('focus', this._updateValue, false);
+    this.el.querySelector('#input').addEventListener('blur', this._checkInput, false);
+    this.el.querySelector('#input').addEventListener('keydown', this._checkKeycode, false);
+  }
+
+  private _removeEventListeners() {
+    this.el.removeEventListener('focus', this.focusMethod, false);
+    this.el.querySelector('#input').removeEventListener('focus', this._updateValue, false);
+    this.el.querySelector('#input').removeEventListener('blur', this._checkInput, false);
+    this.el.querySelector('#input').removeEventListener('keydown', this._checkKeycode, false);
+  }
+
+  focusMethod() {
+    this.el.querySelector('#input')['focus']();
+    if (this.el.querySelector('#input')['scrollIntoViewIfNeeded']) {
+      this.el.querySelector('#input')['scrollIntoViewIfNeeded']();
+    }
+  }
+
+  blurMethod(e) {
+    this._checkInput(e);
+    this.el.querySelector('#input')['blur']();
+  }
+
+  private _checkKeycode(e) {
+    // enter & space
+    if (e.keyCode === 13 || e.keyCode === 32) {
+      this._checkInput(null);
+      return;
+    }
+
+    // esc
+    if (e.keyCode === 27) {
+      this._updateValue(null);
+      e.stopPropagation();
+      this.blurMethod(null);
+      return;
+    }
+
+    if (this.autoResize) {
+      this._debouncedComputeWidth();
+    }
+  }
+
+  private _checkInput(e) {
+    this._inputChanged(this.input || '');
+    this._debouncedComputeWidth();
+    if (e && e.stopPropagation) {
+      e.stopPropagation();
+    }
+  }
+
+  private _updateValue(e) {
+    if (this.value !== undefined) {
+      this._reflectValueToProperty(this.value);
+    }
+    this._debouncedComputeWidth();
+    if (e && e.stopPropagation) {
+      e.stopPropagation();
+    }
+  }
+
+  private _computeMinWidth() {
+    if (this._minWidthComputionJob) {
+      clearTimeout(this._minWidthComputionJob);
+      this._minWidthComputionJob = null;
+    }
+
+    this._minWidthComputionJob = setTimeout(() => {
+      const def = this.default || '',
+        placeholder = this.placeholder || '',
+        minlength = this.minlength || 1,
+        charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; // to compute a random string for minlength
+      let minlengthString = '';
+      for (let i = 0; i < minlength; i++) {
+        minlengthString += charset.charAt(Math.floor(Math.random() * charset.length));
+      }
+      this._minWidthString = (this.noAutoWidth ? [minlengthString] : [def, minlengthString]).reduce( (acc, curr) => {
+        return curr.length > acc.length ? curr : acc;
+      }, placeholder);
+    }, 0);
+  }
+
+  resize() {
+    if (!this._minWidthString || this.hidden || this._minSizeJob) {
+      return;
+    }
+    this._minSizeJob = requestAnimationFrame( () => {
+      let width = this.el.querySelector('#minsize')['getBoundingClientRect']()['width'];
+      // measure the width of the test element
+      if (width !== 0) {
+        this.el.querySelector('#input')['style']['minWidth'] = `${width}px`;
+        this._debouncedComputeWidth();
+        this._minSizeJob = null;
+      } else {
+        // if that fails, clone the test node to document level and add some basic styles, that could define the elements's width
+        const minsizeClone = this.el.querySelector('#minsize')['cloneNode'](true);
+        const style = document.defaultView.getComputedStyle(this.el.querySelector('#minsize'), '');
+        ['font-family', 'font-size', 'font-weight', 'font-style', 'letter-spacing', 'min-width', 'max-width'].reduce(
+          ( accumulator, currentValue) => {
+            if (currentValue && style[currentValue]) {
+              minsizeClone['style'][currentValue] = style[currentValue];
+            }
+            return accumulator;
+          }, 'font-family');
+        minsizeClone['style']['display'] = 'inline-flex';
+        minsizeClone['style']['opacity'] = '0';
+        minsizeClone['style']['position'] = 'fixed';
+        minsizeClone['style']['left'] = '0';
+        minsizeClone['style']['top'] = '0';
+        minsizeClone['style']['border'] = 'thin solid transparent';
+
+        document.body.appendChild(minsizeClone);
+        requestAnimationFrame( () => {
+          width = minsizeClone['getBoundingClientRect']()['width'];
+          minsizeClone['parentElement']['removeChild'](minsizeClone);
+          this._minSizeJob = null;
+          if (width !== 0) {
+            this.el.querySelector('#input')['style']['minWidth'] = `${width}px`;
+            this._debouncedComputeWidth();
+          } else {
+            // if it fails again, retry
+            this.resize();
+          }
+        });
+      }
+    })
+
+  }
+
+  private _debouncedComputeWidth() {
+    if (this._activeResizeJob) {
+      clearTimeout(this._activeResizeJob);
+    }
+    this._activeResizeJob = setTimeout(this._computeWidth.bind(this), 0);
+  }
+
+  private _computeWidth() {
+    this.el.querySelector('#input')['style']['width'] = `${this.el.querySelector('#size')['getBoundingClientRect']()['width']}px`;
+  }
+
   render() {
     return(
       <div>
         STILL TESTING
+        <input id="input"
+            type={this.type}
+            value={this.input}
+            placeholder={this.placeholder}
+            required={this.required}
+            disabled={this.disabled}
+            spellcheck={false}
+            autocomplete="off"/>
+        <div id="size">{this.input}</div>
+        <div id="minsize">{this._minWidthString}</div>
       </div>
     );
   }

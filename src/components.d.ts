@@ -344,11 +344,14 @@ declare global {
 
     interface CwcNumberInput {
       'alwaysSign': boolean;
+      'autoResize': boolean;
       'currency': string;
       'currencyDisplay': string;
-      'default': Object;
+      'default': string;
       'disabled': boolean;
       'formatNumber': Function;
+      'hidden': boolean;
+      'input': string;
       'invalid': boolean;
       'locale': string;
       'maximumFractionDigits': number;
@@ -356,10 +359,15 @@ declare global {
       'minimumFractionDigits': number;
       'minimumIntegerDigits': number;
       'minimumSignificantDigits': number;
+      'minlength': number;
       'name': string;
+      'noAutoWidth': boolean;
       'numberStyle': string;
       'parseNumber': Function;
+      'placeholder': string;
+      'propertyForValue': string;
       'required': boolean;
+      'type': string;
       'unit': string;
       'unitSeparator': string;
       'useGrouping': boolean;
@@ -1840,11 +1848,14 @@ declare global {
 
     export interface CwcNumberInputAttributes extends HTMLAttributes {
       'alwaysSign'?: boolean;
+      'autoResize'?: boolean;
       'currency'?: string;
       'currencyDisplay'?: string;
-      'default'?: Object;
+      'default'?: string;
       'disabled'?: boolean;
       'formatNumber'?: Function;
+      'hidden'?: boolean;
+      'input'?: string;
       'invalid'?: boolean;
       'locale'?: string;
       'maximumFractionDigits'?: number;
@@ -1852,10 +1863,15 @@ declare global {
       'minimumFractionDigits'?: number;
       'minimumIntegerDigits'?: number;
       'minimumSignificantDigits'?: number;
+      'minlength'?: number;
       'name'?: string;
+      'noAutoWidth'?: boolean;
       'numberStyle'?: string;
       'parseNumber'?: Function;
+      'placeholder'?: string;
+      'propertyForValue'?: string;
       'required'?: boolean;
+      'type'?: string;
       'unit'?: string;
       'unitSeparator'?: string;
       'useGrouping'?: boolean;
