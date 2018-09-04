@@ -13,9 +13,9 @@ import 'bootstrap.native/dist/bootstrap-native-v4';
 export class NumberInputComponent {
   // -- intl number format
   @Prop({ mutable: true }) locale: string = window.navigator.language;
-  @Prop({ mutable: true }) minimumFractionDigits: number;
-  @Prop({ mutable: true }) maximumFractionDigits: number;
-  @Prop({ mutable: true }) minimumIntegerDigits: number;
+  // @Prop({ mutable: true }) minimumFractionDigits: number;
+  // @Prop({ mutable: true }) maximumFractionDigits: number;
+  // @Prop({ mutable: true }) minimumIntegerDigits: number;
   @Prop({ mutable: true }) minimumSignificantDigits: number;
   @Prop({ mutable: true }) maximumSignificantDigits: number;
   @Prop({ mutable: true }) unit: string;
@@ -38,7 +38,7 @@ export class NumberInputComponent {
   @Prop({ mutable: true, reflectToAttr: true }) invalid: boolean;
   @Prop({ mutable: true, reflectToAttr: true }) disabled: boolean;
   @Prop({ mutable: true }) name: string;
-  @Prop({ mutable: true }) value: Object;
+  // @Prop({ mutable: true }) value: Object;
   // @Prop({ mutable: true }) default: Object;
 
   @State() _valueIsSet: boolean = false;
@@ -54,7 +54,7 @@ export class NumberInputComponent {
   @Prop({ mutable: true }) noAutoWidth: boolean;
   @Prop({ mutable: true }) autoResize: boolean;
   @Prop({ mutable: true }) hidden: boolean;
-  @Prop({ mutable: true }) propertyForValue: string = 'input';
+  // @Prop({ mutable: true }) propertyForValue: string = 'input';
 
   @State() _minWidthString: string;
   _minWidthComputionJob: any;
@@ -72,6 +72,17 @@ export class NumberInputComponent {
   @Prop({ mutable: true }) noClamp: boolean;
 
   @State() _step: number = 1;
+
+  // -- number input
+  @Prop({ mutable: true }) padLength: number;
+  @Prop({ mutable: true }) autoPadding: boolean;
+  @Prop({ mutable: true }) minimumFractionDigits: number;
+  @Prop({ mutable: true }) maximumFractionDigits: number;
+  @Prop({ mutable: true }) minimumIntegerDigits: number;
+  @Prop({ mutable: true }) value: number;
+  @Prop({ mutable: true }) propertyForValue: string = 'valueAsNumber';
+
+  @State() _type: string;
 
 
   // ** number utilities
@@ -162,11 +173,25 @@ export class NumberInputComponent {
     if (this._minWidthString !== undefined && this.hidden !== undefined) {
       this.resize();
     }
-    this._inputChanged(this.input);
+    this._inputChanged();
 
     // range
     if (this.valueAsNumber === undefined && !isNaN(this.default)) {
       this.valueAsNumber = this.default;
+    }
+    if (this.min !== undefined && this.max !== undefined) {
+      this._minMaxChanged(this.min, this.max);
+    }
+    if (this.step !== undefined && this.stepMod !== undefined) {
+      this._stepChanged(this.step, this.stepMod);
+    }
+
+    // number input
+    if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
+      this._type = this._computeType();
+    }
+    if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
+      this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
     }
   }
 
@@ -187,6 +212,9 @@ export class NumberInputComponent {
   alwaysSignChanged() {
     if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
       this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
+    }
+    if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
+      this._type = this._computeType();
     }
   }
 
@@ -302,6 +330,10 @@ export class NumberInputComponent {
     if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
       this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
     }
+
+    if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
+      this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
+    }
   }
   @Watch('currency')
   currencyChanged() {
@@ -402,7 +434,7 @@ export class NumberInputComponent {
 
   @Watch('input')
   inputChanged() {
-    this._inputChanged(this.input);
+    this._inputChanged();
   }
 
   // range
@@ -423,20 +455,57 @@ export class NumberInputComponent {
 
   @Watch('min')
   minChanged() {
-    this._minMaxChanged(this.min, this.max);
+    if (this.min !== undefined && this.max !== undefined) {
+      this._minMaxChanged(this.min, this.max);
+    }
+
+    if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
+      this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
+    }
   }
   @Watch('max')
   maxChanged() {
-    this._minMaxChanged(this.min, this.max);
+    if (this.min !== undefined && this.max !== undefined) {
+      this._minMaxChanged(this.min, this.max);
+    }
+
+    if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
+      this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
+    }
   }
 
   @Watch('step')
   stepChanged() {
-    this._stepChanged(this.step, this.stepMod);
+    if (this.step !== undefined && this.stepMod !== undefined) {
+      this._stepChanged(this.step, this.stepMod);
+    }
   }
   @Watch('stepMod')
   stepModChanged() {
-    this._stepChanged(this.step, this.stepMod);
+    if (this.step !== undefined && this.stepMod !== undefined) {
+      this._stepChanged(this.step, this.stepMod);
+    }
+  }
+
+  // number input
+  @Watch('formatNumber')
+  formatNumberChanged() {
+    if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
+      this._type = this._computeType();
+    }
+  }
+  @Watch('parseNumber')
+  parseNumberChanged() {
+    if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
+      this._type = this._computeType();
+    }
+  }
+
+  @Watch('_step')
+  underscorestepChanged() {
+    if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
+      this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
+    }
   }
 
   // intl number format
@@ -574,7 +643,8 @@ export class NumberInputComponent {
   // form element
 
   private _computeInvalid(required, value) {
-    this.invalid = Boolean(required && !value);
+    // this.invalid = Boolean(required && !value);
+    this.invalid = required && isNaN(value);
   }
 
   private _computeValueIsSet(value) {
@@ -589,8 +659,13 @@ export class NumberInputComponent {
     //     this[this.propertyForValue] = def;
     //   }
     // }
-    if (!this.input && def) {
-      this.input = def;
+
+    // if (!this.input && def) {
+    //   this.input = def;
+    // }
+
+    if (isNaN(this.valueAsNumber) && !isNaN(def)) {
+      this.valueAsNumber = def;
     }
   }
 
@@ -632,37 +707,81 @@ export class NumberInputComponent {
     }
   }
 
-  blurMethod(e) {
-    this._checkInput(e);
+  blurMethod() {
+    this._checkInput();
     this.el.querySelector('#input')['blur']();
   }
 
   private _checkKeycode(e) {
-    // enter & space
-    if (e.keyCode === 13 || e.keyCode === 32) {
-      this._checkInput(null);
-      return;
-    }
-
-    // esc
-    if (e.keyCode === 27) {
-      this._updateValue();
-      e.stopPropagation();
-      this.blurMethod(null);
-      return;
-    }
-
-    if (this.autoResize) {
-      this._debouncedComputeWidth();
+    // // enter & space
+    // if (e.keyCode === 13 || e.keyCode === 32) {
+    //   this._checkInput(null);
+    //   return;
+    // }
+    //
+    // // esc
+    // if (e.keyCode === 27) {
+    //   this._updateValue();
+    //   e.stopPropagation();
+    //   this.blurMethod(null);
+    //   return;
+    // }
+    //
+    // if (this.autoResize) {
+    //   this._debouncedComputeWidth();
+    // }
+    switch (e.keyCode) {
+      case 9:  // tab // falls-through
+      case 13: // enter
+        this._checkInput();
+        break;
+      case 27: // esc
+        this._updateValue();
+        this.el.querySelector('#input').blur();
+        break;
+        case 38: // up
+        e.preventDefault();
+        e.stopPropagation();
+        this.increase();
+        break;
+      case 40: // down
+        e.preventDefault();
+        e.stopPropagation();
+        this.decrease();
+        break;
     }
   }
 
-  private _checkInput(e) {
-    this._inputChanged(this.input || '');
-    this._debouncedComputeWidth();
-    if (e && e.stopPropagation) {
-      e.stopPropagation();
+  private _checkInput() {
+    // this._inputChanged(this.input || '');
+    // this._debouncedComputeWidth();
+    // if (e && e.stopPropagation) {
+    //   e.stopPropagation();
+    // }
+    if (!this.input) {
+      if (!isNaN(this.default)) {
+        // TODO: try to update simultaneously
+        this.input = this.formatNumber(this.default);
+        this.valueAsNumber = +this.default;
+        // this.setProperties({
+        //   input: this.formatNumber(this.default),
+        //   valueAsNumber: +this.default
+        // })
+      } else {
+        this.valueAsNumber = undefined;
+      }
+      this._debouncedComputeWidth();
+      return;
     }
+    const value = this._checkValue(this.parseNumber(this.input), this.valueAsNumber);
+    // TODO: try to update simultaneously
+    this.input = this.formatNumber(value);
+    this.valueAsNumber = value;
+    // this.setProperties({
+    //   input: this.formatNumber(value),
+    //   valueAsNumber: value
+    // });
+    this._debouncedComputeWidth();
   }
 
   private _updateValue() {
@@ -801,6 +920,12 @@ export class NumberInputComponent {
       this.valueAsNumber = finalValue;
       return;
     }
+
+    if (isNaN(value)) {
+      this.input = '';
+      return;
+    }
+    this.input = this.formatNumber(this.valueAsNumber);
   }
 
   private _checkValue(value, oldValue) {
@@ -863,16 +988,85 @@ export class NumberInputComponent {
     this._updateValue();
   }
 
+  // number input
+  private _inputChanged() {
+    if (this.autoResize) {
+      this._debouncedComputeWidth();
+    }
+  }
+
+  private _computeType() {
+    // maximize compatibility for mobile keyboards
+    if (this.separators['decimal'] === '.') {
+      if (this.numberStyle === 'decimal' && !this.unit && !this.alwaysSign  && !this.padLength && !this.autoPadding) {
+        return 'number';
+      }
+      return 'tel';
+    }
+    return 'text';
+  }
+
+  private _computeMinimumIntegerDigits(autoPadding, padLength, def, startAt, min, max, step, numberStyle) {
+    if (numberStyle === 'percent') {
+      min = Math.round(min * 100);
+      max = Math.round(max * 100);
+      def = Math.round(def * 100);
+      step = Math.round(step * 100);
+      startAt = Math.round(startAt * 100);
+    } else {
+      min = Math.round(min);
+      max = Math.round(max);
+      def = Math.round(def);
+      step = Math.round(step);
+      startAt = Math.round(startAt);
+    }
+    min = '' + (Math.abs(min) || 0);
+    max = '' + (Math.abs(max) || 0);
+    def = '' + (Math.abs(def) || 0);
+    step = '' + (Math.abs(step) || 0);
+    startAt = '' + (Math.abs(startAt) || 0);
+
+    if (autoPadding) {
+      return Math.max((padLength || 1), startAt.length, step.length, def.length, min.length, max.length);
+    }
+    return padLength || 1;
+  }
+
+  private _computeMinimumFractionDigits(step, min, max, numberStyle) {
+    if (numberStyle === 'percent') {
+      min = this._numberUtilities._safeMult(min || 0, 100);
+      max = this._numberUtilities._safeMult(max || 0, 100);
+      step = this._numberUtilities._safeMult(step || 0.01, 100);
+    }
+
+    min = '' + (Math.abs(min) || '');
+    max = '' + (Math.abs(max) || '');
+    step = '' + step;
+
+    return ['0', step, min, max].reduce( (acc, curr) => {
+      const pos = curr.indexOf('.');
+      return Math.max((pos < 0) ? 0 : (curr.length - 1 - pos), acc);
+    });
+  }
+
+  private _computeMaximumFractionDigits(minimumFractionDigits, noClamp) {
+    if (noClamp) {
+      return 20;
+    }
+    return minimumFractionDigits;
+  }
+
   render() {
     return(
       <div>
         STILL TESTING
         <input id="input"
-            type={this.type}
+            type={this._type}
             value={this.input}
-            placeholder={this.placeholder}
+            step={this.step}
             required={this.required}
             disabled={this.disabled}
+            placeholder={this.placeholder}
             spellcheck={false}
             autocomplete="off"/>
         <div id="size">{this.input}</div>
