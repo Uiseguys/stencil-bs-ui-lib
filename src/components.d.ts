@@ -347,31 +347,38 @@ declare global {
       'autoResize': boolean;
       'currency': string;
       'currencyDisplay': string;
-      'default': string;
+      'default': number;
       'disabled': boolean;
       'formatNumber': Function;
       'hidden': boolean;
       'input': string;
       'invalid': boolean;
       'locale': string;
+      'max': number;
       'maximumFractionDigits': number;
       'maximumSignificantDigits': number;
+      'min': number;
       'minimumFractionDigits': number;
       'minimumIntegerDigits': number;
       'minimumSignificantDigits': number;
       'minlength': number;
       'name': string;
       'noAutoWidth': boolean;
+      'noClamp': boolean;
       'numberStyle': string;
       'parseNumber': Function;
       'placeholder': string;
       'propertyForValue': string;
       'required': boolean;
+      'saturate': boolean;
+      'step': number;
+      'stepMod': number;
       'type': string;
       'unit': string;
       'unitSeparator': string;
       'useGrouping': boolean;
       'value': Object;
+      'valueAsNumber': number;
     }
 
     interface CwcPopper {
@@ -1851,31 +1858,38 @@ declare global {
       'autoResize'?: boolean;
       'currency'?: string;
       'currencyDisplay'?: string;
-      'default'?: string;
+      'default'?: number;
       'disabled'?: boolean;
       'formatNumber'?: Function;
       'hidden'?: boolean;
       'input'?: string;
       'invalid'?: boolean;
       'locale'?: string;
+      'max'?: number;
       'maximumFractionDigits'?: number;
       'maximumSignificantDigits'?: number;
+      'min'?: number;
       'minimumFractionDigits'?: number;
       'minimumIntegerDigits'?: number;
       'minimumSignificantDigits'?: number;
       'minlength'?: number;
       'name'?: string;
       'noAutoWidth'?: boolean;
+      'noClamp'?: boolean;
       'numberStyle'?: string;
       'parseNumber'?: Function;
       'placeholder'?: string;
       'propertyForValue'?: string;
       'required'?: boolean;
+      'saturate'?: boolean;
+      'step'?: number;
+      'stepMod'?: number;
       'type'?: string;
       'unit'?: string;
       'unitSeparator'?: string;
       'useGrouping'?: boolean;
       'value'?: Object;
+      'valueAsNumber'?: number;
     }
 
     export interface CwcPopperAttributes extends HTMLAttributes {

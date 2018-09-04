@@ -49,7 +49,7 @@ export class NumberInputComponent {
   @Prop({ mutable: true }) type: string = 'text';
   @Prop({ mutable: true }) input: string;
   @Prop({ mutable: true }) placeholder: string;
-  @Prop({ mutable: true }) default: string;
+  // @Prop({ mutable: true }) default: string;
   @Prop({ mutable: true }) minlength: number;
   @Prop({ mutable: true }) noAutoWidth: boolean;
   @Prop({ mutable: true }) autoResize: boolean;
@@ -60,6 +60,19 @@ export class NumberInputComponent {
   _minWidthComputionJob: any;
   _minSizeJob: any;
   _activeResizeJob: any;
+
+  // -- range
+  @Prop({ mutable: true }) min: number;
+  @Prop({ mutable: true }) max: number;
+  @Prop({ mutable: true }) step: number = 1;
+  @Prop({ mutable: true }) stepMod: number = 1;
+  @Prop({ mutable: true }) valueAsNumber: number;
+  @Prop({ mutable: true }) default: number;
+  @Prop({ mutable: true }) saturate: boolean;
+  @Prop({ mutable: true }) noClamp: boolean;
+
+  @State() _step: number = 1;
+
 
   // ** number utilities
   _numberUtilities = {
@@ -150,6 +163,11 @@ export class NumberInputComponent {
       this.resize();
     }
     this._inputChanged(this.input);
+
+    // range
+    if (this.valueAsNumber === undefined && !isNaN(this.default)) {
+      this.valueAsNumber = this.default;
+    }
   }
 
   componentDidUnload() {
@@ -387,6 +405,40 @@ export class NumberInputComponent {
     this._inputChanged(this.input);
   }
 
+  // range
+  @Watch('valueAsNumber')
+  valueAsNumberChanged(newVal: number, oldVal: number) {
+    this._valueAsNumberChanged(newVal, oldVal);
+  }
+
+  @Watch('saturate')
+  saturateChanged() {
+    this._updateValue();
+  }
+
+  @Watch('noClamp')
+  noClampChanged() {
+    this._updateValue();
+  }
+
+  @Watch('min')
+  minChanged() {
+    this._minMaxChanged(this.min, this.max);
+  }
+  @Watch('max')
+  maxChanged() {
+    this._minMaxChanged(this.min, this.max);
+  }
+
+  @Watch('step')
+  stepChanged() {
+    this._stepChanged(this.step, this.stepMod);
+  }
+  @Watch('stepMod')
+  stepModChanged() {
+    this._stepChanged(this.step, this.stepMod);
+  }
+
   // intl number format
 
   private _handleLocale(locale) {
@@ -594,7 +646,7 @@ export class NumberInputComponent {
 
     // esc
     if (e.keyCode === 27) {
-      this._updateValue(null);
+      this._updateValue();
       e.stopPropagation();
       this.blurMethod(null);
       return;
@@ -613,32 +665,53 @@ export class NumberInputComponent {
     }
   }
 
-  private _updateValue(e) {
-    if (this.value !== undefined) {
-      this._reflectValueToProperty(this.value);
-    }
-    this._debouncedComputeWidth();
-    if (e && e.stopPropagation) {
-      e.stopPropagation();
+  private _updateValue() {
+    // if (this.value !== undefined) {
+    //   this._reflectValueToProperty(this.value);
+    // }
+    // this._debouncedComputeWidth();
+    // if (e && e.stopPropagation) {
+    //   e.stopPropagation();
+    // }
+    if (this.valueAsNumber !== undefined) {
+      this._valueAsNumberChanged(this.valueAsNumber, this.valueAsNumber);
     }
   }
 
   private _computeMinWidth() {
+    // if (this._minWidthComputionJob) {
+    //   clearTimeout(this._minWidthComputionJob);
+    //   this._minWidthComputionJob = null;
+    // }
+    //
+    // this._minWidthComputionJob = setTimeout(() => {
+    //   const def = this.default || '',
+    //     placeholder = this.placeholder || '',
+    //     minlength = this.minlength || 1,
+    //     charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; // to compute a random string for minlength
+    //   let minlengthString = '';
+    //   for (let i = 0; i < minlength; i++) {
+    //     minlengthString += charset.charAt(Math.floor(Math.random() * charset.length));
+    //   }
+    //   this._minWidthString = (this.noAutoWidth ? [minlengthString] : [def, minlengthString]).reduce( (acc, curr) => {
+    //     return curr.length > acc.length ? curr : acc;
+    //   }, placeholder);
+    // }, 0);
     if (this._minWidthComputionJob) {
       clearTimeout(this._minWidthComputionJob);
       this._minWidthComputionJob = null;
     }
 
     this._minWidthComputionJob = setTimeout(() => {
-      const def = this.default || '',
+      const def = this.formatNumber(this.default || 0),
         placeholder = this.placeholder || '',
-        minlength = this.minlength || 1,
-        charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; // to compute a random string for minlength
-      let minlengthString = '';
-      for (let i = 0; i < minlength; i++) {
-        minlengthString += charset.charAt(Math.floor(Math.random() * charset.length));
-      }
-      this._minWidthString = (this.noAutoWidth ? [minlengthString] : [def, minlengthString]).reduce( (acc, curr) => {
+        startAt = this.formatNumber(this.startAt || 0),
+        min = this.formatNumber(this.min || 0),
+        max = this.formatNumber(this.max || 0),
+        minlength = this.formatNumber(Math.pow(10, Math.ceil(this.minlength || 1) - (this.numberStyle === 'percent' ? 3 : 1)));
+      const gen = (!this.alwaysSign && (this.min < 0 || this.max < 0) ? '-' : '')
+        + this.formatNumber(Math.pow(10, (this.minimumIntegerDigits || 1) - 1) + Math.pow(10, -(this.minimumFractionDigits || 0)));
+      this._minWidthString = (this.noAutoWidth ? [minlength] : [max, min, def, startAt, gen, minlength]).reduce( (acc, curr) => {
         return curr.length > acc.length ? curr : acc;
       }, placeholder);
     }, 0);
@@ -700,6 +773,94 @@ export class NumberInputComponent {
 
   private _computeWidth() {
     this.el.querySelector('#input')['style']['width'] = `${this.el.querySelector('#size')['getBoundingClientRect']()['width']}px`;
+  }
+
+  // range
+  private _minMaxChanged(min, max) {
+    if (+max < +min) {
+      // TODO: look for a way to update min and max simultaneously
+      this.min = +max;
+      this.max = +min;
+      // this.setProperties({
+      //   min: +max,
+      //   max: +min
+      // })
+    } else {
+      this._updateValue();
+    }
+  }
+
+  private _valueAsNumberChanged(value, oldValue) {
+    if (value === undefined) {
+      return;
+    }
+
+    const finalValue = this._checkValue(value, oldValue);
+
+    if (finalValue !== this.valueAsNumber) {
+      this.valueAsNumber = finalValue;
+      return;
+    }
+  }
+
+  private _checkValue(value, oldValue) {
+    if (isNaN(value)) {
+      if (!isNaN(oldValue)) {
+        return oldValue;
+      } else if (!isNaN(this.default)) {
+        return this.default;
+      } else if (!isNaN(this.min)) {
+        return this.min;
+      } else if (!isNaN(this.max)) {
+        return this.max;
+      }
+      return 0;
+    }
+
+    const saturate = this.saturate,
+      min = this.min,
+      max = this.max;
+
+    if (min !== undefined && value <= min) {
+      if (saturate || value === min || max === undefined || oldValue !== min) {
+        return min;
+      }
+      return max;
+    } else if (max !== undefined && value >= max) {
+      if (saturate || value === max || min === undefined || max !== oldValue) {
+        return max;
+      }
+      return min;
+    } else if (this.noClamp) {
+      return value;
+    }
+    return this._checkStep(value, this._step);
+  }
+
+  private _checkStep(value, step) {
+    if (!step) {
+      return value;
+    }
+    if (this.default !== undefined) {
+      return this._numberUtilities._safeAdd(this._numberUtilities._safeMult(Math.round((value - this.default) / step), step), this.default);
+    }
+    if (this.min !== undefined) {
+      return this._numberUtilities._safeAdd(this._numberUtilities._safeMult(Math.round((value - this.min) / step), step), this.min);
+    }
+    if (this.max !== undefined) {
+      return this._numberUtilities._safeAdd(this._numberUtilities._safeMult(-Math.round((this.max - value) / step), step), this.max);
+    }
+    return this._numberUtilities._safeMult(Math.round(value / step), step);
+  }
+
+  private _stepChanged(step, stepMod) {
+    step = step || 0;
+    if (step !== Math.abs(step)) {
+      this.step = Math.abs(step);
+      return;
+    }
+    this._step = this._numberUtilities._safeMult(step, stepMod || 1);
+    this._updateValue();
   }
 
   render() {
