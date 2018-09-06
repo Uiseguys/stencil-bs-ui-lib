@@ -1,4 +1,4 @@
-import { Component, Prop, State, Watch, Element, HostElement } from '@stencil/core';
+import { Component, Prop, State, Watch, Element, HostElement, Method } from '@stencil/core';
 import 'bootstrap.native/dist/bootstrap-native-v4';
 
 // TODO: test first before proceeding
@@ -80,6 +80,7 @@ export class NumberInputComponent {
   @Prop({ mutable: true }) maximumFractionDigits: number;
   @Prop({ mutable: true }) minimumIntegerDigits: number;
   @Prop({ mutable: true }) value: number;
+  @Prop({ mutable: true }) startAt: number;
   @Prop({ mutable: true }) propertyForValue: string = 'valueAsNumber';
 
   @State() _type: string;
@@ -131,7 +132,8 @@ export class NumberInputComponent {
     }
   };
 
-  componentWillLoad() {
+  componentDidLoad() {
+  // componentWillLoad() {
     // intl num format
     this._handleLocale(this.locale);
 
@@ -166,10 +168,10 @@ export class NumberInputComponent {
     this._checkKeycode = this._checkKeycode.bind(this);
     this._addEventListeners();
     setTimeout(this.resize.bind(this), 0);
-    if (this.noAutoWidth !== undefined && this.minlength !== undefined
-      && this.default !== undefined && this.placeholder !== undefined) {
-      this._computeMinWidth();
-    }
+    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
+    //   && this.default !== undefined && this.placeholder !== undefined) {
+    //   this._computeMinWidth();
+    // }
     if (this._minWidthString !== undefined && this.hidden !== undefined) {
       this.resize();
     }
@@ -193,6 +195,28 @@ export class NumberInputComponent {
     if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
       this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
     }
+    if (this.minimumFractionDigits !== undefined && this.noClamp !== undefined) {
+      this.maximumFractionDigits = this._computeMaximumFractionDigits(this.minimumFractionDigits, this.noClamp);
+    }
+    if (
+      this.autoPadding !== undefined && this.padLength !== undefined
+      && this.default !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this._step !== undefined && this.numberStyle !== undefined
+    ) {
+      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+      );
+    }
+    if (this.noAutoWidth !== undefined && this.minlength !== undefined
+      && this.default !== undefined && this.placeholder !== undefined
+      && this.formatNumber !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+      && this.alwaysSign !== undefined
+    ) {
+      this._computeMinWidth();
+    }
   }
 
   componentDidUnload() {
@@ -215,6 +239,17 @@ export class NumberInputComponent {
     }
     if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
       this._type = this._computeType();
+    }
+    this._updateValue();
+
+    if (this.noAutoWidth !== undefined && this.minlength !== undefined
+      && this.default !== undefined && this.placeholder !== undefined
+      && this.formatNumber !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+      && this.alwaysSign !== undefined
+    ) {
+      this._computeMinWidth();
     }
   }
 
@@ -250,6 +285,16 @@ export class NumberInputComponent {
         this.currency, this.currencyDisplay
       );
     }
+
+    if (this.noAutoWidth !== undefined && this.minlength !== undefined
+      && this.default !== undefined && this.placeholder !== undefined
+      && this.formatNumber !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+      && this.alwaysSign !== undefined
+    ) {
+      this._computeMinWidth();
+    }
   }
   @Watch('minimumFractionDigits')
   minimumFractionDigitsChanged() {
@@ -262,6 +307,16 @@ export class NumberInputComponent {
         this.currency, this.currencyDisplay
       );
     }
+
+    if (this.noAutoWidth !== undefined && this.minlength !== undefined
+      && this.default !== undefined && this.placeholder !== undefined
+      && this.formatNumber !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+      && this.alwaysSign !== undefined
+    ) {
+      this._computeMinWidth();
+    }
   }
   @Watch('maximumFractionDigits')
   maximumFractionDigitsChanged() {
@@ -273,6 +328,9 @@ export class NumberInputComponent {
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
         this.currency, this.currencyDisplay
       );
+    }
+    if (this.minimumFractionDigits !== undefined && this.noClamp !== undefined) {
+      this.maximumFractionDigits = this._computeMaximumFractionDigits(this.minimumFractionDigits, this.noClamp);
     }
   }
   @Watch('minimumSignificantDigits')
@@ -334,6 +392,17 @@ export class NumberInputComponent {
     if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
       this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
     }
+
+    if (
+      this.autoPadding !== undefined && this.padLength !== undefined
+      && this.default !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this._step !== undefined && this.numberStyle !== undefined
+    ) {
+      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+      );
+    }
   }
   @Watch('currency')
   currencyChanged() {
@@ -391,8 +460,24 @@ export class NumberInputComponent {
     this._defaultChanged(this.default);
 
     if (this.noAutoWidth !== undefined && this.minlength !== undefined
-      && this.default !== undefined && this.placeholder !== undefined) {
+      && this.default !== undefined && this.placeholder !== undefined
+      && this.formatNumber !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+      && this.alwaysSign !== undefined
+    ) {
       this._computeMinWidth();
+    }
+
+    if (
+      this.autoPadding !== undefined && this.padLength !== undefined
+      && this.default !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this._step !== undefined && this.numberStyle !== undefined
+    ) {
+      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+      );
     }
   }
 
@@ -400,21 +485,36 @@ export class NumberInputComponent {
   @Watch('noAutoWidth')
   noAutoWidthChanged() {
     if (this.noAutoWidth !== undefined && this.minlength !== undefined
-      && this.default !== undefined && this.placeholder !== undefined) {
+      && this.default !== undefined && this.placeholder !== undefined
+      && this.formatNumber !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+      && this.alwaysSign !== undefined
+    ) {
       this._computeMinWidth();
     }
   }
   @Watch('minlength')
   minlengthChanged() {
     if (this.noAutoWidth !== undefined && this.minlength !== undefined
-      && this.default !== undefined && this.placeholder !== undefined) {
+      && this.default !== undefined && this.placeholder !== undefined
+      && this.formatNumber !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+      && this.alwaysSign !== undefined
+    ) {
       this._computeMinWidth();
     }
   }
   @Watch('placeholder')
   placeholderChanged() {
     if (this.noAutoWidth !== undefined && this.minlength !== undefined
-      && this.default !== undefined && this.placeholder !== undefined) {
+      && this.default !== undefined && this.placeholder !== undefined
+      && this.formatNumber !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+      && this.alwaysSign !== undefined
+    ) {
       this._computeMinWidth();
     }
   }
@@ -451,6 +551,9 @@ export class NumberInputComponent {
   @Watch('noClamp')
   noClampChanged() {
     this._updateValue();
+    if (this.minimumFractionDigits !== undefined && this.noClamp !== undefined) {
+      this.maximumFractionDigits = this._computeMaximumFractionDigits(this.minimumFractionDigits, this.noClamp);
+    }
   }
 
   @Watch('min')
@@ -462,6 +565,27 @@ export class NumberInputComponent {
     if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
       this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
     }
+
+    if (
+      this.autoPadding !== undefined && this.padLength !== undefined
+      && this.default !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this._step !== undefined && this.numberStyle !== undefined
+    ) {
+      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+      );
+    }
+
+    if (this.noAutoWidth !== undefined && this.minlength !== undefined
+      && this.default !== undefined && this.placeholder !== undefined
+      && this.formatNumber !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+      && this.alwaysSign !== undefined
+    ) {
+      this._computeMinWidth();
+    }
   }
   @Watch('max')
   maxChanged() {
@@ -471,6 +595,27 @@ export class NumberInputComponent {
 
     if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
       this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
+    }
+
+    if (
+      this.autoPadding !== undefined && this.padLength !== undefined
+      && this.default !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this._step !== undefined && this.numberStyle !== undefined
+    ) {
+      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+      );
+    }
+
+    if (this.noAutoWidth !== undefined && this.minlength !== undefined
+      && this.default !== undefined && this.placeholder !== undefined
+      && this.formatNumber !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+      && this.alwaysSign !== undefined
+    ) {
+      this._computeMinWidth();
     }
   }
 
@@ -493,6 +638,17 @@ export class NumberInputComponent {
     if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
       this._type = this._computeType();
     }
+    this._updateValue();
+
+    if (this.noAutoWidth !== undefined && this.minlength !== undefined
+      && this.default !== undefined && this.placeholder !== undefined
+      && this.formatNumber !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+      && this.alwaysSign !== undefined
+    ) {
+      this._computeMinWidth();
+    }
   }
   @Watch('parseNumber')
   parseNumberChanged() {
@@ -505,6 +661,67 @@ export class NumberInputComponent {
   underscorestepChanged() {
     if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
       this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
+    }
+
+    if (
+      this.autoPadding !== undefined && this.padLength !== undefined
+      && this.default !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this._step !== undefined && this.numberStyle !== undefined
+    ) {
+      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+      );
+    }
+  }
+
+  @Watch('autoPadding')
+  autoPaddingChanged() {
+    if (
+      this.autoPadding !== undefined && this.padLength !== undefined
+      && this.default !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this._step !== undefined && this.numberStyle !== undefined
+    ) {
+      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+      );
+    }
+  }
+  @Watch('padLength')
+  padLengthChanged() {
+    if (
+      this.autoPadding !== undefined && this.padLength !== undefined
+      && this.default !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this._step !== undefined && this.numberStyle !== undefined
+    ) {
+      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+      );
+    }
+  }
+  @Watch('startAt')
+  startAtChanged() {
+    if (
+      this.autoPadding !== undefined && this.padLength !== undefined
+      && this.default !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this._step !== undefined && this.numberStyle !== undefined
+    ) {
+      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+      );
+    }
+
+    if (this.noAutoWidth !== undefined && this.minlength !== undefined
+      && this.default !== undefined && this.placeholder !== undefined
+      && this.formatNumber !== undefined && this.startAt !== undefined
+      && this.min !== undefined && this.max !== undefined
+      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+      && this.alwaysSign !== undefined
+    ) {
+      this._computeMinWidth();
     }
   }
 
@@ -669,6 +886,7 @@ export class NumberInputComponent {
     }
   }
 
+  @Method()
   validate() {
     return !this.invalid;
   }
@@ -700,6 +918,7 @@ export class NumberInputComponent {
     this.el.querySelector('#input').removeEventListener('keydown', this._checkKeycode, false);
   }
 
+  @Method()
   focusMethod() {
     this.el.querySelector('#input')['focus']();
     if (this.el.querySelector('#input')['scrollIntoViewIfNeeded']) {
@@ -707,6 +926,7 @@ export class NumberInputComponent {
     }
   }
 
+  @Method()
   blurMethod() {
     this._checkInput();
     this.el.querySelector('#input')['blur']();
@@ -737,7 +957,7 @@ export class NumberInputComponent {
         break;
       case 27: // esc
         this._updateValue();
-        this.el.querySelector('#input').blur();
+        this.el.querySelector('#input')['blur']();
         break;
         case 38: // up
         e.preventDefault();
@@ -836,6 +1056,7 @@ export class NumberInputComponent {
     }, 0);
   }
 
+  @Method()
   resize() {
     if (!this._minWidthString || this.hidden || this._minSizeJob) {
       return;
@@ -1054,6 +1275,17 @@ export class NumberInputComponent {
       return 20;
     }
     return minimumFractionDigits;
+  }
+
+  // TODO: confirm these
+  private increase() {
+    this.value = this.value ? this.value + this._step : this.startAt;
+    this.input = this.formatNumber(this.value);
+  }
+
+  private decrease() {
+    this.value = this.value ? this.value - this._step : this.startAt;
+    this.input = this.formatNumber(this.value);
   }
 
   render() {

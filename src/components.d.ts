@@ -344,11 +344,14 @@ declare global {
 
     interface CwcNumberInput {
       'alwaysSign': boolean;
+      'autoPadding': boolean;
       'autoResize': boolean;
+      'blurMethod': () => void;
       'currency': string;
       'currencyDisplay': string;
       'default': number;
       'disabled': boolean;
+      'focusMethod': () => void;
       'formatNumber': Function;
       'hidden': boolean;
       'input': string;
@@ -366,18 +369,22 @@ declare global {
       'noAutoWidth': boolean;
       'noClamp': boolean;
       'numberStyle': string;
+      'padLength': number;
       'parseNumber': Function;
       'placeholder': string;
       'propertyForValue': string;
       'required': boolean;
+      'resize': () => void;
       'saturate': boolean;
+      'startAt': number;
       'step': number;
       'stepMod': number;
       'type': string;
       'unit': string;
       'unitSeparator': string;
       'useGrouping': boolean;
-      'value': Object;
+      'validate': () => boolean;
+      'value': number;
       'valueAsNumber': number;
     }
 
@@ -1855,6 +1862,7 @@ declare global {
 
     export interface CwcNumberInputAttributes extends HTMLAttributes {
       'alwaysSign'?: boolean;
+      'autoPadding'?: boolean;
       'autoResize'?: boolean;
       'currency'?: string;
       'currencyDisplay'?: string;
@@ -1877,18 +1885,20 @@ declare global {
       'noAutoWidth'?: boolean;
       'noClamp'?: boolean;
       'numberStyle'?: string;
+      'padLength'?: number;
       'parseNumber'?: Function;
       'placeholder'?: string;
       'propertyForValue'?: string;
       'required'?: boolean;
       'saturate'?: boolean;
+      'startAt'?: number;
       'step'?: number;
       'stepMod'?: number;
       'type'?: string;
       'unit'?: string;
       'unitSeparator'?: string;
       'useGrouping'?: boolean;
-      'value'?: Object;
+      'value'?: number;
       'valueAsNumber'?: number;
     }
 

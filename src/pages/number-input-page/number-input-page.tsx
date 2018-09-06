@@ -10,8 +10,7 @@ export class NumberInputPage {
         return (
           <div>
             <cwc-number-input
-            // required={true}
-            // step={0.001} min={-1} max={1} placeholder="0" startAt={0}
+            step={0.001} min={-1} max={1} placeholder="0.000" startAt={0}
             ></cwc-number-input>
           </div>
         );
