@@ -376,6 +376,7 @@ declare global {
       'required': boolean;
       'resize': () => void;
       'saturate': boolean;
+      'separators': Object;
       'startAt': number;
       'step': number;
       'stepMod': number;
@@ -1891,6 +1892,7 @@ declare global {
       'propertyForValue'?: string;
       'required'?: boolean;
       'saturate'?: boolean;
+      'separators'?: Object;
       'startAt'?: number;
       'step'?: number;
       'stepMod'?: number;

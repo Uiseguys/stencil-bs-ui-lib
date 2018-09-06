@@ -28,7 +28,7 @@ export class NumberInputComponent {
   @Prop({ mutable: true }) formatNumber: Function;
   @Prop({ mutable: true }) parseNumber: Function;
 
-  @State() separators: Object = { decimal: null, grouping: null };
+  @Prop({ mutable: true }) separators: Object = { decimal: null, grouping: null };
 
   @State() _numberOptions: Object;
   _regExpNotInNumber: RegExp = /[^\d\-+.e]/g;
