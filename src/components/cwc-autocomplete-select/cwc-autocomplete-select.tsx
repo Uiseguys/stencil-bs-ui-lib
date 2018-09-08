@@ -25,16 +25,17 @@ import get from 'lodash/get';
 export class CwcAutocompleteSelect {
   retainedInitialValues: any[] = [];
   @Prop() id: string;
+  @Prop() value: any[] = [];
   @Prop() label: string;
+  @Prop() placeholder = 'Search something';
+
+  @Prop() data: any[] = [];
+  @Prop() searchKey: string;
+  @Prop() itemAs: string = 'item';
+  @Prop() template: string;
 
   @Prop() minSearchLength = 1;
-  @Prop() data: any[] = [];
-  @Prop() value: any[] = [];
-  @Prop() itemAs: string = 'item';
   @Prop() idValue: string = 'multiselect-' + Math.floor(1000 + Math.random() * 9000) + new Date().getUTCMilliseconds();
-  @Prop() searchKey: string;
-  @Prop() template: string;
-  @Prop() placeholder = 'Search something';
 
   @State() filterValue: string = '';
   @State() optionsShown = false;
@@ -51,7 +52,7 @@ export class CwcAutocompleteSelect {
   @Element() el: HTMLElement;
 
   @Event() multiselectOnSubmit: EventEmitter;
-  @Event() postValue: EventEmitter;
+  @Event() onChange: EventEmitter;
   @Event() textChange: EventEmitter;
 
   @Listen('destroy')
@@ -156,10 +157,9 @@ export class CwcAutocompleteSelect {
     this.results = this.results.filter((_, i) => i !== index);
     this.multiselectOnSubmit.emit(this.results);
 
-    this.postValue.emit({
+    this.onChange.emit({
       id: this.id,
-      value: this.results.length ? this.results : null,
-      type: 'autocomplete'
+      value: this.results.length ? this.results : null
     });
   }
 
@@ -188,10 +188,9 @@ export class CwcAutocompleteSelect {
 
     this.multiselectOnSubmit.emit(this.results);
 
-    this.postValue.emit({
+    this.onChange.emit({
       id: this.id,
-      value: this.results,
-      type: 'autocomplete'
+      value: this.results
     });
   }
 
