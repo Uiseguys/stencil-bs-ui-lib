@@ -3,171 +3,165 @@ import DateRangePicker from 'tiny-date-picker/dist/date-range-picker';
 import moment from 'moment';
 
 @Component({
-    tag: 'cwc-datepicker',
-    styleUrls: ["../../../node_modules/tiny-date-picker/tiny-date-picker.css",
-        "../../../node_modules/tiny-date-picker/date-range-picker.css",
-        'cwc-datepicker.scss'
-    ]
+  tag: 'cwc-datepicker',
+  styleUrls: ["../../../node_modules/tiny-date-picker/tiny-date-picker.css",
+    "../../../node_modules/tiny-date-picker/date-range-picker.css",
+    'cwc-datepicker.scss'
+  ]
 })
 export class CwcDatepicker {
-    @Prop() id: string;
-    @Prop() for: string;
-    @Prop() label: string;
+  @Prop() id: string;
+  @Prop() label: string;
 
-    @Prop() startDate: string;
-    @Prop() endDate: string;
+  @Prop() startDate: string;
+  @Prop() endDate: string;
 
-    @Prop() lang: string = 'en';
-    @Prop() format: string = 'MM.DD.YYYY'
+  @Prop() lang: string = 'en';
+  @Prop() format: string = 'MM.DD.YYYY'
 
-    @Event() statechange: EventEmitter;
-    @Event() postValue: EventEmitter;
+  @Event() statechange: EventEmitter;
+  @Event() onChange: EventEmitter;
 
-    @Element() element: HTMLInputElement;
-    @Element() el: HTMLElement;
-    container: HTMLElement;
+  @Element() element: HTMLInputElement;
+  @Element() el: HTMLElement;
+  container: HTMLElement;
 
-    langConstants = {
-
-        en: {
-            days: 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
-            months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_'),
-            today: 'Today',
-            clear: 'Clear',
-            close: 'Close',
-            startDate: 'Start date',
-            endDate: 'End date'
-        },
-        de: {
-            days: 'So._Mo._Di._Mi._Do._Fr._Sa.'.split('_'),
-            months: 'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'.split('_'),
-            today: 'Heute',
-            clear: 'Klar',
-            close: 'Schließen',
-            startDate: 'Frühestens',
-            endDate: 'Spätestens'
-
-        }
+  langConstants = {
+    en: {
+      days: 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
+      months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_'),
+      today: 'Today',
+      clear: 'Clear',
+      close: 'Close',
+      startDate: 'Start date',
+      endDate: 'End date'
+    },
+    de: {
+      days: 'So._Mo._Di._Mi._Do._Fr._Sa.'.split('_'),
+      months: 'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'.split('_'),
+      today: 'Heute',
+      clear: 'Klar',
+      close: 'Schließen',
+      startDate: 'Frühestens',
+      endDate: 'Spätestens'
     }
+  }
 
-    rangeInputElement: HTMLInputElement
-    dp: any
-    initIndex: number
-    range
+  rangeInputElement: HTMLInputElement
+  dp: any
+  initIndex: number
+  range
 
-    componentDidLoad() {
-        this.container = this.el.querySelector('.ex-inputs-picker');
-        this.rangeInputElement = this.el.querySelector('.ex-input-daterange');
-        const self = this;
-        this.initIndex = 0;
+  componentDidLoad() {
+    this.container = this.el.querySelector('.ex-inputs-picker');
+    this.rangeInputElement = this.el.querySelector('.ex-input-daterange');
+    const self = this;
+    this.initIndex = 0;
 
-        this.dp = DateRangePicker.DateRangePicker(this.container, {
-            startOpts: {
-                lang: this.langConstants[this.lang] || this.langConstants['en']
-            }
-        }).on('statechange', function (_, rp) {
-            // Update the inputs when the state changes
-            self.range = rp.state;
+    this.dp = DateRangePicker.DateRangePicker(this.container, {
+      startOpts: {
+        lang: this.langConstants[this.lang] || this.langConstants['en']
+      }
+    }).on('statechange', function (_, rp) {
+      // Update the inputs when the state changes
+      self.range = rp.state;
 
-            self.rangeInputElement.value = self.formInputValueString(self.range.start, self.range.end)
+      self.rangeInputElement.value = self.formInputValueString(self.range.start, self.range.end)
 
-            self.statechange.emit({
-                start: self.range.start,
-                end: self.range.end
-            });
+      self.statechange.emit({
+        start: self.range.start,
+        end: self.range.end
+      });
 
-            if (self.initIndex < 2) {
-                self.initIndex++;
-            } else {
-                self.postValue.emit({
-                    id: self.id,
-                    value: {
-                        endDate: self.range.end ? self.endDateValueString(self.range.end) : null,
-                        startDate: self.range.start ? self.startDateValueString(self.range.start) : null
-                    },
-                    type: 'date'
-                });
-            }
-        })
-
-
-        if (this.startDate) {
-
-            this.dp.setState({
-                start: new Date(this.startDate)
-            });
-        }
-        if (this.endDate) {
-            this.dp.setState({
-                end: new Date(this.endDate)
-            });
-        }
-
-        // When the inputs gain focus, show the date range picker
-        this.rangeInputElement.addEventListener('focus', () => this.showPicker());
-        this.rangeInputElement.addEventListener('change', () => {
-
-            const parsed = this.parseInputString(this.rangeInputElement.value)
-            const dateStart = new Date(parsed[0]),
-            dateEnd = new Date(parsed[1]);
-
-            this.dp.setState({
-                start: !isNaN(dateStart.getTime()) ? dateStart : '',
-                end: !isNaN(dateEnd.getTime()) ? dateEnd : ''
-            });
+      if (self.initIndex < 2) {
+        self.initIndex++;
+      } else {
+        self.onChange.emit({
+          id: self.id,
+          value: {
+            endDate: self.range.end ? self.endDateValueString(self.range.end) : null,
+            startDate: self.range.start ? self.startDateValueString(self.range.start) : null
+          }
         });
+      }
+    })
 
-        // If focus leaves the root element, it is not in the date
-        // picker or the inputs, so we should hide the date picker
-        // we do this in a setTimeout because redraws cause temporary
-        // loss of focus.
-        let previousTimeout;
-        this.el.addEventListener('focusout', function hidePicker() {
-            clearTimeout(previousTimeout);
-            previousTimeout = setTimeout(function () {
-                if (!self.el.contains(document.activeElement)) {
-                    self.container.classList.remove('ex-inputs-picker-visible');
-                }
-            }, 10);
-        });
-    }
 
-    private parseInputString(value: string): string[] {
-        const values = value.split('-')
-        return values.map(val => val.trim())
-    }
+      if (this.startDate) {
 
-    private formInputValueString(startDate, endDate): string {
-        return `${this.startDateValueString(startDate)} - ${this.endDateValueString(endDate)}`;
-    }
+          this.dp.setState({
+              start: new Date(this.startDate)
+          });
+      }
+      if (this.endDate) {
+          this.dp.setState({
+              end: new Date(this.endDate)
+          });
+      }
 
-    private startDateValueString(startDate) {
-        return startDate ? moment(startDate).format(this.format) : this.langConstants[this.lang].startDate;
-    }
+      // When the inputs gain focus, show the date range picker
+      this.rangeInputElement.addEventListener('focus', () => this.showPicker());
+      this.rangeInputElement.addEventListener('change', () => {
 
-    private endDateValueString(endDate) {
-        return endDate ? moment(endDate).format(this.format) : this.langConstants[this.lang].endDate;
-    }
+          const parsed = this.parseInputString(this.rangeInputElement.value)
+          const dateStart = new Date(parsed[0]),
+          dateEnd = new Date(parsed[1]);
 
-    private showPicker() {
-        this.container.classList.add('ex-inputs-picker-visible');
-    }
+          this.dp.setState({
+              start: !isNaN(dateStart.getTime()) ? dateStart : '',
+              end: !isNaN(dateEnd.getTime()) ? dateEnd : ''
+          });
+      });
 
-    render() {
-        return (
-            <div>
-                <div class="form-group ex-inputs">
-                    <label class="control-label">{this.label}</label>
-                    <input
-                        id={this.id}
-                        type={this.for}
-                        class="form-control ex-input-daterange"
-                        placeholder={`${this.langConstants[this.lang].startDate} - ${this.langConstants[this.lang].endDate}`}
-                    />
-                    <div class="ex-inputs-picker"></div>
-                </div>
-            </div>
-        )
-    }
+      // If focus leaves the root element, it is not in the date
+      // picker or the inputs, so we should hide the date picker
+      // we do this in a setTimeout because redraws cause temporary
+      // loss of focus.
+      let previousTimeout;
+      this.el.addEventListener('focusout', function hidePicker() {
+          clearTimeout(previousTimeout);
+          previousTimeout = setTimeout(function () {
+              if (!self.el.contains(document.activeElement)) {
+                  self.container.classList.remove('ex-inputs-picker-visible');
+              }
+          }, 10);
+      });
+  }
 
+  private parseInputString(value: string): string[] {
+    const values = value.split('-')
+    return values.map(val => val.trim())
+  }
+
+  private formInputValueString(startDate, endDate): string {
+    return `${this.startDateValueString(startDate)} - ${this.endDateValueString(endDate)}`;
+  }
+
+  private startDateValueString(startDate) {
+    return startDate ? moment(startDate).format(this.format) : this.langConstants[this.lang].startDate;
+  }
+
+  private endDateValueString(endDate) {
+    return endDate ? moment(endDate).format(this.format) : this.langConstants[this.lang].endDate;
+  }
+
+  private showPicker() {
+    this.container.classList.add('ex-inputs-picker-visible');
+  }
+
+  render() {
+    return (
+      <div>
+        <div class="form-group ex-inputs">
+          <label class="control-label">{this.label}</label>
+          <input
+            id={this.id}
+            class="form-control ex-input-daterange"
+            placeholder={`${this.langConstants[this.lang].startDate} - ${this.langConstants[this.lang].endDate}`}
+          />
+          <div class="ex-inputs-picker"></div>
+        </div>
+      </div>
+    )
+  }
 }
