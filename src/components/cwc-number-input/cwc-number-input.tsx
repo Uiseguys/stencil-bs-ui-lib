@@ -172,9 +172,9 @@ export class NumberInputComponent {
     //   && this.default !== undefined && this.placeholder !== undefined) {
     //   this._computeMinWidth();
     // }
-    if (this._minWidthString !== undefined && this.hidden !== undefined) {
+    // if (this._minWidthString !== undefined && this.hidden !== undefined) {
       this.resize();
-    }
+    // }
     this._inputChanged();
 
     // range
@@ -193,9 +193,9 @@ export class NumberInputComponent {
       this._type = this._computeType();
       this.type = this._type;
     // }
-    if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
+    // if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
       this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
-    }
+    // }
     // if (this.minimumFractionDigits !== undefined && this.noClamp !== undefined) {
       this.maximumFractionDigits = this._computeMaximumFractionDigits(this.minimumFractionDigits, this.noClamp);
     // }
@@ -209,15 +209,15 @@ export class NumberInputComponent {
         this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
       );
     // }
-    if (this.noAutoWidth !== undefined && this.minlength !== undefined
-      && this.default !== undefined && this.placeholder !== undefined
-      && this.formatNumber !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-      && this.alwaysSign !== undefined
-    ) {
+    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
+    //   && this.default !== undefined && this.placeholder !== undefined
+    //   && this.formatNumber !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+    //   && this.alwaysSign !== undefined
+    // ) {
       this._computeMinWidth();
-    }
+    // }
 
     // transferred from intl num format
     // this._handleLocale(this.locale);
@@ -239,21 +239,21 @@ export class NumberInputComponent {
     // }
 
     // transferred from range
-    if (this.valueAsNumber === undefined && !isNaN(this.default)) {
+    // if (this.valueAsNumber === undefined && !isNaN(this.default)) {
       this.valueAsNumber = this.default;
-    }
-    if (this.min !== undefined && this.max !== undefined) {
+    // }
+    // if (this.min !== undefined && this.max !== undefined) {
       this._minMaxChanged(this.min, this.max);
-    }
-    if (this.step !== undefined && this.stepMod !== undefined) {
+    // }
+    // if (this.step !== undefined && this.stepMod !== undefined) {
       this._stepChanged(this.step, this.stepMod);
-    }
+    // }
 
     // transferred from form element
     this.el['tabindex'] = 0;
-    if (this.required !== undefined && this.value !== undefined) {
+    // if (this.required !== undefined && this.value !== undefined) {
       this._computeInvalid(this.required, this.value);
-    }
+    // }
     this._computeValueIsSet(this.value);
     this._defaultChanged(this.default);
   }
@@ -266,213 +266,213 @@ export class NumberInputComponent {
 
   @Watch('separators')
   separatorsChanged() {
-    if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
+    // if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
       this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
-    }
+    // }
   }
 
   @Watch('alwaysSign')
   alwaysSignChanged() {
-    if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
+    // if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
       this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
-    }
-    if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
+    // }
+    // if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
       this._type = this._computeType();
-    }
+    // }
     this._updateValue();
 
-    if (this.noAutoWidth !== undefined && this.minlength !== undefined
-      && this.default !== undefined && this.placeholder !== undefined
-      && this.formatNumber !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-      && this.alwaysSign !== undefined
-    ) {
+    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
+    //   && this.default !== undefined && this.placeholder !== undefined
+    //   && this.formatNumber !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+    //   && this.alwaysSign !== undefined
+    // ) {
       this._computeMinWidth();
-    }
+    // }
   }
 
   @Watch('unitSeparator')
   unitSeparatorChanged() {
-    if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
+    // if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
       this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
-    }
+    // }
   }
 
   @Watch('_numberOptions')
   _numberOptionsChanged() {
-    if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
+    // if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
       this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
-    }
+    // }
   }
 
   @Watch('unit')
   unitChanged() {
-    if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
+    // if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
       this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
-    }
+    // }
   }
 
   @Watch('minimumIntegerDigits')
   minimumIntegerDigitsChanged() {
-    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
+    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
         this.currency, this.currencyDisplay
       );
-    }
+    // }
 
-    if (this.noAutoWidth !== undefined && this.minlength !== undefined
-      && this.default !== undefined && this.placeholder !== undefined
-      && this.formatNumber !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-      && this.alwaysSign !== undefined
-    ) {
+    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
+    //   && this.default !== undefined && this.placeholder !== undefined
+    //   && this.formatNumber !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+    //   && this.alwaysSign !== undefined
+    // ) {
       this._computeMinWidth();
-    }
+    // }
   }
   @Watch('minimumFractionDigits')
   minimumFractionDigitsChanged() {
-    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
+    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
         this.currency, this.currencyDisplay
       );
-    }
+    // }
 
-    if (this.noAutoWidth !== undefined && this.minlength !== undefined
-      && this.default !== undefined && this.placeholder !== undefined
-      && this.formatNumber !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-      && this.alwaysSign !== undefined
-    ) {
+    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
+    //   && this.default !== undefined && this.placeholder !== undefined
+    //   && this.formatNumber !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+    //   && this.alwaysSign !== undefined
+    // ) {
       this._computeMinWidth();
-    }
+    // }
   }
   @Watch('maximumFractionDigits')
   maximumFractionDigitsChanged() {
-    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
+    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
         this.currency, this.currencyDisplay
       );
-    }
-    if (this.minimumFractionDigits !== undefined && this.noClamp !== undefined) {
+    // }
+    // if (this.minimumFractionDigits !== undefined && this.noClamp !== undefined) {
       this.maximumFractionDigits = this._computeMaximumFractionDigits(this.minimumFractionDigits, this.noClamp);
-    }
+    // }
   }
   @Watch('minimumSignificantDigits')
   minimumSignificantDigitsChanged() {
-    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
+    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
         this.currency, this.currencyDisplay
       );
-    }
+    // }
   }
   @Watch('maximumSignificantDigits')
   maximumSignificantDigitsChanged() {
-    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
+    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
         this.currency, this.currencyDisplay
       );
-    }
+    // }
   }
   @Watch('useGrouping')
   useGroupingChanged() {
-    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
+    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
         this.currency, this.currencyDisplay
       );
-    }
+    // }
 
-    if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
+    // if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
       this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
-    }
+    // }
   }
   @Watch('numberStyle')
   numberStyleChanged() {
-    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
+    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
         this.currency, this.currencyDisplay
       );
-    }
+    // }
 
-    if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
+    // if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
       this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
-    }
+    // }
 
-    if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
+    // if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
       this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
-    }
+    // }
 
-    if (
-      this.autoPadding !== undefined && this.padLength !== undefined
-      && this.default !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this._step !== undefined && this.numberStyle !== undefined
-    ) {
+    // if (
+    //   this.autoPadding !== undefined && this.padLength !== undefined
+    //   && this.default !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this._step !== undefined && this.numberStyle !== undefined
+    // ) {
       this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
         this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
       );
-    }
+    // }
   }
   @Watch('currency')
   currencyChanged() {
-    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
+    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
         this.currency, this.currencyDisplay
       );
-    }
+    // }
   }
   @Watch('currencyDisplay')
   currencyDisplayChanged() {
-    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
+    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
         this.currency, this.currencyDisplay
       );
-    }
+    // }
   }
 
   @Watch('locale')
   _localeChanged(locale: string) {
-    if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
+    // if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
       this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
-    }
+    // }
 
     this._handleLocale(locale);
   }
@@ -481,16 +481,16 @@ export class NumberInputComponent {
 
   @Watch('required')
   requiredChanged() {
-    if (this.required !== undefined && this.value !== undefined) {
+    // if (this.required !== undefined && this.value !== undefined) {
       this._computeInvalid(this.required, this.value);
-    }
+    // }
   }
 
   @Watch('value')
   valueChanged() {
-    if (this.required !== undefined && this.value !== undefined) {
+    // if (this.required !== undefined && this.value !== undefined) {
       this._computeInvalid(this.required, this.value);
-    }
+    // }
     this._computeValueIsSet(this.value);
   }
 
@@ -498,77 +498,77 @@ export class NumberInputComponent {
   defaultChanged() {
     this._defaultChanged(this.default);
 
-    if (this.noAutoWidth !== undefined && this.minlength !== undefined
-      && this.default !== undefined && this.placeholder !== undefined
-      && this.formatNumber !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-      && this.alwaysSign !== undefined
-    ) {
+    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
+    //   && this.default !== undefined && this.placeholder !== undefined
+    //   && this.formatNumber !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+    //   && this.alwaysSign !== undefined
+    // ) {
       this._computeMinWidth();
-    }
+    // }
 
-    if (
-      this.autoPadding !== undefined && this.padLength !== undefined
-      && this.default !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this._step !== undefined && this.numberStyle !== undefined
-    ) {
+    // if (
+    //   this.autoPadding !== undefined && this.padLength !== undefined
+    //   && this.default !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this._step !== undefined && this.numberStyle !== undefined
+    // ) {
       this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
         this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
       );
-    }
+    // }
   }
 
   // input pattern
   @Watch('noAutoWidth')
   noAutoWidthChanged() {
-    if (this.noAutoWidth !== undefined && this.minlength !== undefined
-      && this.default !== undefined && this.placeholder !== undefined
-      && this.formatNumber !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-      && this.alwaysSign !== undefined
-    ) {
+    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
+    //   && this.default !== undefined && this.placeholder !== undefined
+    //   && this.formatNumber !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+    //   && this.alwaysSign !== undefined
+    // ) {
       this._computeMinWidth();
-    }
+    // }
   }
   @Watch('minlength')
   minlengthChanged() {
-    if (this.noAutoWidth !== undefined && this.minlength !== undefined
-      && this.default !== undefined && this.placeholder !== undefined
-      && this.formatNumber !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-      && this.alwaysSign !== undefined
-    ) {
+    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
+    //   && this.default !== undefined && this.placeholder !== undefined
+    //   && this.formatNumber !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+    //   && this.alwaysSign !== undefined
+    // ) {
       this._computeMinWidth();
-    }
+    // }
   }
   @Watch('placeholder')
   placeholderChanged() {
-    if (this.noAutoWidth !== undefined && this.minlength !== undefined
-      && this.default !== undefined && this.placeholder !== undefined
-      && this.formatNumber !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-      && this.alwaysSign !== undefined
-    ) {
+    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
+    //   && this.default !== undefined && this.placeholder !== undefined
+    //   && this.formatNumber !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+    //   && this.alwaysSign !== undefined
+    // ) {
       this._computeMinWidth();
-    }
+    // }
   }
 
   @Watch('_minWidthString')
   _minWidthStringChanged() {
-    if (this._minWidthString !== undefined && this.hidden !== undefined) {
+    // if (this._minWidthString !== undefined && this.hidden !== undefined) {
       this.resize();
-    }
+    // }
   }
   @Watch('hidden')
   hiddenChanged() {
-    if (this._minWidthString !== undefined && this.hidden !== undefined) {
+    // if (this._minWidthString !== undefined && this.hidden !== undefined) {
       this.resize();
-    }
+    // }
   }
 
   @Watch('input')
@@ -591,178 +591,178 @@ export class NumberInputComponent {
   @Watch('noClamp')
   noClampChanged() {
     this._updateValue();
-    if (this.minimumFractionDigits !== undefined && this.noClamp !== undefined) {
+    // if (this.minimumFractionDigits !== undefined && this.noClamp !== undefined) {
       this.maximumFractionDigits = this._computeMaximumFractionDigits(this.minimumFractionDigits, this.noClamp);
-    }
+    // }
   }
 
   @Watch('min')
   minChanged() {
-    if (this.min !== undefined && this.max !== undefined) {
+    // if (this.min !== undefined && this.max !== undefined) {
       this._minMaxChanged(this.min, this.max);
-    }
+    // }
 
-    if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
+    // if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
       this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
-    }
+    // }
 
-    if (
-      this.autoPadding !== undefined && this.padLength !== undefined
-      && this.default !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this._step !== undefined && this.numberStyle !== undefined
-    ) {
+    // if (
+    //   this.autoPadding !== undefined && this.padLength !== undefined
+    //   && this.default !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this._step !== undefined && this.numberStyle !== undefined
+    // ) {
       this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
         this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
       );
-    }
+    // }
 
-    if (this.noAutoWidth !== undefined && this.minlength !== undefined
-      && this.default !== undefined && this.placeholder !== undefined
-      && this.formatNumber !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-      && this.alwaysSign !== undefined
-    ) {
+    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
+    //   && this.default !== undefined && this.placeholder !== undefined
+    //   && this.formatNumber !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+    //   && this.alwaysSign !== undefined
+    // ) {
       this._computeMinWidth();
-    }
+    // }
   }
   @Watch('max')
   maxChanged() {
-    if (this.min !== undefined && this.max !== undefined) {
+    // if (this.min !== undefined && this.max !== undefined) {
       this._minMaxChanged(this.min, this.max);
-    }
+    // }
 
-    if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
+    // if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
       this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
-    }
+    // }
 
-    if (
-      this.autoPadding !== undefined && this.padLength !== undefined
-      && this.default !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this._step !== undefined && this.numberStyle !== undefined
-    ) {
+    // if (
+    //   this.autoPadding !== undefined && this.padLength !== undefined
+    //   && this.default !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this._step !== undefined && this.numberStyle !== undefined
+    // ) {
       this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
         this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
       );
-    }
+    // }
 
-    if (this.noAutoWidth !== undefined && this.minlength !== undefined
-      && this.default !== undefined && this.placeholder !== undefined
-      && this.formatNumber !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-      && this.alwaysSign !== undefined
-    ) {
+    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
+    //   && this.default !== undefined && this.placeholder !== undefined
+    //   && this.formatNumber !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+    //   && this.alwaysSign !== undefined
+    // ) {
       this._computeMinWidth();
-    }
+    // }
   }
 
   @Watch('step')
   stepChanged() {
-    if (this.step !== undefined && this.stepMod !== undefined) {
+    // if (this.step !== undefined && this.stepMod !== undefined) {
       this._stepChanged(this.step, this.stepMod);
-    }
+    // }
   }
   @Watch('stepMod')
   stepModChanged() {
-    if (this.step !== undefined && this.stepMod !== undefined) {
+    // if (this.step !== undefined && this.stepMod !== undefined) {
       this._stepChanged(this.step, this.stepMod);
-    }
+    // }
   }
 
   // number input
   @Watch('formatNumber')
   formatNumberChanged() {
-    if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
+    // if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
       this._type = this._computeType();
-    }
+    // }
     this._updateValue();
 
-    if (this.noAutoWidth !== undefined && this.minlength !== undefined
-      && this.default !== undefined && this.placeholder !== undefined
-      && this.formatNumber !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-      && this.alwaysSign !== undefined
-    ) {
+    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
+    //   && this.default !== undefined && this.placeholder !== undefined
+    //   && this.formatNumber !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+    //   && this.alwaysSign !== undefined
+    // ) {
       this._computeMinWidth();
-    }
+    // }
   }
   @Watch('parseNumber')
   parseNumberChanged() {
-    if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
+    // if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
       this._type = this._computeType();
-    }
+    // }
   }
 
   @Watch('_step')
   underscorestepChanged() {
-    if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
+    // if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
       this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
-    }
+    // }
 
-    if (
-      this.autoPadding !== undefined && this.padLength !== undefined
-      && this.default !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this._step !== undefined && this.numberStyle !== undefined
-    ) {
+    // if (
+    //   this.autoPadding !== undefined && this.padLength !== undefined
+    //   && this.default !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this._step !== undefined && this.numberStyle !== undefined
+    // ) {
       this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
         this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
       );
-    }
+    // }
   }
 
   @Watch('autoPadding')
   autoPaddingChanged() {
-    if (
-      this.autoPadding !== undefined && this.padLength !== undefined
-      && this.default !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this._step !== undefined && this.numberStyle !== undefined
-    ) {
+    // if (
+    //   this.autoPadding !== undefined && this.padLength !== undefined
+    //   && this.default !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this._step !== undefined && this.numberStyle !== undefined
+    // ) {
       this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
         this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
       );
-    }
+    // }
   }
   @Watch('padLength')
   padLengthChanged() {
-    if (
-      this.autoPadding !== undefined && this.padLength !== undefined
-      && this.default !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this._step !== undefined && this.numberStyle !== undefined
-    ) {
+    // if (
+    //   this.autoPadding !== undefined && this.padLength !== undefined
+    //   && this.default !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this._step !== undefined && this.numberStyle !== undefined
+    // ) {
       this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
         this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
       );
-    }
+    // }
   }
   @Watch('startAt')
   startAtChanged() {
-    if (
-      this.autoPadding !== undefined && this.padLength !== undefined
-      && this.default !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this._step !== undefined && this.numberStyle !== undefined
-    ) {
+    // if (
+    //   this.autoPadding !== undefined && this.padLength !== undefined
+    //   && this.default !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this._step !== undefined && this.numberStyle !== undefined
+    // ) {
       this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
         this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
       );
-    }
+    // }
 
-    if (this.noAutoWidth !== undefined && this.minlength !== undefined
-      && this.default !== undefined && this.placeholder !== undefined
-      && this.formatNumber !== undefined && this.startAt !== undefined
-      && this.min !== undefined && this.max !== undefined
-      && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-      && this.alwaysSign !== undefined
-    ) {
+    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
+    //   && this.default !== undefined && this.placeholder !== undefined
+    //   && this.formatNumber !== undefined && this.startAt !== undefined
+    //   && this.min !== undefined && this.max !== undefined
+    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
+    //   && this.alwaysSign !== undefined
+    // ) {
       this._computeMinWidth();
-    }
+    // }
   }
 
   // intl number format

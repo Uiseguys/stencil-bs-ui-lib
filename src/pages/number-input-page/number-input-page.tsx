@@ -12,7 +12,7 @@ export class NumberInputPage {
             <cwc-number-input
             step={0.001} min={-1} max={1} placeholder="0.000" startAt={0}
             ></cwc-number-input>
-
+            <br/>
             <cwc-number-input
             class="various" noClamp default={1}
             step={0.01} min={-1} max={20000}
@@ -21,7 +21,7 @@ export class NumberInputPage {
             locale="en" numberStyle="currency"
             currency="EUR" autoPadding={true}
             ></cwc-number-input>
-
+            <br/>
             <cwc-number-input
             class="saturate" padLength={4}
             saturate placeholder="0000"
