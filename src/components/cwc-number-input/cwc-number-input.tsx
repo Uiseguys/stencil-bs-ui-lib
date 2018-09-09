@@ -222,15 +222,15 @@ export class NumberInputComponent {
     // transferred
     // this._handleLocale(this.locale);
 
-    if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
+    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
+    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
+    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
       this._numberOptions = this._computeNumberOptions(
         this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
         this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
         this.currency, this.currencyDisplay
       );
-    }
+    // }
     // if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
       this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
     // }
@@ -989,6 +989,12 @@ export class NumberInputComponent {
         e.stopPropagation();
         this.decrease();
         break;
+      default:
+        setTimeout(() => {
+          this.input = e.target.value;
+          this._checkInput();
+          this.value = this.valueAsNumber;
+        }, 0);
     }
   }
 
@@ -1299,13 +1305,19 @@ export class NumberInputComponent {
 
   // TODO: confirm these
   private increase() {
-    this.value = this.value !== undefined ? this.value + this._step : this.startAt;
-    this.input = this.formatNumber(this.value);
+    const value = this.value !== undefined ? Math.round((this.value + this._step) * 1e12) / 1e12 : this.startAt;
+    this.valueAsNumber = value;
+    this.input = this.formatNumber(value);
+    this._checkInput();
+    this.value = this.valueAsNumber;
   }
 
   private decrease() {
-    this.value = this.value !== undefined ? this.value - this._step : this.startAt;
-    this.input = this.formatNumber(this.value);
+    const value = this.value !== undefined ? Math.round((this.value - this._step) * 1e12) / 1e12 : this.startAt;
+    this.valueAsNumber = value;
+    this.input = this.formatNumber(value);
+    this._checkInput();
+    this.value = this.valueAsNumber;
   }
 
   render() {
