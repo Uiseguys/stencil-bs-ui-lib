@@ -18,9 +18,15 @@ export class NumberInputPage {
             step={0.01} min={-1} max={20000}
             unit="cm" startAt={1}
             useGrouping={true} alwaysSign={true}
-            locale="it" numberStyle="currency"
+            locale="en" numberStyle="currency"
             currency="EUR" autoPadding={true}
             ></cwc-number-input>
+
+            <number-input
+            class="saturate" padLength={4}
+            saturate placeholder="0000"
+            min={-10} step={100} max={9999.11} default={100}
+            ></number-input>
           </div>
         );
     }

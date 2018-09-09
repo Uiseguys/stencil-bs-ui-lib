@@ -1326,18 +1326,16 @@ export class NumberInputComponent {
   // TODO: confirm these
   private increase() {
     const value = this.value !== undefined ? Math.round((this.value + this._step) * 1e12) / 1e12 : this.startAt;
-    this.valueAsNumber = value;
+    // this.valueAsNumber = value;
     this.input = this.formatNumber(value);
     this._checkInput();
-    // this.value = this.valueAsNumber;
   }
 
   private decrease() {
     const value = this.value !== undefined ? Math.round((this.value - this._step) * 1e12) / 1e12 : this.startAt;
-    this.valueAsNumber = value;
+    // this.valueAsNumber = value;
     this.input = this.formatNumber(value);
     this._checkInput();
-    // this.value = this.valueAsNumber;
   }
 
   render() {
