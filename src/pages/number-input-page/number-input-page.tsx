@@ -27,6 +27,10 @@ export class NumberInputPage {
             saturate placeholder="0000"
             min={-10} step={100} max={9999.11} default={100}
             ></cwc-number-input>
+            <br/>
+            <cwc-number-input class="decimal" min={-23}
+            step={1.15} max={45} padLength={4} placeholder="- -"
+            ></cwc-number-input>
           </div>
         );
     }
