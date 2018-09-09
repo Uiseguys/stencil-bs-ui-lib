@@ -22,11 +22,11 @@ export class NumberInputPage {
             currency="EUR" autoPadding={true}
             ></cwc-number-input>
 
-            <number-input
+            <cwc-number-input
             class="saturate" padLength={4}
             saturate placeholder="0000"
             min={-10} step={100} max={9999.11} default={100}
-            ></number-input>
+            ></cwc-number-input>
           </div>
         );
     }
