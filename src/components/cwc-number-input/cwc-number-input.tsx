@@ -154,12 +154,12 @@ export class NumberInputComponent {
     // }
 
     // form element
-    this.el['tabindex'] = 0;
-    if (this.required !== undefined && this.value !== undefined) {
-      this._computeInvalid(this.required, this.value);
-    }
-    this._computeValueIsSet(this.value);
-    this._defaultChanged(this.default);
+    // this.el['tabindex'] = 0;
+    // if (this.required !== undefined && this.value !== undefined) {
+    //   this._computeInvalid(this.required, this.value);
+    // }
+    // this._computeValueIsSet(this.value);
+    // this._defaultChanged(this.default);
 
     // input pattern
     this.focusMethod = this.focusMethod.bind(this);
@@ -178,15 +178,15 @@ export class NumberInputComponent {
     this._inputChanged();
 
     // range
-    if (this.valueAsNumber === undefined && !isNaN(this.default)) {
-      this.valueAsNumber = this.default;
-    }
-    if (this.min !== undefined && this.max !== undefined) {
-      this._minMaxChanged(this.min, this.max);
-    }
-    if (this.step !== undefined && this.stepMod !== undefined) {
-      this._stepChanged(this.step, this.stepMod);
-    }
+    // if (this.valueAsNumber === undefined && !isNaN(this.default)) {
+    //   this.valueAsNumber = this.default;
+    // }
+    // if (this.min !== undefined && this.max !== undefined) {
+    //   this._minMaxChanged(this.min, this.max);
+    // }
+    // if (this.step !== undefined && this.stepMod !== undefined) {
+    //   this._stepChanged(this.step, this.stepMod);
+    // }
 
     // number input
     // if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
@@ -219,7 +219,7 @@ export class NumberInputComponent {
       this._computeMinWidth();
     }
 
-    // transferred
+    // transferred from intl num format
     // this._handleLocale(this.locale);
 
     // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
@@ -237,6 +237,25 @@ export class NumberInputComponent {
     // if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
       this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
     // }
+
+    // transferred from range
+    if (this.valueAsNumber === undefined && !isNaN(this.default)) {
+      this.valueAsNumber = this.default;
+    }
+    if (this.min !== undefined && this.max !== undefined) {
+      this._minMaxChanged(this.min, this.max);
+    }
+    if (this.step !== undefined && this.stepMod !== undefined) {
+      this._stepChanged(this.step, this.stepMod);
+    }
+
+    // transferred from form element
+    this.el['tabindex'] = 0;
+    if (this.required !== undefined && this.value !== undefined) {
+      this._computeInvalid(this.required, this.value);
+    }
+    this._computeValueIsSet(this.value);
+    this._defaultChanged(this.default);
   }
 
   componentDidUnload() {
@@ -561,6 +580,7 @@ export class NumberInputComponent {
   @Watch('valueAsNumber')
   valueAsNumberChanged(newVal: number, oldVal: number) {
     this._valueAsNumberChanged(newVal, oldVal);
+    this.value = this.valueAsNumber;
   }
 
   @Watch('saturate')
@@ -1309,7 +1329,7 @@ export class NumberInputComponent {
     this.valueAsNumber = value;
     this.input = this.formatNumber(value);
     this._checkInput();
-    this.value = this.valueAsNumber;
+    // this.value = this.valueAsNumber;
   }
 
   private decrease() {
@@ -1317,7 +1337,7 @@ export class NumberInputComponent {
     this.valueAsNumber = value;
     this.input = this.formatNumber(value);
     this._checkInput();
-    this.value = this.valueAsNumber;
+    // this.value = this.valueAsNumber;
   }
 
   render() {
