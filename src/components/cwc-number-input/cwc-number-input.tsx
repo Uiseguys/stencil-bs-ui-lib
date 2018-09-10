@@ -1072,24 +1072,6 @@ export class NumberInputComponent {
   }
 
   private _computeMinWidth() {
-    // if (this._minWidthComputionJob) {
-    //   clearTimeout(this._minWidthComputionJob);
-    //   this._minWidthComputionJob = null;
-    // }
-    //
-    // this._minWidthComputionJob = setTimeout(() => {
-    //   const def = this.default || '',
-    //     placeholder = this.placeholder || '',
-    //     minlength = this.minlength || 1,
-    //     charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; // to compute a random string for minlength
-    //   let minlengthString = '';
-    //   for (let i = 0; i < minlength; i++) {
-    //     minlengthString += charset.charAt(Math.floor(Math.random() * charset.length));
-    //   }
-    //   this._minWidthString = (this.noAutoWidth ? [minlengthString] : [def, minlengthString]).reduce( (acc, curr) => {
-    //     return curr.length > acc.length ? curr : acc;
-    //   }, placeholder);
-    // }, 0);
     if (this._minWidthComputionJob) {
       clearTimeout(this._minWidthComputionJob);
       this._minWidthComputionJob = null;
@@ -1120,14 +1102,16 @@ export class NumberInputComponent {
       this._minSizeJob = null;
     }
     const minsizer = () => {
-      const width = this.el.querySelector('#minsize')['getBoundingClientRect']()['width'];
-      this._minSizeJob = null;
-      if (width === 0) {
-        this._minSizeJob = setTimeout(minsizer.bind(this), 0);
-      } else {
-        this.el.querySelector('#input')['style']['minWidth'] = `${width}px`;
-        this._debouncedComputeWidth();
-      }
+      setTimeout(() => {
+        const width = this.el.querySelector('#minsize')['getBoundingClientRect']()['width'];
+        this._minSizeJob = null;
+        if (width === 0) {
+          this._minSizeJob = setTimeout(minsizer.bind(this), 0);
+        } else {
+          this.el.querySelector('#input')['style']['minWidth'] = `${width}px`;
+          this._debouncedComputeWidth();
+        }
+      }, 50);
     }
     this._minSizeJob = setTimeout(minsizer.bind(this), 0);
   }
@@ -1333,7 +1317,6 @@ export class NumberInputComponent {
   render() {
     return(
       <div>
-        STILL TESTING
         <input id="input"
             type={this.type}
             value={this.input}

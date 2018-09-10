@@ -267,81 +267,6 @@ declare global {
       'titleText': string;
     }
 
-    interface CwcNumberInputOld {
-      'alwaysSign': boolean;
-      'autoPadding': boolean;
-      'autoResize': boolean;
-      'blurMethod': () => void;
-      'connectedCallback': () => void;
-      'currency': string;
-      'currencyDisplay': string;
-      'decimalSeparator': string;
-      'default': any;
-      'disabled': boolean;
-      'disconnectedCallback': () => void;
-      'focusMethod': () => void;
-      'formatNumber': Function;
-      'groupingSeparator': string;
-      'hidden': boolean;
-      'input': string;
-      'invalid': boolean;
-      'locale': string;
-      'max': number;
-      'maximumFractionDigits': number;
-      'maximumSignificantDigits': number;
-      'min': number;
-      'minimumFractionDigits': number;
-      'minimumIntegerDigits': number;
-      'minimumSignificantDigits': number;
-      'minlength': number;
-      'name': string;
-      'noAutoWidth': boolean;
-      'noClamp': boolean;
-      'numberStyle': string;
-      'padLength': number;
-      'parseNumber': Function;
-      'placeholder': string;
-      'propertyForValue': string;
-      'required': boolean;
-      'resize': () => void;
-      'saturate': boolean;
-      'startAt': number;
-      'step': number;
-      'stepMod': number;
-      'type': string;
-      'unit': string;
-      'unitSeparator': string;
-      'useGrouping': boolean;
-      'validate': () => boolean;
-      'value': Object;
-      'valueAsNumber': number;
-    }
-
-    interface CwcNumberInputOlder {
-      'alwaysSign': boolean;
-      'autoPadding': boolean;
-      'autoResize': boolean;
-      'default': string;
-      'disabled': boolean;
-      'handleAlwaysSign': () => void;
-      'handleLackingPad': () => void;
-      'handleOverPad': () => void;
-      'handlePad': () => void;
-      'hidden': boolean;
-      'max': number;
-      'maximumFractionDigits': number;
-      'min': number;
-      'minimumFractionDigits': number;
-      'minlength': number;
-      'name': string;
-      'numberStyle': string;
-      'padLength': number;
-      'placeholder': string;
-      'required': boolean;
-      'step': number;
-      'type': string;
-    }
-
     interface CwcNumberInput {
       'alwaysSign': boolean;
       'autoPadding': boolean;
@@ -933,22 +858,6 @@ declare global {
     };
     
 
-    interface HTMLCwcNumberInputOldElement extends StencilComponents.CwcNumberInputOld, HTMLStencilElement {}
-
-    var HTMLCwcNumberInputOldElement: {
-      prototype: HTMLCwcNumberInputOldElement;
-      new (): HTMLCwcNumberInputOldElement;
-    };
-    
-
-    interface HTMLCwcNumberInputOlderElement extends StencilComponents.CwcNumberInputOlder, HTMLStencilElement {}
-
-    var HTMLCwcNumberInputOlderElement: {
-      prototype: HTMLCwcNumberInputOlderElement;
-      new (): HTMLCwcNumberInputOlderElement;
-    };
-    
-
     interface HTMLCwcNumberInputElement extends StencilComponents.CwcNumberInput, HTMLStencilElement {}
 
     var HTMLCwcNumberInputElement: {
@@ -1488,8 +1397,6 @@ declare global {
     'navigation-item-group': JSXElements.NavigationItemGroupAttributes;
     'navigation-item': JSXElements.NavigationItemAttributes;
     'navigation-title': JSXElements.NavigationTitleAttributes;
-    'cwc-number-input-old': JSXElements.CwcNumberInputOldAttributes;
-    'cwc-number-input-older': JSXElements.CwcNumberInputOlderAttributes;
     'cwc-number-input': JSXElements.CwcNumberInputAttributes;
     'cwc-popper': JSXElements.CwcPopperAttributes;
     'cwc-progress-bar': JSXElements.CwcProgressBarAttributes;
@@ -1793,71 +1700,6 @@ declare global {
       'showIcon'?: boolean;
       'text'?: string;
       'titleText'?: string;
-    }
-
-    export interface CwcNumberInputOldAttributes extends HTMLAttributes {
-      'alwaysSign'?: boolean;
-      'autoPadding'?: boolean;
-      'autoResize'?: boolean;
-      'currency'?: string;
-      'currencyDisplay'?: string;
-      'decimalSeparator'?: string;
-      'default'?: any;
-      'disabled'?: boolean;
-      'formatNumber'?: Function;
-      'groupingSeparator'?: string;
-      'hidden'?: boolean;
-      'input'?: string;
-      'invalid'?: boolean;
-      'locale'?: string;
-      'max'?: number;
-      'maximumFractionDigits'?: number;
-      'maximumSignificantDigits'?: number;
-      'min'?: number;
-      'minimumFractionDigits'?: number;
-      'minimumIntegerDigits'?: number;
-      'minimumSignificantDigits'?: number;
-      'minlength'?: number;
-      'name'?: string;
-      'noAutoWidth'?: boolean;
-      'noClamp'?: boolean;
-      'numberStyle'?: string;
-      'padLength'?: number;
-      'parseNumber'?: Function;
-      'placeholder'?: string;
-      'propertyForValue'?: string;
-      'required'?: boolean;
-      'saturate'?: boolean;
-      'startAt'?: number;
-      'step'?: number;
-      'stepMod'?: number;
-      'type'?: string;
-      'unit'?: string;
-      'unitSeparator'?: string;
-      'useGrouping'?: boolean;
-      'value'?: Object;
-      'valueAsNumber'?: number;
-    }
-
-    export interface CwcNumberInputOlderAttributes extends HTMLAttributes {
-      'alwaysSign'?: boolean;
-      'autoPadding'?: boolean;
-      'autoResize'?: boolean;
-      'default'?: string;
-      'disabled'?: boolean;
-      'hidden'?: boolean;
-      'max'?: number;
-      'maximumFractionDigits'?: number;
-      'min'?: number;
-      'minimumFractionDigits'?: number;
-      'minlength'?: number;
-      'name'?: string;
-      'numberStyle'?: string;
-      'padLength'?: number;
-      'placeholder'?: string;
-      'required'?: boolean;
-      'step'?: number;
-      'type'?: string;
     }
 
     export interface CwcNumberInputAttributes extends HTMLAttributes {
@@ -2277,8 +2119,6 @@ declare global {
     'navigation-item-group': HTMLNavigationItemGroupElement
     'navigation-item': HTMLNavigationItemElement
     'navigation-title': HTMLNavigationTitleElement
-    'cwc-number-input-old': HTMLCwcNumberInputOldElement
-    'cwc-number-input-older': HTMLCwcNumberInputOlderElement
     'cwc-number-input': HTMLCwcNumberInputElement
     'cwc-popper': HTMLCwcPopperElement
     'cwc-progress-bar': HTMLCwcProgressBarElement
@@ -2370,8 +2210,6 @@ declare global {
     'navigation-item-group': HTMLNavigationItemGroupElement;
     'navigation-item': HTMLNavigationItemElement;
     'navigation-title': HTMLNavigationTitleElement;
-    'cwc-number-input-old': HTMLCwcNumberInputOldElement;
-    'cwc-number-input-older': HTMLCwcNumberInputOlderElement;
     'cwc-number-input': HTMLCwcNumberInputElement;
     'cwc-popper': HTMLCwcPopperElement;
     'cwc-progress-bar': HTMLCwcProgressBarElement;
