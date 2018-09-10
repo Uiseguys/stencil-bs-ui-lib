@@ -179,213 +179,119 @@ export class NumberInputComponent {
 
   @Watch('separators')
   separatorsChanged() {
-    // if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
-      this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
-    // }
+    this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
   }
 
   @Watch('alwaysSign')
   alwaysSignChanged() {
-    // if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
-      this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
-    // }
-    // if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
-      this.type = this._computeType();
-    // }
+    this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
+    this.type = this._computeType();
     this._updateValue();
 
-    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
-    //   && this.default !== undefined && this.placeholder !== undefined
-    //   && this.formatNumber !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-    //   && this.alwaysSign !== undefined
-    // ) {
-      this._computeMinWidth();
-    // }
+    this._computeMinWidth();
   }
 
   @Watch('unitSeparator')
   unitSeparatorChanged() {
-    // if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
-      this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
-    // }
+    this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
   }
 
   @Watch('_numberOptions')
   _numberOptionsChanged() {
-    // if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
-      this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
-    // }
+    this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
   }
 
   @Watch('unit')
   unitChanged() {
-    // if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
-      this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
-    // }
+    this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
   }
 
   @Watch('minimumIntegerDigits')
   minimumIntegerDigitsChanged() {
-    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
-      this._numberOptions = this._computeNumberOptions(
-        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
-        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
-        this.currency, this.currencyDisplay
-      );
-    // }
+    this._numberOptions = this._computeNumberOptions(
+      this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+      this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+      this.currency, this.currencyDisplay
+    );
 
-    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
-    //   && this.default !== undefined && this.placeholder !== undefined
-    //   && this.formatNumber !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-    //   && this.alwaysSign !== undefined
-    // ) {
-      this._computeMinWidth();
-    // }
+    this._computeMinWidth();
   }
   @Watch('minimumFractionDigits')
   minimumFractionDigitsChanged() {
-    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
-      this._numberOptions = this._computeNumberOptions(
-        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
-        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
-        this.currency, this.currencyDisplay
-      );
-    // }
-
-    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
-    //   && this.default !== undefined && this.placeholder !== undefined
-    //   && this.formatNumber !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-    //   && this.alwaysSign !== undefined
-    // ) {
-      this._computeMinWidth();
-    // }
+    this._numberOptions = this._computeNumberOptions(
+      this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+      this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+      this.currency, this.currencyDisplay
+    );
+    this._computeMinWidth();
   }
   @Watch('maximumFractionDigits')
   maximumFractionDigitsChanged() {
-    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
-      this._numberOptions = this._computeNumberOptions(
-        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
-        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
-        this.currency, this.currencyDisplay
-      );
-    // }
-    // if (this.minimumFractionDigits !== undefined && this.noClamp !== undefined) {
-      this.maximumFractionDigits = this._computeMaximumFractionDigits(this.minimumFractionDigits, this.noClamp);
-    // }
+    this._numberOptions = this._computeNumberOptions(
+      this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+      this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+      this.currency, this.currencyDisplay
+    );
+    this.maximumFractionDigits = this._computeMaximumFractionDigits(this.minimumFractionDigits, this.noClamp);
   }
   @Watch('minimumSignificantDigits')
   minimumSignificantDigitsChanged() {
-    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
-      this._numberOptions = this._computeNumberOptions(
-        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
-        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
-        this.currency, this.currencyDisplay
-      );
-    // }
+    this._numberOptions = this._computeNumberOptions(
+      this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+      this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+      this.currency, this.currencyDisplay
+    );
   }
   @Watch('maximumSignificantDigits')
   maximumSignificantDigitsChanged() {
-    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
-      this._numberOptions = this._computeNumberOptions(
-        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
-        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
-        this.currency, this.currencyDisplay
-      );
-    // }
+    this._numberOptions = this._computeNumberOptions(
+      this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+      this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+      this.currency, this.currencyDisplay
+    );
   }
   @Watch('useGrouping')
   useGroupingChanged() {
-    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
-      this._numberOptions = this._computeNumberOptions(
-        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
-        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
-        this.currency, this.currencyDisplay
-      );
-    // }
-
-    // if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
-      this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
-    // }
+    this._numberOptions = this._computeNumberOptions(
+      this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+      this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+      this.currency, this.currencyDisplay
+    );
+    this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
   }
   @Watch('numberStyle')
   numberStyleChanged() {
-    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
-      this._numberOptions = this._computeNumberOptions(
-        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
-        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
-        this.currency, this.currencyDisplay
-      );
-    // }
-
-    // if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
-      this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
-    // }
-
-    // if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
-      this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
-    // }
-
-    // if (
-    //   this.autoPadding !== undefined && this.padLength !== undefined
-    //   && this.default !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this._step !== undefined && this.numberStyle !== undefined
-    // ) {
-      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
-        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
-      );
-    // }
+    this._numberOptions = this._computeNumberOptions(
+      this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+      this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+      this.currency, this.currencyDisplay
+    );
+    this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
+    this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
+    this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+      this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+    );
   }
   @Watch('currency')
   currencyChanged() {
-    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
-      this._numberOptions = this._computeNumberOptions(
-        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
-        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
-        this.currency, this.currencyDisplay
+    this._numberOptions = this._computeNumberOptions(
+      this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+      this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+      this.currency, this.currencyDisplay
       );
-    // }
   }
   @Watch('currencyDisplay')
   currencyDisplayChanged() {
-    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
-      this._numberOptions = this._computeNumberOptions(
-        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
-        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
-        this.currency, this.currencyDisplay
-      );
-    // }
+    this._numberOptions = this._computeNumberOptions(
+      this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+      this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+      this.currency, this.currencyDisplay
+    );
   }
 
   @Watch('locale')
   _localeChanged(locale: string) {
-    // if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
-      this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
-    // }
+    this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
 
     this._handleLocale(locale);
   }
@@ -394,101 +300,50 @@ export class NumberInputComponent {
 
   @Watch('required')
   requiredChanged() {
-    // if (this.required !== undefined && this.value !== undefined) {
-      this._computeInvalid(this.required, this.value);
-    // }
+    this._computeInvalid(this.required, this.value);
   }
 
   @Watch('value')
   valueChanged() {
-    // if (this.required !== undefined && this.value !== undefined) {
-      this._computeInvalid(this.required, this.value);
-    // }
+    this._computeInvalid(this.required, this.value);
     this._computeValueIsSet(this.value);
-    // this.theValueChanged.emit(this.value);
   }
 
   @Watch('default')
   defaultChanged() {
     this._defaultChanged(this.default);
-
-    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
-    //   && this.default !== undefined && this.placeholder !== undefined
-    //   && this.formatNumber !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-    //   && this.alwaysSign !== undefined
-    // ) {
-      this._computeMinWidth();
-    // }
-
-    // if (
-    //   this.autoPadding !== undefined && this.padLength !== undefined
-    //   && this.default !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this._step !== undefined && this.numberStyle !== undefined
-    // ) {
-      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
-        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
-      );
-    // }
+    this._computeMinWidth();
+    this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+      this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+    );
   }
 
   // input pattern
   @Watch('noAutoWidth')
   noAutoWidthChanged() {
-    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
-    //   && this.default !== undefined && this.placeholder !== undefined
-    //   && this.formatNumber !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-    //   && this.alwaysSign !== undefined
-    // ) {
-      this._computeMinWidth();
-    // }
+    this._computeMinWidth();
   }
   @Watch('minlength')
   minlengthChanged() {
-    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
-    //   && this.default !== undefined && this.placeholder !== undefined
-    //   && this.formatNumber !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-    //   && this.alwaysSign !== undefined
-    // ) {
-      this._computeMinWidth();
-    // }
+    this._computeMinWidth();
   }
   @Watch('placeholder')
   placeholderChanged() {
-    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
-    //   && this.default !== undefined && this.placeholder !== undefined
-    //   && this.formatNumber !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-    //   && this.alwaysSign !== undefined
-    // ) {
-      this._computeMinWidth();
-    // }
+    this._computeMinWidth();
   }
 
   @Watch('_minWidthString')
   _minWidthStringChanged() {
-    // if (this._minWidthString !== undefined && this.hidden !== undefined) {
-      this.resize();
-    // }
+    this.resize();
   }
   @Watch('hidden')
   hiddenChanged() {
-    // if (this._minWidthString !== undefined && this.hidden !== undefined) {
-      this.resize();
-    // }
+    this.resize();
   }
 
   @Watch('input')
   inputChanged() {
     this._inputChanged(this.input);
-    // this.theInputChanged.emit(this.input);
   }
 
   // range
@@ -507,178 +362,73 @@ export class NumberInputComponent {
   @Watch('noClamp')
   noClampChanged() {
     this._updateValue();
-    // if (this.minimumFractionDigits !== undefined && this.noClamp !== undefined) {
-      this.maximumFractionDigits = this._computeMaximumFractionDigits(this.minimumFractionDigits, this.noClamp);
-    // }
+    this.maximumFractionDigits = this._computeMaximumFractionDigits(this.minimumFractionDigits, this.noClamp);
   }
 
   @Watch('min')
   minChanged() {
-    // if (this.min !== undefined && this.max !== undefined) {
-      this._minMaxChanged(this.min, this.max);
-    // }
-
-    // if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
-      this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
-    // }
-
-    // if (
-    //   this.autoPadding !== undefined && this.padLength !== undefined
-    //   && this.default !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this._step !== undefined && this.numberStyle !== undefined
-    // ) {
-      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
-        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
-      );
-    // }
-
-    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
-    //   && this.default !== undefined && this.placeholder !== undefined
-    //   && this.formatNumber !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-    //   && this.alwaysSign !== undefined
-    // ) {
-      this._computeMinWidth();
-    // }
+    this._minMaxChanged(this.min, this.max);
+    this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
+    this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+      this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+    );
+    this._computeMinWidth();
   }
   @Watch('max')
   maxChanged() {
-    // if (this.min !== undefined && this.max !== undefined) {
-      this._minMaxChanged(this.min, this.max);
-    // }
-
-    // if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
-      this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
-    // }
-
-    // if (
-    //   this.autoPadding !== undefined && this.padLength !== undefined
-    //   && this.default !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this._step !== undefined && this.numberStyle !== undefined
-    // ) {
-      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
-        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
-      );
-    // }
-
-    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
-    //   && this.default !== undefined && this.placeholder !== undefined
-    //   && this.formatNumber !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-    //   && this.alwaysSign !== undefined
-    // ) {
-      this._computeMinWidth();
-    // }
+    this._minMaxChanged(this.min, this.max);
+    this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
+    this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+      this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+    );
+    this._computeMinWidth();
   }
 
   @Watch('step')
   stepChanged() {
-    // if (this.step !== undefined && this.stepMod !== undefined) {
-      this._stepChanged(this.step, this.stepMod);
-    // }
+    this._stepChanged(this.step, this.stepMod);
   }
   @Watch('stepMod')
   stepModChanged() {
-    // if (this.step !== undefined && this.stepMod !== undefined) {
-      this._stepChanged(this.step, this.stepMod);
-    // }
+    this._stepChanged(this.step, this.stepMod);
   }
 
   // number input
   @Watch('formatNumber')
   formatNumberChanged() {
-    // if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
-      this.type = this._computeType();
-    // }
+    this.type = this._computeType();
     this._updateValue();
 
-    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
-    //   && this.default !== undefined && this.placeholder !== undefined
-    //   && this.formatNumber !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-    //   && this.alwaysSign !== undefined
-    // ) {
-      this._computeMinWidth();
-    // }
+    this._computeMinWidth();
   }
-  // @Watch('parseNumber')
-  // parseNumberChanged() {
-  //   // if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
-  //     this.type = this._computeType();
-  //   // }
-  // }
 
   @Watch('_step')
   underscorestepChanged() {
-    // if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
-      this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
-    // }
+    this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
 
-    // if (
-    //   this.autoPadding !== undefined && this.padLength !== undefined
-    //   && this.default !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this._step !== undefined && this.numberStyle !== undefined
-    // ) {
-      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
-        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
-      );
-    // }
+    this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+      this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+    );
   }
 
   @Watch('autoPadding')
   autoPaddingChanged() {
-    // if (
-    //   this.autoPadding !== undefined && this.padLength !== undefined
-    //   && this.default !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this._step !== undefined && this.numberStyle !== undefined
-    // ) {
-      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
-        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
-      );
-    // }
+    this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+      this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+    );
   }
   @Watch('padLength')
   padLengthChanged() {
-    // if (
-    //   this.autoPadding !== undefined && this.padLength !== undefined
-    //   && this.default !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this._step !== undefined && this.numberStyle !== undefined
-    // ) {
-      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
-        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
-      );
-    // }
+    this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+      this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+    );
   }
   @Watch('startAt')
   startAtChanged() {
-    // if (
-    //   this.autoPadding !== undefined && this.padLength !== undefined
-    //   && this.default !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this._step !== undefined && this.numberStyle !== undefined
-    // ) {
-      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
-        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
-      );
-    // }
-
-    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
-    //   && this.default !== undefined && this.placeholder !== undefined
-    //   && this.formatNumber !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-    //   && this.alwaysSign !== undefined
-    // ) {
-      this._computeMinWidth();
-    // }
+    this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+      this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+    );
+    this._computeMinWidth();
   }
 
   // intl number format
@@ -816,7 +566,6 @@ export class NumberInputComponent {
   // form element
 
   private _computeInvalid(required, value) {
-    // this.invalid = Boolean(required && !value);
     this.invalid = required && isNaN(value);
   }
 
@@ -825,18 +574,6 @@ export class NumberInputComponent {
   }
 
   private _defaultChanged(def) {
-    // TODO: find a way to simultaneously update value and ${propertyForValue}
-    // if (def && this.value === undefined) {
-    //   this.value = def;
-    //   if (this.propertyForValue) {
-    //     this[this.propertyForValue] = def;
-    //   }
-    // }
-
-    // if (!this.input && def) {
-    //   this.input = def;
-    // }
-
     if (isNaN(this.valueAsNumber) && !isNaN(def)) {
       this.valueAsNumber = def;
     }
@@ -846,18 +583,6 @@ export class NumberInputComponent {
   validate() {
     return !this.invalid;
   }
-
-  // TODO: might remove this
-  // _attachDom(dom) {
-  //   if (!this.shadowRoot) {
-  //     this.attachShadow({
-  //         mode: 'open',
-  //         delegatesFocus: true
-  //     });
-  //     this.shadowRoot.appendChild(dom);
-  //   }
-  //   return this.shadowRoot;
-  // }
 
   // input pattern
   private _addEventListeners() {
@@ -889,13 +614,11 @@ export class NumberInputComponent {
   }
 
   private _checkKeycode(e) {
-    // up or down key press
     setTimeout(() => {
       this.input = e.target.value;
-      // this._checkInput(e);
-      // this.value = this.valueAsNumber;
     }, 0);
 
+    // up or down key press
     const step = (e.keyCode === 38) ? this._step : (e.keyCode === 40 ? -this._step : 0);
     if (step !== 0) {
       this._checkInput(e);
@@ -944,41 +667,9 @@ export class NumberInputComponent {
     if (e && e.stopPropagation) {
       e.stopPropagation();
     }
-
-    // if (!this.input) {
-    //   if (!isNaN(this.default)) {
-    //     // TODO: try to update simultaneously
-    //     this.input = this.formatNumber(this.default);
-    //     this.valueAsNumber = +this.default;
-    //     // this.setProperties({
-    //     //   input: this.formatNumber(this.default),
-    //     //   valueAsNumber: +this.default
-    //     // })
-    //   } else {
-    //     this.valueAsNumber = undefined;
-    //   }
-    //   this._debouncedComputeWidth();
-    //   return;
-    // }
-    // const value = this._checkValue(this.parseNumber(this.input), this.valueAsNumber);
-    // // TODO: try to update simultaneously
-    // this.input = this.formatNumber(value);
-    // this.valueAsNumber = value;
-    // // this.setProperties({
-    // //   input: this.formatNumber(value),
-    // //   valueAsNumber: value
-    // // });
-    // this._debouncedComputeWidth();
   }
 
   private _updateValue() {
-    // if (this.value !== undefined) {
-    //   this._reflectValueToProperty(this.value);
-    // }
-    // this._debouncedComputeWidth();
-    // if (e && e.stopPropagation) {
-    //   e.stopPropagation();
-    // }
     if (this.valueAsNumber !== undefined) {
       this._valueAsNumberChanged(this.valueAsNumber, this.valueAsNumber);
     }
@@ -1046,10 +737,6 @@ export class NumberInputComponent {
       // TODO: look for a way to update min and max simultaneously
       this.min = +max;
       this.max = +min;
-      // this.setProperties({
-      //   min: +max,
-      //   max: +min
-      // })
     } else {
       this._updateValue();
     }
@@ -1144,10 +831,6 @@ export class NumberInputComponent {
       if (!isNaN(this.default)) {
         this.input = this.formatNumber(this.default);
         this.valueAsNumber = +this.default;
-        // this.setProperties({
-        //   input: this.formatNumber(this.default),
-        //   valueAsNumber: +this.default
-        // })
       }
       this._debouncedComputeWidth();
       return;
@@ -1157,10 +840,6 @@ export class NumberInputComponent {
 
     this.input = input;
     this.valueAsNumber = value;
-    // this.setProperties({
-    //   input: input,
-    //   valueAsNumber: value
-    // });
     if (this.autoResize) {
       this._debouncedComputeWidth();
     }
