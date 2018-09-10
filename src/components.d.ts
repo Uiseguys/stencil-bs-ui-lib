@@ -346,7 +346,7 @@ declare global {
       'alwaysSign': boolean;
       'autoPadding': boolean;
       'autoResize': boolean;
-      'blurMethod': () => void;
+      'blurMethod': (e: any) => void;
       'currency': string;
       'currencyDisplay': string;
       'default': number;
@@ -380,12 +380,11 @@ declare global {
       'startAt': number;
       'step': number;
       'stepMod': number;
-      'type': string;
       'unit': string;
       'unitSeparator': string;
       'useGrouping': boolean;
       'validate': () => boolean;
-      'value': number;
+      'value': Object;
       'valueAsNumber': number;
     }
 
@@ -1896,11 +1895,10 @@ declare global {
       'startAt'?: number;
       'step'?: number;
       'stepMod'?: number;
-      'type'?: string;
       'unit'?: string;
       'unitSeparator'?: string;
       'useGrouping'?: boolean;
-      'value'?: number;
+      'value'?: Object;
       'valueAsNumber'?: number;
     }
 

@@ -38,7 +38,7 @@ export class NumberInputComponent {
   @Prop({ mutable: true, reflectToAttr: true }) invalid: boolean;
   @Prop({ mutable: true, reflectToAttr: true }) disabled: boolean;
   @Prop({ mutable: true }) name: string;
-  // @Prop({ mutable: true }) value: Object;
+  @Prop({ mutable: true }) value: Object;
   // @Prop({ mutable: true }) default: Object;
 
   @State() _valueIsSet: boolean = false;
@@ -46,7 +46,7 @@ export class NumberInputComponent {
   @Element() el: HostElement;
 
   // -- input pattern
-  @Prop({ mutable: true }) type: string = 'text';
+  // @Prop({ mutable: true }) type: string = 'text';
   @Prop({ mutable: true }) input: string;
   @Prop({ mutable: true }) placeholder: string;
   // @Prop({ mutable: true }) default: string;
@@ -79,11 +79,11 @@ export class NumberInputComponent {
   @Prop({ mutable: true }) minimumFractionDigits: number;
   @Prop({ mutable: true }) maximumFractionDigits: number;
   @Prop({ mutable: true }) minimumIntegerDigits: number;
-  @Prop({ mutable: true }) value: number;
+  // @Prop({ mutable: true }) value: number;
   @Prop({ mutable: true }) startAt: number;
   @Prop({ mutable: true }) propertyForValue: string = 'valueAsNumber';
 
-  @State() _type: string;
+  @State() type: string;
 
 
   // ** number utilities
@@ -175,7 +175,7 @@ export class NumberInputComponent {
     // if (this._minWidthString !== undefined && this.hidden !== undefined) {
       this.resize();
     // }
-    this._inputChanged();
+    // this._inputChanged(this.input);
 
     // range
     // if (this.valueAsNumber === undefined && !isNaN(this.default)) {
@@ -190,8 +190,7 @@ export class NumberInputComponent {
 
     // number input
     // if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
-      this._type = this._computeType();
-      this.type = this._type;
+      this.type = this._computeType();
     // }
     // if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
       this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
@@ -238,6 +237,9 @@ export class NumberInputComponent {
       this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
     // }
 
+    // transferred
+    this._inputChanged(this.input);
+
     // transferred from range
     // if (this.valueAsNumber === undefined && !isNaN(this.default)) {
       this.valueAsNumber = this.default;
@@ -277,7 +279,7 @@ export class NumberInputComponent {
       this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
     // }
     // if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
-      this._type = this._computeType();
+      this.type = this._computeType();
     // }
     this._updateValue();
 
@@ -573,14 +575,15 @@ export class NumberInputComponent {
 
   @Watch('input')
   inputChanged() {
-    this._inputChanged();
+    this._inputChanged(this.input);
   }
 
   // range
   @Watch('valueAsNumber')
   valueAsNumberChanged(newVal: number, oldVal: number) {
     this._valueAsNumberChanged(newVal, oldVal);
-    this.value = this.valueAsNumber;
+    // TODO: check
+    // this.value = this.valueAsNumber;
   }
 
   @Watch('saturate')
@@ -676,7 +679,7 @@ export class NumberInputComponent {
   @Watch('formatNumber')
   formatNumberChanged() {
     // if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
-      this._type = this._computeType();
+      this.type = this._computeType();
     // }
     this._updateValue();
 
@@ -690,12 +693,12 @@ export class NumberInputComponent {
       this._computeMinWidth();
     // }
   }
-  @Watch('parseNumber')
-  parseNumberChanged() {
-    // if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
-      this._type = this._computeType();
-    // }
-  }
+  // @Watch('parseNumber')
+  // parseNumberChanged() {
+  //   // if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
+  //     this.type = this._computeType();
+  //   // }
+  // }
 
   @Watch('_step')
   underscorestepChanged() {
@@ -967,87 +970,93 @@ export class NumberInputComponent {
   }
 
   @Method()
-  blurMethod() {
-    this._checkInput();
+  blurMethod(e) {
+    this._checkInput(e);
     this.el.querySelector('#input')['blur']();
   }
 
   private _checkKeycode(e) {
-    // // enter & space
-    // if (e.keyCode === 13 || e.keyCode === 32) {
-    //   this._checkInput(null);
-    //   return;
-    // }
-    //
-    // // esc
-    // if (e.keyCode === 27) {
-    //   this._updateValue();
-    //   e.stopPropagation();
-    //   this.blurMethod(null);
-    //   return;
-    // }
-    //
-    // if (this.autoResize) {
-    //   this._debouncedComputeWidth();
-    // }
-    switch (e.keyCode) {
-      case 9:  // tab // falls-through
-      case 13: // enter
-        this._checkInput();
-        break;
-      case 27: // esc
-        this._updateValue();
-        this.el.querySelector('#input')['blur']();
-        break;
-        case 38: // up
-        e.preventDefault();
-        e.stopPropagation();
-        this.increase();
-        break;
-      case 40: // down
-        e.preventDefault();
-        e.stopPropagation();
-        this.decrease();
-        break;
-      default:
-        setTimeout(() => {
-          this.input = e.target.value;
-          this._checkInput();
-          this.value = this.valueAsNumber;
-        }, 0);
+    // up or down key press
+    const step = (e.keyCode === 38) ? this._step : (e.keyCode === 40 ? -this._step : 0);
+    if (step !== 0) {
+      this._checkInput(e);
+      setTimeout(this._increm.bind(this, this.valueAsNumber, +step), 0);
+      e.stopPropagation();
+      return;
+    }
+
+    // enter & space
+    if (e.keyCode === 13 || e.keyCode === 32) {
+      this._checkInput(null);
+      return;
+    }
+
+    // esc
+    if (e.keyCode === 27) {
+      this._updateValue();
+      e.stopPropagation();
+      this.blurMethod(null);
+      return;
+    }
+
+    // from me
+    setTimeout(() => {
+      this.input = e.target.value;
+      // this._checkInput(e);
+      // this.value = this.valueAsNumber;
+    }, 0);
+
+    if (this.autoResize) {
+      this._debouncedComputeWidth();
     }
   }
 
-  private _checkInput() {
-    // this._inputChanged(this.input || '');
-    // this._debouncedComputeWidth();
-    // if (e && e.stopPropagation) {
-    //   e.stopPropagation();
-    // }
-    if (!this.input) {
-      if (!isNaN(this.default)) {
-        // TODO: try to update simultaneously
-        this.input = this.formatNumber(this.default);
+  private _increm(value, step) {
+    value = +this._numberUtilities._safeAdd(value, step);
+    if (isNaN(value)) {
+      if (!isNaN(this.startAt)) {
+        this.valueAsNumber = +this.startAt;
+      } else if (!isNaN(this.default)) {
         this.valueAsNumber = +this.default;
-        // this.setProperties({
-        //   input: this.formatNumber(this.default),
-        //   valueAsNumber: +this.default
-        // })
       } else {
-        this.valueAsNumber = undefined;
+        this.valueAsNumber = this.min < 0 ? 0 : this.min || 0;
       }
-      this._debouncedComputeWidth();
-      return;
+    } else {
+      this.valueAsNumber = value;
     }
-    const value = this._checkValue(this.parseNumber(this.input), this.valueAsNumber);
-    // TODO: try to update simultaneously
-    this.input = this.formatNumber(value);
-    this.valueAsNumber = value;
-    // this.setProperties({
-    //   input: this.formatNumber(value),
-    //   valueAsNumber: value
-    // });
+  }
+
+  private _checkInput(e) {
+    this._inputChanged(this.input || '');
     this._debouncedComputeWidth();
+    if (e && e.stopPropagation) {
+      e.stopPropagation();
+    }
+
+    // if (!this.input) {
+    //   if (!isNaN(this.default)) {
+    //     // TODO: try to update simultaneously
+    //     this.input = this.formatNumber(this.default);
+    //     this.valueAsNumber = +this.default;
+    //     // this.setProperties({
+    //     //   input: this.formatNumber(this.default),
+    //     //   valueAsNumber: +this.default
+    //     // })
+    //   } else {
+    //     this.valueAsNumber = undefined;
+    //   }
+    //   this._debouncedComputeWidth();
+    //   return;
+    // }
+    // const value = this._checkValue(this.parseNumber(this.input), this.valueAsNumber);
+    // // TODO: try to update simultaneously
+    // this.input = this.formatNumber(value);
+    // this.valueAsNumber = value;
+    // // this.setProperties({
+    // //   input: this.formatNumber(value),
+    // //   valueAsNumber: value
+    // // });
+    // this._debouncedComputeWidth();
   }
 
   private _updateValue() {
@@ -1104,50 +1113,24 @@ export class NumberInputComponent {
 
   @Method()
   resize() {
-    if (!this._minWidthString || this.hidden || this._minSizeJob) {
+    if (!this._minWidthString) {
       return;
     }
-    this._minSizeJob = requestAnimationFrame( () => {
-      let width = this.el.querySelector('#minsize')['getBoundingClientRect']()['width'];
-      // measure the width of the test element
-      if (width !== 0) {
+    if (this._minSizeJob) {
+      clearTimeout(this._minSizeJob);
+      this._minSizeJob = null;
+    }
+    const minsizer = () => {
+      const width = this.el.querySelector('#minsize')['getBoundingClientRect']()['width'];
+      this._minSizeJob = null;
+      if (width === 0) {
+        this._minSizeJob = setTimeout(minsizer.bind(this), 0);
+      } else {
         this.el.querySelector('#input')['style']['minWidth'] = `${width}px`;
         this._debouncedComputeWidth();
-        this._minSizeJob = null;
-      } else {
-        // if that fails, clone the test node to document level and add some basic styles, that could define the elements's width
-        const minsizeClone = this.el.querySelector('#minsize')['cloneNode'](true);
-        const style = document.defaultView.getComputedStyle(this.el.querySelector('#minsize'), '');
-        ['font-family', 'font-size', 'font-weight', 'font-style', 'letter-spacing', 'min-width', 'max-width'].reduce(
-          ( accumulator, currentValue) => {
-            if (currentValue && style[currentValue]) {
-              minsizeClone['style'][currentValue] = style[currentValue];
-            }
-            return accumulator;
-          }, 'font-family');
-        minsizeClone['style']['display'] = 'inline-flex';
-        minsizeClone['style']['opacity'] = '0';
-        minsizeClone['style']['position'] = 'fixed';
-        minsizeClone['style']['left'] = '0';
-        minsizeClone['style']['top'] = '0';
-        minsizeClone['style']['border'] = 'thin solid transparent';
-
-        document.body.appendChild(minsizeClone);
-        requestAnimationFrame( () => {
-          width = minsizeClone['getBoundingClientRect']()['width'];
-          minsizeClone['parentElement']['removeChild'](minsizeClone);
-          this._minSizeJob = null;
-          if (width !== 0) {
-            this.el.querySelector('#input')['style']['minWidth'] = `${width}px`;
-            this._debouncedComputeWidth();
-          } else {
-            // if it fails again, retry
-            this.resize();
-          }
-        });
       }
-    })
-
+    }
+    this._minSizeJob = setTimeout(minsizer.bind(this), 0);
   }
 
   private _debouncedComputeWidth() {
@@ -1178,21 +1161,25 @@ export class NumberInputComponent {
 
   private _valueAsNumberChanged(value, oldValue) {
     if (value === undefined) {
+      if (!isNaN(this.default)) {
+        this.valueAsNumber = this.default;
+      } else {
+        this.input = this.input = '';
+      }
       return;
     }
 
-    const finalValue = this._checkValue(value, oldValue);
-
-    if (finalValue !== this.valueAsNumber) {
-      this.valueAsNumber = finalValue;
-      return;
+    if (isNaN(oldValue)) {
+      value = this._checkValue(value, null);
+    } else {
+      value = this._checkValue(value, oldValue);
     }
 
-    if (isNaN(value)) {
-      this.input = '';
+    if (this.valueAsNumber !== value) {
+      this.valueAsNumber = value;
       return;
     }
-    this.input = this.formatNumber(this.valueAsNumber);
+    this.input = this.input = this.formatNumber(value);
   }
 
   private _checkValue(value, oldValue) {
@@ -1256,7 +1243,28 @@ export class NumberInputComponent {
   }
 
   // number input
-  private _inputChanged() {
+  private _inputChanged(input) {
+    if (!input) {
+      if (!isNaN(this.default)) {
+        this.input = this.formatNumber(this.default);
+        this.valueAsNumber = +this.default;
+        // this.setProperties({
+        //   input: this.formatNumber(this.default),
+        //   valueAsNumber: +this.default
+        // })
+      }
+      this._debouncedComputeWidth();
+      return;
+    }
+    const value = this._checkValue(this.parseNumber(input), this.valueAsNumber);
+    input = this.formatNumber(value);
+
+    this.input = input;
+    this.valueAsNumber = value;
+    // this.setProperties({
+    //   input: input,
+    //   valueAsNumber: value
+    // });
     if (this.autoResize) {
       this._debouncedComputeWidth();
     }
@@ -1323,27 +1331,12 @@ export class NumberInputComponent {
     return minimumFractionDigits;
   }
 
-  // TODO: confirm these
-  private increase() {
-    const value = this.value !== undefined ? Math.round((this.value + this._step) * 1e12) / 1e12 : this.startAt || 0;
-    // this.valueAsNumber = value;
-    this.input = this.formatNumber(value);
-    this._checkInput();
-  }
-
-  private decrease() {
-    const value = this.value !== undefined ? Math.round((this.value - this._step) * 1e12) / 1e12 : this.startAt || 0;
-    // this.valueAsNumber = value;
-    this.input = this.formatNumber(value);
-    this._checkInput();
-  }
-
   render() {
     return(
       <div>
         STILL TESTING
         <input id="input"
-            type={this._type}
+            type={this.type}
             value={this.input}
             step={this.step}
             required={this.required}
