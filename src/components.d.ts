@@ -309,7 +309,7 @@ declare global {
       'unitSeparator': string;
       'useGrouping': boolean;
       'validate': () => boolean;
-      'value': Object;
+      'value': number;
       'valueAsNumber': number;
     }
 
@@ -1727,6 +1727,7 @@ declare global {
       'noAutoWidth'?: boolean;
       'noClamp'?: boolean;
       'numberStyle'?: string;
+      'onTheComponentChanged'?: (event: CustomEvent) => void;
       'padLength'?: number;
       'parseNumber'?: Function;
       'placeholder'?: string;
@@ -1740,7 +1741,7 @@ declare global {
       'unit'?: string;
       'unitSeparator'?: string;
       'useGrouping'?: boolean;
-      'value'?: Object;
+      'value'?: number;
       'valueAsNumber'?: number;
     }
 

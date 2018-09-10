@@ -1,10 +1,5 @@
-import { Component, Prop, State, Watch, Element, HostElement, Method } from '@stencil/core';
+import { Component, Prop, State, Watch, Element, HostElement, Method, Event, EventEmitter } from '@stencil/core';
 import 'bootstrap.native/dist/bootstrap-native-v4';
-
-// TODO: test first before proceeding
-
-// TODO: observers, computed values, should also fire on load
-// TODO: complex observers and computed values should only fire if all args are !==undefined
 
 @Component({
     tag: 'cwc-number-input',
@@ -13,9 +8,6 @@ import 'bootstrap.native/dist/bootstrap-native-v4';
 export class NumberInputComponent {
   // -- intl number format
   @Prop({ mutable: true }) locale: string = window.navigator.language;
-  // @Prop({ mutable: true }) minimumFractionDigits: number;
-  // @Prop({ mutable: true }) maximumFractionDigits: number;
-  // @Prop({ mutable: true }) minimumIntegerDigits: number;
   @Prop({ mutable: true }) minimumSignificantDigits: number;
   @Prop({ mutable: true }) maximumSignificantDigits: number;
   @Prop({ mutable: true }) unit: string;
@@ -38,23 +30,19 @@ export class NumberInputComponent {
   @Prop({ mutable: true, reflectToAttr: true }) invalid: boolean;
   @Prop({ mutable: true, reflectToAttr: true }) disabled: boolean;
   @Prop({ mutable: true }) name: string;
-  @Prop({ mutable: true }) value: Object;
-  // @Prop({ mutable: true }) default: Object;
+  // @Prop({ mutable: true }) value: Object;
 
   @State() _valueIsSet: boolean = false;
 
   @Element() el: HostElement;
 
   // -- input pattern
-  // @Prop({ mutable: true }) type: string = 'text';
   @Prop({ mutable: true }) input: string;
   @Prop({ mutable: true }) placeholder: string;
-  // @Prop({ mutable: true }) default: string;
   @Prop({ mutable: true }) minlength: number;
   @Prop({ mutable: true }) noAutoWidth: boolean;
   @Prop({ mutable: true }) autoResize: boolean;
   @Prop({ mutable: true }) hidden: boolean;
-  // @Prop({ mutable: true }) propertyForValue: string = 'input';
 
   @State() _minWidthString: string;
   _minWidthComputionJob: any;
@@ -79,12 +67,13 @@ export class NumberInputComponent {
   @Prop({ mutable: true }) minimumFractionDigits: number;
   @Prop({ mutable: true }) maximumFractionDigits: number;
   @Prop({ mutable: true }) minimumIntegerDigits: number;
-  // @Prop({ mutable: true }) value: number;
+  @Prop({ mutable: true }) value: number;
   @Prop({ mutable: true }) startAt: number;
   @Prop({ mutable: true }) propertyForValue: string = 'valueAsNumber';
 
   @State() type: string;
 
+  @Event() theComponentChanged: EventEmitter;
 
   // ** number utilities
   _numberUtilities = {
@@ -133,33 +122,8 @@ export class NumberInputComponent {
   };
 
   componentDidLoad() {
-  // componentWillLoad() {
     // intl num format
     this._handleLocale(this.locale);
-    //
-    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
-    //   this._numberOptions = this._computeNumberOptions(
-    //     this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
-    //     this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
-    //     this.currency, this.currencyDisplay
-    //   );
-    // }
-    // if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
-    //   this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
-    // }
-    // if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
-    //   this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
-    // }
-
-    // form element
-    // this.el['tabindex'] = 0;
-    // if (this.required !== undefined && this.value !== undefined) {
-    //   this._computeInvalid(this.required, this.value);
-    // }
-    // this._computeValueIsSet(this.value);
-    // this._defaultChanged(this.default);
 
     // input pattern
     this.focusMethod = this.focusMethod.bind(this);
@@ -168,100 +132,47 @@ export class NumberInputComponent {
     this._checkKeycode = this._checkKeycode.bind(this);
     this._addEventListeners();
     setTimeout(this.resize.bind(this), 0);
-    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
-    //   && this.default !== undefined && this.placeholder !== undefined) {
-    //   this._computeMinWidth();
-    // }
-    // if (this._minWidthString !== undefined && this.hidden !== undefined) {
-      this.resize();
-    // }
-    // this._inputChanged(this.input);
-
-    // range
-    // if (this.valueAsNumber === undefined && !isNaN(this.default)) {
-    //   this.valueAsNumber = this.default;
-    // }
-    // if (this.min !== undefined && this.max !== undefined) {
-    //   this._minMaxChanged(this.min, this.max);
-    // }
-    // if (this.step !== undefined && this.stepMod !== undefined) {
-    //   this._stepChanged(this.step, this.stepMod);
-    // }
+    this.resize();
 
     // number input
-    // if (this.formatNumber !== undefined && this.parseNumber !== undefined && this.alwaysSign !== undefined) {
-      this.type = this._computeType();
-    // }
-    // if (this._step !== undefined && this.min !== undefined && this.max !== undefined && this.numberStyle !== undefined) {
-      this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
-    // }
-    // if (this.minimumFractionDigits !== undefined && this.noClamp !== undefined) {
-      this.maximumFractionDigits = this._computeMaximumFractionDigits(this.minimumFractionDigits, this.noClamp);
-    // }
-    // if (
-    //   this.autoPadding !== undefined && this.padLength !== undefined
-    //   && this.default !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this._step !== undefined && this.numberStyle !== undefined
-    // ) {
-      this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
-        this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
-      );
-    // }
-    // if (this.noAutoWidth !== undefined && this.minlength !== undefined
-    //   && this.default !== undefined && this.placeholder !== undefined
-    //   && this.formatNumber !== undefined && this.startAt !== undefined
-    //   && this.min !== undefined && this.max !== undefined
-    //   && this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined
-    //   && this.alwaysSign !== undefined
-    // ) {
-      this._computeMinWidth();
-    // }
+    this.type = this._computeType();
+    this.minimumFractionDigits = this._computeMinimumFractionDigits(this.step, this.min, this.max, this.numberStyle);
+    this.maximumFractionDigits = this._computeMaximumFractionDigits(this.minimumFractionDigits, this.noClamp);
+    this.minimumIntegerDigits = this._computeMinimumIntegerDigits(
+      this.autoPadding, this.padLength, this.default, this.startAt, this.min, this.max, this._step, this.numberStyle
+    );
+    this._computeMinWidth();
 
     // transferred from intl num format
-    // this._handleLocale(this.locale);
 
-    // if (this.minimumIntegerDigits !== undefined && this.minimumFractionDigits !== undefined && this.maximumFractionDigits !== undefined &&
-    // this.minimumSignificantDigits !== undefined && this.maximumSignificantDigits !== undefined && this.useGrouping !== undefined
-    // && this.numberStyle !== undefined && this.currency !== undefined && this.currencyDisplay !== undefined) {
-      this._numberOptions = this._computeNumberOptions(
-        this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
-        this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
-        this.currency, this.currencyDisplay
-      );
-    // }
-    // if (this.locale !== undefined && this._numberOptions !== undefined && this.unit !== undefined) {
-      this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
-    // }
-    // if (this.separators['decimal'] !== undefined && this.numberStyle !== undefined && this.useGrouping !== undefined) {
-      this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
-    // }
+    this._numberOptions = this._computeNumberOptions(
+      this.minimumIntegerDigits, this.minimumFractionDigits, this.maximumFractionDigits,
+      this.minimumSignificantDigits, this.maximumSignificantDigits, this.useGrouping, this.numberStyle,
+      this.currency, this.currencyDisplay
+    );
+    this.formatNumber = this._computeFormatNumber(this.locale, this._numberOptions, this.unit);
+    this.parseNumber = this._computeParseNumber(this.separators['decimal'], this.numberStyle, this.useGrouping);
 
     // transferred
     this._inputChanged(this.input);
 
-    // transferred from range
-    // if (this.valueAsNumber === undefined && !isNaN(this.default)) {
-      this.valueAsNumber = this.default;
-    // }
-    // if (this.min !== undefined && this.max !== undefined) {
-      this._minMaxChanged(this.min, this.max);
-    // }
-    // if (this.step !== undefined && this.stepMod !== undefined) {
-      this._stepChanged(this.step, this.stepMod);
-    // }
+    this.valueAsNumber = this.default;
+    this._minMaxChanged(this.min, this.max);
+    this._stepChanged(this.step, this.stepMod);
 
     // transferred from form element
     this.el['tabindex'] = 0;
-    // if (this.required !== undefined && this.value !== undefined) {
-      this._computeInvalid(this.required, this.value);
-    // }
+    this._computeInvalid(this.required, this.value);
     this._computeValueIsSet(this.value);
     this._defaultChanged(this.default);
   }
 
   componentDidUnload() {
     this._removeEventListeners();
+  }
+
+  componentDidUpdate() {
+    this.theComponentChanged.emit('number input updated');
   }
 
   // intl number format
@@ -494,6 +405,7 @@ export class NumberInputComponent {
       this._computeInvalid(this.required, this.value);
     // }
     this._computeValueIsSet(this.value);
+    // this.theValueChanged.emit(this.value);
   }
 
   @Watch('default')
@@ -576,6 +488,7 @@ export class NumberInputComponent {
   @Watch('input')
   inputChanged() {
     this._inputChanged(this.input);
+    // this.theInputChanged.emit(this.input);
   }
 
   // range
@@ -583,7 +496,7 @@ export class NumberInputComponent {
   valueAsNumberChanged(newVal: number, oldVal: number) {
     this._valueAsNumberChanged(newVal, oldVal);
     // TODO: check
-    // this.value = this.valueAsNumber;
+    this.value = this.valueAsNumber;
   }
 
   @Watch('saturate')
