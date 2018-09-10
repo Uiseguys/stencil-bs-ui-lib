@@ -977,6 +977,12 @@ export class NumberInputComponent {
 
   private _checkKeycode(e) {
     // up or down key press
+    setTimeout(() => {
+      this.input = e.target.value;
+      // this._checkInput(e);
+      // this.value = this.valueAsNumber;
+    }, 0);
+
     const step = (e.keyCode === 38) ? this._step : (e.keyCode === 40 ? -this._step : 0);
     if (step !== 0) {
       this._checkInput(e);
@@ -998,13 +1004,6 @@ export class NumberInputComponent {
       this.blurMethod(null);
       return;
     }
-
-    // from me
-    setTimeout(() => {
-      this.input = e.target.value;
-      // this._checkInput(e);
-      // this.value = this.valueAsNumber;
-    }, 0);
 
     if (this.autoResize) {
       this._debouncedComputeWidth();
