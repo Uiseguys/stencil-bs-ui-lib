@@ -3,22 +3,29 @@ import { Component, Prop, Event, EventEmitter, Method, State } from '@stencil/co
 
 @Component({
     tag: 'cwc-infinite-list-watcher',
-    // styleUrl: 'cwc-infinite-list-watcher.scss'
+    styleUrls: [
+        'cwc-infinite-list-watcher.scss'
+    ]
 })
 export class CwcInfiniteListWatcher {
 
     @Prop() listSelector: string = '';
     @Prop() lastItemSelector: string = '.list-item-last'
-    @Prop() containerSelector: string = '';
 
     @Prop() bindToList: boolean = false;
-    @Prop() bottomOffset?: number = 100;
+    @Prop() bottomOffset?: number = 50;
     @Prop() debounce: number = 300;
+    
     @State() listElement: HTMLElement;
 
     debounceStatus: boolean = false
 
     @Event() onBottomReach: EventEmitter
+
+    constructor() {
+        console.log('Holla watcher!');
+        
+    }
 
     @Method()
     loadMore() {
@@ -26,24 +33,33 @@ export class CwcInfiniteListWatcher {
             this.startDebounce()
 
             this.onBottomReach.emit(this.listElement.id && this.listElement.id)
-        }
+        } 
     }
 
     startDebounce(): void {
         this.debounceStatus = true;
 
-        setTimeout(() =>
+        setTimeout(() => {
+
+            // Triggers additional check if list was scrolled down during debounce
             this.debounceStatus = false
-            , this.debounce)
+            this.bindToList ? 
+                this.listScrollHandler() : 
+                this.windowScrollHandler()
+        }, this.debounce)
     }
 
-    componentWillLoad() {
-
+    componentDidLoad() {
         this.listElement = document.querySelector(this.listSelector)
 
-        this.bindToList ?
-            this.listElement.addEventListener('scroll', this.listScrollHandler.bind(this))
-            : document.addEventListener('scroll', this.windowScrollHandler.bind(this))
+        if (this.listElement) {
+            
+            this.bindToList ?
+                this.listElement.addEventListener('scroll', this.listScrollHandler.bind(this))
+                : document.addEventListener('scroll', this.windowScrollHandler.bind(this))
+        } else {
+            console.error(`List watcher component can't bind to given selector ${this.listSelector}.`)
+        }        
     }
 
 
@@ -61,8 +77,6 @@ export class CwcInfiniteListWatcher {
             this.loadMore()
         }
     }
-
-
 
     render() {
         return (

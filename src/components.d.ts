@@ -18,9 +18,6 @@ import {
   DurationInputArg2,
 } from 'moment';
 import {
-  Placement,
-} from 'popper.js';
-import {
   BootstrapThemeColor as BootstrapThemeColor2,
 } from './common/bootstrap-theme-color.type';
 import {
@@ -148,7 +145,6 @@ declare global {
     interface CwcInfiniteListWatcher {
       'bindToList': boolean;
       'bottomOffset': number;
-      'containerSelector': string;
       'debounce': number;
       'lastItemSelector': string;
       'listSelector': string;
@@ -174,9 +170,10 @@ declare global {
       'addClassFirst': string;
       'addClassLast': string;
       'addClassOdd': string;
+      'interpolationRegex': any;
       'itemAs': string;
-      'items': object[];
-      'template': string;
+      'items': any[];
+      'listId': string;
       'wrapperClass': string;
     }
 
@@ -235,10 +232,7 @@ declare global {
     }
 
     interface CwcNavigation {
-      'containerChildren': any[];
       'isCollapsed': boolean;
-      'primaryActions': any[];
-      'secondaryActions': any[];
     }
 
     interface NavigationItemGroup {
@@ -364,20 +358,6 @@ declare global {
       'labelOFF': string;
       'labelON': string;
       'value': boolean;
-    }
-
-    interface CwcTag {
-      'classes': string;
-      'closable': boolean;
-      'close': (e?: UIEvent) => void;
-      'imgLink': string;
-      'limitTo': number;
-      'link': string;
-      'onCloseData': any;
-      'removeOnClose': boolean;
-      'rounded': boolean;
-      'tagType': BootstrapThemeColor;
-      'text': string;
     }
 
     interface CwcTypeahead {
@@ -568,6 +548,10 @@ declare global {
 
     }
 
+    interface InfiniteListPage {
+
+    }
+
     interface InlineeditPage {
 
     }
@@ -604,11 +588,11 @@ declare global {
 
     }
 
-    interface MySwitchPage {
+    interface NavbarPage {
 
     }
 
-    interface NavbarPage {
+    interface MySwitchPage {
 
     }
 
@@ -671,14 +655,6 @@ declare global {
     var HTMLCwcAlertElement: {
       prototype: HTMLCwcAlertElement;
       new (): HTMLCwcAlertElement;
-    };
-    
-
-    interface HTMLCwcAutocompleteSelectElement extends StencilComponents.CwcAutocompleteSelect, HTMLStencilElement {}
-
-    var HTMLCwcAutocompleteSelectElement: {
-      prototype: HTMLCwcAutocompleteSelectElement;
-      new (): HTMLCwcAutocompleteSelectElement;
     };
     
 
@@ -873,7 +849,6 @@ declare global {
       new (): HTMLCwcPopperElement;
     };
     
-
     interface HTMLCwcProgressBarElement extends StencilComponents.CwcProgressBar, HTMLStencilElement {}
 
     var HTMLCwcProgressBarElement: {
@@ -919,14 +894,6 @@ declare global {
     var HTMLCwcSwitchElement: {
       prototype: HTMLCwcSwitchElement;
       new (): HTMLCwcSwitchElement;
-    };
-    
-
-    interface HTMLCwcTagElement extends StencilComponents.CwcTag, HTMLStencilElement {}
-
-    var HTMLCwcTagElement: {
-      prototype: HTMLCwcTagElement;
-      new (): HTMLCwcTagElement;
     };
     
 
@@ -1178,6 +1145,14 @@ declare global {
     };
     
 
+    interface HTMLInfiniteListPageElement extends StencilComponents.InfiniteListPage, HTMLStencilElement {}
+
+    var HTMLInfiniteListPageElement: {
+      prototype: HTMLInfiniteListPageElement;
+      new (): HTMLInfiniteListPageElement;
+    };
+    
+
     interface HTMLInlineeditPageElement extends StencilComponents.InlineeditPage, HTMLStencilElement {}
 
     var HTMLInlineeditPageElement: {
@@ -1250,19 +1225,19 @@ declare global {
     };
     
 
-    interface HTMLMySwitchPageElement extends StencilComponents.MySwitchPage, HTMLStencilElement {}
-
-    var HTMLMySwitchPageElement: {
-      prototype: HTMLMySwitchPageElement;
-      new (): HTMLMySwitchPageElement;
-    };
-    
-
     interface HTMLNavbarPageElement extends StencilComponents.NavbarPage, HTMLStencilElement {}
 
     var HTMLNavbarPageElement: {
       prototype: HTMLNavbarPageElement;
       new (): HTMLNavbarPageElement;
+    };
+    
+
+    interface HTMLMySwitchPageElement extends StencilComponents.MySwitchPage, HTMLStencilElement {}
+
+    var HTMLMySwitchPageElement: {
+      prototype: HTMLMySwitchPageElement;
+      new (): HTMLMySwitchPageElement;
     };
     
 
@@ -1374,7 +1349,6 @@ declare global {
     interface Element {}
     export interface IntrinsicElements {
     'cwc-alert': JSXElements.CwcAlertAttributes;
-    'cwc-autocomplete-select': JSXElements.CwcAutocompleteSelectAttributes;
     'cwc-avatar': JSXElements.CwcAvatarAttributes;
     'cwc-checkbox-group': JSXElements.CwcCheckboxGroupAttributes;
     'cwc-combobox': JSXElements.CwcComboboxAttributes;
@@ -1405,7 +1379,6 @@ declare global {
     'cwc-sticky': JSXElements.CwcStickyAttributes;
     'cwc-styles': JSXElements.CwcStylesAttributes;
     'cwc-switch': JSXElements.CwcSwitchAttributes;
-    'cwc-tag': JSXElements.CwcTagAttributes;
     'cwc-typeahead': JSXElements.CwcTypeaheadAttributes;
     'cwc-wysiwyg-editor': JSXElements.CwcWysiwygEditorAttributes;
     'fcl-image': JSXElements.FclImageAttributes;
@@ -1437,6 +1410,7 @@ declare global {
     'fcl-image-page': JSXElements.FclImagePageAttributes;
     'file-input-page': JSXElements.FileInputPageAttributes;
     'form-page': JSXElements.FormPageAttributes;
+    'infinite-list-page': JSXElements.InfiniteListPageAttributes;
     'inlineedit-page': JSXElements.InlineeditPageAttributes;
     'inlineedit-textarea-page': JSXElements.InlineeditTextareaPageAttributes;
     'list-page': JSXElements.ListPageAttributes;
@@ -1446,8 +1420,8 @@ declare global {
     'multiselect-page': JSXElements.MultiselectPageAttributes;
     'mwc-slider-page': JSXElements.MwcSliderPageAttributes;
     'my-checkbox-page': JSXElements.MyCheckboxPageAttributes;
-    'my-switch-page': JSXElements.MySwitchPageAttributes;
     'navbar-page': JSXElements.NavbarPageAttributes;
+    'my-switch-page': JSXElements.MySwitchPageAttributes;
     'navigation-page': JSXElements.NavigationPageAttributes;
     'number-input-page': JSXElements.NumberInputPageAttributes;
     'popper-page': JSXElements.PopperPageAttributes;
@@ -1576,7 +1550,6 @@ declare global {
     export interface CwcInfiniteListWatcherAttributes extends HTMLAttributes {
       'bindToList'?: boolean;
       'bottomOffset'?: number;
-      'containerSelector'?: string;
       'debounce'?: number;
       'lastItemSelector'?: string;
       'listSelector'?: string;
@@ -1609,9 +1582,10 @@ declare global {
       'addClassFirst'?: string;
       'addClassLast'?: string;
       'addClassOdd'?: string;
+      'interpolationRegex'?: any;
       'itemAs'?: string;
-      'items'?: object[];
-      'template'?: string;
+      'items'?: any[];
+      'listId'?: string;
       'wrapperClass'?: string;
     }
 
@@ -1670,10 +1644,7 @@ declare global {
     }
 
     export interface CwcNavigationAttributes extends HTMLAttributes {
-      'containerChildren'?: any[];
       'isCollapsed'?: boolean;
-      'primaryActions'?: any[];
-      'secondaryActions'?: any[];
     }
 
     export interface NavigationItemGroupAttributes extends HTMLAttributes {
@@ -1755,7 +1726,7 @@ declare global {
       'refid'?: string;
       'trigger'?: string;
     }
-
+                                     
     export interface CwcProgressBarAttributes extends HTMLAttributes {
       'animated'?: boolean;
       'classes'?: string;
@@ -1794,20 +1765,6 @@ declare global {
       'labelON'?: string;
       'onPostValue'?: (event: CustomEvent) => void;
       'value'?: boolean;
-    }
-
-    export interface CwcTagAttributes extends HTMLAttributes {
-      'classes'?: string;
-      'closable'?: boolean;
-      'imgLink'?: string;
-      'limitTo'?: number;
-      'link'?: string;
-      'onCloseData'?: any;
-      'onTagCloseEvent'?: (event: CustomEvent) => void;
-      'removeOnClose'?: boolean;
-      'rounded'?: boolean;
-      'tagType'?: BootstrapThemeColor;
-      'text'?: string;
     }
 
     export interface CwcTypeaheadAttributes extends HTMLAttributes {
@@ -1996,6 +1953,10 @@ declare global {
 
     }
 
+    export interface InfiniteListPageAttributes extends HTMLAttributes {
+
+    }
+
     export interface InlineeditPageAttributes extends HTMLAttributes {
 
     }
@@ -2032,16 +1993,18 @@ declare global {
 
     }
 
-    export interface MySwitchPageAttributes extends HTMLAttributes {
+    export interface NavbarPageAttributes extends HTMLAttributes {
 
     }
 
-    export interface NavbarPageAttributes extends HTMLAttributes {
+    export interface MySwitchPageAttributes extends HTMLAttributes {
 
     }
 
     export interface NavigationPageAttributes extends HTMLAttributes {
       'onNaviconstoggle'?: (event: CustomEvent) => void;
+      'onNavigationcomponentnumber'?: (event: CustomEvent) => void;
+      'onNavigationshowcontrol'?: (event: CustomEvent) => void;
       'onShownavigationcontainertoggle'?: (event: CustomEvent) => void;
       'onShownavigationtoggle'?: (event: CustomEvent) => void;
     }
@@ -2097,7 +2060,6 @@ declare global {
 
   interface HTMLElementTagNameMap {
     'cwc-alert': HTMLCwcAlertElement
-    'cwc-autocomplete-select': HTMLCwcAutocompleteSelectElement
     'cwc-avatar': HTMLCwcAvatarElement
     'cwc-checkbox-group': HTMLCwcCheckboxGroupElement
     'cwc-combobox': HTMLCwcComboboxElement
@@ -2128,7 +2090,6 @@ declare global {
     'cwc-sticky': HTMLCwcStickyElement
     'cwc-styles': HTMLCwcStylesElement
     'cwc-switch': HTMLCwcSwitchElement
-    'cwc-tag': HTMLCwcTagElement
     'cwc-typeahead': HTMLCwcTypeaheadElement
     'cwc-wysiwyg-editor': HTMLCwcWysiwygEditorElement
     'fcl-image': HTMLFclImageElement
@@ -2160,6 +2121,7 @@ declare global {
     'fcl-image-page': HTMLFclImagePageElement
     'file-input-page': HTMLFileInputPageElement
     'form-page': HTMLFormPageElement
+    'infinite-list-page': HTMLInfiniteListPageElement
     'inlineedit-page': HTMLInlineeditPageElement
     'inlineedit-textarea-page': HTMLInlineeditTextareaPageElement
     'list-page': HTMLListPageElement
@@ -2169,8 +2131,8 @@ declare global {
     'multiselect-page': HTMLMultiselectPageElement
     'mwc-slider-page': HTMLMwcSliderPageElement
     'my-checkbox-page': HTMLMyCheckboxPageElement
-    'my-switch-page': HTMLMySwitchPageElement
     'navbar-page': HTMLNavbarPageElement
+    'my-switch-page': HTMLMySwitchPageElement
     'navigation-page': HTMLNavigationPageElement
     'number-input-page': HTMLNumberInputPageElement
     'popper-page': HTMLPopperPageElement
@@ -2188,7 +2150,6 @@ declare global {
 
   interface ElementTagNameMap {
     'cwc-alert': HTMLCwcAlertElement;
-    'cwc-autocomplete-select': HTMLCwcAutocompleteSelectElement;
     'cwc-avatar': HTMLCwcAvatarElement;
     'cwc-checkbox-group': HTMLCwcCheckboxGroupElement;
     'cwc-combobox': HTMLCwcComboboxElement;
@@ -2219,7 +2180,6 @@ declare global {
     'cwc-sticky': HTMLCwcStickyElement;
     'cwc-styles': HTMLCwcStylesElement;
     'cwc-switch': HTMLCwcSwitchElement;
-    'cwc-tag': HTMLCwcTagElement;
     'cwc-typeahead': HTMLCwcTypeaheadElement;
     'cwc-wysiwyg-editor': HTMLCwcWysiwygEditorElement;
     'fcl-image': HTMLFclImageElement;
@@ -2251,6 +2211,7 @@ declare global {
     'fcl-image-page': HTMLFclImagePageElement;
     'file-input-page': HTMLFileInputPageElement;
     'form-page': HTMLFormPageElement;
+    'infinite-list-page': HTMLInfiniteListPageElement;
     'inlineedit-page': HTMLInlineeditPageElement;
     'inlineedit-textarea-page': HTMLInlineeditTextareaPageElement;
     'list-page': HTMLListPageElement;
@@ -2260,8 +2221,8 @@ declare global {
     'multiselect-page': HTMLMultiselectPageElement;
     'mwc-slider-page': HTMLMwcSliderPageElement;
     'my-checkbox-page': HTMLMyCheckboxPageElement;
-    'my-switch-page': HTMLMySwitchPageElement;
     'navbar-page': HTMLNavbarPageElement;
+    'my-switch-page': HTMLMySwitchPageElement;
     'navigation-page': HTMLNavigationPageElement;
     'number-input-page': HTMLNumberInputPageElement;
     'popper-page': HTMLPopperPageElement;

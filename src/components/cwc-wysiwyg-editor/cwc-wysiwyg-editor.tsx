@@ -9,7 +9,6 @@ import domador from '../../../node_modules/domador/dist/domador.min';
 })
 export class CwcWysiwygEditor {
   @Prop() id: string;
-  @Prop() for: string;
   @Prop() label: string;
 
   @Prop() fencing: boolean = true;
@@ -21,7 +20,7 @@ export class CwcWysiwygEditor {
 
   @Element() _element: HTMLElement;
 
-  @Event() postValue: EventEmitter;
+  @Event() onChange: EventEmitter;
 
   private _woofmark: any = null;
 
@@ -72,10 +71,9 @@ export class CwcWysiwygEditor {
     this._initEditor();
 
     this._woofmark.editable.addEventListener('DOMSubtreeModified', function(e) {
-      self.postValue.emit({
+      self.onChange.emit({
           id: self.id,
-          value: e.currentTarget.innerHTML,
-          type: self.for
+          value: e.currentTarget.innerHTML
       });
     });
   }

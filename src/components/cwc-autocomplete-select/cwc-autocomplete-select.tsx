@@ -23,17 +23,19 @@ import get from 'lodash/get';
   styleUrl: 'cwc-autocomplete-select.scss',
 })
 export class CwcAutocompleteSelect {
+  retainedInitialValues: any[] = [];
   @Prop() id: string;
+  @Prop() value: any[] = [];
   @Prop() label: string;
+  @Prop() placeholder = 'Search something';
+
+  @Prop() data: any[] = [];
+  @Prop() searchKey: string;
+  @Prop() itemAs: string = 'item';
+  @Prop() template: string;
 
   @Prop() minSearchLength = 1;
-  @Prop() data: any[] = [];
-  @Prop() value: any[] = [];
-  @Prop() itemAs: string = 'item';
   @Prop() idValue: string = 'multiselect-' + Math.floor(1000 + Math.random() * 9000) + new Date().getUTCMilliseconds();
-  @Prop() searchKey: string;
-  @Prop() template: string;
-  @Prop() placeholder = 'Search something';
 
   @State() filterValue: string = '';
   @State() optionsShown = false;
@@ -50,7 +52,7 @@ export class CwcAutocompleteSelect {
   @Element() el: HTMLElement;
 
   @Event() multiselectOnSubmit: EventEmitter;
-  @Event() postValue: EventEmitter;
+  @Event() onChange: EventEmitter;
   @Event() textChange: EventEmitter;
 
   @Listen('destroy')
@@ -62,11 +64,85 @@ export class CwcAutocompleteSelect {
       console.log("auto open", newVal);
   }
 
+  @Watch('value')
+  reloadValueProp() {
+    if (this.retainedInitialValues.toString() !== this.value.toString()) {
+      this.loadValueProp();
+    }
+  }
+
+  componentWillLoad() {
+    if (this.value == null) this.value = [];
+  }
+
+  componentDidLoad() {
+    // TODO: this line of code is here because removing "import template from 'lodash/template';" will cause this error to happen when you build the project:
+    // [ ERROR ]  Minify JS e.name.definition is not a function
+    if (this.focusIndex > 999) console.log(template);
+    /** */
+    this.loadValueProp();
+  }
+
+  /** Life cycle hooks **/
+  componentWillUpdate() {
+    if (this.filterValue) {
+      if (this.filterValue.length >= this.minSearchLength) {
+        this.filtered = this.filter();
+        if (this.filtered.length > 0) {
+          this.optionsShown = true;
+        }
+      }
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.justAddedLabel) {
+      this.justAddedLabel = false;
+      this.labelsAdded = true;
+      this.setCaretPositionEnd();
+    } else {
+      this.filtered = this.filter();
+    }
+  }
+
+  loadValueProp() {
+    this.retainedInitialValues = this.value;
+    if (this.value && this.value.length >= 1) {
+      this.results = this.value;
+      this.value.map((val, key) => {
+        let tempLabel;
+        if (typeof val === 'string') {
+          if (!this.labels.includes(val)) this.labels.push(val);
+        } else {
+          if (this.template) {
+            tempLabel = this.interpolate(this.template, { [this.itemAs]: val });
+          } else {
+            tempLabel = get(val, this.searchKey);
+          }
+          if (!this.labels.includes(tempLabel)) this.labels.push(tempLabel);
+        }
+
+        if (key === this.value.length - 1) {
+          this.multiselectOnSubmit.emit(this.results);
+          setTimeout(() => {
+            this.renderLabels();
+            this.checkForPlaceholder();
+
+            this.clearTextNodes();
+            this.autoOpen = false;
+            this.close();
+            this.textChange.emit('');
+          }, 500);
+        }
+      });
+    }
+  }
+
   addLabel(label) {
     this.labels = [...this.labels, label];
     this.justAddedLabel = true;
     this.renderLabels();
-    this.autoOpen=false;
+    this.autoOpen = false;
   }
 
   addResult(result: any) {
@@ -81,10 +157,9 @@ export class CwcAutocompleteSelect {
     this.results = this.results.filter((_, i) => i !== index);
     this.multiselectOnSubmit.emit(this.results);
 
-    this.postValue.emit({
+    this.onChange.emit({
       id: this.id,
-      value: this.results.length ? this.results : null,
-      type: 'autocomplete'
+      value: this.results.length ? this.results : null
     });
   }
 
@@ -101,6 +176,7 @@ export class CwcAutocompleteSelect {
   }
 
   multiselectOnSubmitHandler(result) {
+    if (this.labels.includes(result)) return;
     this.addLabel(result);
     this.filterValue = '';
     this.clearTextNodes();
@@ -112,62 +188,23 @@ export class CwcAutocompleteSelect {
 
     this.multiselectOnSubmit.emit(this.results);
 
-    this.postValue.emit({
+    this.onChange.emit({
       id: this.id,
-      value: this.results,
-      type: 'autocomplete'
+      value: this.results
     });
   }
 
-  /**
-   * Life cycle hooks
-   */
-  componentWillUpdate() {
-    if (this.filterValue) {
-      if (this.filterValue.length >= this.minSearchLength) {
-        this.filtered = this.filter();
-        if (this.filtered.length > 0) {
-          this.optionsShown = true;
-        }
-      }
-    }
+  private interpolate(template, variables, fallback = '') {
+    const regex = /\${[^{]+}/g;
+    return template.replace(regex, (match) => {
+      const path = match.slice(2, -1).trim();
+      return this.getObjPath(path, variables, fallback);
+    });
   }
 
-  componentDidUpdate() {
-    if (this.justAddedLabel) {
-      this.setCaretPositionEnd();
-      this.justAddedLabel = false;
-      this.labelsAdded = true;
-    } else {
-      this.filtered = this.filter();
-    }
-  }
-
-  componentDidLoad() {
-    if(this.value && this.value.length >= 1){
-      this.results = this.value;
-      this.value.map((val, key) => {
-        if (typeof val === 'string') {
-          this.labels.push(val);
-        } else {
-          let tempLabel = get(val, this.searchKey);
-          this.labels.push(tempLabel);
-        }
-
-        if(key === this.value.length-1){
-          this.multiselectOnSubmit.emit(this.results);
-          setTimeout(() => {
-            this.renderLabels();
-            this.checkForPlaceholder();
-
-            this.clearTextNodes();
-            this.autoOpen = false;
-            this.close();
-            this.textChange.emit('');
-          }, 500);
-        }
-      });
-    }
+  /** get the specified property or nested property of an object **/
+  private getObjPath(path, obj, fallback = '') {
+    return path.split('.').reduce((res, key) => res[key] || fallback, obj);
   }
 
   private removeAlllabels() {
@@ -205,9 +242,7 @@ export class CwcAutocompleteSelect {
     });
   }
 
-  /**
-   * Private functions
-   */
+  /** Private functions **/
   private filter() {
     if (typeof this.data[0] === 'string') {
       return this.filterStringArray(this.data);
@@ -238,13 +273,14 @@ export class CwcAutocompleteSelect {
     if (typeof val === 'string') {
       return val;
     } else {
+      if (this.template) {
+        return this.interpolate(this.template, { [this.itemAs]: val.data });
+      }
       return get(val.data, this.searchKey);
     }
   }
 
-  /**
-   * Handlers
-   */
+  /** Handlers **/
   handleInputChange(e) {
     //let elText = (typeof e.target.textContent !== 'undefined' && typeof e.target.textContent.length !== 'undefined') ? e.target.textContent[e.target.textContent.length-1] : '';
     //this.filterValue = (e && e.target && e.target.childNodes && e.target.childNodes && e.target.childNodes.length && e.target.childNodes[e.target.childNodes.length - 1]) ? e.target.childNodes[e.target.childNodes.length-1].textContent : '';
@@ -272,8 +308,10 @@ export class CwcAutocompleteSelect {
     input.value = value;
 
     const result = this.getStringValue(this.filtered[index]);
+
     this.multiselectOnSubmitHandler(result);
 
+    this.checkForPlaceholder();
     this.close();
   }
 
@@ -294,9 +332,7 @@ export class CwcAutocompleteSelect {
   }
   /** End - Set Placeholder **/
 
-  /**
-   * Public methods
-   */
+  /** Public methods **/
   @Method()
   close() {
     this.focusIndex = 0;
@@ -305,15 +341,11 @@ export class CwcAutocompleteSelect {
   }
 
   populateDropdown() {
-    let tmpl, list, templateString, itemValue;
-
-    if (this.template) {
-      tmpl = template(this.template);
-    }
+    let list, templateString, itemValue;
 
     list = this.filtered.map((val, i) => {
       if (this.template) {
-        templateString = tmpl({ [this.itemAs]: val.data });
+        templateString = this.interpolate(this.template, { [this.itemAs]: val.data });
       } else {
         itemValue = (typeof val == 'string') ? val : val.index;
       }
@@ -345,7 +377,7 @@ export class CwcAutocompleteSelect {
           <span class="caret" />
         </div>
         <div class="popper-container">
-          {this.filtered.length > 0 && (
+          {this.autoOpen && this.filtered.length > 0 && (
             <cwc-popper
               autoOpen={this.autoOpen}
               id={`cwc-popper-autocomplete-${this.idValue}`}
@@ -367,46 +399,31 @@ export class CwcAutocompleteSelect {
     ];
   }
 
-  /**
-   * Keyboard handlers
-   *
-   **/
-  @Listen('keyup')
-  @Listen('click')
-  @Listen('keydown')
-  handleKeyUpDown(e) {
-    setTimeout(() => {
-      //popper will be appear on click if data length will be '<=25'
-      if (this.data.length <= 25 && !this.labelsAdded) {
-        this.autoOpen = true;
-      }
-      //End
-      let popperContainer = document.querySelector(`#${this.idValue} .popper-container`);
-      if (e && typeof e.type !== 'undefined' && e.type === 'click') {
-        this.filtered = this.filter();
-        if (popperContainer instanceof HTMLElement) {
-          popperContainer.style.position = 'relative';
-        }
-      } else {
-        if (popperContainer instanceof HTMLElement) {
-          popperContainer.style.position = 'unset';
-        }
-      }
+  handlePopperContainer(e) {
+    let popperContainer = document.querySelector(`#${this.idValue} .popper-container`);
 
-      let formSelector = `#${this.idValue} div.form-control`;
-      let HTMLInputEle = document.querySelector(formSelector);
-      if (HTMLInputEle != null) {
-        let positionInfo = HTMLInputEle.getBoundingClientRect();
-        setTimeout(() => {
-          let targetElem = document.querySelector(formSelector + ' + div > cwc-popper > .popper > .cwc-popper-autocomplete');
-          if (targetElem instanceof HTMLElement) {
-            targetElem.style.width = positionInfo.width + 'px';
-          }
-        });
+    if (e && typeof e.type !== 'undefined' && e.type === 'click') {
+      this.filtered = this.filter();
+      if (popperContainer instanceof HTMLElement) {
+        popperContainer.style.position = 'relative';
       }
-    },200);
+    } else {
+      if (popperContainer instanceof HTMLElement) {
+        popperContainer.style.position = 'unset';
+      }
+    }
 
-    this.labelsAdded=false;
+    let formSelector = `#${this.idValue} div.form-control`;
+    let HTMLInputEle = document.querySelector(formSelector);
+    if (HTMLInputEle != null) {
+      let positionInfo = HTMLInputEle.getBoundingClientRect();
+      let targetElem = document.querySelector(formSelector + ' + div > cwc-popper > .popper > .cwc-popper-autocomplete');
+      if (targetElem instanceof HTMLElement) {
+        targetElem.style.width = positionInfo.width + 'px';
+      }
+    }
+
+    this.labelsAdded = false;
     if (e && (e.type === 'keydown' || e.type === 'keyup')) {
       //this.textChange.emit((e && typeof e.target !== 'undefined' && typeof e.target.childNodes !== 'undefined' && typeof e.target.childNodes.length !== 'undefined') ? e.target.childNodes[e.target.childNodes.length-1].textContent : '');
       let searchText = '';
@@ -417,6 +434,21 @@ export class CwcAutocompleteSelect {
       }
       this.textChange.emit(searchText);
     }
+  }
+
+  /** Keyboard handlers **/
+  @Listen('click')
+  handleClick(e) {
+    //popper will be appear on click if data length is '<=25'
+    if (this.data.length <= 25) this.autoOpen = true;
+    this.handlePopperContainer(e);
+  }
+
+
+  @Listen('keydown')
+  handleKeyUpDown(e) {
+    this.autoOpen = true;
+    this.handlePopperContainer(e);
   }
 
   @Listen('keydown.down')
@@ -455,9 +487,7 @@ export class CwcAutocompleteSelect {
     }
   }
 
-  /*
-   DOM API functions
-   */
+  /** DOM API functions **/
   setCaretPositionEnd() {
     const input = document.querySelector(`#${this.idValue} div.form-control`);
     const range = document && document.createRange && document.createRange();
