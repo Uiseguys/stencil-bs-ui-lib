@@ -50,6 +50,23 @@ declare global {
       'type': string;
     }
 
+    interface CwcAutocompleteSelect {
+      /**
+       * End - Set Placeholder * Public methods
+       */
+      'close': () => void;
+      'data': any[];
+      'id': string;
+      'idValue': string;
+      'itemAs': string;
+      'label': string;
+      'minSearchLength': number;
+      'placeholder': string;
+      'searchKey': string;
+      'template': string;
+      'value': any[];
+    }
+
     interface CwcAvatar {
       'background': string;
       'color': string;
@@ -242,6 +259,66 @@ declare global {
       'showIcon': boolean;
       'text': string;
       'titleText': string;
+    }
+
+    interface CwcNumberInput {
+      'alwaysSign': boolean;
+      'autoPadding': boolean;
+      'autoResize': boolean;
+      'blurMethod': (e: any) => void;
+      'currency': string;
+      'currencyDisplay': string;
+      'default': number;
+      'disabled': boolean;
+      'focusMethod': () => void;
+      'formatNumber': Function;
+      'hidden': boolean;
+      'input': string;
+      'invalid': boolean;
+      'locale': string;
+      'max': number;
+      'maximumFractionDigits': number;
+      'maximumSignificantDigits': number;
+      'min': number;
+      'minimumFractionDigits': number;
+      'minimumIntegerDigits': number;
+      'minimumSignificantDigits': number;
+      'minlength': number;
+      'name': string;
+      'noAutoWidth': boolean;
+      'noClamp': boolean;
+      'numberStyle': string;
+      'padLength': number;
+      'parseNumber': Function;
+      'placeholder': string;
+      'propertyForValue': string;
+      'required': boolean;
+      'resize': () => void;
+      'saturate': boolean;
+      'separators': Object;
+      'startAt': number;
+      'step': number;
+      'stepMod': number;
+      'unit': string;
+      'unitSeparator': string;
+      'useGrouping': boolean;
+      'validate': () => boolean;
+      'value': number;
+      'valueAsNumber': number;
+    }
+
+    interface CwcPopper {
+      'arrow': boolean;
+      'autoClose': boolean;
+      'autoOpen': boolean;
+      'close': () => void;
+      'closeable': boolean;
+      'isToggleBtn': boolean;
+      'open': () => void;
+      'placement': Placement;
+      'refid': string;
+      'toggle': () => void;
+      'trigger': string;
     }
 
     interface CwcProgressBar {
@@ -523,6 +600,10 @@ declare global {
 
     }
 
+    interface NumberInputPage {
+
+    }
+
     interface PopperPage {
 
     }
@@ -753,6 +834,21 @@ declare global {
     };
     
 
+    interface HTMLCwcNumberInputElement extends StencilComponents.CwcNumberInput, HTMLStencilElement {}
+
+    var HTMLCwcNumberInputElement: {
+      prototype: HTMLCwcNumberInputElement;
+      new (): HTMLCwcNumberInputElement;
+    };
+    
+
+    interface HTMLCwcPopperElement extends StencilComponents.CwcPopper, HTMLStencilElement {}
+
+    var HTMLCwcPopperElement: {
+      prototype: HTMLCwcPopperElement;
+      new (): HTMLCwcPopperElement;
+    };
+    
     interface HTMLCwcProgressBarElement extends StencilComponents.CwcProgressBar, HTMLStencilElement {}
 
     var HTMLCwcProgressBarElement: {
@@ -1153,6 +1249,14 @@ declare global {
     };
     
 
+    interface HTMLNumberInputPageElement extends StencilComponents.NumberInputPage, HTMLStencilElement {}
+
+    var HTMLNumberInputPageElement: {
+      prototype: HTMLNumberInputPageElement;
+      new (): HTMLNumberInputPageElement;
+    };
+    
+
     interface HTMLPopperPageElement extends StencilComponents.PopperPage, HTMLStencilElement {}
 
     var HTMLPopperPageElement: {
@@ -1267,6 +1371,8 @@ declare global {
     'navigation-item-group': JSXElements.NavigationItemGroupAttributes;
     'navigation-item': JSXElements.NavigationItemAttributes;
     'navigation-title': JSXElements.NavigationTitleAttributes;
+    'cwc-number-input': JSXElements.CwcNumberInputAttributes;
+    'cwc-popper': JSXElements.CwcPopperAttributes;
     'cwc-progress-bar': JSXElements.CwcProgressBarAttributes;
     'cwc-resolution-info': JSXElements.CwcResolutionInfoAttributes;
     'cwc-sticky-header': JSXElements.CwcStickyHeaderAttributes;
@@ -1317,6 +1423,7 @@ declare global {
     'navbar-page': JSXElements.NavbarPageAttributes;
     'my-switch-page': JSXElements.MySwitchPageAttributes;
     'navigation-page': JSXElements.NavigationPageAttributes;
+    'number-input-page': JSXElements.NumberInputPageAttributes;
     'popper-page': JSXElements.PopperPageAttributes;
     'progress-bar-page': JSXElements.ProgressBarPageAttributes;
     'resolution-info-page': JSXElements.ResolutionInfoPageAttributes;
@@ -1340,6 +1447,22 @@ declare global {
       'onToggleVisibility'?: (event: CustomEvent) => void;
       'show'?: boolean;
       'type'?: string;
+    }
+
+    export interface CwcAutocompleteSelectAttributes extends HTMLAttributes {
+      'data'?: any[];
+      'id'?: string;
+      'idValue'?: string;
+      'itemAs'?: string;
+      'label'?: string;
+      'minSearchLength'?: number;
+      'onMultiselectOnSubmit'?: (event: CustomEvent) => void;
+      'onPostValue'?: (event: CustomEvent) => void;
+      'onTextChange'?: (event: CustomEvent) => void;
+      'placeholder'?: string;
+      'searchKey'?: string;
+      'template'?: string;
+      'value'?: any[];
     }
 
     export interface CwcAvatarAttributes extends HTMLAttributes {
@@ -1550,6 +1673,60 @@ declare global {
       'titleText'?: string;
     }
 
+    export interface CwcNumberInputAttributes extends HTMLAttributes {
+      'alwaysSign'?: boolean;
+      'autoPadding'?: boolean;
+      'autoResize'?: boolean;
+      'currency'?: string;
+      'currencyDisplay'?: string;
+      'default'?: number;
+      'disabled'?: boolean;
+      'formatNumber'?: Function;
+      'hidden'?: boolean;
+      'input'?: string;
+      'invalid'?: boolean;
+      'locale'?: string;
+      'max'?: number;
+      'maximumFractionDigits'?: number;
+      'maximumSignificantDigits'?: number;
+      'min'?: number;
+      'minimumFractionDigits'?: number;
+      'minimumIntegerDigits'?: number;
+      'minimumSignificantDigits'?: number;
+      'minlength'?: number;
+      'name'?: string;
+      'noAutoWidth'?: boolean;
+      'noClamp'?: boolean;
+      'numberStyle'?: string;
+      'onTheComponentChanged'?: (event: CustomEvent) => void;
+      'padLength'?: number;
+      'parseNumber'?: Function;
+      'placeholder'?: string;
+      'propertyForValue'?: string;
+      'required'?: boolean;
+      'saturate'?: boolean;
+      'separators'?: Object;
+      'startAt'?: number;
+      'step'?: number;
+      'stepMod'?: number;
+      'unit'?: string;
+      'unitSeparator'?: string;
+      'useGrouping'?: boolean;
+      'value'?: number;
+      'valueAsNumber'?: number;
+    }
+
+    export interface CwcPopperAttributes extends HTMLAttributes {
+      'arrow'?: boolean;
+      'autoClose'?: boolean;
+      'autoOpen'?: boolean;
+      'closeable'?: boolean;
+      'isToggleBtn'?: boolean;
+      'placement'?: Placement;
+      'refid'?: string;
+      'trigger'?: string;
+    }
+                                     
     export interface CwcProgressBarAttributes extends HTMLAttributes {
       'animated'?: boolean;
       'classes'?: string;
@@ -1832,6 +2009,10 @@ declare global {
       'onShownavigationtoggle'?: (event: CustomEvent) => void;
     }
 
+    export interface NumberInputPageAttributes extends HTMLAttributes {
+
+    }
+
     export interface PopperPageAttributes extends HTMLAttributes {
 
     }
@@ -1901,6 +2082,8 @@ declare global {
     'navigation-item-group': HTMLNavigationItemGroupElement
     'navigation-item': HTMLNavigationItemElement
     'navigation-title': HTMLNavigationTitleElement
+    'cwc-number-input': HTMLCwcNumberInputElement
+    'cwc-popper': HTMLCwcPopperElement
     'cwc-progress-bar': HTMLCwcProgressBarElement
     'cwc-resolution-info': HTMLCwcResolutionInfoElement
     'cwc-sticky-header': HTMLCwcStickyHeaderElement
@@ -1951,6 +2134,7 @@ declare global {
     'navbar-page': HTMLNavbarPageElement
     'my-switch-page': HTMLMySwitchPageElement
     'navigation-page': HTMLNavigationPageElement
+    'number-input-page': HTMLNumberInputPageElement
     'popper-page': HTMLPopperPageElement
     'progress-bar-page': HTMLProgressBarPageElement
     'resolution-info-page': HTMLResolutionInfoPageElement
@@ -1988,6 +2172,8 @@ declare global {
     'navigation-item-group': HTMLNavigationItemGroupElement;
     'navigation-item': HTMLNavigationItemElement;
     'navigation-title': HTMLNavigationTitleElement;
+    'cwc-number-input': HTMLCwcNumberInputElement;
+    'cwc-popper': HTMLCwcPopperElement;
     'cwc-progress-bar': HTMLCwcProgressBarElement;
     'cwc-resolution-info': HTMLCwcResolutionInfoElement;
     'cwc-sticky-header': HTMLCwcStickyHeaderElement;
@@ -2038,6 +2224,7 @@ declare global {
     'navbar-page': HTMLNavbarPageElement;
     'my-switch-page': HTMLMySwitchPageElement;
     'navigation-page': HTMLNavigationPageElement;
+    'number-input-page': HTMLNumberInputPageElement;
     'popper-page': HTMLPopperPageElement;
     'progress-bar-page': HTMLProgressBarPageElement;
     'resolution-info-page': HTMLResolutionInfoPageElement;

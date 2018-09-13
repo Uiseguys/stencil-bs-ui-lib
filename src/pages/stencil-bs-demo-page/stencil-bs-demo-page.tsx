@@ -214,6 +214,11 @@ export class StencilBsDemoPage {
       url: '/checkboxgroup',
       title: 'Checkbox Group',
       componentName: 'checkbox-group-page'
+    },
+    {
+      url: '/numberinput',
+      title: 'Number Input',
+      componentName: 'number-input-page'
     }
   ];
 
