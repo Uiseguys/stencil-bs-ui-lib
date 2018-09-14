@@ -12,7 +12,7 @@ export class DatetimeInputComponent {
   @Prop({ mutable: true, reflectToAttr: true }) disabled: boolean;
   @Prop({ mutable: true }) name: string;
   @Prop({ mutable: true }) value: Object;
-  @Prop({ mutable: true }) default: Object;
+  // @Prop({ mutable: true }) default: Object;
 
   @State() _valueIsSet: boolean = false;
 
@@ -27,6 +27,49 @@ export class DatetimeInputComponent {
     amString: null,
     pmString: null,
   };
+
+  // -- date time
+  @Prop({ mutable: true }) year: number;
+  @Prop({ mutable: true }) month: number;
+  @Prop({ mutable: true }) day: number;
+  @Prop({ mutable: true }) hour: number;
+  @Prop({ mutable: true }) hour12: number;
+  @Prop({ mutable: true }) isAm: boolean;
+  @Prop({ mutable: true }) minute: number;
+  @Prop({ mutable: true }) second: number;
+  @Prop({ mutable: true }) millisecond: number;
+  @Prop({ mutable: true }) datetime: string;
+  @Prop({ mutable: true }) date: string;
+  @Prop({ mutable: true }) time: string;
+  // TODO: check if there is type date on stencil
+  @Prop({ mutable: true }) valueAsDate: Date;
+  @Prop({ mutable: true }) valueAsNumber: number;
+  @Prop({ mutable: true }) default: Object;
+  @Prop({ mutable: true }) min: Object;
+  @Prop({ mutable: true }) max: Object;
+  @Prop({ mutable: true, reflectToAttr: true }) hour12Format: boolean;
+  @Prop({ mutable: true }) clamp: string;
+  @Prop({ mutable: true }) timezone: string;
+  @Prop({ mutable: true }) timezone: string;
+  @Prop({ mutable: true }) dateOrder: Object = {
+    year: 1,
+    month: 3,
+    day: 5,
+    timeFirst: false,
+    dateFirst: true
+  };
+
+  @State() _timezoneOffset: number;
+  @State() _timeZoneHours: number;
+  @State() _timeZoneMinutes: number;
+  @State() _recentLocalTimezoneOffset: number;
+  @State() _maxDayOfMonth: number;
+  @State() _regexpDatetime: RegExp = /^(-?\d+-\d\d-\d\d)?(?:T?(?:(\d\d:\d\d(?::\d\d(?:\.\d\d\d)?)?)([+-]\d\d:\d\d|Z)?)?)$/;
+  @State() _regexpTimezone: RegExp = /(?:([+-]\d\d):(\d\d)|Z)$/;
+  @State() _regexpTimezone: boolean;
+  @State() _timeOnly: boolean = false;
+
+
 
   componentDidLoad() {
     // -- form element
@@ -205,6 +248,9 @@ export class DatetimeInputComponent {
       pmString: (!pmString || pmString === '.') ? 'PM' : pmString
     };
   }
+
+  // -- date time
+
 
   render() {
     return (
