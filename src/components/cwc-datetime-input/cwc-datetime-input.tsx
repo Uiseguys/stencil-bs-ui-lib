@@ -71,6 +71,22 @@ export class DatetimeInputComponent {
   @State() _min: any;
   @State() _max: any;
 
+  // -- date time input
+  @Prop({ mutable: true }) step: number;
+  @Prop({ mutable: true }) partsHidden: Object = {};
+  @Prop({ mutable: true }) partsDisabled: Object = {};
+  @Prop({ mutable: true }) partsStep: Object = {
+    day: 1,
+    hour: 1,
+    minute: 1,
+    second: 1,
+    millisecond: 1
+  };
+  @Prop({ mutable: true }) propertyForValue: string = 'valueAsNumber';
+
+  @State() _resetButtonIsInvisible: boolean;
+  @State() _defaultValue: number;
+
   componentDidLoad() {
     // -- form element
     this.el['tabindex'] = 0;
@@ -209,7 +225,7 @@ export class DatetimeInputComponent {
 
   // -- form element
   private _computeInvalid(required, value) {
-    this.invalid = Boolean(required && !value);
+    this.invalid = required && isNaN(value);
   }
   private _computeValueIsSet(value) {
     this._valueIsSet = value !== undefined;
