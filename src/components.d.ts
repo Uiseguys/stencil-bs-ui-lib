@@ -116,15 +116,36 @@ declare global {
     }
 
     interface CwcDatetimeInput {
-      'default': Object;
+      'clamp': string;
+      'date': string;
+      'dateOrder': Object;
+      'datetime': string;
+      'day': number;
+      'default': any;
       'disabled': boolean;
+      'hour': number;
+      'hour12': number;
+      'hour12Format': boolean;
       'invalid': boolean;
+      'isAm': boolean;
       'locale': string;
       'markers': Object;
+      'max': Object;
+      'millisecond': number;
+      'min': Object;
+      'minute': number;
+      'month': number;
       'name': string;
+      'now': () => void;
       'required': boolean;
+      'second': number;
+      'time': string;
+      'timezone': string;
       'validate': () => boolean;
       'value': Object;
+      'valueAsDate': Date;
+      'valueAsNumber': number;
+      'year': number;
     }
 
     interface CwcDnd {
@@ -1565,14 +1586,34 @@ declare global {
     }
 
     export interface CwcDatetimeInputAttributes extends HTMLAttributes {
-      'default'?: Object;
+      'clamp'?: string;
+      'date'?: string;
+      'dateOrder'?: Object;
+      'datetime'?: string;
+      'day'?: number;
+      'default'?: any;
       'disabled'?: boolean;
+      'hour'?: number;
+      'hour12'?: number;
+      'hour12Format'?: boolean;
       'invalid'?: boolean;
+      'isAm'?: boolean;
       'locale'?: string;
       'markers'?: Object;
+      'max'?: Object;
+      'millisecond'?: number;
+      'min'?: Object;
+      'minute'?: number;
+      'month'?: number;
       'name'?: string;
       'required'?: boolean;
+      'second'?: number;
+      'time'?: string;
+      'timezone'?: string;
       'value'?: Object;
+      'valueAsDate'?: Date;
+      'valueAsNumber'?: number;
+      'year'?: number;
     }
 
     export interface CwcDndAttributes extends HTMLAttributes {
