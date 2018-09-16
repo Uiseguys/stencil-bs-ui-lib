@@ -892,15 +892,20 @@ export class DatetimeInputComponent {
     switch (clamp) {
       case 'year':
       case 'month':
-        d.setUTCMonth(0); // falls through
+        d.setUTCMonth(0);
+        /* falls through */
       case 'day':
-        d.setUTCDate(1); // falls through
+        d.setUTCDate(1);
+        /* falls through */
       case 'hour':
-        d.setUTCHours(0); // falls through
+        d.setUTCHours(0);
+        /* falls through */
       case 'minute':
-        d.setUTCMinutes(0); // falls through
+        d.setUTCMinutes(0);
+        /* falls through */
       case 'second':
-        d.setUTCSeconds(0); // falls through
+        d.setUTCSeconds(0);
+        /* falls through */
       case 'millisecond':
         d.setUTCMilliseconds(0);
     }
