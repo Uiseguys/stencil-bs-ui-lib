@@ -150,6 +150,7 @@ declare global {
       'value': Object;
       'valueAsDate': Date;
       'valueAsNumber': number;
+      'withTimezone': boolean;
       'year': number;
     }
 
@@ -1623,6 +1624,7 @@ declare global {
       'value'?: Object;
       'valueAsDate'?: Date;
       'valueAsNumber'?: number;
+      'withTimezone'?: boolean;
       'year'?: number;
     }
 

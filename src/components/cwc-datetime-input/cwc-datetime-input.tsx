@@ -48,7 +48,7 @@ export class DatetimeInputComponent {
   @Prop({ mutable: true }) min: Object;
   @Prop({ mutable: true }) max: Object;
   @Prop({ mutable: true, reflectToAttr: true }) hour12Format: boolean;
-  @Prop({ mutable: true }) clamp: string;
+  // @Prop({ mutable: true }) clamp: string;
   @Prop({ mutable: true }) timezone: string;
   @Prop({ mutable: true }) dateOrder: Object = {
     year: 1,
@@ -86,6 +86,10 @@ export class DatetimeInputComponent {
 
   @State() _resetButtonIsInvisible: boolean;
   @State() _defaultValue: number;
+
+  // -- time input pattern
+  @Prop({ mutable: true }) clamp: string = '';
+  @Prop({ mutable: true }) withTimezone: boolean = false;
 
   componentDidLoad() {
     // -- form element
@@ -742,20 +746,6 @@ export class DatetimeInputComponent {
         this.datetime  = datetime;
         this.date  = date;
         this.time  = time;
-        // this.setProperties({
-        //   year: year,
-        //   month: month,
-        //   day: day,
-        //   hour: hour,
-        //   minute: minute,
-        //   second: second,
-        //   millisecond: millisecond,
-        //   isAm: isAm,
-        //   hour12: hour12,
-        //   datetime: datetime,
-        //   date: date,
-        //   time: time
-        // });
     } else if (!isNaN(d = new Date(this.default))) {
       this._setDate(d);
     } else if (!isNaN(this.valueAsNumber)) {
@@ -796,27 +786,6 @@ export class DatetimeInputComponent {
     this._timeZoneHours = undefined;
     this._timeZoneMinutes = undefined;
     this._recentLocalTimezoneOffset = undefined;
-    // this.setProperties({
-    //   valueAsDate: undefined,
-    //   valueAsNumber: undefined,
-    //   datetime: undefined,
-    //   date: undefined,
-    //   time: undefined,
-    //   year: undefined,
-    //   month: undefined,
-    //   day: undefined,
-    //   hour: undefined,
-    //   hour12: undefined,
-    //   isAm: undefined,
-    //   minute: undefined,
-    //   second: undefined,
-    //   millisecond: undefined,
-    //   timezone: undefined,
-    //   _timezoneOffset: undefined,
-    //   _timeZoneHours: undefined,
-    //   _timeZoneMinutes: undefined,
-    //   _recentLocalTimezoneOffset: undefined
-    // });
   }
 
   private _fromDatetime(datetime) {
@@ -860,10 +829,6 @@ export class DatetimeInputComponent {
       // TODO: check
       this.min = this.max;
       this.max = min;
-      // this.setProperties({
-      //   min: this.max,
-      //   max: min
-      // });
       return;
     }
     this._min = d;
@@ -882,10 +847,6 @@ export class DatetimeInputComponent {
       // TODO: check
       this.min = max;
       this.max = this.min;
-      // this.setProperties({
-      //   min: max,
-      //   max: this.min
-      // });
       return;
     }
     this._max = d;
@@ -1190,12 +1151,6 @@ export class DatetimeInputComponent {
         second: 0,
         millisecond: 0
       });
-      // this.set('partsStep.day', 0);
-      // this.set('partsStep.hour', 0);
-      // this.set('partsStep.minute', 0);
-      // this.set('partsStep.second', 0);
-      // this.set('partsStep.millisecond', 0);
-      // this.notifyPath('partsStep');
       return;
     } else if (step < 0.001) {
       this.step = 0.001;
@@ -1206,13 +1161,6 @@ export class DatetimeInputComponent {
         second: 1,
         millisecond: 1
       });
-      // this.set('step', 0.001);
-      // this.set('partsStep.day', 1);
-      // this.set('partsStep.hour', 1);
-      // this.set('partsStep.minute', 1);
-      // this.set('partsStep.second', 1);
-      // this.set('partsStep.millisecond', 1);
-      // this.notifyPath('partsStep');
       return;
     }
     step = +step.toFixed(3);
@@ -1225,11 +1173,6 @@ export class DatetimeInputComponent {
         second: 0,
         millisecond: 0
       });
-      // this.set('partsStep.day', step / 86400);
-      // this.set('partsStep.hour', 0);
-      // this.set('partsStep.minute', 0);
-      // this.set('partsStep.second', 0);
-      // this.set('partsStep.millisecond', 0);
       if (this._ifClamped(this.clamp, 'day', null)) {
         // reset `clamp` to next inferior standing if clamped
         // this.set('clamp', 'hour');
@@ -1243,11 +1186,6 @@ export class DatetimeInputComponent {
         second: 0,
         millisecond: 0
       });
-      // this.set('partsStep.day', 1);
-      // this.set('partsStep.hour', step / 3600);
-      // this.set('partsStep.minute', 0);
-      // this.set('partsStep.second', 0);
-      // this.set('partsStep.millisecond', 0);
       if (this._ifClamped(this.clamp, 'hour', null)) {
         // reset `clamp` to next inferior standing if clamped
         // this.set('clamp', 'minute');
@@ -1261,11 +1199,6 @@ export class DatetimeInputComponent {
         second: 0,
         millisecond: 0
       });
-      // this.set('partsStep.day', 1);
-      // this.set('partsStep.hour', 1);
-      // this.set('partsStep.minute', step / 60);
-      // this.set('partsStep.second', 0);
-      // this.set('partsStep.millisecond', 0);
       if (this._ifClamped(this.clamp, 'minute', null)) {
         // reset `clamp` to next inferior standing if clamped
         // this.set('clamp', 'second');
@@ -1279,11 +1212,6 @@ export class DatetimeInputComponent {
         second: step,
         millisecond: 0
       });
-      // this.set('partsStep.day', 1);
-      // this.set('partsStep.hour', 1);
-      // this.set('partsStep.minute', 1);
-      // this.set('partsStep.second', step);
-      // this.set('partsStep.millisecond', 0);
       if (this._ifClamped(this.clamp, 'second', null)) {
         // reset `clamp` to next inferior standing if clamped
         // this.set('clamp', 'millisecond');
@@ -1297,11 +1225,6 @@ export class DatetimeInputComponent {
         second: 1,
         millisecond: step * 1000
       });
-      // this.set('partsStep.day', 1);
-      // this.set('partsStep.hour', 1);
-      // this.set('partsStep.minute', 1);
-      // this.set('partsStep.second', 1);
-      // this.set('partsStep.millisecond', step * 1000);
       if (this._ifClamped(this.clamp, 'millisecond', null)) {
         // reset `clamp` to next inferior standing if clamped
         // this.set('clamp', '');
@@ -1343,10 +1266,70 @@ export class DatetimeInputComponent {
     // this.notifyPath('partsDisabled');
   }
 
+  private _switchAm() {
+    this.isAm = !this.isAm;
+  }
+
+  private _computeMultipleClamp(clamp, prop1, hidden1, prop2, hidden2) {
+    return hidden1 || hidden2 || this._ifClamped(clamp, prop1, null) || this._ifClamped(clamp, prop2, null);
+  }
+
   // TODO: fix invisible attribute on button
+  // TODO: fix on-click on buttons
   render() {
     return (
       <div id="input">
+        <div style={{ order: this._computePartOrder(this.dateOrder['timeFirst']) }}
+          hidden={this._ifClamped(this.clamp, 'hour', null)}>
+          <template is="dom-if" if={!this._ifClamped(this.clamp, 'hour', this.partsHidden.hour)}>
+            <cwc-number-input id="hour" hidden={this.hour12Format} pad-length={2}
+              no-clamp value-as-number={this.hour} placeholder="00"
+              disabled={this.partsDisabled.hour} step={this.partsStep.hour}>
+            </cwc-number-input>
+            <template is="dom-if" if={this.hour12Format}>
+              <cwc-number-input pad-length={2} no-clamp value-as-number={this.hour12}
+                placeholder="00" disabled={this.partsDisabled.hour} step={this.partsStep.hour}>
+              </cwc-number-input>
+            </template>
+          </template>
+          <span hidden={this._computeMultipleClamp(this.clamp, 'hour', this.partsHidden.hour, 'minute', this.partsHidden.minute)}>
+            {this.timeSeparator}
+          </span>
+          <cwc-number-input id="minute" value-as-number={this.minute}
+            hidden={this._ifClamped(this.clamp, 'minute', this.partsHidden.minute)} pad-length={2}
+            no-clamp step={this.partsStep.minute} disabled={this.partsDisabled.minute} placeholder="00">
+          </cwc-number-input>
+          <span hidden={this._computeMultipleClamp(this.clamp, 'second', this.partsHidden.second, 'minute', this.partsHidden.minute)}>
+            {this.timeSeparator}
+          </span>
+          <cwc-number-input hidden={this._ifClamped(this.clamp, 'second', this.partsHidden.second)}
+            pad-length={2} no-clamp step={this.partsStep.second} disabled={this.partsDisabled.second}
+            value-as-number={this.second} placeholder="00">
+          </cwc-number-input>
+          <template is="dom-if" if={this._ifClamped(this.clamp, 'second', this.partsHidden.second)}>
+            <span hidden={this._ifClamped(this.clamp, 'millisecond', this.partsHidden.millisecond)}>0</span>
+          </template>
+          <span hidden={this._ifClamped(this.clamp, 'millisecond', this.partsHidden.millisecond)}>{this.decimalSeparator}</span>
+          <cwc-number-input value-as-number={this.millisecond}
+            hidden={this._ifClamped(this.clamp, 'millisecond', this.partsHidden.millisecond)}
+            pad-length={3} no-clamp step={this.partsStep.millisecond}
+            disabled={this.partsDisabled.millisecond} placeholder="000">
+          </cwc-number-input>
+          <template is="dom-if" if={this.hour12Format}>
+            <button class="hour12" disabled={this.partsHidden.hour} on-click={this._switchAm} hidden={!this._valueIsSet}>
+              <div hidden={!this.isAm}>{this.amString}</div>
+              <div hidden={this.isAm}>{this.pmString}</div>
+            </button>
+          </template>
+          <template is="dom-if" if={this.withTimezone}>
+            <cwc-number-input value-as-number={this._timeZoneHours} pad-length={2}
+              always-sign step={1} placeholder="+00" min={-23} max={23}>
+            </cwc-number-input>
+            <span>{this.timeSeparator}</span>
+            <cwc-number-input value-as-number={this._timeZoneMinutes} pad-length={2} min={0} max={45} step={15} placeholder="00">
+            </cwc-number-input>
+          </template>
+        </div>
         <button class="icon reset" invisible={this._resetButtonIsInvisible} hidden={this.disabled}>
           <svg viewBox="0 0 24 24">
             <g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></g>
