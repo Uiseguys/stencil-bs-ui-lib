@@ -112,6 +112,17 @@ export class DatetimeInputComponent {
     this._datetimeChanged(this.datetime);
     this._dateTimeChanged(this.date, this.time);
     this._timeZoneHoursMinutesChanged(this._timeZoneHours, this._timeZoneMinutes);
+
+    // -- date time input
+    this._resetButtonIsInvisible = this._computeResetButtonIsHidden(this._valueIsSet, this._defaultValue, this.value);
+    this._defaultValue = this._computeDefaultValue(this.default);
+    this._computePartsStep(this.step);
+    this._computePartsDisabled({ path: 'partsStep', value: this.partsStep }, this.disabled);
+    this.el.querySelector('button.reset').addEventListener('click', this._resetDate, false);
+  }
+
+  componentDidUnload() {
+    this.el.querySelector('button.reset').removeEventListener('click', this._resetDate, false);
   }
 
   // -- form element
@@ -123,10 +134,12 @@ export class DatetimeInputComponent {
   valueChanged() {
     this._computeInvalid(this.required, this.value);
     this._computeValueIsSet(this.value);
+    this._resetButtonIsInvisible = this._computeResetButtonIsHidden(this._valueIsSet, this._defaultValue, this.value);
   }
   @Watch('default')
   defaultChanged() {
     this._defaultChanged(this.default);
+    this._defaultValue = this._computeDefaultValue(this.default);
   }
 
   // -- intl date time format
@@ -222,6 +235,34 @@ export class DatetimeInputComponent {
   underscoreTimeZoneMinutesChanged() {
     this._timeZoneHoursMinutesChanged(this._timeZoneHours, this._timeZoneMinutes);
   }
+
+  // -- date time input
+  @Watch('_valueIsSet')
+  underscoreValueIsSetChanged() {
+    this._resetButtonIsInvisible = this._computeResetButtonIsHidden(this._valueIsSet, this._defaultValue, this.value);
+  }
+  @Watch('_defaultValue')
+  underscoreDefaultValueChanged() {
+    this._resetButtonIsInvisible = this._computeResetButtonIsHidden(this._valueIsSet, this._defaultValue, this.value);
+  }
+  @Watch('step')
+  stepChanged() {
+    this._computePartsStep(this.step);
+  }
+  @Watch('partsStep')
+  partsStepChanged(newVal, oldVal) {
+    // TODO: confirm if works
+    for (const key in newVal) {
+      if (newVal.hasOwnProperty(key) && newVal[key] !== oldVal[key]) {
+        this._computePartsDisabled({ path: `partsStep.${key}`, value: newVal[key] }, this.disabled);
+      }
+    }
+  }
+  @Watch('disabled')
+  disabledChanged() {
+    this._computePartsDisabled({ path: 'partsStep' }, this.disabled);
+  }
+
 
   // -- form element
   private _computeInvalid(required, value) {
@@ -1120,10 +1161,197 @@ export class DatetimeInputComponent {
     return 31;
   }
 
+  // -- date time input
+  private _computePartOrder(first) {
+    return first ? 0 : 1;
+  }
+
+  private _computeDefaultValue(def) {
+    if (def !== undefined) {
+      const d = this._fromDatetime(def);
+      if (!isNaN(d)) {
+        return +d;
+      }
+    }
+  }
+
+  private _computeResetButtonIsHidden(_valueIsSet, _defaultValue, value) {
+    return !_valueIsSet || (_defaultValue !== undefined && _defaultValue === value);
+  }
+
+  private _computePartsStep(step) {
+    if (step === undefined) { return; }
+
+    if (step === 0) {
+      this.partsStep = Object.assign(this.partsStep, {
+        day: 0,
+        hour: 0,
+        minute: 0,
+        second: 0,
+        millisecond: 0
+      });
+      // this.set('partsStep.day', 0);
+      // this.set('partsStep.hour', 0);
+      // this.set('partsStep.minute', 0);
+      // this.set('partsStep.second', 0);
+      // this.set('partsStep.millisecond', 0);
+      // this.notifyPath('partsStep');
+      return;
+    } else if (step < 0.001) {
+      this.step = 0.001;
+      this.partsStep = Object.assign(this.partsStep, {
+        day: 1,
+        hour: 1,
+        minute: 1,
+        second: 1,
+        millisecond: 1
+      });
+      // this.set('step', 0.001);
+      // this.set('partsStep.day', 1);
+      // this.set('partsStep.hour', 1);
+      // this.set('partsStep.minute', 1);
+      // this.set('partsStep.second', 1);
+      // this.set('partsStep.millisecond', 1);
+      // this.notifyPath('partsStep');
+      return;
+    }
+    step = +step.toFixed(3);
+
+    if (step % 86400 === 0) {
+      this.partsStep = Object.assign(this.partsStep, {
+        day: step / 86400,
+        hour: 0,
+        minute: 0,
+        second: 0,
+        millisecond: 0
+      });
+      // this.set('partsStep.day', step / 86400);
+      // this.set('partsStep.hour', 0);
+      // this.set('partsStep.minute', 0);
+      // this.set('partsStep.second', 0);
+      // this.set('partsStep.millisecond', 0);
+      if (this._ifClamped(this.clamp, 'day', null)) {
+        // reset `clamp` to next inferior standing if clamped
+        // this.set('clamp', 'hour');
+        this.clamp = 'hour';
+      }
+    } else if (step % 3600 === 0) {
+      this.partsStep = Object.assign(this.partsStep, {
+        day: 1,
+        hour: step / 3600,
+        minute: 0,
+        second: 0,
+        millisecond: 0
+      });
+      // this.set('partsStep.day', 1);
+      // this.set('partsStep.hour', step / 3600);
+      // this.set('partsStep.minute', 0);
+      // this.set('partsStep.second', 0);
+      // this.set('partsStep.millisecond', 0);
+      if (this._ifClamped(this.clamp, 'hour', null)) {
+        // reset `clamp` to next inferior standing if clamped
+        // this.set('clamp', 'minute');
+        this.clamp = 'minute';
+      }
+    } else if (step % 60 === 0) {
+      this.partsStep = Object.assign(this.partsStep, {
+        day: 1,
+        hour: 1,
+        minute: step / 60,
+        second: 0,
+        millisecond: 0
+      });
+      // this.set('partsStep.day', 1);
+      // this.set('partsStep.hour', 1);
+      // this.set('partsStep.minute', step / 60);
+      // this.set('partsStep.second', 0);
+      // this.set('partsStep.millisecond', 0);
+      if (this._ifClamped(this.clamp, 'minute', null)) {
+        // reset `clamp` to next inferior standing if clamped
+        // this.set('clamp', 'second');
+        this.clamp = 'second';
+      }
+    } else if (step % 1 === 0) {
+      this.partsStep = Object.assign(this.partsStep, {
+        day: 1,
+        hour: 1,
+        minute: 1,
+        second: step,
+        millisecond: 0
+      });
+      // this.set('partsStep.day', 1);
+      // this.set('partsStep.hour', 1);
+      // this.set('partsStep.minute', 1);
+      // this.set('partsStep.second', step);
+      // this.set('partsStep.millisecond', 0);
+      if (this._ifClamped(this.clamp, 'second', null)) {
+        // reset `clamp` to next inferior standing if clamped
+        // this.set('clamp', 'millisecond');
+        this.clamp = 'millisecond';
+      }
+    } else {
+      this.partsStep = Object.assign(this.partsStep, {
+        day: 1,
+        hour: 1,
+        minute: 1,
+        second: 1,
+        millisecond: step * 1000
+      });
+      // this.set('partsStep.day', 1);
+      // this.set('partsStep.hour', 1);
+      // this.set('partsStep.minute', 1);
+      // this.set('partsStep.second', 1);
+      // this.set('partsStep.millisecond', step * 1000);
+      if (this._ifClamped(this.clamp, 'millisecond', null)) {
+        // reset `clamp` to next inferior standing if clamped
+        // this.set('clamp', '');
+        this.clamp = '';
+      }
+    }
+    // this.notifyPath('partsStep');
+  }
+
+  private _computePartsDisabled(change, disabled) {
+    if (!(change && change.path)) {
+      return;
+    }
+    if (change.path.indexOf('.') !== -1) {
+      // const key = 'partsDisabled.' + change.path.split('.')[1];
+      const key = change.path.split('.')[1];
+      if (disabled) {
+        this.partsDisabled = Object.assign(this.partsDisabled, {
+          [key]: true
+        });
+        // this.set(key, true);
+      } else {
+        this.partsDisabled = Object.assign(this.partsDisabled, {
+          [key]: !change.value
+        });
+        // this.set(key, !change.value);
+      }
+    } else if (change && change.value) {
+      const newData = {};
+      for (const key in change.value) {
+        if (change.value.hasOwnProperty(key)) {
+          newData[key] = !change.value[key];
+          // this.set('partsDisabled.' + key, !change.value[key]);
+        }
+      }
+      this.partsDisabled = Object.assign(this.partsDisabled, newData);
+    }
+
+    // this.notifyPath('partsDisabled');
+  }
+
+  // TODO: fix invisible attribute on button
   render() {
     return (
-      <div>
-        TEST
+      <div id="input">
+        <button class="icon reset" invisible={this._resetButtonIsInvisible} hidden={this.disabled}>
+          <svg viewBox="0 0 24 24">
+            <g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></g>
+          </svg>
+        </button>
       </div>
     );
   }

@@ -137,8 +137,13 @@ declare global {
       'month': number;
       'name': string;
       'now': () => void;
+      'partsDisabled': Object;
+      'partsHidden': Object;
+      'partsStep': Object;
+      'propertyForValue': string;
       'required': boolean;
       'second': number;
+      'step': number;
       'time': string;
       'timezone': string;
       'validate': () => boolean;
@@ -1606,8 +1611,13 @@ declare global {
       'minute'?: number;
       'month'?: number;
       'name'?: string;
+      'partsDisabled'?: Object;
+      'partsHidden'?: Object;
+      'partsStep'?: Object;
+      'propertyForValue'?: string;
       'required'?: boolean;
       'second'?: number;
+      'step'?: number;
       'time'?: string;
       'timezone'?: string;
       'value'?: Object;
