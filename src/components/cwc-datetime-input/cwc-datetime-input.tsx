@@ -1281,51 +1281,53 @@ export class DatetimeInputComponent {
       <div id="input">
         <div style={{ order: this._computePartOrder(this.dateOrder['timeFirst']) }}
           hidden={this._ifClamped(this.clamp, 'hour', null)}>
-          <template is="dom-if" if={!this._ifClamped(this.clamp, 'hour', this.partsHidden.hour)}>
+          <template is="dom-if" if={!this._ifClamped(this.clamp, 'hour', this.partsHidden['hour'])}>
             <cwc-number-input id="hour" hidden={this.hour12Format} pad-length={2}
               no-clamp value-as-number={this.hour} placeholder="00"
-              disabled={this.partsDisabled.hour} step={this.partsStep.hour}>
+              disabled={this.partsDisabled['hour']} step={this.partsStep['hour']}>
             </cwc-number-input>
             <template is="dom-if" if={this.hour12Format}>
               <cwc-number-input pad-length={2} no-clamp value-as-number={this.hour12}
-                placeholder="00" disabled={this.partsDisabled.hour} step={this.partsStep.hour}>
+                placeholder="00" disabled={this.partsDisabled['hour']} step={this.partsStep['hour']}>
               </cwc-number-input>
             </template>
           </template>
-          <span hidden={this._computeMultipleClamp(this.clamp, 'hour', this.partsHidden.hour, 'minute', this.partsHidden.minute)}>
-            {this.timeSeparator}
+          <span hidden={this._computeMultipleClamp(this.clamp, 'hour', this.partsHidden['hour'], 'minute', this.partsHidden['minute'])}>
+            {this.markers['timeSeparator']}
           </span>
           <cwc-number-input id="minute" value-as-number={this.minute}
-            hidden={this._ifClamped(this.clamp, 'minute', this.partsHidden.minute)} pad-length={2}
-            no-clamp step={this.partsStep.minute} disabled={this.partsDisabled.minute} placeholder="00">
+            hidden={this._ifClamped(this.clamp, 'minute', this.partsHidden['minute'])} pad-length={2}
+            no-clamp step={this.partsStep['minute']} disabled={this.partsDisabled['minute']} placeholder="00">
           </cwc-number-input>
-          <span hidden={this._computeMultipleClamp(this.clamp, 'second', this.partsHidden.second, 'minute', this.partsHidden.minute)}>
-            {this.timeSeparator}
+          <span hidden={this._computeMultipleClamp(this.clamp, 'second', this.partsHidden['second'], 'minute', this.partsHidden['minute'])}>
+            {this.markers['timeSeparator']}
           </span>
-          <cwc-number-input hidden={this._ifClamped(this.clamp, 'second', this.partsHidden.second)}
-            pad-length={2} no-clamp step={this.partsStep.second} disabled={this.partsDisabled.second}
+          <cwc-number-input hidden={this._ifClamped(this.clamp, 'second', this.partsHidden['second'])}
+            pad-length={2} no-clamp step={this.partsStep['second']} disabled={this.partsDisabled['second']}
             value-as-number={this.second} placeholder="00">
           </cwc-number-input>
-          <template is="dom-if" if={this._ifClamped(this.clamp, 'second', this.partsHidden.second)}>
-            <span hidden={this._ifClamped(this.clamp, 'millisecond', this.partsHidden.millisecond)}>0</span>
+          <template is="dom-if" if={this._ifClamped(this.clamp, 'second', this.partsHidden['second'])}>
+            <span hidden={this._ifClamped(this.clamp, 'millisecond', this.partsHidden['millisecond'])}>0</span>
           </template>
-          <span hidden={this._ifClamped(this.clamp, 'millisecond', this.partsHidden.millisecond)}>{this.decimalSeparator}</span>
+          <span hidden={this._ifClamped(this.clamp, 'millisecond', this.partsHidden['millisecond'])}>
+            {this.markers['decimalSeparator']}
+          </span>
           <cwc-number-input value-as-number={this.millisecond}
-            hidden={this._ifClamped(this.clamp, 'millisecond', this.partsHidden.millisecond)}
-            pad-length={3} no-clamp step={this.partsStep.millisecond}
-            disabled={this.partsDisabled.millisecond} placeholder="000">
+            hidden={this._ifClamped(this.clamp, 'millisecond', this.partsHidden['millisecond'])}
+            pad-length={3} no-clamp step={this.partsStep['millisecond']}
+            disabled={this.partsDisabled['millisecond']} placeholder="000">
           </cwc-number-input>
           <template is="dom-if" if={this.hour12Format}>
-            <button class="hour12" disabled={this.partsHidden.hour} on-click={this._switchAm} hidden={!this._valueIsSet}>
-              <div hidden={!this.isAm}>{this.amString}</div>
-              <div hidden={this.isAm}>{this.pmString}</div>
+            <button class="hour12" disabled={this.partsHidden['hour']} on-click={this._switchAm} hidden={!this._valueIsSet}>
+              <div hidden={!this.isAm}>{this.markers['amString']}</div>
+              <div hidden={this.isAm}>{this.markers['pmString']}</div>
             </button>
           </template>
           <template is="dom-if" if={this.withTimezone}>
             <cwc-number-input value-as-number={this._timeZoneHours} pad-length={2}
               always-sign step={1} placeholder="+00" min={-23} max={23}>
             </cwc-number-input>
-            <span>{this.timeSeparator}</span>
+            <span>{this.markers['timeSeparator']}</span>
             <cwc-number-input value-as-number={this._timeZoneMinutes} pad-length={2} min={0} max={45} step={15} placeholder="00">
             </cwc-number-input>
           </template>
