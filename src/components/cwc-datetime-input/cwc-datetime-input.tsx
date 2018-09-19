@@ -88,8 +88,14 @@ export class DatetimeInputComponent {
   @State() _defaultValue: number;
 
   // -- time input pattern
-  @Prop({ mutable: true }) clamp: string = '';
+  // @Prop({ mutable: true }) clamp: string = '';
   @Prop({ mutable: true }) withTimezone: boolean = false;
+
+  // -- date input pattern
+  // @Prop({ mutable: true }) clamp: string = 'hour';
+
+  // -- date time input
+  @Prop({ mutable: true }) clamp: string = 'millisecond';
 
   componentDidLoad() {
     // -- form element
@@ -545,9 +551,9 @@ export class DatetimeInputComponent {
         this._resetDate(null);
       }
       return;
-    } else if (isNaN(d)) {
+    } else if (isNaN(d.getTime())) {
       d = new Date(this.valueAsNumber !== undefined ? this.valueAsNumber : this.datetime);
-      if (isNaN(d)) {
+      if (isNaN(d.getTime())) {
         if (this._timeOnly) {
           if (!this.timezone || !this.date) {
             this.__updatingTimezoneOffset = true;
@@ -571,7 +577,7 @@ export class DatetimeInputComponent {
             d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
           }
         }
-        if (isNaN(d)) {
+        if (isNaN(d.getTime())) {
           d = new Date();
         }
       }
@@ -746,7 +752,7 @@ export class DatetimeInputComponent {
         this.datetime  = datetime;
         this.date  = date;
         this.time  = time;
-    } else if (!isNaN(d = new Date(this.default))) {
+    } else if (!isNaN((d = new Date(this.default)).getTime())) {
       this._setDate(d);
     } else if (!isNaN(this.valueAsNumber)) {
       this._valueAsNumberChanged(this.valueAsNumber);
@@ -873,33 +879,33 @@ export class DatetimeInputComponent {
     return this._pad(year, year < 0 ? 6 : 4) + '-' + this._pad(d.getMonth() + 1, 2) + '-' + this._pad(d.getDate(), 2);
   }
 
-  private _toUTCDate(d) {
-    if (typeof d === 'number') {
-      d = new Date(d);
-    }
-    const year = d.getUTCFullYear();
-    return this._pad(year, year < 0 ? 6 : 4) + '-' + this._pad(d.getUTCMonth() + 1, 2) + '-' + this._pad(d.getUTCDate(), 2);
-  }
+  // private _toUTCDate(d) {
+  //   if (typeof d === 'number') {
+  //     d = new Date(d);
+  //   }
+  //   const year = d.getUTCFullYear();
+  //   return this._pad(year, year < 0 ? 6 : 4) + '-' + this._pad(d.getUTCMonth() + 1, 2) + '-' + this._pad(d.getUTCDate(), 2);
+  // }
 
   private __toDate(year, month, day) {
     return this._pad(year, year < 0 ? 6 : 4) + '-' + this._pad(month, 2) + '-' + this._pad(day, 2);
   }
 
-  private _toTime(d) {
-    if (typeof d === 'number') {
-      d = new Date(d);
-    }
-    return this._pad(d.getHours(), 2) + ':' + this._pad(d.getMinutes(), 2) + ':' + this._pad(d.getSeconds(), 2)
-      + '.' + this._pad(d.getMilliseconds(), 3);
-  }
+  // private _toTime(d) {
+  //   if (typeof d === 'number') {
+  //     d = new Date(d);
+  //   }
+  //   return this._pad(d.getHours(), 2) + ':' + this._pad(d.getMinutes(), 2) + ':' + this._pad(d.getSeconds(), 2)
+  //     + '.' + this._pad(d.getMilliseconds(), 3);
+  // }
 
-  private _toUTCTime(d) {
-    if (typeof d === 'number') {
-      d = new Date(d);
-    }
-    return this._pad(d.getUTCHours(), 2) + ':' + this._pad(d.getUTCMinutes(), 2) + ':'
-      + this._pad(d.getUTCSeconds(), 2) + '.' + this._pad(d.getUTCMilliseconds(), 3);
-  }
+  // private _toUTCTime(d) {
+  //   if (typeof d === 'number') {
+  //     d = new Date(d);
+  //   }
+  //   return this._pad(d.getUTCHours(), 2) + ':' + this._pad(d.getUTCMinutes(), 2) + ':'
+  //     + this._pad(d.getUTCSeconds(), 2) + '.' + this._pad(d.getUTCMilliseconds(), 3);
+  // }
 
   private __toTime(hour, minute, second, millisecond) {
     return this._pad(hour || 0, 2) + ':' + this._pad(minute || 0, 2)
@@ -1274,12 +1280,94 @@ export class DatetimeInputComponent {
     return hidden1 || hidden2 || this._ifClamped(clamp, prop1, null) || this._ifClamped(clamp, prop2, null);
   }
 
+  // TODO: confirm arguments
+  // -- date input pattern
+  // private _edgeIsHidden(order, clamp, hidden, leftToRight) {
+  private _edgeIsHidden(order, clamp, leftToRight) {
+    if (order === undefined) {
+      return true; // hide if not fully initialized
+    }
+    const yearHidden = this._ifClamped(clamp, 'year', this.partsHidden['year']),
+    monthHidden = this._ifClamped(clamp, 'month', this.partsHidden['month']),
+    dayHidden = this._ifClamped(clamp, 'day', this.partsHidden['day']);
+
+    const total = yearHidden + monthHidden + dayHidden;
+    if (total >= 2) {
+      return true; // more than two are hidden
+    } else if (!total) {
+      return false; // none is hidden
+    }
+
+    if (leftToRight) {
+      if (order.year < order.month && order.year < order.day) {
+        return Boolean(yearHidden);
+      }
+      if (order.month < order.year && order.month < order.day) {
+        return Boolean(monthHidden);
+      }
+      if (order.day < order.year && order.day < order.month) {
+        return Boolean(dayHidden);
+      }
+    } else {
+      if (order.day === 3 && dayHidden === true) {
+        return true;
+      }
+      if (order.year > order.month && order.year > order.day) {
+        return Boolean(yearHidden);
+      }
+      if (order.month > order.year && order.month > order.day) {
+        return Boolean(monthHidden);
+      }
+      if (order.day > order.year && order.day > order.month) {
+        return Boolean(dayHidden);
+      }
+    }
+  }
+
+  private _getDefaultForProp(prop) {
+    const d = (this.default && this._fromDatetime(this.default)) || new Date();
+    switch (prop) {
+      case 'year':
+        return d.getFullYear();
+      case 'month':
+        return d.getMonth() + 1;
+      case 'day':
+        return d.getDate();
+      default:
+        return 0;
+    }
+  }
+
   // TODO: fix invisible attribute on button
   // TODO: fix on-click on buttons
+  // TODO: fix arguments passed to edgeishidden
   render() {
     return (
       <div id="input">
-        <div style={{ order: this._computePartOrder(this.dateOrder['timeFirst']) }}
+        <div style={{ order: `${this._computePartOrder(this.dateOrder['dateFirst'])}` }} tabindex={0}>
+          <cwc-number-input id="year" value-as-number={this.year} start-at={this._getDefaultForProp('year')}
+            style={{ order: this.dateOrder['year'] }} tabindex={this.dateOrder['year']}
+            hidden={this._ifClamped(this.clamp, 'year', this.partsHidden['year'])}
+            pad-length={4} placeholder="−−−−" disabled={this.partsDisabled['year']}>
+          </cwc-number-input>
+          <span style={{ order: '2' }} hidden={this._edgeIsHidden(this.dateOrder, this.clamp, true)}>
+            {this.markers['dateSeparator']}
+          </span>
+          <cwc-number-input id="month" value-as-number={this.month} start-at={this._getDefaultForProp('month')}
+            style={{ order: this.dateOrder['month'] }} tabindex={this.dateOrder['month']}
+            hidden={this._ifClamped(this.clamp, 'month', this.partsHidden['month'])}
+            pad-length={2} placeholder="−−" disabled={this.partsDisabled['month']}>
+          </cwc-number-input>
+          <span style={{ order: '4' }} hidden={this._edgeIsHidden(this.dateOrder, this.clamp, null)}>
+            {this.markers['dateSeparator']}
+          </span>
+          <cwc-number-input id="day" value-as-number={this.day} style={{ order: this.dateOrder['day'] }}
+            start-at={this._getDefaultForProp('day')} tabindex={this.dateOrder['day']}
+            hidden={this._ifClamped(this.clamp, 'day', this.partsHidden['day'])} no-clamp pad-length={2}
+            placeholder="−−" step={this.partsStep['day']} disabled={this.partsDisabled['day']}>
+          </cwc-number-input>
+        </div>
+        <div style={{ order: `${this._computePartOrder(this.dateOrder['timeFirst'])}` }}
           hidden={this._ifClamped(this.clamp, 'hour', null)}>
           <template is="dom-if" if={!this._ifClamped(this.clamp, 'hour', this.partsHidden['hour'])}>
             <cwc-number-input id="hour" hidden={this.hour12Format} pad-length={2}
@@ -1332,7 +1420,8 @@ export class DatetimeInputComponent {
             </cwc-number-input>
           </template>
         </div>
-        <button class="icon reset" invisible={this._resetButtonIsInvisible} hidden={this.disabled}>
+        <button class="icon reset" style={{ visibility: this._resetButtonIsInvisible ? 'hidden' : 'visible' }}
+          hidden={this.disabled}>
           <svg viewBox="0 0 24 24">
             <g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></g>
           </svg>
