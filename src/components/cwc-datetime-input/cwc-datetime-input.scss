@@ -136,8 +136,7 @@ select {
 /**
  * inner inputs
  */
-integer-input,
-number-input,
+cwc-number-input,
 text-input {
   --input-color: var(--inner-input-color, inherit);
   --input-background: var(--inner-input-background, transparent);
@@ -466,6 +465,6 @@ select:focus::-ms-value {
   align-self: stretch;
   border-color: transparent;
 }
-#dateinput integer-input[always-sign] {
+#dateinput cwc-number-input[always-sign] {
   --input-align: end;
 }
