@@ -1343,7 +1343,7 @@ export class DatetimeInputComponent {
   // TODO: fix arguments passed to edgeishidden
   render() {
     return (
-      <div id="input">
+      <div id="dateinput">
         <div style={{ order: `${this._computePartOrder(this.dateOrder['dateFirst'])}` }} tabindex={0}>
           <cwc-number-input id="year" value-as-number={this.year} start-at={this._getDefaultForProp('year')}
             style={{ order: this.dateOrder['year'] }} tabindex={this.dateOrder['year']}
