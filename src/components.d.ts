@@ -583,6 +583,10 @@ declare global {
 
     }
 
+    interface DatetimeInputPage {
+
+    }
+
     interface DndPage {
 
     }
@@ -1185,6 +1189,14 @@ declare global {
     };
     
 
+    interface HTMLDatetimeInputPageElement extends StencilComponents.DatetimeInputPage, HTMLStencilElement {}
+
+    var HTMLDatetimeInputPageElement: {
+      prototype: HTMLDatetimeInputPageElement;
+      new (): HTMLDatetimeInputPageElement;
+    };
+    
+
     interface HTMLDndPageElement extends StencilComponents.DndPage, HTMLStencilElement {}
 
     var HTMLDndPageElement: {
@@ -1488,6 +1500,7 @@ declare global {
     'collapse-page': JSXElements.CollapsePageAttributes;
     'combobox-page': JSXElements.ComboboxPageAttributes;
     'datepicker-page': JSXElements.DatepickerPageAttributes;
+    'datetime-input-page': JSXElements.DatetimeInputPageAttributes;
     'dnd-page': JSXElements.DndPageAttributes;
     'dropdown-page': JSXElements.DropdownPageAttributes;
     'fcl-image-page': JSXElements.FclImagePageAttributes;
@@ -2065,6 +2078,10 @@ declare global {
 
     }
 
+    export interface DatetimeInputPageAttributes extends HTMLAttributes {
+
+    }
+
     export interface DndPageAttributes extends HTMLAttributes {
 
     }
@@ -2251,6 +2268,7 @@ declare global {
     'collapse-page': HTMLCollapsePageElement
     'combobox-page': HTMLComboboxPageElement
     'datepicker-page': HTMLDatepickerPageElement
+    'datetime-input-page': HTMLDatetimeInputPageElement
     'dnd-page': HTMLDndPageElement
     'dropdown-page': HTMLDropdownPageElement
     'fcl-image-page': HTMLFclImagePageElement
@@ -2344,6 +2362,7 @@ declare global {
     'collapse-page': HTMLCollapsePageElement;
     'combobox-page': HTMLComboboxPageElement;
     'datepicker-page': HTMLDatepickerPageElement;
+    'datetime-input-page': HTMLDatetimeInputPageElement;
     'dnd-page': HTMLDndPageElement;
     'dropdown-page': HTMLDropdownPageElement;
     'fcl-image-page': HTMLFclImagePageElement;
