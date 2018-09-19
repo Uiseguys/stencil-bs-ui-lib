@@ -98,6 +98,10 @@ export class DatetimeInputComponent {
   @Prop({ mutable: true }) clamp: string = 'millisecond';
 
   componentDidLoad() {
+    this.el.querySelector('button.reset').addEventListener('click', this._resetDate, false);
+  }
+  
+  componentWillLoad() {
     // -- form element
     this.el['tabindex'] = 0;
     this._computeInvalid(this.required, this.value);
@@ -128,7 +132,7 @@ export class DatetimeInputComponent {
     this._defaultValue = this._computeDefaultValue(this.default);
     this._computePartsStep(this.step);
     this._computePartsDisabled({ path: 'partsStep', value: this.partsStep }, this.disabled);
-    this.el.querySelector('button.reset').addEventListener('click', this._resetDate, false);
+    // this.el.querySelector('button.reset').addEventListener('click', this._resetDate, false);
   }
 
   componentDidUnload() {
