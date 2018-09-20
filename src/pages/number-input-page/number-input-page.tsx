@@ -13,8 +13,8 @@ export class NumberInputPage {
 
   @Element() el: HostElement;
 
-  @Listen('theComponentChanged')
-  theComponentChangedHandler() {
+  @Listen('numberInputChanged')
+  numberInputChangedHandler() {
     this.updateValues();
   }
 

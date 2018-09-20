@@ -1,4 +1,4 @@
-import { Component, Prop, State, Watch, Element, HostElement, Method } from '@stencil/core';
+import { Component, Prop, State, Watch, Element, HostElement, Method, Listen } from '@stencil/core';
 import 'bootstrap.native/dist/bootstrap-native-v4';
 
 @Component({
@@ -97,10 +97,15 @@ export class DatetimeInputComponent {
   // -- date time input
   @Prop({ mutable: true }) clamp: string = 'millisecond';
 
+  @Listen('numberInputChanged')
+  numberInputChangedHandler() {
+    this._updateValues();
+  }
+
   componentDidLoad() {
     this.el.querySelector('button.reset').addEventListener('click', this._resetDate, false);
   }
-  
+
   componentWillLoad() {
     // -- form element
     this.el['tabindex'] = 0;
@@ -713,6 +718,7 @@ export class DatetimeInputComponent {
   }
 
   private _setDate(d) {
+    console.log('here', d)
     if (!isNaN(d)) {
       this._correctTimezoneShift(d);
       d = this._checkThreshold(d);
@@ -720,8 +726,8 @@ export class DatetimeInputComponent {
       const value = +d;
 
       if (+this.valueAsDate !== value || this.valueAsNumber !== value) {
-        this.valueAsDate = d;
         this.valueAsNumber = value;
+        this.valueAsDate = d;
         return;
       }
       d = new Date(d);
@@ -1342,6 +1348,16 @@ export class DatetimeInputComponent {
     }
   }
 
+  private _updateValues() {
+    this.year = this.el.querySelector('#year')['value'];
+    this.month = this.el.querySelector('#month')['value'];
+    this.day = this.el.querySelector('#day')['value'];
+    this.hour = this.el.querySelector('#hour')['value'];
+    this.minute = this.el.querySelector('#minute')['value'];
+    this.second = this.el.querySelector('#second')['value'];
+    this.millisecond = this.el.querySelector('#millisecond')['value'];
+  }
+
   // TODO: fix invisible attribute on button
   // TODO: fix on-click on buttons
   // TODO: fix arguments passed to edgeishidden
@@ -1394,7 +1410,7 @@ export class DatetimeInputComponent {
           <span hidden={this._computeMultipleClamp(this.clamp, 'second', this.partsHidden['second'], 'minute', this.partsHidden['minute'])}>
             {this.markers['timeSeparator']}
           </span>
-          <cwc-number-input hidden={this._ifClamped(this.clamp, 'second', this.partsHidden['second'])}
+          <cwc-number-input id="second" hidden={this._ifClamped(this.clamp, 'second', this.partsHidden['second'])}
             pad-length={2} no-clamp step={this.partsStep['second']} disabled={this.partsDisabled['second']}
             value-as-number={this.second} placeholder="00">
           </cwc-number-input>
@@ -1404,7 +1420,7 @@ export class DatetimeInputComponent {
           <span hidden={this._ifClamped(this.clamp, 'millisecond', this.partsHidden['millisecond'])}>
             {this.markers['decimalSeparator']}
           </span>
-          <cwc-number-input value-as-number={this.millisecond}
+          <cwc-number-input id="millisecond" value-as-number={this.millisecond}
             hidden={this._ifClamped(this.clamp, 'millisecond', this.partsHidden['millisecond'])}
             pad-length={3} no-clamp step={this.partsStep['millisecond']}
             disabled={this.partsDisabled['millisecond']} placeholder="000">

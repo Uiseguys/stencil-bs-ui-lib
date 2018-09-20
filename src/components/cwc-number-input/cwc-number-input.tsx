@@ -73,7 +73,7 @@ export class NumberInputComponent {
 
   @State() type: string;
 
-  @Event() theComponentChanged: EventEmitter;
+  @Event() numberInputChanged: EventEmitter;
 
   // ** number utilities
   _numberUtilities = {
@@ -172,7 +172,7 @@ export class NumberInputComponent {
   }
 
   componentDidUpdate() {
-    this.theComponentChanged.emit('number input updated');
+    this.numberInputChanged.emit('number input updated');
   }
 
   // intl number format

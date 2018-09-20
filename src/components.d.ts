@@ -1830,7 +1830,7 @@ declare global {
       'noAutoWidth'?: boolean;
       'noClamp'?: boolean;
       'numberStyle'?: string;
-      'onTheComponentChanged'?: (event: CustomEvent) => void;
+      'onNumberInputChanged'?: (event: CustomEvent) => void;
       'padLength'?: number;
       'parseNumber'?: Function;
       'placeholder'?: string;
