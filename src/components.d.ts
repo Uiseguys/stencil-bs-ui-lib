@@ -119,11 +119,10 @@ declare global {
       'clamp': string;
       'date': string;
       'dateOrder': Object;
+      'dateValues': Object;
       'datetime': string;
-      'day': number;
       'default': any;
       'disabled': boolean;
-      'hour': number;
       'hour12': number;
       'hour12Format': boolean;
       'invalid': boolean;
@@ -131,10 +130,7 @@ declare global {
       'locale': string;
       'markers': Object;
       'max': Object;
-      'millisecond': number;
       'min': Object;
-      'minute': number;
-      'month': number;
       'name': string;
       'now': () => void;
       'partsDisabled': Object;
@@ -142,16 +138,13 @@ declare global {
       'partsStep': Object;
       'propertyForValue': string;
       'required': boolean;
-      'second': number;
       'step': number;
       'time': string;
       'timezone': string;
       'validate': () => boolean;
       'value': Object;
-      'valueAsDate': Date;
-      'valueAsNumber': number;
+      'valueAs': Object;
       'withTimezone': boolean;
-      'year': number;
     }
 
     interface CwcDnd {
@@ -1608,11 +1601,10 @@ declare global {
       'clamp'?: string;
       'date'?: string;
       'dateOrder'?: Object;
+      'dateValues'?: Object;
       'datetime'?: string;
-      'day'?: number;
       'default'?: any;
       'disabled'?: boolean;
-      'hour'?: number;
       'hour12'?: number;
       'hour12Format'?: boolean;
       'invalid'?: boolean;
@@ -1620,25 +1612,19 @@ declare global {
       'locale'?: string;
       'markers'?: Object;
       'max'?: Object;
-      'millisecond'?: number;
       'min'?: Object;
-      'minute'?: number;
-      'month'?: number;
       'name'?: string;
       'partsDisabled'?: Object;
       'partsHidden'?: Object;
       'partsStep'?: Object;
       'propertyForValue'?: string;
       'required'?: boolean;
-      'second'?: number;
       'step'?: number;
       'time'?: string;
       'timezone'?: string;
       'value'?: Object;
-      'valueAsDate'?: Date;
-      'valueAsNumber'?: number;
+      'valueAs'?: Object;
       'withTimezone'?: boolean;
-      'year'?: number;
     }
 
     export interface CwcDndAttributes extends HTMLAttributes {
