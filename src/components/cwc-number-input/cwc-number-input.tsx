@@ -42,7 +42,7 @@ export class NumberInputComponent {
   @Prop({ mutable: true }) minlength: number;
   @Prop({ mutable: true }) noAutoWidth: boolean;
   @Prop({ mutable: true }) autoResize: boolean;
-  @Prop({ mutable: true }) hidden: boolean;
+  @Prop({ mutable: true, reflectToAttr: true }) hidden: boolean;
 
   @State() _minWidthString: string;
   _minWidthComputionJob: any;

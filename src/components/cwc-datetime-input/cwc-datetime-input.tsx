@@ -123,44 +123,43 @@ export class DatetimeInputComponent {
 
   componentWillLoad() {
     // -- form element
-    // this._computeInvalid(this.required, this.value);
-    // this._computeValueIsSet(this.value);
-    // this._defaultChanged(this.default);
+    this._computeInvalid(this.required, this.value);
+    this._computeValueIsSet(this.value);
+    this._defaultChanged(this.default);
 
     // -- intl date time format
     this._localeChanged(this.locale);
 
     // -- date time
-    // this._hour12Changed(this.hour12, null);
-    // this._isAmChanged(this.isAm, null)
-    // this._computeDatetime(
-    //   this.dateValues['year'], this.dateValues['month'],
-    //   this.dateValues['day'], this.dateValues['hour'],
-    //   this.dateValues['minute'], this.dateValues['second'], this.dateValues['millisecond']
-    // );
-    // this._valueAsDateChanged(this.valueAs['date']);
-    // this._valueAsNumberChanged(this.valueAs['number']);
-    // this._minChanged(this.min);
-    // this._maxChanged(this.max);
-    // this._timezoneChanged(this.timezone, null);
-    // this._timezoneOffsetChanged(this._timezoneOffset);
-    // this._maxDayOfMonth = this._computeMaxDayOfMonth(this.dateValues['year'], this.dateValues['month']);
-    // this._dateLocked = this._ifClamped(this.clamp, 'hour', null);
-    // this._computeDatetime(
-    //   this.dateValues['year'], this.dateValues['month'],
-    //   this.dateValues['day'], this.dateValues['hour'],
-    //   this.dateValues['minute'], this.dateValues['second'], this.dateValues['millisecond']
-    // );
-    // this._datetimeChanged(this.datetime);
-    // this._dateTimeChanged(this.date, this.time);
-    // this._timeZoneHoursMinutesChanged(this._timeZoneHours, this._timeZoneMinutes);
+    this._hour12Changed(this.hour12, null);
+    this._isAmChanged(this.isAm, null)
+    this._computeDatetime(
+      this.dateValues['year'], this.dateValues['month'],
+      this.dateValues['day'], this.dateValues['hour'],
+      this.dateValues['minute'], this.dateValues['second'], this.dateValues['millisecond']
+    );
+    this._valueAsDateChanged(this.valueAs['date']);
+    this._valueAsNumberChanged(this.valueAs['number']);
+    this._minChanged(this.min);
+    this._maxChanged(this.max);
+    this._timezoneChanged(this.timezone, null);
+    this._timezoneOffsetChanged(this._timezoneOffset);
+    this._maxDayOfMonth = this._computeMaxDayOfMonth(this.dateValues['year'], this.dateValues['month']);
+    this._dateLocked = this._ifClamped(this.clamp, 'hour', null);
+    this._computeDatetime(
+      this.dateValues['year'], this.dateValues['month'],
+      this.dateValues['day'], this.dateValues['hour'],
+      this.dateValues['minute'], this.dateValues['second'], this.dateValues['millisecond']
+    );
+    this._datetimeChanged(this.datetime);
+    this._dateTimeChanged(this.date, this.time);
+    this._timeZoneHoursMinutesChanged(this._timeZoneHours, this._timeZoneMinutes);
 
     // -- date time input
     this._resetButtonIsInvisible = this._computeResetButtonIsHidden(this._valueIsSet, this._defaultValue, this.value);
-    // this._defaultValue = this._computeDefaultValue(this.default);
-    // this._computePartsStep(this.step);
-    // this._computePartsDisabled({ path: 'partsStep', value: this.partsStep }, this.disabled);
-    // this.el.querySelector('button.reset').addEventListener('click', this._resetDate, false);
+    this._defaultValue = this._computeDefaultValue(this.default);
+    this._computePartsStep(this.step);
+    this._computePartsDisabled({ path: 'partsStep', value: this.partsStep }, this.disabled);
   }
 
   componentDidUnload() {
@@ -211,7 +210,6 @@ export class DatetimeInputComponent {
       this._valueAsDateChanged(newVal['date']);
     }
     if (newVal['number'] !== oldVal['number']) {
-      console.log('b', newVal['number'])
       this._valueAsNumberChanged(newVal['number']);
     }
   }
@@ -241,7 +239,6 @@ export class DatetimeInputComponent {
   }
   @Watch('dateValues')
   dateValuesChanged(newVal, oldVal) {
-    console.log('date value changed oy')
     const self = this;
     setTimeout(() => {
       if (newVal['year'] !== oldVal['year'] || newVal['month'] !== oldVal['month']) {
@@ -619,7 +616,6 @@ export class DatetimeInputComponent {
         d.setUTCDate(1);
       }
     }
-    console.log(1)
     this._setDate(d);
   }
 
@@ -693,7 +689,6 @@ export class DatetimeInputComponent {
     // shift back from UTC to timezone
     d.setMinutes(d.getMinutes() + this._timezoneOffset);
 
-    console.log(2)
     this._setDate(d);
   }
 
@@ -733,7 +728,6 @@ export class DatetimeInputComponent {
     if (typeof datetime === 'object') {
       // 'date' is a Date Object
       this._recentLocalTimezoneOffset = datetime.getTimezoneOffset();
-      console.log(3)
       this._setDate(datetime);
       return;
     }
@@ -764,7 +758,6 @@ export class DatetimeInputComponent {
         this.__updatingTimezoneOffset = false;
       }
     }
-    console.log(4)
     this._setDate(d);
   }
 
@@ -773,12 +766,9 @@ export class DatetimeInputComponent {
     if (this.__updatingTimezoneOffset) {
       return;
     }
-    console.log('hi', value)
     if (isNaN(value)) {
-      console.log('bye')
       return;
     }
-    console.log(5)
     this._setDate(new Date(+value));
   }
 
@@ -791,7 +781,6 @@ export class DatetimeInputComponent {
       return;
     }
     if (this.valueAs['number'] !== +d) {
-      console.log(6)
       this._setDate(new Date(d));
     }
   }
@@ -803,9 +792,7 @@ export class DatetimeInputComponent {
 
       const value = +d;
 
-      console.log(value, d, this.valueAs)
       if (+this.valueAs['date'] !== value || this.valueAs['number'] !== value) {
-        console.log('was here')
         this.valueAs = {
           number: value,
           date: d
@@ -814,7 +801,6 @@ export class DatetimeInputComponent {
         // this.valueAs['date'] = d;
         return;
       }
-      console.log('but then went here')
       d = new Date(d);
 
       // shift date, so that date properties are according to timezone
@@ -833,8 +819,6 @@ export class DatetimeInputComponent {
         date = this.__toDate(year, month, day),
         time = this._dateLocked ? '00:00:00.000' : this.__toTime(hour, minute, second, millisecond),
         datetime = date + 'T' + time + this.timezone;
-
-        console.log('up to here')
 
         // TODO: check
         // this.year  = year;
@@ -859,15 +843,14 @@ export class DatetimeInputComponent {
         this.date  = date;
         this.time  = time;
     } else if (!isNaN((d = new Date(this.default)).getTime())) {
-      console.log(7)
       this._setDate(d);
     } else if (!isNaN(this.valueAs['number'])) {
-      console.log('a')
       this._valueAsNumberChanged(this.valueAs['number']);
     }
   }
 
   private _resetDate(e) {
+    console.log('hereeeee')
     if (e && e.stopPropagation) {
       e.stopPropagation();
     }
@@ -875,7 +858,6 @@ export class DatetimeInputComponent {
       const d = this._fromDatetime(this.default);
       if (!isNaN(d)) {
         this._recentLocalTimezoneOffset = d.getTimezoneOffset();
-        console.log(8)
         this._setDate(d);
         return;
       }
@@ -883,10 +865,6 @@ export class DatetimeInputComponent {
 
 
     // TODO: check
-    this.valueAs = {
-      date: undefined,
-      number: undefined
-    };
     this.dateValues = {
       year: undefined,
       month: undefined,
@@ -896,25 +874,20 @@ export class DatetimeInputComponent {
       second: undefined,
       millisecond: undefined,
     };
-    // this.valueAsDate = undefined;
-    // this.valueAsNumber = undefined;
-    this.datetime = undefined;
-    this.date = undefined;
-    this.time = undefined;
-    // this.year = undefined;
-    // this.month = undefined;
-    // this.day = undefined;
-    // this.hour = undefined;
-    this.hour12 = undefined;
-    this.isAm = undefined;
-    // this.minute = undefined;
-    // this.second = undefined;
-    // this.millisecond = undefined;
-    this.timezone = undefined;
-    this._timezoneOffset = undefined;
-    this._timeZoneHours = undefined;
-    this._timeZoneMinutes = undefined;
-    this._recentLocalTimezoneOffset = undefined;
+    this.valueAs = {
+    date: undefined,
+    number: undefined
+    };
+    // this.datetime = undefined;
+    // this.time = undefined;
+    // this.date = undefined;
+    // this.hour12 = undefined;
+    // this.isAm = undefined;
+    // this.timezone = undefined;
+    // this._timezoneOffset = undefined;
+    // this._timeZoneHours = undefined;
+    // this._timeZoneMinutes = undefined;
+    // this._recentLocalTimezoneOffset = undefined;
   }
 
   private _fromDatetime(datetime) {
