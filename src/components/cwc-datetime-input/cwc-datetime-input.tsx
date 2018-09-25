@@ -117,7 +117,9 @@ export class DatetimeInputComponent {
 
   componentDidLoad() {
     this._resetDate = this._resetDate.bind(this);
+    this._switchAm = this._switchAm.bind(this);
     this.el.querySelector('button.reset').addEventListener('click', this._resetDate, false);
+    this.el.querySelector('button.hour12').addEventListener('click', this._switchAm, false);
     this.el['tabindex'] = 0;
   }
 
@@ -1473,7 +1475,6 @@ export class DatetimeInputComponent {
   }
 
   // TODO: fix invisible attribute on button
-  // TODO: fix on-click on buttons
   // TODO: fix arguments passed to edgeishidden
   render() {
     return (
@@ -1540,7 +1541,7 @@ export class DatetimeInputComponent {
             disabled={this.partsDisabled['millisecond']} placeholder="000">
           </cwc-number-input>
           <template is="dom-if" if={this.hour12Format}>
-            <button class="hour12" disabled={this.partsHidden['hour']} on-click={this._switchAm} hidden={!this._valueIsSet}>
+            <button class="hour12" disabled={this.partsHidden['hour']} hidden={!this._valueIsSet}>
               <div hidden={!this.isAm}>{this.markers['amString']}</div>
               <div hidden={this.isAm}>{this.markers['pmString']}</div>
             </button>
