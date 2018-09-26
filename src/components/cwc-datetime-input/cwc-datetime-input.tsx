@@ -789,7 +789,6 @@ export class DatetimeInputComponent {
   }
 
   private _setDate(d) {
-    console.log(d)
     if (!isNaN(d)) {
       this._correctTimezoneShift(d);
       d = this._checkThreshold(d);
@@ -859,40 +858,55 @@ export class DatetimeInputComponent {
     if (e && e.stopPropagation) {
       e.stopPropagation();
     }
-    if (this.default !== undefined) {
-      const d = this._fromDatetime(this.default);
-      if (!isNaN(d)) {
-        this._recentLocalTimezoneOffset = d.getTimezoneOffset();
-        this._setDate(d);
-        return;
-      }
+
+    if (!this.valueAs['date']) {
+      return;
     }
 
-
-    // TODO: check
     this.dateValues = {
-      year: undefined,
-      month: undefined,
-      day: undefined,
-      hour: undefined,
-      minute: undefined,
-      second: undefined,
-      millisecond: undefined,
+      year: 1970,
+      month: 1,
+      day: 1,
+      hour: 0,
+      minute: 0,
+      second: 0,
+      millisecond: 0,
     };
-    this.valueAs = {
-    date: undefined,
-    number: undefined
-    };
+    this.timezone = undefined;
+
+    // if (this.default !== undefined) {
+    //   const d = this._fromDatetime(this.default);
+    //   if (!isNaN(d)) {
+    //     this._recentLocalTimezoneOffset = d.getTimezoneOffset();
+    //     this._setDate(d);
+    //     return;
+    //   }
+    // }
+
+    // // TODO: check
+    // this.dateValues = {
+    //   year: undefined,
+    //   month: undefined,
+    //   day: undefined,
+    //   hour: undefined,
+    //   minute: undefined,
+    //   second: undefined,
+    //   millisecond: undefined,
+    // };
+    // this.valueAs = {
+    // date: undefined,
+    // number: undefined
+    // };
     // this.datetime = undefined;
     // this.time = undefined;
     // this.date = undefined;
     // this.hour12 = undefined;
     // this.isAm = undefined;
     // this.timezone = undefined;
+    // this._recentLocalTimezoneOffset = undefined;
     // this._timezoneOffset = undefined;
     // this._timeZoneHours = undefined;
     // this._timeZoneMinutes = undefined;
-    // this._recentLocalTimezoneOffset = undefined;
   }
 
   private _fromDatetime(datetime) {
