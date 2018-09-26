@@ -621,7 +621,8 @@ export class DatetimeInputComponent {
     this._setDate(d);
   }
 
-  private _computeDatetime(year, month, day, hour, minute, second, millisecond) {
+  private _computeDatetime(initialYear, month, day, hour, minute, second, millisecond) {
+    const year = initialYear && initialYear.toString().length > 4 ? (new Date(this.valueAs['date'])).getUTCFullYear() : initialYear;
     if (this.__updatingTimezoneOffset) {
       return;
     }
@@ -788,6 +789,7 @@ export class DatetimeInputComponent {
   }
 
   private _setDate(d) {
+    console.log(d)
     if (!isNaN(d)) {
       this._correctTimezoneShift(d);
       d = this._checkThreshold(d);
@@ -821,6 +823,7 @@ export class DatetimeInputComponent {
         date = this.__toDate(year, month, day),
         time = this._dateLocked ? '00:00:00.000' : this.__toTime(hour, minute, second, millisecond),
         datetime = date + 'T' + time + this.timezone;
+
 
         // TODO: check
         // this.year  = year;
@@ -1504,8 +1507,8 @@ export class DatetimeInputComponent {
         </div>
         <div style={{ order: `${this._computePartOrder(this.dateOrder['timeFirst'])}` }}
           hidden={this._ifClamped(this.clamp, 'hour', null)}>
-          <cwc-number-input id="hour" hidden={this.hour12Format || this._ifClamped(this.clamp, 'hour', this.partsHidden['hour'])} pad-length={2}
-            no-clamp value-as-number={this.dateValues['hour']} placeholder="00"
+          <cwc-number-input id="hour" hidden={this.hour12Format || this._ifClamped(this.clamp, 'hour', this.partsHidden['hour'])}
+            pad-length={2} no-clamp value-as-number={this.dateValues['hour']} placeholder="00"
             disabled={this.partsDisabled['hour']} step={this.partsStep['hour']}>
           </cwc-number-input>
           <cwc-number-input pad-length={2} hidden={!this.hour12Format} no-clamp value-as-number={this.hour12}
@@ -1526,7 +1529,8 @@ export class DatetimeInputComponent {
             value-as-number={this.dateValues['second']} placeholder="00">
           </cwc-number-input>
           <span
-            hidden={this._ifClamped(this.clamp, 'millisecond', this.partsHidden['millisecond']) || !this._ifClamped(this.clamp, 'second', this.partsHidden['second'])}
+            hidden={this._ifClamped(this.clamp, 'millisecond', this.partsHidden['millisecond'])
+              || !this._ifClamped(this.clamp, 'second', this.partsHidden['second'])}
           >0</span>
           <span hidden={this._ifClamped(this.clamp, 'millisecond', this.partsHidden['millisecond'])}>
             {this.markers['decimalSeparator']}
@@ -1544,7 +1548,8 @@ export class DatetimeInputComponent {
             always-sign step={1} placeholder="+00" min={-23} max={23}>
           </cwc-number-input>
           <span hidden={!this.withTimezone}>{this.markers['timeSeparator']}</span>
-          <cwc-number-input hidden={!this.withTimezone} value-as-number={this._timeZoneMinutes} pad-length={2} min={0} max={45} step={15} placeholder="00">
+          <cwc-number-input hidden={!this.withTimezone} value-as-number={this._timeZoneMinutes}
+            pad-length={2} min={0} max={45} step={15} placeholder="00">
           </cwc-number-input>
         </div>
         <button class="icon reset" style={{ visibility: this._resetButtonIsInvisible ? 'hidden' : 'visible' }}
