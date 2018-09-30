@@ -74,7 +74,8 @@ export class DatetimeInputComponent {
   @State() _timeZoneHours: number;
   @State() _timeZoneMinutes: number;
   @State() _recentLocalTimezoneOffset: number;
-  @State() _maxDayOfMonth: number;
+  // @State() _maxDayOfMonth: number;
+  _maxDayOfMonth: number;
   @State() _regexpDatetime: RegExp = /^(-?\d+-\d\d-\d\d)?(?:T?(?:(\d\d:\d\d(?::\d\d(?:\.\d\d\d)?)?)([+-]\d\d:\d\d|Z)?)?)$/;
   @State() _regexpTimezone: RegExp = /(?:([+-]\d\d):(\d\d)|Z)$/;
   @State() _dateLocked: boolean;
@@ -133,8 +134,8 @@ export class DatetimeInputComponent {
     this._localeChanged(this.locale);
 
     // -- date time
-    this._hour12Changed(this.hour12, null);
-    this._isAmChanged(this.isAm, null)
+    this._hour12Changed(this.hour12, undefined);
+    this._isAmChanged(this.isAm, undefined)
     this._computeDatetime(
       this.dateValues['year'], this.dateValues['month'],
       this.dateValues['day'], this.dateValues['hour'],
@@ -144,10 +145,10 @@ export class DatetimeInputComponent {
     this._valueAsNumberChanged(this.valueAs['number']);
     this._minChanged(this.min);
     this._maxChanged(this.max);
-    this._timezoneChanged(this.timezone, null);
+    this._timezoneChanged(this.timezone, undefined);
     this._timezoneOffsetChanged(this._timezoneOffset);
     this._maxDayOfMonth = this._computeMaxDayOfMonth(this.dateValues['year'], this.dateValues['month']);
-    this._dateLocked = this._ifClamped(this.clamp, 'hour', null);
+    this._dateLocked = this._ifClamped(this.clamp, 'hour', undefined);
     this._computeDatetime(
       this.dateValues['year'], this.dateValues['month'],
       this.dateValues['day'], this.dateValues['hour'],
@@ -193,21 +194,21 @@ export class DatetimeInputComponent {
 
   // -- date time
   @Watch('hour12')
-  hour12Changed(newVal, oldVal) {
+  async hour12Changed(newVal, oldVal) {
     const self = this;
     setTimeout(() => {
       self._hour12Changed(newVal, oldVal);
     }, 0);
   }
   @Watch('isAm')
-  isAmChanged(newVal, oldVal) {
+  async isAmChanged(newVal, oldVal) {
     const self = this;
     setTimeout(() => {
       self._isAmChanged(newVal, oldVal);
     }, 0)
   }
   @Watch('valueAs')
-  valueAsDateChanged(newVal, oldVal) {
+  async valueAsDateChanged(newVal, oldVal) {
     if (newVal['date'] !== oldVal['date']) {
       this._valueAsDateChanged(newVal['date']);
     }
@@ -232,15 +233,15 @@ export class DatetimeInputComponent {
     this._maxChanged(max);
   }
   @Watch('timezone')
-  timezoneChanged(newVal, oldVal) {
+  async timezoneChanged(newVal, oldVal) {
     this._timezoneChanged(newVal, oldVal);
   }
   @Watch('_timezoneOffset')
-  underscoreTimezoneOffsetChanged(offset) {
+  async underscoreTimezoneOffsetChanged(offset) {
     this._timezoneOffsetChanged(offset);
   }
   @Watch('dateValues')
-  dateValuesChanged(newVal, oldVal) {
+  async dateValuesChanged(newVal, oldVal) {
     const self = this;
     setTimeout(() => {
       if (newVal['year'] !== oldVal['year'] || newVal['month'] !== oldVal['month']) {
@@ -270,7 +271,7 @@ export class DatetimeInputComponent {
   // }
   @Watch('clamp')
   clampChanged() {
-    this._dateLocked = this._ifClamped(this.clamp, 'hour', null);
+    this._dateLocked = this._ifClamped(this.clamp, 'hour', undefined);
   }
   // @Watch('day')
   // dayChanged() {
@@ -293,14 +294,14 @@ export class DatetimeInputComponent {
   //   this._computeDatetime(this.year, this.month, this.day, this.hour, this.minute, this.second, this.millisecond);
   // }
   @Watch('datetime')
-  datetimeChanged() {
+  async datetimeChanged() {
     const self = this;
     setTimeout(() => {
       self._datetimeChanged(self.datetime);
     }, 0);
   }
   @Watch('date')
-  dateChanged() {
+  async dateChanged() {
     const self = this;
     setTimeout(() => {
       self._dateTimeChanged(self.date, self.time);
@@ -313,12 +314,12 @@ export class DatetimeInputComponent {
   //     self._dateTimeChanged(self.date, self.time);
   //   }, 0);
   // }
-  @Watch('_timeZoneHours')
-  underscoreTimeZoneHoursChanged() {
-    this._timeZoneHoursMinutesChanged(this._timeZoneHours, this._timeZoneMinutes);
-  }
+  // @Watch('_timeZoneHours')
+  // async underscoreTimeZoneHoursChanged() {
+  //   this._timeZoneHoursMinutesChanged(this._timeZoneHours, this._timeZoneMinutes);
+  // }
   @Watch('_timeZoneMinutes')
-  underscoreTimeZoneMinutesChanged() {
+  async underscoreTimeZoneMinutesChanged() {
     this._timeZoneHoursMinutesChanged(this._timeZoneHours, this._timeZoneMinutes);
   }
 
@@ -363,7 +364,7 @@ export class DatetimeInputComponent {
       if (this.propertyForValue) {
         if (this.propertyForValue.includes('.')) {
           const [ parent, child ] = this.propertyForValue.split('.');
-          this[parent] = Object.assign(this[parent], { [child]: def });
+          this[parent] = { ...this[parent], ...{ [child]: def } };
         } else {
           this[this.propertyForValue] = def;
         }
@@ -375,7 +376,7 @@ export class DatetimeInputComponent {
       return;
     }
     if (this.valueAs['date'] === undefined || this.valueAs['number'] === undefined) {
-      this._resetDate(null);
+      this._resetDate(undefined);
     }
   }
   @Method()
@@ -630,7 +631,7 @@ export class DatetimeInputComponent {
 
     if (isNaN(year) && isNaN(month) && isNaN(day) && isNaN(hour) && isNaN(minute) && isNaN(second) && isNaN(millisecond)) {
       if (d !== undefined) {
-        this._resetDate(null);
+        this._resetDate(undefined);
       }
       return;
     } else if (isNaN(d.getTime())) {
@@ -702,7 +703,7 @@ export class DatetimeInputComponent {
 
     if (date === undefined && time === undefined) {
       if (this.valueAs['date'] !== undefined) {
-        this._resetDate(null);
+        this._resetDate(undefined);
       }
       return;
     }
@@ -723,7 +724,7 @@ export class DatetimeInputComponent {
 
     if (datetime === undefined) {
       if (this.valueAs['date'] !== undefined) {
-        this._resetDate(null);
+        this._resetDate(undefined);
       }
       return;
     }
@@ -854,59 +855,58 @@ export class DatetimeInputComponent {
   }
 
   private _resetDate(e) {
-    console.log('hereeeee')
     if (e && e.stopPropagation) {
       e.stopPropagation();
     }
 
-    if (!this.valueAs['date']) {
-      return;
+    // if (!this.valueAs['date']) {
+    //   return;
+    // }
+    //
+    // this.dateValues = {
+    //   year: 1970,
+    //   month: 1,
+    //   day: 1,
+    //   hour: 0,
+    //   minute: 0,
+    //   second: 0,
+    //   millisecond: 0,
+    // };
+    // this.timezone = undefined;
+
+    if (this.default !== undefined) {
+      const d = this._fromDatetime(this.default);
+      if (!isNaN(d)) {
+        this._recentLocalTimezoneOffset = d.getTimezoneOffset();
+        this._setDate(d);
+        return;
+      }
     }
 
-    this.dateValues = {
-      year: 1970,
-      month: 1,
-      day: 1,
-      hour: 0,
-      minute: 0,
-      second: 0,
-      millisecond: 0,
+    // TODO: check
+    this._recentLocalTimezoneOffset = undefined;
+    this.valueAs = {
+      date: undefined,
+      number: undefined
     };
+    this.dateValues = {
+      year: undefined,
+      month: undefined,
+      day: undefined,
+      hour: undefined,
+      minute: undefined,
+      second: undefined,
+      millisecond: undefined,
+    };
+    this.datetime = undefined;
+    this.time = undefined;
+    this.date = undefined;
+    this.hour12 = undefined;
+    this.isAm = undefined;
     this.timezone = undefined;
-
-    // if (this.default !== undefined) {
-    //   const d = this._fromDatetime(this.default);
-    //   if (!isNaN(d)) {
-    //     this._recentLocalTimezoneOffset = d.getTimezoneOffset();
-    //     this._setDate(d);
-    //     return;
-    //   }
-    // }
-
-    // // TODO: check
-    // this.dateValues = {
-    //   year: undefined,
-    //   month: undefined,
-    //   day: undefined,
-    //   hour: undefined,
-    //   minute: undefined,
-    //   second: undefined,
-    //   millisecond: undefined,
-    // };
-    // this.valueAs = {
-    // date: undefined,
-    // number: undefined
-    // };
-    // this.datetime = undefined;
-    // this.time = undefined;
-    // this.date = undefined;
-    // this.hour12 = undefined;
-    // this.isAm = undefined;
-    // this.timezone = undefined;
-    // this._recentLocalTimezoneOffset = undefined;
-    // this._timezoneOffset = undefined;
-    // this._timeZoneHours = undefined;
-    // this._timeZoneMinutes = undefined;
+    this._timezoneOffset = undefined;
+    this._timeZoneHours = undefined;
+    this._timeZoneMinutes = undefined;
   }
 
   private _fromDatetime(datetime) {
@@ -954,9 +954,9 @@ export class DatetimeInputComponent {
     }
     this._min = d;
     if (!isNaN(this.valueAs['number'])) {
-      this.valueAs = Object.assign(this.valueAs, {
+      this.valueAs = { ...this.valueAs, ...{
         number: +this._checkThreshold(new Date(this.valueAs['number']))
-      });
+      } };
       // this.valueAs['number'] = +this._checkThreshold(new Date(this.valueAs['number']));
     }
   }
@@ -975,9 +975,9 @@ export class DatetimeInputComponent {
     }
     this._max = d;
     if (!isNaN(this.valueAs['number'])) {
-      this.valueAs = Object.assign(this.valueAs, {
+      this.valueAs = {...this.valueAs, ...{
         number: +this._checkThreshold(new Date(this.valueAs['number']))
-      });
+      }};
       // this.valueAs['number'] = +this._checkThreshold(new Date(this.valueAs['number']));
     }
   }
@@ -1068,17 +1068,16 @@ export class DatetimeInputComponent {
 
   private _hour12Changed(hour12, old) {
     if (hour12 === undefined || hour12 === old) { return; }
-
-    this.dateValues = Object.assign(this.dateValues, {
+    this.dateValues = { ...this.dateValues, ...{
       hour: (hour12 === 12) ? (this.isAm ? 0 : 12) : (this.isAm ? hour12 : hour12 + 12)
-    });
+    }};
     // this.hour = (hour12 === 12) ? (this.isAm ? 0 : 12) : (this.isAm ? hour12 : hour12 + 12);
   }
 
   private _isAmChanged(isAm, old) {
     if (isAm === undefined || isAm === old) { return; }
 
-    this._hour12Changed(this.hour12, null);
+    this._hour12Changed(this.hour12, undefined);
   }
 
   private _ifClamped(clamp, comp, hidden) {
@@ -1129,7 +1128,7 @@ export class DatetimeInputComponent {
 
     if (timezone === undefined) {
       if (this.valueAs['date'] !== undefined) {
-        this._resetDate(null);
+        this._resetDate(undefined);
       }
       return;
     } else if (!(this._regexpTimezone.exec(timezone))) {
@@ -1274,88 +1273,88 @@ export class DatetimeInputComponent {
     if (step === undefined) { return; }
 
     if (step === 0) {
-      this.partsStep = Object.assign(this.partsStep, {
+      this.partsStep = {...this.partsStep, ...{
         day: 0,
         hour: 0,
         minute: 0,
         second: 0,
         millisecond: 0
-      });
+      }};
       return;
     } else if (step < 0.001) {
       this.step = 0.001;
-      this.partsStep = Object.assign(this.partsStep, {
+      this.partsStep = {...this.partsStep, ...{
         day: 1,
         hour: 1,
         minute: 1,
         second: 1,
         millisecond: 1
-      });
+      }};
       return;
     }
     step = +step.toFixed(3);
 
     if (step % 86400 === 0) {
-      this.partsStep = Object.assign(this.partsStep, {
+      this.partsStep = {...this.partsStep, ...{
         day: step / 86400,
         hour: 0,
         minute: 0,
         second: 0,
         millisecond: 0
-      });
-      if (this._ifClamped(this.clamp, 'day', null)) {
+      }};
+      if (this._ifClamped(this.clamp, 'day', undefined)) {
         // reset `clamp` to next inferior standing if clamped
         // this.set('clamp', 'hour');
         this.clamp = 'hour';
       }
     } else if (step % 3600 === 0) {
-      this.partsStep = Object.assign(this.partsStep, {
+      this.partsStep = {...this.partsStep, ...{
         day: 1,
         hour: step / 3600,
         minute: 0,
         second: 0,
         millisecond: 0
-      });
-      if (this._ifClamped(this.clamp, 'hour', null)) {
+      }};
+      if (this._ifClamped(this.clamp, 'hour', undefined)) {
         // reset `clamp` to next inferior standing if clamped
         // this.set('clamp', 'minute');
         this.clamp = 'minute';
       }
     } else if (step % 60 === 0) {
-      this.partsStep = Object.assign(this.partsStep, {
+      this.partsStep = {...this.partsStep, ...{
         day: 1,
         hour: 1,
         minute: step / 60,
         second: 0,
         millisecond: 0
-      });
-      if (this._ifClamped(this.clamp, 'minute', null)) {
+      }};
+      if (this._ifClamped(this.clamp, 'minute', undefined)) {
         // reset `clamp` to next inferior standing if clamped
         // this.set('clamp', 'second');
         this.clamp = 'second';
       }
     } else if (step % 1 === 0) {
-      this.partsStep = Object.assign(this.partsStep, {
+      this.partsStep = {...this.partsStep, ...{
         day: 1,
         hour: 1,
         minute: 1,
         second: step,
         millisecond: 0
-      });
-      if (this._ifClamped(this.clamp, 'second', null)) {
+      }};
+      if (this._ifClamped(this.clamp, 'second', undefined)) {
         // reset `clamp` to next inferior standing if clamped
         // this.set('clamp', 'millisecond');
         this.clamp = 'millisecond';
       }
     } else {
-      this.partsStep = Object.assign(this.partsStep, {
+      this.partsStep = {...this.partsStep, ...{
         day: 1,
         hour: 1,
         minute: 1,
         second: 1,
         millisecond: step * 1000
-      });
-      if (this._ifClamped(this.clamp, 'millisecond', null)) {
+      }};
+      if (this._ifClamped(this.clamp, 'millisecond', undefined)) {
         // reset `clamp` to next inferior standing if clamped
         // this.set('clamp', '');
         this.clamp = '';
@@ -1372,14 +1371,14 @@ export class DatetimeInputComponent {
       // const key = 'partsDisabled.' + change.path.split('.')[1];
       const key = change.path.split('.')[1];
       if (disabled) {
-        this.partsDisabled = Object.assign(this.partsDisabled, {
+        this.partsDisabled = {...this.partsDisabled, ...{
           [key]: true
-        });
+        }};
         // this.set(key, true);
       } else {
-        this.partsDisabled = Object.assign(this.partsDisabled, {
+        this.partsDisabled = {...this.partsDisabled, ...{
           [key]: !change.value
-        });
+        }};
         // this.set(key, !change.value);
       }
     } else if (change && change.value) {
@@ -1390,7 +1389,7 @@ export class DatetimeInputComponent {
           // this.set('partsDisabled.' + key, !change.value[key]);
         }
       }
-      this.partsDisabled = Object.assign(this.partsDisabled, newData);
+      this.partsDisabled = {...this.partsDisabled, ...newData};
     }
 
     // this.notifyPath('partsDisabled');
@@ -1401,7 +1400,7 @@ export class DatetimeInputComponent {
   }
 
   private _computeMultipleClamp(clamp, prop1, hidden1, prop2, hidden2) {
-    return hidden1 || hidden2 || this._ifClamped(clamp, prop1, null) || this._ifClamped(clamp, prop2, null);
+    return hidden1 || hidden2 || this._ifClamped(clamp, prop1, undefined) || this._ifClamped(clamp, prop2, undefined);
   }
 
   // TODO: confirm arguments
@@ -1463,13 +1462,26 @@ export class DatetimeInputComponent {
   }
 
   private _updateValues() {
-    const year = this.el.querySelector('#year')['valueAsNumber'];
-    const month = this.el.querySelector('#month')['valueAsNumber'];
-    const day = this.el.querySelector('#day')['valueAsNumber'];
-    const hour = this.el.querySelector('#hour')['valueAsNumber'];
-    const minute = this.el.querySelector('#minute')['valueAsNumber'];
-    const second = this.el.querySelector('#second')['valueAsNumber'];
-    const millisecond = this.el.querySelector('#millisecond')['valueAsNumber'];
+    let year = this.el.querySelector('#year')['valueAsNumber'];
+    let month = this.el.querySelector('#month')['valueAsNumber'];
+    let day = this.el.querySelector('#day')['valueAsNumber'];
+    let hour = this.el.querySelector('#hour')['valueAsNumber'];
+    let minute = this.el.querySelector('#minute')['valueAsNumber'];
+    let second = this.el.querySelector('#second')['valueAsNumber'];
+    let millisecond = this.el.querySelector('#millisecond')['valueAsNumber'];
+    let hour12 = this.el.querySelector('#hour12')['valueAsNumber'];
+    let timezoneHours = this.el.querySelector('#timezonehours')['valueAsNumber'];
+    let timezoneMinutes = this.el.querySelector('#timezoneminutes')['valueAsNumber'];
+    year = year === null ? undefined : year;
+    month = month === null ? undefined : month;
+    day = day === null ? undefined : day;
+    hour = hour === null ? undefined : hour;
+    minute = minute === null ? undefined : minute;
+    second = second === null ? undefined : second;
+    millisecond = millisecond === null ? undefined : millisecond;
+    hour12 = hour12 === null ? undefined : hour12;
+    timezoneHours = timezoneHours === null ? undefined : timezoneHours;
+    timezoneMinutes = timezoneMinutes === null ? undefined : timezoneMinutes;
     if (
       this.dateValues['year'] !== year
       || this.dateValues['month'] !== month
@@ -1488,6 +1500,15 @@ export class DatetimeInputComponent {
         second,
         millisecond,
       };
+    }
+    if (this.hour12 !== hour12) {
+      this.hour12 = hour12;
+    }
+    if (this._timeZoneHours !== timezoneHours) {
+      this._timeZoneHours = timezoneHours;
+    }
+    if (this._timeZoneMinutes !== timezoneMinutes) {
+      this._timeZoneMinutes = timezoneMinutes;
     }
   }
 
@@ -1510,7 +1531,7 @@ export class DatetimeInputComponent {
             hidden={this._ifClamped(this.clamp, 'month', this.partsHidden['month'])}
             pad-length={2} placeholder="−−" disabled={this.partsDisabled['month']}>
           </cwc-number-input>
-          <span style={{ order: '4' }} hidden={this._edgeIsHidden(this.dateOrder, this.clamp, null)}>
+          <span style={{ order: '4' }} hidden={this._edgeIsHidden(this.dateOrder, this.clamp, undefined)}>
             {this.markers['dateSeparator']}
           </span>
           <cwc-number-input id="day" value-as-number={this.dateValues['day']} style={{ order: this.dateOrder['day'] }}
@@ -1520,12 +1541,12 @@ export class DatetimeInputComponent {
           </cwc-number-input>
         </div>
         <div style={{ order: `${this._computePartOrder(this.dateOrder['timeFirst'])}` }}
-          hidden={this._ifClamped(this.clamp, 'hour', null)}>
+          hidden={this._ifClamped(this.clamp, 'hour', undefined)}>
           <cwc-number-input id="hour" hidden={this.hour12Format || this._ifClamped(this.clamp, 'hour', this.partsHidden['hour'])}
             pad-length={2} no-clamp value-as-number={this.dateValues['hour']} placeholder="00"
             disabled={this.partsDisabled['hour']} step={this.partsStep['hour']}>
           </cwc-number-input>
-          <cwc-number-input pad-length={2} hidden={!this.hour12Format} no-clamp value-as-number={this.hour12}
+          <cwc-number-input id="hour12" pad-length={2} hidden={!this.hour12Format} no-clamp value-as-number={this.hour12}
             placeholder="00" disabled={this.partsDisabled['hour']} step={this.partsStep['hour']}>
           </cwc-number-input>
           <span hidden={this._computeMultipleClamp(this.clamp, 'hour', this.partsHidden['hour'], 'minute', this.partsHidden['minute'])}>
@@ -1554,15 +1575,15 @@ export class DatetimeInputComponent {
             pad-length={3} no-clamp step={this.partsStep['millisecond']}
             disabled={this.partsDisabled['millisecond']} placeholder="000">
           </cwc-number-input>
-          <button class="hour12" disabled={this.partsHidden['hour']} hidden={!this._valueIsSet || !this.hour12Format}>
+          <button class="hour12" disabled={this.partsHidden['hour']} hidden={!(this._valueIsSet && this.hour12Format)}>
             <div hidden={!this.isAm}>{this.markers['amString']}</div>
             <div hidden={this.isAm}>{this.markers['pmString']}</div>
           </button>
-          <cwc-number-input hidden={!this.withTimezone} value-as-number={this._timeZoneHours} pad-length={2}
+          <cwc-number-input id="timezonehours" hidden={!this.withTimezone} value-as-number={this._timeZoneHours} pad-length={2}
             always-sign step={1} placeholder="+00" min={-23} max={23}>
           </cwc-number-input>
           <span hidden={!this.withTimezone}>{this.markers['timeSeparator']}</span>
-          <cwc-number-input hidden={!this.withTimezone} value-as-number={this._timeZoneMinutes}
+          <cwc-number-input id="timezoneminutes" hidden={!this.withTimezone} value-as-number={this._timeZoneMinutes}
             pad-length={2} min={0} max={45} step={15} placeholder="00">
           </cwc-number-input>
         </div>

@@ -670,7 +670,7 @@ export class NumberInputComponent {
   }
 
   private _updateValue() {
-    if (this.valueAsNumber !== undefined) {
+    if (!(this.valueAsNumber === null || this.valueAsNumber === undefined)) {
       this._valueAsNumberChanged(this.valueAsNumber, this.valueAsNumber);
     }
   }
@@ -743,11 +743,11 @@ export class NumberInputComponent {
   }
 
   private _valueAsNumberChanged(value, oldValue) {
-    if (value === undefined) {
+    if (value === undefined || value === null) {
       if (!isNaN(this.default)) {
         this.valueAsNumber = this.default;
       } else {
-        this.input = this.input = '';
+        this.input = '';
       }
       return;
     }

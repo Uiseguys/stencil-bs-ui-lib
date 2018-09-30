@@ -12,7 +12,7 @@ export class DatetimeInputPage {
             <cwc-datetime-input
               locale="en-US"
               step={1}
-              hour12-format={true}
+              hour12Format={true}
               with-timezone={true}>
             </cwc-datetime-input>
           </div>
