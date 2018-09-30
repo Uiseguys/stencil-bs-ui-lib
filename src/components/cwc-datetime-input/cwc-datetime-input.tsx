@@ -1,4 +1,4 @@
-import { Component, Prop, State, Watch, Element, HostElement, Method, Listen } from '@stencil/core';
+import { Component, Prop, State, Watch, Event, EventEmitter, Element, HostElement, Method, Listen } from '@stencil/core';
 import 'bootstrap.native/dist/bootstrap-native-v4';
 
 @Component({
@@ -111,6 +111,8 @@ export class DatetimeInputComponent {
   // -- date time input
   @Prop({ mutable: true }) clamp: string = 'millisecond';
 
+  @Event() datetimeInputChanged: EventEmitter;
+
   @Listen('numberInputChanged')
   numberInputChangedHandler() {
     this._updateValues();
@@ -167,6 +169,10 @@ export class DatetimeInputComponent {
 
   componentDidUnload() {
     this.el.querySelector('button.reset').removeEventListener('click', this._resetDate, false);
+  }
+
+  componentDidUpdate() {
+    this.datetimeInputChanged.emit({ id: this.el['id'] });
   }
 
   // -- form element

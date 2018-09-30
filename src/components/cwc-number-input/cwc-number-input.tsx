@@ -172,7 +172,7 @@ export class NumberInputComponent {
   }
 
   componentDidUpdate() {
-    this.numberInputChanged.emit('number input updated');
+    this.numberInputChanged.emit({ id: this.el['id'] });
   }
 
   // intl number format

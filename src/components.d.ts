@@ -1614,6 +1614,7 @@ declare global {
       'max'?: Object;
       'min'?: Object;
       'name'?: string;
+      'onDatetimeInputChanged'?: (event: CustomEvent) => void;
       'partsDisabled'?: Object;
       'partsHidden'?: Object;
       'partsStep'?: Object;
