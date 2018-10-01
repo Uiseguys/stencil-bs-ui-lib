@@ -112,6 +112,7 @@ export class DatetimeInputComponent {
   @Prop({ mutable: true }) clamp: string = 'millisecond';
 
   @Event() datetimeInputChanged: EventEmitter;
+  @Event() clampValueChanged: EventEmitter;
 
   @Listen('numberInputChanged')
   numberInputChangedHandler() {
@@ -278,6 +279,7 @@ export class DatetimeInputComponent {
   @Watch('clamp')
   clampChanged() {
     this._dateLocked = this._ifClamped(this.clamp, 'hour', undefined);
+    this.clampValueChanged.emit({ id: this.el['id'] });
   }
   // @Watch('day')
   // dayChanged() {
