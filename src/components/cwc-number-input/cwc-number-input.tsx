@@ -132,7 +132,7 @@ export class NumberInputComponent {
     this._checkKeycode = this._checkKeycode.bind(this);
     this._addEventListeners();
     setTimeout(this.resize.bind(this), 0);
-    this.resize();
+    // this.resize();
 
     // number input
     this.type = this._computeType();
@@ -705,17 +705,15 @@ export class NumberInputComponent {
       clearTimeout(this._minSizeJob);
       this._minSizeJob = null;
     }
-    const minsizer = () => {
-      setTimeout(() => {
-        const width = this.el.querySelector('#minsize')['getBoundingClientRect']()['width'];
-        this._minSizeJob = null;
-        if (width === 0) {
-          this._minSizeJob = setTimeout(minsizer.bind(this), 0);
-        } else {
-          this.el.querySelector('#input')['style']['minWidth'] = `${width}px`;
-          this._debouncedComputeWidth();
-        }
-      }, 50);
+    const minsizer = (tries = 0) => {
+      const width = this.el.querySelector('#minsize')['getBoundingClientRect']()['width'];
+      this._minSizeJob = null;
+      if (width <= 2 && !this.el['hidden'] && tries < 50) {
+        this._minSizeJob = setTimeout(minsizer.bind(this, tries + 1), 0);
+      } else {
+        this.el.querySelector('#input')['style']['minWidth'] = `${width}px`;
+        this._debouncedComputeWidth();
+      }
     }
     this._minSizeJob = setTimeout(minsizer.bind(this), 0);
   }
