@@ -107,11 +107,9 @@ export class DatetimeInputComponent {
   @State() _defaultValue: number;
 
   // -- time input pattern
-  // @Prop({ mutable: true }) clamp: string = '';
   @Prop({ mutable: true }) withTimezone: boolean = false;
 
   // -- date input pattern
-  // @Prop({ mutable: true }) clamp: string = 'hour';
 
   // -- date time input
   @Prop({ mutable: true }) clamp: string = 'millisecond';
@@ -124,20 +122,11 @@ export class DatetimeInputComponent {
     this._updateValues();
   }
 
-  // componentDidLoad() {
-  //   this._resetDate = this._resetDate.bind(this);
-  //   this._switchAm = this._switchAm.bind(this);
-  //   this.el.querySelector('button.reset').addEventListener('click', this._resetDate, false);
-  //   this.el.querySelector('button.hour12').addEventListener('click', this._switchAm, false);
-  //   this.el['tabindex'] = 0;
-  // }
-
   componentDidLoad() {
     this._resetDate = this._resetDate.bind(this);
     this._switchAm = this._switchAm.bind(this);
     this.el.querySelector('button.reset').addEventListener('click', this._resetDate, false);
     this.el.querySelector('button.hour12').addEventListener('click', this._switchAm, false);
-    // this.el['tabindex'] = 0;
     // -- form element
     this._computeInvalid(this.required, this.value);
     this._computeValueIsSet(this.value);
@@ -233,14 +222,6 @@ export class DatetimeInputComponent {
       this._valueAsNumberChanged(newVal['number']);
     }
   }
-  // @Watch('valueAsDate')
-  // valueAsDateChanged(d) {
-  //   this._valueAsDateChanged(d);
-  // }
-  // @Watch('valueAsNumber')
-  // valueAsNumberChanged(value) {
-  //   this._valueAsNumberChanged(value);
-  // }
   @Watch('min')
   minChanged(min) {
     this._minChanged(min);
@@ -276,41 +257,11 @@ export class DatetimeInputComponent {
       }
     }, 0);
   }
-  // @Watch('year')
-  // yearChanged() {
-  //   this._maxDayOfMonth = this._computeMaxDayOfMonth(this.year, this.month);
-  //   this._computeDatetime(this.year, this.month, this.day, this.hour, this.minute, this.second, this.millisecond);
-  // }
-  // @Watch('month')
-  // monthChanged() {
-  //   this._maxDayOfMonth = this._computeMaxDayOfMonth(this.year, this.month);
-  //   this._computeDatetime(this.year, this.month, this.day, this.hour, this.minute, this.second, this.millisecond);
-  // }
   @Watch('clamp')
   clampChanged() {
     this._dateLocked = this._ifClamped(this.clamp, 'hour', undefined);
     this.clampValueChanged.emit({ id: this.el['id'] });
   }
-  // @Watch('day')
-  // dayChanged() {
-  //   this._computeDatetime(this.year, this.month, this.day, this.hour, this.minute, this.second, this.millisecond);
-  // }
-  // @Watch('hour')
-  // hourChanged() {
-  //   this._computeDatetime(this.year, this.month, this.day, this.hour, this.minute, this.second, this.millisecond);
-  // }
-  // @Watch('minute')
-  // minuteChanged() {
-  //   this._computeDatetime(this.year, this.month, this.day, this.hour, this.minute, this.second, this.millisecond);
-  // }
-  // @Watch('second')
-  // secondChanged() {
-  //   this._computeDatetime(this.year, this.month, this.day, this.hour, this.minute, this.second, this.millisecond);
-  // }
-  // @Watch('millisecond')
-  // millisecondChanged() {
-  //   this._computeDatetime(this.year, this.month, this.day, this.hour, this.minute, this.second, this.millisecond);
-  // }
   @Watch('datetime')
   async datetimeChanged() {
     const self = this;
@@ -325,17 +276,6 @@ export class DatetimeInputComponent {
       self._dateTimeChanged(self.date, self.time);
     }, 0);
   }
-  // @Watch('time')
-  // timeChanged() {
-  //   const self = this;
-  //   setTimeout(() => {
-  //     self._dateTimeChanged(self.date, self.time);
-  //   }, 0);
-  // }
-  // @Watch('_timeZoneHours')
-  // async underscoreTimeZoneHoursChanged() {
-  //   this._timeZoneHoursMinutesChanged(this._timeZoneHours, this._timeZoneMinutes);
-  // }
   @Watch('_timeZoneMinutes')
   async underscoreTimeZoneMinutesChanged() {
     this._timeZoneHoursMinutesChanged(this._timeZoneHours, this._timeZoneMinutes);
@@ -356,7 +296,6 @@ export class DatetimeInputComponent {
   }
   @Watch('partsStep')
   partsStepChanged(newVal, oldVal) {
-    // TODO: confirm if works
     for (const key in newVal) {
       if (newVal.hasOwnProperty(key) && newVal[key] !== oldVal[key]) {
         this._computePartsDisabled({ path: `partsStep.${key}`, value: newVal[key] }, this.disabled);
@@ -438,7 +377,6 @@ export class DatetimeInputComponent {
     // decimal separator
     const numberString = (0.5).toLocaleString(locale, {
       minimumIntegerDigits: 1,
-      // maximumIntegerDigits: 1,
       minimumFractionDigits: 1,
       maximumFractionDigits: 1
     });
@@ -501,8 +439,7 @@ export class DatetimeInputComponent {
       hour: '2-digit',
       minute: '2-digit',
       timeZone: 'UTC',
-      hour12: true,
-      // hourCycle: 'h12'
+      hour12: true
     }));
 
     formatedTimeParts.push(amString);
@@ -515,8 +452,7 @@ export class DatetimeInputComponent {
       hour: '2-digit',
       minute: '2-digit',
       timeZone: 'UTC',
-      hour12: true,
-      // hourCycle: 'h12'
+      hour12: true
     }));
 
     this.markers = {
@@ -776,7 +712,6 @@ export class DatetimeInputComponent {
         fields.map((field) => {
           this[field] = propertiesToChange[field];
         });
-        // this.setProperties(this._computeTimezoneOffset(match[3]));
         this.__updatingTimezoneOffset = false;
       }
     }
@@ -819,8 +754,6 @@ export class DatetimeInputComponent {
           number: value,
           date: d
         };
-        // this.valueAs['number'] = value;
-        // this.valueAs['date'] = d;
         return;
       }
       d = new Date(d);
@@ -842,15 +775,6 @@ export class DatetimeInputComponent {
         time = this._dateLocked ? '00:00:00.000' : this.__toTime(hour, minute, second, millisecond),
         datetime = date + 'T' + time + this.timezone;
 
-
-        // TODO: check
-        // this.year  = year;
-        // this.month  = month;
-        // this.day  = day;
-        // this.hour  = hour;
-        // this.minute  = minute;
-        // this.second  = second;
-        // this.millisecond  = millisecond;
         this.dateValues = {
           year,
           month,
@@ -877,21 +801,6 @@ export class DatetimeInputComponent {
       e.stopPropagation();
     }
 
-    // if (!this.valueAs['date']) {
-    //   return;
-    // }
-    //
-    // this.dateValues = {
-    //   year: 1970,
-    //   month: 1,
-    //   day: 1,
-    //   hour: 0,
-    //   minute: 0,
-    //   second: 0,
-    //   millisecond: 0,
-    // };
-    // this.timezone = undefined;
-
     if (this.default !== undefined) {
       const d = this._fromDatetime(this.default);
       if (!isNaN(d)) {
@@ -901,7 +810,6 @@ export class DatetimeInputComponent {
       }
     }
 
-    // TODO: check
     this._recentLocalTimezoneOffset = undefined;
     this.valueAs = {
       date: undefined,
@@ -965,7 +873,6 @@ export class DatetimeInputComponent {
     }
     const max = this.max && this._fromDatetime(this.max);
     if (d > max) {
-      // TODO: check
       this.min = this.max;
       this.max = min;
       return;
@@ -975,7 +882,6 @@ export class DatetimeInputComponent {
       this.valueAs = { ...this.valueAs, ...{
         number: +this._checkThreshold(new Date(this.valueAs['number']))
       } };
-      // this.valueAs['number'] = +this._checkThreshold(new Date(this.valueAs['number']));
     }
   }
 
@@ -986,7 +892,6 @@ export class DatetimeInputComponent {
     }
     const min = this.min && this._fromDatetime(this.min);
     if (min > d) {
-      // TODO: check
       this.min = max;
       this.max = this.min;
       return;
@@ -996,7 +901,6 @@ export class DatetimeInputComponent {
       this.valueAs = {...this.valueAs, ...{
         number: +this._checkThreshold(new Date(this.valueAs['number']))
       }};
-      // this.valueAs['number'] = +this._checkThreshold(new Date(this.valueAs['number']));
     }
   }
 
@@ -1018,33 +922,9 @@ export class DatetimeInputComponent {
     return this._pad(year, year < 0 ? 6 : 4) + '-' + this._pad(d.getMonth() + 1, 2) + '-' + this._pad(d.getDate(), 2);
   }
 
-  // private _toUTCDate(d) {
-  //   if (typeof d === 'number') {
-  //     d = new Date(d);
-  //   }
-  //   const year = d.getUTCFullYear();
-  //   return this._pad(year, year < 0 ? 6 : 4) + '-' + this._pad(d.getUTCMonth() + 1, 2) + '-' + this._pad(d.getUTCDate(), 2);
-  // }
-
   private __toDate(year, month, day) {
     return this._pad(year, year < 0 ? 6 : 4) + '-' + this._pad(month, 2) + '-' + this._pad(day, 2);
   }
-
-  // private _toTime(d) {
-  //   if (typeof d === 'number') {
-  //     d = new Date(d);
-  //   }
-  //   return this._pad(d.getHours(), 2) + ':' + this._pad(d.getMinutes(), 2) + ':' + this._pad(d.getSeconds(), 2)
-  //     + '.' + this._pad(d.getMilliseconds(), 3);
-  // }
-
-  // private _toUTCTime(d) {
-  //   if (typeof d === 'number') {
-  //     d = new Date(d);
-  //   }
-  //   return this._pad(d.getUTCHours(), 2) + ':' + this._pad(d.getUTCMinutes(), 2) + ':'
-  //     + this._pad(d.getUTCSeconds(), 2) + '.' + this._pad(d.getUTCMilliseconds(), 3);
-  // }
 
   private __toTime(hour, minute, second, millisecond) {
     return this._pad(hour || 0, 2) + ':' + this._pad(minute || 0, 2)
@@ -1089,7 +969,6 @@ export class DatetimeInputComponent {
     this.dateValues = { ...this.dateValues, ...{
       hour: (hour12 === 12) ? (this.isAm ? 0 : 12) : (this.isAm ? hour12 : hour12 + 12)
     }};
-    // this.hour = (hour12 === 12) ? (this.isAm ? 0 : 12) : (this.isAm ? hour12 : hour12 + 12);
   }
 
   private _isAmChanged(isAm, old) {
@@ -1114,14 +993,12 @@ export class DatetimeInputComponent {
         fields.map((field) => {
           this[field] = propertiesToChange[field];
         });
-        // this.setProperties(this._computeTimezoneOffset(this.timezone));
       } else {
         const propertiesToChange = this._computeTimezone((d || new Date()).getTimezoneOffset());
         const fields = Object.keys(propertiesToChange);
         fields.map((field) => {
           this[field] = propertiesToChange[field];
         });
-        // this.setProperties(this._computeTimezone((d || new Date()).getTimezoneOffset()));
       }
       this.__updatingTimezoneOffset = false;
     }
@@ -1156,7 +1033,6 @@ export class DatetimeInputComponent {
         fields.map((field) => {
           this[field] = propertiesToChange[field];
         });
-        // this.setProperties(this._computeTimezoneOffset(oldValue));
         return;
       }
       const propertiesToChange1 = this
@@ -1165,8 +1041,6 @@ export class DatetimeInputComponent {
       fields1.map((field) => {
         this[field] = propertiesToChange1[field];
       });
-      // this.setProperties(this.
-        // _computeTimezone((this.valueAsDate === undefined ? new Date() : new Date(this.valueAsDate)).getTimezoneOffset()));
       return;
     }
 
@@ -1177,7 +1051,6 @@ export class DatetimeInputComponent {
       fields2.map((field) => {
         this[field] = toSet[field];
       });
-      // this.setProperties(toSet);
       this.__updatingTimezoneOffset = false;
     }
   }
@@ -1192,7 +1065,6 @@ export class DatetimeInputComponent {
     fields.map((field) => {
       this[field] = propertiesToChange[field];
     });
-    // this.setProperties(this._computeTimezone(offsetMinutes));
     if (this.date && this.time) {
       this._dateTimeChanged(this.date, this.time);
     }
@@ -1207,10 +1079,6 @@ export class DatetimeInputComponent {
     if (offsetMinutes !== this._timezoneOffset) {
       this._timezoneOffset = offsetMinutes;
       this.timezone = timezone;
-      // this.setProperties({
-      //   _timezoneOffset: offsetMinutes,
-      //   timezone: timezone
-      // });
     } else if (this.timezone !== timezone) {
       this.timezone = timezone;
     }
@@ -1322,7 +1190,6 @@ export class DatetimeInputComponent {
       }};
       if (this._ifClamped(this.clamp, 'day', undefined)) {
         // reset `clamp` to next inferior standing if clamped
-        // this.set('clamp', 'hour');
         this.clamp = 'hour';
       }
     } else if (step % 3600 === 0) {
@@ -1335,7 +1202,6 @@ export class DatetimeInputComponent {
       }};
       if (this._ifClamped(this.clamp, 'hour', undefined)) {
         // reset `clamp` to next inferior standing if clamped
-        // this.set('clamp', 'minute');
         this.clamp = 'minute';
       }
     } else if (step % 60 === 0) {
@@ -1348,7 +1214,6 @@ export class DatetimeInputComponent {
       }};
       if (this._ifClamped(this.clamp, 'minute', undefined)) {
         // reset `clamp` to next inferior standing if clamped
-        // this.set('clamp', 'second');
         this.clamp = 'second';
       }
     } else if (step % 1 === 0) {
@@ -1361,7 +1226,6 @@ export class DatetimeInputComponent {
       }};
       if (this._ifClamped(this.clamp, 'second', undefined)) {
         // reset `clamp` to next inferior standing if clamped
-        // this.set('clamp', 'millisecond');
         this.clamp = 'millisecond';
       }
     } else {
@@ -1374,11 +1238,9 @@ export class DatetimeInputComponent {
       }};
       if (this._ifClamped(this.clamp, 'millisecond', undefined)) {
         // reset `clamp` to next inferior standing if clamped
-        // this.set('clamp', '');
         this.clamp = '';
       }
     }
-    // this.notifyPath('partsStep');
   }
 
   private _computePartsDisabled(change, disabled) {
@@ -1386,31 +1248,25 @@ export class DatetimeInputComponent {
       return;
     }
     if (change.path.indexOf('.') !== -1) {
-      // const key = 'partsDisabled.' + change.path.split('.')[1];
       const key = change.path.split('.')[1];
       if (disabled) {
         this.partsDisabled = {...this.partsDisabled, ...{
           [key]: true
         }};
-        // this.set(key, true);
       } else {
         this.partsDisabled = {...this.partsDisabled, ...{
           [key]: !change.value
         }};
-        // this.set(key, !change.value);
       }
     } else if (change && change.value) {
       const newData = {};
       for (const key in change.value) {
         if (change.value.hasOwnProperty(key)) {
           newData[key] = !change.value[key];
-          // this.set('partsDisabled.' + key, !change.value[key]);
         }
       }
       this.partsDisabled = {...this.partsDisabled, ...newData};
     }
-
-    // this.notifyPath('partsDisabled');
   }
 
   private _switchAm() {
@@ -1421,9 +1277,6 @@ export class DatetimeInputComponent {
     return hidden1 || hidden2 || this._ifClamped(clamp, prop1, undefined) || this._ifClamped(clamp, prop2, undefined);
   }
 
-  // TODO: confirm arguments
-  // -- date input pattern
-  // private _edgeIsHidden(order, clamp, hidden, leftToRight) {
   private _edgeIsHidden(order, clamp, leftToRight) {
     if (order === undefined) {
       return true; // hide if not fully initialized
@@ -1530,8 +1383,6 @@ export class DatetimeInputComponent {
     }
   }
 
-  // TODO: fix invisible attribute on button
-  // TODO: fix arguments passed to edgeishidden
   render() {
     return (
       <div id="dateinput">
