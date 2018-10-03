@@ -201,17 +201,11 @@ export class DatetimeInputComponent {
   // -- date time
   @Watch('hour12')
   async hour12Changed(newVal, oldVal) {
-    const self = this;
-    setTimeout(() => {
-      self._hour12Changed(newVal, oldVal);
-    }, 0);
+    this._hour12Changed(newVal, oldVal);
   }
   @Watch('isAm')
   async isAmChanged(newVal, oldVal) {
-    const self = this;
-    setTimeout(() => {
-      self._isAmChanged(newVal, oldVal);
-    }, 0)
+    this._isAmChanged(newVal, oldVal);
   }
   @Watch('valueAs')
   async valueAsDateChanged(newVal, oldVal) {
@@ -240,22 +234,19 @@ export class DatetimeInputComponent {
   }
   @Watch('dateValues')
   async dateValuesChanged(newVal, oldVal) {
-    const self = this;
-    setTimeout(() => {
-      if (newVal['year'] !== oldVal['year'] || newVal['month'] !== oldVal['month']) {
-        self._maxDayOfMonth = self._computeMaxDayOfMonth(newVal['year'], oldVal['month']);
-      }
-      if (
-        newVal['year'] !== oldVal['year'] || newVal['month'] !== oldVal['month']
-        || newVal['day'] !== oldVal['day'] || newVal['hour'] !== oldVal['hour']
-        || newVal['minute'] !== oldVal['minute'] || newVal['second'] !== oldVal['second']
-        || newVal['millisecond'] !== oldVal['millisecond']
-      ) {
-        self._computeDatetime(
-          newVal['year'], newVal['month'], newVal['day'], newVal['hour'], newVal['minute'], newVal['second'], newVal['millisecond']
-        );
-      }
-    }, 0);
+    if (newVal['year'] !== oldVal['year'] || newVal['month'] !== oldVal['month']) {
+      this._maxDayOfMonth = this._computeMaxDayOfMonth(newVal['year'], oldVal['month']);
+    }
+    if (
+      newVal['year'] !== oldVal['year'] || newVal['month'] !== oldVal['month']
+      || newVal['day'] !== oldVal['day'] || newVal['hour'] !== oldVal['hour']
+      || newVal['minute'] !== oldVal['minute'] || newVal['second'] !== oldVal['second']
+      || newVal['millisecond'] !== oldVal['millisecond']
+    ) {
+      this._computeDatetime(
+        newVal['year'], newVal['month'], newVal['day'], newVal['hour'], newVal['minute'], newVal['second'], newVal['millisecond']
+      );
+    }
   }
   @Watch('clamp')
   clampChanged() {
@@ -264,17 +255,11 @@ export class DatetimeInputComponent {
   }
   @Watch('datetime')
   async datetimeChanged() {
-    const self = this;
-    setTimeout(() => {
-      self._datetimeChanged(self.datetime);
-    }, 0);
+    this._datetimeChanged(this.datetime);
   }
   @Watch('date')
   async dateChanged() {
-    const self = this;
-    setTimeout(() => {
-      self._dateTimeChanged(self.date, self.time);
-    }, 0);
+    this._dateTimeChanged(this.date, this.time);
   }
   @Watch('_timeZoneMinutes')
   async underscoreTimeZoneMinutesChanged() {
