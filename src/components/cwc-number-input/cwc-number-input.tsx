@@ -3,7 +3,12 @@ import 'bootstrap.native/dist/bootstrap-native-v4';
 
 @Component({
     tag: 'cwc-number-input',
-    styleUrl: 'cwc-number-input.scss'
+    styleUrl: 'cwc-number-input.scss',
+    host: {
+      theme: 'number',
+      role: 'input',
+      tabindex: '0'
+    }
 })
 export class NumberInputComponent {
   // -- intl number format
@@ -161,7 +166,7 @@ export class NumberInputComponent {
     this._stepChanged(this.step, this.stepMod);
 
     // transferred from form element
-    this.el['tabindex'] = 0;
+    // this.el['tabindex'] = 0;
     this._computeInvalid(this.required, this.value);
     this._computeValueIsSet(this.value);
     this._defaultChanged(this.default);

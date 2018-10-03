@@ -3,7 +3,12 @@ import 'bootstrap.native/dist/bootstrap-native-v4';
 
 @Component({
     tag: 'cwc-datetime-input',
-    styleUrl: 'cwc-datetime-input.scss'
+    styleUrl: 'cwc-datetime-input.scss',
+    host: {
+      theme: 'datetime',
+      role: 'input',
+      tabindex: '0'
+    }
 })
 export class DatetimeInputComponent {
   // -- form element
@@ -132,7 +137,7 @@ export class DatetimeInputComponent {
     this._switchAm = this._switchAm.bind(this);
     this.el.querySelector('button.reset').addEventListener('click', this._resetDate, false);
     this.el.querySelector('button.hour12').addEventListener('click', this._switchAm, false);
-    this.el['tabindex'] = 0;
+    // this.el['tabindex'] = 0;
     // -- form element
     this._computeInvalid(this.required, this.value);
     this._computeValueIsSet(this.value);
