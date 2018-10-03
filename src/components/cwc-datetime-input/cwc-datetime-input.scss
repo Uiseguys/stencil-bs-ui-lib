@@ -136,7 +136,7 @@ select {
 /**
  * inner inputs
  */
-cwc-number-input,
+#year, #month, #day, #minute, #hour, #second, #millisecond, #hour12, #timezonehours, #timezoneminutes,
 text-input {
   --input-color: var(--inner-input-color, inherit);
   --input-background: var(--inner-input-background, transparent);
@@ -465,6 +465,6 @@ select:focus::-ms-value {
   align-self: stretch;
   border-color: transparent;
 }
-#dateinput cwc-number-input[always-sign] {
+#dateinput cwc-number-input#timezonehours[always-sign] {
   --input-align: end;
 }
