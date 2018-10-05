@@ -200,21 +200,27 @@ export class DatetimeInputComponent {
 
   // -- date time
   @Watch('hour12')
-  async hour12Changed(newVal, oldVal) {
-    this._hour12Changed(newVal, oldVal);
+  hour12Changed(newVal, oldVal) {
+    setTimeout((() => {
+      this._hour12Changed(newVal, oldVal);
+    }).bind(this), 0);
   }
   @Watch('isAm')
-  async isAmChanged(newVal, oldVal) {
-    this._isAmChanged(newVal, oldVal);
+  isAmChanged(newVal, oldVal) {
+    setTimeout((() => {
+      this._isAmChanged(newVal, oldVal);
+    }).bind(this), 0);
   }
   @Watch('valueAs')
-  async valueAsDateChanged(newVal, oldVal) {
-    if (newVal['date'] !== oldVal['date']) {
-      this._valueAsDateChanged(newVal['date']);
-    }
-    if (newVal['number'] !== oldVal['number']) {
-      this._valueAsNumberChanged(newVal['number']);
-    }
+  valueAsDateChanged(newVal, oldVal) {
+    setTimeout((() => {
+      if (newVal['date'] !== oldVal['date']) {
+        this._valueAsDateChanged(newVal['date']);
+      }
+      if (newVal['number'] !== oldVal['number']) {
+        this._valueAsNumberChanged(newVal['number']);
+      }
+    }).bind(this), 0);
   }
   @Watch('min')
   minChanged(min) {
@@ -225,28 +231,32 @@ export class DatetimeInputComponent {
     this._maxChanged(max);
   }
   @Watch('timezone')
-  async timezoneChanged(newVal, oldVal) {
-    this._timezoneChanged(newVal, oldVal);
+  timezoneChanged(newVal, oldVal) {
+    setTimeout((() => {
+      this._timezoneChanged(newVal, oldVal);
+    }).bind(this), 0);
   }
   @Watch('_timezoneOffset')
-  async underscoreTimezoneOffsetChanged(offset) {
+  underscoreTimezoneOffsetChanged(offset) {
     this._timezoneOffsetChanged(offset);
   }
   @Watch('dateValues')
-  async dateValuesChanged(newVal, oldVal) {
-    if (newVal['year'] !== oldVal['year'] || newVal['month'] !== oldVal['month']) {
-      this._maxDayOfMonth = this._computeMaxDayOfMonth(newVal['year'], oldVal['month']);
-    }
-    if (
-      newVal['year'] !== oldVal['year'] || newVal['month'] !== oldVal['month']
-      || newVal['day'] !== oldVal['day'] || newVal['hour'] !== oldVal['hour']
-      || newVal['minute'] !== oldVal['minute'] || newVal['second'] !== oldVal['second']
-      || newVal['millisecond'] !== oldVal['millisecond']
-    ) {
-      this._computeDatetime(
-        newVal['year'], newVal['month'], newVal['day'], newVal['hour'], newVal['minute'], newVal['second'], newVal['millisecond']
-      );
-    }
+  dateValuesChanged(newVal, oldVal) {
+    setTimeout((() => {
+      if (newVal['year'] !== oldVal['year'] || newVal['month'] !== oldVal['month']) {
+        this._maxDayOfMonth = this._computeMaxDayOfMonth(newVal['year'], oldVal['month']);
+      }
+      if (
+        newVal['year'] !== oldVal['year'] || newVal['month'] !== oldVal['month']
+        || newVal['day'] !== oldVal['day'] || newVal['hour'] !== oldVal['hour']
+        || newVal['minute'] !== oldVal['minute'] || newVal['second'] !== oldVal['second']
+        || newVal['millisecond'] !== oldVal['millisecond']
+      ) {
+        this._computeDatetime(
+          newVal['year'], newVal['month'], newVal['day'], newVal['hour'], newVal['minute'], newVal['second'], newVal['millisecond']
+        );
+      }
+    }).bind(this), 0);
   }
   @Watch('clamp')
   clampChanged() {
@@ -254,16 +264,18 @@ export class DatetimeInputComponent {
     this.clampValueChanged.emit({ id: this.el['id'] });
   }
   @Watch('datetime')
-  async datetimeChanged() {
+  datetimeChanged() {
     this._datetimeChanged(this.datetime);
   }
   @Watch('date')
-  async dateChanged() {
+  dateChanged() {
     this._dateTimeChanged(this.date, this.time);
   }
   @Watch('_timeZoneMinutes')
-  async underscoreTimeZoneMinutesChanged() {
-    this._timeZoneHoursMinutesChanged(this._timeZoneHours, this._timeZoneMinutes);
+  underscoreTimeZoneMinutesChanged() {
+    setTimeout((() => {
+      this._timeZoneHoursMinutesChanged(this._timeZoneHours, this._timeZoneMinutes);
+    }).bind(this), 0);
   }
 
   // -- date time input
