@@ -791,11 +791,11 @@ export class DatetimeInputComponent {
           second,
           millisecond
         };
-        this.isAm  = isAm;
-        this.hour12  = hour12;
-        this.datetime  = datetime;
-        this.date  = date;
-        this.time  = time;
+        this.hour12 = hour12;
+        this.isAm = isAm;
+        this.datetime = datetime;
+        this.date = date;
+        this.time = time;
     } else if (!isNaN((d = new Date(this.default)).getTime())) {
       this._setDate(d);
     } else if (!isNaN(this.valueAs['number'])) {
@@ -981,8 +981,8 @@ export class DatetimeInputComponent {
 
   private _isAmChanged(isAm, old) {
     if (isAm === undefined || isAm === old) { return; }
-
-    this._hour12Changed(this.hour12, undefined);
+    // console.log('many here')
+    // this._hour12Changed(this.hour12, undefined);
   }
 
   private _ifClamped(clamp, comp, hidden) {
