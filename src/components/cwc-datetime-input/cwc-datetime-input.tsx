@@ -39,6 +39,7 @@ export class DatetimeInputComponent {
     month: undefined,
     day: undefined,
     hour: undefined,
+    // hour12: undefined,
     minute: undefined,
     second: undefined,
     millisecond: undefined,
@@ -201,26 +202,26 @@ export class DatetimeInputComponent {
   // -- date time
   @Watch('hour12')
   hour12Changed(newVal, oldVal) {
-    setTimeout((() => {
+    // setTimeout((() => {
       this._hour12Changed(newVal, oldVal);
-    }).bind(this), 0);
+    // }).bind(this), 0);
   }
   @Watch('isAm')
   isAmChanged(newVal, oldVal) {
-    setTimeout((() => {
+    // setTimeout((() => {
       this._isAmChanged(newVal, oldVal);
-    }).bind(this), 0);
+    // }).bind(this), 0);
   }
   @Watch('valueAs')
   valueAsDateChanged(newVal, oldVal) {
-    setTimeout((() => {
+    // setTimeout((() => {
       if (newVal['date'] !== oldVal['date']) {
         this._valueAsDateChanged(newVal['date']);
       }
       if (newVal['number'] !== oldVal['number']) {
         this._valueAsNumberChanged(newVal['number']);
       }
-    }).bind(this), 0);
+    // }).bind(this), 0);
   }
   @Watch('min')
   minChanged(min) {
@@ -232,9 +233,9 @@ export class DatetimeInputComponent {
   }
   @Watch('timezone')
   timezoneChanged(newVal, oldVal) {
-    setTimeout((() => {
+    // setTimeout((() => {
       this._timezoneChanged(newVal, oldVal);
-    }).bind(this), 0);
+    // }).bind(this), 0);
   }
   @Watch('_timezoneOffset')
   underscoreTimezoneOffsetChanged(offset) {
@@ -242,7 +243,7 @@ export class DatetimeInputComponent {
   }
   @Watch('dateValues')
   dateValuesChanged(newVal, oldVal) {
-    setTimeout((() => {
+    // setTimeout((() => {
       if (newVal['year'] !== oldVal['year'] || newVal['month'] !== oldVal['month']) {
         this._maxDayOfMonth = this._computeMaxDayOfMonth(newVal['year'], oldVal['month']);
       }
@@ -256,7 +257,15 @@ export class DatetimeInputComponent {
           newVal['year'], newVal['month'], newVal['day'], newVal['hour'], newVal['minute'], newVal['second'], newVal['millisecond']
         );
       }
-    }).bind(this), 0);
+      // change value as number of number input
+      // nessaaaa
+      this._alignValues(newVal['year'], oldVal['year'], 'year');
+      this._alignValues(newVal['month'], oldVal['month'], 'month');
+      this._alignValues(newVal['day'], oldVal['day'], 'day');
+      this._alignValues(newVal['hour'], oldVal['hour'], 'hour');
+      this._alignValues(newVal['minute'], oldVal['minute'], 'minute');
+      this._alignValues(newVal['second'], oldVal['second'], 'second');
+      this._alignValues(newVal['millisecond'], oldVal['millisecond'], 'millisecond');
   }
   @Watch('clamp')
   clampChanged() {
@@ -273,9 +282,9 @@ export class DatetimeInputComponent {
   }
   @Watch('_timeZoneMinutes')
   underscoreTimeZoneMinutesChanged() {
-    setTimeout((() => {
+    // setTimeout((() => {
       this._timeZoneHoursMinutesChanged(this._timeZoneHours, this._timeZoneMinutes);
-    }).bind(this), 0);
+    // }).bind(this), 0);
   }
 
   // -- date time input
@@ -777,6 +786,7 @@ export class DatetimeInputComponent {
           month,
           day,
           hour,
+          // hour12,
           minute,
           second,
           millisecond
@@ -817,6 +827,7 @@ export class DatetimeInputComponent {
       month: undefined,
       day: undefined,
       hour: undefined,
+      // hour12: undefined,
       minute: undefined,
       second: undefined,
       millisecond: undefined,
@@ -1358,12 +1369,14 @@ export class DatetimeInputComponent {
       || this.dateValues['minute'] !== minute
       || this.dateValues['second'] !== second
       || this.dateValues['millisecond'] !== millisecond
+      // || this.dateValues['hour12'] !== hour12
     ) {
       this.dateValues = {
         year,
         month,
         day,
         hour,
+        // hour12,
         minute,
         second,
         millisecond,
@@ -1377,6 +1390,12 @@ export class DatetimeInputComponent {
     }
     if (this._timeZoneMinutes !== timezoneMinutes) {
       this._timeZoneMinutes = timezoneMinutes;
+    }
+  }
+
+  private _alignValues(newValue, oldValue, id) {
+    if (newValue === oldValue && newValue !== this.el.querySelector(`#${id}`)['valueAsNumber']) {
+      this.el.querySelector(`#${id}`)['valueAsNumber'] = newValue;
     }
   }
 
