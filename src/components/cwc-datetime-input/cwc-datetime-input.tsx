@@ -138,7 +138,7 @@ export class DatetimeInputComponent {
 
     // -- date time
     this._hour12Changed(this.hour12, undefined);
-    this._isAmChanged(this.isAm, undefined)
+    // this._isAmChanged(this.isAm, undefined)
     this._computeDatetime(
       this.dateValues['year'], this.dateValues['month'],
       this.dateValues['day'], this.dateValues['hour'],
@@ -202,26 +202,20 @@ export class DatetimeInputComponent {
   // -- date time
   @Watch('hour12')
   hour12Changed(newVal, oldVal) {
-    // setTimeout((() => {
-      this._hour12Changed(newVal, oldVal);
-    // }).bind(this), 0);
+    this._hour12Changed(newVal, oldVal);
   }
-  @Watch('isAm')
-  isAmChanged(newVal, oldVal) {
-    // setTimeout((() => {
-      this._isAmChanged(newVal, oldVal);
-    // }).bind(this), 0);
-  }
+  // @Watch('isAm')
+  // isAmChanged(newVal, oldVal) {
+  //   this._isAmChanged(newVal, oldVal);
+  // }
   @Watch('valueAs')
   valueAsDateChanged(newVal, oldVal) {
-    // setTimeout((() => {
-      if (newVal['date'] !== oldVal['date']) {
-        this._valueAsDateChanged(newVal['date']);
-      }
-      if (newVal['number'] !== oldVal['number']) {
-        this._valueAsNumberChanged(newVal['number']);
-      }
-    // }).bind(this), 0);
+    if (newVal['date'] !== oldVal['date']) {
+      this._valueAsDateChanged(newVal['date']);
+    }
+    if (newVal['number'] !== oldVal['number']) {
+      this._valueAsNumberChanged(newVal['number']);
+    }
   }
   @Watch('min')
   minChanged(min) {
@@ -233,9 +227,7 @@ export class DatetimeInputComponent {
   }
   @Watch('timezone')
   timezoneChanged(newVal, oldVal) {
-    // setTimeout((() => {
-      this._timezoneChanged(newVal, oldVal);
-    // }).bind(this), 0);
+    this._timezoneChanged(newVal, oldVal);
   }
   @Watch('_timezoneOffset')
   underscoreTimezoneOffsetChanged(offset) {
@@ -243,8 +235,7 @@ export class DatetimeInputComponent {
   }
   @Watch('dateValues')
   dateValuesChanged(newVal, oldVal) {
-    // setTimeout((() => {
-      if (newVal['year'] !== oldVal['year'] || newVal['month'] !== oldVal['month']) {
+    if (newVal['year'] !== oldVal['year'] || newVal['month'] !== oldVal['month']) {
         this._maxDayOfMonth = this._computeMaxDayOfMonth(newVal['year'], oldVal['month']);
       }
       if (
@@ -258,7 +249,6 @@ export class DatetimeInputComponent {
         );
       }
       // change value as number of number input
-      // nessaaaa
       this._alignValues(newVal['year'], oldVal['year'], 'year');
       this._alignValues(newVal['month'], oldVal['month'], 'month');
       this._alignValues(newVal['day'], oldVal['day'], 'day');
@@ -282,9 +272,7 @@ export class DatetimeInputComponent {
   }
   @Watch('_timeZoneMinutes')
   underscoreTimeZoneMinutesChanged() {
-    // setTimeout((() => {
-      this._timeZoneHoursMinutesChanged(this._timeZoneHours, this._timeZoneMinutes);
-    // }).bind(this), 0);
+    this._timeZoneHoursMinutesChanged(this._timeZoneHours, this._timeZoneMinutes);
   }
 
   // -- date time input
@@ -786,7 +774,6 @@ export class DatetimeInputComponent {
           month,
           day,
           hour,
-          // hour12,
           minute,
           second,
           millisecond
@@ -827,7 +814,6 @@ export class DatetimeInputComponent {
       month: undefined,
       day: undefined,
       hour: undefined,
-      // hour12: undefined,
       minute: undefined,
       second: undefined,
       millisecond: undefined,
@@ -979,11 +965,10 @@ export class DatetimeInputComponent {
     }};
   }
 
-  private _isAmChanged(isAm, old) {
-    if (isAm === undefined || isAm === old) { return; }
-    // console.log('many here')
-    // this._hour12Changed(this.hour12, undefined);
-  }
+  // private _isAmChanged(isAm, old) {
+  //   if (isAm === undefined || isAm === old) { return; }
+  //   // this._hour12Changed(this.hour12, undefined);
+  // }
 
   private _ifClamped(clamp, comp, hidden) {
     const features = ['month', 'day', 'hour', 'minute', 'second', 'millisecond'];
