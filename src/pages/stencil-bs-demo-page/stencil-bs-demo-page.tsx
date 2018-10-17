@@ -219,6 +219,11 @@ export class StencilBsDemoPage {
       url: '/numberinput',
       title: 'Number Input',
       componentName: 'number-input-page'
+    },
+    {
+      url: '/datetimeinput',
+      title: 'Date Time Input',
+      componentName: 'datetime-input-page'
     }
   ];
 

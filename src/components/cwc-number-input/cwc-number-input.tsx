@@ -3,7 +3,12 @@ import 'bootstrap.native/dist/bootstrap-native-v4';
 
 @Component({
     tag: 'cwc-number-input',
-    styleUrl: 'cwc-number-input.scss'
+    styleUrl: 'cwc-number-input.scss',
+    host: {
+      theme: 'number',
+      role: 'input',
+      tabindex: '0'
+    }
 })
 export class NumberInputComponent {
   // -- intl number format
@@ -20,7 +25,7 @@ export class NumberInputComponent {
   @Prop({ mutable: true }) formatNumber: Function;
   @Prop({ mutable: true }) parseNumber: Function;
 
-  @Prop({ mutable: true }) separators: Object = { decimal: null, grouping: null };
+  @Prop({ mutable: true }) separators: Object = { decimal: undefined, grouping: undefined };
 
   @State() _numberOptions: Object;
   _regExpNotInNumber: RegExp = /[^\d\-+.e]/g;
@@ -42,7 +47,7 @@ export class NumberInputComponent {
   @Prop({ mutable: true }) minlength: number;
   @Prop({ mutable: true }) noAutoWidth: boolean;
   @Prop({ mutable: true }) autoResize: boolean;
-  @Prop({ mutable: true }) hidden: boolean;
+  @Prop({ mutable: true, reflectToAttr: true }) hidden: boolean;
 
   @State() _minWidthString: string;
   _minWidthComputionJob: any;
@@ -73,7 +78,7 @@ export class NumberInputComponent {
 
   @State() type: string;
 
-  @Event() theComponentChanged: EventEmitter;
+  @Event() numberInputChanged: EventEmitter;
 
   // ** number utilities
   _numberUtilities = {
@@ -132,7 +137,7 @@ export class NumberInputComponent {
     this._checkKeycode = this._checkKeycode.bind(this);
     this._addEventListeners();
     setTimeout(this.resize.bind(this), 0);
-    this.resize();
+    // this.resize();
 
     // number input
     this.type = this._computeType();
@@ -161,7 +166,7 @@ export class NumberInputComponent {
     this._stepChanged(this.step, this.stepMod);
 
     // transferred from form element
-    this.el['tabindex'] = 0;
+    // this.el['tabindex'] = 0;
     this._computeInvalid(this.required, this.value);
     this._computeValueIsSet(this.value);
     this._defaultChanged(this.default);
@@ -172,7 +177,7 @@ export class NumberInputComponent {
   }
 
   componentDidUpdate() {
-    this.theComponentChanged.emit('number input updated');
+    this.numberInputChanged.emit({ id: this.el['id'] });
   }
 
   // intl number format
@@ -501,19 +506,19 @@ export class NumberInputComponent {
       useGrouping: Boolean(useGrouping),
       style: style || 'decimal'
     }
-    if (currency !== undefined) {
+    if (currency !== undefined && currency !== null) {
       options['currency'] = currency;
     }
-    if (currencyDisplay !== undefined) {
+    if (currencyDisplay !== undefined && currencyDisplay !== null) {
       options['currencyDisplay'] = currencyDisplay;
     }
-    if (maximumFractionDigits !== undefined) {
+    if (maximumFractionDigits !== undefined && maximumFractionDigits !== null) {
       options['maximumFractionDigits'] = maximumFractionDigits < minimumFractionDigits ? minimumFractionDigits : maximumFractionDigits;
     }
-    if (minimumSignificantDigits !== undefined) {
+    if (minimumSignificantDigits !== undefined && minimumSignificantDigits !== null) {
       options['minimumSignificantDigits'] = minimumSignificantDigits;
     }
-    if (maximumSignificantDigits !== undefined) {
+    if (maximumSignificantDigits !== undefined && maximumSignificantDigits !== null) {
       options['maximumSignificantDigits'] =
         maximumSignificantDigits < minimumSignificantDigits ? minimumSignificantDigits : maximumSignificantDigits;
     }
@@ -570,7 +575,7 @@ export class NumberInputComponent {
   }
 
   private _computeValueIsSet(value) {
-    this._valueIsSet = value !== undefined;
+    this._valueIsSet = value !== undefined && value !== null;
   }
 
   private _defaultChanged(def) {
@@ -629,7 +634,7 @@ export class NumberInputComponent {
 
     // enter & space
     if (e.keyCode === 13 || e.keyCode === 32) {
-      this._checkInput(null);
+      this._checkInput(undefined);
       return;
     }
 
@@ -637,7 +642,7 @@ export class NumberInputComponent {
     if (e.keyCode === 27) {
       this._updateValue();
       e.stopPropagation();
-      this.blurMethod(null);
+      this.blurMethod(undefined);
       return;
     }
 
@@ -670,7 +675,7 @@ export class NumberInputComponent {
   }
 
   private _updateValue() {
-    if (this.valueAsNumber !== undefined) {
+    if (!(this.valueAsNumber === null || this.valueAsNumber === undefined)) {
       this._valueAsNumberChanged(this.valueAsNumber, this.valueAsNumber);
     }
   }
@@ -705,17 +710,15 @@ export class NumberInputComponent {
       clearTimeout(this._minSizeJob);
       this._minSizeJob = null;
     }
-    const minsizer = () => {
-      setTimeout(() => {
-        const width = this.el.querySelector('#minsize')['getBoundingClientRect']()['width'];
-        this._minSizeJob = null;
-        if (width === 0) {
-          this._minSizeJob = setTimeout(minsizer.bind(this), 0);
-        } else {
-          this.el.querySelector('#input')['style']['minWidth'] = `${width}px`;
-          this._debouncedComputeWidth();
-        }
-      }, 50);
+    const minsizer = (tries = 0) => {
+      const width = this.el.querySelector('#minsize')['getBoundingClientRect']()['width'];
+      this._minSizeJob = null;
+      if (width <= 2 && !this.el['hidden'] && tries < 50) {
+        this._minSizeJob = setTimeout(minsizer.bind(this, tries + 1), 0);
+      } else {
+        this.el.querySelector('#input')['style']['minWidth'] = `${width}px`;
+        this._debouncedComputeWidth();
+      }
     }
     this._minSizeJob = setTimeout(minsizer.bind(this), 0);
   }
@@ -742,18 +745,20 @@ export class NumberInputComponent {
     }
   }
 
-  private _valueAsNumberChanged(value, oldValue) {
-    if (value === undefined) {
+  private _valueAsNumberChanged(preValue, preOldValue) {
+    let value = preValue === null ? undefined : preValue;
+    const oldValue = preOldValue === null ? undefined : preOldValue;
+    if (value === undefined || value === null) {
       if (!isNaN(this.default)) {
         this.valueAsNumber = this.default;
       } else {
-        this.input = this.input = '';
+        this.input = '';
       }
       return;
     }
 
     if (isNaN(oldValue)) {
-      value = this._checkValue(value, null);
+      value = this._checkValue(value, undefined);
     } else {
       value = this._checkValue(value, oldValue);
     }
@@ -762,7 +767,7 @@ export class NumberInputComponent {
       this.valueAsNumber = value;
       return;
     }
-    this.input = this.input = this.formatNumber(value);
+    this.input = this.formatNumber(value);
   }
 
   private _checkValue(value, oldValue) {
@@ -783,13 +788,13 @@ export class NumberInputComponent {
       min = this.min,
       max = this.max;
 
-    if (min !== undefined && value <= min) {
-      if (saturate || value === min || max === undefined || oldValue !== min) {
+    if (min !== undefined && min !== null && value <= min) {
+      if (saturate || value === min || max === undefined || max === null || oldValue !== min) {
         return min;
       }
       return max;
-    } else if (max !== undefined && value >= max) {
-      if (saturate || value === max || min === undefined || max !== oldValue) {
+    } else if (max !== undefined && max !== null && value >= max) {
+      if (saturate || value === max || min === undefined || min === null || max !== oldValue) {
         return max;
       }
       return min;
@@ -803,13 +808,13 @@ export class NumberInputComponent {
     if (!step) {
       return value;
     }
-    if (this.default !== undefined) {
+    if (this.default !== undefined && this.default !== null) {
       return this._numberUtilities._safeAdd(this._numberUtilities._safeMult(Math.round((value - this.default) / step), step), this.default);
     }
-    if (this.min !== undefined) {
+    if (this.min !== undefined && this.min !== null) {
       return this._numberUtilities._safeAdd(this._numberUtilities._safeMult(Math.round((value - this.min) / step), step), this.min);
     }
-    if (this.max !== undefined) {
+    if (this.max !== undefined && this.max !== null) {
       return this._numberUtilities._safeAdd(this._numberUtilities._safeMult(-Math.round((this.max - value) / step), step), this.max);
     }
     return this._numberUtilities._safeMult(Math.round(value / step), step);

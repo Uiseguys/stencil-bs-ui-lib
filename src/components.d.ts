@@ -18,6 +18,9 @@ import {
   DurationInputArg2,
 } from 'moment';
 import {
+  Placement,
+} from 'popper.js';
+import {
   BootstrapThemeColor as BootstrapThemeColor2,
 } from './common/bootstrap-theme-color.type';
 import {
@@ -52,7 +55,7 @@ declare global {
 
     interface CwcAutocompleteSelect {
       /**
-       * End - Set Placeholder * Public methods
+       * End - Set Placeholder * Public methods *
        */
       'close': () => void;
       'data': any[];
@@ -105,12 +108,43 @@ declare global {
 
     interface CwcDatepicker {
       'endDate': string;
-      'for': string;
       'format': string;
       'id': string;
       'label': string;
       'lang': string;
       'startDate': string;
+    }
+
+    interface CwcDatetimeInput {
+      'clamp': string;
+      'date': string;
+      'dateOrder': Object;
+      'dateValues': Object;
+      'datetime': string;
+      'default': any;
+      'disabled': boolean;
+      'hour12': number;
+      'hour12Format': boolean;
+      'invalid': boolean;
+      'isAm': boolean;
+      'locale': string;
+      'markers': Object;
+      'max': Object;
+      'min': Object;
+      'name': string;
+      'now': () => void;
+      'partsDisabled': Object;
+      'partsHidden': Object;
+      'partsStep': Object;
+      'propertyForValue': string;
+      'required': boolean;
+      'step': number;
+      'time': string;
+      'timezone': string;
+      'validate': () => boolean;
+      'value': Object;
+      'valueAs': Object;
+      'withTimezone': boolean;
     }
 
     interface CwcDnd {
@@ -152,12 +186,13 @@ declare global {
     }
 
     interface CwcInlineeditTextarea {
+      'id': string;
       'label': string;
+      'placeholder': string;
       'value': string;
     }
 
     interface CwcInlineedit {
-      'for': string;
       'id': string;
       'label': string;
       'placeholder': string;
@@ -360,6 +395,20 @@ declare global {
       'value': boolean;
     }
 
+    interface CwcTag {
+      'classes': string;
+      'closable': boolean;
+      'close': (e?: UIEvent) => void;
+      'imgLink': string;
+      'limitTo': number;
+      'link': string;
+      'onCloseData': any;
+      'removeOnClose': boolean;
+      'rounded': boolean;
+      'tagType': BootstrapThemeColor;
+      'text': string;
+    }
+
     interface CwcTypeahead {
       /**
        * Public methods
@@ -379,7 +428,6 @@ declare global {
     interface CwcWysiwygEditor {
       'defaultMode': string;
       'fencing': boolean;
-      'for': string;
       'getRef': () => any;
       'html': boolean;
       'id': string;
@@ -528,6 +576,10 @@ declare global {
 
     }
 
+    interface DatetimeInputPage {
+
+    }
+
     interface DndPage {
 
     }
@@ -658,6 +710,14 @@ declare global {
     };
     
 
+    interface HTMLCwcAutocompleteSelectElement extends StencilComponents.CwcAutocompleteSelect, HTMLStencilElement {}
+
+    var HTMLCwcAutocompleteSelectElement: {
+      prototype: HTMLCwcAutocompleteSelectElement;
+      new (): HTMLCwcAutocompleteSelectElement;
+    };
+    
+
     interface HTMLCwcAvatarElement extends StencilComponents.CwcAvatar, HTMLStencilElement {}
 
     var HTMLCwcAvatarElement: {
@@ -687,6 +747,14 @@ declare global {
     var HTMLCwcDatepickerElement: {
       prototype: HTMLCwcDatepickerElement;
       new (): HTMLCwcDatepickerElement;
+    };
+    
+
+    interface HTMLCwcDatetimeInputElement extends StencilComponents.CwcDatetimeInput, HTMLStencilElement {}
+
+    var HTMLCwcDatetimeInputElement: {
+      prototype: HTMLCwcDatetimeInputElement;
+      new (): HTMLCwcDatetimeInputElement;
     };
     
 
@@ -849,6 +917,7 @@ declare global {
       new (): HTMLCwcPopperElement;
     };
     
+
     interface HTMLCwcProgressBarElement extends StencilComponents.CwcProgressBar, HTMLStencilElement {}
 
     var HTMLCwcProgressBarElement: {
@@ -894,6 +963,14 @@ declare global {
     var HTMLCwcSwitchElement: {
       prototype: HTMLCwcSwitchElement;
       new (): HTMLCwcSwitchElement;
+    };
+    
+
+    interface HTMLCwcTagElement extends StencilComponents.CwcTag, HTMLStencilElement {}
+
+    var HTMLCwcTagElement: {
+      prototype: HTMLCwcTagElement;
+      new (): HTMLCwcTagElement;
     };
     
 
@@ -1102,6 +1179,14 @@ declare global {
     var HTMLDatepickerPageElement: {
       prototype: HTMLDatepickerPageElement;
       new (): HTMLDatepickerPageElement;
+    };
+    
+
+    interface HTMLDatetimeInputPageElement extends StencilComponents.DatetimeInputPage, HTMLStencilElement {}
+
+    var HTMLDatetimeInputPageElement: {
+      prototype: HTMLDatetimeInputPageElement;
+      new (): HTMLDatetimeInputPageElement;
     };
     
 
@@ -1349,10 +1434,12 @@ declare global {
     interface Element {}
     export interface IntrinsicElements {
     'cwc-alert': JSXElements.CwcAlertAttributes;
+    'cwc-autocomplete-select': JSXElements.CwcAutocompleteSelectAttributes;
     'cwc-avatar': JSXElements.CwcAvatarAttributes;
     'cwc-checkbox-group': JSXElements.CwcCheckboxGroupAttributes;
     'cwc-combobox': JSXElements.CwcComboboxAttributes;
     'cwc-datepicker': JSXElements.CwcDatepickerAttributes;
+    'cwc-datetime-input': JSXElements.CwcDatetimeInputAttributes;
     'cwc-dnd': JSXElements.CwcDndAttributes;
     'cwc-dropdown': JSXElements.CwcDropdownAttributes;
     'cwc-file-input': JSXElements.CwcFileInputAttributes;
@@ -1379,6 +1466,7 @@ declare global {
     'cwc-sticky': JSXElements.CwcStickyAttributes;
     'cwc-styles': JSXElements.CwcStylesAttributes;
     'cwc-switch': JSXElements.CwcSwitchAttributes;
+    'cwc-tag': JSXElements.CwcTagAttributes;
     'cwc-typeahead': JSXElements.CwcTypeaheadAttributes;
     'cwc-wysiwyg-editor': JSXElements.CwcWysiwygEditorAttributes;
     'fcl-image': JSXElements.FclImageAttributes;
@@ -1405,6 +1493,7 @@ declare global {
     'collapse-page': JSXElements.CollapsePageAttributes;
     'combobox-page': JSXElements.ComboboxPageAttributes;
     'datepicker-page': JSXElements.DatepickerPageAttributes;
+    'datetime-input-page': JSXElements.DatetimeInputPageAttributes;
     'dnd-page': JSXElements.DndPageAttributes;
     'dropdown-page': JSXElements.DropdownPageAttributes;
     'fcl-image-page': JSXElements.FclImagePageAttributes;
@@ -1457,7 +1546,7 @@ declare global {
       'label'?: string;
       'minSearchLength'?: number;
       'onMultiselectOnSubmit'?: (event: CustomEvent) => void;
-      'onPostValue'?: (event: CustomEvent) => void;
+      'onOnChange'?: (event: CustomEvent) => void;
       'onTextChange'?: (event: CustomEvent) => void;
       'placeholder'?: string;
       'searchKey'?: string;
@@ -1491,7 +1580,7 @@ declare global {
       'data'?: Array<string|number>;
       'id'?: string;
       'label'?: string;
-      'onPostValue'?: (event: CustomEvent) => void;
+      'onOnChange'?: (event: CustomEvent) => void;
       'placeholder'?: string;
       'readonly'?: boolean;
       'value'?: any;
@@ -1499,14 +1588,45 @@ declare global {
 
     export interface CwcDatepickerAttributes extends HTMLAttributes {
       'endDate'?: string;
-      'for'?: string;
       'format'?: string;
       'id'?: string;
       'label'?: string;
       'lang'?: string;
-      'onPostValue'?: (event: CustomEvent) => void;
+      'onOnChange'?: (event: CustomEvent) => void;
       'onStatechange'?: (event: CustomEvent) => void;
       'startDate'?: string;
+    }
+
+    export interface CwcDatetimeInputAttributes extends HTMLAttributes {
+      'clamp'?: string;
+      'date'?: string;
+      'dateOrder'?: Object;
+      'dateValues'?: Object;
+      'datetime'?: string;
+      'default'?: any;
+      'disabled'?: boolean;
+      'hour12'?: number;
+      'hour12Format'?: boolean;
+      'invalid'?: boolean;
+      'isAm'?: boolean;
+      'locale'?: string;
+      'markers'?: Object;
+      'max'?: Object;
+      'min'?: Object;
+      'name'?: string;
+      'onClampValueChanged'?: (event: CustomEvent) => void;
+      'onDatetimeInputChanged'?: (event: CustomEvent) => void;
+      'partsDisabled'?: Object;
+      'partsHidden'?: Object;
+      'partsStep'?: Object;
+      'propertyForValue'?: string;
+      'required'?: boolean;
+      'step'?: number;
+      'time'?: string;
+      'timezone'?: string;
+      'value'?: Object;
+      'valueAs'?: Object;
+      'withTimezone'?: boolean;
     }
 
     export interface CwcDndAttributes extends HTMLAttributes {
@@ -1557,21 +1677,21 @@ declare global {
     }
 
     export interface CwcInlineeditTextareaAttributes extends HTMLAttributes {
+      'id'?: string;
       'label'?: string;
-      'onOncancel'?: (event: CustomEvent) => void;
-      'onOnchange'?: (event: CustomEvent) => void;
-      'onOnconfirm'?: (event: CustomEvent) => void;
+      'onOnCancel'?: (event: CustomEvent) => void;
+      'onOnChange'?: (event: CustomEvent) => void;
+      'onOnConfirm'?: (event: CustomEvent) => void;
+      'placeholder'?: string;
       'value'?: string;
     }
 
     export interface CwcInlineeditAttributes extends HTMLAttributes {
-      'for'?: string;
       'id'?: string;
       'label'?: string;
-      'onOncancel'?: (event: CustomEvent) => void;
-      'onOnchange'?: (event: CustomEvent) => void;
-      'onOnconfirm'?: (event: CustomEvent) => void;
-      'onPostValue'?: (event: CustomEvent) => void;
+      'onOnCancel'?: (event: CustomEvent) => void;
+      'onOnChange'?: (event: CustomEvent) => void;
+      'onOnConfirm'?: (event: CustomEvent) => void;
       'placeholder'?: string;
       'value'?: any;
     }
@@ -1698,7 +1818,7 @@ declare global {
       'noAutoWidth'?: boolean;
       'noClamp'?: boolean;
       'numberStyle'?: string;
-      'onTheComponentChanged'?: (event: CustomEvent) => void;
+      'onNumberInputChanged'?: (event: CustomEvent) => void;
       'padLength'?: number;
       'parseNumber'?: Function;
       'placeholder'?: string;
@@ -1726,7 +1846,7 @@ declare global {
       'refid'?: string;
       'trigger'?: string;
     }
-                                     
+
     export interface CwcProgressBarAttributes extends HTMLAttributes {
       'animated'?: boolean;
       'classes'?: string;
@@ -1767,6 +1887,20 @@ declare global {
       'value'?: boolean;
     }
 
+    export interface CwcTagAttributes extends HTMLAttributes {
+      'classes'?: string;
+      'closable'?: boolean;
+      'imgLink'?: string;
+      'limitTo'?: number;
+      'link'?: string;
+      'onCloseData'?: any;
+      'onTagCloseEvent'?: (event: CustomEvent) => void;
+      'removeOnClose'?: boolean;
+      'rounded'?: boolean;
+      'tagType'?: BootstrapThemeColor;
+      'text'?: string;
+    }
+
     export interface CwcTypeaheadAttributes extends HTMLAttributes {
       'data'?: any[];
       'googleAutocomplete'?: boolean;
@@ -1783,13 +1917,12 @@ declare global {
     export interface CwcWysiwygEditorAttributes extends HTMLAttributes {
       'defaultMode'?: string;
       'fencing'?: boolean;
-      'for'?: string;
       'html'?: boolean;
       'id'?: string;
       'images'?: object;
       'label'?: string;
       'markdown'?: boolean;
-      'onPostValue'?: (event: CustomEvent) => void;
+      'onOnChange'?: (event: CustomEvent) => void;
       'wysiwyg'?: boolean;
     }
 
@@ -1933,6 +2066,10 @@ declare global {
 
     }
 
+    export interface DatetimeInputPageAttributes extends HTMLAttributes {
+
+    }
+
     export interface DndPageAttributes extends HTMLAttributes {
 
     }
@@ -2060,10 +2197,12 @@ declare global {
 
   interface HTMLElementTagNameMap {
     'cwc-alert': HTMLCwcAlertElement
+    'cwc-autocomplete-select': HTMLCwcAutocompleteSelectElement
     'cwc-avatar': HTMLCwcAvatarElement
     'cwc-checkbox-group': HTMLCwcCheckboxGroupElement
     'cwc-combobox': HTMLCwcComboboxElement
     'cwc-datepicker': HTMLCwcDatepickerElement
+    'cwc-datetime-input': HTMLCwcDatetimeInputElement
     'cwc-dnd': HTMLCwcDndElement
     'cwc-dropdown': HTMLCwcDropdownElement
     'cwc-file-input': HTMLCwcFileInputElement
@@ -2090,6 +2229,7 @@ declare global {
     'cwc-sticky': HTMLCwcStickyElement
     'cwc-styles': HTMLCwcStylesElement
     'cwc-switch': HTMLCwcSwitchElement
+    'cwc-tag': HTMLCwcTagElement
     'cwc-typeahead': HTMLCwcTypeaheadElement
     'cwc-wysiwyg-editor': HTMLCwcWysiwygEditorElement
     'fcl-image': HTMLFclImageElement
@@ -2116,6 +2256,7 @@ declare global {
     'collapse-page': HTMLCollapsePageElement
     'combobox-page': HTMLComboboxPageElement
     'datepicker-page': HTMLDatepickerPageElement
+    'datetime-input-page': HTMLDatetimeInputPageElement
     'dnd-page': HTMLDndPageElement
     'dropdown-page': HTMLDropdownPageElement
     'fcl-image-page': HTMLFclImagePageElement
@@ -2150,10 +2291,12 @@ declare global {
 
   interface ElementTagNameMap {
     'cwc-alert': HTMLCwcAlertElement;
+    'cwc-autocomplete-select': HTMLCwcAutocompleteSelectElement;
     'cwc-avatar': HTMLCwcAvatarElement;
     'cwc-checkbox-group': HTMLCwcCheckboxGroupElement;
     'cwc-combobox': HTMLCwcComboboxElement;
     'cwc-datepicker': HTMLCwcDatepickerElement;
+    'cwc-datetime-input': HTMLCwcDatetimeInputElement;
     'cwc-dnd': HTMLCwcDndElement;
     'cwc-dropdown': HTMLCwcDropdownElement;
     'cwc-file-input': HTMLCwcFileInputElement;
@@ -2180,6 +2323,7 @@ declare global {
     'cwc-sticky': HTMLCwcStickyElement;
     'cwc-styles': HTMLCwcStylesElement;
     'cwc-switch': HTMLCwcSwitchElement;
+    'cwc-tag': HTMLCwcTagElement;
     'cwc-typeahead': HTMLCwcTypeaheadElement;
     'cwc-wysiwyg-editor': HTMLCwcWysiwygEditorElement;
     'fcl-image': HTMLFclImageElement;
@@ -2206,6 +2350,7 @@ declare global {
     'collapse-page': HTMLCollapsePageElement;
     'combobox-page': HTMLComboboxPageElement;
     'datepicker-page': HTMLDatepickerPageElement;
+    'datetime-input-page': HTMLDatetimeInputPageElement;
     'dnd-page': HTMLDndPageElement;
     'dropdown-page': HTMLDropdownPageElement;
     'fcl-image-page': HTMLFclImagePageElement;
