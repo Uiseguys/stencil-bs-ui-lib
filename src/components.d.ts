@@ -50,6 +50,23 @@ declare global {
       'type': string;
     }
 
+    interface CwcAutocompleteSelect {
+      /**
+       * End - Set Placeholder * Public methods *
+       */
+      'close': () => void;
+      'data': any[];
+      'id': string;
+      'idValue': string;
+      'itemAs': string;
+      'label': string;
+      'minSearchLength': number;
+      'placeholder': string;
+      'searchKey': string;
+      'template': string;
+      'value': any[];
+    }
+
     interface CwcAvatar {
       'background': string;
       'color': string;
@@ -574,6 +591,14 @@ declare global {
     var HTMLCwcAlertElement: {
       prototype: HTMLCwcAlertElement;
       new (): HTMLCwcAlertElement;
+    };
+    
+
+    interface HTMLCwcAutocompleteSelectElement extends StencilComponents.CwcAutocompleteSelect, HTMLStencilElement {}
+
+    var HTMLCwcAutocompleteSelectElement: {
+      prototype: HTMLCwcAutocompleteSelectElement;
+      new (): HTMLCwcAutocompleteSelectElement;
     };
     
 
@@ -1245,6 +1270,7 @@ declare global {
     interface Element {}
     export interface IntrinsicElements {
     'cwc-alert': JSXElements.CwcAlertAttributes;
+    'cwc-autocomplete-select': JSXElements.CwcAutocompleteSelectAttributes;
     'cwc-avatar': JSXElements.CwcAvatarAttributes;
     'cwc-checkbox-group': JSXElements.CwcCheckboxGroupAttributes;
     'cwc-combobox': JSXElements.CwcComboboxAttributes;
@@ -1340,6 +1366,22 @@ declare global {
       'onToggleVisibility'?: (event: CustomEvent) => void;
       'show'?: boolean;
       'type'?: string;
+    }
+
+    export interface CwcAutocompleteSelectAttributes extends HTMLAttributes {
+      'data'?: any[];
+      'id'?: string;
+      'idValue'?: string;
+      'itemAs'?: string;
+      'label'?: string;
+      'minSearchLength'?: number;
+      'onMultiselectOnSubmit'?: (event: CustomEvent) => void;
+      'onPostValue'?: (event: CustomEvent) => void;
+      'onTextChange'?: (event: CustomEvent) => void;
+      'placeholder'?: string;
+      'searchKey'?: string;
+      'template'?: string;
+      'value'?: any[];
     }
 
     export interface CwcAvatarAttributes extends HTMLAttributes {
@@ -1879,6 +1921,7 @@ declare global {
 
   interface HTMLElementTagNameMap {
     'cwc-alert': HTMLCwcAlertElement
+    'cwc-autocomplete-select': HTMLCwcAutocompleteSelectElement
     'cwc-avatar': HTMLCwcAvatarElement
     'cwc-checkbox-group': HTMLCwcCheckboxGroupElement
     'cwc-combobox': HTMLCwcComboboxElement
@@ -1966,6 +2009,7 @@ declare global {
 
   interface ElementTagNameMap {
     'cwc-alert': HTMLCwcAlertElement;
+    'cwc-autocomplete-select': HTMLCwcAutocompleteSelectElement;
     'cwc-avatar': HTMLCwcAvatarElement;
     'cwc-checkbox-group': HTMLCwcCheckboxGroupElement;
     'cwc-combobox': HTMLCwcComboboxElement;
